@@ -298,13 +298,40 @@ def cloth_cut(body, coarse_mask, inside, offset=0.0025, thick=0.0016, subdiv=1, 
     s = submesh(body, region(body, coarse_mask, all_in=False))
     N0 = vertex_normals(s)
     V, F, N, J, W = _subdivide(s.V, s.F, N0, s.J, s.W, subdiv)
-    keep = inside(V[F].mean(1)) > 0
-    F = F[keep]
-    used = np.unique(F); remap = -np.ones(len(V), np.int64); remap[used] = np.arange(len(used))
-    V, N, J, W, F = V[used], N[used], J[used], W[used], remap[F]
+    V, N, J, W, F = _clip_faces(V, N, J, W, F, inside(V))
     off = offset + (bump(V) if bump is not None else 0.0)
     P = V + N * np.asarray(off).reshape(-1, 1)
     UV = np.c_[P[:, 0] * uv_scale + P[:, 2] * uv_scale * 0.5, P[:, 1] * uv_scale]
     outer = Mesh(P, F.copy(), UV, J.copy(), W.copy())
     inner = Mesh(P - N * thick, F[:, ::-1].copy(), UV.copy(), J.copy(), W.copy())
     return concat([outer, inner])
+
+
+def _clip_faces(V, N, J, W, F, f):
+    """Découpe exacte d'un maillage par la ligne de niveau f = 0 (garde f > 0) : les triangles coupés sont recoupés
+    aux points de passage sur leurs arêtes → bord net sans subdivision supplémentaire."""
+    pos = f > 0
+    cnt = pos[F].sum(1)
+    out_F = [F[cnt == 3]]
+    nV = [V]; nN = [N]; nJ = [J]; nW = [W]; base = len(V); cache = {}
+    def cross(a, b):
+        k = (a, b) if a < b else (b, a)
+        if k not in cache:
+            t = f[a] / (f[a] - f[b]); t = min(max(t, 0.0), 1.0)
+            nV.append((V[a] + (V[b] - V[a]) * t)[None]); nN.append(unit(N[a] + (N[b] - N[a]) * t)[None])
+            src = a if t < 0.5 else b; nJ.append(J[src][None]); nW.append(W[src][None])
+            cache[k] = base + len(cache)
+        return cache[k]
+    extra = []
+    for tri in F[(cnt == 1) | (cnt == 2)]:
+        p = pos[tri]
+        for r in range(3):                       # rotation : sommet « isolé » en première position
+            a, b, c = np.roll(tri, -r); pa, pb, pc = np.roll(p, -r)
+            if pa != pb and pa != pc: break
+        ab, ac = cross(a, b), cross(a, c)
+        if pa: extra.append((a, ab, ac))                         # un seul sommet dedans
+        else: extra += [(ab, b, c), (ab, c, ac)]                  # deux sommets dedans
+    if extra: out_F.append(np.array(extra, np.int64))
+    V = np.vstack(nV); N = np.vstack(nN); J = np.vstack(nJ); W = np.vstack(nW); F = np.vstack(out_F)
+    used = np.unique(F); remap = -np.ones(len(V), np.int64); remap[used] = np.arange(len(used))
+    return V[used], N[used], J[used], W[used], remap[F]
