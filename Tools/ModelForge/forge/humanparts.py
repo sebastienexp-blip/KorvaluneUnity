@@ -189,7 +189,7 @@ def mh_eyes(marks):
         sel = Vv[:, 0] * side > 0
         lo, hi = Vv[sel].min(0), Vv[sel].max(0)
         ctr = np.array([(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, lo[2] + (hi[1] - lo[1]) / 2])     # centre du globe (pas de la cornée)
-        Vv[sel] = np.asarray(marks[k]) + (Vv[sel] - ctr) * s * 1.06 + np.array([0, 0, 0.0028])   # comble le jour paupières / globe (cerne noir)
+        Vv[sel] = np.asarray(marks[k]) + (Vv[sel] - ctr) * s
     m = Mesh(Vv, Fm, UV)
     if (vertex_normals(m) * (m.V - m.V.mean(0)) * np.array([0, 0, 1])).sum() < 0: pass
     return m

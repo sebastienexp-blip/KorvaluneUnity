@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from heroes.common import TexBank, turnaround, anim_sheet
 from forge import export as EX
 
-HEROES = {'kael': 'heroes.kael_draven', 'tharion': 'heroes.tharion', 'varek': 'heroes.varek', 'elyra': 'heroes.elyra', 'morvanna': 'heroes.morvanna'}
+HEROES = {'kael': 'heroes.kael_draven', 'tharion': 'heroes.tharion', 'varek': 'heroes.varek', 'elyra': 'heroes.elyra', 'morvanna': 'heroes.morvanna', 'base_m': 'heroes.base_male', 'base_f': 'heroes.base_female'}
 
 
 def run(key, preview, anims):
@@ -28,10 +28,11 @@ def run(key, preview, anims):
     scale = getattr(mod, 'SCALE', 1.0)
     if scale != 1.0: EX.scale_asset(a, scale)
     ex = EX.hero_expect((1.60, 1.98), getattr(mod, 'MAX_TRIS', 140000))
-    mats = EX.export(a, bank, bank.specs(), f'Heroes/{mod.NAME}', clips=clips,
+    folder = getattr(mod, 'FOLDER', 'Heroes')
+    mats = EX.export(a, bank, bank.specs(), f'{folder}/{mod.NAME}', clips=clips,
                      attachments=[(s, f'../../Weapons/{n}/{n}.fbx') for s, n in mod.GEAR],
                      collider=dict(type='capsule', center=[0, 0.93 * scale, 0], height=1.86 * scale, radius=0.33), expect=ex)
-    shared = EX.shared_from(mats, f'../../Heroes/{mod.NAME}/')
+    shared = EX.shared_from(mats, f'../../{folder}/{mod.NAME}/')
     for gname, g in gear.items():
         if scale != 1.0: EX.scale_asset(g, scale)
         EX.export_prop(g, bank, bank.specs(), f'Weapons/{gname}', shared=shared)

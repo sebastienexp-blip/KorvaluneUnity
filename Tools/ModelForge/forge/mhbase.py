@@ -204,4 +204,5 @@ def build(sk, targets=MALE, extra=(), thickness=1.04, head_scale=1.0, groups=('b
     for k in ('oris01', 'oris05', 'oris06', 'oris03.L', 'oris04.L'):
         if k + '____head' in mh.joint_idx: marks[k] = tr(mh.head(k))
     marks['lashes'] = lashes
+    marks['base_V'], marks['base_J'], marks['base_W'] = Vn, J, W          # tous les sommets (aides comprises) : ajustement des proxys
     return body, eyes, marks

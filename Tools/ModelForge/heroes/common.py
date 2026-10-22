@@ -186,3 +186,45 @@ def mh_human(sk, asset, bank, prefix, targets, extra=(), skin_kw=None, iris=(0.3
         uvbd = lambda P: (np.arctan2(P[:, 0], P[:, 2]) / (2 * np.pi) * 14, np.clip((mo[1] + 0.02 - P[:, 1]) / 0.08, 0, 1))
         asset.add('barbe', headw(HG.smooth_shells(body, cm, beard_in, uvbd, [0.0008, 0.0020, 0.0034, 0.0048], [0, 1, 2, 3], [0.0, 0.0015, 0.003, 0.0045], subdiv=1)), HM)
     return body, marks
+
+
+def mh_character(sk, asset, bank, prefix, targets, extra=(), skin='young_caucasian_male', skin_tint=None, skin_kw=None,
+                 eyes='brown', iris=None, glow=None, hair='short02', hair_tint=None, brows='eyebrow001', brow_tint=None,
+                 lashes='eyelashes01', cut_y=1.50, body_mask=None, thickness=1.04, hair_cutoff=0.40, mouth=True, eye_color=None):
+    """Personnage bâti avec les ressources MakeHuman CC0 : texture de peau photo (même dépliage UV que le corps), yeux HD,
+    cheveux / sourcils / cils en proxys ajustés exactement sur le corps (poids de skinning hérités). Retourne (corps, repères)."""
+    from forge import mhbase as MB, mhskin as SKN, humanparts as HP, mhassets as MA
+    body, _, marks = MB.build(sk, targets, extra, thickness=thickness)
+    V = body.V
+    keep = body_mask(V) if body_mask is not None else ((V[:, 1] > cut_y) & (np.abs(V[:, 0]) < 0.16))
+    asset.add('peau', HP.submesh(body, HP.region(body, keep)), prefix + '_Skin')
+    def headw(m):
+        m.J = np.zeros((len(m.V), 4), np.int64); m.J[:, 0] = sk['Head']; m.W = np.zeros((len(m.V), 4)); m.W[:, 0] = 1; return m
+    asset.add('yeux', headw(HP.mh_eyes(marks)), prefix + '_Eye')
+    sdir = MA.path('skins', skin); photo = os.path.join(sdir, [f for f in os.listdir(sdir) if f.endswith('.png')][0])
+    kw = dict(skin_kw or {})
+    bank.recipes[prefix + '_Skin'] = (lambda S, kw=kw: SKN.skin(body, marks, S=S, photo=photo, tint=skin_tint, **kw), 2048, 1024, dict(metallic=0.0, smoothness=1.0))
+    if eye_color is not None:   # iris MakeHuman recoloré (rouge, violet…), éventuellement luisant
+        bank.recipes[prefix + '_Eye'] = (lambda S: MA.eye_texset(eye_color, S, glow=glow), 1024, 512,
+                                         dict(metallic=0.0, smoothness=1.0, emission=(1, 1, 1) if glow is not None else (0, 0, 0)))
+    elif glow is not None or iris is not None:
+        bank.recipes[prefix + '_Eye'] = (lambda S: SKN.eye_tex(S, iris=iris or (0.3, 0.22, 0.12), glow=glow), 1024, 512,
+                                         dict(metallic=0.0, smoothness=1.0, emission=(0.6, 0.6, 0.6) if glow else (0, 0, 0)))
+    else:
+        ef = MA.path('eyes', 'materials', eyes + '_eye.png')
+        bank.recipes[prefix + '_Eye'] = (lambda S: MA.texset(ef, S, smooth=0.85, alpha=False), 1024, 512, dict(metallic=0.0, smoothness=1.0))
+    base = (marks['base_V'], marks['base_J'], marks['base_W'])
+    for part, folder, mat, tint, cut, sm in (('cheveux', hair and 'hair/' + hair, '_Hair', hair_tint, hair_cutoff, 0.30),
+                                             ('sourcils', brows and 'eyebrows/' + brows, '_Brow', brow_tint, 0.30, 0.25),
+                                             ('cils', lashes and 'eyelashes/' + lashes, '_Lash', None, 0.30, 0.25),
+                                             ('dents', mouth and 'teeth/teeth_base', '_Teeth', None, None, 0.70),
+                                             ('langue', mouth and 'tongue/tongue01', '_Tongue', None, None, 0.55)):
+        if not folder: continue
+        p = MA.Proxy(folder)
+        m = p.fit(base[0], J=base[1], W=base[2])
+        asset.add(part, m, prefix + mat)
+        spec = dict(metallic=0.0, smoothness=1.0)
+        if cut is not None: spec['cutoff'] = cut
+        bank.recipes[prefix + mat] = (lambda S, p=p, tint=tint, sm=sm, cut=cut: MA.texset(p, S, tint=tint, smooth=sm, alpha=cut is not None),
+                                      2048 if part == 'cheveux' else 1024, 1024 if part == 'cheveux' else 512, spec)
+    return body, marks

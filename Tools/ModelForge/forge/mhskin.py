@@ -39,13 +39,21 @@ def uv_raster(m, S):
 
 
 def skin(m, marks, S=2048, tone=(0.78, 0.60, 0.50), seed=1, female=False, stubble=0.0, beard_col=(0.12, 0.08, 0.05),
-         lip=None, makeup=None, pale=0.0, scars=(), brows=(0.08, 0.055, 0.04), dirt=0.0, veins=None):
+         lip=None, makeup=None, pale=0.0, scars=(), brows=(0.08, 0.055, 0.04), dirt=0.0, veins=None, photo=None, tint=None, beard_paint=0.0):
+    """photo : texture de peau MakeHuman (CC0, même dépliage UV que le corps) utilisée comme base ; tint : multiplicateur RGB.
+    Sans photo, le teint est peint (ancienne méthode). beard_paint : barbe courte peinte (0 → 1)."""
     r = np.random.default_rng(seed)
     pos, nrm, cov = uv_raster(m, S)
     x, y, z = pos[..., 0], pos[..., 1], pos[..., 2]
     eL, eR, mo = marks['eye_L'], marks['eye_R'], marks['mouth']
     d2 = lambda c: ((pos - np.asarray(c)) ** 2).sum(-1)
     face = (z > 0.03) & (y > 1.55)
+    if photo is not None:
+        from PIL import Image
+        base = np.asarray(Image.open(photo).convert('RGB').resize((S, S), Image.LANCZOS), float) / 255
+        if tint is not None: base = base * np.array(tint)[None, None]
+        base = base * (1 - pale) + np.array([0.80, 0.80, 0.84]) * pale * (0.85 + 0.15 * base.mean(-1, keepdims=True))
+        return _skin_extras(base, pos, marks, S, r, stubble, beard_col, scars, dirt, veins, beard_paint, makeup)
     base = np.array(tone)[None, None] * (1 + 0.035 * fbm(S, S, r, base=S / 8, octaves=4)[..., None])
     base = base * (1 - pale) + np.array([0.80, 0.80, 0.84]) * pale
     # rougeurs : joues, nez, oreilles, articulations
@@ -98,6 +106,50 @@ def skin(m, marks, S=2048, tone=(0.78, 0.60, 0.50), seed=1, female=False, stubbl
     smooth = np.clip(0.34 + 0.08 * lips + 0.06 * face - 0.1 * (stubble > 0) * 0, 0, 1)
     nm = height_to_normal(hgt, 0.35 * S / 1024)
     return TexSet(np.clip(base, 0, 1), nm, np.zeros((S, S)), smooth, np.clip(1 - 0.12 * flush, 0, 1))
+
+
+def _skin_extras(base, pos, marks, S, r, stubble, beard_col, scars, dirt, veins, beard_paint, makeup):
+    """Effets ajoutés à une texture de peau photo : barbe peinte / naissante, cicatrices, saleté, veines, maquillage."""
+    x, y, z = pos[..., 0], pos[..., 1], pos[..., 2]
+    eL, eR, mo, jaw = marks['eye_L'], marks['eye_R'], marks['mouth'], marks['jaw']
+    face = (z > 0.03) & (y > 1.55)
+    hgt = 0.10 * noise(S, S, 1.0, r) + 0.08 * fbm(S, S, r, base=10, octaves=3)
+    lips = np.clip(1.2 - ((x / 0.024) ** 2 + ((y - mo[1] - 0.001) / 0.0068) ** 2), 0, 1) * (z > mo[2] - 0.02) * face
+    amt = max(stubble, beard_paint)
+    if amt:
+        # zone de barbe : joues basses, menton, moustache, cou ; bord supérieur fondu (pas de ligne dure)
+        top_ = mo[1] + 0.020 - 0.012 * np.clip(np.abs(x) / 0.055, 0, 1)
+        under = jaw[1] - 0.010 - 0.025 * smooth01((z - (jaw[2] - 0.06)) / 0.06)       # sous le menton seulement, pas tout le cou
+        zone = smooth01((top_ - y) / 0.014) * smooth01((y - under) / 0.012) * smooth01((z - (jaw[2] - 0.075)) / 0.03) * (y > 1.48)
+        must = smooth01((mo[1] + 0.017 - y) / 0.004) * smooth01((y - mo[1] - 0.004) / 0.003) * smooth01((0.030 - np.abs(x)) / 0.008) * (z > mo[2] - 0.02)
+        zone = np.clip(np.maximum(zone, must) * (1 - np.clip(lips * 2.5, 0, 1)), 0, 1)
+        strokes = n01(noise(S, S, 1.2, r, aniso=(1.0, 0.4)))
+        hairs = np.clip((strokes - (0.62 - 0.30 * beard_paint)) * 5, 0, 1) * zone
+        cover = zone * (0.18 * stubble + 0.38 * beard_paint)
+        dark = np.clip(cover + gaussian_filter(hairs, 0.6) * (0.30 * stubble + 0.40 * beard_paint), 0, 0.85)
+        base = base * (1 - dark[..., None]) + np.array(beard_col) * dark[..., None]
+        hgt += 0.5 * hairs
+    for (c, d, L) in scars:
+        c = np.asarray(c); d = np.asarray(d) / np.linalg.norm(d)
+        rel = pos - c; t = np.clip(rel @ d, 0, L); q = rel - t[..., None] * d
+        sc = np.exp(-(q ** 2).sum(-1) / 0.0012 ** 2) * face
+        base = base * (1 - 0.30 * sc[..., None]) + np.array([0.72, 0.45, 0.42]) * 0.30 * sc[..., None]; hgt += 4 * sc
+    if makeup is not None:
+        for e in (eL, eR):
+            mk = G(((pos - (np.asarray(e) + (0.004 * np.sign(e[0]), 0.006, 0))) ** 2).sum(-1), 0.016) * face
+            base = base * (1 - 0.55 * mk[..., None]) + np.array(makeup) * 0.55 * mk[..., None]
+    if veins is not None:
+        vn = np.clip(1 - np.abs(fbm(S, S, r, base=40, octaves=4, aniso=(1.0, 0.6))) * 6, 0, 1)
+        base = base * (1 - 0.22 * vn[..., None]) + np.array(veins) * 0.22 * vn[..., None]
+    if dirt:
+        dm = np.clip(n01(fbm(S, S, r, base=S / 10, octaves=4)) - 0.55, 0, 1) * 2 * dirt
+        base = base * (1 - 0.30 * dm[..., None])
+    smooth = np.clip(0.36 + 0.10 * lips + 0.05 * face, 0, 1)
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.35 * S / 1024), np.zeros((S, S)), smooth, np.ones((S, S)))
+
+
+def smooth01(t):
+    t = np.clip(t, 0, 1); return t * t * (3 - 2 * t)
 
 
 def eye_tex(S=512, iris=(0.30, 0.22, 0.12), glow=None):
