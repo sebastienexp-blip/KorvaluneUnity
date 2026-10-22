@@ -1,0 +1,105 @@
+# Intégration Unity dans le cloud : ouvre le projet, importe et intègre les modèles ModelForge (FBX, textures, matériaux URP,
+# avatars, clips, prefabs), construit la scène vitrine, vérifie chaque modèle, puis renvoie dans le dépôt les fichiers
+# générés par Unity (.meta, matériaux, prefabs, contrôleurs, scène, réglages) et le rapport ci-report.md.
+name: Unity — intégration des modèles
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Assets/**'
+      - 'Packages/**'
+      - 'ProjectSettings/**'
+      - '.github/workflows/unity-ci.yml'
+
+concurrency:
+  group: unity-ci
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Libérer de l'espace disque
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+
+      - uses: actions/checkout@v4
+
+      - id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: Library
+          key: Library-Forge-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: Library-Forge-
+
+      - name: Charger la licence Unity
+        env:
+          SECRET_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          if [ -n "$SECRET_LICENSE" ]; then LIC="$SECRET_LICENSE";
+          elif [ -f .licence/Unity_lic.ulf ]; then LIC="$(cat .licence/Unity_lic.ulf)";
+          else echo "::error::Aucune licence Unity trouvée"; exit 1; fi
+          { echo "UNITY_LICENSE<<ULF_EOF"; echo "$LIC"; echo "ULF_EOF"; } >> "$GITHUB_ENV"
+
+      - name: Unity — import, intégration et vérification
+        id: unity
+        uses: game-ci/unity-builder@v4
+        continue-on-error: true
+        timeout-minutes: 80
+        env:
+          UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneLinux64
+          buildMethod: Korvalune.EditorTools.CI.Run
+          allowDirtyBuild: true
+          customParameters: -logFile /github/workspace/unity-editor.log
+
+      - name: Rapport
+        if: always()
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" . || true
+          if [ ! -f ci-report.md ]; then
+            { echo "# Rapport absent : Unity s'est arrêté avant la fin"; echo; echo '```';
+              grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60;
+              echo '```'; } > ci-report.md
+          fi
+          M=$(head -c 60000 ci-report.md | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
+          if [ "${{ steps.unity.outcome }}" = "success" ]; then echo "::notice title=Intégration Unity::${M}"; else echo "::error title=Intégration Unity::${M}"; fi
+          mkdir -p ci-out
+          tail -c 400000 unity-editor.log > ci-out/unity-editor-tail.log 2>/dev/null || true
+
+      - name: Renvoyer les fichiers générés dans le dépôt
+        if: always()
+        run: |
+          git config user.name "korvalune-ci"
+          git config user.email "ci@korvalune.invalid"
+          git add -A Assets ProjectSettings Packages ci-report.md ci-out 2>/dev/null || true
+          if git diff --cached --quiet; then echo "rien à renvoyer"; exit 0; fi
+          git commit -m "CI Unity : fichiers générés et rapport [skip ci]"
+          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+
+      - name: Sauver le cache Library
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: Library
+          key: Library-Forge-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.run_id }}
+
+      - name: Résultat
+        if: always()
+        run: |
+          if [ "${{ steps.unity.outcome }}" = "success" ]; then exit 0; fi
+          echo "::error::Échec de l'intégration Unity (voir ci-report.md)"; exit 1
