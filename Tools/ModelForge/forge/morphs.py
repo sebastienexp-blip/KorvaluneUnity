@@ -58,6 +58,10 @@ def sliders(female, extra_dirs=()):
             if last in NEG or last in POS: key = '-'.join(toks[:-1]); d = 'plus' if last in POS else 'minus'
             else: key = n; d = 'plus'
             if any(re.search(p, key) for p in EXCLUDE): continue
+            # corps : un jeu raisonnable de curseurs (les cibles de mensurations et de silhouettes se recouvrent largement)
+            if cat == 'armslegs' and not re.search(r'(fat|muscle|fingers|valgus|foot-scale)', key): continue
+            if cat == 'measure' and not re.search(r'(bust|underbust|waist|hips|neck)-circ', key): continue
+            if cat == 'bodyshapes': continue
             g = groups.setdefault((cat, key), dict(plus=[], minus=[]))
             g[d].append((f'{cat}/{f[:-7]}', 1))
     for (cat, key), g in groups.items():

@@ -190,7 +190,7 @@ def hood(a, add, body, marks, sk):
 
 def build(bank, female=False):
     from forge import armorparts as AP
-    sk = H.build(); a = Asset(NAME, sk); sw = H.swap_table(sk)
+    sk = H.build(); a = Asset(NAME + ('_F' if female else '_M'), sk); sw = H.swap_table(sk)
     def add(n, m, mat, both=False):
         a.add(n, m, mat)
         if both: a.add(n + '_R', mirror(m, sw), mat)
