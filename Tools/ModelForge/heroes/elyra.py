@@ -28,8 +28,7 @@ M = dict(corset='EL_Corset', sleeve='EL_Sleeve', cloth='EL_Cloth', cloak='EL_Clo
 def build(bank, female=True):
     sk = H.build(); a = Asset(NAME + ('_F' if female else '_M'), sk)
     body, marks = MOD.base(sk, a, bank, 'EL' + ('F' if female else 'M'), female=female, look=None if not female else dict(skin='young_caucasian_female', hair='culturalibre_hair_01', brows='eyebrow010'))
-    if not female: marks['breasts'] = [__import__('numpy').array([sx * 0.085, 1.33, 0.16]) for sx in (1, -1)]
-    FK.build_outfit(a, body, marks, sk, 'EL', M, dict(neck=2.4 if female else 7.0, spikes=False, skulls=False, tatter=0.10, collar=True, cloak=True, cloak_len=1.12, cloak_tatter=0.4))
+    FK.build_outfit(a, body, marks, sk, 'EL', M, dict(male=not female, neck=2.4, spikes=False, skulls=False, tatter=0.10, collar=True, cloak=True, cloak_len=1.12, cloak_tatter=0.4))
     MOD.assign(a, [])
     MOD.covers(a, FK.COVERS)
     anims.build(sk, a, FK.StaffStyle())

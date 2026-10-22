@@ -118,7 +118,7 @@ def build(bank, female=False):
     body, marks = MOD.base(sk, a, bank, 'THF' if female else 'THM', female=female, look=dict(hair='long01', hair_tint=(0.30, 0.20, 0.10), skin='young_caucasian_female2') if female else dict(extra=[('universal-male-young-maxmuscle-averageweight', 0.7), ('stomach-pregnant-decr', 0.5), ('stomach-tone-incr', 0.7)],
                                                         skin='young_caucasian_male', hair='short02', hair_tint=(0.24, 0.15, 0.08),
                                                         skin_kw=dict(pubic=0.75, pubic_col=(0.12, 0.08, 0.05), scars=[((0.030, 1.735, 0.10), (0.25, -1, 0.1), 0.05)])))
-    with FL.fitted(body, sk):
+    with FL.fitted(body, sk, female=female):
         armor.build(sk, a, remap=REMAP, helmet=False, skip=('gorgerin0', 'gorgerin_bord', 'col'))
     cape.build(sk, a, mat='TH_Cloth', clasp='TH_Gold', length=1.0, width=1.05)
     cape.build_tabard(sk, a, mat='TH_Cloth', length=1.25, width=1.25)

@@ -54,6 +54,57 @@ def _refit(make, body, mask, ref=(0, 0, 1), **kw):
     return out
 
 
+def _hull_section(body, mask, loft, margin=0.004, nbin=96, vsmooth=1.0):
+    """Section « moulée » : par anneau, enveloppe convexe de la coupe réelle du corps (poitrine galbée, taille cintrée,
+    sans creux entre les seins), échantillonnée en rayon polaire. Renvoie une fonction section(i, ang, rf, rs) pour Loft."""
+    from scipy.spatial import ConvexHull
+    V = body.V[mask]
+    P = loft.path; n = len(P)
+    T, A, S = frames(P, getattr(loft, '_ref', (0, 0, 1)))
+    seg = np.r_[np.linalg.norm(np.diff(P, axis=0), axis=1), 0]
+    th = np.linspace(0, 2 * np.pi, nbin, endpoint=False)
+    R = np.full((n, nbin), np.nan); C = np.zeros((n, 2))
+    for i in range(n):
+        d = V - P[i]
+        h = max(seg[i], seg[i - 1] if i else seg[i], 0.006) * 0.75
+        sel = np.abs(d @ T[i]) < h
+        if sel.sum() < 12: continue
+        xy = np.c_[d[sel] @ A[i], d[sel] @ S[i]]
+        try: hull = xy[ConvexHull(xy).vertices]
+        except Exception: continue
+        c = hull.mean(0); C[i] = c
+        # rayon de l'enveloppe dans chaque direction (intersection rayon / polygone convexe)
+        hp = hull - c; hq = np.roll(hp, -1, 0)
+        for k, t in enumerate(th):
+            u = np.array([np.cos(t), np.sin(t)]); best = 0.0
+            e = hq - hp
+            den = u[0] * e[:, 1] - u[1] * e[:, 0]
+            ok = np.abs(den) > 1e-12
+            s = np.where(ok, (hp[:, 0] * e[:, 1] - hp[:, 1] * e[:, 0]) / np.where(ok, den, 1), -1)
+            w = np.where(ok, (hp[:, 0] * u[1] - hp[:, 1] * u[0]) / np.where(ok, den, 1), -1)
+            hit = ok & (s > 0) & (w >= -1e-9) & (w <= 1 + 1e-9)
+            if hit.any(): best = s[hit].max()
+            R[i, k] = best
+    found = ~np.isnan(R[:, 0])
+    idx = np.arange(n)
+    for k in range(nbin): R[~found, k] = np.interp(idx[~found], idx[found], R[found, k])
+    for j in range(2): C[~found, j] = np.interp(idx[~found], idx[found], C[found, j])
+    R = gaussian_filter1d(R, 1.2, axis=1, mode='wrap')
+    R = np.maximum(gaussian_filter1d(R, vsmooth, axis=0, mode='nearest'), R * 0.99) + margin
+    C = gaussian_filter1d(C, 1.2, axis=0, mode='nearest')
+
+    def section(i, ang, rf, rs):
+        r = np.interp(np.mod(ang, 2 * np.pi), np.r_[th, 2 * np.pi], np.r_[R[i], R[i, 0]])
+        return C[i, 0] + r * np.cos(ang), C[i, 1] + r * np.sin(ang)
+    return section, R, C
+
+
+def _conform(make, body, mask, margin=0.004):
+    lo = make()
+    sec, R, C = _hull_section(body, mask, lo, margin=margin)
+    return Loft(lo.path, R.max(1) * 0 + lo.rf, lo.rs, p=lo.p, segs=lo.segs, ref=lo._ref, cap0=getattr(lo, '_cap0', 0), cap1=getattr(lo, '_cap1', 0), section=sec)
+
+
 @contextlib.contextmanager
 def fitted(body, sk, female=False, margin=0.002):
     """Remplace les gabarits du chevalier par des gabarits mesurés sur body, le temps du bloc with."""
@@ -79,7 +130,14 @@ def fitted(body, sk, female=False, margin=0.002):
                 cache[key] = _refit(lambda: orig[name](*a, **k), body, mask, ref=ref, margin=margin, **kw)
             return cache[key]
         return f
-    BD.torso_loft = mk('torso_loft', None, torso_m)
+    if female:   # cuirasse moulée : galbe de la poitrine, taille cintrée, hanches
+        def torso_f(*a, **k):
+            key = ('torso_conform', a, tuple(sorted(k.items())))
+            if key not in cache: cache[key] = _conform(lambda: orig['torso_loft'](*a, **k), body, torso_m, margin=margin + 0.002)
+            return cache[key]
+        BD.torso_loft = torso_f
+    else:
+        BD.torso_loft = mk('torso_loft', None, torso_m)
     BD.neck_loft = mk('neck_loft', None, neck_m)
     BD.head_loft = mk('head_loft', None, head_m)
     BD.arm_loft = mk('arm_loft', None, larm)

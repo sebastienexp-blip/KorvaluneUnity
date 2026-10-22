@@ -74,6 +74,51 @@ def staff(name, mats, kind='void'):
     return a
 
 
+def _male_garb(a, body, sk, M, style, add, W, arms, legs):
+    """Version homme des tenues de mage : pourpoint fermé à col montant (fermoirs d'or sur le devant, médaillon), pantalon,
+    bottes hautes au genou à revers ; pas de décolleté, pas de jambes nues."""
+    V = body.V; ax = np.abs(V[:, 0])
+    def doublet_in(Q):
+        x, y, z = Q[:, 0], Q[:, 1], Q[:, 2]
+        top = np.where(z > 0, 1.505 - 0.25 * np.clip(np.abs(x) - 0.05, 0, None), 1.535)
+        return np.minimum(y - 0.86, top - y)
+    coarse = HP.bone_mask(body, sk, ['Hips', 'Spine', 'Chest', 'UpperChest', 'Neck'], 0.2) & ~arms & (V[:, 1] > 0.82) & (V[:, 1] < 1.56) & (ax < 0.22)
+    add('pourpoint', HP.cloth_cut(body, coarse, doublet_in, 0.005, thick=0.0028, uv_scale=7.0), M['corset'], 'Pourpoint')
+    # patte de boutonnage dorée et brandebourgs
+    def placket_in(Q):
+        x, y, z = Q[:, 0], Q[:, 1], Q[:, 2]
+        return np.minimum.reduce([0.013 - np.abs(x), y - 0.875, 1.495 - y, np.where(z > 0, 1.0, -1.0)])
+    add('pourpoint_patte', HP.cloth_cut(body, coarse & (ax < 0.05) & (V[:, 2] > 0), placket_in, 0.0085, thick=0.0018, uv_scale=6.0), M['gold'], 'Pourpoint')
+    for k, y in enumerate(np.linspace(0.96, 1.44, 6)):
+        q, n_, _ = HP.surface_point(body, (0, y, 0.25), 0.0105)
+        t = unit(np.cross(n_, (0, 1, 0)))
+        add(f'pourpoint_brandebourg{k}', W(tube([q - t * 0.032, q - t * 0.012 + (0, 0.004, 0), q + t * 0.012 + (0, 0.004, 0), q + t * 0.032], 0.0028, segs=6)), M['gold'], 'Pourpoint')
+        add(f'pourpoint_bouton{k}', W(rivet(q + n_ * 0.004, n_, r=0.0055, h=0.004, segs=10, rings=3)), M['gold'], 'Pourpoint')
+    # médaillon sur la poitrine
+    q, n_, _ = HP.surface_point(body, (0.0, 1.33, 0.25), 0.014)
+    if style.get('skulls'):
+        bm, hm = skull(q + n_ * 0.016, 0.45, face=n_)
+        add('medaillon', W(bm), M['bone'], 'Pourpoint'); add('medaillon_orbites', W(hm), M['dark'], 'Pourpoint')
+    else:
+        pl, tr = AP.shield_plate(q, n_, (0, 1, 0), W=0.040, H=0.060, top=0.5, tip=1.0, dome=0.010, ridge=0.003, wrap=0.3, trim=0.004)
+        add('medaillon', W(pl), M['metal'], 'Pourpoint'); add('medaillon_bord', W(tr), M['gold'], 'Pourpoint')
+        add('medaillon_gemme', W(rivet(q + n_ * 0.013, n_, r=0.011, h=0.008, segs=10, rings=4)), M['crystal'], 'Pourpoint')
+    # pantalon (bassin → mollet)
+    hips = HP.bone_mask(body, sk, ['Hips', 'Spine'], 0.3)
+    add('pantalon', HP.cloth_cut(body, (legs | hips) & ~arms & (V[:, 1] > 0.36) & (V[:, 1] < 0.99), lambda Q: np.minimum(Q[:, 1] - 0.40, 0.955 - Q[:, 1]),
+                                 0.0035, thick=0.002, uv_scale=8.0), M['sleeve'], 'Pantalon')
+    # bottes hautes au genou, revers, genouillères
+    add('bottes', HP.shell(body, HP.region(body, legs & (V[:, 1] < 0.50) & (V[:, 1] > 0.085)), offset=0.0075, thick=0.004, uv_scale=8, smooth=80, restore=0.002, inflate=0.004),
+        M['leather'], 'Bottes')
+    for sd in ('Left', 'Right'): add('pied_botte_' + sd, HP.boot_last(body, sk, sd, margin=0.011, sole=0.013), M['leather'], 'Bottes')
+    add('bottes_revers', HP.cloth_cut(body, legs & (V[:, 1] < 0.55) & (V[:, 1] > 0.44), lambda Q: np.minimum(Q[:, 1] - 0.465, 0.515 - Q[:, 1]), 0.014, thick=0.004, uv_scale=6.0),
+        M['gold'], 'Bottes')
+    for sx in (1, -1):
+        q, n_, _ = HP.surface_point(body, (0.095 * sx, 0.53, 0.07), 0.018)
+        pl, tr = AP.shield_plate(q, n_, (0, 1, 0), W=0.046, H=0.11, top=0.45, tip=1.0, dome=0.016, ridge=0.006, wrap=0.065, trim=0.0035)
+        add(f'genouillere{sx}', W(pl), M['metal'], 'Bottes'); add(f'genouillere_bord{sx}', W(tr), M['gold'], 'Bottes')
+
+
 def build_outfit(a, body, marks, sk, P, M, style):
     """P : préfixe d'emplacement inutile (les emplacements sont nommés), M : matériaux {corset, cloth, gold, leather, metal, bone, dark}.
     style : dict(neck=…, spikes=bool, skulls=bool, tatter=float, collar=bool, sleeves=bool, cloak=bool)."""
@@ -83,24 +128,29 @@ def build_outfit(a, body, marks, sk, P, M, style):
         a.add(n, m, mat, slot=slot)
         if both: a.add(n + '_R', mirror(m, sw), mat, slot=slot)
     W = lambda m: HP.weights_from(body, m)
-    cen = marks['breasts']; by = cen[0][1]
+    cen = marks.get('breasts'); by = cen[0][1] if cen is not None else 1.33
     arms = HP.bone_mask(body, sk, ['UpperArm', 'LowerArm', 'Hand'], 0.25)
+    male = style.get('male', False)
+    legs = HP.bone_mask(body, sk, ['UpperLeg', 'LowerLeg'], 0.3)
+    if male:
+        _male_garb(a, body, sk, M, style, add, W, arms, legs)
     # ---- corset : sous la poitrine jusqu'aux hanches, bonnets, décolleté en V plongeant, dos montant
     def corset_in(Q):
         x, y, z = Q[:, 0], Q[:, 1], Q[:, 2]
         ftop = np.minimum(by + 0.030 + 0.25 * np.clip(np.abs(x) - 0.09, 0, None), by - 0.075 + style.get('neck', 2.6) * np.abs(x))
         top = np.where(z > 0.0, ftop, 1.40)
         return np.minimum(y - 0.905, top - y)
-    coarse = HP.bone_mask(body, sk, ['Hips', 'Spine', 'Chest', 'UpperChest'], 0.2) & ~arms & (V[:, 1] > 0.86) & (V[:, 1] < 1.46) & (ax < 0.22)
-    add('corset', HP.cloth_cut(body, coarse, corset_in, 0.0045, thick=0.0025, uv_scale=7.0), M['corset'], 'Corset')
-    # baleines dorées verticales et laçage central
-    for x in (-0.11, -0.05, 0.05, 0.11):
-        pts = [(x, 0.93, 0.25), (x, 1.02, 0.25), (x * 0.95, by - 0.05, 0.25)]
-        add(f'corset_baleine{x}', HP.strap(body, pts, 0.0075, 0.007, thick=0.0018), M['gold'], 'Corset')
-    for k, y in enumerate(np.linspace(0.95, by - 0.07, 6)):
-        q, n_, _ = HP.surface_point(body, (0, y, 0.25), 0.010)
-        add(f'corset_lacet{k}', W(tube([q + (-0.014, 0.006, 0), q + (0.014, -0.006, 0)], 0.0016, segs=5)), M['dark'], 'Corset')
-        add(f'corset_oeillet{k}', W(concat([rivet(q + (sx * 0.016, 0, 0), n_, r=0.0035, h=0.002, segs=8, rings=2) for sx in (-1, 1)])), M['gold'], 'Corset')
+    if not male:
+        coarse = HP.bone_mask(body, sk, ['Hips', 'Spine', 'Chest', 'UpperChest'], 0.2) & ~arms & (V[:, 1] > 0.86) & (V[:, 1] < 1.46) & (ax < 0.22)
+        add('corset', HP.cloth_cut(body, coarse, corset_in, 0.0045, thick=0.0025, uv_scale=7.0), M['corset'], 'Corset')
+        # baleines dorées verticales et laçage central
+        for x in (-0.11, -0.05, 0.05, 0.11):
+            pts = [(x, 0.93, 0.25), (x, 1.02, 0.25), (x * 0.95, by - 0.05, 0.25)]
+            add(f'corset_baleine{x}', HP.strap(body, pts, 0.0075, 0.007, thick=0.0018), M['gold'], 'Corset')
+        for k, y in enumerate(np.linspace(0.95, by - 0.07, 6)):
+            q, n_, _ = HP.surface_point(body, (0, y, 0.25), 0.010)
+            add(f'corset_lacet{k}', W(tube([q + (-0.014, 0.006, 0), q + (0.014, -0.006, 0)], 0.0016, segs=5)), M['dark'], 'Corset')
+            add(f'corset_oeillet{k}', W(concat([rivet(q + (sx * 0.016, 0, 0), n_, r=0.0035, h=0.002, segs=8, rings=2) for sx in (-1, 1)])), M['gold'], 'Corset')
     # ---- manches (épaule → poignet) et gants
     if style.get('sleeves', True):
         def sleeve_in(Q): return np.minimum(np.abs(Q[:, 0]) - 0.17, 0.665 - np.abs(Q[:, 0]))
@@ -164,7 +214,6 @@ def build_outfit(a, body, marks, sk, P, M, style):
         add('boucle', W(pl), M['metal'], 'Ceinture'); add('boucle_bord', W(tr), M['gold'], 'Ceinture')
         add('boucle_gemme', W(rivet(q + n_ * 0.013, n_, r=0.012, h=0.008, segs=10, rings=4)), M['crystal'], 'Ceinture')
     # ---- pans de jupe longs (côtés et dos jusqu'aux chevilles, devant ouvert sur les jambes)
-    legs = HP.bone_mask(body, sk, ['UpperLeg', 'LowerLeg'], 0.3)
     env = AP.hip_envelope(body, (legs | HP.bone_mask(body, sk, ['Hips', 'Spine'], 0.3)) & (ax < 0.30), y0=0.05)
     tat = style.get('tatter', 0.15)
     for k, (th, L, wd) in enumerate([(0.80, 0.70, 0.080), (-0.80, 0.70, 0.080), (1.30, 0.80, 0.090), (-1.30, 0.80, 0.090),
@@ -177,16 +226,17 @@ def build_outfit(a, body, marks, sk, P, M, style):
             mm.J[:, 0] = sk['Hips']; mm.W[:, 0] = 1 - f
             mm.J[:, 1] = sk['LeftUpperLeg']; mm.W[:, 1] = f * wl; mm.J[:, 2] = sk['RightUpperLeg']; mm.W[:, 2] = f * (1 - wl)
             add(nm, mm, mat, 'Jupe')
-    # ---- cuissardes : tige jusqu'à mi-cuisse, pied de botte, genouillère d'or, revers
-    add('cuissardes', HP.shell(body, HP.region(body, legs & (V[:, 1] < 0.68) & (V[:, 1] > 0.085)), offset=0.006, thick=0.004, uv_scale=8, smooth=80, restore=0.002, inflate=0.004),
-        M['leather'], 'Bottes')
-    for sd in ('Left', 'Right'): add('pied_botte_' + sd, HP.boot_last(body, sk, sd, margin=0.010, sole=0.012), M['leather'], 'Bottes')
-    add('cuissardes_revers', HP.cloth_cut(body, legs & (V[:, 1] < 0.73) & (V[:, 1] > 0.62), lambda Q: np.minimum(Q[:, 1] - 0.650, 0.690 - Q[:, 1]), 0.012, thick=0.004, uv_scale=6.0),
-        M['gold'], 'Bottes')
-    for sx in (1, -1):
-        q, n_, _ = HP.surface_point(body, (0.095 * sx, 0.53, 0.07), 0.016)
-        pl, tr = AP.shield_plate(q, n_, (0, 1, 0), W=0.046, H=0.12, top=0.45, tip=1.0, dome=0.018, ridge=0.006, wrap=0.065, trim=0.0035)
-        add(f'genouillere{sx}', W(pl), M['metal'], 'Bottes'); add(f'genouillere_bord{sx}', W(tr), M['gold'], 'Bottes')
+    if not male:
+        # ---- cuissardes : tige jusqu'à mi-cuisse, pied de botte, genouillère d'or, revers
+        add('cuissardes', HP.shell(body, HP.region(body, legs & (V[:, 1] < 0.68) & (V[:, 1] > 0.085)), offset=0.006, thick=0.004, uv_scale=8, smooth=80, restore=0.002, inflate=0.004),
+            M['leather'], 'Bottes')
+        for sd in ('Left', 'Right'): add('pied_botte_' + sd, HP.boot_last(body, sk, sd, margin=0.010, sole=0.012), M['leather'], 'Bottes')
+        add('cuissardes_revers', HP.cloth_cut(body, legs & (V[:, 1] < 0.73) & (V[:, 1] > 0.62), lambda Q: np.minimum(Q[:, 1] - 0.650, 0.690 - Q[:, 1]), 0.012, thick=0.004, uv_scale=6.0),
+            M['gold'], 'Bottes')
+        for sx in (1, -1):
+            q, n_, _ = HP.surface_point(body, (0.095 * sx, 0.53, 0.07), 0.016)
+            pl, tr = AP.shield_plate(q, n_, (0, 1, 0), W=0.046, H=0.12, top=0.45, tip=1.0, dome=0.018, ridge=0.006, wrap=0.065, trim=0.0035)
+            add(f'genouillere{sx}', W(pl), M['metal'], 'Bottes'); add(f'genouillere_bord{sx}', W(tr), M['gold'], 'Bottes')
     # ---- cape longue
     if style.get('cloak', True):
         cape.build(sk, a, mat=M['cloak'], clasp=M['gold'], length=style.get('cloak_len', 1.12), width=style.get('cloak_w', 1.0), tatter=style.get('cloak_tatter', 0.6))
@@ -194,7 +244,7 @@ def build_outfit(a, body, marks, sk, P, M, style):
             if n.startswith('cape'): a.slot[n] = 'Cape'
 
 
-COVERS = {'Corset': ['SousVetementHaut'], 'Manches': ['Bras', 'AvantBras'], 'Gants': ['Mains'], 'Brassards': [], 'Col': [], 'Epaulieres': [],
+COVERS = {'Corset': ['SousVetementHaut'], 'Pourpoint': ['SousVetementHaut'], 'Pantalon': ['SousVetementBas'], 'Manches': ['Bras', 'AvantBras'], 'Gants': ['Mains'], 'Brassards': [], 'Col': [], 'Epaulieres': [],
           'Ceinture': [], 'Jupe': [], 'Bottes': ['Pieds', 'Jambes'], 'Cape': []}
 
 
