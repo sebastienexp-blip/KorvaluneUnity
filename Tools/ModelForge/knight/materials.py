@@ -6,17 +6,17 @@ from PIL import Image, ImageDraw, ImageFilter
 from forge.texgen import TexSet, fbm, noise, n01, height_to_normal, cavity_ao, scratches, voronoi_edges
 
 
-def steel(S=2048, seed=11, tone=(0.36, 0.355, 0.37), polish=0.62, rust_amt=1.0):
+def steel(S=2048, seed=11, tone=(0.36, 0.355, 0.37), polish=0.62, rust_amt=1.0, grime_amt=1.0, scratch_amt=1.0):
     """Acier de plates : poli à l'origine, bruni par l'usage. Coups de marteau du forgeron, rayures de combat,
     zones ternies et piquetées. UV en mètres / 0,35 m par répétition."""
     r = np.random.default_rng(seed)
     hammer = fbm(S, S, r, base=S / 6, octaves=3, gain=0.5)                    # martelage (cupules larges)
     pits = np.clip(fbm(S, S, r, base=6, octaves=2) - 2.2, 0, None)            # piqûres
     brushed = fbm(S, S, r, base=S / 10, octaves=4, aniso=(0.08, 1.0))          # polissage directionnel
-    sc_fine = gaussian_filter(scratches(S, S, r, 900, (0.01, 0.06), (1, 1)), 0.5, mode='wrap')
-    sc_big = gaussian_filter(scratches(S, S, r, 70, (0.04, 0.22), (1, 3), angle=0.5, spread=0.9), 0.7, mode='wrap')
+    sc_fine = scratch_amt * gaussian_filter(scratches(S, S, r, 900, (0.01, 0.06), (1, 1)), 0.5, mode='wrap')
+    sc_big = scratch_amt * gaussian_filter(scratches(S, S, r, 70, (0.04, 0.22), (1, 3), angle=0.5, spread=0.9), 0.7, mode='wrap')
     tarnish = n01(fbm(S, S, r, base=S / 3, octaves=4))                       # ternissure
-    grime = np.clip((tarnish - 0.58) * 3.0, 0, 1)
+    grime = grime_amt * np.clip((tarnish - 0.58) * 3.0, 0, 1)
     rust = rust_amt * np.clip((n01(fbm(S, S, r, base=S / 5, octaves=5)) - 0.80) * 6, 0, 1) * np.clip(n01(fbm(S, S, r, base=24, octaves=3)) * 1.6 - 0.3, 0, 1)
     hgt = 4.0 * hammer + 0.25 * brushed - 1.0 * sc_big - 0.45 * sc_fine - 1.5 * pits
     normal = height_to_normal(hgt, 0.55 * S / 512)
@@ -30,7 +30,7 @@ def steel(S=2048, seed=11, tone=(0.36, 0.355, 0.37), polish=0.62, rust_amt=1.0):
     return TexSet(np.clip(base, 0, 1), normal, metal, smooth, ao)
 
 
-def brass(S=1024, seed=21):
+def brass(S=1024, seed=21, gold=(0.80, 0.60, 0.30), dark=(0.16, 0.11, 0.06)):
     """Laiton doré gravé : rinceaux de feuillage (creux noircis), reliefs polis. 0,10 m par répétition."""
     r = np.random.default_rng(seed)
     im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
@@ -59,7 +59,7 @@ def brass(S=1024, seed=21):
     wear = n01(fbm(S, S, r, base=S / 4, octaves=4))
     hgt = -3.0 * etch - 0.8 * gaussian_filter(stipple, 0.6, mode='wrap') + 0.4 * fbm(S, S, r, base=S / 8, octaves=3)
     normal = height_to_normal(hgt, 0.9 * S / 1024)
-    gold = np.array([0.80, 0.60, 0.30]); dark = np.array([0.16, 0.11, 0.06])
+    gold = np.array(gold); dark = np.array(dark)
     base = gold[None, None] * (1 - 0.15 * wear[..., None]) * (1 - etch[..., None]) + dark * etch[..., None]
     metal = 1 - etch * 0.6
     smooth = np.clip(0.78 - 0.45 * etch - 0.18 * wear - 0.2 * stipple, 0.1, 0.9)
@@ -67,7 +67,7 @@ def brass(S=1024, seed=21):
     return TexSet(np.clip(base, 0, 1), normal, metal, smooth, ao)
 
 
-def leather(S=1024, seed=31):
+def leather(S=1024, seed=31, tone=(0.22, 0.13, 0.075)):
     r = np.random.default_rng(seed)
     cells = voronoi_edges(S // 2, S // 2, r, 700)
     cells = np.kron(cells, np.ones((2, 2))); cells = n01(gaussian_filter(cells, 1.0, mode='wrap'))
@@ -75,7 +75,7 @@ def leather(S=1024, seed=31):
     mott = fbm(S, S, r, base=S / 5, octaves=5)
     hgt = 2.0 * np.sqrt(cells) - 2.0 * crease + 0.3 * mott
     normal = height_to_normal(hgt, 0.8 * S / 1024)
-    base = np.array([0.22, 0.13, 0.075])[None, None] * (1 + 0.18 * mott[..., None]) * (0.8 + 0.25 * cells[..., None]) * (1 - 0.3 * crease[..., None])
+    base = np.array(tone)[None, None] * (1 + 0.18 * mott[..., None]) * (0.8 + 0.25 * cells[..., None]) * (1 - 0.3 * crease[..., None])
     worn = np.clip((n01(fbm(S, S, r, base=S / 3, octaves=3)) - 0.6) * 2.5, 0, 1)
     base = base * (1 - worn[..., None] * 0.35) + np.array([0.32, 0.22, 0.14]) * worn[..., None] * 0.35
     smooth = np.clip(0.42 + 0.1 * mott - 0.2 * crease + 0.12 * worn, 0.1, 0.7)
@@ -110,7 +110,7 @@ def chainmail(S=1024, seed=41, rings=16):
     return TexSet(np.clip(base, 0, 1), normal, metal, smooth, ao)
 
 
-def gambeson(S=1024, seed=51):
+def gambeson(S=1024, seed=51, color=(0.16, 0.075, 0.07)):
     """Gambison de lin matelassé (piqûres verticales tous les 3 cm), teinte noir-bordeaux. Tuile ≈ 0,15 m."""
     r = np.random.default_rng(seed)
     yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
@@ -122,14 +122,14 @@ def gambeson(S=1024, seed=51):
     weave = 0.5 * np.sin(xx * S * np.pi / 2.0) * np.sin(yy * S * np.pi / 2.0) + 0.3 * noise(S, S, 1.5, r)
     hgt = 6.0 * puff + 0.6 * weave + 1.2 * fbm(S, S, r, base=S / 6, octaves=3) - 2.0 * (stitch & dots)
     normal = height_to_normal(gaussian_filter(hgt, 0.7, mode='wrap'), 0.5 * S / 1024)
-    base = np.array([0.16, 0.075, 0.07])[None, None] * (0.75 + 0.3 * puff[..., None]) * (1 + 0.08 * weave[..., None])
+    base = np.array(color)[None, None] * (0.75 + 0.3 * puff[..., None]) * (1 + 0.08 * weave[..., None])
     base = np.where((stitch & dots)[..., None], np.array([0.30, 0.25, 0.20]), base)
     dirt = np.clip(n01(fbm(S, S, r, base=S / 3, octaves=4)) - 0.5, 0, 1)
     base = base * (1 - 0.4 * dirt[..., None])
     return TexSet(np.clip(base, 0, 1), normal, np.zeros((S, S)), np.clip(0.18 + 0.05 * puff, 0, 1), np.clip(0.55 + 0.45 * puff, 0, 1))
 
 
-def cloak(W=1024, H=2048, seed=61):
+def cloak(W=1024, H=2048, seed=61, color=(0.42, 0.045, 0.05), thread_color=(0.72, 0.52, 0.20), mud_amt=1.0):
     """Cape de laine rouge (texture unique, non répétée) : u = largeur (0 gauche → 1 droite), v = hauteur (0 bas → 1 col).
     Sergé de laine, feutrage, galon brodé d'or en bas et sur les côtés, usure et boue sur l'ourlet."""
     r = np.random.default_rng(seed)
@@ -138,7 +138,7 @@ def cloak(W=1024, H=2048, seed=61):
     twill = np.sin((xx + yy) * np.pi / 3.0) * 0.6 + np.sin((xx - yy * 0.5) * np.pi / 1.5) * 0.2
     fuzz = fbm(H, W, r, base=18, octaves=3); big = fbm(H, W, r, base=300, octaves=4)
     hgt = 0.8 * twill + 0.9 * fuzz
-    crimson = np.array([0.42, 0.045, 0.05])
+    crimson = np.array(color)
     base = crimson[None, None] * (1 + 0.10 * big[..., None] + 0.06 * fuzz[..., None] + 0.05 * twill[..., None])
     # galon brodé : bande en bas (v < 0.055) et sur les bords (u < 0.035, u > 0.965)
     band = np.zeros((H, W))
@@ -152,12 +152,12 @@ def cloak(W=1024, H=2048, seed=61):
     border = (np.abs(bv - 0.08) < 0.05) | (np.abs(bv - 0.92) < 0.05)
     thread = band * (diamond | border)
     thread_h = gaussian_filter(thread.astype(float), 1.0)
-    gold = np.array([0.72, 0.52, 0.20]) * (0.85 + 0.25 * np.sin(yy * np.pi / 1.7)[..., None] * np.sin(xx * np.pi / 2.1)[..., None])
+    gold = np.array(thread_color) * (0.85 + 0.25 * np.sin(yy * np.pi / 1.7)[..., None] * np.sin(xx * np.pi / 2.1)[..., None])
     base = np.where(thread[..., None] > 0, gold, base * np.where(band[..., None] > 0, 0.55, 1.0))
     hgt = hgt + 3.0 * thread_h
     # usure, déchirures sombres et boue sur le bas
     edge_wear = np.clip(1 - v / 0.12, 0, 1) * n01(fbm(H, W, r, base=40, octaves=4))
-    mud = np.clip((1 - v / 0.22) * 1.3 - 0.25 + 0.4 * fbm(H, W, r, base=60, octaves=4) * 0.5, 0, 1) ** 1.5
+    mud = mud_amt * np.clip((1 - v / 0.22) * 1.3 - 0.25 + 0.4 * fbm(H, W, r, base=60, octaves=4) * 0.5, 0, 1) ** 1.5
     base = base * (1 - 0.35 * edge_wear[..., None]) * (1 - 0.55 * mud[..., None]) + np.array([0.12, 0.09, 0.06]) * 0.55 * mud[..., None]
     sun = np.clip(v - 0.6, 0, 1) * 0.15                                 # haut un peu passé
     base = base * (1 + sun[..., None])
@@ -188,3 +188,72 @@ def wood(S=1024, seed=81):
     hgt = 0.6 * rings + 1.2 * grain
     base = np.array([0.20, 0.12, 0.07])[None, None] * (1 + 0.25 * rings[..., None] + 0.15 * grain[..., None])
     return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.7 * S / 1024), np.zeros((S, S)), np.clip(0.30 + 0.05 * grain, 0, 1), cavity_ao(hgt, 4, 0.15))
+
+
+def scale_fabric(S=1024, seed=91, color=(0.20, 0.21, 0.10), vein=(0.52, 0.44, 0.20), rows=4, cols=4):
+    """Étoffe de rôdeur à écailles en feuilles : rangées décalées de feuilles pointées qui se chevauchent, bord et nervure
+    centrale brodés (fil vieil or). Tuile ≈ 0,15 m."""
+    r = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:S, 0:S].astype(float)
+    w = S / cols; h = S / rows * 1.55
+    hgt = np.full((S, S), -0.2); edge = np.zeros((S, S)); midv = np.zeros((S, S)); shade = np.zeros((S, S))
+    for k in range(rows + 1, -2, -1):          # du bas vers le haut : la pointe de chaque feuille recouvre le haut de la rangée suivante
+        y0 = k * S / rows
+        for c in range(-1, cols + 1):
+            cx = (c + 0.5 * (k % 2)) * w + w / 2
+            jit = r.uniform(0.85, 1.0)
+            for oy in (-S, 0, S):
+                for ox in (-S, 0, S):
+                    dx = xx - (cx + ox); t = (yy - (y0 + oy)) / h
+                    inside_t = (t >= 0) & (t <= 1)
+                    hw = w / 2 * 1.04 * np.sin(np.pi * (0.22 + 0.78 * np.clip(t, 0, 1))) ** 0.8 * np.clip(1.25 - np.clip(t, 0, 1), 0, 1) * jit
+                    ins = inside_t & (np.abs(dx) < hw)
+                    if not ins.any(): continue
+                    dist = hw - np.abs(dx)
+                    hv = 0.25 + 0.75 * np.clip(t, 0, 1) * np.clip(dist / (w * 0.25), 0, 1) ** 0.5
+                    hgt = np.where(ins, hv, hgt)
+                    edge = np.where(ins, np.clip(1 - dist / 3.0, 0, 1), edge)
+                    midv = np.where(ins, np.clip(1 - np.abs(dx) / 1.6, 0, 1) * (t > 0.08) * (t < 0.92), midv)
+                    shade = np.where(ins, r.uniform(-1, 1), shade)
+    weave = 0.5 * np.sin(xx * np.pi / 1.5) * np.sin(yy * np.pi / 1.5) + 0.3 * noise(S, S, 1.5, r)
+    mott = fbm(S, S, r, base=S / 4, octaves=4)
+    line = np.clip(edge + midv * 0.8, 0, 1)
+    H = 5.0 * gaussian_filter(hgt, 1.2, mode='wrap') + 0.4 * weave - 1.5 * line + 0.6 * mott
+    normal = height_to_normal(H, 0.6 * S / 1024)
+    base = np.array(color)[None, None] * (0.70 + 0.45 * np.clip(hgt, 0, 1)[..., None]) * (1 + 0.10 * shade[..., None] + 0.12 * mott[..., None])
+    base = base * (1 - line[..., None] * 0.6) + np.array(vein)[None, None] * line[..., None] * 0.6 * (0.7 + 0.3 * np.clip(hgt, 0, 1)[..., None])
+    wear = np.clip((n01(fbm(S, S, r, base=S / 3, octaves=4)) - 0.55) * 2.2, 0, 1)
+    base = base * (1 - 0.35 * wear[..., None]) + np.array([0.30, 0.29, 0.20]) * 0.35 * wear[..., None]
+    smooth = np.clip(0.22 + 0.25 * line + 0.05 * mott, 0.05, 0.7)
+    metal = line * 0.5
+    ao = np.clip(0.45 + 0.55 * np.clip(hgt, 0, 1), 0, 1)
+    return TexSet(np.clip(base, 0, 1), normal, metal, smooth, ao)
+
+
+def tooled_leather(S=1024, seed=93, tone=(0.14, 0.09, 0.055), line=(0.42, 0.30, 0.15), n=26):
+    """Cuir repoussé : rinceaux et volutes gravés, reliefs patinés plus clairs, filets dorés usés. Tuile ≈ 0,12 m."""
+    r = np.random.default_rng(seed)
+    base_tex = leather(S, seed=seed, tone=tone)
+    im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
+    lw = max(2, S // 170)
+    for _ in range(n):
+        cx, cy = r.uniform(0, S, 2); rad = r.uniform(0.04, 0.09) * S; sgn = r.choice([-1, 1]); a0 = r.uniform(0, 2 * np.pi)
+        th = np.linspace(0, 3.2 * np.pi, 140); rr = rad * (1 - th / (3.6 * np.pi))
+        sp = [(cx + np.cos(a0 + sgn * t) * q, cy + np.sin(a0 + sgn * t) * q) for t, q in zip(th, rr)]
+        # queue de la volute : longue courbe en S
+        L = r.uniform(0.15, 0.30) * S; ang = a0 + sgn * np.pi / 2
+        tail = [(cx + np.cos(a0) * rad + np.cos(ang + 0.8 * np.sin(s * 3)) * L * s, cy + np.sin(a0) * rad + np.sin(ang + 0.8 * np.sin(s * 3)) * L * s) for s in np.linspace(0, 1, 60)]
+        for ox in (-S, 0, S):
+            for oy in (-S, 0, S):
+                d.line([(x + ox, y + oy) for x, y in sp], fill=255, width=lw)
+                d.line([(x + ox, y + oy) for x, y in tail], fill=255, width=lw)
+    et = np.asarray(im.filter(ImageFilter.GaussianBlur(1.0)), float) / 255
+    ridge = np.clip(gaussian_filter(et, 3.0, mode='wrap') * 2.5 - et, 0, 1)          # bourrelet de part et d'autre du trait
+    hgt = -2.5 * et + 1.2 * ridge
+    nrm = height_to_normal(hgt, 0.8 * S / 1024)
+    N0 = base_tex.normal * 2 - 1; N1 = nrm * 2 - 1
+    N = np.dstack([N0[..., 0] + N1[..., 0], N0[..., 1] + N1[..., 1], N0[..., 2]]); N /= np.linalg.norm(N, axis=-1, keepdims=True)
+    base = base_tex.base * (1 - 0.5 * et[..., None]) + np.array(line)[None, None] * ridge[..., None] * 0.55
+    smooth = np.clip(base_tex.smooth + 0.25 * ridge, 0, 0.8)
+    metal = ridge * 0.35
+    return TexSet(np.clip(base, 0, 1), N * 0.5 + 0.5, metal, smooth, np.clip(base_tex.ao * (1 - 0.4 * et), 0, 1))

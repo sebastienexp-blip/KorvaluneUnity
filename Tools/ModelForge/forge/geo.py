@@ -256,7 +256,8 @@ def plate_edge(loft, a0, a1, t_fn, off, r=0.004, n=60, tile=0.1, side=+1):
     n = max(8, int(n * 0.6))
     A = np.linspace(a0, a1, n); T = tf(A)
     P, N, _, _ = loft.frame(T, A)
-    pts = P + N * (off + r * 0.8)
+    o = off(A) if callable(off) else off
+    pts = P + N * (np.asarray(o)[..., None] if np.ndim(o) else o) + N * r * 0.8
     return tube(pts, r, segs=8, tile=tile)
 
 

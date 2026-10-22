@@ -67,11 +67,15 @@ def render(prims, size=(720, 900), yaw=25.0, pitch=8.0, target=(0, 0.95, 0), dis
         return np.stack([(d @ lx) / ext * SM / 2 + SM / 2, (d @ ly) / ext * SM / 2 + SM / 2, -(d @ L)], 1)
     smap = np.full((SM, SM), np.inf)
     for V, N, UV, F, md in prims:
+        if getattr(md, 'cutoff', None) is not None: continue   # mèches : pas d'ombre grossière dans l'aperçu
         S = lproj(V)[F]
         for k in range(3):
             pass
         # éclaboussure de points (rapide) : sommets + centres de facettes
-        pts = np.vstack([S.reshape(-1, 3), S.mean(1), (S[:, 0] + S[:, 1]) / 2, (S[:, 1] + S[:, 2]) / 2, (S[:, 0] + S[:, 2]) / 2])
+        rb = np.random.default_rng(0).dirichlet((1, 1, 1), size=(len(S), 10))
+        e1_ = S[:, 1, :2] - S[:, 0, :2]; e2_ = S[:, 2, :2] - S[:, 0, :2]; area_px = np.abs(e1_[:, 0] * e2_[:, 1] - e1_[:, 1] * e2_[:, 0]) * 0.5
+        extra = np.einsum('tkj,tjd->tkd', rb, S)[area_px > 1.5].reshape(-1, 3)
+        pts = np.vstack([S.reshape(-1, 3), S.mean(1), (S[:, 0] + S[:, 1]) / 2, (S[:, 1] + S[:, 2]) / 2, (S[:, 0] + S[:, 2]) / 2, extra])
         xi = np.clip(pts[:, 0].astype(int), 0, SM - 1); yi = np.clip(pts[:, 1].astype(int), 0, SM - 1)
         np.minimum.at(smap, (yi, xi), pts[:, 2])
     from scipy.ndimage import minimum_filter
@@ -84,6 +88,7 @@ def render(prims, size=(720, 900), yaw=25.0, pitch=8.0, target=(0, 0.95, 0), dis
         xmn = np.floor(np.minimum(np.minimum(A[:, 0], B[:, 0]), C[:, 0])).astype(int); xmx = np.ceil(np.maximum(np.maximum(A[:, 0], B[:, 0]), C[:, 0])).astype(int)
         ymn = np.floor(np.minimum(np.minimum(A[:, 1], B[:, 1]), C[:, 1])).astype(int); ymx = np.ceil(np.maximum(np.maximum(A[:, 1], B[:, 1]), C[:, 1])).astype(int)
         ok = (np.abs(area) > 1e-9) & (xmx >= 0) & (ymx >= 0) & (xmn < W) & (ymn < H) & (np.minimum(np.minimum(A[:, 2], B[:, 2]), C[:, 2]) > 0.05)
+        amap = md.images.get('alpha') if getattr(md, 'cutoff', None) is not None else None
         if not md.double_sided: ok &= area < 0
         for k in np.nonzero(ok)[0]:
             x0, x1 = max(xmn[k], 0), min(xmx[k], W - 1); y0, y1 = max(ymn[k], 0), min(ymx[k], H - 1)
@@ -96,6 +101,11 @@ def render(prims, size=(720, 900), yaw=25.0, pitch=8.0, target=(0, 0.95, 0), dis
             if not ins.any(): continue
             z = 1 / (w0 / a[2] + w1 / b[2] + w2 / c[2])
             sub = zb[y0:y1 + 1, x0:x1 + 1]; m = ins & (z < sub)
+            if amap is not None and m.any():
+                pw0 = (w0 / a[2]) * z; pw1 = (w1 / b[2]) * z; pw2 = 1 - pw0 - pw1
+                uvp = (UV[F[k, 0]][None, None] * pw0[..., None] + UV[F[k, 1]][None, None] * pw1[..., None] + UV[F[k, 2]][None, None] * pw2[..., None]) * np.array(md.tiling)
+                al = _sample(amap, uvp.reshape(-1, 2)).reshape(m.shape)
+                m &= al >= md.cutoff
             if not m.any(): continue
             sub[m] = z[m]; tid[y0:y1 + 1, x0:x1 + 1][m] = base + k
             bb = bary[y0:y1 + 1, x0:x1 + 1]
@@ -148,7 +158,7 @@ def render(prims, size=(720, 900), yaw=25.0, pitch=8.0, target=(0, 0.95, 0), dis
             Nn = Tg * nt[:, 0:1] + Bt * nt[:, 1:2] + Nn * nt[:, 2:3]; Nn /= np.linalg.norm(Nn, axis=1, keepdims=True) + 1e-12
         rough = np.clip(1 - smooth, 0.05, 1); metal = np.clip(metal, 0, 1)
         F0 = 0.04 * (1 - metal) + base_c * metal; diff = base_c * (1 - metal)
-        sh = _shadow(P + Nn * 0.004, lproj, smap, 0.012)[:, None]
+        sh = _shadow(P + Nn * 0.008, lproj, smap, 0.02)[:, None]
         col = np.zeros_like(base_c)
         for Ld, Lcol, s in ((L, Lc, sh), (L2, L2c, 1.0)):
             ndl = np.clip(Nn @ Ld, 0, 1)[:, None]

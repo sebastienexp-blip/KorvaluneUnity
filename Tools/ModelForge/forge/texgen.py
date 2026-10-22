@@ -74,21 +74,25 @@ def lin_to_srgb(c): c = np.clip(c, 0, 1); return np.where(c <= 0.0031308, c * 12
 
 class TexSet:
     """Jeu de textures d'un matériau (valeurs 0..1). base : sRGB ; normal : encodée ; metal, smooth, ao : (h, w)."""
-    def __init__(self, base, normal, metal, smooth, ao, emit=None):
+    def __init__(self, base, normal, metal, smooth, ao, emit=None, alpha=None):
         self.base, self.normal, self.metal, self.smooth, self.ao, self.emit = base, normal, metal, smooth, ao, emit
+        self.alpha = alpha       # découpe (cheveux, cils…) : stockée dans le canal A de la BaseMap
 
     def images(self):
         """Pour l'aperçu logiciel : couleur LINÉAIRE, normales, masque (R métal, A lissé), occlusion."""
         mask = np.zeros(self.base.shape[:2] + (4,)); mask[..., 0] = self.metal; mask[..., 3] = self.smooth
         d = {'base': srgb_to_lin(self.base), 'normal': self.normal, 'mask': mask, 'ao': self.ao[..., None]}
         if self.emit is not None: d['emit'] = srgb_to_lin(self.emit)
+        if self.alpha is not None: d['alpha'] = self.alpha[..., None]
         return d
 
     def save(self, folder, prefix):
         os.makedirs(folder, exist_ok=True)
         u8 = lambda a: (np.clip(a, 0, 1) * 255 + 0.5).astype(np.uint8)
         files = {}
-        files['baseMap'] = f'{prefix}_BaseMap.png'; Image.fromarray(u8(self.base)).save(os.path.join(folder, files['baseMap']), optimize=True)
+        files['baseMap'] = f'{prefix}_BaseMap.png'
+        if self.alpha is not None: Image.fromarray(u8(np.dstack([self.base, self.alpha])), 'RGBA').save(os.path.join(folder, files['baseMap']), optimize=True)
+        else: Image.fromarray(u8(self.base)).save(os.path.join(folder, files['baseMap']), optimize=True)
         files['normalMap'] = f'{prefix}_Normal.png'; Image.fromarray(u8(self.normal)).save(os.path.join(folder, files['normalMap']), optimize=True)
         ms = np.dstack([self.metal, self.metal, self.metal, self.smooth])
         files['maskMap'] = f'{prefix}_MetallicSmoothness.png'; Image.fromarray(u8(ms), 'RGBA').save(os.path.join(folder, files['maskMap']), optimize=True)

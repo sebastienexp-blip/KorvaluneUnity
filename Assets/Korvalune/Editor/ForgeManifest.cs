@@ -30,6 +30,8 @@ namespace Korvalune.EditorTools
         public float[] emission = { 0, 0, 0 };
         public float[] tiling = { 1, 1 };
         public bool doubleSided;
+        public bool alphaClip;               // découpe alpha (cheveux, cils, sourcils) : canal A de la BaseMap
+        public float cutoff = 0.5f;
         public int maxSize = 2048, mobileMaxSize = 1024;
     }
 

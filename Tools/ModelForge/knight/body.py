@@ -7,14 +7,20 @@ from forge import humanoid as H
 N = 40   # anneaux le long des lofts principaux
 
 
-def torso_loft():
+def torso_loft(female=False):
     """Tronc du bassin au cou. a=0 avant, 0.25 gauche (+X), 0.5 dos, 0.75 droite."""
     path = spline([(0, 0.86, 0.004), (0, 0.98, 0.0), (0, 1.10, 0.004), (0, 1.25, 0.008), (0, 1.40, 0.0), (0, 1.50, -0.010), (0, 1.56, -0.014)], N)
-    # demi-profondeur (avant/arrière) et demi-largeur selon la hauteur (bassin → cou)
-    rf = curve([(0, .118), (.15, .118), (.32, .108), (.50, .118), (.66, .128), (.80, .122), (.92, .095), (1, .060)], N)
-    rs = curve([(0, .160), (.15, .168), (.32, .145), (.50, .158), (.66, .178), (.80, .182), (.92, .125), (1, .062)], N)
-    of = curve([(0, 0.0), (.5, 0.006), (.7, 0.012), (.85, 0.0), (1, -0.004)], N)
-    return Loft(path, rf, rs, p=2.35, of=of, segs=72)
+    if not female:
+        # demi-profondeur (avant/arrière) et demi-largeur selon la hauteur (bassin → cou)
+        rf = curve([(0, .118), (.15, .118), (.32, .108), (.50, .118), (.66, .128), (.80, .122), (.92, .095), (1, .060)], N)
+        rs = curve([(0, .160), (.15, .168), (.32, .145), (.50, .158), (.66, .178), (.80, .182), (.92, .125), (1, .062)], N)
+        of = curve([(0, 0.0), (.5, 0.006), (.7, 0.012), (.85, 0.0), (1, -0.004)], N)
+        return Loft(path, rf, rs, p=2.35, of=of, segs=72)
+    # silhouette féminine : taille marquée, hanches plus larges, poitrine
+    rf = curve([(0, .112), (.15, .110), (.32, .092), (.48, .098), (.62, .124), (.72, .126), (.82, .102), (.92, .082), (1, .054)], N)
+    rs = curve([(0, .170), (.15, .172), (.32, .126), (.50, .136), (.66, .150), (.80, .150), (.92, .108), (1, .056)], N)
+    of = curve([(0, -0.004), (.32, 0.0), (.5, 0.006), (.66, 0.026), (.74, 0.026), (.84, 0.004), (1, -0.004)], N)
+    return Loft(path, rf, rs, p=2.3, of=of, segs=72)
 
 
 def neck_loft():
@@ -30,23 +36,23 @@ def head_loft():
     return Loft(path, rf, rs, p=2.1, segs=64)
 
 
-def arm_loft():
+def arm_loft(scale=1.0):
     """Bras gauche en pose T (le long de +X). a=0 avant (+Z), 0.25 dessous (-Y), 0.5 arrière, 0.75 dessus (+Y)."""
     sh, el, wr = np.array(H.ARM['UpperArm']), np.array(H.ARM['LowerArm']), np.array(H.ARM['Hand'])
     path = spline([sh + (-0.04, 0.0, 0.0), sh + (0.06, 0, 0), el, wr + (-0.03, 0, 0), wr + (0.01, 0, 0)], N)
     rf = curve([(0, .060), (.1, .058), (.3, .052), (.48, .043), (.58, .046), (.75, .038), (.92, .029), (1, .028)], N)
     rs = curve([(0, .064), (.1, .060), (.3, .054), (.48, .045), (.58, .049), (.75, .041), (.92, .023), (1, .022)], N)
-    return Loft(path, rf, rs, p=2.3, segs=48)
+    return Loft(path, rf * scale, rs * scale, p=2.3, segs=48)
 
 
-def leg_loft():
+def leg_loft(scale=1.0):
     """Jambe gauche, de la hanche à la cheville. a=0 avant, 0.25 intérieur (-X), 0.5 arrière, 0.75 extérieur (+X)."""
     hip, kn, an = np.array(H.LEG['UpperLeg']), np.array(H.LEG['LowerLeg']), np.array(H.LEG['Foot'])
     path = spline([hip + (0, 0.05, 0), hip + (0.002, -0.05, 0.004), kn, an + (0, 0.04, 0), an + (0, 0.01, 0)], N)
     rf = curve([(0, .095), (.12, .090), (.35, .072), (.5, .058), (.62, .062), (.75, .055), (.9, .040), (1, .038)], N)
     rs = curve([(0, .098), (.12, .092), (.35, .076), (.5, .060), (.62, .058), (.75, .050), (.9, .036), (1, .035)], N)
     of = curve([(0, 0.0), (.45, 0.0), (.6, -0.010), (.75, -0.004), (1, 0.0)], N)
-    return Loft(path, rf, rs, p=2.3, of=of, segs=48)
+    return Loft(path, rf * scale, rs * scale, p=2.3, of=of, segs=48)
 
 
 def foot_loft():

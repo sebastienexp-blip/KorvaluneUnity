@@ -7,12 +7,12 @@ from forge import humanoid as H
 CLOAK = 'KN_Cloak'
 
 
-def sheet(nu=40, nv=56):
+def sheet(nu=40, nv=56, length=1.0, width=1.0, tatter=0.0, seed=2):
     u = np.linspace(0, 1, nu); v = np.linspace(0, 1, nv)              # v : 0 = col, 1 = ourlet
     U, Vv = np.meshgrid(u, v)
     s = 2 * U - 1
-    top_y, bot_y = 1.475, 0.27
-    hw = 0.165 + 0.27 * Vv ** 0.85
+    top_y, bot_y = 1.475, 1.475 - (1.475 - 0.27) * length
+    hw = 0.165 + 0.27 * width * Vv ** 0.85
     x = s * hw
     y = top_y - Vv * (top_y - bot_y)
     # col : s'enroule derrière la nuque, puis le drap s'écarte du dos
@@ -26,6 +26,10 @@ def sheet(nu=40, nv=56):
     z += 0.05 * Vv * np.abs(s) ** 3
     # ourlet légèrement ondulé
     y += (Vv > 0.97) * 0.0 + 0.012 * np.sin(2 * np.pi * 7 * U) * Vv ** 8
+    if tatter:   # ourlet déchiqueté : pointes irrégulières
+        rr = np.random.default_rng(seed)
+        jag = np.interp(U[0], np.linspace(0, 1, 23), rr.uniform(0, 1, 23)) ** 1.5
+        y += tatter * (jag[None, :] * 0.18 - 0.02) * smoothstep((Vv - 0.75) / 0.25)
     P = np.stack([x, y, z], -1)
     idx = np.arange(nu * nv).reshape(nv, nu)
     a = idx[:-1, :-1].ravel(); b = idx[:-1, 1:].ravel(); c = idx[1:, :-1].ravel(); d = idx[1:, 1:].ravel()
@@ -68,27 +72,31 @@ def skin(m, sk, U):
     return m
 
 
-def build(sk, asset):
-    outer, inner, U, V = sheet()
+def build(sk, asset, mat=CLOAK, clasp='KN_Brass', **kw):
+    outer, inner, U, V = sheet(**kw)
     skin(outer, sk, U); skin(inner, sk, U)
-    asset.add('cape_dehors', outer, CLOAK); asset.add('cape_doublure', inner, CLOAK)
+    asset.add('cape_dehors', outer, mat); asset.add('cape_doublure', inner, mat)
     # fermoirs : deux disques de laiton sur le haut des épaules + chaînette
     for sx in (1, -1):
         P = np.array([0.150 * sx, 1.468, -0.045]); N = unit(np.array([0.25 * sx, 1.0, 0.35]))
-        m = rivet(P, N, r=0.016, h=0.006, segs=16, rings=5); rigid(m, sk['UpperChest']); asset.add(f'cape_fermoir{sx}', m, 'KN_Brass')
+        m = rivet(P, N, r=0.016, h=0.006, segs=16, rings=5); rigid(m, sk['UpperChest']); asset.add(f'cape_fermoir{sx}', m, clasp)
     return asset
 
 
-def tabard_panel(sk, front=True, nu=14, nv=30):
+def tabard_panel(sk, front=True, nu=14, nv=30, length=1.0, width=1.0, tatter=0.0, seed=5):
     """Pan de tabard rouge qui tombe sous les faulds (devant et derrière), entre les tassettes."""
     u = np.linspace(0, 1, nu); v = np.linspace(0, 1, nv)
     U, Vv = np.meshgrid(u, v); s = 2 * U - 1
-    y = 1.00 - Vv * (1.00 - 0.50)
-    hw = 0.085 + 0.025 * Vv
+    y = 1.00 - Vv * (1.00 - 0.50) * length
+    hw = (0.085 + 0.025 * Vv) * width
     x = s * hw
     zf = 0.150 + 0.045 * np.clip((1.0 - y) / 0.3, 0, 1) - 0.05 * np.clip((0.70 - y) / 0.2, 0, 1)
     z = (zf + 0.012 * np.sin(2 * np.pi * 2 * U) * Vv) * (1 if front else -1.05)
     z += -0.012 * s ** 2
+    if tatter:   # bas déchiqueté
+        rr = np.random.default_rng(seed + (0 if front else 7))
+        jag = np.interp(U[0], np.linspace(0, 1, 9), rr.uniform(0, 1, 9)) ** 1.3
+        y += tatter * jag[None, :] * 0.12 * smoothstep((Vv - 0.6) / 0.4)
     P = np.stack([x, y, z], -1)
     idx = np.arange(nu * nv).reshape(nv, nu)
     a = idx[:-1, :-1].ravel(); b = idx[:-1, 1:].ravel(); c = idx[1:, :-1].ravel(); d = idx[1:, 1:].ravel()
@@ -107,6 +115,6 @@ def tabard_panel(sk, front=True, nu=14, nv=30):
     return concat([m, back])
 
 
-def build_tabard(sk, asset):
-    asset.add('tabard_avant', tabard_panel(sk, True), CLOAK)
-    asset.add('tabard_arriere', tabard_panel(sk, False), CLOAK)
+def build_tabard(sk, asset, mat=CLOAK, **kw):
+    asset.add('tabard_avant', tabard_panel(sk, True, **kw), mat)
+    asset.add('tabard_arriere', tabard_panel(sk, False, **kw), mat)

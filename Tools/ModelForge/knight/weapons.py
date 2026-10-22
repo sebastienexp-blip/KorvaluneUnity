@@ -93,12 +93,33 @@ def shield(W=0.27, Hh=0.66, bend=0.55, th=0.022):
         Pz = np.c_[pts[:, 0], pts[:, 1], -bend * pts[:, 0] ** 2 + th / 2 + 0.0015]
         lo = Loft(Pz, h, w, p=4.0, segs=16, ref=(0, 0, 1), cap0=2, cap1=2)
         a.add(name, lo.mesh(0.05), BRASS)
-    raised_strip(spline([(0, 0.25, 0), (0, -0.05, 0), (0, -0.30, 0)], 30), 0.016, 0.004, 'croix_v')
-    raised_strip(spline([(-0.20, 0.12, 0), (0, 0.12, 0), (0.20, 0.12, 0)], 30), 0.016, 0.004, 'croix_h')
-    for (x, y) in ((0, 0.255), (0, -0.305), (-0.205, 0.12), (0.205, 0.12)):
-        c = np.array([x, y, -bend * x * x + th / 2 + 0.002]); nrm = unit(np.array([2 * bend * x, 0, 1.0]))
-        a.add(f'fleuron{x}{y}', rivet(c, nrm, r=0.022, h=0.008, segs=16, rings=5), BRASS)
-    c = np.array([0, 0.12, th / 2 + 0.004])
+    # ornement doré rayonnant (griffe / étoile) autour de l'ombilic, comme sur l'écu de Kael Draven
+    cx, cy = 0.0, 0.10
+    for k in range(8):
+        ang = np.pi / 2 + k * np.pi / 4
+        L = (0.30 if k in (0, 4) else 0.21 if k in (2, 6) else 0.19) * (1.15 if k == 4 else 1.0)
+        bend_r = 0.05 * (1 if k % 2 else -1)
+        pts = [(cx + np.cos(ang) * r_ - np.sin(ang) * bend_r * np.sin(np.pi * r_ / L), cy + np.sin(ang) * r_ + np.cos(ang) * bend_r * np.sin(np.pi * r_ / L), 0)
+               for r_ in np.linspace(0.06, L, 20)]
+        pts = np.array(pts)
+        hw = float(heater_outline(np.array(np.clip((0.30 - pts[-1, 1]) / 0.66, 0, 1)), 0)) * 0.27 - 0.035
+        pts[:, 0] = np.clip(pts[:, 0], -hw, hw)
+        Pz = np.c_[pts[:, 0], pts[:, 1], -bend * pts[:, 0] ** 2 + th / 2 + 0.0015]
+        w_ = curve([(0, .016), (.6, .010), (1, .002)], 20)
+        lo = Loft(Pz, curve([(0, .0045), (1, .0015)], 20), w_, p=3.0, segs=12, ref=(0, 0, 1), cap0=1, cap1=1)
+        a.add(f'rayon{k}', lo.mesh(0.05), BRASS)
+    # bordure intérieure gravée
+    inner = []
+    for vv in np.linspace(0.03, 0.97, 60):
+        hw = float(heater_outline(np.array(vv), 0)) * W - 0.045
+        inner.append((hw, top - vv * Hh))
+    inner = np.array(inner)
+    for side in (1, -1):
+        P3 = np.c_[side * inner[:, 0], inner[:, 1], -bend * inner[:, 0] ** 2 + th / 2 + 0.001]
+        a.add(f'liseré{side}', tube(P3, 0.0035, segs=6, tile=0.04, cap=True), BRASS)
+    top_line = np.array([(x, top - 0.03 * Hh, -bend * x * x + th / 2 + 0.001) for x in np.linspace(-W + 0.045, W - 0.045, 30)])
+    a.add('liseré_haut', tube(top_line, 0.0035, segs=6, tile=0.04, cap=True), BRASS)
+    c = np.array([0, 0.10, th / 2 + 0.004])
     a.add('ombilic', rivet(c, np.array([0, 0, 1.0]), r=0.05, h=0.025, segs=24, rings=7), STEEL)
     a.add('ombilic_pointe', rivet(c + (0, 0, 0.023), np.array([0, 0, 1.0]), r=0.014, h=0.012), BRASS)
     # rivets de bordure

@@ -59,7 +59,25 @@ class Pose(dict):
         return self
 
 
+class Style:
+    """Style de combat : garde, bras pendant la marche, attaque, blocage. Le style par défaut est épée + écu."""
+    name = 'sword_shield'
+    def guard(self, p): return _guard_sword(p)
+    def gait_arms(self, p, w, run, arm_amp):
+        p.arm('R', down=72, fwd=16 + arm_amp * np.sin(w + np.pi), twist=-10, elbow=40 + (30 if run else 0), wrist=(-8, 0, -15))
+        p.arm('L', down=64, fwd=22 + 0.35 * arm_amp * np.sin(w), twist=35, elbow=62 + (15 if run else 0))
+    attack = None; block = None
+
+
+_STYLE = Style()
+_SK = None
+
+
 def guard(p, crouch=0.0):
+    return _STYLE.guard(p)
+
+
+def _guard_sword(p):
     """Garde de base : épée basse devant, bouclier au bras gauche porté devant le flanc."""
     p.arm('R', down=70, fwd=18, twist=-10, elbow=38, wrist=(-8, 0, -15))
     p.arm('L', down=66, fwd=20, twist=35, elbow=60, wrist=(0, 0, 0))
@@ -104,14 +122,14 @@ def gait(sk, name, period, amp, knee, arm_amp, lean, bob, run=False):
             kb = knee * max(0.0, -c) ** 1.3 + 6 + (knee * 0.35 if run else 0) * max(0.0, s)
             p.leg(side, thigh=amp * s + (8 if run else 2), knee=kb, foot=-0.4 * amp * s * (s < 0) + 6 * (c > 0.6), spread=1)
         guard(p)
-        p.arm('R', down=72, fwd=16 + arm_amp * np.sin(w + np.pi), twist=-10, elbow=40 + (30 if run else 0), wrist=(-8, 0, -15))
-        p.arm('L', down=64, fwd=22 + 0.35 * arm_amp * np.sin(w), twist=35, elbow=62 + (15 if run else 0))
+        _STYLE.gait_arms(p, w, run, arm_amp)
         ks.append(key(k * period / 8, p, hips=(0.018 * np.sin(w), -bob * np.cos(2 * w) - (0.06 if run else 0.02), 0),
                       hips_rot=(lean * 0.3, 6 * np.sin(w) * amp / 30, 3 * np.cos(w))))
     return build_qclip(name, ks, BONES(sk), loop=True)
 
 
 def attack(sk):
+    if _STYLE.attack: return _STYLE.attack(sk)
     def P(spine, twist, rdown, rfwd, rtw, rel, wr, lfwd, lel, lthigh, rthigh, lknee, rknee, hz, hry):
         p = Pose().spine(spine, twist, 0).head(-spine * 0.5, -twist * 0.7)
         guard(p)
@@ -132,6 +150,7 @@ def attack(sk):
 
 
 def block(sk):
+    if _STYLE.block: return _STYLE.block(sk)
     ks = []
     for t, br in ((0, 0), (0.6, 1), (1.2, 0)):
         p = Pose().spine(10 + br, 18, 0).head(-8, -14)
@@ -198,7 +217,9 @@ CLIPS = [('Idle', True, False, ()), ('Walk', True, False, (0.0, 0.5)), ('Run', T
          ('Dodge', False, True, ()), ('Death', False, False, (0.55,))]
 
 
-def build(sk, asset):
+def build(sk, asset, style=None):
+    global _STYLE, _SK
+    _STYLE = style or Style(); _SK = sk
     clips = [idle(sk), gait(sk, 'Walk', 1.05, 24, 55, 14, 4, 0.018), gait(sk, 'Run', 0.68, 38, 95, 30, 14, 0.035, run=True),
              attack(sk), block(sk), hit(sk), dodge(sk), death(sk)]
     for c in clips:
@@ -206,3 +227,38 @@ def build(sk, asset):
         simulate_cape(sk, c, [[f'Cape_{ch}{k}' for k in range(1, 5)] for ch in ('L', 'C', 'R')])
         asset.clips[c.name] = c
     return asset
+
+
+def aim_wrist(sk, pose, side, target, socket='Socket_Weapon_R', axis=(0, 1, 0), up=None, hips_rot=(0, 0, 0)):
+    """Cherche la rotation du poignet (flexion, inclinaison, rotation) qui oriente l'axe de l'arme (axis, repère du socket)
+    vers target (monde). up : second axe facultatif (ex. dessus de l'arbalète vers le haut). Modifie pose et renvoie l'angle."""
+    from forge.rig import qmat
+    target = np.asarray(target, float); target /= np.linalg.norm(target)
+    hand = ('Right' if side == 'R' else 'Left') + 'Hand'
+    si = sk[socket]; best = None
+    base = dict(pose); base['Hips'] = qeuler(*hips_rot)
+    def err_of(fx, ry, rx):
+        q = M(Rz(fx), Ry(ry), Rx(rx))
+        if side == 'R': q = mirror(q)
+        base[hand] = q
+        G = sk.fk(base)
+        d = G[si][:3, :3] @ np.asarray(axis, float)
+        e = 1 - d @ target
+        if up is not None: e += 0.4 * (1 - (G[si][:3, :3] @ np.asarray(up[0], float)) @ np.asarray(up[1], float))
+        return e, q
+    for fx in range(-80, 81, 20):
+        for ry in range(-60, 61, 30):
+            for rx in range(-180, 180, 30):
+                e, q = err_of(fx, ry, rx)
+                if best is None or e < best[0]: best = (e, q, (fx, ry, rx))
+    step = 10
+    while step >= 2:
+        fx0, ry0, rx0 = best[2]
+        for dfx in (-step, 0, step):
+            for dry in (-step, 0, step):
+                for drx in (-step, 0, step):
+                    e, q = err_of(fx0 + dfx, ry0 + dry, rx0 + drx)
+                    if e < best[0]: best = (e, q, (fx0 + dfx, ry0 + dry, rx0 + drx))
+        step //= 2
+    pose[hand] = best[1]
+    return best[0]

@@ -101,10 +101,11 @@ class Clip:
 
 class MaterialDef:
     def __init__(self, name, textures=None, color=(1, 1, 1, 1), metallic=0.0, smoothness=0.5, emission=None,
-                 double_sided=False, normal_scale=1.0, tiling=(1, 1), images=None):
+                 double_sided=False, normal_scale=1.0, tiling=(1, 1), images=None, cutoff=None):
         self.name = name; self.textures = textures or {}; self.color = color; self.metallic = metallic
         self.smoothness = smoothness; self.emission = emission; self.double_sided = double_sided
-        self.normal_scale = normal_scale; self.tiling = tiling
+        self.normal_scale = normal_scale; self.tiling = tiling; self.cutoff = cutoff
+        if cutoff is not None: self.double_sided = True
         self.images = images or {}   # aperçu : {'base': rgb float, 'normal':…, 'ms': (métal, lissé)} en mémoire
 
 

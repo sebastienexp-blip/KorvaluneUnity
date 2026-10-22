@@ -14,11 +14,14 @@ def tri_shape(q): return 1 - np.abs(2 * np.clip(q, 0, 1) - 1)
 
 
 class Builder:
-    def __init__(self, sk, asset):
+    def __init__(self, sk, asset, remap=None, skip=()):
         self.sk, self.asset = sk, asset
         self.swap = H.swap_table(sk)
+        self.remap = remap or {}; self.skip = skip
 
     def add(self, name, m, mat, both=False):
+        if any(name.startswith(s) for s in self.skip): return m
+        mat = self.remap.get(mat, mat)
         self.asset.add(name, m, mat)
         if both: self.asset.add(name + '_R', mirror(m, self.swap), mat)
         return m
@@ -39,8 +42,9 @@ def weights_by_y(m, sk, pairs):
     return m
 
 
-def build(sk, asset):
-    B = Builder(sk, asset)
+def build(sk, asset, remap=None, helmet=True, skip=()):
+    """remap : {matériau du chevalier: matériau du personnage} ; helmet=False : pas de casque (tête visible) ; skip : préfixes de pièces à omettre."""
+    B = Builder(sk, asset, remap, tuple(skip) + (() if helmet else ('casque', 'visiere')))
     torso, neck, head = BD.torso_loft(), BD.neck_loft(), BD.head_loft()
     arm, leg, foot, palm = BD.arm_loft(), BD.leg_loft(), BD.foot_loft(), BD.palm_loft()
     ty = lambda y: (y - 0.86) / 0.70                                      # hauteur → paramètre t du tronc
@@ -50,7 +54,7 @@ def build(sk, asset):
     m = neck.mesh(0.12, 1, 2); BD.skin_torso(m, sk); B.add('col', m, MAIL)
     m = arm.mesh(0.12, 2, 2); BD.skin_arm(m, sk); B.add('manche_maille', m, MAIL, both=True)
     m = leg.mesh(0.12, 2, 2); BD.skin_leg(m, sk); B.add('chausse_maille', m, MAIL, both=True)
-    m = foot.mesh(0.2, 2, 2); BD.skin_leg(m, sk); B.add('soulier', m, LEATHER, both=True)
+    m = foot.mesh(0.2, 2, 2); BD.skin_leg(m, sk); B.add('soulier', m, STEEL, both=True)
     m = palm.mesh(0.1); BD.skin_arm(m, sk); B.add('paume', m, LEATHER, both=True)
     for fn in H.FINGERS:
         m = BD.finger_loft(fn).mesh(0.06); BD.skin_finger(m, sk, fn); B.add('gant_' + fn, m, LEATHER, both=True)
@@ -126,7 +130,7 @@ def build(sk, asset):
     gp = spline([(0, 1.66, -0.002), (0, 1.58, -0.008), (0, 1.50, -0.016), (0, 1.43, -0.020)], 24)
     gor = Loft(gp, curve([(0, .068), (.4, .078), (.75, .112), (1, .135)], 24), curve([(0, .072), (.4, .082), (.75, .135), (1, .170)], 24), p=2.3, segs=72)
     for k, (lo, hi, off) in enumerate([(0.0, 0.34, 0.010), (0.28, 0.58, 0.014), (0.52, 0.80, 0.018), (0.74, 1.0, 0.022)]):
-        m = plate(gor, -0.5, 0.5, lo, hi, off=off, thick=0.0035, bevel=0.005, na=72, nt=8, tile=0.3, edge_roll=0.002)
+        m = plate(gor, -0.5, 0.5, lo, hi, off=off, thick=0.0035, bevel=0.005, na=150, nt=8, tile=0.3, edge_roll=0.002)
         weights_by_y(m, sk, [(1.60, 'Neck'), (1.48, 'UpperChest')]); B.add(f'gorgerin{k}', m, STEEL)
     m = plate_edge(gor, -0.5, 0.5, 0.012, 0.0115, r=0.0042, n=90, tile=0.06); weights_by_y(m, sk, [(1.60, 'Neck')]); B.add('gorgerin_bord', m, BRASS)
 
@@ -207,6 +211,9 @@ def build(sk, asset):
     m = plate_edge(leg, -0.32, 0.22, 0.045, 0.0205, r=0.0042, n=60, tile=0.06)
     blend_bones(m, sk['Hips'], sk['LeftUpperLeg'], 0.6); B.add('cuissot_bord', m, BRASS, both=True)
     m = rivets_on(leg, [(0.20, -0.25), (0.30, -0.25), (0.20, 0.17), (0.30, 0.17)], 0.0165, r=0.0045, h=0.0026); rigid(m, sk['LeftUpperLeg']); B.add('cuissot_rivets', m, BRASS, both=True)
+    m = plate(leg, -0.08, -0.04, 0.15, 0.38, off=0.0172, thick=0.0012, bevel=0.002, na=6, nt=24, tile=0.06); rigid(m, sk['LeftUpperLeg']); B.add('cuissot_gravure', m, BRASS, both=True)
+    m = plate(leg, -0.025, 0.025, 0.66, 0.93, off=lambda da, tr, qa, qt: 0.0172 + 0.004 * np.sin(np.pi * np.clip(tr, 0, 1)) * 0, thick=0.0012, bevel=0.002, na=6, nt=24, tile=0.06)
+    rigid(m, sk['LeftLowerLeg']); B.add('greve_gravure', m, BRASS, both=True)
     tk = 0.53
     for k, (lo, hi) in enumerate([(0.42, 0.47), (0.60, 0.645)]):
         m = plate(leg, -0.27, 0.27, lo, hi, off=0.012, thick=0.004, bevel=0.005, na=26, nt=5, tile=0.3, edge_roll=0.0015)
@@ -247,7 +254,7 @@ def build(sk, asset):
     # crête : relief médian d'avant en arrière
     for a0 in (-0.012, 0.488):
         m = plate(hl, a0, a0 + 0.024, 0.52, 0.995, off=lambda da, tr, qa, qt: 0.0215 + 0.0035 * np.sin(np.pi * qa), thick=0.002, bevel=0.004, na=8, nt=40, tile=0.2)
-        rigid_head(m); B.add(f'casque_crete{a0}', m, STEEL)
+        rigid_head(m); B.add(f'casque_crete{a0}', m, BRASS)
     # bandeau gravé laiton (côtés et nuque)
     m = plate(hl, 0.23, 0.77, 0.47, 0.53, off=0.023, thick=0.0022, bevel=0.002, na=60, nt=5, tile=0.12)
     rigid_head(m); B.add('casque_bandeau', m, BRASS)
@@ -270,15 +277,20 @@ def build(sk, asset):
     # fente de vue : sous la visière, l'intérieur sombre est visible (intervalle t 0.475–0.505)
     m = plate(hl, -0.17, 0.17, 0.46, 0.52, off=0.012, thick=0.001, bevel=0.001, na=20, nt=4, tile=0.3)
     rigid_head(m); B.add('casque_fente', m, VOID)
-    # bouches d'aération (côté droit de la ventaille, comme sur les armets réels)
-    holes = []
-    for row in range(3):
-        for col in range(5):
-            a = -0.035 - 0.022 * col; t = 0.17 + 0.075 * row
-            P, Nn, _, _ = hl.frame(np.array(t), np.array(a % 1.0))
-            o = float(beak(np.array(0.0), np.array(t / 0.475), np.array((a + 0.17) / 0.34), np.array(0.0))) + 0.0048
-            holes.append(disc_cut(P + Nn * o, Nn, 0.0032, depth=0.004))
-    m = concat(holes); rigid_head(m); B.add('casque_aeration', m, VOID)
+    # grille de ventilation : fentes verticales de part et d'autre de l'arête du bec
+    slots = []
+    for side in (1, -1):
+        for col in range(6):
+            ac = side * (0.032 + 0.020 * col)
+            qa_c = (ac + 0.17) / 0.34
+            slot = plate(hl, ac - 0.0035, ac + 0.0035, 0.13 + 0.012 * col, 0.39 - 0.02 * col,
+                         off=lambda da, tr, qa, qt, qa_c=qa_c: beak(da, tr * 0.0 + np.clip((0.13 + tr * 0.26) / 0.475, 0, 1), qa * 0 + qa_c, qt) + 0.0047,
+                         thick=0.0003, bevel=0.0005, na=4, nt=8, tile=0.1)
+            slots.append(slot)
+    m = concat(slots); rigid_head(m); B.add('casque_grille', m, VOID)
+    # encadrement doré de la fente de vue
+    m = plate_edge(hl, -0.165, 0.165, 0.468, lambda a: 0.024 + 0.050 * (1 - np.abs(a / 0.17)) ** 1.7 * (0.25 + 0.75 * np.sin(np.pi * 0.95)) + 0.0045, r=0.0032, n=60, tile=0.06)
+    rigid_head(m); B.add('casque_fente_bord', m, BRASS)
     # pivots de visière : rosettes laiton
     m = rivets_on(hl, [(0.53, 0.205), (0.53, 0.795)], 0.032, r=0.010, h=0.005); rigid_head(m); B.add('casque_pivots', m, BRASS)
     m = rivets_on(hl, [(0.30, a) for a in (0.18, 0.28, 0.72, 0.82)] + [(0.62, a) for a in (0.30, 0.40, 0.5, 0.60, 0.70)], 0.0245, r=0.004, h=0.0024)

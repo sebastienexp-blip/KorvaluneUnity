@@ -73,6 +73,13 @@ namespace Korvalune.EditorTools
             ti.wrapMode = TextureWrapMode.Repeat;
             ti.maxTextureSize = fm.maxSize;
             ti.textureCompression = TextureImporterCompression.CompressedHQ;
+            if (fm.alphaClip && srgb && type == TextureImporterType.Default)
+            {
+                ti.alphaSource = TextureImporterAlphaSource.FromInput;
+                ti.alphaIsTransparency = true;
+                ti.mipMapsPreserveCoverage = true;          // les mèches ne disparaissent pas au loin
+                ti.alphaTestReferenceValue = fm.cutoff;
+            }
             var android = ti.GetPlatformTextureSettings("Android");
             android.overridden = true; android.maxTextureSize = fm.mobileMaxSize; android.format = TextureImporterFormat.ASTC_6x6;
             ti.SetPlatformTextureSettings(android);
@@ -116,6 +123,10 @@ namespace Korvalune.EditorTools
             mat.globalIlluminationFlags = emissive ? MaterialGlobalIlluminationFlags.RealtimeEmissive : MaterialGlobalIlluminationFlags.EmissiveIsBlack;
 
             mat.SetFloat("_Cull", fm.doubleSided ? 0f : 2f);
+            mat.SetFloat("_AlphaClip", fm.alphaClip ? 1f : 0f);
+            mat.SetFloat("_Cutoff", fm.cutoff);
+            Keyword(mat, "_ALPHATEST_ON", fm.alphaClip);
+            mat.renderQueue = fm.alphaClip ? (int)UnityEngine.Rendering.RenderQueue.AlphaTest : -1;
             mat.doubleSidedGI = fm.doubleSided;
             EditorUtility.SetDirty(mat);
             return mat;
