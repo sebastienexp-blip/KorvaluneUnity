@@ -17,12 +17,14 @@ RECIPES = {
     'CK_Steel':    (lambda S: EM.cursed_steel(S, seed=401, tone=(0.085, 0.080, 0.085), amount=0.45), 2048, 512, dict(metallic=1.0, smoothness=1.0, emission=(2.2, 2.2, 2.2), emission_preview=(1.0, 1.0, 1.0))),
     'CK_Trim':     (lambda S: KM.brass(S, seed=402, gold=(0.42, 0.16, 0.08), dark=(0.06, 0.02, 0.015)), 1024, 256, dict(metallic=1.0, smoothness=1.0)),
     'CK_Leather':  (lambda S: KM.leather(S, seed=403, tone=(0.05, 0.025, 0.02)), 1024, 256, dict(metallic=0.0, smoothness=1.0)),
-    'CK_Mail':     (lambda S: EM.tinted(KM.chainmail(S, seed=404), (0.55, 0.16, 0.12)), 1024, 512, dict(metallic=1.0, smoothness=1.0)),
-    'CK_Gambeson': (lambda S: KM.gambeson(S, seed=405, color=(0.14, 0.015, 0.015)), 1024, 256, dict(metallic=0.0, smoothness=1.0)),
-    'CK_Cloth':    (lambda W, H_: KM.cloak(W, H_, seed=406, color=(0.22, 0.015, 0.015), thread_color=(0.30, 0.08, 0.04), mud_amt=1.6), (1024, 2048), (256, 512), dict(metallic=0.0, smoothness=1.0)),
+    'CK_Mail':     (lambda S: EM.tinted(KM.chainmail(S, seed=404), (0.75, 0.16, 0.12)), 1024, 512, dict(metallic=1.0, smoothness=1.0)),
+    'CK_Gambeson': (lambda S: KM.gambeson(S, seed=405, color=(0.26, 0.02, 0.02)), 1024, 256, dict(metallic=0.0, smoothness=1.0)),
+    'CK_Cloth':    (lambda W, H_: KM.cloak(W, H_, seed=406, color=(0.34, 0.02, 0.02), thread_color=(0.55, 0.12, 0.05), mud_amt=1.0), (1024, 2048), (256, 512), dict(metallic=0.0, smoothness=1.0)),
     'CK_Void':     (lambda S: KM.void(S), 64, 64, dict(metallic=0.0, smoothness=1.0)),
     'CK_Eye':      (lambda S: EM.glow(S, (1.0, 0.10, 0.03)), 64, 64, dict(metallic=0.0, smoothness=1.0, emission=(4.0, 4.0, 4.0), emission_preview=(3.0, 3.0, 3.0))),
     'CK_Blade':    (lambda S: EM.cursed_steel(S, seed=407, tone=(0.12, 0.115, 0.12), amount=0.25), 1024, 256, dict(metallic=1.0, smoothness=1.0, emission=(2.0, 2.0, 2.0), emission_preview=(1.0, 1.0, 1.0))),
+    'CK_ShieldFace': (lambda S: EM.cursed_steel(S, seed=408, tone=(0.30, 0.28, 0.27), amount=0.25), 2048, 512, dict(metallic=1.0, smoothness=1.0, emission=(1.5, 1.5, 1.5), emission_preview=(0.8, 0.8, 0.8))),
+    'CK_Gold':     (lambda S: KM.brass(S, seed=409, gold=(0.78, 0.50, 0.22)), 1024, 256, dict(metallic=1.0, smoothness=1.0)),
     'WP_Wood':     (KM.wood, 1024, 256, dict(metallic=0.0, smoothness=1.0)),
 }
 GEAR = [('Socket_Weapon_R', 'CursedBlade'), ('Socket_Shield_L', 'CursedShield')]
@@ -65,5 +67,5 @@ def build(bank, female=False):
     a.parts = [(n, m, 'CK_Eye' if n.startswith('casque_fente') and mat == 'CK_Void' else mat) for n, m, mat in a.parts]
     anims.build(sk, a)
     gear = {'CursedBlade': remap(weapons.sword(), REMAP, 'CursedBlade'),
-            'CursedShield': remap(weapons.shield(W=0.30, Hh=0.80), REMAP, 'CursedShield')}
+            'CursedShield': remap(weapons.shield(W=0.33, Hh=0.95), dict(REMAP, KN_Steel='CK_ShieldFace', KN_Brass='CK_Gold'), 'CursedShield')}
     return a, gear, anims.CLIPS

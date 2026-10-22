@@ -217,7 +217,7 @@ def build_outfit(a, body, marks, sk, P, M, style):
     env = AP.hip_envelope(body, (legs | HP.bone_mask(body, sk, ['Hips', 'Spine'], 0.3)) & (ax < 0.30), y0=0.05)
     tat = style.get('tatter', 0.15)
     for k, (th, L, wd) in enumerate([(0.80, 0.70, 0.080), (-0.80, 0.70, 0.080), (1.30, 0.80, 0.090), (-1.30, 0.80, 0.090),
-                                     (1.80, 0.84, 0.095), (-1.80, 0.84, 0.095), (np.pi, 0.86, 0.110)] + ([(0.0, 0.80, 0.100)] if style.get('front_panel') else [])):
+                                     (1.80, 0.84, 0.095), (-1.80, 0.84, 0.095), (np.pi, 0.86, 0.110)] + ([(0.0, 0.80, 0.100), (0.42, 0.80, 0.090), (-0.42, 0.80, 0.090)] if style.get('front_panel') else [])):
         m, edge = AP.lappet(env, th, 0.925, L, wd, off=0.020, flare=0.09, seed=11 + k, notch=tat, tip=0.6)
         for mm, mat, nm in ((m, M['cloth'], f'jupe{k}'), (edge, M['gold'], f'jupe_bord{k}')):
             yv = mm.V[:, 1]; f = smoothstep((0.88 - yv) / 0.40) * 0.85

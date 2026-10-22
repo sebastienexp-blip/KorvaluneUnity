@@ -14,7 +14,7 @@ NAME = 'SqueletteGuerrier'
 FOLDER = 'Enemies'
 HEAD_VIEW = (0, 1.66, 0.06)
 RECIPES = {
-    'SK_Bone':      (lambda S: KM.bone(S, seed=601, tone=(0.66, 0.60, 0.48)), 1024, 512, dict(metallic=0.0, smoothness=0.6)),
+    'SK_Bone':      (lambda S: KM.bone(S, seed=601, tone=(0.52, 0.45, 0.34)), 1024, 512, dict(metallic=0.0, smoothness=0.6)),
     'SK_Cartilage': (lambda S: KM.bone(S, seed=602, tone=(0.52, 0.44, 0.33)), 512, 256, dict(metallic=0.0, smoothness=1.0)),
     'SK_Dark':      (lambda S: KM.void(S), 64, 64, dict(metallic=0.0, smoothness=1.0)),
     'SK_Rust':      (lambda S: KM.steel(S, seed=603, tone=(0.26, 0.24, 0.22), polish=0.45, rust_amt=3.0, grime_amt=1.6, scratch_amt=1.4), 2048, 512, dict(metallic=1.0, smoothness=1.0)),

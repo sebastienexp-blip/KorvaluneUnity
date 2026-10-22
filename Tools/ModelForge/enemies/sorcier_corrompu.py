@@ -73,7 +73,7 @@ def build(bank, female=False):
     a.parts = [p for p in a.parts if a.slot.get(p[0]) not in ('Anatomie', 'SousVetementBas', 'SousVetementHaut')]
     FK.build_outfit(a, body, marks, sk, 'SC', M, dict(male=True, front_panel=True, spikes=True, skulls=False, tatter=0.55, collar=False, cloak=True, cloak_len=1.12, cloak_tatter=1.5))
     def add(n, m, mat): a.add(n, m, mat, slot='Capuche')
-    VR.hood(a, add, body, marks, sk, cloth='SC_Cloak', lining='SC_Dark', depth=1.25)
+    VR.hood(a, add, body, marks, sk, cloth='SC_Cloak', lining='SC_Dark', depth=1.6, loose=0.018)
     MOD.assign(a, [])
     MOD.covers(a, FK.COVERS)
     anims.build(sk, a, FK.StaffStyle())

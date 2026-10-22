@@ -104,7 +104,7 @@ class CrossbowStyle(Style):
         return build_qclip('Block', ks, BONES(sk), loop=True)
 
 
-def hood(a, add, body, marks, sk, cloth='VR_Cloak', lining='VR_Dark', depth=1.0):
+def hood(a, add, body, marks, sk, cloth='VR_Cloak', lining='VR_Dark', depth=1.0, loose=0.0):
     """Capuche de rôdeur : surface lisse paramétrée autour de la vraie tête MakeHuman (enveloppe azimut × élévation),
     ouverture du visage à bord net roulé, sommet en pointe douce, bord avant avancé → visage dans l'ombre."""
     from scipy.ndimage import gaussian_filter, grey_dilation
@@ -143,7 +143,7 @@ def hood(a, add, body, marks, sk, cloth='VR_Cloak', lining='VR_Dark', depth=1.0)
     tw = smoothstep((EE - deg(55)) / deg(33))
     # plis verticaux doux dans le tissu (surtout derrière et sur les côtés)
     folds = 0.006 * np.sin(AA * 7 + 0.8) * smoothstep((deg(40) - EE) / deg(60)) * (1 - smoothstep((deg(40) - np.abs(np.pi - AA)) / deg(40)) * 0)
-    rr = r_env(AA, EE) + 0.034 + 0.010 * up + 0.020 * back * (1 - tw) + folds
+    rr = r_env(AA, EE) + 0.034 + loose + 0.010 * up + 0.020 * back * (1 - tw) + folds
     G = ctr + dirs * rr[..., None]
     pk = smoothstep((EE - deg(35)) / deg(55)) * ((0.4 + 0.6 * back) * (1 - tw) + 0.75 * tw)
     G = G + np.stack([np.zeros_like(pk), -0.004 * pk ** 1.5, -0.030 * pk ** 1.3], -1)   # couronne arrondie, léger tombé du tissu vers l'arrière
