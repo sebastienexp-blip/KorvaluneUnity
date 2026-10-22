@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-10-22 12:56 UTC
+# Rapport d'intégration Unity — 2026-10-22 13:42 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 5 modèle(s) ModelForge trouvé(s)
@@ -30,7 +30,7 @@
 ## BaseFemale.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 40172 triangles, 23345 sommets (max 140000)
+- ✅ **Budget de triangles** 52986 triangles, 31879 sommets (max 140000)
 - ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/BaseFemale.prefab
 - ✅ **Échelle (hauteur)** 1.874 m (attendu 1.6–1.98), boîte 1.05×1.87×0.86, pieds à y=-0.022
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.211
@@ -39,13 +39,17 @@
 - ✅ **Point d'attache Socket_Shield_L** 
 - ✅ **Point d'attache Socket_Back** 
 - ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Eye** shader Universal Render Pipeline/Lit, base BF_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Hair** shader Universal Render Pipeline/Lit, base BF_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Brow** shader Universal Render Pipeline/Lit, base BF_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Lash** shader Universal Render Pipeline/Lit, base BF_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Teeth** shader Universal Render Pipeline/Lit, base BF_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Tongue** shader Universal Render Pipeline/Lit, base BF_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Under** shader Universal Render Pipeline/Lit, base BF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Under** shader Universal Render Pipeline/Lit, base BF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
+- ✅ **Équipement détachable** 3 pièce(s) : Anatomie (masqué), SousVetementBas (visible), SousVetementHaut (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -62,7 +66,7 @@
 ## BaseMale.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseMale/BaseMale.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 39288 triangles, 21990 sommets (max 140000)
+- ✅ **Budget de triangles** 46728 triangles, 26619 sommets (max 140000)
 - ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/BaseMale.prefab
 - ✅ **Échelle (hauteur)** 1.875 m (attendu 1.6–1.98), boîte 1.04×1.87×0.84, pieds à y=-0.026
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.211
@@ -71,13 +75,16 @@
 - ✅ **Point d'attache Socket_Shield_L** 
 - ✅ **Point d'attache Socket_Back** 
 - ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Eye** shader Universal Render Pipeline/Lit, base BM_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Hair** shader Universal Render Pipeline/Lit, base BM_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Brow** shader Universal Render Pipeline/Lit, base BM_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Lash** shader Universal Render Pipeline/Lit, base BM_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Teeth** shader Universal Render Pipeline/Lit, base BM_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Tongue** shader Universal Render Pipeline/Lit, base BM_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Under** shader Universal Render Pipeline/Lit, base BM_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
+- ✅ **Équipement détachable** 2 pièce(s) : Anatomie (masqué), SousVetementBas (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30

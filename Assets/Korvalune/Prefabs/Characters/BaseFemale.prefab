@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6865079339205955016, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -4864920316260856247, guid: 498279d8c477261d1979eafeb3205117, type: 3}
       propertyPath: m_Quality
       value: 4
@@ -68,9 +72,21 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.52122575
       objectReference: {fileID: 0}
+    - target: {fileID: 638227179339596054, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 498279d8c477261d1979eafeb3205117, type: 3}
       propertyPath: m_Name
       value: BaseFemale
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522026850942705094, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522026850942705094, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+      propertyPath: m_Quality
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 498279d8c477261d1979eafeb3205117, type: 3}
       propertyPath: m_Controller
@@ -90,6 +106,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 498279d8c477261d1979eafeb3205117, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5583477535636687565}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6680705793871457934}
   m_SourcePrefab: {fileID: 100100000, guid: 498279d8c477261d1979eafeb3205117, type: 3}
 --- !u!4 &311819104026672580 stripped
 Transform:
@@ -106,9 +125,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -3605743683329932621, guid: 498279d8c477261d1979eafeb3205117, type: 3}
   m_PrefabInstance: {fileID: 8903101253067503699}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &3975558355291186581 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5522026850942705094, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+  m_PrefabInstance: {fileID: 8903101253067503699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6572016148469844587 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6865079339205955016, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+  m_PrefabInstance: {fileID: 8903101253067503699}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6838809102336657176 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6528390085559156917, guid: 498279d8c477261d1979eafeb3205117, type: 3}
+  m_PrefabInstance: {fileID: 8903101253067503699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8310649119603767621 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 638227179339596054, guid: 498279d8c477261d1979eafeb3205117, type: 3}
   m_PrefabInstance: {fileID: 8903101253067503699}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8597163582995645698 stripped
@@ -156,3 +190,30 @@ MonoBehaviour:
   - {fileID: 311819104026672580}
   - {fileID: 3926004531664435936}
   - {fileID: 6838809102336657176}
+--- !u!114 &6680705793871457934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597163582995645698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf75fde299b68a0eb856611b066a4c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contenuAdulte: 0
+  slots:
+  - name: Anatomie
+    renderer: {fileID: 3975558355291186581}
+    equipped: 0
+    hides: []
+  - name: SousVetementBas
+    renderer: {fileID: 8310649119603767621}
+    equipped: 1
+    hides:
+    - Anatomie
+  - name: SousVetementHaut
+    renderer: {fileID: 6572016148469844587}
+    equipped: 1
+    hides: []
