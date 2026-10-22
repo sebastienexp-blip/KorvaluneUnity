@@ -67,6 +67,10 @@ class Style:
         p.arm('R', down=72, fwd=16 + arm_amp * np.sin(w + np.pi), twist=-10, elbow=40 + (30 if run else 0), wrist=(-8, 0, -15))
         p.arm('L', down=64, fwd=22 + 0.35 * arm_amp * np.sin(w), twist=35, elbow=62 + (15 if run else 0))
     attack = None; block = None
+    def idle_arms(self, p, br):
+        """Respiration au repos : par défaut, l'épée oscille légèrement (les autres styles gardent leur garde)."""
+        if self.name == 'sword_shield':
+            p.arm('R', down=70 - 1.5 * br, fwd=18, twist=-10, elbow=38 + 2 * br, wrist=(-8, 0, -15))
 
 
 _STYLE = Style()
@@ -106,7 +110,7 @@ def idle(sk):
     for t, br in ((0, 0), (1.2, 1), (2.4, 0)):
         p = Pose().spine(2 + 1.5 * br, -6, 0).head(-2 - 1 * br, 6)
         guard(p)
-        p.arm('R', down=70 - 1.5 * br, fwd=18, twist=-10, elbow=38 + 2 * br, wrist=(-8, 0, -15))
+        _STYLE.idle_arms(p, br)
         p.leg('L', thigh=6, knee=8, foot=0, spread=4, turn=-8); p.leg('R', thigh=-4, knee=6, foot=0, spread=-6, turn=12)
         ks.append(key(t, p, hips=(0.01 * br, -0.03 - 0.006 * br, 0), hips_rot=(0, 10, 1.5 * br)))
     return build_qclip('Idle', ks, BONES(sk), loop=True)

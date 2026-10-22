@@ -8,6 +8,7 @@ from knight import body as BD, cape, anims, materials as KM
 from knight.anims import Style, Pose, key, build_qclip, BONES, aim_wrist
 from knight import anims as AN
 from heroes.common import mh_human
+from heroes import modular as MOD
 from forge import humanparts as HP
 from forge import mhbase as MB
 
@@ -193,9 +194,8 @@ def build(bank):
     def add(n, m, mat, both=False):
         a.add(n, m, mat)
         if both: a.add(n + '_R', mirror(m, sw), mat)
-    body, marks = mh_human(sk, a, bank, 'VR', MB.MALE, extra=[('universal-male-young-maxmuscle-averageweight', 0.45)], iris=(0.32, 0.30, 0.16),
-                           skin_kw=dict(tone=(0.70, 0.54, 0.44), stubble=0.9, dirt=0.6, scars=[((-0.035, 1.70, 0.10), (0.3, -1, 0.0), 0.045)]),
-                           hair='short', hair_color=(0.09, 0.065, 0.045), beard=True, brow_bands=(3,))
+    body, marks = MOD.base(sk, a, bank, 'VR', look=dict(skin='middleage_caucasian_male', hair='short02', hair_tint=(0.09, 0.065, 0.045),
+                                                     skin_kw=dict(pubic=0.75, pubic_col=(0.07, 0.05, 0.035), dirt=0.5, scars=[((-0.035, 1.70, 0.10), (0.3, -1, 0.0), 0.045)])))
     V = body.V
     W = lambda m: HP.weights_from(body, m)
     def sh(name, vmask, off, thick, mat, uv=10.0, smooth=0, restore=1.0, inflate=0.0):
@@ -347,5 +347,17 @@ def build(bank):
     names += ['arc_dos', 'corde_dos']
     idx = {p[0]: i for i, p in enumerate(a.parts)}
     for n in names: rigid(a.parts[idx[n]][1], sk['UpperChest'])
+    MOD.assign(a, RULES)
+    MOD.covers(a, COVERS)
     anims.build(sk, a, CrossbowStyle())
     return a, {'AshCrossbow': crossbow()}, anims.CLIPS
+
+
+RULES = [(r'^(capuche|pelerine)', 'Capuche'), (r'^cape', 'Cape'), (r'^(carquois|fleche|empenne|arc_dos|corde_dos)', 'Carquois'),
+         (r'^tunique', 'Tunique'), (r'^pantalon', 'Pantalon'), (r'^(bottes|pied_botte|botte_)', 'Bottes'), (r'^gants', 'Gants'),
+         (r'^spaliere', 'Spalieres'), (r'^brassard', 'Brassards'), (r'^(cuissard|genouillere|genou_|jambiere)', 'Jambieres'),
+         (r'^(baudrier|sangle_croisee)', 'Baudrier'), (r'^(ceinture|clou|boucle|sacoche)', 'Ceinture'), (r'^pan', 'Pans'),
+         (r'^epauliere', 'Epaulieres')]
+COVERS = {'Capuche': ['Cheveux'], 'Tunique': ['Torse', 'Bras', 'SousVetementHaut'], 'Pantalon': ['Cuisses', 'Bassin', 'SousVetementBas', 'Anatomie'],
+          'Bottes': ['Pieds', 'Jambes'], 'Gants': ['Mains'], 'Brassards': ['AvantBras'], 'Spalieres': [], 'Jambieres': [], 'Baudrier': [],
+          'Ceinture': [], 'Pans': [], 'Epaulieres': [], 'Cape': [], 'Carquois': []}

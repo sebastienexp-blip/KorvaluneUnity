@@ -272,3 +272,26 @@ def linen(S=512, seed=97, color=(0.62, 0.57, 0.48)):
     dirt = np.clip(n01(fbm(S, S, r, base=S / 3, octaves=4)) - 0.6, 0, 1)
     base = base * (1 - 0.35 * dirt[..., None])
     return TexSet(np.clip(base, 0, 1), height_to_normal(gaussian_filter(hgt, 0.6, mode='wrap'), 0.4), np.zeros((S, S)), np.full((S, S), 0.22), np.clip(0.75 + 0.25 * hgt, 0, 1))
+
+
+def crystal(S=512, seed=99, color=(0.55, 0.20, 0.95), glow=1.0):
+    """Cristal magique : facettes (Voronoï), veines lumineuses, cœur plus clair ; carte d'émission (lueur dans Unity)."""
+    r = np.random.default_rng(seed)
+    cells = n01(gaussian_filter(voronoi_edges(S, S, r, 60), 1.0, mode='wrap'))
+    vein = np.clip(1 - np.abs(fbm(S, S, r, base=S / 6, octaves=4)) * 4, 0, 1)
+    c = np.array(color)
+    base = c[None, None] * (0.45 + 0.55 * cells[..., None]) + 0.25 * vein[..., None] * np.array([1, 1, 1])
+    emit = np.clip(c[None, None] * (0.35 + 0.9 * vein[..., None] + 0.3 * cells[..., None]) * glow, 0, 1)
+    hgt = 2.0 * cells
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.6), np.zeros((S, S)), np.full((S, S), 0.92), np.ones((S, S)), emit)
+
+
+def bone(S=512, seed=101, tone=(0.74, 0.69, 0.58)):
+    """Os patiné : fines fissures, pores, crasse dans les creux."""
+    r = np.random.default_rng(seed)
+    cr = gaussian_filter(scratches(S, S, r, 140, (0.02, 0.10), (1, 2), angle=None, spread=0.6), 0.7, mode='wrap')
+    mott = fbm(S, S, r, base=S / 6, octaves=5)
+    grime = np.clip(n01(fbm(S, S, r, base=S / 4, octaves=4)) - 0.45, 0, 1)
+    base = np.array(tone)[None, None] * (0.85 + 0.12 * mott[..., None]) * (1 - 0.55 * cr[..., None]) * (1 - 0.45 * grime[..., None])
+    hgt = 0.6 * mott - 2.0 * cr
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.5), np.zeros((S, S)), np.clip(0.30 - 0.1 * grime, 0, 1), np.clip(1 - 0.5 * cr, 0, 1))

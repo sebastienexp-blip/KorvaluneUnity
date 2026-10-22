@@ -190,14 +190,15 @@ def mh_human(sk, asset, bank, prefix, targets, extra=(), skin_kw=None, iris=(0.3
 
 def mh_character(sk, asset, bank, prefix, targets, extra=(), skin='young_caucasian_male', skin_tint=None, skin_kw=None,
                  eyes='brown', iris=None, glow=None, hair='short02', hair_tint=None, brows='eyebrow001', brow_tint=None,
-                 lashes='eyelashes01', cut_y=1.50, body_mask=None, thickness=1.04, hair_cutoff=0.40, mouth=True, eye_color=None):
+                 lashes='eyelashes01', cut_y=1.50, body_mask=None, thickness=1.04, hair_cutoff=0.40, mouth=True, eye_color=None, skin_part=True):
     """Personnage bâti avec les ressources MakeHuman CC0 : texture de peau photo (même dépliage UV que le corps), yeux HD,
     cheveux / sourcils / cils en proxys ajustés exactement sur le corps (poids de skinning hérités). Retourne (corps, repères)."""
     from forge import mhbase as MB, mhskin as SKN, humanparts as HP, mhassets as MA
     body, _, marks = MB.build(sk, targets, extra, thickness=thickness)
     V = body.V
-    keep = body_mask(V) if body_mask is not None else ((V[:, 1] > cut_y) & (np.abs(V[:, 0]) < 0.16))
-    asset.add('peau', HP.submesh(body, HP.region(body, keep)), prefix + '_Skin')
+    if skin_part:
+        keep = body_mask(V) if body_mask is not None else ((V[:, 1] > cut_y) & (np.abs(V[:, 0]) < 0.16))
+        asset.add('peau', HP.submesh(body, HP.region(body, keep)), prefix + '_Skin')
     def headw(m):
         m.J = np.zeros((len(m.V), 4), np.int64); m.J[:, 0] = sk['Head']; m.W = np.zeros((len(m.V), 4)); m.W[:, 0] = 1; return m
     asset.add('yeux', headw(HP.mh_eyes(marks)), prefix + '_Eye')

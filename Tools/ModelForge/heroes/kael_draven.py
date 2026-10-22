@@ -2,6 +2,8 @@
 from forge.rig import Asset
 from forge import humanoid as H
 from knight import armor, cape, anims, weapons, materials as KM
+from forge import fitloft as FL
+from heroes import modular as MOD
 
 NAME = 'KaelDraven'
 RECIPES = {
@@ -21,8 +23,13 @@ GEAR = [('Socket_Weapon_R', 'Longsword'), ('Socket_Shield_L', 'HeaterShield')]
 def build(bank):
     sk = H.build()
     a = Asset(NAME, sk)
-    armor.build(sk, a)
+    # corps de base masculin (peau, yeux rouges, cheveux bruns) sous l'armure ; chaque pièce est détachable
+    body, marks = MOD.base(sk, a, bank, 'KD', look=dict(hair='short02', hair_tint=(0.06, 0.045, 0.035)))
+    with FL.fitted(body, sk):
+        armor.build(sk, a)
     cape.build(sk, a); cape.build_tabard(sk, a)
+    MOD.assign(a, MOD.KNIGHT_RULES)
+    MOD.covers(a, MOD.KNIGHT_COVERS)
     anims.build(sk, a)
     gear = {'Longsword': weapons.sword(), 'HeaterShield': weapons.shield()}
     return a, gear, anims.CLIPS

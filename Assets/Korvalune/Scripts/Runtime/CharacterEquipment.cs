@@ -55,6 +55,17 @@ namespace Korvalune
         }
 
         public Slot Find(string name) => slots.Find(s => s != null && s.name == name);
+
+        /// <summary>Déclare ce qu'une pièce masque quand elle est équipée (zones de peau « Peau_* », autres pièces).</summary>
+        public void SetHides(string name, IEnumerable<string> hides)
+        {
+            var s = Find(name);
+            if (s == null || hides == null) return;
+            foreach (var h in hides) if (!s.hides.Contains(h)) s.hides.Add(h);
+        }
+
+        /// <summary>Vrai pour les zones de peau du corps de base : jamais « retirées », seulement masquées par l'équipement.</summary>
+        public static bool IsBody(string name) => name.StartsWith("Peau_");
         public bool IsEquipped(string name) { var s = Find(name); return s != null && s.equipped; }
 
         /// <summary>Équipe ou retire une pièce. Renvoie faux si l'emplacement n'existe pas ou si le retrait est interdit.</summary>
@@ -62,6 +73,7 @@ namespace Korvalune
         {
             var s = Find(name);
             if (s == null) return false;
+            if (!on && IsBody(name)) return false;
             if (!on && !contenuAdulte && (name == UnderwearLower || name == UnderwearUpper)) return false;
             s.equipped = on;
             Apply();
@@ -74,13 +86,18 @@ namespace Korvalune
         public void Apply()
         {
             var hidden = new HashSet<string>();
-            foreach (var s in slots) if (s != null && s.equipped) foreach (var h in s.hides) hidden.Add(h);
+            foreach (var s in slots)
+            {
+                if (s == null) continue;
+                bool worn = s.equipped || IsBody(s.name) || (!contenuAdulte && (s.name == UnderwearLower || s.name == UnderwearUpper));
+                if (worn) foreach (var h in s.hides) hidden.Add(h);
+            }
             foreach (var s in slots)
             {
                 if (s == null || s.renderer == null) continue;
                 bool show = s.equipped && !hidden.Contains(s.name);
                 if (s.name == Anatomy && !contenuAdulte) show = false;
-                if (!contenuAdulte && (s.name == UnderwearLower || s.name == UnderwearUpper)) show = true;
+                if (!contenuAdulte && (s.name == UnderwearLower || s.name == UnderwearUpper)) show = !hidden.Contains(s.name);
                 s.renderer.enabled = show;
             }
         }

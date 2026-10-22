@@ -7,6 +7,8 @@ from forge.geo import Loft, Mesh, spline, curve, tube, rivet, concat, unit, grid
 from knight import armor, cape, anims, materials as KM
 from knight.anims import Style, Pose, key, build_qclip, BONES
 from heroes.common import mh_human
+from heroes import modular as MOD
+from forge import fitloft as FL
 from forge import mhbase as MB
 
 NAME = 'Tharion'
@@ -113,11 +115,14 @@ class HammerStyle(Style):
 def build(bank):
     sk = H.build()
     a = Asset(NAME, sk)
-    armor.build(sk, a, remap=REMAP, helmet=False, skip=('gorgerin0', 'gorgerin_bord', 'col'))
+    body, marks = MOD.base(sk, a, bank, 'TH', look=dict(extra=[('universal-male-young-maxmuscle-averageweight', 0.7), ('stomach-pregnant-decr', 0.5), ('stomach-tone-incr', 0.7)],
+                                                        skin='young_caucasian_male', hair='short02', hair_tint=(0.24, 0.15, 0.08),
+                                                        skin_kw=dict(pubic=0.75, pubic_col=(0.12, 0.08, 0.05), scars=[((0.030, 1.735, 0.10), (0.25, -1, 0.1), 0.05)])))
+    with FL.fitted(body, sk):
+        armor.build(sk, a, remap=REMAP, helmet=False, skip=('gorgerin0', 'gorgerin_bord', 'col'))
     cape.build(sk, a, mat='TH_Cloth', clasp='TH_Gold', length=1.0, width=1.05)
     cape.build_tabard(sk, a, mat='TH_Cloth', length=1.25, width=1.25)
-    mh_human(sk, a, bank, 'TH', MB.MALE, extra=[('universal-male-young-maxmuscle-averageweight', 0.7)], iris=(0.22, 0.40, 0.62),
-             skin_kw=dict(tone=(0.76, 0.56, 0.45), stubble=0.5, scars=[((0.030, 1.735, 0.10), (0.25, -1, 0.1), 0.05)]),
-             hair='short', hair_color=(0.17, 0.10, 0.05), beard=True)
+    MOD.assign(a, MOD.KNIGHT_RULES)
+    MOD.covers(a, MOD.KNIGHT_COVERS)
     anims.build(sk, a, HammerStyle())
     return a, {'SunHammer': hammer(), 'SunPavise': pavise()}, anims.CLIPS

@@ -301,7 +301,13 @@ namespace Korvalune.EditorTools
                     // pièces d'équipement séparées (SkinnedMeshRenderer autres que « *_Mesh ») : composant d'équipement
                     bool hasSlots = false;
                     foreach (var smr in go.GetComponentsInChildren<SkinnedMeshRenderer>(true)) if (!smr.name.EndsWith("_Mesh")) hasSlots = true;
-                    if (hasSlots) go.AddComponent<CharacterEquipment>().Collect();
+                    if (hasSlots)
+                    {
+                        var eq = go.AddComponent<CharacterEquipment>();
+                        eq.Collect();
+                        if (e.m.slots != null) foreach (var sl in e.m.slots) eq.SetHides(sl.name, sl.hides);
+                        eq.Apply();
+                    }
                 }
                 var dir = Path.GetDirectoryName(e.m.prefab).Replace('\\', '/');
                 EnsureFolder(dir);

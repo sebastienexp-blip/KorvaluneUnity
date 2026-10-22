@@ -117,7 +117,7 @@ class Loft:
     of / os_ : décalage de la section. Angle a ∈ [0,1) : 0 = avant, 0.25 = côté (S), 0.5 = arrière, 0.75 = côté opposé."""
 
     def __init__(self, path, rf, rs, p=2.4, of=0.0, os_=0.0, segs=32, ref=(0, 0, 1), cap0=0, cap1=0, bulge=None, section=None):
-        self.section = section
+        self.section = section; self._cap0, self._cap1, self._ref = cap0, cap1, ref
         path = np.asarray(path, float); n = len(path)
         B = lambda x: np.broadcast_to(np.asarray(x, float), (n,)).copy()
         self.rf, self.rs, self.p, self.of, self.os = B(rf), B(rs), B(p), B(of), B(os_)

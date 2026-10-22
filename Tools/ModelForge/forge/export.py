@@ -50,6 +50,10 @@ def export(asset, tex, specs, subdir, kind='character', rig='Human', clips=(), a
                controller=controller if rig != 'None' and asset.clips else '', priority=priority, materials=mats,
                clips=[dict(name=n, loop=l, rootMotion=r, events=list(ev)) for n, l, r, ev in clips],
                attachments=[dict(socket=s, model=m) for s, m in attachments])
+    if getattr(asset, 'slot', None):
+        names = sorted(set(asset.slot.values()))
+        hides = getattr(asset, 'hides', {})
+        man['slots'] = [dict(name=s, hides=list(hides.get(s, []))) for s in names]
     if collider: man['collider'] = collider
     if expect: man['expect'] = expect
     json.dump(man, open(os.path.join(folder, asset.name + '.forge.json'), 'w'), indent=2, ensure_ascii=False)

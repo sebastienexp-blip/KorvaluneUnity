@@ -17,6 +17,7 @@ namespace Korvalune.EditorTools
         public ForgeAttachment[] attachments = new ForgeAttachment[0];
         public ForgeCollider collider;
         public ForgeExpect expect;
+        public ForgeSlot[] slots = new ForgeSlot[0];   // pièces d'équipement séparées et ce qu'elles masquent
         public int priority;                 // ordre de traitement (armes avant personnages)
     }
 
@@ -33,6 +34,13 @@ namespace Korvalune.EditorTools
         public bool alphaClip;               // découpe alpha (cheveux, cils, sourcils) : canal A de la BaseMap
         public float cutoff = 0.5f;
         public int maxSize = 2048, mobileMaxSize = 1024;
+    }
+
+    [Serializable]
+    public class ForgeSlot
+    {
+        public string name;                    // nom du maillage séparé dans le FBX (emplacement)
+        public string[] hides = new string[0]; // emplacements / zones de peau masqués quand celui-ci est équipé
     }
 
     [Serializable]
