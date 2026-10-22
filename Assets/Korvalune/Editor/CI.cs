@@ -126,6 +126,12 @@ namespace Korvalune.EditorTools
 
                 // collisions
                 if (m.collider != null && m.collider.type != "none") Check("Collider", go.GetComponent<Collider>() != null, m.collider.type);
+                var eq = go.GetComponent<CharacterEquipment>();
+                if (eq != null)
+                {
+                    var names = string.Join(", ", eq.Slots.Select(sl => sl.name + (sl.renderer != null && sl.renderer.enabled ? " (visible)" : " (masqué)")));
+                    Check("Équipement détachable", eq.Slots.Count > 0 && eq.Slots.All(sl => sl.renderer != null), $"{eq.Slots.Count} pièce(s) : {names}");
+                }
 
                 // rig et animations
                 if (m.rig != "None")

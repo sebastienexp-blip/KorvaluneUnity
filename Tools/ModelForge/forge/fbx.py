@@ -58,65 +58,80 @@ def write_fbx(path, asset, creator='Korvalune ModelForge'):
             C.append(f'\tC: "OO",{aid},{mid}')
             C.append(f'\tC: "OO",{mid},{bone_ids[sk.parents[i]] if sk.parents[i] >= 0 else 0}')
 
-    # ------------------------------------------------------------------ maillage (un seul, multi-matériaux)
-    groups = asset.by_material()
-    mat_names = list(groups.keys())
-    V_all, F_all, UV_all, N_all, MI_all, J_all, W_all = [], [], [], [], [], [], []
-    off = 0
-    for k, mn in enumerate(mat_names):
-        m = groups[mn]
-        N = m.N if m.N is not None else vertex_normals(m)
-        V_all.append(m.V); F_all.append(m.F + off); UV_all.append(m.UV); N_all.append(N)
-        MI_all.append(np.full(len(m.F), k)); J_all.append(m.J); W_all.append(m.W); off += len(m.V)
-    V = np.vstack(V_all) * CM; F = np.vstack(F_all); UV = np.vstack(UV_all); N = np.vstack(N_all)
-    MI = np.concatenate(MI_all); J = np.vstack(J_all); W = np.vstack(W_all)
-    pvi = F.copy(); pvi[:, 2] = -pvi[:, 2] - 1
-    pn = N[F].reshape(-1, 3)
-    gid = ids(); mesh_id = ids()
-    O.append(f'\tGeometry: {gid}, "Geometry::{asset.name}", "Mesh" {{\n\t\tVertices: {_arr(V, "{:.5f}")}\n\t\tPolygonVertexIndex: {_arr(pvi)}\n'
-             f'\t\tGeometryVersion: 124\n'
-             f'\t\tLayerElementNormal: 0 {{\n\t\t\tVersion: 101\n\t\t\tName: ""\n\t\t\tMappingInformationType: "ByPolygonVertex"\n\t\t\tReferenceInformationType: "Direct"\n\t\t\tNormals: {_arr(pn, "{:.5f}")}\n\t\t}}\n'
-             f'\t\tLayerElementUV: 0 {{\n\t\t\tVersion: 101\n\t\t\tName: "UVMap"\n\t\t\tMappingInformationType: "ByPolygonVertex"\n\t\t\tReferenceInformationType: "IndexToDirect"\n'
-             f'\t\t\tUV: {_arr(UV, "{:.5f}")}\n\t\t\tUVIndex: {_arr(F.ravel())}\n\t\t}}\n'
-             f'\t\tLayerElementMaterial: 0 {{\n\t\t\tVersion: 101\n\t\t\tName: ""\n\t\t\tMappingInformationType: "ByPolygon"\n\t\t\tReferenceInformationType: "IndexToDirect"\n\t\t\tMaterials: {_arr(MI)}\n\t\t}}\n'
-             f'\t\tLayer: 0 {{\n\t\t\tVersion: 100\n'
-             f'\t\t\tLayerElement:  {{\n\t\t\t\tType: "LayerElementNormal"\n\t\t\t\tTypedIndex: 0\n\t\t\t}}\n'
-             f'\t\t\tLayerElement:  {{\n\t\t\t\tType: "LayerElementMaterial"\n\t\t\t\tTypedIndex: 0\n\t\t\t}}\n'
-             f'\t\t\tLayerElement:  {{\n\t\t\t\tType: "LayerElementUV"\n\t\t\t\tTypedIndex: 0\n\t\t\t}}\n\t\t}}\n\t}}')
-    O.append(f'\tModel: {mesh_id}, "Model::{asset.name}_Mesh", "Mesh" {{\n\t\tVersion: 232\n\t\tProperties70:  {{\n'
-             f'\t\t\tP: "DefaultAttributeIndex", "int", "Integer", "",0\n\t\t\tP: "Lcl Translation", "Lcl Translation", "", "A",0,0,0\n'
-             f'\t\t\tP: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0\n\t\t\tP: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1\n'
-             f'\t\t}}\n\t\tShading: T\n\t\tCulling: "CullingOff"\n\t}}')
-    C.append(f'\tC: "OO",{gid},{mesh_id}'); C.append(f'\tC: "OO",{mesh_id},0')
-    for mn in mat_names:
-        md = asset.materials.get(mn)
-        col = md.color[:3] if md else (0.8, 0.8, 0.8)
-        mid = ids()
-        O.append(f'\tMaterial: {mid}, "Material::{mn}", "" {{\n\t\tVersion: 102\n\t\tShadingModel: "phong"\n\t\tMultiLayer: 0\n\t\tProperties70:  {{\n'
-                 f'\t\t\tP: "DiffuseColor", "Color", "", "A",{col[0]:.4f},{col[1]:.4f},{col[2]:.4f}\n\t\t\tP: "DiffuseFactor", "Number", "", "A",1\n'
-                 f'\t\t\tP: "SpecularFactor", "Number", "", "A",0.5\n\t\t\tP: "ShininessExponent", "Number", "", "A",20\n\t\t}}\n\t}}')
-        C.append(f'\tC: "OO",{mid},{mesh_id}')
-
-    # ------------------------------------------------------------------ skinning
+    # ------------------------------------------------------------------ maillages (un par emplacement d'équipement, multi-matériaux)
+    # asset.slot[nom de pièce] = emplacement (ex. « Sexe », « SousVetementBas ») : chaque emplacement devient un objet séparé
+    # (SkinnedMeshRenderer dans Unity) qu'on peut masquer ou retirer ; le reste forme le maillage principal « <Nom>_Mesh ».
+    slots = {}
+    for pn, pm_, pmat in asset.parts:
+        slots.setdefault(getattr(asset, 'slot', {}).get(pn, ''), []).append((pm_, pmat))
+    from .geo import concat as _concat
+    mat_ids = {}
+    G = sk.rest_global() if sk is not None else None
+    pose_nodes = []
+    for sname in sorted(slots, key=lambda k: (k != '', k)):
+        groups = {}
+        for pm_, pmat in slots[sname]: groups.setdefault(pmat, []).append(pm_)
+        groups = {k: _concat(v) for k, v in groups.items()}
+        mat_names = list(groups.keys())
+        V_all, F_all, UV_all, N_all, MI_all, J_all, W_all = [], [], [], [], [], [], []
+        off = 0
+        for k, mn in enumerate(mat_names):
+            m = groups[mn]
+            N = m.N if m.N is not None else vertex_normals(m)
+            V_all.append(m.V); F_all.append(m.F + off); UV_all.append(m.UV); N_all.append(N)
+            MI_all.append(np.full(len(m.F), k)); J_all.append(m.J); W_all.append(m.W); off += len(m.V)
+        V = np.vstack(V_all) * CM; F = np.vstack(F_all); UV = np.vstack(UV_all); N = np.vstack(N_all)
+        MI = np.concatenate(MI_all)
+        J = np.vstack(J_all) if sk is not None else None; W = np.vstack(W_all) if sk is not None else None
+        pvi = F.copy(); pvi[:, 2] = -pvi[:, 2] - 1
+        pn = N[F].reshape(-1, 3)
+        mname = f'{asset.name}_Mesh' if not sname else sname
+        gid = ids(); mesh_id = ids()
+        O.append(f'\tGeometry: {gid}, "Geometry::{mname}", "Mesh" {{\n\t\tVertices: {_arr(V, "{:.5f}")}\n\t\tPolygonVertexIndex: {_arr(pvi)}\n'
+                 f'\t\tGeometryVersion: 124\n'
+                 f'\t\tLayerElementNormal: 0 {{\n\t\t\tVersion: 101\n\t\t\tName: ""\n\t\t\tMappingInformationType: "ByPolygonVertex"\n\t\t\tReferenceInformationType: "Direct"\n\t\t\tNormals: {_arr(pn, "{:.5f}")}\n\t\t}}\n'
+                 f'\t\tLayerElementUV: 0 {{\n\t\t\tVersion: 101\n\t\t\tName: "UVMap"\n\t\t\tMappingInformationType: "ByPolygonVertex"\n\t\t\tReferenceInformationType: "IndexToDirect"\n'
+                 f'\t\t\tUV: {_arr(UV, "{:.5f}")}\n\t\t\tUVIndex: {_arr(F.ravel())}\n\t\t}}\n'
+                 f'\t\tLayerElementMaterial: 0 {{\n\t\t\tVersion: 101\n\t\t\tName: ""\n\t\t\tMappingInformationType: "ByPolygon"\n\t\t\tReferenceInformationType: "IndexToDirect"\n\t\t\tMaterials: {_arr(MI)}\n\t\t}}\n'
+                 f'\t\tLayer: 0 {{\n\t\t\tVersion: 100\n'
+                 f'\t\t\tLayerElement:  {{\n\t\t\t\tType: "LayerElementNormal"\n\t\t\t\tTypedIndex: 0\n\t\t\t}}\n'
+                 f'\t\t\tLayerElement:  {{\n\t\t\t\tType: "LayerElementMaterial"\n\t\t\t\tTypedIndex: 0\n\t\t\t}}\n'
+                 f'\t\t\tLayerElement:  {{\n\t\t\t\tType: "LayerElementUV"\n\t\t\t\tTypedIndex: 0\n\t\t\t}}\n\t\t}}\n\t}}')
+        O.append(f'\tModel: {mesh_id}, "Model::{mname}", "Mesh" {{\n\t\tVersion: 232\n\t\tProperties70:  {{\n'
+                 f'\t\t\tP: "DefaultAttributeIndex", "int", "Integer", "",0\n\t\t\tP: "Lcl Translation", "Lcl Translation", "", "A",0,0,0\n'
+                 f'\t\t\tP: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0\n\t\t\tP: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1\n'
+                 f'\t\t}}\n\t\tShading: T\n\t\tCulling: "CullingOff"\n\t}}')
+        C.append(f'\tC: "OO",{gid},{mesh_id}'); C.append(f'\tC: "OO",{mesh_id},0')
+        for mn in mat_names:
+            if mn not in mat_ids:
+                md = asset.materials.get(mn)
+                col = md.color[:3] if md else (0.8, 0.8, 0.8)
+                mid = ids(); mat_ids[mn] = mid
+                O.append(f'\tMaterial: {mid}, "Material::{mn}", "" {{\n\t\tVersion: 102\n\t\tShadingModel: "phong"\n\t\tMultiLayer: 0\n\t\tProperties70:  {{\n'
+                         f'\t\t\tP: "DiffuseColor", "Color", "", "A",{col[0]:.4f},{col[1]:.4f},{col[2]:.4f}\n\t\t\tP: "DiffuseFactor", "Number", "", "A",1\n'
+                         f'\t\t\tP: "SpecularFactor", "Number", "", "A",0.5\n\t\t\tP: "ShininessExponent", "Number", "", "A",20\n\t\t}}\n\t}}')
+            C.append(f'\tC: "OO",{mat_ids[mn]},{mesh_id}')
+        pose_nodes.append(f'\t\tPoseNode:  {{\n\t\t\tNode: {mesh_id}\n\t\t\tMatrix: {_arr(_mat16(np.eye(4)))}\n\t\t}}')
+        # skinning de ce maillage
+        if sk is not None:
+            skin_id = ids()
+            O.append(f'\tDeformer: {skin_id}, "Deformer::Skin_{mname}", "Skin" {{\n\t\tVersion: 101\n\t\tLink_DeformAcuracy: 50\n\t}}')
+            C.append(f'\tC: "OO",{skin_id},{gid}')
+            for bi, name in enumerate(sk.names):
+                if sk.null[bi]: continue
+                sel = (J == bi) & (W > 1e-5)
+                vidx, slot_ = np.nonzero(sel)
+                if len(vidx) == 0: continue
+                wts = W[vidx, slot_]
+                L = G[bi].copy(); L[:3, 3] *= CM
+                cid = ids()
+                O.append(f'\tDeformer: {cid}, "SubDeformer::{name}_{mname}", "Cluster" {{\n\t\tVersion: 100\n\t\tUserData: "", ""\n'
+                         f'\t\tIndexes: {_arr(vidx)}\n\t\tWeights: {_arr(wts, "{:.5f}")}\n'
+                         f'\t\tTransform: {_arr(_mat16(np.linalg.inv(L)), "{:.8f}")}\n\t\tTransformLink: {_arr(_mat16(L), "{:.8f}")}\n\t}}')
+                C.append(f'\tC: "OO",{cid},{skin_id}'); C.append(f'\tC: "OO",{bone_ids[bi]},{cid}')
     if sk is not None:
-        skin_id = ids()
-        O.append(f'\tDeformer: {skin_id}, "Deformer::Skin", "Skin" {{\n\t\tVersion: 101\n\t\tLink_DeformAcuracy: 50\n\t}}')
-        C.append(f'\tC: "OO",{skin_id},{gid}')
-        G = sk.rest_global()
-        for bi, name in enumerate(sk.names):
-            if sk.null[bi]: continue
-            sel = (J == bi) & (W > 1e-5)
-            vidx, slot = np.nonzero(sel)
-            if len(vidx) == 0: continue
-            wts = W[vidx, slot]
-            L = G[bi].copy(); L[:3, 3] *= CM
-            cid = ids()
-            O.append(f'\tDeformer: {cid}, "SubDeformer::{name}", "Cluster" {{\n\t\tVersion: 100\n\t\tUserData: "", ""\n'
-                     f'\t\tIndexes: {_arr(vidx)}\n\t\tWeights: {_arr(wts, "{:.5f}")}\n'
-                     f'\t\tTransform: {_arr(_mat16(np.linalg.inv(L)), "{:.8f}")}\n\t\tTransformLink: {_arr(_mat16(L), "{:.8f}")}\n\t}}')
-            C.append(f'\tC: "OO",{cid},{skin_id}'); C.append(f'\tC: "OO",{bone_ids[bi]},{cid}')
         pid = ids()
-        nodes = [f'\t\tPoseNode:  {{\n\t\t\tNode: {mesh_id}\n\t\t\tMatrix: {_arr(_mat16(np.eye(4)))}\n\t\t}}']
+        nodes = list(pose_nodes)
         for bi in range(len(sk.names)):
             L = G[bi].copy(); L[:3, 3] *= CM
             nodes.append(f'\t\tPoseNode:  {{\n\t\t\tNode: {bone_ids[bi]}\n\t\t\tMatrix: {_arr(_mat16(L), "{:.8f}")}\n\t\t}}')
@@ -217,4 +232,5 @@ References:  {{
             + 'Objects:  {\n' + '\n'.join(O) + '\n}\n' + 'Connections:  {\n' + '\n'.join(C) + '\n}\n'
             + 'Takes:  {\n\tCurrent: ""\n}\n')
     with open(path, 'w', encoding='utf-8') as f: f.write(body)
-    return dict(path=path, polygons=int(len(F)), vertices=int(len(V)), materials=mat_names, clips=list(asset.clips.keys()))
+    tris = sum(len(m.F) for _, m, _ in asset.parts); nv = sum(len(m.V) for _, m, _ in asset.parts)
+    return dict(path=path, polygons=int(tris), vertices=int(nv), materials=list(mat_ids.keys()), clips=list(asset.clips.keys()), meshes=len(slots))

@@ -298,6 +298,10 @@ namespace Korvalune.EditorTools
                 {
                     var rig = go.AddComponent<CharacterRig>();
                     rig.Collect();
+                    // pièces d'équipement séparées (SkinnedMeshRenderer autres que « *_Mesh ») : composant d'équipement
+                    bool hasSlots = false;
+                    foreach (var smr in go.GetComponentsInChildren<SkinnedMeshRenderer>(true)) if (!smr.name.EndsWith("_Mesh")) hasSlots = true;
+                    if (hasSlots) go.AddComponent<CharacterEquipment>().Collect();
                 }
                 var dir = Path.GetDirectoryName(e.m.prefab).Replace('\\', '/');
                 EnsureFolder(dir);

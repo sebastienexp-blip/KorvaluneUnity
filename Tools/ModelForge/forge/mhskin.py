@@ -39,7 +39,8 @@ def uv_raster(m, S):
 
 
 def skin(m, marks, S=2048, tone=(0.78, 0.60, 0.50), seed=1, female=False, stubble=0.0, beard_col=(0.12, 0.08, 0.05),
-         lip=None, makeup=None, pale=0.0, scars=(), brows=(0.08, 0.055, 0.04), dirt=0.0, veins=None, photo=None, tint=None, beard_paint=0.0):
+         lip=None, makeup=None, pale=0.0, scars=(), brows=(0.08, 0.055, 0.04), dirt=0.0, veins=None, photo=None, tint=None, beard_paint=0.0,
+         pubic=0.0, pubic_col=None):
     """photo : texture de peau MakeHuman (CC0, même dépliage UV que le corps) utilisée comme base ; tint : multiplicateur RGB.
     Sans photo, le teint est peint (ancienne méthode). beard_paint : barbe courte peinte (0 → 1)."""
     r = np.random.default_rng(seed)
@@ -53,7 +54,7 @@ def skin(m, marks, S=2048, tone=(0.78, 0.60, 0.50), seed=1, female=False, stubbl
         base = np.asarray(Image.open(photo).convert('RGB').resize((S, S), Image.LANCZOS), float) / 255
         if tint is not None: base = base * np.array(tint)[None, None]
         base = base * (1 - pale) + np.array([0.80, 0.80, 0.84]) * pale * (0.85 + 0.15 * base.mean(-1, keepdims=True))
-        return _skin_extras(base, pos, marks, S, r, stubble, beard_col, scars, dirt, veins, beard_paint, makeup)
+        return _skin_extras(base, pos, marks, S, r, stubble, beard_col, scars, dirt, veins, beard_paint, makeup, pubic, beard_col if pubic_col is None else pubic_col)
     base = np.array(tone)[None, None] * (1 + 0.035 * fbm(S, S, r, base=S / 8, octaves=4)[..., None])
     base = base * (1 - pale) + np.array([0.80, 0.80, 0.84]) * pale
     # rougeurs : joues, nez, oreilles, articulations
@@ -108,7 +109,7 @@ def skin(m, marks, S=2048, tone=(0.78, 0.60, 0.50), seed=1, female=False, stubbl
     return TexSet(np.clip(base, 0, 1), nm, np.zeros((S, S)), smooth, np.clip(1 - 0.12 * flush, 0, 1))
 
 
-def _skin_extras(base, pos, marks, S, r, stubble, beard_col, scars, dirt, veins, beard_paint, makeup):
+def _skin_extras(base, pos, marks, S, r, stubble, beard_col, scars, dirt, veins, beard_paint, makeup, pubic=0.0, pubic_col=(0.07, 0.05, 0.04)):
     """Effets ajoutés à une texture de peau photo : barbe peinte / naissante, cicatrices, saleté, veines, maquillage."""
     x, y, z = pos[..., 0], pos[..., 1], pos[..., 2]
     eL, eR, mo, jaw = marks['eye_L'], marks['eye_R'], marks['mouth'], marks['jaw']
@@ -129,6 +130,13 @@ def _skin_extras(base, pos, marks, S, r, stubble, beard_col, scars, dirt, veins,
         dark = np.clip(cover + gaussian_filter(hairs, 0.6) * (0.30 * stubble + 0.40 * beard_paint), 0, 0.85)
         base = base * (1 - dark[..., None]) + np.array(beard_col) * dark[..., None]
         hgt += 0.5 * hairs
+    if pubic:   # pilosité pubienne peinte : triangle au-dessus de la racine, fondu sur les bords
+        half = 0.010 + 0.75 * np.clip(y - 0.895, 0, None)
+        pz = smooth01((0.962 - y) / 0.012) * smooth01((y - 0.880) / 0.008) * smooth01((half - np.abs(x)) / 0.010) * smooth01((z - 0.02) / 0.02) * (y < 1.0)
+        st = n01(noise(S, S, 1.4, r, aniso=(1.0, 0.5)))
+        ph = np.clip((st - 0.45) * 4, 0, 1) * pz
+        dk = np.clip(0.30 * pz + 0.55 * gaussian_filter(ph, 0.6), 0, 0.85) * pubic
+        base = base * (1 - dk[..., None]) + np.array(pubic_col) * dk[..., None]; hgt += 0.4 * ph * pubic
     for (c, d, L) in scars:
         c = np.asarray(c); d = np.asarray(d) / np.linalg.norm(d)
         rel = pos - c; t = np.clip(rel @ d, 0, L); q = rel - t[..., None] * d

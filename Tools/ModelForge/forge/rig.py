@@ -115,9 +115,12 @@ class Asset:
         self.parts = []          # (nom, Mesh, matériau)
         self.materials = {}      # nom → MaterialDef
         self.clips = {}          # nom → Clip
+        self.slot = {}           # nom de pièce → emplacement d'équipement (maillage séparé dans le FBX)
 
-    def add(self, name, mesh, mat):
-        self.parts.append((name, mesh, mat)); return mesh
+    def add(self, name, mesh, mat, slot=None):
+        self.parts.append((name, mesh, mat))
+        if slot: self.slot[name] = slot
+        return mesh
 
     def by_material(self):
         from .geo import concat

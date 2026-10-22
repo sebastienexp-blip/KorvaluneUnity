@@ -257,3 +257,18 @@ def tooled_leather(S=1024, seed=93, tone=(0.14, 0.09, 0.055), line=(0.42, 0.30, 
     smooth = np.clip(base_tex.smooth + 0.25 * ridge, 0, 0.8)
     metal = ridge * 0.35
     return TexSet(np.clip(base, 0, 1), N * 0.5 + 0.5, metal, smooth, np.clip(base_tex.ao * (1 - 0.4 * et), 0, 1))
+
+
+def linen(S=512, seed=97, color=(0.62, 0.57, 0.48)):
+    """Toile de lin fine (sous-vêtements) : armure toile, fils irréguliers, légères salissures. Tuile ≈ 0,05 m."""
+    r = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:S, 0:S].astype(float)
+    k = S / 64
+    warp = np.sin(xx / k * np.pi) ** 2; weft = np.sin(yy / k * np.pi) ** 2
+    chk = ((np.floor(xx / k) + np.floor(yy / k)) % 2)
+    hgt = np.where(chk > 0, warp, weft) + 0.3 * noise(S, S, 2.0, r)
+    slub = n01(noise(S, S, 6.0, r, aniso=(0.2, 3.0)))
+    base = np.array(color)[None, None] * (0.86 + 0.14 * hgt[..., None]) * (0.92 + 0.12 * slub[..., None])
+    dirt = np.clip(n01(fbm(S, S, r, base=S / 3, octaves=4)) - 0.6, 0, 1)
+    base = base * (1 - 0.35 * dirt[..., None])
+    return TexSet(np.clip(base, 0, 1), height_to_normal(gaussian_filter(hgt, 0.6, mode='wrap'), 0.4), np.zeros((S, S)), np.full((S, S), 0.22), np.clip(0.75 + 0.25 * hgt, 0, 1))

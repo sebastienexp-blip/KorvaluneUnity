@@ -289,3 +289,22 @@ def boot_last(body, sk, side='Left', margin=0.009, sole=0.012, toe_extra=0.012):
     m.J = np.zeros((len(y), 4), np.int64); m.W = np.zeros((len(y), 4))
     m.J[:, 0] = sk[side + 'Foot']; m.W[:, 0] = 1 - f; m.J[:, 1] = sk[side + 'Toes']; m.W[:, 1] = f
     return m
+
+
+def cloth_cut(body, coarse_mask, inside, offset=0.0025, thick=0.0016, subdiv=1, uv_scale=10.0, bump=None):
+    """Vêtement ajusté à bord net : région grossière subdivisée, découpée par la fonction continue inside(P) > 0, décalée
+    le long des normales (+ bump(P) éventuel), double face (extérieur + intérieur). Poids hérités du corps."""
+    from .hairgen import _subdivide
+    s = submesh(body, region(body, coarse_mask, all_in=False))
+    N0 = vertex_normals(s)
+    V, F, N, J, W = _subdivide(s.V, s.F, N0, s.J, s.W, subdiv)
+    keep = inside(V[F].mean(1)) > 0
+    F = F[keep]
+    used = np.unique(F); remap = -np.ones(len(V), np.int64); remap[used] = np.arange(len(used))
+    V, N, J, W, F = V[used], N[used], J[used], W[used], remap[F]
+    off = offset + (bump(V) if bump is not None else 0.0)
+    P = V + N * np.asarray(off).reshape(-1, 1)
+    UV = np.c_[P[:, 0] * uv_scale + P[:, 2] * uv_scale * 0.5, P[:, 1] * uv_scale]
+    outer = Mesh(P, F.copy(), UV, J.copy(), W.copy())
+    inner = Mesh(P - N * thick, F[:, ::-1].copy(), UV.copy(), J.copy(), W.copy())
+    return concat([outer, inner])
