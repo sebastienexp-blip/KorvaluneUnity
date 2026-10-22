@@ -1,0 +1,90 @@
+# Vérifie seulement que le code C# compile (aucun APK). Les erreurs sont écrites dans une annotation lisible.
+name: Vérifier la compilation
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: check-compile-korvalune
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    steps:
+      - name: Libérer de l'espace disque
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: Library
+          key: Library-Check2-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}
+          restore-keys: Library-Check2-
+
+      - name: Charger la licence
+        env:
+          SECRET_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          if [ -n "$SECRET_LICENSE" ]; then LIC="$SECRET_LICENSE";
+          elif [ -f .licence/Unity_lic.ulf ]; then LIC="$(cat .licence/Unity_lic.ulf)";
+          else echo "::error::Aucune licence Unity trouvée"; exit 1; fi
+          { echo "UNITY_LICENSE<<ULF_EOF"; echo "$LIC"; echo "ULF_EOF"; } >> "$GITHUB_ENV"
+
+      - name: Compiler les scripts (GameCI)
+        id: build
+        uses: game-ci/unity-builder@v4
+        continue-on-error: true
+        timeout-minutes: 25
+        env:
+          UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneLinux64
+          buildMethod: Korvalune.EditorTools.KorvaluneSetup.CompileCheck
+          customParameters: -logFile /github/workspace/unity-check.log
+
+      - name: Diagnostic
+        if: always()
+        run: |
+          {
+            echo "--- racine"; ls -la | head -30
+            echo "--- logs"; find . -maxdepth 3 \( -name '*.log' -o -name 'Editor.log' \) -not -path './.git/*' 2>/dev/null | head
+            echo "--- erreurs"; grep -rIoh -E "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"]{0,170}" Library/Bee Library/Bee/*.json 2>/dev/null | sort -u | head -45
+            echo "--- Library"; ls Library 2>/dev/null | head -20; du -sh Library 2>/dev/null
+          } > diag.txt 2>&1
+          M=$(head -c 6000 diag.txt | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
+          echo "::error title=Diagnostic::${M}"
+
+      - name: Résultat
+        if: always()
+        run: |
+          if [ "${{ steps.build.outcome }}" = "success" ]; then echo "::notice title=Compilation::OK, aucune erreur C#"; exit 0; fi
+          echo "::error title=Compilation échouée::voir l'étape Diagnostic"; exit 1
+
+      - name: Sauver le cache Library
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: Library
+          key: Library-Check2-${{ hashFiles('Packages/**', 'ProjectSettings/**') }}-${{ github.run_id }}
+
+      - name: Journal Unity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-check-log
+          path: unity-check.log
+          if-no-files-found: ignore
