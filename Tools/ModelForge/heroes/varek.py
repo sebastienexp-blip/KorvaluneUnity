@@ -188,13 +188,13 @@ def hood(a, add, body, marks, sk):
     y = pm.V[:, 1]; blend_bones(pm, sk['Neck'], sk['UpperChest'], smoothstep((1.56 - y) / 0.08)); add('pelerine', pm, 'VR_Cloak')
 
 
-def build(bank):
+def build(bank, female=False):
     from forge import armorparts as AP
     sk = H.build(); a = Asset(NAME, sk); sw = H.swap_table(sk)
     def add(n, m, mat, both=False):
         a.add(n, m, mat)
         if both: a.add(n + '_R', mirror(m, sw), mat)
-    body, marks = MOD.base(sk, a, bank, 'VR', look=dict(skin='middleage_caucasian_male', hair='short02', hair_tint=(0.09, 0.065, 0.045),
+    body, marks = MOD.base(sk, a, bank, 'VRF' if female else 'VRM', female=female, look=dict(hair='braid01', hair_tint=(0.10, 0.07, 0.05), skin_kw=dict(pubic=0.45, dirt=0.4)) if female else dict(skin='middleage_caucasian_male', hair='short02', hair_tint=(0.09, 0.065, 0.045),
                                                      skin_kw=dict(pubic=0.75, pubic_col=(0.07, 0.05, 0.035), dirt=0.5, scars=[((-0.035, 1.70, 0.10), (0.3, -1, 0.0), 0.045)])))
     V = body.V
     W = lambda m: HP.weights_from(body, m)

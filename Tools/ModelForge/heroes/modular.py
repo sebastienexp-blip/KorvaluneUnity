@@ -78,6 +78,7 @@ def base(sk, a, bank, prefix, female=False, look=None):
     bank.recipes[prefix + '_Under'] = (lambda S: KM.linen(S, color=(0.60, 0.55, 0.46)), 512, 256, dict(metallic=0.0, smoothness=1.0))
     a.hides = getattr(a, 'hides', {})
     a.hides['SousVetementBas'] = ['Anatomie']
+    a.base_body, a.base_marks, a.base_female = body, marks, female
     return body, marks
 
 
@@ -120,3 +121,17 @@ KNIGHT_COVERS = {
     'Epaulieres': [], 'Brassards': ['AvantBras'], 'Gantelets': ['Mains'], 'Tassettes': [], 'Cuissots': ['Cuisses'],
     'Genouilleres': [], 'Greves': ['Jambes'], 'Solerets': ['Pieds'], 'Cape': [], 'Tabard': [],
 }
+
+
+def morph(a, body, marks, female):
+    """Curseurs de morphologie (blendshapes) sur toutes les pièces de l'asset ; liste des curseurs pour le manifeste."""
+    from forge import morphs as MO
+    import os
+    hands = '/tmp/mhpacks2/hands01_cc0/targets/hands'
+    vend = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'third_party', 'makehuman', 'targets', 'hands')
+    sl = MO.sliders(female, extra_dirs=[d for d in (vend, hands) if os.path.isdir(d)][:1])
+    D = MO.shape_deltas(marks, sl)
+    MO.apply(a, body, D)
+    keep = {k.rsplit('_', 1)[0] for k in D}
+    a.morphs = [m for m in MO.manifest(sl, female) if m['id'] in keep]
+    return a.morphs

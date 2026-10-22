@@ -25,11 +25,12 @@ M = dict(corset='MO_Corset', sleeve='MO_Sleeve', cloth='MO_Cloth', cloak='MO_Clo
          crystal='MO_Crystal', dark='MO_Dark', bone='MO_Bone', wood='MO_Dark')
 
 
-def build(bank):
-    sk = H.build(); a = Asset(NAME, sk)
-    body, marks = MOD.base(sk, a, bank, 'MO', female=True, look=dict(skin='young_caucasian_female2', hair='o4saken_long01', hair_tint=(0.035, 0.03, 0.035),
+def build(bank, female=True):
+    sk = H.build(); a = Asset(NAME + ('_F' if female else '_M'), sk)
+    body, marks = MOD.base(sk, a, bank, 'MO' + ('F' if female else 'M'), female=female, look=None if not female else dict(skin='young_caucasian_female2', hair='o4saken_long01', hair_tint=(0.035, 0.03, 0.035),
                                                                      brows='eyebrow003', skin_kw=dict(pale=0.25, pubic=0.45, pubic_col=(0.03, 0.03, 0.03))))
-    FK.build_outfit(a, body, marks, sk, 'MO', M, dict(neck=2.8, spikes=True, skulls=True, tatter=0.45, collar=True, cloak=True, cloak_len=1.10, cloak_tatter=1.4))
+    if not female: marks['breasts'] = [__import__('numpy').array([sx * 0.085, 1.33, 0.16]) for sx in (1, -1)]
+    FK.build_outfit(a, body, marks, sk, 'MO', M, dict(neck=2.8 if female else 7.0, spikes=True, skulls=True, tatter=0.45, collar=True, cloak=True, cloak_len=1.10, cloak_tatter=1.4))
     MOD.assign(a, [])
     MOD.covers(a, FK.COVERS)
     anims.build(sk, a, FK.StaffStyle())

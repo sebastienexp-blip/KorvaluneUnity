@@ -42,6 +42,9 @@ def concat(meshes):
                np.vstack([m.J for m in ms]), np.vstack([m.W for m in ms]))
     if any(m.N is not None for m in ms):
         out.N = np.vstack([m.N if m.N is not None else vertex_normals(m) for m in ms])
+    names = sorted(set(k for m in ms for k in getattr(m, 'shapes', {})))
+    if names:   # blendshapes : zéros pour les pièces qui n'en ont pas
+        out.shapes = {k: np.vstack([getattr(m, 'shapes', {}).get(k, np.zeros((len(m.V), 3))) for m in ms]) for k in names}
     return out
 
 

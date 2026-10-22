@@ -150,7 +150,8 @@ namespace Korvalune.EditorTools
             var m = e.m;
             mi.globalScale = 1f;
             mi.useFileScale = true;
-            mi.importCameras = false; mi.importLights = false; mi.importBlendShapes = false;
+            mi.importCameras = false; mi.importLights = false;
+            mi.importBlendShapes = true; mi.importBlendShapeNormals = ModelImporterNormals.Calculate;   // curseurs de morphologie
             mi.importVisibility = false;
             mi.isReadable = false;
             mi.meshCompression = ModelImporterMeshCompression.Off;
@@ -294,7 +295,7 @@ namespace Korvalune.EditorTools
                     var bc = go.AddComponent<BoxCollider>();
                     bc.center = V3(c.center); bc.size = V3(c.size); bc.isTrigger = c.trigger;
                 }
-                if (e.m.kind != "prop")
+                if (e.m.kind != "prop" && e.m.kind != "part")
                 {
                     var rig = go.AddComponent<CharacterRig>();
                     rig.Collect();

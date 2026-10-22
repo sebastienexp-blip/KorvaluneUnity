@@ -41,9 +41,11 @@ namespace Korvalune.EditorTools
                     catch (Exception ex) { Check($"Traitement {e.m.model}", false, ex.ToString()); }
                 }
                 AssetDatabase.SaveAssets();
-                foreach (var e in entries) Validate(e);
+                foreach (var e in entries.Where(x => x.m.kind != "part")) Validate(e);
+                ValidateParts(entries.Where(x => x.m.kind == "part").ToList());
                 BuildShowcase(entries);
                 Captures(entries);
+                CharacterCreatorCheck();
             }
             catch (Exception ex) { Check("Exécution CI", false, ex.ToString()); }
             finally
@@ -184,6 +186,56 @@ namespace Korvalune.EditorTools
             var b = rs[0].bounds; foreach (var r in rs) b.Encapsulate(r.bounds); return b;
         }
 
+        // ------------------------------------------------------------------------------------------ pièces du créateur
+        static void ValidateParts(List<ModelPipeline.Entry> parts)
+        {
+            if (parts.Count == 0) return;
+            Line($"\n## Pièces du créateur de personnage ({parts.Count} modèles : cheveux, sourcils, cils)");
+            int ok = 0, shapes = 0; var bad = new List<string>();
+            foreach (var e in parts)
+            {
+                var model = AssetDatabase.LoadAssetAtPath<GameObject>(e.modelPath);
+                var pf = AssetDatabase.LoadAssetAtPath<GameObject>(e.m.prefab);
+                var smr = model ? model.GetComponentInChildren<SkinnedMeshRenderer>(true) : null;
+                if (model && pf && smr && smr.sharedMesh) { ok++; shapes = Math.Max(shapes, smr.sharedMesh.blendShapeCount); }
+                else bad.Add(Path.GetFileName(e.modelPath));
+            }
+            Check("Pièces importées (modèle + prefab + peau)", bad.Count == 0, $"{ok}/{parts.Count}" + (bad.Count > 0 ? " — échecs : " + string.Join(", ", bad.Take(10)) : "") + $", jusqu'à {shapes} blendshapes");
+        }
+
+        static void CharacterCreatorCheck()
+        {
+            var cat = CatalogBuilder.Build();
+            if (cat == null) { Line("\n_Pas de catalogue de personnalisation (Art/Catalog/catalog.json absent)._"); return; }
+            Line("\n## Créateur de personnage");
+            Check("Catalogue", cat.skins.Count > 0 && cat.eyes.Count > 0, $"{cat.classes.Count} classes, {cat.skins.Count} peaux, {cat.eyes.Count} yeux, {cat.hair.Count} coiffures ({cat.hair.Sum(h => h.variants.Count)} variantes), {cat.eyebrows.Count} sourcils, {cat.eyelashes.Count} cils, {cat.morphsMale.Count}/{cat.morphsFemale.Count} curseurs homme/femme");
+            Check("Classes jouables en homme et en femme", cat.classes.Count > 0 && cat.classes.All(c => c.male && c.female), string.Join(", ", cat.classes.Select(c => $"{c.id} [{(c.male ? "H" : "-")}{(c.female ? "F" : "-")}]")));
+            CatalogBuilder.BuildScene(cat);
+            Check("Scène du créateur", File.Exists(CatalogBuilder.ScenePath), CatalogBuilder.ScenePath);
+            if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null) return;
+            // captures : personnage par défaut puis apparence aléatoire, homme et femme
+            var cc = UnityEngine.Object.FindFirstObjectByType<Korvalune.CharacterCreator>();
+            var cam = cc.viewCamera;
+            void Shot(string name)
+            {
+                Canvas.ForceUpdateCanvases();
+                var rt = new RenderTexture(1600, 900, 24, RenderTextureFormat.ARGB32) { antiAliasing = 4 };
+                cam.targetTexture = rt; cam.Render(); RenderTexture.active = rt;
+                var tex = new Texture2D(1600, 900, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, 1600, 900), 0, 0); tex.Apply();
+                RenderTexture.active = null; cam.targetTexture = null;
+                File.WriteAllBytes($"ci-out/Createur_{name}.png", tex.EncodeToPNG()); UnityEngine.Object.DestroyImmediate(tex); rt.Release();
+            }
+            try
+            {
+                cc.Init(); Shot("1_defaut");
+                cc.ShowTab("Visage"); cc.Randomize(); Shot("2_aleatoire_homme");
+                cc.female = true; cc.ShowTab("Cheveux"); cc.Randomize(); Shot("3_aleatoire_femme");
+                cc.classIndex = 1; cc.Rebuild(); cc.ShowTab("Équipement"); Shot("4_classe2_femme");
+                Check("Captures du créateur", true, "ci-out/Createur_*.png");
+            }
+            catch (Exception ex) { Check("Captures du créateur", false, ex.Message); }
+        }
+
         // ------------------------------------------------------------------------------------------ scène vitrine
         const string ShowcasePath = ModelPipeline.Root + "/Scenes/Showcase.unity";
 
@@ -193,7 +245,7 @@ namespace Korvalune.EditorTools
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             SetupStage(out var cam);
             float x = 0;
-            foreach (var e in entries.Where(e => e.m.kind != "prop" && !string.IsNullOrEmpty(e.m.prefab)))
+            foreach (var e in entries.Where(e => e.m.kind != "prop" && e.m.kind != "part" && !string.IsNullOrEmpty(e.m.prefab)))
             {
                 var p = AssetDatabase.LoadAssetAtPath<GameObject>(e.m.prefab);
                 if (!p) continue;
@@ -234,7 +286,7 @@ namespace Korvalune.EditorTools
         {
             if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null) { Line("\n_Captures : aucun processeur graphique dans ce conteneur (Unity lancé sans rendu)._"); return; }
             Directory.CreateDirectory("ci-out");
-            foreach (var e in entries.Where(x => !string.IsNullOrEmpty(x.m.prefab)))
+            foreach (var e in entries.Where(x => !string.IsNullOrEmpty(x.m.prefab) && x.m.kind != "part"))
             {
                 var p = AssetDatabase.LoadAssetAtPath<GameObject>(e.m.prefab);
                 if (!p) continue;

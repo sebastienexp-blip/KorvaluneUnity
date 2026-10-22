@@ -54,6 +54,7 @@ def export(asset, tex, specs, subdir, kind='character', rig='Human', clips=(), a
         names = sorted(set(asset.slot.values()))
         hides = getattr(asset, 'hides', {})
         man['slots'] = [dict(name=s, hides=list(hides.get(s, []))) for s in names]
+    if getattr(asset, 'morphs', None): man['morphs'] = asset.morphs
     if collider: man['collider'] = collider
     if expect: man['expect'] = expect
     json.dump(man, open(os.path.join(folder, asset.name + '.forge.json'), 'w'), indent=2, ensure_ascii=False)

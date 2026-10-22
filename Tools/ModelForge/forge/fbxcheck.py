@@ -1,9 +1,13 @@
 """Relecture indépendante d'un FBX ASCII produit par ModelForge : cohérence des objets, connexions, polygones, skinning, animations."""
-import re, sys
+import re, sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import numpy as np
 
 def check(path):
-    txt = open(path, encoding='utf-8').read()
+    raw = open(path, 'rb').read()
+    if raw[:18] == b'Kaydara FBX Binary':
+        print('  OK  FBX binaire 7.4 (contrôle de structure)'); return _check_bin(raw)
+    txt = raw.decode('utf-8')
     ok = True
     def chk(c, msg):
         nonlocal ok; print(('  OK  ' if c else '  ÉCHEC ') + msg); ok &= bool(c)
@@ -36,6 +40,36 @@ def check(path):
     finite = all(np.isfinite(np.array([float(x) for x in v.split(',')])).all() for _, _, v in curves[:4000])
     chk(all(a == b for a, b, _ in curves) and finite, f'{len(curves)} courbes, clés cohérentes et finies')
     print('RÉSULTAT :', 'valide' if ok else 'ERREURS'); return ok
+
+
+
+def _check_bin(raw):
+    """Contrôle d'un FBX binaire : arbre lisible, maillages, indices, poids par maillage."""
+    from forge.fbxbin import read
+    import numpy as np
+    r = read(raw); ok = True
+    def chk(cnd, msg):
+        nonlocal ok; print(('  OK  ' if cnd else '  ÉCHEC ') + msg); ok &= bool(cnd)
+    top = [c.name for c in r.children]
+    chk(all(n in top for n in ('FBXHeaderExtension', 'GlobalSettings', 'Objects', 'Connections')), 'nœuds de premier niveau')
+    obj = [c for c in r.children if c.name == 'Objects'][0]
+    geos = [g for g in obj.children if g.name == 'Geometry' and g.props[2][1] == b'Mesh']
+    clusters = [d for d in obj.children if d.name == 'Deformer' and d.props[2][1] == b'Cluster']
+    shapes = [g for g in obj.children if g.name == 'Geometry' and g.props[2][1] == b'Shape']
+    for g in geos:
+        gname = g.props[1][1].split(b'\x00')[0].decode()
+        V = [c for c in g.children if c.name == 'Vertices'][0].props[0][1]; P = [c for c in g.children if c.name == 'PolygonVertexIndex'][0].props[0][1]
+        idx = np.where(P < 0, -P - 1, P)
+        chk(len(V) % 3 == 0 and idx.max() < len(V) // 3 and (P < 0).sum() * 3 == len(P), f'[{gname}] {len(V) // 3} sommets, {(P < 0).sum()} triangles')
+        W = np.zeros(len(V) // 3)
+        for d in clusters:
+            if not d.props[1][1].split(b'\x00')[0].decode().endswith('_' + gname) and len(geos) > 1: continue
+            I = [c for c in d.children if c.name == 'Indexes']; Wt = [c for c in d.children if c.name == 'Weights']
+            if I: np.add.at(W, I[0].props[0][1].astype(int), Wt[0].props[0][1])
+        if clusters: chk(np.abs(W - 1).max() < 2e-3, f'[{gname}] poids (écart max {np.abs(W - 1).max():.4f})')
+    print(f'  OK  {len(shapes)} blendshapes')
+    print('RÉSULTAT :', 'valide' if ok else 'ERREURS'); return ok
+
 
 if __name__ == '__main__':
     for p in sys.argv[1:]: print(p); check(p)

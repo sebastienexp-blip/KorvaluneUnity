@@ -20,11 +20,11 @@ RECIPES = {
 GEAR = [('Socket_Weapon_R', 'Longsword'), ('Socket_Shield_L', 'HeaterShield')]
 
 
-def build(bank):
+def build(bank, female=False):
     sk = H.build()
-    a = Asset(NAME, sk)
+    a = Asset(NAME + ('_F' if female else '_M'), sk)
     # corps de base masculin (peau, yeux rouges, cheveux bruns) sous l'armure ; chaque pièce est détachable
-    body, marks = MOD.base(sk, a, bank, 'KD', look=dict(hair='short02', hair_tint=(0.06, 0.045, 0.035)))
+    body, marks = MOD.base(sk, a, bank, 'KDF' if female else 'KDM', female=female, look=None if female else dict(hair='short02', hair_tint=(0.06, 0.045, 0.035)))
     with FL.fitted(body, sk):
         armor.build(sk, a)
     cape.build(sk, a); cape.build_tabard(sk, a)

@@ -29,7 +29,7 @@ def _mat16(M):
     return np.asarray(M, float).T.ravel()
 
 
-def write_fbx(path, asset, creator='Korvalune ModelForge'):
+def write_fbx(path, asset, creator='Korvalune ModelForge', binary=True):
     ids = _Ids()
     sk = asset.skeleton
     O = []      # objets
@@ -112,6 +112,27 @@ def write_fbx(path, asset, creator='Korvalune ModelForge'):
                          f'\t\t\tP: "SpecularFactor", "Number", "", "A",0.5\n\t\t\tP: "ShininessExponent", "Number", "", "A",20\n\t\t}}\n\t}}')
             C.append(f'\tC: "OO",{mat_ids[mn]},{mesh_id}')
         pose_nodes.append(f'\t\tPoseNode:  {{\n\t\t\tNode: {mesh_id}\n\t\t\tMatrix: {_arr(_mat16(np.eye(4)))}\n\t\t}}')
+        # blendshapes (curseurs de morphologie) : une forme par curseur, indices creux
+        shp = {}
+        for k, mn in enumerate(mat_names):
+            for sn, D in getattr(groups[mn], 'shapes', {}).items(): shp.setdefault(sn, {})[k] = D
+        if shp:
+            starts = np.cumsum([0] + [len(groups[mn].V) for mn in mat_names])
+            bs_id = ids()
+            O.append(f'\tDeformer: {bs_id}, "Deformer::Morphs_{mname}", "BlendShape" {{\n\t\tVersion: 100\n\t}}')
+            C.append(f'\tC: "OO",{bs_id},{gid}')
+            nshapes = 0
+            for sn in sorted(shp):
+                Dfull = np.zeros((len(V), 3))
+                for k, D in shp[sn].items(): Dfull[starts[k]:starts[k + 1]] = D
+                nz = np.where(np.abs(Dfull).max(1) > 1e-6)[0]
+                if len(nz) == 0: continue
+                sg = ids(); ch = ids(); nshapes += 1
+                O.append(f'\tGeometry: {sg}, "Geometry::{sn}", "Shape" {{\n\t\tVersion: 100\n\t\tIndexes: {_arr(nz)}\n'
+                         f'\t\tVertices: {_arr(Dfull[nz] * CM, "{:.4f}")}\n\t\tNormals: {_arr(np.zeros((len(nz), 3)), "{:.1f}")}\n\t}}')
+                O.append(f'\tDeformer: {ch}, "SubDeformer::{sn}", "BlendShapeChannel" {{\n\t\tVersion: 100\n\t\tDeformPercent: 0\n'
+                         f'\t\tFullWeights: *1 {{\n\t\t\ta: 100\n\t\t}}\n\t}}')
+                C.append(f'\tC: "OO",{ch},{bs_id}'); C.append(f'\tC: "OO",{sg},{ch}')
         # skinning de ce maillage
         if sk is not None:
             skin_id = ids()
@@ -231,6 +252,10 @@ References:  {{
     body = (head + f'Definitions:  {{\n\tVersion: 100\n\tCount: {sum(counts.values()) + 1}\n\tObjectType: "GlobalSettings" {{\n\t\tCount: 1\n\t}}\n{defs}\n}}\n'
             + 'Objects:  {\n' + '\n'.join(O) + '\n}\n' + 'Connections:  {\n' + '\n'.join(C) + '\n}\n'
             + 'Takes:  {\n\tCurrent: ""\n}\n')
-    with open(path, 'w', encoding='utf-8') as f: f.write(body)
+    if binary:
+        from .fbxbin import to_binary
+        with open(path, 'wb') as f: f.write(to_binary(body))
+    else:
+        with open(path, 'w', encoding='utf-8') as f: f.write(body)
     tris = sum(len(m.F) for _, m, _ in asset.parts); nv = sum(len(m.V) for _, m, _ in asset.parts)
     return dict(path=path, polygons=int(tris), vertices=int(nv), materials=list(mat_ids.keys()), clips=list(asset.clips.keys()), meshes=len(slots))

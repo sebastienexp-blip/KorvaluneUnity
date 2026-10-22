@@ -205,4 +205,31 @@ def build(sk, targets=MALE, extra=(), thickness=1.04, head_scale=1.0, groups=('b
         if k + '____head' in mh.joint_idx: marks[k] = tr(mh.head(k))
     marks['lashes'] = lashes
     marks['base_V'], marks['base_J'], marks['base_W'] = Vn, J, W          # tous les sommets (aides comprises) : ajustement des proxys
+    Lv = np.zeros((nV, 3, 3))
+    for k, b in enumerate(bones): Lv += Wa[:, k, None, None] * T[b][None, :3, :3]
+    marks['base_L'] = Lv                                              # partie linéaire locale du report (morphes → notre espace)
     return body, eyes, marks
+
+
+TDIRS = [os.path.join(D, 'targets'), '/tmp/mh_targets_tmp/makehuman/data/targets']
+
+
+def target_path(name):
+    """Fichier .target (vendu dans third_party, ou dépôt MakeHuman extrait) — name relatif, ex. 'nose/nose-scale-horiz-incr'."""
+    for d in TDIRS:
+        for p in (os.path.join(d, name + '.target'), os.path.join(d, os.path.basename(name) + '.target')):
+            if os.path.exists(p): return p
+    raise FileNotFoundError(name)
+
+
+def target_delta(marks, names, weights=None):
+    """Déplacement (m, dans notre espace, pour TOUS les sommets du maillage de base) produit par une ou plusieurs cibles."""
+    Lv = marks['base_L']; n = len(Lv); d = np.zeros((n, 3))
+    for k, nm in enumerate(names):
+        w = 1.0 if weights is None else weights[k]
+        idx, dd = [], []
+        for l in open(target_path(nm)):
+            if l[0] == '#' or not l.strip(): continue
+            p = l.split(); idx.append(int(p[0])); dd.append([float(x) for x in p[1:4]])
+        if idx: d[np.array(idx)] += w * np.array(dd) * 0.1
+    return np.einsum('nij,nj->ni', Lv, d)
