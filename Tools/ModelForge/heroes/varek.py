@@ -132,7 +132,7 @@ def hood(a, add, body, marks, sk):
     deg = np.radians
     def phi0(Ev):
         e = np.degrees(Ev)
-        return deg(50) * np.where(e < -8, 1.0, np.sqrt(np.clip((20 - e) / 28, 0, 1)))
+        return deg(48) * np.where(e < -8, 1.0, np.sqrt(np.clip((18 - e) / 26, 0, 1)))
     nr, nc = 46, 85
     Ev = np.linspace(E0, deg(88), nr)
     S = np.linspace(0, 1, nc)
@@ -143,14 +143,14 @@ def hood(a, add, body, marks, sk):
     tw = smoothstep((EE - deg(55)) / deg(33))
     # plis verticaux doux dans le tissu (surtout derrière et sur les côtés)
     folds = 0.006 * np.sin(AA * 7 + 0.8) * smoothstep((deg(40) - EE) / deg(60)) * (1 - smoothstep((deg(40) - np.abs(np.pi - AA)) / deg(40)) * 0)
-    rr = r_env(AA, EE) + 0.040 + 0.022 * up + 0.018 * back * (1 - tw) + folds
+    rr = r_env(AA, EE) + 0.034 + 0.010 * up + 0.020 * back * (1 - tw) + folds
     G = ctr + dirs * rr[..., None]
     pk = smoothstep((EE - deg(35)) / deg(55)) * ((0.4 + 0.6 * back) * (1 - tw) + 0.75 * tw)
-    G = G + np.stack([np.zeros_like(pk), 0.022 * pk ** 1.5, -0.050 * pk ** 1.3], -1)
+    G = G + np.stack([np.zeros_like(pk), -0.004 * pk ** 1.5, -0.030 * pk ** 1.3], -1)   # couronne arrondie, léger tombé du tissu vers l'arrière
     dfront = np.minimum(AA, 2 * np.pi - AA) - P0
     near = smoothstep((deg(28) - dfront) / deg(28)) * smoothstep((EE + deg(50)) / deg(30))
     hi = smoothstep((EE + deg(5)) / deg(30)) * smoothstep((deg(58) - EE) / deg(25))
-    G = G + np.stack([-0.30 * (G[..., 0] - ctr[0]) * near * hi, -0.024 * near * hi, (0.014 + 0.060 * hi) * near], -1)
+    G = G + np.stack([-0.22 * (G[..., 0] - ctr[0]) * near * hi, -0.030 * near * hi, (0.030 + 0.085 * hi) * near], -1)   # bord avancé : visage dans l'ombre
     # pôle : les dernières rangées convergent en douceur vers un sommet unique (pas d'épine)
     pole = G[-1].mean(0)
     for k in range(1, 7):
@@ -171,9 +171,11 @@ def hood(a, add, body, marks, sk):
     fn = np.cross(rm.V[rm.F[:, 1]] - rm.V[rm.F[:, 0]], rm.V[rm.F[:, 2]] - rm.V[rm.F[:, 0]])
     cen = rm.V[rm.F].mean(1); flip = (fn * (cen - ctr - np.array([0, 0, 0.12]) * (cen[:, 2:3] > ctr[2]))).sum(1) < 0
     rm.F[flip] = rm.F[flip][:, ::-1]
-    m = concat([outer, inner, rm])
+    m = concat([outer, rm])
     blend_bones(m, sk['Head'], sk['Neck'], smoothstep((1.60 - m.V[:, 1]) / 0.06))
     add('capuche', m, 'VR_Cloak')
+    blend_bones(inner, sk['Head'], sk['Neck'], smoothstep((1.60 - inner.V[:, 1]) / 0.06))
+    add('capuche_doublure', inner, 'VR_Dark')   # intérieur sombre : visage dans l'ombre de la capuche
     # bord avant roulé (repli épais du tissu) le long de l'ouverture du visage
     rows = np.where(P0[:, 0] > 1e-3)[0]; rows = np.r_[rows, rows[-1] + 1]          # le repli passe par la pointe du front (ferme l'encoche)
     line = np.concatenate([idx[rows[::-1], 0][::-1], idx[rows[::-1], -1]])
@@ -181,10 +183,10 @@ def hood(a, add, body, marks, sk):
     roll = tube(pts, 0.0065, segs=10, tile=0.08); blend_bones(roll, sk['Head'], sk['Neck'], smoothstep((1.60 - roll.V[:, 1]) / 0.06))
     add('capuche_repli', roll, 'VR_Cloak')
     # col / pèlerine plissée qui retombe en vagues sur les épaules
-    path = spline([(0, 1.61, -0.02), (0, 1.53, -0.025), (0, 1.39, -0.03)], 20)
-    lo = Loft(path, curve([(0, .092), (1, .18)], 20), curve([(0, .096), (1, .27)], 20), p=2.3, segs=120)
-    jag = lambda q: 1.0 - 0.12 * np.abs(np.sin(q * np.pi * 9)) ** 0.7
-    pm = plate(lo, -0.5, 0.5, 0.0, jag, off=lambda da, tr, qa, qt: 0.014 + 0.014 * qt ** 1.2 * (0.5 + 0.5 * np.sin(qa * 2 * np.pi * 11)), thick=0.005, bevel=0.008, na=160, nt=18, tile=0.3)
+    path = spline([(0, 1.61, -0.02), (0, 1.54, -0.024), (0, 1.45, -0.026)], 20)
+    lo = Loft(path, curve([(0, .090), (1, .145)], 20), curve([(0, .094), (1, .20)], 20), p=2.3, segs=120)
+    jag = lambda q: 1.0 - 0.05 * np.abs(np.sin(q * np.pi * 7)) ** 0.7 - 0.30 * np.cos(np.pi * q) ** 2
+    pm = plate(lo, -0.5, 0.5, 0.0, jag, off=lambda da, tr, qa, qt: 0.012 + 0.008 * qt ** 1.2 * (0.5 + 0.5 * np.sin(qa * 2 * np.pi * 9)), thick=0.005, bevel=0.008, na=160, nt=18, tile=0.3)
     y = pm.V[:, 1]; blend_bones(pm, sk['Neck'], sk['UpperChest'], smoothstep((1.56 - y) / 0.08)); add('pelerine', pm, 'VR_Cloak')
 
 
