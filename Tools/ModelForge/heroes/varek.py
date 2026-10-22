@@ -16,7 +16,7 @@ NAME = 'Varek'
 HEAD_VIEW = (0, 1.68, 0.06)
 RECIPES = {
     'VR_Leather':  (lambda S: KM.leather(S, tone=(0.13, 0.085, 0.05)), 1024, 256, dict(metallic=0.0, smoothness=1.0)),
-    'VR_Dark':     (lambda S: KM.gambeson(S, seed=55, color=(0.07, 0.06, 0.045)), 1024, 256, dict(metallic=0.0, smoothness=1.0)),
+    'VR_Dark':     (lambda S: KM.gambeson(S, seed=55, color=(0.07, 0.06, 0.045)), 1024, 256, dict(metallic=0.0, smoothness=0.4)),
     'VR_Scale':    (lambda S: KM.scale_fabric(S, color=(0.20, 0.21, 0.10), vein=(0.50, 0.42, 0.19)), 1024, 512, dict(metallic=1.0, smoothness=1.0)),
     'VR_Tooled':   (lambda S: KM.tooled_leather(S, tone=(0.15, 0.095, 0.055)), 1024, 512, dict(metallic=0.25, smoothness=0.9)),
     'VR_Feather':  (lambda S: KM.gambeson(S, seed=58, color=(0.24, 0.17, 0.11)), 256, 128, dict(metallic=0.0, smoothness=1.0)),
@@ -104,7 +104,7 @@ class CrossbowStyle(Style):
         return build_qclip('Block', ks, BONES(sk), loop=True)
 
 
-def hood(a, add, body, marks, sk):
+def hood(a, add, body, marks, sk, cloth='VR_Cloak', lining='VR_Dark', depth=1.0):
     """Capuche de rôdeur : surface lisse paramétrée autour de la vraie tête MakeHuman (enveloppe azimut × élévation),
     ouverture du visage à bord net roulé, sommet en pointe douce, bord avant avancé → visage dans l'ombre."""
     from scipy.ndimage import gaussian_filter, grey_dilation
@@ -150,7 +150,7 @@ def hood(a, add, body, marks, sk):
     dfront = np.minimum(AA, 2 * np.pi - AA) - P0
     near = smoothstep((deg(28) - dfront) / deg(28)) * smoothstep((EE + deg(50)) / deg(30))
     hi = smoothstep((EE + deg(5)) / deg(30)) * smoothstep((deg(58) - EE) / deg(25))
-    G = G + np.stack([-0.22 * (G[..., 0] - ctr[0]) * near * hi, -0.030 * near * hi, (0.030 + 0.085 * hi) * near], -1)   # bord avancé : visage dans l'ombre
+    G = G + np.stack([-0.22 * (G[..., 0] - ctr[0]) * near * hi, -0.030 * near * hi, (0.030 + 0.085 * hi * depth) * near], -1)   # bord avancé : visage dans l'ombre
     # pôle : les dernières rangées convergent en douceur vers un sommet unique (pas d'épine)
     pole = G[-1].mean(0)
     for k in range(1, 7):
@@ -173,21 +173,21 @@ def hood(a, add, body, marks, sk):
     rm.F[flip] = rm.F[flip][:, ::-1]
     m = concat([outer, rm])
     blend_bones(m, sk['Head'], sk['Neck'], smoothstep((1.60 - m.V[:, 1]) / 0.06))
-    add('capuche', m, 'VR_Cloak')
+    add('capuche', m, cloth)
     blend_bones(inner, sk['Head'], sk['Neck'], smoothstep((1.60 - inner.V[:, 1]) / 0.06))
-    add('capuche_doublure', inner, 'VR_Dark')   # intérieur sombre : visage dans l'ombre de la capuche
+    add('capuche_doublure', inner, lining)   # intérieur sombre : visage dans l'ombre de la capuche
     # bord avant roulé (repli épais du tissu) le long de l'ouverture du visage
     rows = np.where(P0[:, 0] > 1e-3)[0]; rows = np.r_[rows, rows[-1] + 1]          # le repli passe par la pointe du front (ferme l'encoche)
     line = np.concatenate([idx[rows[::-1], 0][::-1], idx[rows[::-1], -1]])
     G2 = outer.V; pts = G2[line] - n[line] * 0.003
     roll = tube(pts, 0.0065, segs=10, tile=0.08); blend_bones(roll, sk['Head'], sk['Neck'], smoothstep((1.60 - roll.V[:, 1]) / 0.06))
-    add('capuche_repli', roll, 'VR_Cloak')
+    add('capuche_repli', roll, cloth)
     # col / pèlerine plissée qui retombe en vagues sur les épaules
     path = spline([(0, 1.61, -0.02), (0, 1.54, -0.024), (0, 1.45, -0.026)], 20)
     lo = Loft(path, curve([(0, .090), (1, .145)], 20), curve([(0, .094), (1, .20)], 20), p=2.3, segs=120)
     jag = lambda q: 1.0 - 0.05 * np.abs(np.sin(q * np.pi * 7)) ** 0.7 - 0.30 * np.cos(np.pi * q) ** 2
     pm = plate(lo, -0.5, 0.5, 0.0, jag, off=lambda da, tr, qa, qt: 0.012 + 0.008 * qt ** 1.2 * (0.5 + 0.5 * np.sin(qa * 2 * np.pi * 9)), thick=0.005, bevel=0.008, na=160, nt=18, tile=0.3)
-    y = pm.V[:, 1]; blend_bones(pm, sk['Neck'], sk['UpperChest'], smoothstep((1.56 - y) / 0.08)); add('pelerine', pm, 'VR_Cloak')
+    y = pm.V[:, 1]; blend_bones(pm, sk['Neck'], sk['UpperChest'], smoothstep((1.56 - y) / 0.08)); add('pelerine', pm, cloth)
 
 
 def build(bank, female=False):
