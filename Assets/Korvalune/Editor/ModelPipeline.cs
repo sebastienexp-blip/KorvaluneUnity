@@ -85,6 +85,8 @@ namespace Korvalune.EditorTools
         public static bool UpToDate(Entry e)
         {
             var hp = HashPath(e);
+            // amorçage : pièces du créateur déjà intégrées avant l'empreinte (inchangées depuis) → considérées à jour
+            if (!File.Exists(hp) && e.m.kind == "part" && !string.IsNullOrEmpty(e.m.prefab) && File.Exists(e.m.prefab)) { MarkDone(e); return true; }
             if (!File.Exists(hp)) return false;
             if (!string.IsNullOrEmpty(e.m.prefab) && !File.Exists(e.m.prefab)) return false;
             return File.ReadAllText(hp).Trim() == Fingerprint(e);
