@@ -61,7 +61,7 @@ namespace Korvalune.Game
                 if (save.skillRanks != null && save.skillRanks.Count == Runner.book.Count) Runner.ranks = save.skillRanks.ToArray();
                 if (save.loadout != null && save.loadout.Count == Runner.loadout.Length) Runner.loadout = save.loadout.ToArray();
             }
-            h.modifyIncoming = a => Time.time < Runner.shieldUntil ? a * (1f - Runner.shieldPower) : a;
+            h.modifyIncoming = dmgIn => Time.time < Runner.shieldUntil ? dmgIn * (1f - Runner.shieldPower) : dmgIn;
 
             // ---- interface
             var ui = new GameObject("Interface"); Hud = ui.AddComponent<HUD>(); Hud.player = Player; Hud.runner = Runner; Hud.worldCam = Cam;
