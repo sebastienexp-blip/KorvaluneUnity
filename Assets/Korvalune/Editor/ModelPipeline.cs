@@ -290,6 +290,14 @@ namespace Korvalune.EditorTools
                     var cc = go.AddComponent<CapsuleCollider>();
                     cc.center = V3(c.center); cc.height = c.height; cc.radius = c.radius; cc.direction = 1; cc.isTrigger = c.trigger;
                 }
+                else if (c != null && c.type == "mesh")
+                {
+                    // décor (château, rochers) : collision exacte sur chaque maillage
+                    foreach (var mf in go.GetComponentsInChildren<MeshFilter>(true))
+                    { var mc = mf.gameObject.AddComponent<MeshCollider>(); mc.sharedMesh = mf.sharedMesh; }
+                    go.isStatic = true;
+                    foreach (var t in go.GetComponentsInChildren<Transform>(true)) t.gameObject.isStatic = true;
+                }
                 else if (c != null && c.type == "box")
                 {
                     var bc = go.AddComponent<BoxCollider>();

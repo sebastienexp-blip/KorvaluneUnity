@@ -116,7 +116,7 @@ class Sculpt:
         if detail is not None:
             for i0 in range(0, n[0], 16):
                 X = np.stack(np.meshgrid(gx[i0:i0 + 16], gy, gz, indexing='ij'), -1)
-                near = np.abs(D[i0:i0 + 16]) < 0.02
+                near = np.abs(D[i0:i0 + 16]) < max(0.02, 3 * res)
                 if near.any():
                     blk = D[i0:i0 + 16]; blk[near] += detail(X[near]); D[i0:i0 + 16] = blk
         vol[:] = D

@@ -36,9 +36,13 @@ namespace Korvalune.EditorTools
                 var entries = ModelPipeline.FindAll();
                 Line($"- {entries.Count} modèle(s) ModelForge trouvé(s)");
                 try { File.Delete("ci-out/progress.log"); } catch { }
+                // pièces du créateur en dernier ; mémoire libérée régulièrement (les 140 pièces à blendshapes saturaient l'éditeur)
+                entries = entries.OrderBy(x => x.m.kind == "part" ? 1 : 0).ToList();
+                int n = 0;
                 foreach (var e in entries)
                 {
                     Progress("traitement " + e.modelPath);
+                    if (++n % 8 == 0) { AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect(); }
                     try { ModelPipeline.Process(e); }
                     catch (Exception ex) { Check($"Traitement {e.m.model}", false, ex.ToString()); }
                 }
@@ -48,6 +52,7 @@ namespace Korvalune.EditorTools
                 BuildShowcase(entries);
                 Captures(entries);
                 CharacterCreatorCheck();
+                WorldCheck();
             }
             catch (Exception ex) { Check("Exécution CI", false, ex.ToString()); }
             finally
@@ -239,6 +244,24 @@ namespace Korvalune.EditorTools
                 Check("Captures du créateur", true, "ci-out/Createur_*.png");
             }
             catch (Exception ex) { Check("Captures du créateur", false, ex.Message); }
+        }
+
+        static void WorldCheck()
+        {
+            Line("\n## Vallée de Korvalune (tranche jouable)");
+            if (!AssetDatabase.IsValidFolder(ModelPipeline.Root + "/Art/World")) { Line("_Décor absent (Art/World)._"); return; }
+            var game = WorldBuilder.Build();
+            Check("Scène de la vallée", File.Exists(WorldBuilder.ScenePath), WorldBuilder.ScenePath);
+            var t = Terrain.activeTerrain;
+            Check("Terrain", t != null && t.terrainData.terrainLayers.Length == 5 && t.terrainData.treeInstanceCount > 500,
+                t ? $"{t.terrainData.size}, {t.terrainData.terrainLayers.Count(l => l && l.diffuseTexture)} couches texturées, {t.terrainData.treeInstanceCount} arbres" : "absent");
+            Check("Château", GameObject.Find("ChateauKorvalune") != null);
+            var cfg = game.config;
+            Check("Héros jouable", cfg.defaultHero != null, cfg.defaultHero ? cfg.defaultHero.name + $" ({cfg.heroes.Count} héros)" : "aucun prefab");
+            Check("Ennemis configurés", cfg.enemies.All(e => e.prefab), string.Join(", ", cfg.enemies.Select(e => e.id + (e.prefab ? "" : " (absent)"))));
+            WorldBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
+            Check("Héros posé sur le sol", game.Player && Mathf.Abs(game.Player.transform.position.y - WorldBuilder.Height(game.Player.transform.position.x, game.Player.transform.position.z)) < 1.5f,
+                game.Player ? $"y = {game.Player.transform.position.y:0.0}" : "");
         }
 
         // ------------------------------------------------------------------------------------------ scène vitrine
