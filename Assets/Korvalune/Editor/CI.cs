@@ -38,17 +38,19 @@ namespace Korvalune.EditorTools
                 try { File.Delete("ci-out/progress.log"); } catch { }
                 // pièces du créateur en dernier ; mémoire libérée régulièrement (les 140 pièces à blendshapes saturaient l'éditeur)
                 entries = entries.OrderBy(x => x.m.kind == "part" ? 1 : 0).ToList();
-                int n = 0;
+                int n = 0, skipped = 0;
                 foreach (var e in entries)
                 {
+                    if (ModelPipeline.UpToDate(e)) { skipped++; continue; }
                     Progress("traitement " + e.modelPath);
                     // héros (blendshapes, 16 matériaux, 2K) : mémoire libérée après chacun, sinon tous les 8 modèles
                     bool heavy = e.modelPath.Contains("/Heroes/");
-                    if (heavy || ++n % 8 == 0) { AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect(); }
-                    try { ModelPipeline.Process(e); }
+                    if (heavy || ++n % 4 == 0) { AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect(); }
+                    try { ModelPipeline.Process(e); ModelPipeline.MarkDone(e); }
                     catch (Exception ex) { Check($"Traitement {e.m.model}", false, ex.ToString()); }
                 }
                 AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Line($"- {entries.Count - skipped} modèle(s) intégré(s), {skipped} déjà à jour (inchangés)");
                 Progress($"traitement terminé — mémoire {UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / 1048576} Mo");
                 foreach (var e in entries.Where(x => x.m.kind != "part"))
                 {

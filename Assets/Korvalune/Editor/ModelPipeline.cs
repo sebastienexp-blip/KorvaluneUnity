@@ -59,6 +59,39 @@ namespace Korvalune.EditorTools
             if (!string.IsNullOrEmpty(m.prefab)) BuildPrefab(e, ctrl);
         }
 
+        // ---- traitement incrémental : un modèle déjà intégré (mêmes FBX, manifeste, textures et même pipeline) n'est pas retraité.
+        // Évite de réimporter à chaque passage les ~140 pièces du créateur (l'éditeur finissait tué faute de mémoire).
+        static string pipelineHash;
+        static string HashPath(Entry e) => e.manifestPath.Replace(".forge.json", ".forgehash");
+
+        public static string Fingerprint(Entry e)
+        {
+            using (var md5 = System.Security.Cryptography.MD5.Create())
+            {
+                if (pipelineHash == null)
+                {
+                    var src = Directory.GetFiles(Root + "/Editor", "ModelPipeline.cs", SearchOption.AllDirectories).FirstOrDefault();
+                    pipelineHash = src != null ? System.BitConverter.ToString(md5.ComputeHash(File.ReadAllBytes(src))) : "?";
+                }
+                var sb = new System.Text.StringBuilder(pipelineHash);
+                void Add(string path) { if (path != null && File.Exists(path)) { var fi = new FileInfo(path); sb.Append('|').Append(fi.Length).Append(':').Append(System.BitConverter.ToString(md5.ComputeHash(File.ReadAllBytes(path)))); } }
+                Add(e.manifestPath); Add(e.modelPath);
+                foreach (var mat in e.m.materials) { Add(Rel(e, mat.baseMap)); Add(Rel(e, mat.normalMap)); Add(Rel(e, mat.maskMap)); Add(Rel(e, mat.occlusionMap)); Add(Rel(e, mat.emissionMap)); }
+                return System.BitConverter.ToString(md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(sb.ToString())));
+            }
+        }
+
+        /// <summary>Vrai si le modèle a déjà été intégré à l'identique (empreinte enregistrée et prefab présent).</summary>
+        public static bool UpToDate(Entry e)
+        {
+            var hp = HashPath(e);
+            if (!File.Exists(hp)) return false;
+            if (!string.IsNullOrEmpty(e.m.prefab) && !File.Exists(e.m.prefab)) return false;
+            return File.ReadAllText(hp).Trim() == Fingerprint(e);
+        }
+
+        public static void MarkDone(Entry e) { try { File.WriteAllText(HashPath(e), Fingerprint(e)); } catch (System.Exception ex) { Debug.LogWarning("[ModelForge] empreinte : " + ex.Message); } }
+
         static string Rel(Entry e, string p) => string.IsNullOrEmpty(p) ? null : NormalizePath(e.dir + "/" + p);
 
         static void ConfigureTexture(string path, TextureImporterType type, bool srgb, ForgeMaterial fm)
