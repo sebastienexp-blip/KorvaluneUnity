@@ -163,7 +163,7 @@ namespace Korvalune.Game
             var sc = go.GetComponent<CanvasScaler>(); sc.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; sc.referenceResolution = new Vector2(1920, 1080); sc.matchWidthOrHeight = 0.6f;
             root = (RectTransform)go.transform;
 
-            var logo = Label(root, "KORVALUNE", 64, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0, -30), new Vector2(900, 90));
+            var logo = Label(root, "Logo", "KORVALUNE", 64, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0, -30), new Vector2(900, 90));
             logo.color = UIStyle.Gold; logo.gameObject.AddComponent<Shadow>().effectDistance = new Vector2(3, -3);
 
             // emplacements (gauche)
