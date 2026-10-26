@@ -108,3 +108,37 @@ jobs:
         run: |
           if [ "${{ steps.unity.outcome }}" = "success" ]; then exit 0; fi
           echo "::error::Échec de l'intégration Unity (voir ci-report.md)"; exit 1
+
+  # Journal du job d'intégration récupéré par GitHub lui-même (l'archive des journaux n'est pas lisible depuis l'extérieur) :
+  # les lignes utiles (erreurs, « Killed », fin du journal Unity) sont enregistrées dans ci-out/unity-job.log.
+  journal:
+    needs: integrate
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Récupérer le journal du job
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p ci-out
+          JOB=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs --jq '.jobs[] | select(.name=="integrate") | .id')
+          gh api repos/${{ github.repository }}/actions/jobs/$JOB/logs > job.log || true
+          {
+            echo "# Journal du job d'intégration (run ${{ github.run_id }})"
+            echo "## Lignes importantes"
+            grep -nE "Killed|exit code|error CS|Caught fatal|Exception|Out of memory|OutOfMemory|\[ModelForge\]|Crash|abort" job.log | grep -v "ValidationExceptions" | head -150
+            echo; echo "## Fin du journal Unity (400 dernières lignes avant l'arrêt)"
+            L=$(grep -n "Build failed\|Exiting batchmode\|Application is shutting down" job.log | tail -1 | cut -d: -f1)
+            [ -n "$L" ] && sed -n "$((L>400 ? L-400 : 1)),${L}p" job.log || tail -400 job.log
+          } | cut -c1-400 > ci-out/unity-job.log
+          wc -l ci-out/unity-job.log
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add ci-out/unity-job.log
+          git commit -m "CI Unity : journal du job [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
