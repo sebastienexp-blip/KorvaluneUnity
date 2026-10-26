@@ -23,7 +23,7 @@ permissions:
 jobs:
   integrate:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 330
     steps:
       - name: Libérer de l'espace disque
         uses: jlumbroso/free-disk-space@v1.3.1
@@ -74,7 +74,26 @@ jobs:
         if: always()
         run: sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
 
-      - name: Unity — vérification, scènes et captures (éditeur 2)
+      - name: Unity — vérification des modèles et captures (éditeur 2)
+        id: validate
+        uses: game-ci/unity-builder@v4
+        continue-on-error: true
+        timeout-minutes: 80
+        env:
+          UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneLinux64
+          buildMethod: Korvalune.EditorTools.CI.Run
+          allowDirtyBuild: true
+          customParameters: -ciPhaseValidate
+
+      - name: Préparer les scènes
+        if: always()
+        run: sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+
+      - name: Unity — créateur, vallée et sélection (éditeur 3)
         id: unity
         uses: game-ci/unity-builder@v4
         continue-on-error: true
@@ -87,7 +106,7 @@ jobs:
           targetPlatform: StandaloneLinux64
           buildMethod: Korvalune.EditorTools.CI.Run
           allowDirtyBuild: true
-          customParameters: -logFile /github/workspace/unity-editor.log
+          customParameters: -ciPhaseScenes
 
       - name: Rapport
         if: always()
@@ -147,7 +166,9 @@ jobs:
         run: |
           mkdir -p ci-out
           JOB=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs --jq '.jobs[] | select(.name=="integrate") | .id')
-          gh api repos/${{ github.repository }}/actions/jobs/$JOB/logs > job.log || true
+          echo "job $JOB"
+          curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/jobs/$JOB/logs" -o job.log || true
+          ls -la job.log; head -c 300 job.log
           {
             echo "# Journal du job d'intégration (run ${{ github.run_id }})"
             echo "## Lignes importantes"

@@ -12,6 +12,7 @@ namespace Korvalune.EditorTools
         public string prefab;                // chemin du prefab à créer
         public string controller;            // « humanoid-combat », « creature-combat » ou vide
         public string avatarSource;          // Generic : os racine du mouvement
+        public string animModel;             // FBX ASCII séparé contenant les animations (même squelette), facultatif
         public ForgeMaterial[] materials = new ForgeMaterial[0];
         public ForgeClip[] clips = new ForgeClip[0];
         public ForgeAttachment[] attachments = new ForgeAttachment[0];

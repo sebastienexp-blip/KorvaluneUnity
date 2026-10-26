@@ -16,7 +16,12 @@ namespace Korvalune.EditorTools
     {
         public const string Root = "Assets/Korvalune";
 
-        public class Entry { public string manifestPath, dir, modelPath; public ForgeManifest m; }
+        public class Entry
+        {
+            public string manifestPath, dir, modelPath; public ForgeManifest m;
+            /// <summary>FBX qui porte les clips : le FBX d'animations séparé s'il existe, sinon le modèle.</summary>
+            public string AnimPath => string.IsNullOrEmpty(m.animModel) ? modelPath : dir + "/" + m.animModel;
+        }
 
         public static List<Entry> FindAll()
         {
@@ -75,7 +80,7 @@ namespace Korvalune.EditorTools
                 }
                 var sb = new System.Text.StringBuilder(pipelineHash);
                 void Add(string path) { if (path != null && File.Exists(path)) { var fi = new FileInfo(path); sb.Append('|').Append(fi.Length).Append(':').Append(System.BitConverter.ToString(md5.ComputeHash(File.ReadAllBytes(path)))); } }
-                Add(e.manifestPath); Add(e.modelPath);
+                Add(e.manifestPath); Add(e.modelPath); if (e.AnimPath != e.modelPath) Add(e.AnimPath);
                 foreach (var mat in e.m.materials) { Add(Rel(e, mat.baseMap)); Add(Rel(e, mat.normalMap)); Add(Rel(e, mat.maskMap)); Add(Rel(e, mat.occlusionMap)); Add(Rel(e, mat.emissionMap)); }
                 return System.BitConverter.ToString(md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(sb.ToString())));
             }
@@ -86,7 +91,8 @@ namespace Korvalune.EditorTools
         {
             var hp = HashPath(e);
             // amorçage : pièces du créateur déjà intégrées avant l'empreinte (inchangées depuis) → considérées à jour
-            if (!File.Exists(hp) && e.m.kind == "part" && !string.IsNullOrEmpty(e.m.prefab) && File.Exists(e.m.prefab)) { MarkDone(e); return true; }
+            // pièces du créateur : stables, intégrées une fois pour toutes (supprimer leur .forgehash pour forcer une réintégration)
+            if (e.m.kind == "part" && !string.IsNullOrEmpty(e.m.prefab) && File.Exists(e.m.prefab)) { if (!File.Exists(hp)) MarkDone(e); return true; }
             if (!File.Exists(hp)) return false;
             if (!string.IsNullOrEmpty(e.m.prefab) && !File.Exists(e.m.prefab)) return false;
             return File.ReadAllText(hp).Trim() == Fingerprint(e);
@@ -207,12 +213,31 @@ namespace Korvalune.EditorTools
                     break;
                 default: mi.animationType = ModelImporterAnimationType.None; break;
             }
-            mi.importAnimation = m.clips.Length > 0;
+            bool separate = !string.IsNullOrEmpty(m.animModel);
+            mi.importAnimation = m.clips.Length > 0 && !separate;
             mi.SaveAndReimport();                                 // nécessaire pour obtenir les clips par défaut
+
+            if (separate && m.clips.Length > 0)
+            {
+                // FBX d'animations : même squelette, avatar copié du modèle
+                var ai = AssetImporter.GetAtPath(e.AnimPath) as ModelImporter;
+                if (ai == null) { Debug.LogError($"[ModelForge] FBX d'animations introuvable : {e.AnimPath}"); return; }
+                var avatar = AssetDatabase.LoadAllAssetsAtPath(e.modelPath).OfType<Avatar>().FirstOrDefault();
+                ai.globalScale = 1f; ai.useFileScale = true; ai.importCameras = false; ai.importLights = false; ai.importVisibility = false;
+                ai.materialImportMode = ModelImporterMaterialImportMode.None;
+                ai.animationType = mi.animationType;
+                if (avatar != null && mi.animationType != ModelImporterAnimationType.None) { ai.avatarSetup = ModelImporterAvatarSetup.CopyFromOther; ai.sourceAvatar = avatar; }
+                else Debug.LogError($"[ModelForge] Avatar absent pour {e.modelPath}");
+                if (mi.animationType == ModelImporterAnimationType.Generic && !string.IsNullOrEmpty(m.avatarSource)) ai.motionNodeName = m.avatarSource;
+                ai.importAnimation = true;
+                ai.SaveAndReimport();
+                mi = ai;
+            }
 
             if (m.clips.Length > 0)
             {
                 var defs = mi.defaultClipAnimations;
+                if (defs.Length == 0) Debug.LogError($"[ModelForge] Aucune prise d'animation lue dans {mi.assetPath}");
                 var outClips = new List<ModelImporterClipAnimation>();
                 foreach (var d in defs)
                 {
@@ -242,7 +267,7 @@ namespace Korvalune.EditorTools
             var path = dir + "/" + Path.GetFileNameWithoutExtension(e.m.model) + ".controller";
             AssetDatabase.DeleteAsset(path);                      // reconstruit à chaque fois : aucun état orphelin
             var ctrl = AnimatorController.CreateAnimatorControllerAtPath(path);
-            var clips = Clips(e.modelPath).ToDictionary(c => c.name, c => c);
+            var clips = Clips(e.AnimPath).ToDictionary(c => c.name, c => c);
             AnimationClip C(string n) => clips.TryGetValue(n, out var c) ? c : null;
 
             ctrl.AddParameter("Speed", AnimatorControllerParameterType.Float);

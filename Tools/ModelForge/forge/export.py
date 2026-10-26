@@ -45,7 +45,19 @@ def export(asset, tex, specs, subdir, kind='character', rig='Human', clips=(), a
     """subdir : chemin sous Assets/Korvalune/Art (ex. 'Heroes/KaelDraven'). clips : [(nom, boucle, mouvement_racine, événements)]."""
     folder = os.path.join(ART, subdir); os.makedirs(folder, exist_ok=True)
     mats = material_entries(asset, tex, specs, folder, shared)
-    info = write_fbx(os.path.join(folder, asset.name + '.fbx'), asset)
+    # animations dans un FBX séparé, en ASCII : Unity n'importe pas les prises (takes) de nos FBX binaires, alors qu'il lit
+    # parfaitement les FBX ASCII ; le modèle (maillages, gros) reste en binaire compressé, le squelette animé (léger) en ASCII
+    anim_file = None
+    if asset.clips and rig != 'None':
+        from .rig import Asset as _A
+        an = _A(asset.name + '_Anims', asset.skeleton); an.clips = asset.clips
+        anim_file = an.name + '.fbx'
+        ainfo = write_fbx(os.path.join(folder, anim_file), an, binary=False)
+        saved = asset.clips; asset.clips = {}
+        info = write_fbx(os.path.join(folder, asset.name + '.fbx'), asset)
+        asset.clips = saved; info['clips'] = ainfo['clips']
+    else:
+        info = write_fbx(os.path.join(folder, asset.name + '.fbx'), asset)
     man = dict(model=asset.name + '.fbx', kind=kind, rig=rig, prefab=f'Assets/Korvalune/Prefabs/{prefab_dir}/{asset.name}.prefab',
                controller=controller if rig != 'None' and asset.clips else '', priority=priority, materials=mats,
                clips=[dict(name=n, loop=l, rootMotion=r, events=list(ev)) for n, l, r, ev in clips],
@@ -55,6 +67,7 @@ def export(asset, tex, specs, subdir, kind='character', rig='Human', clips=(), a
         hides = getattr(asset, 'hides', {})
         man['slots'] = [dict(name=s, hides=list(hides.get(s, []))) for s in names]
     if getattr(asset, 'morphs', None): man['morphs'] = asset.morphs
+    if anim_file: man['animModel'] = anim_file
     if collider: man['collider'] = collider
     if expect: man['expect'] = expect
     json.dump(man, open(os.path.join(folder, asset.name + '.forge.json'), 'w'), indent=2, ensure_ascii=False)

@@ -35,7 +35,10 @@ namespace Korvalune.EditorTools
                 Check("Render Pipeline", GraphicsSettings.defaultRenderPipeline == pipe && pipe != null, pipe != null ? $"URP actif ({pipe.name})" : "URP absent");
                 var entries = ModelPipeline.FindAll();
                 Line($"- {entries.Count} modèle(s) ModelForge trouvé(s)");
-                try { File.Delete("ci-out/progress.log"); } catch { }
+                var args = Environment.GetCommandLineArgs();
+                bool phProcess = args.Contains("-ciPhaseProcess"), phValidate = args.Contains("-ciPhaseValidate"), phScenes = args.Contains("-ciPhaseScenes");
+                if (phProcess || !(phValidate || phScenes)) { try { File.Delete("ci-out/progress.log"); } catch { } }
+                Progress("== éditeur " + (phProcess ? "1 : intégration" : phValidate ? "2 : vérification et captures" : phScenes ? "3 : scènes" : "unique"));
                 // pièces du créateur en dernier ; mémoire libérée régulièrement (les 140 pièces à blendshapes saturaient l'éditeur)
                 entries = entries.OrderBy(x => x.m.kind == "part" ? 1 : 0).ToList();
                 int n = 0, skipped = 0;
@@ -53,23 +56,30 @@ namespace Korvalune.EditorTools
                 Line($"- {entries.Count - skipped} modèle(s) intégré(s), {skipped} déjà à jour (inchangés)");
                 // phase « intégration seule » : l'éditeur s'arrête ici ; la vérification repart dans un éditeur neuf
                 // (la mémoire native de l'import des héros n'est jamais rendue : 8 Go dépassés sinon)
-                if (Environment.GetCommandLineArgs().Contains("-ciPhaseProcess"))
-                {
-                    Progress("phase intégration terminée");
-                    File.WriteAllText("ci-out/phase-integration.md", Rep.ToString());
-                    Application.logMessageReceived -= OnLog;
-                    EditorApplication.Exit(failures == 0 ? 0 : 1); return;
-                }
+                if (phProcess) { EndPhase("ci-out/phase-integration.md"); return; }
                 Progress($"traitement terminé — mémoire {UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / 1048576} Mo");
-                foreach (var e in entries.Where(x => x.m.kind != "part"))
+                if (!phScenes) foreach (var e in entries.Where(x => x.m.kind != "part"))
                 {
                     Progress("validation " + e.modelPath);
                     Validate(e); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 }
-                Progress("validation des pièces");
-                ValidateParts(entries.Where(x => x.m.kind == "part").ToList());
-                Progress("BuildShowcase"); BuildShowcase(entries);
-                Progress("Captures"); Captures(entries);
+                if (!phScenes)
+                {
+                    Progress("validation des pièces");
+                    ValidateParts(entries.Where(x => x.m.kind == "part").ToList());
+                    Progress("BuildShowcase"); BuildShowcase(entries);
+                    Progress("Captures"); Captures(entries);
+                }
+                if (phValidate) { EndPhase("ci-out/phase-validation.md"); return; }
+                if (phScenes)
+                {
+                    // rapport complet : parties écrites par les éditeurs précédents + scènes
+                    var head = new StringBuilder();
+                    foreach (var f in new[] { "ci-out/phase-integration.md", "ci-out/phase-validation.md" })
+                        if (File.Exists(f)) { var t = File.ReadAllText(f); head.AppendLine(t); failures += t.Split('\n').Count(l => l.StartsWith("- ❌ **")); }
+                        else { head.AppendLine($"- ❌ **{Path.GetFileName(f)}** absent : l'éditeur précédent s'est arrêté avant la fin"); failures++; }
+                    Rep.Insert(0, head.ToString() + "\n# Scènes (éditeur 3)\n");
+                }
                 Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
                 Progress("WorldCheck"); WorldCheck();
                 Progress("SelectionCheck"); SelectionCheck();
@@ -88,6 +98,17 @@ namespace Korvalune.EditorTools
                 File.WriteAllText("ci-report.md", Rep.ToString());
                 Debug.Log(Rep.ToString());
             }
+            EditorApplication.Exit(failures == 0 ? 0 : 1);
+        }
+
+        /// <summary>Fin d'une phase (éditeur 1 ou 2) : écrit sa partie du rapport (avec ses erreurs Unity) et ferme l'éditeur.</summary>
+        static void EndPhase(string path)
+        {
+            Application.logMessageReceived -= OnLog;
+            var errs = Logs.Where(l => l.StartsWith("Error") || l.StartsWith("Exception") || l.StartsWith("Assert")).Distinct().Take(30).ToList();
+            foreach (var l in errs) Line("- ⚠️ journal : " + Trim(l));
+            Progress("fin de phase : " + path);
+            File.WriteAllText(path, Rep.ToString());
             EditorApplication.Exit(failures == 0 ? 0 : 1);
         }
 
@@ -181,7 +202,7 @@ namespace Korvalune.EditorTools
                         Line($"  - doigts mappés : {fingers}/30");
                     }
                     Check("Contrôleur d'animation", string.IsNullOrEmpty(m.controller) || (anim && anim.runtimeAnimatorController), anim && anim.runtimeAnimatorController ? anim.runtimeAnimatorController.name : "");
-                    var clips = ModelPipeline.Clips(e.modelPath).ToDictionary(c => c.name, c => c);
+                    var clips = ModelPipeline.Clips(e.AnimPath).ToDictionary(c => c.name, c => c);
                     foreach (var fc in m.clips)
                     {
                         clips.TryGetValue(fc.name, out var clip);
@@ -348,7 +369,8 @@ namespace Korvalune.EditorTools
             {
                 var p = AssetDatabase.LoadAssetAtPath<GameObject>(e.m.prefab);
                 if (!p) continue;
-                var clips = ModelPipeline.Clips(e.modelPath);
+                EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                var clips = ModelPipeline.Clips(e.AnimPath);
                 var poses = new List<(string, AnimationClip, float)> { ("repos", null, 0) };
                 bool female = e.m.model.EndsWith("_F.fbx");
                 foreach (var c in clips)
