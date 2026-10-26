@@ -35,8 +35,10 @@ namespace Korvalune.EditorTools
                 Check("Render Pipeline", GraphicsSettings.defaultRenderPipeline == pipe && pipe != null, pipe != null ? $"URP actif ({pipe.name})" : "URP absent");
                 var entries = ModelPipeline.FindAll();
                 Line($"- {entries.Count} modèle(s) ModelForge trouvé(s)");
+                try { File.Delete("ci-out/progress.log"); } catch { }
                 foreach (var e in entries)
                 {
+                    Progress("traitement " + e.modelPath);
                     try { ModelPipeline.Process(e); }
                     catch (Exception ex) { Check($"Traitement {e.m.model}", false, ex.ToString()); }
                 }
@@ -68,11 +70,14 @@ namespace Korvalune.EditorTools
         {
             if (type == LogType.Log) return;
             if (msg.Contains("Rapport d'intégration")) return;
+            Progress(type + ": " + msg.Split('\n')[0]);
             Logs.Add(type + ": " + msg.Split('\n')[0]);
         }
 
         static string Trim(string s) => s.Length > 300 ? s.Substring(0, 300) + "…" : s;
-        static void Line(string s) { Rep.AppendLine(s); }
+        static void Line(string s) { Rep.AppendLine(s); Progress(s); }
+        /// <summary>Journal de progression écrit au fil de l'eau (survit à un plantage natif de l'éditeur).</summary>
+        static void Progress(string s) { try { Directory.CreateDirectory("ci-out"); File.AppendAllText("ci-out/progress.log", DateTime.UtcNow.ToString("HH:mm:ss ") + s + "\n"); } catch { } }
         static void Check(string what, bool ok, string detail = "")
         {
             if (!ok) failures++;

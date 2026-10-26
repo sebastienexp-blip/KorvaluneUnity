@@ -52,6 +52,9 @@ jobs:
           else echo "::error::Aucune licence Unity trouvée"; exit 1; fi
           { echo "UNITY_LICENSE<<ULF_EOF"; echo "$LIC"; echo "ULF_EOF"; } >> "$GITHUB_ENV"
 
+      - name: Effacer l'ancien rapport
+        run: rm -f ci-report.md ci-out/progress.log
+
       - name: Unity — import, intégration et vérification
         id: unity
         uses: game-ci/unity-builder@v4
@@ -74,7 +77,7 @@ jobs:
           if [ ! -f ci-report.md ]; then
             { echo "# Rapport absent : Unity s'est arrêté avant la fin"; echo; echo '```';
               grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60;
-              echo '```'; } > ci-report.md
+              echo '```'; echo; echo "## Dernières étapes (ci-out/progress.log)"; echo '```'; tail -40 ci-out/progress.log 2>/dev/null; echo '```'; } > ci-report.md
           fi
           M=$(head -c 60000 ci-report.md | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
           if [ "${{ steps.unity.outcome }}" = "success" ]; then echo "::notice title=Intégration Unity::${M}"; else echo "::error title=Intégration Unity::${M}"; fi
