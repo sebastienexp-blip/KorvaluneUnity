@@ -307,6 +307,6 @@ def build(sk, asset, style, who=None):
     if fn is None: return []
     clips = fn(style, sk)
     for c in clips:
-        simulate_cape(sk, c, [[f'Cape_{ch}{k}' for k in range(1, 5)] for ch in ('L', 'C', 'R')])
+        simulate_cape(sk, c, [[f'Cape_{ch}{k}' for k in range(1, 5)] for ch in ('L', 'C', 'R')], stiffness=4.0, damping=7.0, pre_roll=1)
         asset.clips[c.name] = c
     return [(c.name, False, False, ()) for c in clips]
