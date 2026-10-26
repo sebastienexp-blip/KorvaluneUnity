@@ -4,7 +4,7 @@ cristal vert d'âme. Corps de base féminin : chaque pièce est détachable."""
 from forge.rig import Asset
 from forge import humanoid as H
 from knight import anims, materials as KM
-from heroes import modular as MOD, female_kit as FK
+from heroes import modular as MOD, female_kit as FK, skill_anims as SA
 
 NAME = 'Morvanna'
 HEAD_VIEW = (0, 1.66, 0.05)
@@ -33,4 +33,5 @@ def build(bank, female=True):
     MOD.assign(a, [])
     MOD.covers(a, FK.COVERS)
     anims.build(sk, a, FK.StaffStyle())
-    return a, {'SoulStaff': FK.staff('SoulStaff', dict(wood='MO_Dark', gold='MO_Silver', crystal='MO_Crystal', bone='MO_Bone', dark='MO_Dark'), 'skull')}, anims.CLIPS
+    sk_clips = SA.build(sk, a, anims._STYLE, 'morvanna')
+    return a, {'SoulStaff': FK.staff('SoulStaff', dict(wood='MO_Dark', gold='MO_Silver', crystal='MO_Crystal', bone='MO_Bone', dark='MO_Dark'), 'skull')}, anims.CLIPS + sk_clips

@@ -88,7 +88,8 @@ namespace Korvalune.Game
         /// <summary>Icônes dessinées (sur fond transparent) : attaque, tourbillon, bond, cri, piétinement, sac, livre.</summary>
         public static Sprite Icon(string id, Color col)
         {
-            if (icons.TryGetValue(id, out var s)) return s;
+            string cacheKey = id + ColorUtility.ToHtmlStringRGB(col);
+            if (icons.TryGetValue(cacheKey, out var s)) return s;
             int S = 128; var t = Tex(S, S); var px = new Color[S * S];
             for (int y = 0; y < S; y++) for (int x = 0; x < S; x++)
             {
@@ -113,7 +114,7 @@ namespace Korvalune.Game
                 var c = col * (0.8f + 0.4f * (1 - r)); c.a = m; px[y * S + x] = c;
             }
             t.SetPixels(px); t.Apply();
-            return icons[id] = Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100);
+            return icons[cacheKey] = Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100);
         }
     }
 }

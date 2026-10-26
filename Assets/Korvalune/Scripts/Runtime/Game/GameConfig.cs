@@ -19,6 +19,7 @@ namespace Korvalune.Game
         public List<GameObject> heroes = new List<GameObject>();
         public List<EnemyType> enemies = new List<EnemyType>();
         public Material fxAdditive, fxAlpha, ringMat;
+        public VfxLibrary vfx;
         public UnityEngine.Rendering.RenderPipelineAsset highPipeline, mobilePipeline;
         public Font font;
         public EnemyType Enemy(string id) => enemies.Find(e => e.id == id);

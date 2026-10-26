@@ -12,6 +12,7 @@ namespace Korvalune.Game
     public class HUD : MonoBehaviour
     {
         public PlayerController player;
+        public SkillRunner runner;
         public Quest quest;
         public Camera worldCam;
         public string zoneName = "Vallée de Korvalune";
@@ -21,6 +22,9 @@ namespace Korvalune.Game
         Font font;
         Image hpFill, manaFill, xpFill; Text hpText, levelText, questText, notifyText, zoneText;
         readonly List<(Image cd, Text t, int idx)> skillButtons = new List<(Image, Text, int)>();
+        readonly List<Image> skillIcons = new List<Image>(); readonly List<string> shownIcon = new List<string>();
+        GameObject treePanel; Text treePoints; int pickSlot = -1;
+        readonly List<(SkillDef d, int i, Text title, Text rank, Image row, Button learn)> treeRows = new List<(SkillDef, int, Text, Text, Image, Button)>();
         RectTransform arrow; Camera mapCam; RenderTexture mapRT; GameObject deathPanel;
         float notifyUntil;
         readonly List<(RectTransform rt, Text t, Vector3 world, float born)> popups = new List<(RectTransform, Text, Vector3, float)>();
@@ -71,17 +75,20 @@ namespace Korvalune.Game
 
             // ---- attaque et compétences (bas droite)
             var atk = RoundButton(root, "Attaque", "attack", new Vector2(1, 0), new Vector2(-70, 60), 230, () => player?.Attack(), out _, out _);
-            var pos = new[] { new Vector2(-330, 70), new Vector2(-310, 230), new Vector2(-200, 345), new Vector2(-45, 345) };
-            string[] ic = { "whirlwind", "leap", "warcry", "stomp" };
-            for (int i = 0; i < 4; i++)
+            var pos = new[] { new Vector2(-330, 70), new Vector2(-310, 230), new Vector2(-200, 345), new Vector2(-45, 345), new Vector2(-490, 60) };
+            int nb = runner ? runner.loadout.Length : 4;
+            for (int i = 0; i < nb; i++)
             {
                 int k = i;
-                RoundButton(root, "Compétence" + i, ic[i], new Vector2(1, 0), pos[i], 140, () => player?.UseSkill(k), out var cd, out var t);
+                var bg = RoundButton(root, "Compétence" + i, runner ? IconOf(runner.book[runner.loadout[i]]) : "stomp", new Vector2(1, 0), pos[i], 140,
+                    () => { if (runner) runner.Use(k); else player?.UseSkill(k); }, out var cd, out var t);
+                skillIcons.Add(bg.transform.Find("Icône").GetComponent<Image>()); shownIcon.Add("");
                 skillButtons.Add((cd, t, i));
             }
             // menus (inventaire, compétences) — coins du haut
             RoundButton(root, "Inventaire", "bag", new Vector2(0.5f, 1), new Vector2(-60, -24), 96, () => Notify("Inventaire : bientôt disponible"), out _, out _);
-            RoundButton(root, "Arbre", "book", new Vector2(0.5f, 1), new Vector2(60, -24), 96, () => Notify("Arbre de compétences : bientôt disponible"), out _, out _);
+            RoundButton(root, "Arbre", "book", new Vector2(0.5f, 1), new Vector2(60, -24), 96, ToggleTree, out _, out _);
+            if (runner) BuildTree(root);
 
             notifyText = Label(root, "Notification", "", 38, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0, -170), new Vector2(1200, 60));
             notifyText.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
@@ -130,7 +137,8 @@ namespace Korvalune.Game
             hpFill.fillAmount = h.hp / h.maxHp; hpText.text = $"{Mathf.CeilToInt(h.hp)} / {Mathf.CeilToInt(h.maxHp)}";
             manaFill.fillAmount = h.maxMana > 0 ? h.mana / h.maxMana : 0;
             xpFill.fillAmount = player.xp / player.xpNext; levelText.text = "Nv " + player.level;
-            foreach (var (cd, t, i) in skillButtons)
+            if (runner) RefreshSkills(h);
+            else foreach (var (cd, t, i) in skillButtons)
             {
                 var s = player.skills[i];
                 float rem = s.Remaining;
@@ -144,7 +152,118 @@ namespace Korvalune.Game
             if (arrow) arrow.localRotation = Quaternion.Euler(0, 0, -player.transform.eulerAngles.y);
             if (notifyText && Time.time > notifyUntil) notifyText.color = Color.Lerp(notifyText.color, new Color(1, 1, 1, 0), 4 * Time.deltaTime);
             deathPanel.SetActive(h.Dead);
-            UpdatePopups(); UpdateBars();
+            UpdatePopups(); UpdateBars(); UpdateLootLabels();
+        }
+
+        // ------------------------------------------------------------------------------------------ compétences
+        public static string IconOf(SkillDef d)
+        {
+            switch (d.kind)
+            {
+                case SkillKind.Whirl: case SkillKind.Cleave: return "whirlwind";
+                case SkillKind.Leap: case SkillKind.Dash: case SkillKind.Teleport: case SkillKind.Evade: return "leap";
+                case SkillKind.Buff: case SkillKind.Shield: case SkillKind.Heal: case SkillKind.Summon: case SkillKind.Curse: return "warcry";
+                case SkillKind.Nova: case SkillKind.GroundAoE: case SkillKind.Zone: case SkillKind.Rain: case SkillKind.Totem: case SkillKind.Trap: return "stomp";
+                default: return "attack";
+            }
+        }
+
+        void RefreshSkills(Health h)
+        {
+            for (int k = 0; k < skillButtons.Count; k++)
+            {
+                var (cd, t, i) = skillButtons[k];
+                int si = runner.loadout[i]; var d = runner.book[si];
+                string key = d.id + runner.ranks[si];
+                if (shownIcon[k] != key)
+                {
+                    shownIcon[k] = key;
+                    var col = Vfx.Of(d.element).outer; col.a = 1;
+                    skillIcons[k].sprite = UIStyle.Icon(IconOf(d), Color.Lerp(UIStyle.Gold, col, 0.65f));
+                    skillIcons[k].color = runner.ranks[si] > 0 ? Color.white : new Color(0.35f, 0.35f, 0.35f, 1);
+                }
+                float rem = runner.Remaining(si), full = d.cooldown;
+                cd.fillAmount = rem > 0 ? Mathf.Clamp01(rem / full) : 0;
+                t.text = rem > 0 ? Mathf.CeilToInt(rem).ToString() : "";
+                bool noMana = h.mana < d.mana && rem <= 0;
+                cd.color = noMana ? new Color(0.1f, 0.15f, 0.5f, 0.55f) : new Color(0, 0, 0, 0.6f);
+                if (noMana || runner.ranks[si] <= 0) cd.fillAmount = 1;
+            }
+            if (treePanel && treePanel.activeSelf) RefreshTree();
+        }
+
+        void ToggleTree()
+        {
+            if (!treePanel) { Notify("Arbre de compétences indisponible"); return; }
+            treePanel.SetActive(!treePanel.activeSelf); pickSlot = -1; if (treePanel.activeSelf) RefreshTree();
+        }
+
+        /// <summary>Panneau des compétences : les 32 compétences de la classe (niveau requis, rang 0 à 5), apprendre avec les
+        /// points gagnés à chaque niveau, et placer une compétence sur l'un des 5 emplacements de la barre.</summary>
+        void BuildTree(RectTransform root)
+        {
+            var panel = Panel(root, "Compétences", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1180, 860)); treePanel = panel.gameObject;
+            Label(panel, "Titre", "Compétences — " + runner.classId, 40, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(40, -24), new Vector2(800, 56)).color = UIStyle.Gold;
+            treePoints = Label(panel, "Points", "", 30, TextAnchor.MiddleRight, new Vector2(1, 1), new Vector2(-130, -28), new Vector2(420, 50));
+            RoundButton(panel, "Fermer", "attack", new Vector2(1, 1), new Vector2(-24, -20), 80, ToggleTree, out _, out _);
+            Label(panel, "Aide", "Touchez un emplacement (1 à 5) puis une compétence pour l'équiper. « + » dépense un point.", 22, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(40, -78), new Vector2(1100, 30));
+            // défilement
+            var view = Img(panel, "Vue", UIStyle.Bar(), new Vector2(0.5f, 0), new Vector2(0, 30), new Vector2(1120, 720)); view.color = new Color(0, 0, 0, 0.25f); view.raycastTarget = true;
+            view.gameObject.AddComponent<RectMask2D>();
+            var content = new GameObject("Contenu", typeof(RectTransform)).GetComponent<RectTransform>();
+            content.SetParent(view.rectTransform, false); content.anchorMin = new Vector2(0, 1); content.anchorMax = new Vector2(1, 1); content.pivot = new Vector2(0.5f, 1);
+            var order = new List<int>(); for (int i = 0; i < runner.book.Count; i++) order.Add(i);
+            order.Sort((a, b) => runner.book[a].unlockLevel.CompareTo(runner.book[b].unlockLevel));
+            float rowH = 92; content.sizeDelta = new Vector2(0, rowH * order.Count + 10); content.anchoredPosition = Vector2.zero;
+            for (int r = 0; r < order.Count; r++)
+            {
+                int i = order[r]; var d = runner.book[i];
+                var row = Img(content, d.name, UIStyle.Bar(), new Vector2(0.5f, 1), new Vector2(0, -6 - r * rowH), new Vector2(1090, rowH - 8)); row.type = Image.Type.Sliced; row.raycastTarget = true;
+                var col = Vfx.Of(d.element).outer; col.a = 1;
+                Img(row.rectTransform, "Icône", UIStyle.Icon(IconOf(d), Color.Lerp(UIStyle.Gold, col, 0.65f)), new Vector2(0, 0.5f), new Vector2(14, 0), new Vector2(70, 70));
+                var title = Label(row.rectTransform, "Nom", "", 28, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(100, -6), new Vector2(760, 36));
+                Label(row.rectTransform, "Description", d.description, 20, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(100, -44), new Vector2(760, 40)).color = new Color(0.85f, 0.8f, 0.7f);
+                var rank = Label(row.rectTransform, "Rang", "", 28, TextAnchor.MiddleCenter, new Vector2(1, 0.5f), new Vector2(-110, 0), new Vector2(110, 60));
+                var lb = Img(row.rectTransform, "Apprendre", UIStyle.Button(), new Vector2(1, 0.5f), new Vector2(-14, 0), new Vector2(76, 76)); lb.raycastTarget = true;
+                Label(lb.rectTransform, "+", "+", 44, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(76, 76)).color = UIStyle.Gold;
+                var learn = lb.gameObject.AddComponent<Button>(); learn.targetGraphic = lb;
+                learn.onClick.AddListener(() => { if (runner.Learn(i)) Notify($"{d.name} : rang {runner.ranks[i]}"); else if (!runner.Unlocked(i)) Notify($"Niveau {d.unlockLevel} requis"); else if (runner.ranks[i] >= d.MaxRank) Notify("Rang maximum"); else Notify("Aucun point de compétence"); RefreshTree(); });
+                var pick = row.gameObject.AddComponent<Button>(); pick.targetGraphic = row;
+                pick.onClick.AddListener(() =>
+                {
+                    if (pickSlot < 0) { Notify("Choisissez d'abord un emplacement (1 à 5)"); return; }
+                    if (runner.ranks[i] <= 0) { Notify("Apprenez d'abord cette compétence"); return; }
+                    runner.Equip(pickSlot, i); Notify($"{d.name} → emplacement {pickSlot + 1}"); pickSlot = -1; RefreshTree();
+                });
+                treeRows.Add((d, i, title, rank, row, learn));
+            }
+            var scroll = view.gameObject.AddComponent<ScrollRect>(); scroll.content = content; scroll.viewport = view.rectTransform; scroll.horizontal = false; scroll.movementType = ScrollRect.MovementType.Clamped; scroll.scrollSensitivity = 40;
+            // emplacements de la barre
+            for (int k = 0; k < runner.loadout.Length; k++)
+            {
+                int slot = k;
+                var sb = Img(panel, "Emplacement" + k, UIStyle.Button(), new Vector2(0, 1), new Vector2(560 + k * 104, -14), new Vector2(64, 64)); sb.raycastTarget = true;
+                Label(sb.rectTransform, "N", (k + 1).ToString(), 30, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(64, 64)).color = UIStyle.Gold;
+                var b = sb.gameObject.AddComponent<Button>(); b.targetGraphic = sb;
+                b.onClick.AddListener(() => { pickSlot = slot; Notify($"Emplacement {slot + 1} : touchez une compétence apprise"); });
+            }
+            treePanel.SetActive(false);
+        }
+
+        void RefreshTree()
+        {
+            if (!runner) return;
+            treePoints.text = $"Niveau {player.level} — points : <color=#FFD27A>{player.skillPoints}</color>";
+            foreach (var (d, i, title, rank, row, learn) in treeRows)
+            {
+                bool open = runner.Unlocked(i); int r = runner.ranks[i];
+                int slot = System.Array.IndexOf(runner.loadout, i);
+                var col = Vfx.Of(d.element).outer;
+                title.text = $"<color=#{ColorUtility.ToHtmlStringRGB(Color.Lerp(col, Color.white, 0.35f))}>{d.name}</color>  <size=20>Nv {d.unlockLevel} · {d.element} · {d.cooldown:0.#} s · {d.mana:0} mana</size>" + (slot >= 0 ? $"  <color=#FFD27A>[{slot + 1}]</color>" : "");
+                rank.text = open ? $"{r}/{d.MaxRank}" : "—";
+                row.color = !open ? new Color(0.25f, 0.22f, 0.2f, 0.9f) : (pickSlot >= 0 && r > 0 ? new Color(0.45f, 0.35f, 0.15f, 0.95f) : new Color(0.16f, 0.10f, 0.07f, 0.95f));
+                learn.interactable = open && r < d.MaxRank && player.skillPoints > 0;
+            }
         }
 
         public void Notify(string msg) { if (!notifyText) return; notifyText.text = msg; notifyText.color = UIStyle.Parch; notifyUntil = Time.time + 2.5f; }
@@ -195,6 +314,26 @@ namespace Korvalune.Game
             var dead = new List<Health>();
             foreach (var kv in bars) if (kv.Key == null) { if (kv.Value.root) Destroy(kv.Value.root.gameObject); dead.Add(kv.Key); }
             foreach (var d in dead) bars.Remove(d);
+        }
+
+        readonly Dictionary<LootDrop, Text> lootLabels = new Dictionary<LootDrop, Text>();
+        /// <summary>Noms des objets au sol, à la couleur de leur rareté (comme dans Diablo 4).</summary>
+        void UpdateLootLabels()
+        {
+            foreach (var d in LootDrop.All)
+            {
+                if (!d) continue;
+                if (!lootLabels.TryGetValue(d, out var t))
+                {
+                    t = Label(root, "NomObjet", d.item.name, 22, TextAnchor.MiddleCenter, Vector2.zero, Vector2.zero, new Vector2(360, 30));
+                    t.color = Loot.ColorOf(d.item.rarity); t.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.9f);
+                    lootLabels[d] = t;
+                }
+                Screen2Canvas(d.transform.position + Vector3.up * 0.9f, t.rectTransform);
+            }
+            var gone = new List<LootDrop>();
+            foreach (var kv in lootLabels) if (!kv.Key) { if (kv.Value) Destroy(kv.Value.gameObject); gone.Add(kv.Key); }
+            foreach (var g in gone) lootLabels.Remove(g);
         }
 
         void Screen2Canvas(Vector3 world, RectTransform rt)

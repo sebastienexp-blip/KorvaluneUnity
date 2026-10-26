@@ -12,10 +12,15 @@ namespace Korvalune.Game
         public float attackDamage = 18f, attackRange = 2.4f, attackCone = 140f, attackCooldown = 0.75f, critChance = 0.12f;
         public VirtualJoystick joystick;
         public Transform cam;
-        public int level = 1; public float xp, xpNext = 100;
+        public const int MaxLevel = 200;
+        public int level = 1; public float xp, xpNext = 100; public int skillPoints = 1;
+
+        /// <summary>Expérience nécessaire pour passer du niveau l au niveau l+1 (courbe longue jusqu'au niveau 200).</summary>
+        public static float XpForLevel(int l) => Mathf.Round(80f * Mathf.Pow(l, 1.6f) + 40f * l);
         public float damageMult = 1f, buffUntil;
         public Skill[] skills;
         public System.Action<string> Notify;
+        public System.Collections.Generic.List<ItemSave> inventory = new System.Collections.Generic.List<ItemSave>();
 
         public Health Health { get; private set; }
         public Animator Anim { get; private set; }
@@ -25,12 +30,20 @@ namespace Korvalune.Game
         public bool Busy => Time.time < lockUntil;
 
         void Awake() { Init(); }
+        void OnEnable() { LootDrop.Picked += OnPicked; }
+        void OnDisable() { LootDrop.Picked -= OnPicked; }
+        void OnPicked(ItemSave it)
+        {
+            inventory.Add(it);
+            Notify?.Invoke($"<color=#{ColorUtility.ToHtmlStringRGB(Loot.ColorOf(it.rarity))}>{it.name}</color> ({Loot.LabelOf(it.rarity)})");
+        }
 
         /// <summary>Références et compétences (appelé par Awake ; appelable hors jeu pour les captures).</summary>
         public void Init()
         {
             cc = GetComponent<CharacterController>(); Health = GetComponent<Health>(); Anim = GetComponentInChildren<Animator>();
             if (skills == null || skills.Length == 0) skills = Skill.Defaults();
+            xpNext = XpForLevel(level);
         }
 
         void Update()
@@ -54,7 +67,9 @@ namespace Korvalune.Game
             Speed = spd;
             Anim?.SetFloat(CharacterRig.SpeedId, spd, 0.1f, Time.deltaTime);
             if (Input.GetKeyDown(KeyCode.Space)) Attack();
-            for (int i = 0; i < skills.Length && i < 4; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) UseSkill(i);
+            var runner = GetComponent<SkillRunner>();
+            if (runner) { for (int i = 0; i < runner.loadout.Length; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) runner.Use(i); }
+            else for (int i = 0; i < skills.Length && i < 4; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) UseSkill(i);
         }
 
         /// <summary>Tourne vers l'ennemi le plus proche à portée (assistance de visée mobile).</summary>
@@ -106,14 +121,16 @@ namespace Korvalune.Game
         public void GainXp(float amount)
         {
             xp += amount;
-            while (xp >= xpNext)
+            if (level >= MaxLevel) { xp = 0; return; }
+            while (xp >= xpNext && level < MaxLevel)
             {
-                xp -= xpNext; level++; xpNext = Mathf.Round(xpNext * 1.35f);
+                xp -= xpNext; level++; xpNext = XpForLevel(level); skillPoints++;
                 Health.maxHp += 15; Health.maxMana += 8; attackDamage += 3; Health.Heal(Health.maxHp);
                 Health.mana = Health.maxMana;
                 FX.Burst(transform.position + Vector3.up, new Color(1f, 0.9f, 0.4f), 60, 4f, 0.25f, 1.0f, -0.3f);
-                Notify?.Invoke($"Niveau {level} !");
+                Notify?.Invoke(level >= MaxLevel ? "Niveau maximum (200) atteint !" : $"Niveau {level} !");
             }
+            if (level >= MaxLevel) xp = 0;
         }
     }
 }

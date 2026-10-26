@@ -4,6 +4,7 @@ from forge import humanoid as H
 from knight import armor, cape, anims, weapons, materials as KM
 from forge import fitloft as FL
 from heroes import modular as MOD
+from heroes import skill_anims as SA
 
 NAME = 'KaelDraven'
 RECIPES = {
@@ -31,5 +32,6 @@ def build(bank, female=False):
     MOD.assign(a, MOD.KNIGHT_RULES)
     MOD.covers(a, MOD.KNIGHT_COVERS)
     anims.build(sk, a)
+    sk_clips = SA.build(sk, a, anims._STYLE, None)
     gear = {'Longsword': weapons.sword(), 'HeaterShield': weapons.shield()}
-    return a, gear, anims.CLIPS
+    return a, gear, anims.CLIPS + sk_clips

@@ -47,6 +47,13 @@ namespace Korvalune
         {
             font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             if (!stage) stage = new GameObject("Scène").transform;
+            var d = Game.CharacterSelect.draft;
+            if (Game.CharacterSelect.returningFromCreator && d != null)
+            {
+                classIndex = d.classIndex; female = d.female;
+                var a = d.look; skinIndex = a.skin; eyeIndex = a.eyes; hairIndex = a.hair; hairVariant = a.hairVariant; browIndex = a.brows; lashIndex = a.lashes; hairTint = a.hairTint;
+                morphs.Clear(); foreach (var m in a.morphs) morphs[m.id] = m.v;
+            }
             BuildUI();
             Rebuild();
             ShowTab(tab);
@@ -68,7 +75,7 @@ namespace Korvalune
             if (!prefab) return;
             current = Instantiate(prefab, stage);
             current.transform.localPosition = Vector3.zero;
-            look = current.GetComponent<CharacterAppearance>() ?? current.AddComponent<CharacterAppearance>();
+            look = current.GetComponent<CharacterAppearance>(); if (!look) look = current.AddComponent<CharacterAppearance>();
             look.female = female;
             Reapply();
         }
@@ -117,6 +124,7 @@ namespace Korvalune
             logo.rectTransform.offsetMin = new Vector2(0, -80); logo.rectTransform.offsetMax = new Vector2(0, -16); logo.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
             foreach (var t in Tabs) { var tt = t; Button(tabs, t, () => ShowTab(tt), 44); }
             Button(tabs, "Aléatoire", Randomize, 44);
+            if (Game.CharacterSelect.returningFromCreator) Button(tabs, "Valider", ConfirmToSelection, 52);
 
             // liste des choix (droite)
             var right = Panel(root, "Choix", new Vector2(1, 0), new Vector2(1, 1), new Vector2(-560, 20), new Vector2(-20, -20), new Color(0.05f, 0.05f, 0.07f, 0.85f));
@@ -138,6 +146,16 @@ namespace Korvalune
             var bottom = Panel(root, "Rotation", new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-300, 20), new Vector2(300, 70), new Color(0.05f, 0.05f, 0.07f, 0.7f));
             var s = Slider(bottom, 0, 360, yaw, v => yaw = v); var r = s.GetComponent<RectTransform>();
             r.anchorMin = new Vector2(0, 0.5f); r.anchorMax = new Vector2(1, 0.5f); r.offsetMin = new Vector2(20, -10); r.offsetMax = new Vector2(-20, 10);
+        }
+
+        /// <summary>Retour à l'écran de sélection avec l'apparence choisie (création d'un héros).</summary>
+        public void ConfirmToSelection()
+        {
+            var d = Game.CharacterSelect.draft; if (d == null) return;
+            d.classIndex = classIndex; d.female = female;
+            d.look = new Game.AppearanceSave { skin = skinIndex, eyes = eyeIndex, hair = hairIndex, hairVariant = hairVariant, brows = browIndex, lashes = lashIndex, hairTint = hairTint };
+            foreach (var kv in morphs) d.look.morphs.Add(new Game.MorphSave { id = kv.Key, v = kv.Value });
+            if (Application.isPlaying) UnityEngine.SceneManagement.SceneManager.LoadScene("Korvalune_Selection");
         }
 
         public void ShowTab(string t)

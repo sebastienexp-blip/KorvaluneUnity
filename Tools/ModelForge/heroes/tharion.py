@@ -8,6 +8,7 @@ from knight import armor, cape, anims, materials as KM
 from knight.anims import Style, Pose, key, build_qclip, BONES
 from heroes.common import mh_human
 from heroes import modular as MOD
+from heroes import skill_anims as SA
 from forge import fitloft as FL
 from forge import mhbase as MB
 
@@ -125,4 +126,5 @@ def build(bank, female=False):
     MOD.assign(a, MOD.KNIGHT_RULES)
     MOD.covers(a, MOD.KNIGHT_COVERS)
     anims.build(sk, a, HammerStyle())
-    return a, {'SunHammer': hammer(), 'SunPavise': pavise()}, anims.CLIPS
+    sk_clips = SA.build(sk, a, anims._STYLE, None)
+    return a, {'SunHammer': hammer(), 'SunPavise': pavise()}, anims.CLIPS + sk_clips

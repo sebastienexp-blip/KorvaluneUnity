@@ -42,17 +42,26 @@ namespace Korvalune.EditorTools
                 foreach (var e in entries)
                 {
                     Progress("traitement " + e.modelPath);
-                    if (++n % 8 == 0) { AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect(); }
+                    // héros (blendshapes, 16 matériaux, 2K) : mémoire libérée après chacun, sinon tous les 8 modèles
+                    bool heavy = e.modelPath.Contains("/Heroes/");
+                    if (heavy || ++n % 8 == 0) { AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect(); }
                     try { ModelPipeline.Process(e); }
                     catch (Exception ex) { Check($"Traitement {e.m.model}", false, ex.ToString()); }
                 }
-                AssetDatabase.SaveAssets();
-                int v = 0; foreach (var e in entries.Where(x => x.m.kind != "part")) { Validate(e); if (++v % 4 == 0) { EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect(); } }
+                AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress($"traitement terminé — mémoire {UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / 1048576} Mo");
+                foreach (var e in entries.Where(x => x.m.kind != "part"))
+                {
+                    Progress("validation " + e.modelPath);
+                    Validate(e); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                }
+                Progress("validation des pièces");
                 ValidateParts(entries.Where(x => x.m.kind == "part").ToList());
-                BuildShowcase(entries);
-                Captures(entries);
-                CharacterCreatorCheck();
-                WorldCheck();
+                Progress("BuildShowcase"); BuildShowcase(entries);
+                Progress("Captures"); Captures(entries);
+                Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
+                Progress("WorldCheck"); WorldCheck();
+                Progress("SelectionCheck"); SelectionCheck();
             }
             catch (Exception ex) { Check("Exécution CI", false, ex.ToString()); }
             finally
@@ -246,6 +255,16 @@ namespace Korvalune.EditorTools
             catch (Exception ex) { Check("Captures du créateur", false, ex.Message); }
         }
 
+        static void SelectionCheck()
+        {
+            Line("\n## Sélection des personnages");
+            var sel = SelectionBuilder.Build();
+            Check("Scène de sélection", File.Exists(SelectionBuilder.ScenePath), SelectionBuilder.ScenePath);
+            Check("Classes proposées", sel.catalog && sel.catalog.classes.Count == 5, sel.catalog ? $"{sel.catalog.classes.Count} classes" : "catalogue absent");
+            Check("Ordre des scènes", EditorBuildSettings.scenes.Length > 0 && EditorBuildSettings.scenes[0].path == SelectionBuilder.ScenePath, string.Join(", ", EditorBuildSettings.scenes.Select(x => System.IO.Path.GetFileNameWithoutExtension(x.path))));
+            SelectionBuilder.Captures(sel, (w, ok, d) => Check(w, ok, d));
+        }
+
         static void WorldCheck()
         {
             Line("\n## Vallée de Korvalune (tranche jouable)");
@@ -320,7 +339,12 @@ namespace Korvalune.EditorTools
                 if (!p) continue;
                 var clips = ModelPipeline.Clips(e.modelPath);
                 var poses = new List<(string, AnimationClip, float)> { ("repos", null, 0) };
-                foreach (var c in clips) poses.Add((c.name, c, c.name == "Death" ? c.length : c.length * 0.4f));
+                bool female = e.m.model.EndsWith("_F.fbx");
+                foreach (var c in clips)
+                {
+                    if (c.name.StartsWith("Sk_") && female) continue;           // compétences : une version par classe suffit
+                    poses.Add((c.name, c, c.name == "Death" ? c.length : c.length * 0.4f));
+                }
                 foreach (var (label, clip, time) in poses)
                 {
                     EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);

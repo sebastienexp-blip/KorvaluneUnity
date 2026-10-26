@@ -242,6 +242,12 @@ namespace Korvalune.EditorTools
                 var back = s.AddTransition(loco); back.hasExitTime = true; back.exitTime = 0.88f; back.duration = 0.15f;
             }
             OneShot("Attack", "Attack", 0.08f, true);
+            // animations de compétences propres à chaque héros : lancées par le jeu (Animator.CrossFadeInFixedTime), retour automatique
+            foreach (var kv in clips.Where(k => k.Key.StartsWith("Sk_")).OrderBy(k => k.Key))
+            {
+                var s = sm.AddState(kv.Key); s.motion = kv.Value;
+                var back = s.AddTransition(loco); back.hasExitTime = true; back.exitTime = 0.92f; back.duration = 0.15f;
+            }
             OneShot("Hit", "Hit", 0.05f, true);
             OneShot("Dodge", "Dodge", 0.06f, false);
             if (C("Death"))

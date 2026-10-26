@@ -9,6 +9,7 @@ from knight.anims import Style, Pose, key, build_qclip, BONES, aim_wrist
 from knight import anims as AN
 from heroes.common import mh_human
 from heroes import modular as MOD
+from heroes import skill_anims as SA
 from forge import humanparts as HP
 from forge import mhbase as MB
 
@@ -352,7 +353,8 @@ def build(bank, female=False):
     MOD.assign(a, RULES)
     MOD.covers(a, COVERS)
     anims.build(sk, a, CrossbowStyle())
-    return a, {'AshCrossbow': crossbow()}, anims.CLIPS
+    sk_clips = SA.build(sk, a, anims._STYLE, None)
+    return a, {'AshCrossbow': crossbow()}, anims.CLIPS + sk_clips
 
 
 RULES = [(r'^(capuche|pelerine)', 'Capuche'), (r'^cape', 'Cape'), (r'^(carquois|fleche|empenne|arc_dos|corde_dos)', 'Carquois'),

@@ -35,9 +35,13 @@ namespace Korvalune.Game
 
         public void Stun(float seconds) { if (!Dead) StunnedUntil = Mathf.Max(StunnedUntil, Time.time + seconds); }
 
+        /// <summary>Modificateur des dégâts reçus (boucliers, réductions) : appliqué avant l'armure.</summary>
+        public System.Func<float, float> modifyIncoming;
+
         public void TakeDamage(float amount, Health source, bool crit = false)
         {
             if (Dead || amount <= 0) return;
+            if (modifyIncoming != null) amount = modifyIncoming(amount);
             amount = Mathf.Max(1f, amount - armor);
             hp = Mathf.Max(0, hp - amount);
             Damaged?.Invoke(amount, source);

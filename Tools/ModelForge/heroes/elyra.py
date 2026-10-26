@@ -4,7 +4,7 @@ bâton à couronne d'or et cristal violet luminescent. Corps de base féminin : 
 from forge.rig import Asset
 from forge import humanoid as H
 from knight import anims, materials as KM
-from heroes import modular as MOD, female_kit as FK
+from heroes import modular as MOD, female_kit as FK, skill_anims as SA
 
 NAME = 'ElyraNoctis'
 HEAD_VIEW = (0, 1.66, 0.05)
@@ -32,4 +32,5 @@ def build(bank, female=True):
     MOD.assign(a, [])
     MOD.covers(a, FK.COVERS)
     anims.build(sk, a, FK.StaffStyle())
-    return a, {'VoidStaff': FK.staff('VoidStaff', dict(wood='EL_Dark', gold='EL_Gold', crystal='EL_Crystal'), 'void')}, anims.CLIPS
+    sk_clips = SA.build(sk, a, anims._STYLE, 'elyra')
+    return a, {'VoidStaff': FK.staff('VoidStaff', dict(wood='EL_Dark', gold='EL_Gold', crystal='EL_Crystal'), 'void')}, anims.CLIPS + sk_clips
