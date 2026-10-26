@@ -173,9 +173,9 @@ def tharion(st, sk):
 def varek(st, sk):
     out = []; up = ((0, 0, 1), (0, 1, 0)); S = lambda: Seq(st, sk, aim_up=up)
     AIM = A(20, 75, -10, 95, (0, 0, -85)); SUP = A(25, 80, 40, 60, (0, 0, 20))
-    out.append(S().guard(0).k(0.25, (-20, 10, 0), (-35, 0, 0), R=A(-20, 60, -10, 95), L=A(-10, 70, 40, 60), aim=(0, 1.2, 1), legs='wide')
-               .k(0.45, (-22, 10, 0), (-38, 0, 0), R=A(-20, 60, -10, 95), L=A(-10, 70, 40, 60), aim=(0, 1.2, 1), legs='wide')
-               .k(0.52, (-26, 12, 0), (-40, 0, 0), R=A(-28, 55, -10, 100), L=A(-15, 66, 40, 62), aim=(0, 1.4, 0.8), legs='wide')
+    out.append(S().guard(0).k(0.25, (-20, 10, 0), (-35, 0, 0), R=A(0, 82, -10, 100), L=A(5, 86, 40, 65), aim=(0, 1.2, 1), legs='wide')
+               .k(0.45, (-22, 10, 0), (-38, 0, 0), R=A(0, 82, -10, 100), L=A(5, 86, 40, 65), aim=(0, 1.2, 1), legs='wide')
+               .k(0.52, (-26, 12, 0), (-40, 0, 0), R=A(-8, 80, -10, 105), L=A(-2, 84, 40, 66), aim=(0, 1.4, 0.8), legs='wide')
                .guard(0.95).clip('Sk_SkyShot'))
     out.append(S().guard(0).k(0.18, (12, 12, 0), R=AIM, L=SUP, aim=(0, 0, 1), legs='kneel', hry=12)
                .k(0.27, (12, 12, 0), R=AIM, L=SUP, aim=(0, 0, 1), legs='kneel', hry=12)
@@ -196,8 +196,8 @@ def varek(st, sk):
     out.append(S().guard(0).k(0.22, (-14, 35, 0), L=A(-40, -30, 30, 110, (30, 0, 0)), fist=(1, 1.0), legs='back', hry=25)
                .k(0.38, (24, -25, 0), L=A(30, 95, 30, 10), fist=(1, 0.1), legs='lunge', hry=-20)
                .guard(0.80).clip('Sk_Throw'))
-    out.append(S().guard(0).k(0.25, (50, 0, 0), L=A(70, 60, 30, 20, (30, 0, 0)), fist=(1, 0.2), legs='crouch')
-               .k(0.55, (52, 0, 0), L=A(72, 62, 30, 15, (30, 0, 0)), fist=(1, 0.0), legs='crouch')
+    out.append(S().guard(0).k(0.25, (26, 0, 0), L=A(75, 55, 30, 15, (30, 0, 0)), fist=(1, 0.2), legs='kneel')
+               .k(0.55, (28, 0, 0), L=A(78, 58, 30, 10, (30, 0, 0)), fist=(1, 0.0), legs='kneel')
                .guard(0.95).clip('Sk_Trap'))
     out.append(S().guard(0).k(0.14, (-10, 0, 0), legs='back')
                .k(0.30, (-25, 0, 0), legs='kickR', hz=0.08)
@@ -211,7 +211,7 @@ def varek(st, sk):
                .k(0.55, (-6, 0, 0), (-14, 0, 0), L=A(30, 56, 30, 142, (40, 0, 0)), fist=(1, 0.6), legs='stand')
                .k(0.75, (10, -10, 0), L=A(10, 85, 30, 5), fist=(1, 0.0), legs='lunge', hry=-8)
                .guard(1.1).clip('Sk_Whistle'))
-    out.append(S().guard(0).k(0.12, (35, 0, 0), legs='lunge').k(0.45, (36, 0, 0), legs='lungeR').guard(0.65).clip('Sk_Dash'))
+    out.append(S().guard(0).k(0.12, (20, 0, 0), legs='lunge').k(0.45, (22, 0, 0), legs='lungeR').guard(0.65).clip('Sk_Dash'))
     return out
 
 
