@@ -55,7 +55,26 @@ jobs:
       - name: Effacer l'ancien rapport
         run: rm -f ci-report.md ci-out/progress.log
 
-      - name: Unity — import, intégration et vérification
+      - name: Unity — intégration des modèles modifiés (éditeur 1)
+        id: process
+        uses: game-ci/unity-builder@v4
+        continue-on-error: true
+        timeout-minutes: 80
+        env:
+          UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneLinux64
+          buildMethod: Korvalune.EditorTools.CI.Run
+          allowDirtyBuild: true
+          customParameters: -ciPhaseProcess
+
+      - name: Préparer la vérification
+        if: always()
+        run: sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+
+      - name: Unity — vérification, scènes et captures (éditeur 2)
         id: unity
         uses: game-ci/unity-builder@v4
         continue-on-error: true

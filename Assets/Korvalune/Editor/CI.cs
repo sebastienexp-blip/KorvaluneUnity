@@ -51,6 +51,15 @@ namespace Korvalune.EditorTools
                 }
                 AssetDatabase.SaveAssets(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Line($"- {entries.Count - skipped} modèle(s) intégré(s), {skipped} déjà à jour (inchangés)");
+                // phase « intégration seule » : l'éditeur s'arrête ici ; la vérification repart dans un éditeur neuf
+                // (la mémoire native de l'import des héros n'est jamais rendue : 8 Go dépassés sinon)
+                if (Environment.GetCommandLineArgs().Contains("-ciPhaseProcess"))
+                {
+                    Progress("phase intégration terminée");
+                    File.WriteAllText("ci-out/phase-integration.md", Rep.ToString());
+                    Application.logMessageReceived -= OnLog;
+                    EditorApplication.Exit(failures == 0 ? 0 : 1); return;
+                }
                 Progress($"traitement terminé — mémoire {UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / 1048576} Mo");
                 foreach (var e in entries.Where(x => x.m.kind != "part"))
                 {
