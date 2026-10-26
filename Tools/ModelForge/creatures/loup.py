@@ -83,7 +83,7 @@ def body(sk):
     sw = lambda b: b[:-2] + '_R' if b.endswith('_L') else b
     s.mirror(sw)
     detail = lambda X: 0.0025 * SC.noise3(X, 0.03, seed=7, octaves=2)
-    m = s.mesh(res=0.006, detail=detail, smooth=10)
+    m = s.mesh(res=0.015, detail=detail, smooth=4)
     s.skin(m, sk, kw=0.025)
     SC.box_uv(m, 0.30)
     return m, s
@@ -151,9 +151,9 @@ def build(bank, female=False):
     nose = SC.Sculpt(k=0.004).ell('Head', q + (0, 0.004, 0.004), (0.024, 0.016, 0.014)).ell('Head', q + (0, -0.006, 0.004), (0.016, 0.010, 0.012)).mesh(res=0.002, smooth=3)
     rigid(nose, sk['Head']); a.add('truffe', nose, 'WF_Nose')
     # intérieur de la gueule : palais et langue rouge sombre
-    pal = SC.Sculpt(k=0.006).cone('Head', (0, 1.150, 0.79), (0, 1.145, 0.95), 0.034, 0.018, squash=(0.35, (0, 1, 0))).mesh(res=0.003, smooth=3)
+    pal = SC.Sculpt(k=0.006).cone('Head', (0, 1.150, 0.79), (0, 1.145, 0.95), 0.034, 0.018, squash=(0.35, (0, 1, 0))).mesh(res=0.005, smooth=3)
     rigid(pal, sk['Head']); a.add('palais', pal, 'WF_Gum')
-    tg = SC.Sculpt(k=0.006).cone('Jaw', (0, 1.100, 0.80), (0, 1.060, 0.93), 0.030, 0.020, squash=(0.40, (0, 1, 0.4))).mesh(res=0.003, smooth=3)
+    tg = SC.Sculpt(k=0.006).cone('Jaw', (0, 1.100, 0.80), (0, 1.060, 0.93), 0.030, 0.020, squash=(0.40, (0, 1, 0.4))).mesh(res=0.005, smooth=3)
     rigid(tg, sk['Jaw']); a.add('langue', tg, 'WF_Gum')
     teeth_u, teeth_l = [], []
     def tooth(base, d, h, w_):

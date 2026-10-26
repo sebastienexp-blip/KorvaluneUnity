@@ -121,7 +121,7 @@ def body(sk):
     s.cone('Palp2_L', (0.16, 0.62, 0.62), (0.20, 0.50, 0.74), 0.022, 0.016)
     s.mirror(lambda b: b[:-2] + '_R' if b.endswith('_L') else b)
     detail = lambda X: 0.002 * SC.noise3(X, 0.03, seed=91, octaves=2)
-    m = s.mesh(res=0.006, detail=detail, smooth=8)
+    m = s.mesh(res=0.014, detail=detail, smooth=4)
     s.skin(m, sk, kw=0.02)
     SC.box_uv(m, 0.35)
     return m
@@ -151,7 +151,7 @@ def legs(sk):
                 base = p + up * r_ * 0.9; tip = base + unit(up + unit(e_ - a_) * 0.8) * rng.uniform(0.03, 0.06)
                 h = Loft(spline([base, tip], 3), curve([(0, .0028), (1, .0004)], 3), curve([(0, .0028), (1, .0004)], 3), p=2, segs=4, cap1=1).mesh(0.05)
                 rigid(h, sk[b]); hairs.append(h)
-        m = s.mesh(res=0.0045, smooth=6); s.skin(m, sk, kw=0.008); SC.box_uv(m, 0.25)
+        m = s.mesh(res=0.015, smooth=3); s.skin(m, sk, kw=0.008); SC.box_uv(m, 0.25)
         ms.append(m)
     return ms, concat(hairs)
 
@@ -165,7 +165,7 @@ def face(sk, m):
     for (x, y, z, r) in ((0.050, 0.705, 0.52, 0.040), (0.018, 0.745, 0.50, 0.018), (0.098, 0.715, 0.46, 0.020), (0.070, 0.760, 0.46, 0.014)):
         for sx in (1, -1):
             q, n = on(np.array([x * sx, y, z]), r * 0.35)
-            eyes.append(SC.Sculpt(k=0.002).ell('Thorax', q, (r, r * 0.9, r * 0.8), fwd=n).mesh(res=max(0.0012, r / 10), smooth=2))
+            eyes.append(SC.Sculpt(k=0.002).ell('Thorax', q, (r, r * 0.9, r * 0.8), fwd=n).mesh(res=max(0.003, r / 5), smooth=2))
     e = concat(eyes); rigid(e, sk['Thorax'])
     fangs = []
     for sx in (1, -1):

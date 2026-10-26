@@ -87,7 +87,7 @@ def body(sk):
     s.cone('LeftToes', L('Toes') + (0, 0.0, -0.03), L('Toes') + (0, -0.005, 0.06), 0.050, 0.035)
     s.mirror(SW)
     detail = lambda X: 0.004 * SC.noise3(X, 0.05, seed=81, octaves=3) + 0.0015 * SC.noise3(X, 0.012, seed=82, octaves=2)
-    m = s.mesh(res=0.0065, detail=detail, smooth=8)
+    m = s.mesh(res=0.012, detail=detail, smooth=4)
     s.skin(m, sk, kw=0.03)
     SC.box_uv(m, 0.40)
     return m
