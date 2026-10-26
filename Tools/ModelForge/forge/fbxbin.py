@@ -14,6 +14,7 @@ ARRAY_TYPES = {'Vertices': 'd', 'PolygonVertexIndex': 'i', 'Normals': 'd', 'UV':
                'Weights': 'd', 'Transform': 'd', 'TransformLink': 'd', 'Matrix': 'd', 'KeyTime': 'l', 'KeyValueFloat': 'f',
                'KeyAttrFlags': 'i', 'KeyAttrDataFloat': 'f', 'KeyAttrRefCount': 'i', 'FullWeights': 'd', 'Edges': 'i'}
 DOUBLE_LEAVES = {'Default', 'DeformPercent', 'Link_DeformAcuracy'}
+LONG_LEAVES = {'LocalTime', 'ReferenceTime'}          # temps FBX (KTime) : entiers 64 bits
 LONG_FIRST = {'Model', 'Geometry', 'Material', 'Deformer', 'NodeAttribute', 'Pose', 'AnimationStack', 'AnimationLayer', 'AnimationCurveNode',
               'AnimationCurve', 'Document', 'Texture', 'Video', 'Node', 'RootNode'}
 P_INT = {'int', 'enum', 'bool', 'Integer', 'Bool', 'Visibility', 'Visibility Inheritance', 'ULongLong'}
@@ -46,6 +47,7 @@ def _scalar(tok, name, idx, ptype=None):
         if ptype in P_INT: return ('I', int(float(tok)))
         return ('D', float(tok))
     if name in DOUBLE_LEAVES: return ('D', float(tok))
+    if name in LONG_LEAVES: return ('L', int(tok))
     if idx == 0 and name in LONG_FIRST: return ('L', int(tok))
     if name == 'C' and idx > 0: return ('L', int(tok))
     if is_float: return ('D', float(tok))

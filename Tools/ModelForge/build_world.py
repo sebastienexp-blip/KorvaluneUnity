@@ -20,13 +20,15 @@ def export_static(a, bank, collider):
               expect=dict(heightMin=float(size[1]) * 0.95, heightMax=float(size[1]) * 1.05, maxTriangles=60000))
 
 
-def main(preview=False):
+def main(preview=False, only_trees=False):
     bank = TexBank(R.RECIPES, preview)
-    export_static(P.castle(), bank, dict(type='mesh'))
+    if not only_trees: export_static(P.castle(), bank, dict(type='mesh'))
     for k in range(3):
-        t = P.oak(k, H=8.0 + 1.5 * k); export_static(t, bank, dict(type='capsule', center=[0, 2.0, 0], height=4.0, radius=0.45))
-        t = P.pine(k, H=11.0 + 2.0 * k); export_static(t, bank, dict(type='capsule', center=[0, 2.0, 0], height=4.0, radius=0.35))
-        r = P.rock(k, size=1.5 + 1.2 * k); export_static(r, bank, dict(type='mesh'))
+        for lod in (0, 1):   # LOD0 détaillé, LOD1 allégé (assemblés en LODGroup dans Unity)
+            t = P.oak(k, H=8.0 + 1.5 * k, lod=lod); export_static(t, bank, dict(type='capsule', center=[0, 2.0, 0], height=4.0, radius=0.45))
+            t = P.pine(k, H=11.0 + 2.0 * k, lod=lod); export_static(t, bank, dict(type='capsule', center=[0, 2.0, 0], height=4.0, radius=0.35))
+        if not only_trees: r = P.rock(k, size=1.5 + 1.2 * k); export_static(r, bank, dict(type='mesh'))
+    if only_trees: return
     folder = os.path.join(EX.ART, 'World', 'Terrain')
     S = 512 if preview else 1024
     for name, fn in (('Herbe', WM.grass), ('SousBois', WM.forest_floor), ('Chemin', WM.dirt), ('Roche', WM.rock), ('Sable', WM.sand), ('Eau', WM.water)):
@@ -34,4 +36,4 @@ def main(preview=False):
 
 
 if __name__ == '__main__':
-    main('--preview' in sys.argv)
+    main('--preview' in sys.argv, '--trees' in sys.argv)

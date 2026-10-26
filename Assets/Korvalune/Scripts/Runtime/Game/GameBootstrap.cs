@@ -24,6 +24,7 @@ namespace Korvalune.Game
         {
             if (Started) return; Started = true;
             FX.additive = config ? config.fxAdditive : null; FX.alpha = config ? config.fxAlpha : null;
+            if (Application.isPlaying) GraphicsQuality.Apply(config, GraphicsQuality.Detect());
             Cam = Camera.main;
             if (!Cam) { Cam = new GameObject("Caméra").AddComponent<Camera>(); Cam.tag = "MainCamera"; }
             Cam.fieldOfView = 45; Cam.farClipPlane = 900;

@@ -159,10 +159,10 @@ def write_fbx(path, asset, creator='Korvalune ModelForge', binary=True):
         O.append(f'\tPose: {pid}, "Pose::BIND_POSES", "BindPose" {{\n\t\tType: "BindPose"\n\t\tVersion: 100\n\t\tNbPoseNodes: {len(nodes)}\n' + '\n'.join(nodes) + '\n\t}')
 
     # ------------------------------------------------------------------ animations
-    stop_all = 0
+    stop_all = 0; takes = []
     for cname, clip in asset.clips.items():
         st = ids(); ly = ids()
-        stop = int(round(clip.duration * KTIME)); stop_all = max(stop_all, stop)
+        stop = int(round(clip.duration * KTIME)); stop_all = max(stop_all, stop); takes.append((cname, stop))
         O.append(f'\tAnimationStack: {st}, "AnimStack::{cname}", "" {{\n\t\tProperties70:  {{\n\t\t\tP: "LocalStop", "KTime", "Time", "",{stop}\n'
                  f'\t\t\tP: "ReferenceStop", "KTime", "Time", "",{stop}\n\t\t}}\n\t}}')
         O.append(f'\tAnimationLayer: {ly}, "AnimLayer::BaseLayer", "" {{\n\t}}')
@@ -251,7 +251,8 @@ References:  {{
     defs = '\n'.join(f'\tObjectType: "{t}" {{\n\t\tCount: {c}\n\t}}' for t, c in counts.items())
     body = (head + f'Definitions:  {{\n\tVersion: 100\n\tCount: {sum(counts.values()) + 1}\n\tObjectType: "GlobalSettings" {{\n\t\tCount: 1\n\t}}\n{defs}\n}}\n'
             + 'Objects:  {\n' + '\n'.join(O) + '\n}\n' + 'Connections:  {\n' + '\n'.join(C) + '\n}\n'
-            + 'Takes:  {\n\tCurrent: ""\n}\n')
+            + 'Takes:  {\n\tCurrent: "' + (takes[0][0] if takes else '') + '"\n'
+            + ''.join(f'\tTake: "{n}" {{\n\t\tFileName: "{n}.tak"\n\t\tLocalTime: 0,{t}\n\t\tReferenceTime: 0,{t}\n\t}}\n' for n, t in takes) + '}\n')
     if binary:
         from .fbxbin import to_binary
         with open(path, 'wb') as f: f.write(to_binary(body))

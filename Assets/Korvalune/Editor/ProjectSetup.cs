@@ -37,11 +37,34 @@ namespace Korvalune.EditorTools
             SetPrivate(pipe, "m_AdditionalLightsPerObjectLimit", 4);
             EditorUtility.SetDirty(pipe);
 
+            EnsureMobile();
             GraphicsSettings.defaultRenderPipeline = pipe;
             int cur = QualitySettings.GetQualityLevel();
             for (int i = 0; i < QualitySettings.names.Length; i++) { QualitySettings.SetQualityLevel(i, false); QualitySettings.renderPipeline = pipe; }
             QualitySettings.SetQualityLevel(cur, false);
             AssetDatabase.SaveAssets();
+            return pipe;
+        }
+
+        /// <summary>Pipeline « Mobile » pour les appareils Android modestes : pas de SSAO ni HDR ni MSAA, rendu à 80 %,
+        /// une cascade d'ombres dures en 1024 sur 35 m. Choisi à l'exécution par GraphicsQuality.</summary>
+        public static UniversalRenderPipelineAsset EnsureMobile()
+        {
+            var rendererPath = RenderDir + "/Korvalune_Renderer_Mobile.asset";
+            var rd = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(rendererPath);
+            if (rd == null) { rd = ScriptableObject.CreateInstance<UniversalRendererData>(); AssetDatabase.CreateAsset(rd, rendererPath); }
+            if (rd.postProcessData == null)
+                rd.postProcessData = AssetDatabase.LoadAssetAtPath<PostProcessData>("Packages/com.unity.render-pipelines.universal/Runtime/Data/PostProcessData.asset");
+            EditorUtility.SetDirty(rd);
+            var path = RenderDir + "/Korvalune_URP_Mobile.asset";
+            var pipe = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(path);
+            if (pipe == null) { pipe = UniversalRenderPipelineAsset.Create(rd); AssetDatabase.CreateAsset(pipe, path); }
+            pipe.supportsHDR = false; pipe.msaaSampleCount = 1; pipe.renderScale = 0.8f;
+            pipe.shadowDistance = 35f; pipe.shadowCascadeCount = 1;
+            SetPrivate(pipe, "m_SoftShadowsSupported", false);
+            SetPrivate(pipe, "m_MainLightShadowmapResolution", 1024);
+            SetPrivate(pipe, "m_AdditionalLightsRenderingMode", 0);
+            EditorUtility.SetDirty(pipe);
             return pipe;
         }
 

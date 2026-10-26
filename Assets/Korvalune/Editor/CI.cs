@@ -47,7 +47,7 @@ namespace Korvalune.EditorTools
                     catch (Exception ex) { Check($"Traitement {e.m.model}", false, ex.ToString()); }
                 }
                 AssetDatabase.SaveAssets();
-                foreach (var e in entries.Where(x => x.m.kind != "part")) Validate(e);
+                int v = 0; foreach (var e in entries.Where(x => x.m.kind != "part")) { Validate(e); if (++v % 4 == 0) { EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect(); } }
                 ValidateParts(entries.Where(x => x.m.kind == "part").ToList());
                 BuildShowcase(entries);
                 Captures(entries);

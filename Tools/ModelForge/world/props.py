@@ -196,12 +196,13 @@ def _cards(centers, size, rng, up_bias=0.3):
     return concat(ms)
 
 
-def oak(seed=0, H=9.0):
+def oak(seed=0, H=9.0, lod=0):
+    """lod=1 : version allégée (moitié moins de cartes, plus grandes ; tronc à 6 côtés)."""
     rng = np.random.default_rng(seed)
-    a = Asset(f'Chene{seed}')
+    a = Asset(f'Chene{seed}' + ('_LOD1' if lod else ''))
     lean = rng.normal(0, 0.2, 2)
     trunk = [(0, 0, 0), (lean[0] * 0.3, H * 0.25, lean[1] * 0.3), (lean[0] * 0.6, H * 0.45, lean[1] * 0.6)]
-    a.add('tronc', Loft(spline(trunk, 16), curve([(0, .55), (.1, .38), (1, .26)], 16), curve([(0, .55), (.1, .38), (1, .26)], 16), p=2.2, segs=12).mesh(0.6), BARK)
+    a.add('tronc', Loft(spline(trunk, 16 if not lod else 6), curve([(0, .55), (.1, .38), (1, .26)], 16 if not lod else 6), curve([(0, .55), (.1, .38), (1, .26)], 16 if not lod else 6), p=2.2, segs=12 if not lod else 6).mesh(0.6), BARK)
     top = np.array(trunk[-1], float)
     centers = []
     for k in range(6):
@@ -211,28 +212,29 @@ def oak(seed=0, H=9.0):
         end = top + unit(d) * L
         mid = top + unit(d) * L * 0.5 + np.array([0, 0.4, 0])
         a.add('branche', Loft(spline([top, mid, end], 10), curve([(0, .20), (1, .05)], 10), curve([(0, .20), (1, .05)], 10), p=2.2, segs=8, cap1=1).mesh(0.6), BARK)
-        for j in range(16):
+        for j in range(16 if not lod else 7):
             centers.append(end + rng.normal(0, 1.0, 3) * np.array([1.0, 0.7, 1.0]))
     crown = top + np.array([0, H * 0.25, 0])
-    for j in range(40):
+    for j in range(40 if not lod else 16):
         centers.append(crown + rng.normal(0, 1, 3) * np.array([2.3, 1.4, 2.3]))
-    a.add('feuillage', _cards(centers, 2.0, rng), LEAF)
+    a.add('feuillage', _cards(centers, 2.0 if not lod else 2.9, rng), LEAF)
     return a
 
 
-def pine(seed=0, H=13.0):
+def pine(seed=0, H=13.0, lod=0):
     rng = np.random.default_rng(seed)
-    a = Asset(f'Pin{seed}')
+    a = Asset(f'Pin{seed}' + ('_LOD1' if lod else ''))
     a.add('tronc', Loft(spline([(0, 0, 0), (0, H * 0.5, 0), (0, H, 0)], 16), curve([(0, .40), (.08, .28), (1, .04)], 16), curve([(0, .40), (.08, .28), (1, .04)], 16), p=2.2, segs=10, cap1=1).mesh(0.6), BARK)
     ms = []
-    for k, y in enumerate(np.linspace(H * 0.22, H * 0.97, 15)):
+    for k, y in enumerate(np.linspace(H * 0.22, H * 0.97, 15 if not lod else 7)):
         f = 1 - (y - H * 0.22) / (H * 0.80)
         L = 0.4 + 3.0 * f
-        for j in range(6):
-            ang = j * 2 * np.pi / 6 + k * 0.5 + rng.uniform(-0.2, 0.2)
+        nb = 6 if not lod else 4
+        for j in range(nb):
+            ang = j * 2 * np.pi / nb + k * 0.5 + rng.uniform(-0.2, 0.2)
             d = np.array([np.cos(ang), -0.25 - 0.1 * f, np.sin(ang)])
             p0 = np.array([0, y, 0]); p1 = p0 + unit(d) * L
-            side = unit(np.cross(d, (0, 1, 0))) * (0.6 + 0.6 * f)
+            side = unit(np.cross(d, (0, 1, 0))) * (0.6 + 0.6 * f) * (1.0 if not lod else 1.4)
             up = np.array([0, 0.35 + 0.2 * f, 0])
             P = np.array([p0 - side * 0.3, p1 - side, p1 + side, p0 + side * 0.3])
             col = rng.integers(0, 2)

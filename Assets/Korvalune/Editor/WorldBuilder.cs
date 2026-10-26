@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace Korvalune.EditorTools
 {
@@ -179,6 +180,10 @@ namespace Korvalune.EditorTools
             var cam = new GameObject("Main Camera").AddComponent<Camera>(); cam.tag = "MainCamera"; cam.gameObject.AddComponent<AudioListener>();
             cam.clearFlags = CameraClearFlags.Skybox; cam.farClipPlane = 900; cam.nearClipPlane = 0.3f;
             cam.gameObject.AddComponent<CameraRig>();
+            var camData = cam.GetComponent<UniversalAdditionalCameraData>(); if (!camData) camData = cam.gameObject.AddComponent<UniversalAdditionalCameraData>();
+            camData.renderPostProcessing = true; camData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
+            PostProcess();
+            Ambience(cam.transform);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = Config();
             game.playerSpawn = Ground(new Vector2(-3, -125));
@@ -282,12 +287,22 @@ namespace Korvalune.EditorTools
             {
                 var p = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Prefabs/World/{n}.prefab");
                 if (!p) continue;
-                // le terrain exige un MeshRenderer à la racine : prefab dédié qui reprend le maillage et les matériaux
-                var mf = p.GetComponentInChildren<MeshFilter>(); var mr = p.GetComponentInChildren<MeshRenderer>();
-                if (!mf || !mr) continue;
+                // arbre du terrain : LODGroup à la racine — LOD0 détaillé, LOD1 allégé, disparition au loin
+                var p1 = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Prefabs/World/{n}_LOD1.prefab");
                 var go = new GameObject(n);
-                go.AddComponent<MeshFilter>().sharedMesh = mf.sharedMesh;
-                go.AddComponent<MeshRenderer>().sharedMaterials = mr.sharedMaterials;
+                Renderer Lod(GameObject src, string nm)
+                {
+                    if (!src) return null;
+                    var mf = src.GetComponentInChildren<MeshFilter>(); var mr = src.GetComponentInChildren<MeshRenderer>();
+                    if (!mf || !mr) return null;
+                    var c = new GameObject(nm); c.transform.SetParent(go.transform, false);
+                    c.AddComponent<MeshFilter>().sharedMesh = mf.sharedMesh; var r = c.AddComponent<MeshRenderer>(); r.sharedMaterials = mr.sharedMaterials; return r;
+                }
+                var r0 = Lod(p, n + "_LOD0"); var r1 = Lod(p1, n + "_LOD1");
+                if (!r0) { Object.DestroyImmediate(go); continue; }
+                var lg = go.AddComponent<LODGroup>();
+                lg.SetLODs(r1 ? new[] { new LOD(0.22f, new[] { r0 }), new LOD(0.035f, new[] { r1 }) } : new[] { new LOD(0.035f, new[] { r0 }) });
+                lg.RecalculateBounds();
                 var cap = go.AddComponent<CapsuleCollider>(); cap.center = new Vector3(0, 2, 0); cap.height = 4; cap.radius = 0.45f;
                 var tp = $"{Root}/Prefabs/World/Arbres/{n}_Arbre.prefab";
                 var pf = PrefabUtility.SaveAsPrefabAsset(go, tp); Object.DestroyImmediate(go);
@@ -390,9 +405,43 @@ namespace Korvalune.EditorTools
             E("araignee", "Araignée géante", "AraigneeGeante", 220, 18, 4.5f, 2.6f, 1.8f, 14, 90, armor: 2);
             E("chevalier", "Chevalier maudit", "ChevalierMaudit", 260, 20, 3.2f, 2.1f, 1.6f, 14, 110, armor: 5);
             E("demon", "Démon brute", "DemonBrute", 650, 34, 3.4f, 3.2f, 2.4f, 18, 300, armor: 6, hitDelay: 0.6f);
+            cfg.highPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP.asset");
+            cfg.mobilePipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Mobile.asset");
             cfg.fxAdditive = FxMaterial("FX_Additif", true); cfg.fxAlpha = FxMaterial("FX_Poussiere", false);
             EditorUtility.SetDirty(cfg);
             return cfg;
+        }
+
+        /// <summary>Post-traitement global : bloom doux, tonemapping ACES, étalonnage chaud, vignette, lift/gamma/gain légers.</summary>
+        static void PostProcess()
+        {
+            var path = DataDir + "/Vallee_PostProcess.asset";
+            AssetDatabase.DeleteAsset(path);
+            var prof = ScriptableObject.CreateInstance<VolumeProfile>(); AssetDatabase.CreateAsset(prof, path);
+            var bloom = prof.Add<Bloom>(true); bloom.intensity.Override(0.55f); bloom.threshold.Override(1.05f); bloom.scatter.Override(0.65f);
+            var tm = prof.Add<Tonemapping>(true); tm.mode.Override(TonemappingMode.ACES);
+            var ca = prof.Add<ColorAdjustments>(true); ca.postExposure.Override(0.15f); ca.contrast.Override(12f); ca.saturation.Override(8f); ca.colorFilter.Override(new Color(1f, 0.97f, 0.92f));
+            var vg = prof.Add<Vignette>(true); vg.intensity.Override(0.28f); vg.smoothness.Override(0.45f);
+            var smh = prof.Add<ShadowsMidtonesHighlights>(true); smh.shadows.Override(new Vector4(0.95f, 0.97f, 1.05f, 0f)); smh.highlights.Override(new Vector4(1.04f, 1.0f, 0.95f, 0f));
+            foreach (var c in prof.components) AssetDatabase.AddObjectToAsset(c, prof);
+            EditorUtility.SetDirty(prof);
+            var vol = new GameObject("Post-traitement").AddComponent<Volume>(); vol.isGlobal = true; vol.sharedProfile = prof; vol.priority = 1;
+        }
+
+        /// <summary>Particules d'ambiance autour de la caméra : pollen et poussières dorées en suspension dans la lumière.</summary>
+        static void Ambience(Transform cam)
+        {
+            var go = new GameObject("Ambiance"); go.transform.SetParent(cam, false); go.transform.localPosition = new Vector3(0, 0, 12);
+            var ps = go.AddComponent<ParticleSystem>();
+            var m = ps.main; m.loop = true; m.startLifetime = 9f; m.startSpeed = 0.15f; m.startSize = new ParticleSystem.MinMaxCurve(0.03f, 0.09f); m.maxParticles = 400;
+            m.startColor = new Color(1f, 0.92f, 0.7f, 0.55f); m.simulationSpace = ParticleSystemSimulationSpace.World;
+            var em = ps.emission; em.rateOverTime = 18;
+            var sh = ps.shape; sh.shapeType = ParticleSystemShapeType.Box; sh.scale = new Vector3(30, 12, 26);
+            var no = ps.noise; no.enabled = true; no.strength = 0.25f; no.frequency = 0.2f;
+            var col = ps.colorOverLifetime; col.enabled = true;
+            var g = new Gradient(); g.SetKeys(new[] { new GradientColorKey(Color.white, 0), new GradientColorKey(Color.white, 1) }, new[] { new GradientAlphaKey(0, 0), new GradientAlphaKey(1, 0.3f), new GradientAlphaKey(0, 1) });
+            col.color = g;
+            go.GetComponent<ParticleSystemRenderer>().sharedMaterial = FxMaterial("FX_Additif", true);
         }
 
         static Material FxMaterial(string name, bool additive)
