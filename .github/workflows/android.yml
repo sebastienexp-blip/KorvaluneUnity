@@ -1,0 +1,145 @@
+# APK Android : construit après une intégration Unity réussie (ou à la demande), puis TESTÉ dans un émulateur Android
+# (installation, lancement, captures d'écran, recherche de plantage). L'APK est publié dans la release « apk-derniere ».
+name: Android — APK testé
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Unity — intégration des modèles"]
+    types: [completed]
+
+concurrency:
+  group: android-apk
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Libérer de l'espace disque
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: Library
+          key: Library-Android-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: |
+            Library-Android-
+            Library-Forge-
+
+      - name: Charger la licence Unity
+        env:
+          SECRET_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          if [ -n "$SECRET_LICENSE" ]; then LIC="$SECRET_LICENSE";
+          elif [ -f .licence/Unity_lic.ulf ]; then LIC="$(cat .licence/Unity_lic.ulf)";
+          else echo "::error::Aucune licence Unity trouvée"; exit 1; fi
+          { echo "UNITY_LICENSE<<ULF_EOF"; echo "$LIC"; echo "ULF_EOF"; } >> "$GITHUB_ENV"
+
+      - name: Unity — construction de l'APK
+        id: unity
+        uses: game-ci/unity-builder@v4
+        continue-on-error: true
+        timeout-minutes: 200
+        env:
+          UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: Android
+          buildMethod: Korvalune.EditorTools.AndroidBuild.Build
+          allowDirtyBuild: true
+
+      - name: Rapport de construction
+        if: always()
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" . || true
+          mkdir -p ci-out/android
+          if [ ! -f ci-out/android/build.md ]; then
+            { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';
+              grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;
+              echo '```'; } > ci-out/android/build.md || true
+          fi
+          ls -la build/Android 2>/dev/null || true
+          cat ci-out/android/build.md
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: apk
+          path: |
+            build/Android/Korvalune.apk
+            ci-out/android/build.md
+          if-no-files-found: warn
+
+      - name: Sauver le cache Library
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: Library
+          key: Library-Android-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.run_id }}
+
+      - name: Résultat
+        run: test -f build/Android/Korvalune.apk
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk
+          path: dl
+      - name: Activer KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Test dans l'émulateur Android
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          arch: x86_64
+          target: google_apis
+          profile: pixel_6
+          ram-size: 4096M
+          disk-size: 6G
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          disable-animations: true
+          script: bash .github/scripts/test-apk.sh dl/build/Android/Korvalune.apk
+      - name: Publier les résultats
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat ci-out/android/test.md 2>/dev/null || true
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          cp dl/ci-out/android/build.md ci-out/android/build.md 2>/dev/null || true
+          git add -A ci-out/android
+          git commit -m "Android : APK construit et testé dans l'émulateur [skip ci]" || true
+          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+          if grep -q "RÉSULTAT : OK" ci-out/android/test.md 2>/dev/null; then
+            V=$(grep -oE "version [0-9.]+" ci-out/android/build.md | head -1 | cut -d' ' -f2)
+            gh release delete apk-derniere -y --cleanup-tag 2>/dev/null || true
+            gh release create apk-derniere dl/build/Android/Korvalune.apk ci-out/android/*.png \
+              --title "Korvalune ${V} — APK testé" --notes-file ci-out/android/test.md --latest
+          fi
