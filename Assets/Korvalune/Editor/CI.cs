@@ -371,12 +371,18 @@ namespace Korvalune.EditorTools
             Directory.CreateDirectory("ci-out");
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             SetupStage(out var cam);
-            var rt = new RenderTexture(512, 640, 24, RenderTextureFormat.ARGB32) { antiAliasing = 4 };
+            // rendu logiciel (pas de GPU) : sans ombres ni anticrénelage, sinon certaines images prennent 10 minutes
+            foreach (var l in UnityEngine.Object.FindObjectsByType<Light>(FindObjectsSortMode.None)) l.shadows = LightShadows.None;
+            var rt = new RenderTexture(512, 640, 24, RenderTextureFormat.ARGB32) { antiAliasing = 1 };
             var tex = new Texture2D(512, 640, TextureFormat.RGB24, false);
             rt.hideFlags = HideFlags.DontUnloadUnusedAsset; tex.hideFlags = HideFlags.DontUnloadUnusedAsset;   // sinon détruits par UnloadUnusedAssets
             int shots = 0; var t0 = DateTime.UtcNow;
-            foreach (var e in entries.Where(x => !string.IsNullOrEmpty(x.m.prefab) && x.m.kind != "part"))
+            // héros et ennemis d'abord (les plus utiles), décor ensuite ; budget de temps global
+            var order = entries.Where(x => !string.IsNullOrEmpty(x.m.prefab) && x.m.kind != "part")
+                .OrderBy(x => x.modelPath.Contains("/Heroes/") ? 0 : x.modelPath.Contains("/Enemies/") ? 1 : 2).ToList();
+            foreach (var e in order)
             {
+                if ((DateTime.UtcNow - t0).TotalMinutes > 30) { Line("_Captures arrêtées : budget de 30 min atteint._"); break; }
                 var p = AssetDatabase.LoadAssetAtPath<GameObject>(e.m.prefab);
                 if (!p) continue;
                 var name = Path.GetFileNameWithoutExtension(e.m.model);
@@ -385,7 +391,7 @@ namespace Korvalune.EditorTools
                 var poses = new List<(string, AnimationClip, float)> { ("repos", null, 0) };
                 foreach (var c in clips)
                 {
-                    bool want = (hero && male && c.name.StartsWith("Sk_")) || (hero && male && c.name == "Attack") || (enemy && (c.name == "Attack" || c.name == "Walk"));
+                    bool want = (hero && male && SkillShot(name, c.name)) || (enemy && c.name == "Attack");
                     if (!want) continue;
                     float at = SkillImpact(c.name, c.length);
                     poses.Add((c.name, c, at));
@@ -412,6 +418,15 @@ namespace Korvalune.EditorTools
             }
             UnityEngine.Object.DestroyImmediate(tex); rt.Release();
             Line($"\n_{shots} captures écrites dans ci-out/ ({SystemInfo.graphicsDeviceType}) en {(DateTime.UtcNow - t0).TotalMinutes:0.0} min._");
+        }
+
+        /// <summary>Deux animations de compétences emblématiques par héros (captures).</summary>
+        static bool SkillShot(string model, string clip)
+        {
+            string[] k = model.StartsWith("KaelDraven") ? new[] { "Sk_LeapSlam", "Sk_Spin" } : model.StartsWith("Tharion") ? new[] { "Sk_GroundPound", "Sk_Prayer" }
+                : model.StartsWith("Varek") ? new[] { "Sk_KneelShot", "Sk_BackFlip" } : model.StartsWith("ElyraNoctis") ? new[] { "Sk_SkyCall", "Sk_Channel" }
+                : new[] { "Sk_RaiseDead", "Sk_Curse" };
+            return k.Contains(clip);
         }
 
         static float SkillImpact(string clip, float length)

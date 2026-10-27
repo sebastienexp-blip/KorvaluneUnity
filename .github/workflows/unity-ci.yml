@@ -76,6 +76,8 @@ jobs:
           sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
           # licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue
           sudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true
+          # éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet
+          docker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true
 
       - name: Unity — vérification des modèles et captures (éditeur 2)
         id: validate
@@ -98,6 +100,8 @@ jobs:
           sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
           # licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue
           sudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true
+          # éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet
+          docker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true
 
       - name: Unity — créateur, vallée et sélection (éditeur 3)
         id: unity
