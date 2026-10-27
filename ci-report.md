@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-10-27 14:06 UTC
+# Rapport d'intégration Unity — 2026-10-27 14:55 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
-- 10 modèle(s) intégré(s), 247 déjà à jour (inchangés)
+- 0 modèle(s) intégré(s), 257 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-10-27 14:15 UTC
+# Rapport d'intégration Unity — 2026-10-27 14:56 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -2464,11 +2464,11 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_133 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
+_133 captures écrites dans ci-out/ (OpenGLCore) en 2.9 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-10-27 14:21 UTC
+# Rapport d'intégration Unity — 2026-10-27 15:00 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -2480,7 +2480,7 @@ _133 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
 - ✅ **Château** 
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
-- ✅ **Ville : échoppes des marchands** Reliquaire Céleste, Marchand, Joaillier, Forgeron, Alchimiste, Coffre, Mystique, Marchande de curiosités, Armurier
+- ✅ **Ville : échoppes des marchands** Mystique, Armurier, Marchand, Reliquaire Céleste, Coffre, Marchande de curiosités, Alchimiste, Forgeron, Joaillier
 - ✅ **Ville : maisons** 48 maisons
 - ✅ **Ville : rue principale praticable jusqu'au château** dégagée
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
@@ -2512,7 +2512,7 @@ _133 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
 ## Terriers de l'Astral (donjon-parcours)
 - ✅ **Scène des terriers** Assets/Korvalune/Scenes/Korvalune_Terriers.unity
 - ✅ **Parcours construit** 82 lumières, 3 coffres, 18 groupes d'ennemis
-- ❌ **Terriers : parcours praticable de l'entrée au gardien** 1 obstacles, premier : tronçon 0 (T_Troncon_m1_0)
+- ✅ **Terriers : parcours praticable de l'entrée au gardien** 56 points du tracé dégagés
 - ✅ **Captures des terriers** ci-out/Terriers_*.png
 - ✅ **Écran de lancement** Assets/Korvalune/Scenes/Korvalune_Lanceur.unity
 
@@ -2525,4 +2525,4 @@ _133 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
 ## Journal Unity (erreurs et avertissements)
 Aucun.
 
-**RÉSULTAT : 1 vérification(s) en échec.**
+**RÉSULTAT : tout est valide.**
