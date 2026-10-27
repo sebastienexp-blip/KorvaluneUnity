@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-10-27 10:26 UTC
+# Rapport d'intégration Unity — 2026-10-27 12:53 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 242 modèle(s) ModelForge trouvé(s)
@@ -1364,7 +1364,7 @@
 ## ElyraNoctis_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 156582 triangles, 109189 sommets (max 220000)
+- ✅ **Budget de triangles** 156582 triangles, 93246 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_F.prefab
 - ✅ **Échelle (hauteur)** 1.891 m (attendu 1.6–1.98), boîte 1.89×1.89×0.59, pieds à y=-0.010
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1441,7 +1441,7 @@
 ## ElyraNoctis_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 175146 triangles, 117436 sommets (max 220000)
+- ✅ **Budget de triangles** 175146 triangles, 101814 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_M.prefab
 - ✅ **Échelle (hauteur)** 1.884 m (attendu 1.6–1.98), boîte 1.89×1.88×0.58, pieds à y=-0.009
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1519,7 +1519,7 @@
 ## KaelDraven_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 163912 triangles, 115940 sommets (max 220000)
+- ✅ **Budget de triangles** 163912 triangles, 98788 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_F.prefab
 - ✅ **Échelle (hauteur)** 1.936 m (attendu 1.6–1.98), boîte 1.90×1.94×0.61, pieds à y=-0.033
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1605,7 +1605,7 @@
 ## KaelDraven_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 157654 triangles, 106905 sommets (max 220000)
+- ✅ **Budget de triangles** 157654 triangles, 93448 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_M.prefab
 - ✅ **Échelle (hauteur)** 1.926 m (attendu 1.6–1.98), boîte 1.90×1.93×0.62, pieds à y=-0.031
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1690,7 +1690,7 @@
 ## Morvanna_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 184676 triangles, 135572 sommets (max 220000)
+- ✅ **Budget de triangles** 184676 triangles, 117828 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_F.prefab
 - ✅ **Échelle (hauteur)** 1.929 m (attendu 1.6–1.98), boîte 1.89×1.93×0.59, pieds à y=-0.010
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1772,7 +1772,7 @@
 ## Morvanna_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 195414 triangles, 133545 sommets (max 220000)
+- ✅ **Budget de triangles** 195414 triangles, 115626 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_M.prefab
 - ✅ **Échelle (hauteur)** 1.884 m (attendu 1.6–1.98), boîte 1.89×1.88×0.58, pieds à y=-0.009
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1855,7 +1855,7 @@
 ## Tharion_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 149706 triangles, 105406 sommets (max 220000)
+- ✅ **Budget de triangles** 149706 triangles, 90462 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_F.prefab
 - ✅ **Échelle (hauteur)** 1.910 m (attendu 1.6–1.98), boîte 1.90×1.91×0.61, pieds à y=-0.033
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1937,7 +1937,7 @@
 ## Tharion_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 143574 triangles, 97055 sommets (max 220000)
+- ✅ **Budget de triangles** 143574 triangles, 85032 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_M.prefab
 - ✅ **Échelle (hauteur)** 1.906 m (attendu 1.6–1.98), boîte 1.90×1.91×0.61, pieds à y=-0.031
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2018,7 +2018,7 @@
 ## Varek_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 189576 triangles, 138488 sommets (max 220000)
+- ✅ **Budget de triangles** 189576 triangles, 111966 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_F.prefab
 - ✅ **Échelle (hauteur)** 1.964 m (attendu 1.6–1.98), boîte 1.89×1.96×0.66, pieds à y=-0.010
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2108,7 +2108,7 @@
 ## Varek_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 182500 triangles, 129967 sommets (max 220000)
+- ✅ **Budget de triangles** 182500 triangles, 105539 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_M.prefab
 - ✅ **Échelle (hauteur)** 1.977 m (attendu 1.6–1.98), boîte 1.89×1.98×0.64, pieds à y=-0.009
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2198,4 +2198,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 158 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_77 captures écrites dans ci-out/ (OpenGLCore) en 2.7 min._
+_118 captures écrites dans ci-out/ (OpenGLCore) en 3.0 min._
