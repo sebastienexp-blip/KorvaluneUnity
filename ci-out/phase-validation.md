@@ -1,8 +1,8 @@
 # Rapport d'intégration Unity — 2026-10-27 10:26 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
-- 201 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 201 déjà à jour (inchangés)
+- 242 modèle(s) ModelForge trouvé(s)
+- 0 modèle(s) intégré(s), 242 déjà à jour (inchangés)
 
 ## AshCrossbow.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/AshCrossbow/AshCrossbow.fbx
@@ -162,14 +162,15 @@
 ## ChateauKorvalune.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/ChateauKorvalune/ChateauKorvalune.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 14400 triangles, 18460 sommets (max 60000)
+- ✅ **Budget de triangles** 15144 triangles, 19948 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/ChateauKorvalune.prefab
-- ✅ **Échelle (hauteur)** 53.350 m (attendu 50.6825–56.0175), boîte 76.49×53.35×76.49, pieds à y=-0.050
+- ✅ **Échelle (hauteur)** 53.370 m (attendu 50.7015–56.0385), boîte 76.49×53.37×76.49, pieds à y=-0.070
 - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Roof** shader Universal Render Pipeline/Lit, base W_Roof_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
 
 ## Chene0.fbx (prop, rig None)
@@ -452,6 +453,629 @@
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
 - ✅ **Échelle (hauteur)** 5.552 m (attendu 5.274186–5.829364), boîte 7.00×5.55×7.49, pieds à y=-2.559
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Banc.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banc/M_Banc.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 36 triangles, 72 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banc.prefab
+- ✅ **Échelle (hauteur)** 0.500 m (attendu 0.475–0.525), boîte 1.80×0.50×0.45, pieds à y=0.000
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Banniere.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banniere/M_Banniere.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 60 triangles, 99 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banniere.prefab
+- ✅ **Échelle (hauteur)** 6.000 m (attendu 5.7–6.3), boîte 1.21×6.00×0.12, pieds à y=0.000
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Caisses.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Caisses/M_Caisses.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 324 triangles, 648 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Caisses.prefab
+- ✅ **Échelle (hauteur)** 1.620 m (attendu 1.539–1.701), boîte 2.06×1.62×1.16, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Charrette.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Charrette/M_Charrette.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 396 triangles, 660 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Charrette.prefab
+- ✅ **Échelle (hauteur)** 1.475 m (attendu 1.40125–1.54875), boîte 2.04×1.48×4.39, pieds à y=0.000
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Etal0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal0/M_Etal0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 756 triangles, 1512 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal0.prefab
+- ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 4.46×2.96×2.41, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Etal1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal1/M_Etal1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal1.prefab
+- ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Etal2.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal2/M_Etal2.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 956 triangles, 1452 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal2.prefab
+- ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Etal3.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal3/M_Etal3.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal3.prefab
+- ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Foin.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Foin/M_Foin.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 48 triangles, 96 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Foin.prefab
+- ✅ **Échelle (hauteur)** 1.500 m (attendu 1.425–1.575), boîte 1.64×1.50×1.12, pieds à y=0.000
+- ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Fontaine.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Fontaine/M_Fontaine.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 524 triangles, 701 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Fontaine.prefab
+- ✅ **Échelle (hauteur)** 4.300 m (attendu 4.085–4.515), boîte 7.18×4.30×7.18, pieds à y=0.000
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Forge.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Forge/M_Forge.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1296 triangles, 2136 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Forge.prefab
+- ✅ **Échelle (hauteur)** 8.525 m (attendu 8.09875–8.95125), boîte 7.80×8.53×11.19, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Lanterne.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Lanterne/M_Lanterne.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 208 triangles, 309 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Lanterne.prefab
+- ✅ **Échelle (hauteur)** 3.430 m (attendu 3.2585–3.6015), boîte 1.07×3.43×0.44, pieds à y=0.000
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison0/M_Maison0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 5980 triangles, 11964 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison0.prefab
+- ✅ **Échelle (hauteur)** 17.877 m (attendu 16.98293–18.7706), boîte 10.32×17.88×9.52, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison1/M_Maison1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 5596 triangles, 11196 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison1.prefab
+- ✅ **Échelle (hauteur)** 16.995 m (attendu 16.14478–17.84423), boîte 9.32×16.99×9.52, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison2.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison2/M_Maison2.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 3976 triangles, 7956 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison2.prefab
+- ✅ **Échelle (hauteur)** 13.774 m (attendu 13.0851–14.46248), boîte 9.90×13.77×8.10, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Roof** shader Universal Render Pipeline/Lit, base W_Roof_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison3.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison3/M_Maison3.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 3832 triangles, 7668 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison3.prefab
+- ✅ **Échelle (hauteur)** 13.358 m (attendu 12.68975–14.02551), boîte 9.90×13.36×8.10, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Roof** shader Universal Render Pipeline/Lit, base W_Roof_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison4.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison4/M_Maison4.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 6124 triangles, 12252 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison4.prefab
+- ✅ **Échelle (hauteur)** 17.728 m (attendu 16.84126–18.61402), boîte 10.32×17.73×9.52, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Roof** shader Universal Render Pipeline/Lit, base W_Roof_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison5.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison5/M_Maison5.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 3568 triangles, 7140 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison5.prefab
+- ✅ **Échelle (hauteur)** 14.035 m (attendu 13.33281–14.73627), boîte 9.90×14.03×9.10, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison6.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison6/M_Maison6.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 3112 triangles, 6228 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison6.prefab
+- ✅ **Échelle (hauteur)** 13.574 m (attendu 12.89525–14.25265), boîte 7.90×13.57×8.10, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Maison7.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison7/M_Maison7.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 5980 triangles, 11964 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison7.prefab
+- ✅ **Échelle (hauteur)** 16.917 m (attendu 16.07084–17.76251), boîte 10.32×16.92×9.52, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_PorteVille.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_PorteVille/M_PorteVille.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 896 triangles, 1662 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_PorteVille.prefab
+- ✅ **Échelle (hauteur)** 17.000 m (attendu 16.15–17.85), boîte 15.32×17.00×7.06, pieds à y=0.000
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Roof** shader Universal Render Pipeline/Lit, base W_Roof_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Puits.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Puits/M_Puits.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 282 triangles, 492 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Puits.prefab
+- ✅ **Échelle (hauteur)** 3.473 m (attendu 3.299435–3.646744), boîte 2.80×3.47×2.40, pieds à y=0.000
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Rempart.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Rempart/M_Rempart.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 228 triangles, 456 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Rempart.prefab
+- ✅ **Échelle (hauteur)** 8.800 m (attendu 8.36–9.24), boîte 12.00×8.80×3.45, pieds à y=0.000
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Taverne.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Taverne/M_Taverne.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 7410 triangles, 13719 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Taverne.prefab
+- ✅ **Échelle (hauteur)** 18.600 m (attendu 17.67017–19.53019), boîte 13.32×18.60×10.86, pieds à y=-0.400
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_Tonneaux.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Tonneaux/M_Tonneaux.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1050 triangles, 1125 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Tonneaux.prefab
+- ✅ **Échelle (hauteur)** 1.000 m (attendu 0.95–1.05), boîte 1.75×1.00×1.77, pieds à y=0.000
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## M_TourVille.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_TourVille/M_TourVille.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 630 triangles, 740 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_TourVille.prefab
+- ✅ **Échelle (hauteur)** 18.800 m (attendu 17.86–19.74), boîte 9.52×18.80×9.52, pieds à y=0.000
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Roof** shader Universal Render Pipeline/Lit, base W_Roof_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Alchimiste.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Alchimiste/S_Alchimiste.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 5636 triangles, 6409 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Alchimiste.prefab
+- ✅ **Échelle (hauteur)** 3.310 m (attendu 3.1445–3.4755), boîte 6.40×3.31×4.59, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionRed** shader Universal Render Pipeline/Lit, base S_PotionRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionBlue** shader Universal Render Pipeline/Lit, base S_PotionBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionGreen** shader Universal Render Pipeline/Lit, base S_PotionGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionViolet** shader Universal Render Pipeline/Lit, base S_PotionViolet_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Leather** shader Universal Render Pipeline/Lit, base S_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Alchimiste_Toit.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Alchimiste_Toit/S_Alchimiste_Toit.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 24 triangles, 48 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Alchimiste_Toit.prefab
+- ✅ **Échelle (hauteur)** 0.730 m (attendu 0.6932802–0.766257), boîte 6.80×0.73×5.02, pieds à y=2.780
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Armurier.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Armurier/S_Armurier.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 3592 triangles, 4633 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Armurier.prefab
+- ✅ **Échelle (hauteur)** 3.610 m (attendu 3.4295–3.7905), boîte 8.64×3.61×5.59, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Leather** shader Universal Render Pipeline/Lit, base S_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Armurier_Toit.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Armurier_Toit/S_Armurier_Toit.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 24 triangles, 48 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Armurier_Toit.prefab
+- ✅ **Échelle (hauteur)** 0.830 m (attendu 0.7882207–0.8711913), boîte 8.80×0.83×6.02, pieds à y=2.980
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Coffre.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Coffre/S_Coffre.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 660 triangles, 1299 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Coffre.prefab
+- ✅ **Échelle (hauteur)** 1.104 m (attendu 1.049212–1.159655), boîte 1.71×1.10×1.03, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Curiosites.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Curiosites/S_Curiosites.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2496 triangles, 3991 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Curiosites.prefab
+- ✅ **Échelle (hauteur)** 4.760 m (attendu 4.522–4.998), boîte 5.04×4.76×6.40, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Violet** shader Universal Render Pipeline/Lit, base S_Violet_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Teal** shader Universal Render Pipeline/Lit, base S_Teal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemRed** shader Universal Render Pipeline/Lit, base S_GemRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemBlue** shader Universal Render Pipeline/Lit, base S_GemBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemGreen** shader Universal Render Pipeline/Lit, base S_GemGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemGold** shader Universal Render Pipeline/Lit, base S_GemGold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Forgeron.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Forgeron/S_Forgeron.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2762 triangles, 4380 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Forgeron.prefab
+- ✅ **Échelle (hauteur)** 7.020 m (attendu 6.669–7.371), boîte 9.68×7.02×6.74, pieds à y=-0.020
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Leather** shader Universal Render Pipeline/Lit, base S_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Forgeron_Toit.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Forgeron_Toit/S_Forgeron_Toit.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 24 triangles, 48 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Forgeron_Toit.prefab
+- ✅ **Échelle (hauteur)** 1.031 m (attendu 0.9793842–1.082477), boîte 9.80×1.03×7.02, pieds à y=3.380
+- ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Joaillier.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Joaillier/S_Joaillier.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 4208 triangles, 4722 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Joaillier.prefab
+- ✅ **Échelle (hauteur)** 3.210 m (attendu 3.0495–3.3705), boîte 5.78×3.21×4.51, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemRed** shader Universal Render Pipeline/Lit, base S_GemRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemBlue** shader Universal Render Pipeline/Lit, base S_GemBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemGreen** shader Universal Render Pipeline/Lit, base S_GemGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemGold** shader Universal Render Pipeline/Lit, base S_GemGold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Candle** shader Universal Render Pipeline/Lit, base S_Candle_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Joaillier_Toit.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Joaillier_Toit/S_Joaillier_Toit.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 108 triangles, 216 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Joaillier_Toit.prefab
+- ✅ **Échelle (hauteur)** 0.561 m (attendu 0.5333087–0.5894465), boîte 5.80×0.56×4.80, pieds à y=2.769
+- ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Marchand.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Marchand/S_Marchand.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 4096 triangles, 5670 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Marchand.prefab
+- ✅ **Échelle (hauteur)** 3.210 m (attendu 3.0495–3.3705), boîte 7.36×3.21×4.71, pieds à y=-0.010
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionRed** shader Universal Render Pipeline/Lit, base S_PotionRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionBlue** shader Universal Render Pipeline/Lit, base S_PotionBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionViolet** shader Universal Render Pipeline/Lit, base S_PotionViolet_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_PotionGreen** shader Universal Render Pipeline/Lit, base S_PotionGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Sack** shader Universal Render Pipeline/Lit, base S_Sack_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Marchand_Toit.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Marchand_Toit/S_Marchand_Toit.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 108 triangles, 216 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Marchand_Toit.prefab
+- ✅ **Échelle (hauteur)** 0.561 m (attendu 0.5324807–0.5885313), boîte 6.80×0.56×5.00, pieds à y=2.770
+- ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Mystique.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Mystique/S_Mystique.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2124 triangles, 2121 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Mystique.prefab
+- ✅ **Échelle (hauteur)** 3.000 m (attendu 2.85–3.15), boîte 7.00×3.00×7.00, pieds à y=0.000
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Rug** shader Universal Render Pipeline/Lit, base S_Rug_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Violet** shader Universal Render Pipeline/Lit, base S_Violet_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Crystal** shader Universal Render Pipeline/Lit, base S_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Candle** shader Universal Render Pipeline/Lit, base S_Candle_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemRed** shader Universal Render Pipeline/Lit, base S_GemRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemGreen** shader Universal Render Pipeline/Lit, base S_GemGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Mystique_Toit.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Mystique_Toit/S_Mystique_Toit.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 490 triangles, 417 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Mystique_Toit.prefab
+- ✅ **Échelle (hauteur)** 3.800 m (attendu 3.61–3.99), boîte 8.73×3.80×8.73, pieds à y=2.770
+- ✅ **Matériau S_Violet** shader Universal Render Pipeline/Lit, base S_Violet_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Crystal** shader Universal Render Pipeline/Lit, base S_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## S_Reliquaire.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/S_Reliquaire/S_Reliquaire.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2098 triangles, 2585 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/S_Reliquaire.prefab
+- ✅ **Échelle (hauteur)** 5.330 m (attendu 5.0635–5.5965), boîte 9.00×5.33×9.00, pieds à y=0.000
+- ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Runes** shader Universal Render Pipeline/Lit, base S_Runes_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_Crystal** shader Universal Render Pipeline/Lit, base S_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Gold** shader Universal Render Pipeline/Lit, base W_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemRed** shader Universal Render Pipeline/Lit, base S_GemRed_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemBlue** shader Universal Render Pipeline/Lit, base S_GemBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau S_GemGreen** shader Universal Render Pipeline/Lit, base S_GemGreen_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
 
 ## BaseFemale.fbx (character, rig Human)
