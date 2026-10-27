@@ -66,10 +66,14 @@ namespace Korvalune.Game
             questText = Label(qp, "Texte", "", 22, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -48), new Vector2(340, 90));
 
             // ---- joystick (bas gauche)
-            var jb = Img(root, "Joystick", UIStyle.Ring(), new Vector2(0, 0), new Vector2(70, 60), new Vector2(300, 300));
+            // zone tactile invisible (tout le quart bas gauche, sous les potions) : l'anneau suit le pouce
+            var zone = Img(root, "ZoneJoystick", null, new Vector2(0, 0), Vector2.zero, new Vector2(760, 560));
+            zone.color = new Color(0, 0, 0, 0); zone.raycastTarget = true;
+            var jb = Img(zone.rectTransform, "Joystick", UIStyle.Ring(), new Vector2(0, 0), new Vector2(220, 210), new Vector2(300, 300));
+            jb.rectTransform.pivot = new Vector2(0.5f, 0.5f);       // centré : l'anneau se pose pile sous le doigt
             Img((RectTransform)jb.transform, "Fond", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(260, 260)).color = new Color(0.1f, 0.06f, 0.04f, 0.45f);
             var knob = Img((RectTransform)jb.transform, "Pouce", UIStyle.Button(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(130, 130));
-            Joystick = jb.gameObject.AddComponent<VirtualJoystick>(); Joystick.knob = knob.rectTransform; Joystick.radius = 105;
+            Joystick = zone.gameObject.AddComponent<VirtualJoystick>(); Joystick.knob = knob.rectTransform; Joystick.ring = jb.rectTransform; Joystick.radius = 105;
 
             // ---- attaque et compétences (bas droite)
             var atk = RoundButton(root, "Attaque", "attack", new Vector2(1, 0), new Vector2(-70, 60), 230, () => player?.Attack(), out _, out _);
