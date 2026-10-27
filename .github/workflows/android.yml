@@ -10,7 +10,7 @@ on:
 
 concurrency:
   group: android-apk
-  cancel-in-progress: true
+  cancel-in-progress: false          # une construction en cours va au bout ; la suivante attend
 
 permissions:
   contents: write
