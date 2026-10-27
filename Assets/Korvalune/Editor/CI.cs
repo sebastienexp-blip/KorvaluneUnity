@@ -76,7 +76,7 @@ namespace Korvalune.EditorTools
                     // rapport complet : parties écrites par les éditeurs précédents + scènes
                     var head = new StringBuilder();
                     foreach (var f in new[] { "ci-out/phase-integration.md", "ci-out/phase-validation.md" })
-                        if (File.Exists(f)) { var t = File.ReadAllText(f); head.AppendLine(t); failures += t.Split('\n').Count(l => l.StartsWith("- ❌ **")); }
+                        if (File.Exists(f)) { var t = File.ReadAllText(f); head.AppendLine(t); failures += t.Split('\n').Count(l => l.StartsWith("- ❌ **", StringComparison.Ordinal)); }
                         else { head.AppendLine($"- ❌ **{Path.GetFileName(f)}** absent : l'éditeur précédent s'est arrêté avant la fin"); failures++; }
                     Rep.Insert(0, head.ToString() + "\n# Scènes (éditeur 3)\n");
                 }
