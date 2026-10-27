@@ -47,8 +47,7 @@ jobs:
           SECRET_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
           if [ -n "$SECRET_LICENSE" ]; then LIC="$SECRET_LICENSE";
-          elif [ -f .licence/Unity_lic.ulf ]; then LIC="$(cat .licence/Unity_lic.ulf)";
-          else echo "::error::Aucune licence Unity trouvée"; exit 1; fi
+          else echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi
           { echo "UNITY_LICENSE<<ULF_EOF"; echo "$LIC"; echo "ULF_EOF"; } >> "$GITHUB_ENV"
 
       - name: Unity — construction de l'APK
