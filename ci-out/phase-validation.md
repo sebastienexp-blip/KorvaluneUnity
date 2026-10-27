@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-10-27 13:33 UTC
+# Rapport d'intégration Unity — 2026-10-27 14:15 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -1594,7 +1594,7 @@
 ## ElyraNoctis_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 241688 triangles, 144379 sommets (max 220000)
+- ✅ **Budget de triangles** 241688 triangles, 144379 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_F.prefab
 - ✅ **Échelle (hauteur)** 1.849 m (attendu 1.6–1.98), boîte 1.89×1.85×0.51, pieds à y=-0.007
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1674,7 +1674,7 @@
 ## ElyraNoctis_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 262964 triangles, 154190 sommets (max 220000)
+- ✅ **Budget de triangles** 262964 triangles, 154190 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_M.prefab
 - ✅ **Échelle (hauteur)** 1.853 m (attendu 1.6–1.98), boîte 1.89×1.85×0.51, pieds à y=-0.013
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1755,7 +1755,7 @@
 ## KaelDraven_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 249018 triangles, 149921 sommets (max 220000)
+- ✅ **Budget de triangles** 249018 triangles, 149921 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_F.prefab
 - ✅ **Échelle (hauteur)** 1.890 m (attendu 1.6–1.98), boîte 1.90×1.89×0.53, pieds à y=-0.026
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1844,7 +1844,7 @@
 ## KaelDraven_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 245472 triangles, 145824 sommets (max 220000)
+- ✅ **Budget de triangles** 245472 triangles, 145824 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_M.prefab
 - ✅ **Échelle (hauteur)** 1.885 m (attendu 1.6–1.98), boîte 1.90×1.88×0.55, pieds à y=-0.025
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -1932,7 +1932,7 @@
 ## Morvanna_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 269782 triangles, 168961 sommets (max 220000)
+- ✅ **Budget de triangles** 269782 triangles, 168961 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_F.prefab
 - ✅ **Échelle (hauteur)** 1.888 m (attendu 1.6–1.98), boîte 1.89×1.89×0.51, pieds à y=-0.007
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2017,7 +2017,7 @@
 ## Morvanna_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 283232 triangles, 168002 sommets (max 220000)
+- ✅ **Budget de triangles** 283232 triangles, 168002 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_M.prefab
 - ✅ **Échelle (hauteur)** 1.853 m (attendu 1.6–1.98), boîte 1.89×1.85×0.53, pieds à y=-0.013
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2103,7 +2103,7 @@
 ## Tharion_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 234812 triangles, 141595 sommets (max 220000)
+- ✅ **Budget de triangles** 234812 triangles, 141595 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_F.prefab
 - ✅ **Échelle (hauteur)** 1.864 m (attendu 1.6–1.98), boîte 1.90×1.86×0.53, pieds à y=-0.026
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2188,7 +2188,7 @@
 ## Tharion_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 231392 triangles, 137545 sommets (max 220000)
+- ✅ **Budget de triangles** 231392 triangles, 137545 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_M.prefab
 - ✅ **Échelle (hauteur)** 1.865 m (attendu 1.6–1.98), boîte 1.90×1.86×0.54, pieds à y=-0.025
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2272,7 +2272,7 @@
 ## Varek_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 274682 triangles, 163099 sommets (max 220000)
+- ✅ **Budget de triangles** 274682 triangles, 163099 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_F.prefab
 - ✅ **Échelle (hauteur)** 1.922 m (attendu 1.6–1.98), boîte 1.89×1.92×0.60, pieds à y=-0.007
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2365,7 +2365,7 @@
 ## Varek_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ❌ **Budget de triangles** 270318 triangles, 157915 sommets (max 220000)
+- ✅ **Budget de triangles** 270318 triangles, 157915 sommets (max 300000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_M.prefab
 - ✅ **Échelle (hauteur)** 1.946 m (attendu 1.6–1.98), boîte 1.89×1.95×0.59, pieds à y=-0.013
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
@@ -2455,7 +2455,7 @@
 - ✅ **Clip Sk_Dash** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.626 m, événements 0
 
 ## Pièces du créateur de personnage (140 modèles : cheveux, sourcils, cils)
-- ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 158 blendshapes
+- ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_133 captures écrites dans ci-out/ (OpenGLCore) en 2.8 min._
+_133 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
