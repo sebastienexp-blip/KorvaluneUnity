@@ -72,8 +72,9 @@ namespace Korvalune.EditorTools
             // ---- ambiance : très sombre, lueur froide zénithale faible pour garder la lisibilité
             RenderSettings.skybox = null; RenderSettings.fog = false;
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(0.22f, 0.24f, 0.30f); RenderSettings.ambientEquatorColor = new Color(0.16f, 0.15f, 0.15f); RenderSettings.ambientGroundColor = new Color(0.07f, 0.06f, 0.05f);
-            var moon = new GameObject("Lueur zénithale").AddComponent<Light>(); moon.type = LightType.Directional; moon.intensity = 0.42f; moon.color = new Color(0.55f, 0.65f, 0.85f);
+            // lisible sur téléphone : sol et ennemis clairement visibles, parois plus sombres, flaques de lumière chaude et bleutée
+            RenderSettings.ambientSkyColor = new Color(0.46f, 0.47f, 0.58f); RenderSettings.ambientEquatorColor = new Color(0.34f, 0.31f, 0.30f); RenderSettings.ambientGroundColor = new Color(0.17f, 0.15f, 0.13f);
+            var moon = new GameObject("Lueur zénithale").AddComponent<Light>(); moon.type = LightType.Directional; moon.intensity = 0.95f; moon.color = new Color(0.62f, 0.70f, 0.88f);
             moon.transform.rotation = Quaternion.Euler(70, -20, 0); moon.shadows = LightShadows.Soft;
 
             // ---- caméra et jeu
@@ -82,9 +83,10 @@ namespace Korvalune.EditorTools
             cam.gameObject.AddComponent<CameraRig>();
             var camData = cam.GetComponent<UniversalAdditionalCameraData>(); if (!camData) camData = cam.gameObject.AddComponent<UniversalAdditionalCameraData>();
             camData.renderPostProcessing = true; camData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-            WorldBuilder.PostProcess("Terriers", 0.25f);
+            WorldBuilder.PostProcess("Terriers", 0.75f);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = WorldBuilder.Config();
+            game.heroLight = 2.2f;
             game.zoneName = "Terriers de l'Astral"; game.questTitle = "Les Terriers de l'Astral";
             var ent = L.entrance.P; var dir = L.entranceDir.P.normalized;
             game.playerSpawn = ent + dir * 3f + Vector3.up * 0.1f;

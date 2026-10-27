@@ -116,8 +116,8 @@ namespace Korvalune.EditorTools
             // ---- lumière d'ensemble : sombre mais lisible (on doit voir les ennemis)
             RenderSettings.skybox = null; RenderSettings.fog = false;
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(0.30f, 0.28f, 0.34f); RenderSettings.ambientEquatorColor = new Color(0.22f, 0.19f, 0.18f); RenderSettings.ambientGroundColor = new Color(0.10f, 0.08f, 0.07f);
-            var moon = new GameObject("Lumière froide").AddComponent<Light>(); moon.type = LightType.Directional; moon.intensity = 0.55f; moon.color = new Color(0.62f, 0.68f, 0.9f);
+            RenderSettings.ambientSkyColor = new Color(0.44f, 0.42f, 0.50f); RenderSettings.ambientEquatorColor = new Color(0.32f, 0.28f, 0.27f); RenderSettings.ambientGroundColor = new Color(0.15f, 0.12f, 0.10f);   // lisible sur téléphone
+            var moon = new GameObject("Lumière froide").AddComponent<Light>(); moon.type = LightType.Directional; moon.intensity = 0.85f; moon.color = new Color(0.62f, 0.68f, 0.9f);
             moon.transform.rotation = Quaternion.Euler(62, -30, 0); moon.shadows = LightShadows.Soft;
 
             // ---- caméra et jeu
@@ -126,10 +126,10 @@ namespace Korvalune.EditorTools
             cam.gameObject.AddComponent<CameraRig>();
             var camData = cam.GetComponent<UniversalAdditionalCameraData>(); if (!camData) camData = cam.gameObject.AddComponent<UniversalAdditionalCameraData>();
             camData.renderPostProcessing = true; camData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-            WorldBuilder.PostProcess("Crypte", 0.25f);
+            WorldBuilder.PostProcess("Crypte", 0.6f);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = WorldBuilder.Config();
-            game.zoneName = "Crypte de Korvalune"; game.questTitle = "Purger la crypte";
+            game.heroLight = 2.0f; game.zoneName = "Crypte de Korvalune"; game.questTitle = "Purger la crypte";
             game.playerSpawn = entrance + new Vector3(-T, 0.05f, 0);
             game.castleGate = entrance;
             game.questSteps.Add(new Quest.Objective { text = "Détruire les morts-vivants de la crypte", enemyId = "squelette", count = 8 });

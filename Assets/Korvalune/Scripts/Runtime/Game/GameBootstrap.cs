@@ -16,6 +16,8 @@ namespace Korvalune.Game
         public static Vector3? nextSpawn;               // posé par un portail avant de charger la scène suivante
         // zone et quête propres à la scène (vallée par défaut)
         public string zoneName = "Vallée de Korvalune";
+        [Tooltip("Lumière portée par le héros (donjons) : halo chaud qui éclaire le sol et les ennemis autour de lui, 0 = aucune")]
+        public float heroLight = 0f;
         public string questTitle = "Purifier la vallée";
         public List<Quest.Objective> questSteps = new List<Quest.Objective>();
         public PlayerController Player { get; private set; }
@@ -45,6 +47,12 @@ namespace Korvalune.Game
             var h = hero.AddComponent<Health>(); h.faction = Faction.Player; h.maxHp = 220; h.maxMana = 100; h.manaRegen = 6; h.hpRegen = 1.5f; h.armor = 2; h.displayName = hero.name;
             h.hp = h.maxHp; h.mana = h.maxMana;
             Player = hero.AddComponent<PlayerController>(); Player.cam = Cam.transform; Player.Init();
+            if (heroLight > 0f)
+            {   // halo du héros : lumière chaude au-dessus de lui (sans ombre portée, peu coûteuse sur mobile)
+                var hl = new GameObject("Halo du héros").AddComponent<Light>(); hl.transform.SetParent(hero.transform, false);
+                hl.transform.localPosition = new Vector3(0, 2.6f, -0.4f); hl.type = LightType.Point; hl.color = new Color(1f, 0.86f, 0.70f);
+                hl.intensity = heroLight; hl.range = 11f; hl.shadows = LightShadows.None; hl.renderMode = LightRenderMode.ForcePixel;
+            }
             rig.target = hero.transform; rig.Snap();
             LootDrop.beamMat = config ? config.fxAdditive : null;
             // personnage sauvegardé (choisi dans l'écran de sélection)

@@ -166,7 +166,7 @@ def _uv_cyl(P, F, J, W, sk, arm_mask, tile):
 
 # ------------------------------------------------------------------------------------------------ bas : pans et robes
 def skirt(body, sk, mask, y_top, y_hem, ease=0.020, flare=0.06, thick=0.004, nth=72, ny=28, tile=6.0, front_only=None,
-          follow=0.85, waist_ease=None, extra=None):
+          follow=0.85, waist_ease=None, extra=None, shin=0.0):
     """Jupe / pans de cotte / tablier : tube fermé (ou portion devant si front_only = demi-angle en radians) autour de
     l'enveloppe convexe du bassin et des jambes, de y_top à y_hem, évasé de « flare » à l'ourlet.
     follow : part du mouvement des cuisses suivie par le bas du tissu (le reste suit le bassin)."""
@@ -193,9 +193,15 @@ def skirt(body, sk, mask, y_top, y_hem, ease=0.020, flare=0.06, thick=0.004, nth
     H = sk.names.index('Hips'); Lu = sk.names.index('LeftUpperLeg'); Ru = sk.names.index('RightUpperLeg')
     fv = np.clip((y_top - P[:, 1]) / max(y_top - y_hem, 1e-6), 0, 1)
     g = follow * np.clip((fv - 0.05) / 0.6, 0, 1) ** 1.2
-    wl = np.clip(0.5 + P[:, 0] / 0.16, 0, 1)
+    wl = np.clip(0.5 + P[:, 0] / 0.12, 0, 1)
+    # sous le genou, les côtés suivent aussi le tibia de leur jambe (la jambe qui avance pousse le tissu)
+    knee = np.mean([sk.pos[sk.names.index('LeftLowerLeg')][1], sk.pos[sk.names.index('RightLowerLeg')][1]])
+    side = np.abs(wl - 0.5) * 2
+    k = shin * np.clip((knee - P[:, 1]) / 0.25, 0, 1) * side
+    Ll = sk.names.index('LeftLowerLeg'); Rl = sk.names.index('RightLowerLeg')
     J = np.zeros((len(P), 4), np.int64); W = np.zeros((len(P), 4))
-    J[:, 0] = H; W[:, 0] = 1 - g; J[:, 1] = Lu; W[:, 1] = g * wl; J[:, 2] = Ru; W[:, 2] = g * (1 - wl); J[:, 3] = H
+    J[:, 0] = H; W[:, 0] = 1 - g; J[:, 1] = Lu; W[:, 1] = g * wl * (1 - k); J[:, 2] = Ru; W[:, 2] = g * (1 - wl) * (1 - k)
+    J[:, 3] = np.where(P[:, 0] > 0, Ll, Rl); W[:, 3] = g * k
     return thicken(P, F, circ * tile, J, W, thick)
 
 
