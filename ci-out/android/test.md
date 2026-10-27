@@ -12,6 +12,9 @@
 - Activité : com.korvalune.game/com.unity3d.player.UnityPlayerGameActivity
     [Korvalune] partie automatique : activée
     [Korvalune][test] lanceur prêt : on joue
+    [Korvalune][test] chargement de la scène « Korvalune_Selection »
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] écran de sélection ouvert
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
 - Erreurs Unity dans le journal : 0
