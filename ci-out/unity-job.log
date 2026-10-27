@@ -1,407 +1,486 @@
-# Journal du job d'intégration (run 40558490222)
+# Journal du job d'intégration (run 40559266682)
 ## Lignes importantes
-877:2026-10-27T18:22:25.9129952Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-879:2026-10-27T18:22:25.9131384Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-1095:2026-10-27T18:22:50.9818264Z ##[error]Process completed with exit code 1.
+1152:2026-10-27T18:31:01.8920741Z [  1/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+1674:2026-10-27T18:31:03.6420884Z Curl error 42: Callback aborted
+2249:2026-10-27T18:31:24.2632158Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
+2486:2026-10-27T18:31:24.2815965Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(41,42): error CS0103: The name 'AutoTest' does not exist in the current context
+2487:2026-10-27T18:31:24.2817158Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(54,27): error CS0103: The name 'AutoTest' does not exist in the current context
+2488:2026-10-27T18:31:24.2818337Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(160,129): error CS0103: The name 'CreatorNames' does not exist in the current context
+2489:2026-10-27T18:31:24.2819591Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(161,17): error CS0019: Operator '>' cannot be applied to operands of type 'method group' and 'int'
+2490:2026-10-27T18:31:24.2820805Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(161,53): error CS1503: Argument 1: cannot convert from 'method group' to 'int'
+2491:2026-10-27T18:31:24.2822153Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(248,97): error CS0103: The name 'CreatorNames' does not exist in the current context
+2492:2026-10-27T18:31:24.2823330Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(249,56): error CS0103: The name 'CreatorNames' does not exist in the current context
+2493:2026-10-27T18:31:24.2824625Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(253,99): error CS0103: The name 'CreatorNames' does not exist in the current context
+2494:2026-10-27T18:31:24.2825802Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(260,56): error CS0103: The name 'CreatorNames' does not exist in the current context
+2495:2026-10-27T18:31:24.2826989Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(262,119): error CS0103: The name 'CreatorNames' does not exist in the current context
+2496:2026-10-27T18:31:24.2828173Z Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs(284,56): error CS0103: The name 'CreatorNames' does not exist in the current context
+2497:2026-10-27T18:31:24.2830282Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2498:2026-10-27T18:31:24.2835851Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2499:2026-10-27T18:31:24.2838245Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(114,21): error CS0103: The name 'AutoTest' does not exist in the current context
+2500:2026-10-27T18:31:24.2839699Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(114,57): error CS0246: The type or namespace name 'AutoTest' could not be found (are you missing a using directive or an assembly reference?)
+2501:2026-10-27T18:31:24.2842051Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2502:2026-10-27T18:31:24.2844188Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(36,25): error CS0103: The name 'OrnatePanel' does not exist in the current context
+2503:2026-10-27T18:31:24.2845238Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(72,58): error CS0103: The name 'treePanel' does not exist in the current context
+2504:2026-10-27T18:31:24.2846229Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(72,69): error CS0103: The name 'treePanel' does not exist in the current context
+2505:2026-10-27T18:31:24.2847231Z Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs(205,17): error CS0103: The name 'AutoTest' does not exist in the current context
+2506:2026-10-27T18:31:24.2848291Z Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs(205,37): error CS0103: The name 'AutoTest' does not exist in the current context
+2507:2026-10-27T18:31:24.2849394Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(89,96): error CS0103: The name 'ToggleTree' does not exist in the current context
+2508:2026-10-27T18:31:24.2850563Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(90,25): error CS0103: The name 'BuildTree' does not exist in the current context
+2509:2026-10-27T18:31:24.2851576Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(100,13): error CS0103: The name 'BuildMenu' does not exist in the current context
+2510:2026-10-27T18:31:24.2852724Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(204,17): error CS0103: The name 'treePanel' does not exist in the current context
+2511:2026-10-27T18:31:24.2853927Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(204,30): error CS0103: The name 'treePanel' does not exist in the current context
+2512:2026-10-27T18:31:24.2855173Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(204,52): error CS0103: The name 'RefreshTree' does not exist in the current context
+2513:2026-10-27T18:31:24.2856243Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(219,17): error CS0103: The name 'treePanel' does not exist in the current context
+2514:2026-10-27T18:31:24.2857282Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(219,28): error CS0103: The name 'treePanel' does not exist in the current context
+2515:2026-10-27T18:31:24.2858379Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(255,25): error CS0103: The name 'OrnatePanel' does not exist in the current context
+2516:2026-10-27T18:31:24.2859730Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(329,31): error CS0103: The name 'ShowDamageNumbers' does not exist in the current context
+2720:2026-10-27T18:31:26.2561966Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
+2960:2026-10-27T18:31:26.2749936Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2961:2026-10-27T18:31:26.2751640Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2962:2026-10-27T18:31:26.2753326Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2968:2026-10-27T18:31:26.2758716Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2969:2026-10-27T18:31:26.2760388Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2970:2026-10-27T18:31:26.2762309Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2975:2026-10-27T18:31:26.2766466Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager windo
+2976:2026-10-27T18:31:26.2768405Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager wind
+2977:2026-10-27T18:31:26.2770331Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager windo
+2987:2026-10-27T18:31:26.3704793Z Build failed, with exit code 1
+3051:2026-10-27T18:31:31.1611105Z Please note that the exit code is not very descriptive.
+3056:2026-10-27T18:31:31.6788871Z ##[error]Build failed with exit code 1
+3532:2026-10-27T18:31:51.2164837Z Curl error 42: Callback aborted
+4071:2026-10-27T18:32:00.6290656Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
+4311:2026-10-27T18:32:00.6529139Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+4312:2026-10-27T18:32:00.6532129Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+4313:2026-10-27T18:32:00.6535848Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+4316:2026-10-27T18:32:00.6540877Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+4317:2026-10-27T18:32:00.6543991Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+4318:2026-10-27T18:32:00.6546957Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+4322:2026-10-27T18:32:00.6551595Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager windo
+4323:2026-10-27T18:32:00.6555069Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager wind
+4324:2026-10-27T18:32:00.6558494Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager windo
+4336:2026-10-27T18:32:00.7448794Z Build failed, with exit code 1
+4400:2026-10-27T18:32:05.0494541Z Please note that the exit code is not very descriptive.
+4405:2026-10-27T18:32:05.6209635Z ##[error]Build failed with exit code 1
+4881:2026-10-27T18:32:19.5763450Z Curl error 42: Callback aborted
+5418:2026-10-27T18:32:28.9454803Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
+5658:2026-10-27T18:32:28.9629903Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5659:2026-10-27T18:32:28.9632943Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5660:2026-10-27T18:32:28.9636438Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5666:2026-10-27T18:32:28.9645270Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5667:2026-10-27T18:32:28.9647331Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5668:2026-10-27T18:32:28.9649010Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5673:2026-10-27T18:32:28.9710279Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager windo
+5674:2026-10-27T18:32:28.9713848Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager wind
+5675:2026-10-27T18:32:28.9716923Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager windo
+5685:2026-10-27T18:32:29.0729961Z Build failed, with exit code 1
+5749:2026-10-27T18:32:33.2338655Z Please note that the exit code is not very descriptive.
+5754:2026-10-27T18:32:33.4955082Z ##[error]Build failed with exit code 1
+5759:2026-10-27T18:32:33.5137458Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+5761:2026-10-27T18:32:33.5138653Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+5815:Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5816:nAssets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5817:nAssets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+5980:2026-10-27T18:33:08.3217760Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-2026-10-27T18:21:37.8761838Z ##[endgroup]
-2026-10-27T18:21:37.9689023Z ##[group]Run game-ci/unity-builder@v4
-2026-10-27T18:21:37.9689317Z with:
-2026-10-27T18:21:37.9689554Z   targetPlatform: StandaloneLinux64
-2026-10-27T18:21:37.9689855Z   buildMethod: Korvalune.EditorTools.CI.Run
-2026-10-27T18:21:37.9690165Z   allowDirtyBuild: true
-2026-10-27T18:21:37.9690430Z   customParameters: -ciPhaseProcess
-2026-10-27T18:21:37.9690689Z   unityVersion: auto
-2026-10-27T18:21:37.9690917Z   versioning: Semantic
-2026-10-27T18:21:37.9691151Z   androidExportType: androidPackage
-2026-10-27T18:21:37.9691430Z   androidSymbolType: none
-2026-10-27T18:21:37.9691685Z   runAsHostUser: false
-2026-10-27T18:21:37.9692097Z   dockerIsolationMode: default
-2026-10-27T18:21:37.9692393Z   containerRegistryRepository: unityci/editor
-2026-10-27T18:21:37.9692721Z   containerRegistryImageVersion: 3
-2026-10-27T18:21:37.9692999Z   awsStackName: game-ci
-2026-10-27T18:21:37.9693250Z   providerStrategy: local
-2026-10-27T18:21:37.9693493Z   kubeVolumeSize: 5Gi
-2026-10-27T18:21:37.9693781Z   watchToEnd: true
-2026-10-27T18:21:37.9694019Z   cacheUnityInstallationOnMac: false
-2026-10-27T18:21:37.9694323Z   dockerWorkspacePath: /github/workspace
-2026-10-27T18:21:37.9694603Z   skipActivation: false
-2026-10-27T18:21:37.9694835Z env:
-2026-10-27T18:21:37.9701820Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LTVDSDktTkhYVC05VUVHLUFGOVMtTVBZNQ=="/>
-        <SerialMasked Value="F4-5CH9-NHXT-9UEG-AF9S-XXXX"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-10-27T18:21:37.9709787Z   UNITY_EMAIL: ***
-2026-10-27T18:21:37.9710044Z   UNITY_PASSWORD: ***
-2026-10-27T18:21:37.9710280Z ##[endgroup]
-2026-10-27T18:21:38.4340779Z (node:2455) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-10-27T18:21:38.4342395Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-10-27T18:22:25.5855283Z ##[error]The operation was canceled.
-2026-10-27T18:22:25.5909370Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
-2026-10-27T18:22:25.5909895Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
-2026-10-27T18:22:25.5910522Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
-2026-10-27T18:22:25.5911191Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
-2026-10-27T18:22:25.5911789Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
-2026-10-27T18:22:25.5912722Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
-2026-10-27T18:22:25.5967079Z shell: /usr/bin/bash -e {0}
-2026-10-27T18:22:25.5967577Z env:
-2026-10-27T18:22:25.5984021Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LTVDSDktTkhYVC05VUVHLUFGOVMtTVBZNQ=="/>
-        <SerialMasked Value="F4-5CH9-NHXT-9UEG-AF9S-XXXX"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-10-27T18:22:25.6001048Z ##[endgroup]
-2026-10-27T18:22:25.7519903Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
-2026-10-27T18:22:25.7520415Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
-2026-10-27T18:22:25.7521061Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
-2026-10-27T18:22:25.7521723Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
-2026-10-27T18:22:25.7522867Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
-2026-10-27T18:22:25.7523475Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
-2026-10-27T18:22:25.7561585Z shell: /usr/bin/bash -e {0}
-2026-10-27T18:22:25.7562112Z env:
-2026-10-27T18:22:25.7569165Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LTVDSDktTkhYVC05VUVHLUFGOVMtTVBZNQ=="/>
-        <SerialMasked Value="F4-5CH9-NHXT-9UEG-AF9S-XXXX"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-10-27T18:22:25.7576822Z ##[endgroup]
-2026-10-27T18:22:25.9128134Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true
-2026-10-27T18:22:25.9128555Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true[0m
-2026-10-27T18:22:25.9128871Z [36;1mif [ ! -f ci-report.md ]; then[0m
-2026-10-27T18:22:25.9129298Z [36;1m  { echo "# Rapport absent : Unity s'est arrêté avant la fin"; echo; echo '```';[0m
-2026-10-27T18:22:25.9129952Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-2026-10-27T18:22:25.9130611Z [36;1m    echo '```'; echo; echo "## Erreurs de compilation (Library/Bee, Logs)"; echo '```';[0m
-2026-10-27T18:22:25.9131384Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-2026-10-27T18:22:25.9133214Z [36;1m    echo '```'; echo; echo "## Dernières étapes (ci-out/progress.log)"; echo '```'; tail -150 ci-out/progress.log 2>/dev/null || echo "(aucune : la méthode CI n'a pas démarré)"; echo '```'; } > ci-report.md || true[0m
-2026-10-27T18:22:25.9133938Z [36;1mfi[0m
-2026-10-27T18:22:25.9134266Z [36;1mM=$(head -c 60000 ci-report.md | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')[0m
-2026-10-27T18:22:25.9134920Z [36;1mif [ "skipped" = "success" ]; then echo "::notice title=Intégration Unity::${M}"; else echo "::error title=Intégration Unity::${M}"; fi[0m
-2026-10-27T18:22:25.9135448Z [36;1mmkdir -p ci-out[0m
-2026-10-27T18:22:25.9135842Z [36;1mtail -c 400000 unity-editor.log > ci-out/unity-editor-tail.log 2>/dev/null || true[0m
-2026-10-27T18:22:25.9177187Z shell: /usr/bin/bash -e {0}
-2026-10-27T18:22:25.9177492Z env:
-2026-10-27T18:22:25.9185845Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LTVDSDktTkhYVC05VUVHLUFGOVMtTVBZNQ=="/>
-        <SerialMasked Value="F4-5CH9-NHXT-9UEG-AF9S-XXXX"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-10-27T18:22:25.9193659Z ##[endgroup]
-2026-10-27T18:22:26.0511176Z ##[error]# Rapport absent : Unity s'est arrêté avant la fin
-
-```
-```
-
-## Erreurs de compilation (Library/Bee, Logs)
-```
-```
-
-## Dernières étapes (ci-out/progress.log)
-```
-(aucune : la méthode CI n'a pas démarré)
-```
-2026-10-27T18:22:26.0550649Z ##[group]Run git config user.name "korvalune-ci"
-2026-10-27T18:22:26.0551046Z [36;1mgit config user.name "korvalune-ci"[0m
-2026-10-27T18:22:26.0551413Z [36;1mgit config user.email "ci@korvalune.invalid"[0m
-2026-10-27T18:22:26.0551877Z [36;1mgit add -A Assets ProjectSettings Packages ci-report.md ci-out 2>/dev/null || true[0m
-2026-10-27T18:22:26.0552616Z [36;1mif git diff --cached --quiet; then echo "rien à renvoyer"; exit 0; fi[0m
-2026-10-27T18:22:26.0553095Z [36;1mgit commit -m "CI Unity : fichiers générés et rapport [skip ci]"[0m
-2026-10-27T18:22:26.0553648Z [36;1mfor i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done[0m
-2026-10-27T18:22:26.0594338Z shell: /usr/bin/bash -e {0}
-2026-10-27T18:22:26.0594621Z env:
-2026-10-27T18:22:26.0604481Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LTVDSDktTkhYVC05VUVHLUFGOVMtTVBZNQ=="/>
-        <SerialMasked Value="F4-5CH9-NHXT-9UEG-AF9S-XXXX"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-10-27T18:22:26.0616902Z ##[endgroup]
-2026-10-27T18:22:31.5105524Z [main fd94ac3] CI Unity : fichiers générés et rapport [skip ci]
-2026-10-27T18:22:31.5106268Z  2 files changed, 10 insertions(+), 5361 deletions(-)
-2026-10-27T18:22:31.5106877Z  delete mode 100644 ci-out/progress.log
-2026-10-27T18:22:32.4915218Z From https://github.com/sebastienexp-blip/KorvaluneUnity
-2026-10-27T18:22:32.4915869Z  * branch            main       -> FETCH_HEAD
-2026-10-27T18:22:32.4916349Z    4722d1d..1d5bf76  main       -> origin/main
-2026-10-27T18:22:32.5592348Z Rebasing (1/1)
-2026-10-27T18:22:32.5592864Z Successfully rebased and updated refs/heads/main.
-2026-10-27T18:22:34.2084684Z To https://github.com/sebastienexp-blip/KorvaluneUnity
-2026-10-27T18:22:34.2085272Z    1d5bf76..d0e7e44  HEAD -> main
-2026-10-27T18:22:34.2736662Z ##[group]Run actions/cache/save@v4
-2026-10-27T18:22:34.2736971Z with:
-2026-10-27T18:22:34.2737185Z   path: Library
-2026-10-27T18:22:34.2737648Z   key: Library-Forge-a7ffedc4b807e8ebac8c666a7f2005ad038a318b4955dcce60f4682323830896-40558490222
-2026-10-27T18:22:34.2738173Z   enableCrossOsArchive: false
-2026-10-27T18:22:34.2738412Z env:
-2026-10-27T18:22:34.2745695Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LTVDSDktTkhYVC05VUVHLUFGOVMtTVBZNQ=="/>
-        <SerialMasked Value="F4-5CH9-NHXT-9UEG-AF9S-XXXX"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-10-27T18:22:34.2753364Z ##[endgroup]
-2026-10-27T18:22:34.3921362Z (node:2714) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-10-27T18:22:34.3922539Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-10-27T18:22:34.4123489Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/KorvaluneUnity/KorvaluneUnity --files-from manifest.txt --use-compress-program zstdmt
-2026-10-27T18:22:45.1826584Z (node:2714) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-2026-10-27T18:22:46.1639119Z Sent 0 of 1716579155 (0.0%), 0.0 MBs/sec
-2026-10-27T18:22:47.1712159Z Sent 469762048 of 1716579155 (27.4%), 223.4 MBs/sec
-2026-10-27T18:22:48.1700280Z Sent 805306368 of 1716579155 (46.9%), 255.5 MBs/sec
-2026-10-27T18:22:49.1705187Z Sent 1073741824 of 1716579155 (62.6%), 255.6 MBs/sec
-2026-10-27T18:22:50.1711244Z Sent 1649470291 of 1716579155 (96.1%), 314.2 MBs/sec
-2026-10-27T18:22:50.6296361Z Sent 1716579155 of 1716579155 (100.0%), 299.5 MBs/sec
-2026-10-27T18:22:50.9603459Z Cache saved with key: Library-Forge-a7ffedc4b807e8ebac8c666a7f2005ad038a318b4955dcce60f4682323830896-40558490222
-2026-10-27T18:22:50.9704372Z ##[group]Run if [ "skipped" = "success" ]; then exit 0; fi
-2026-10-27T18:22:50.9704807Z [36;1mif [ "skipped" = "success" ]; then exit 0; fi[0m
-2026-10-27T18:22:50.9705258Z [36;1mecho "::error::Échec de l'intégration Unity (voir ci-report.md)"; exit 1[0m
-2026-10-27T18:22:50.9742254Z shell: /usr/bin/bash -e {0}
-2026-10-27T18:22:50.9742540Z env:
-2026-10-27T18:22:50.9749534Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0LTVDSDktTkhYVC05VUVHLUFGOVMtTVBZNQ=="/>
-        <SerialMasked Value="F4-5CH9-NHXT-9UEG-AF9S-XXXX"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-10-27T18:22:50.9756799Z ##[endgroup]
-2026-10-27T18:22:50.9816434Z ##[error]Échec de l'intégration Unity (voir ci-report.md)
-2026-10-27T18:22:50.9818264Z ##[error]Process completed with exit code 1.
-2026-10-27T18:22:50.9912475Z Post job cleanup.
-2026-10-27T18:22:51.0934720Z [command]/usr/bin/git version
-2026-10-27T18:22:51.1001147Z git version 2.55.0
-2026-10-27T18:22:51.1048041Z Temporarily overriding HOME='/home/runner/work/_temp/9fd0ba7d-16ff-465d-804f-883d4ff84aed' before making global git config changes
-2026-10-27T18:22:51.1049192Z Adding repository directory to the temporary git global config as a safe directory
-2026-10-27T18:22:51.1055717Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-10-27T18:22:51.1122845Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-10-27T18:22:51.1163519Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-10-27T18:22:51.1446143Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-10-27T18:22:51.1473839Z http.https://github.com/.extraheader
-2026-10-27T18:22:51.1488195Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-2026-10-27T18:22:51.1552420Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-10-27T18:22:51.1919325Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-10-27T18:22:51.1985603Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-10-27T18:22:51.2483898Z Cleaning up orphan processes
-2026-10-27T18:22:51.2846365Z Terminate orphan process: pid (2468) (git)
-2026-10-27T18:22:51.2949331Z Terminate orphan process: pid (2469) (git)
-2026-10-27T18:22:51.3042406Z Terminate orphan process: pid (2470) (git-remote-https)
-2026-10-27T18:22:51.3098407Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache/restore@v4, actions/cache/save@v4, actions/checkout@v4, game-ci/unity-builder@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-10-27T18:32:28.9423136Z -define:ENABLE_DIRECTOR
+2026-10-27T18:32:28.9423324Z -define:ENABLE_LOCALIZATION
+2026-10-27T18:32:28.9423529Z -define:ENABLE_SPRITES
+2026-10-27T18:32:28.9423843Z -define:ENABLE_TERRAIN
+2026-10-27T18:32:28.9424106Z -define:ENABLE_TILEMAP
+2026-10-27T18:32:28.9424288Z -define:ENABLE_TIMELINE
+2026-10-27T18:32:28.9424488Z -define:ENABLE_LEGACY_INPUT_MANAGER
+2026-10-27T18:32:28.9424732Z -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
+2026-10-27T18:32:28.9424980Z -define:TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER
+2026-10-27T18:32:28.9425201Z -define:CSHARP_7_OR_LATER
+2026-10-27T18:32:28.9425400Z -define:CSHARP_7_3_OR_NEWER
+2026-10-27T18:32:28.9425789Z -r:"/opt/unity/Editor/Data/Managed/UnityEditor.Graphs.dll"
+2026-10-27T18:32:28.9426193Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
+2026-10-27T18:32:28.9426669Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
+2026-10-27T18:32:28.9427143Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.BuildProfileModule.dll"
+2026-10-27T18:32:28.9427598Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.CoreBusinessMetricsModule.dll"
+2026-10-27T18:32:28.9428040Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
+2026-10-27T18:32:28.9428473Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
+2026-10-27T18:32:28.9429015Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll"
+2026-10-27T18:32:28.9429477Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.EditorToolbarModule.dll"
+2026-10-27T18:32:28.9429914Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.EmbreeModule.dll"
+2026-10-27T18:32:28.9430309Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.GIModule.dll"
+2026-10-27T18:32:28.9430711Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.GraphViewModule.dll"
+2026-10-27T18:32:28.9431226Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.GraphicsStateCollectionSerializerModule.dll"
+2026-10-27T18:32:28.9431740Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.GridAndSnapModule.dll"
+2026-10-27T18:32:28.9432158Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.GridModule.dll"
+2026-10-27T18:32:28.9432561Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.MultiplayerModule.dll"
+2026-10-27T18:32:28.9432992Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.Physics2DModule.dll"
+2026-10-27T18:32:28.9433409Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.PhysicsModule.dll"
+2026-10-27T18:32:28.9433969Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.PresetsUIModule.dll"
+2026-10-27T18:32:28.9434438Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.PropertiesModule.dll"
+2026-10-27T18:32:28.9434868Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.QuickSearchModule.dll"
+2026-10-27T18:32:28.9435295Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.SafeModeModule.dll"
+2026-10-27T18:32:28.9435726Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.SceneTemplateModule.dll"
+2026-10-27T18:32:28.9436164Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.SceneViewModule.dll"
+2026-10-27T18:32:28.9436587Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.ShaderFoundryModule.dll"
+2026-10-27T18:32:28.9437010Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.SketchUpModule.dll"
+2026-10-27T18:32:28.9437429Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.SpriteMaskModule.dll"
+2026-10-27T18:32:28.9437852Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.SpriteShapeModule.dll"
+2026-10-27T18:32:28.9438278Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.SubstanceModule.dll"
+2026-10-27T18:32:28.9438687Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.TerrainModule.dll"
+2026-10-27T18:32:28.9439132Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.TextCoreFontEngineModule.dll"
+2026-10-27T18:32:28.9439603Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.TextCoreTextEngineModule.dll"
+2026-10-27T18:32:28.9440055Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.TextRenderingModule.dll"
+2026-10-27T18:32:28.9440470Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.TilemapModule.dll"
+2026-10-27T18:32:28.9440875Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.TreeModule.dll"
+2026-10-27T18:32:28.9441558Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.UIAutomationModule.dll"
+2026-10-27T18:32:28.9442233Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.UIBuilderModule.dll"
+2026-10-27T18:32:28.9443117Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.UIElementsModule.dll"
+2026-10-27T18:32:28.9444038Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.UIElementsSamplesModule.dll"
+2026-10-27T18:32:28.9444774Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.UmbraModule.dll"
+2026-10-27T18:32:28.9445485Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll"
+2026-10-27T18:32:28.9446184Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.VFXModule.dll"
+2026-10-27T18:32:28.9446839Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.VideoModule.dll"
+2026-10-27T18:32:28.9447499Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.XRModule.dll"
+2026-10-27T18:32:28.9448298Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEditor.dll"
+2026-10-27T18:32:28.9448898Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll"
+2026-10-27T18:32:28.9449558Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.AndroidJNIModule.dll"
+2026-10-27T18:32:28.9450283Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.AnimationModule.dll"
+2026-10-27T18:32:28.9450978Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll"
+2026-10-27T18:32:28.9451701Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll"
+2026-10-27T18:32:28.9452469Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll"
+2026-10-27T18:32:28.9453244Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.ContentLoadModule.dll"
+2026-10-27T18:32:28.9454096Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll"
+2026-10-27T18:32:28.9454803Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
+2026-10-27T18:32:28.9455530Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.DSPGraphModule.dll"
+2026-10-27T18:32:28.9455936Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.GIModule.dll"
+2026-10-27T18:32:28.9456348Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll"
+2026-10-27T18:32:28.9456860Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.GraphicsStateCollectionSerializerModule.dll"
+2026-10-27T18:32:28.9457441Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll"
+2026-10-27T18:32:28.9457953Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.HierarchyCoreModule.dll"
+2026-10-27T18:32:28.9458387Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.HotReloadModule.dll"
+2026-10-27T18:32:28.9458798Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll"
+2026-10-27T18:32:28.9459218Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll"
+2026-10-27T18:32:28.9459669Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.InputForUIModule.dll"
+2026-10-27T18:32:28.9460094Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.InputLegacyModule.dll"
+2026-10-27T18:32:28.9460512Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll"
+2026-10-27T18:32:28.9460923Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll"
+2026-10-27T18:32:28.9461366Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.LocalizationModule.dll"
+2026-10-27T18:32:28.9461797Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.MarshallingModule.dll"
+2026-10-27T18:32:28.9462213Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.MultiplayerModule.dll"
+2026-10-27T18:32:28.9462650Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll"
+2026-10-27T18:32:28.9463124Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll"
+2026-10-27T18:32:28.9463585Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll"
+2026-10-27T18:32:28.9464200Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.PropertiesModule.dll"
+2026-10-27T18:32:28.9464739Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll"
+2026-10-27T18:32:28.9465511Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.ShaderVariantAnalyticsModule.dll"
+2026-10-27T18:32:28.9466015Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll"
+2026-10-27T18:32:28.9466462Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll"
+2026-10-27T18:32:28.9466888Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll"
+2026-10-27T18:32:28.9467319Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll"
+2026-10-27T18:32:28.9467733Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll"
+2026-10-27T18:32:28.9468242Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll"
+2026-10-27T18:32:28.9468653Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll"
+2026-10-27T18:32:28.9469107Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreFontEngineModule.dll"
+2026-10-27T18:32:28.9469591Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreTextEngineModule.dll"
+2026-10-27T18:32:28.9470053Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll"
+2026-10-27T18:32:28.9470497Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll"
+2026-10-27T18:32:28.9470901Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll"
+2026-10-27T18:32:28.9471348Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsCommonModule.dll"
+2026-10-27T18:32:28.9471812Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll"
+2026-10-27T18:32:28.9472254Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityCurlModule.dll"
+2026-10-27T18:32:28.9472709Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityTestProtocolModule.dll"
+2026-10-27T18:32:28.9473177Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll"
+2026-10-27T18:32:28.9473612Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll"
+2026-10-27T18:32:28.9474219Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.VirtualTexturingModule.dll"
+2026-10-27T18:32:28.9474637Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll"
+2026-10-27T18:32:28.9475112Z -r:"/opt/unity/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+2026-10-27T18:32:28.9475681Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+2026-10-27T18:32:28.9476155Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Core.dll"
+2026-10-27T18:32:28.9476572Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Data.dll"
+2026-10-27T18:32:28.9476992Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Drawing.dll"
+2026-10-27T18:32:28.9477486Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.IO.Compression.FileSystem.dll"
+2026-10-27T18:32:28.9478024Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Net.dll"
+2026-10-27T18:32:28.9478694Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Numerics.dll"
+2026-10-27T18:32:28.9479485Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Runtime.Serialization.dll"
+2026-10-27T18:32:28.9480337Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ServiceModel.Web.dll"
+2026-10-27T18:32:28.9481141Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Transactions.dll"
+2026-10-27T18:32:28.9481895Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Web.dll"
+2026-10-27T18:32:28.9482626Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Windows.dll"
+2026-10-27T18:32:28.9483337Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Xml.Linq.dll"
+2026-10-27T18:32:28.9488800Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Xml.Serialization.dll"
+2026-10-27T18:32:28.9489542Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Xml.dll"
+2026-10-27T18:32:28.9490188Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.dll"
+2026-10-27T18:32:28.9490830Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll"
+2026-10-27T18:32:28.9491599Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/Microsoft.Win32.Primitives.dll"
+2026-10-27T18:32:28.9492424Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.AppContext.dll"
+2026-10-27T18:32:28.9493208Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Buffers.dll"
+2026-10-27T18:32:28.9494597Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.Concurrent.dll"
+2026-10-27T18:32:28.9495513Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.NonGeneric.dll"
+2026-10-27T18:32:28.9496420Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.Specialized.dll"
+2026-10-27T18:32:28.9497307Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.dll"
+2026-10-27T18:32:28.9498252Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.EventBasedAsync.dll"
+2026-10-27T18:32:28.9499268Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.Primitives.dll"
+2026-10-27T18:32:28.9500266Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.TypeConverter.dll"
+2026-10-27T18:32:28.9501169Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.dll"
+2026-10-27T18:32:28.9501956Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Console.dll"
+2026-10-27T18:32:28.9502651Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Data.Common.dll"
+2026-10-27T18:32:28.9503529Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Contracts.dll"
+2026-10-27T18:32:28.9504901Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Debug.dll"
+2026-10-27T18:32:28.9505831Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.FileVersionInfo.dll"
+2026-10-27T18:32:28.9506730Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Process.dll"
+2026-10-27T18:32:28.9507642Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.StackTrace.dll"
+2026-10-27T18:32:28.9508581Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.TextWriterTraceListener.dll"
+2026-10-27T18:32:28.9509546Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Tools.dll"
+2026-10-27T18:32:28.9510445Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.TraceSource.dll"
+2026-10-27T18:32:28.9511334Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Tracing.dll"
+2026-10-27T18:32:28.9512184Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Drawing.Primitives.dll"
+2026-10-27T18:32:28.9513024Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Dynamic.Runtime.dll"
+2026-10-27T18:32:28.9514093Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Calendars.dll"
+2026-10-27T18:32:28.9514987Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Extensions.dll"
+2026-10-27T18:32:28.9515783Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.dll"
+2026-10-27T18:32:28.9516576Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.ZipFile.dll"
+2026-10-27T18:32:28.9517646Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.dll"
+2026-10-27T18:32:28.9518545Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.DriveInfo.dll"
+2026-10-27T18:32:28.9519466Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Primitives.dll"
+2026-10-27T18:32:28.9525543Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Watcher.dll"
+2026-10-27T18:32:28.9526477Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.dll"
+2026-10-27T18:32:28.9527335Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.IsolatedStorage.dll"
+2026-10-27T18:32:28.9528426Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.MemoryMappedFiles.dll"
+2026-10-27T18:32:28.9529289Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Pipes.dll"
+2026-10-27T18:32:28.9530175Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.UnmanagedMemoryStream.dll"
+2026-10-27T18:32:28.9531020Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.dll"
+2026-10-27T18:32:28.9531828Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Expressions.dll"
+2026-10-27T18:32:28.9532688Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Parallel.dll"
+2026-10-27T18:32:28.9533518Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Queryable.dll"
+2026-10-27T18:32:28.9534489Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.dll"
+2026-10-27T18:32:28.9535198Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Memory.dll"
+2026-10-27T18:32:28.9535966Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Http.dll"
+2026-10-27T18:32:28.9536714Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NameResolution.dll"
+2026-10-27T18:32:28.9537502Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NetworkInformation.dll"
+2026-10-27T18:32:28.9538346Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Ping.dll"
+2026-10-27T18:32:28.9539093Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Primitives.dll"
+2026-10-27T18:32:28.9539884Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Requests.dll"
+2026-10-27T18:32:28.9540675Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Security.dll"
+2026-10-27T18:32:28.9541457Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Sockets.dll"
+2026-10-27T18:32:28.9542353Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebHeaderCollection.dll"
+2026-10-27T18:32:28.9543253Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.Client.dll"
+2026-10-27T18:32:28.9544393Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.dll"
+2026-10-27T18:32:28.9545264Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Numerics.Vectors.dll"
+2026-10-27T18:32:28.9546067Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ObjectModel.dll"
+2026-10-27T18:32:28.9546963Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.DispatchProxy.dll"
+2026-10-27T18:32:28.9547954Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.ILGeneration.dll"
+2026-10-27T18:32:28.9548935Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.Lightweight.dll"
+2026-10-27T18:32:28.9549818Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.dll"
+2026-10-27T18:32:28.9550930Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Extensions.dll"
+2026-10-27T18:32:28.9551889Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Primitives.dll"
+2026-10-27T18:32:28.9552774Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.dll"
+2026-10-27T18:32:28.9553635Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Reader.dll"
+2026-10-27T18:32:28.9554662Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.ResourceManager.dll"
+2026-10-27T18:32:28.9555941Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Writer.dll"
+2026-10-27T18:32:28.9557051Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.CompilerServices.VisualC.dll"
+2026-10-27T18:32:28.9558010Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Extensions.dll"
+2026-10-27T18:32:28.9558882Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Handles.dll"
+2026-10-27T18:32:28.9559862Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.RuntimeInformation.dll"
+2026-10-27T18:32:28.9560902Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.dll"
+2026-10-27T18:32:28.9561789Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Numerics.dll"
+2026-10-27T18:32:28.9562743Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Formatters.dll"
+2026-10-27T18:32:28.9563911Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Json.dll"
+2026-10-27T18:32:28.9564917Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Primitives.dll"
+2026-10-27T18:32:28.9565929Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Xml.dll"
+2026-10-27T18:32:28.9566769Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.dll"
+2026-10-27T18:32:28.9567590Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Claims.dll"
+2026-10-27T18:32:28.9568492Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Algorithms.dll"
+2026-10-27T18:32:28.9569512Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Csp.dll"
+2026-10-27T18:32:28.9570490Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Encoding.dll"
+2026-10-27T18:32:28.9571485Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Primitives.dll"
+2026-10-27T18:32:28.9572575Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.X509Certificates.dll"
+2026-10-27T18:32:28.9573575Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Principal.dll"
+2026-10-27T18:32:28.9574632Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.SecureString.dll"
+2026-10-27T18:32:28.9575534Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.Extensions.dll"
+2026-10-27T18:32:28.9576403Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.dll"
+2026-10-27T18:32:28.9577289Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.RegularExpressions.dll"
+2026-10-27T18:32:28.9578166Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Overlapped.dll"
+2026-10-27T18:32:28.9579012Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Extensions.dll"
+2026-10-27T18:32:28.9580174Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Parallel.dll"
+2026-10-27T18:32:28.9581069Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.dll"
+2026-10-27T18:32:28.9581939Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Thread.dll"
+2026-10-27T18:32:28.9582784Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.ThreadPool.dll"
+2026-10-27T18:32:28.9583652Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Timer.dll"
+2026-10-27T18:32:28.9584794Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.dll"
+2026-10-27T18:32:28.9585797Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ValueTuple.dll"
+2026-10-27T18:32:28.9586643Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.ReaderWriter.dll"
+2026-10-27T18:32:28.9587501Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XDocument.dll"
+2026-10-27T18:32:28.9588332Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.XDocument.dll"
+2026-10-27T18:32:28.9589182Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.dll"
+2026-10-27T18:32:28.9590017Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlDocument.dll"
+2026-10-27T18:32:28.9590881Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlSerializer.dll"
+2026-10-27T18:32:28.9591574Z -r:"/opt/unity/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll"
+2026-10-27T18:32:28.9592387Z -r:"/opt/unity/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll"
+2026-10-27T18:32:28.9593543Z -r:"Library/PackageCache/com.unity.collections/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll"
+2026-10-27T18:32:28.9594685Z -r:"Library/PackageCache/com.unity.ext.nunit/net40/unity-custom/nunit.framework.dll"
+2026-10-27T18:32:28.9595380Z -r:"Library/PackageCache/com.unity.nuget.mono-cecil/Mono.Cecil.dll"
+2026-10-27T18:32:28.9596058Z -r:"Library/Bee/artifacts/2400b0aE.dag/Unity.RenderPipelines.Core.Runtime.ref.dll"
+2026-10-27T18:32:28.9596844Z -r:"Library/Bee/artifacts/2400b0aE.dag/Unity.RenderPipelines.Universal.Runtime.ref.dll"
+2026-10-27T18:32:28.9597516Z -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEditor.UI.ref.dll"
+2026-10-27T18:32:28.9598052Z -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.UI.ref.dll"
+2026-10-27T18:32:28.9598779Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
+2026-10-27T18:32:28.9599651Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+2026-10-27T18:32:28.9600544Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+2026-10-27T18:32:28.9601306Z "Assets/Korvalune/Scripts/Runtime/CharacterAppearance.cs"
+2026-10-27T18:32:28.9601842Z "Assets/Korvalune/Scripts/Runtime/CharacterCatalog.cs"
+2026-10-27T18:32:28.9602333Z "Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs"
+2026-10-27T18:32:28.9602837Z "Assets/Korvalune/Scripts/Runtime/CharacterEquipment.cs"
+2026-10-27T18:32:28.9603306Z "Assets/Korvalune/Scripts/Runtime/CharacterRig.cs"
+2026-10-27T18:32:28.9603880Z "Assets/Korvalune/Scripts/Runtime/CreatorNames.cs"
+2026-10-27T18:32:28.9604320Z "Assets/Korvalune/Scripts/Runtime/Game/AutoTest.cs"
+2026-10-27T18:32:28.9604793Z "Assets/Korvalune/Scripts/Runtime/Game/CameraRig.cs"
+2026-10-27T18:32:28.9605294Z "Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs"
+2026-10-27T18:32:28.9605787Z "Assets/Korvalune/Scripts/Runtime/Game/Economy.cs"
+2026-10-27T18:32:28.9606574Z "Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs"
+2026-10-27T18:32:28.9607053Z "Assets/Korvalune/Scripts/Runtime/Game/Equipment.cs"
+2026-10-27T18:32:28.9607502Z "Assets/Korvalune/Scripts/Runtime/Game/FX.cs"
+2026-10-27T18:32:28.9608133Z "Assets/Korvalune/Scripts/Runtime/Game/Flicker.cs"
+2026-10-27T18:32:28.9608617Z "Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs"
+2026-10-27T18:32:28.9609121Z "Assets/Korvalune/Scripts/Runtime/Game/GameConfig.cs"
+2026-10-27T18:32:28.9609623Z "Assets/Korvalune/Scripts/Runtime/Game/GraphicsQuality.cs"
+2026-10-27T18:32:28.9610105Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs"
+2026-10-27T18:32:28.9610557Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs"
+2026-10-27T18:32:28.9610984Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.cs"
+2026-10-27T18:32:28.9611405Z "Assets/Korvalune/Scripts/Runtime/Game/Health.cs"
+2026-10-27T18:32:28.9611825Z "Assets/Korvalune/Scripts/Runtime/Game/HeroOutfit.cs"
+2026-10-27T18:32:28.9612236Z "Assets/Korvalune/Scripts/Runtime/Game/ItemIcons.cs"
+2026-10-27T18:32:28.9612808Z "Assets/Korvalune/Scripts/Runtime/Game/Items.cs"
+2026-10-27T18:32:28.9613189Z "Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs"
+2026-10-27T18:32:28.9613622Z "Assets/Korvalune/Scripts/Runtime/Game/LegendaryPowers.cs"
+2026-10-27T18:32:28.9614241Z "Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs"
+2026-10-27T18:32:28.9614686Z "Assets/Korvalune/Scripts/Runtime/Game/Merchant.cs"
+2026-10-27T18:32:28.9615174Z "Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs"
+2026-10-27T18:32:28.9615666Z "Assets/Korvalune/Scripts/Runtime/Game/Portal.cs"
+2026-10-27T18:32:28.9616100Z "Assets/Korvalune/Scripts/Runtime/Game/Quest.cs"
+2026-10-27T18:32:28.9616529Z "Assets/Korvalune/Scripts/Runtime/Game/RoofFade.cs"
+2026-10-27T18:32:28.9616980Z "Assets/Korvalune/Scripts/Runtime/Game/SaveSystem.cs"
+2026-10-27T18:32:28.9617410Z "Assets/Korvalune/Scripts/Runtime/Game/Skill.cs"
+2026-10-27T18:32:28.9617829Z "Assets/Korvalune/Scripts/Runtime/Game/SkillAnims.cs"
+2026-10-27T18:32:28.9618282Z "Assets/Korvalune/Scripts/Runtime/Game/SkillBook.cs"
+2026-10-27T18:32:28.9618727Z "Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs"
+2026-10-27T18:32:28.9619195Z "Assets/Korvalune/Scripts/Runtime/Game/TreasureChest.cs"
+2026-10-27T18:32:28.9619634Z "Assets/Korvalune/Scripts/Runtime/Game/UIStyle.cs"
+2026-10-27T18:32:28.9620051Z "Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs"
+2026-10-27T18:32:28.9620467Z "Assets/Korvalune/Scripts/Runtime/Game/VfxLibrary.cs"
+2026-10-27T18:32:28.9621035Z "Assets/Korvalune/Scripts/Runtime/Game/VirtualJoystick.cs"
+2026-10-27T18:32:28.9621520Z "Assets/Korvalune/Scripts/Runtime/MorphMap.cs"
+2026-10-27T18:32:28.9621950Z "Assets/Korvalune/Scripts/Runtime/MorphRig.cs"
+2026-10-27T18:32:28.9622395Z "Assets/Korvalune/Scripts/Runtime/ShowcaseCycler.cs"
+2026-10-27T18:32:28.9622808Z -langversion:9.0
+2026-10-27T18:32:28.9623083Z /deterministic
+2026-10-27T18:32:28.9623348Z /optimize+
+2026-10-27T18:32:28.9623599Z /debug:portable
+2026-10-27T18:32:28.9623991Z /nologo
+2026-10-27T18:32:28.9624253Z /RuntimeMetadataVersion:v4.0.30319
+2026-10-27T18:32:28.9624596Z /nowarn:0169
+2026-10-27T18:32:28.9624839Z /nowarn:0649
+2026-10-27T18:32:28.9625071Z /nowarn:0282
+2026-10-27T18:32:28.9625294Z /nowarn:1701
+2026-10-27T18:32:28.9625535Z /nowarn:1702
+2026-10-27T18:32:28.9625770Z /utf8output
+2026-10-27T18:32:28.9626023Z /preferreduilang:en-US
+2026-10-27T18:32:28.9626596Z /additionalfile:"Library/Bee/artifacts/2400b0aE.dag/Korvalune.Runtime.UnityAdditionalFile.txt"
+2026-10-27T18:32:28.9627233Z ##### Custom Environment Variables
+2026-10-27T18:32:28.9627587Z DOTNET_MULTILEVEL_LOOKUP=0
+2026-10-27T18:32:28.9627900Z ##### ExitCode
+2026-10-27T18:32:28.9628157Z 1
+2026-10-27T18:32:28.9628400Z ##### Output
+2026-10-27T18:32:28.9629903Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2026-10-27T18:32:28.9632943Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2026-10-27T18:32:28.9636438Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2026-10-27T18:32:28.9638520Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-10-27T18:32:28.9639506Z *** Tundra build failed (2.46 seconds), 2 items updated, 512 evaluated
+2026-10-27T18:32:28.9640458Z ## Script Compilation Error for: Csc Library/Bee/artifacts/2400b0aE.dag/Korvalune.Runtime.dll (+2 others)
+2026-10-27T18:32:28.9642064Z ## CmdLine: "/opt/unity/Editor/Data/NetCoreRuntime/dotnet" exec "/opt/unity/Editor/Data/DotNetSdkRoslyn/csc.dll" /nostdlib /noconfig /shared "@Library/Bee/artifacts/2400b0aE.dag/Korvalune.Runtime.rsp" "@Library/Bee/artifacts/2400b0aE.dag/Korvalune.Runtime.rsp2"
+2026-10-27T18:32:28.9643385Z ## Output:
+2026-10-27T18:32:28.9645270Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2026-10-27T18:32:28.9647331Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2026-10-27T18:32:28.9649010Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+2026-10-27T18:32:28.9650635Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-10-27T18:32:28.9651377Z 
+2026-10-27T18:32:28.9651501Z Total cache size 661976
+2026-10-27T18:32:28.9677400Z Total cache size after purge 661976, took 00:00:00.0163749
+2026-10-27T18:32:28.9710279Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager window to 
+2026-10-27T18:32:28.9713848Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager window to
+2026-10-27T18:32:28.9716923Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Enable the built in package 'Terrain Physics' in the Package Manager window to 
+2026-10-27T18:32:28.9718348Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-10-27T18:32:28.9770205Z AssetDatabase: script compilation time: 3.030260s
+2026-10-27T18:32:29.0506402Z Scripts have compiler errors.
+2026-10-27T18:32:29.0508314Z 
+2026-10-27T18:32:29.0508637Z Aborting batchmode due to failure:
+2026-10-27T18:32:29.0509148Z Scripts have compiler errors.
+2026-10-27T18:32:29.0509474Z 
+2026-10-27T18:32:29.0509676Z 
+2026-10-27T18:32:29.0509923Z SDL leaked 2 allocations
+2026-10-27T18:32:29.0729961Z Build failed, with exit code 1
+2026-10-27T18:32:29.3587030Z 
+2026-10-27T18:32:29.3587442Z ###########################
+2026-10-27T18:32:29.3587750Z #       Build output      #
+2026-10-27T18:32:29.3587962Z ###########################
+2026-10-27T18:32:29.3588086Z 
+2026-10-27T18:32:29.3600583Z total 8.0K
+2026-10-27T18:32:29.3601204Z drwxr-xr-x 2 1001 1001 4.0K Oct 27 18:31 .
+2026-10-27T18:32:29.3601494Z drwxr-xr-x 3 1001 1001 4.0K Oct 27 18:31 ..
+2026-10-27T18:32:29.4334424Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-10-27T18:32:29.4335382Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-10-27T18:32:29.4336055Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-10-27T18:32:29.4336646Z [UnityConnectServicesConfig] Service configuration:
+2026-10-27T18:32:29.4337063Z     "servicesConfigBaseUrl": "",
+2026-10-27T18:32:29.4337373Z     "disableServicesWindow": false,
+2026-10-27T18:32:29.4337704Z     "disableUserLogin": false,
+2026-10-27T18:32:29.4337956Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-10-27T18:32:29.4338217Z     "clientConnectTimeoutSec": 5,
+2026-10-27T18:32:29.4338450Z     "clientHandshakeTimeoutSec": 10,
+2026-10-27T18:32:29.4338869Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-10-27T18:32:29.4339240Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-10-27T18:32:29.4339497Z     "licensingServiceBaseUrl": "",
+2026-10-27T18:32:29.4339742Z     "enableProxyAutoconfig": "false"
+2026-10-27T18:32:29.4339892Z 
+2026-10-27T18:32:29.4528146Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-10-27T18:32:29.4528462Z Branch:                  6000.0/staging
+2026-10-27T18:32:29.4528694Z Build type:              Release
+2026-10-27T18:32:29.4528916Z Batch mode:              YES
+2026-10-27T18:32:29.4529128Z System name:             Linux
+2026-10-27T18:32:29.4529403Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
+2026-10-27T18:32:29.4529701Z Kernel version:          6.17.0-1022-azure
+2026-10-27T18:32:29.4529936Z Architecture:            x86_64
+2026-10-27T18:32:29.4530150Z Available memory:        15989 MB
+2026-10-27T18:32:30.1540553Z User *** logged in successfully
+2026-10-27T18:32:30.1540999Z [UnityConnect::TryLogin] Request Succeeded.
+2026-10-27T18:32:30.1541534Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-10-27T18:32:30.1542497Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-10-27T18:32:30.1551302Z [Licensing::Module] Successfully launched the LicensingClient (PId: 381)
+2026-10-27T18:32:30.7247710Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T18:32:30.722711Z"
+2026-10-27T18:32:30.7254590Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-10-27T18:32:30.7700007Z [Licensing::Client] Handshaking with LicensingClient:
+2026-10-27T18:32:30.7700791Z   Version:                 1.16.0+1c867a9
+2026-10-27T18:32:30.7712720Z   Session Id:              f908235e6ea24bbd8c2cb06f68b3badf
+2026-10-27T18:32:30.7713525Z   Correlation Id:          6603b3b7ba816c628632ce6b5637f336
+2026-10-27T18:32:30.7714184Z   External correlation Id: 6676095460521344281
+2026-10-27T18:32:30.7714628Z   Machine Id:              Hw0aO2hZJHi0TkzgUeqDvXmBuCE=
+2026-10-27T18:32:30.7715508Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.05s, handshake: 0.00s)
+2026-10-27T18:32:30.7717197Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T18:32:30.769893Z"
+2026-10-27T18:32:30.7718317Z [Licensing::Module] Connected to LicensingClient (PId: 381, launch time: 0.00, total connection time: 0.62s)
+2026-10-27T18:32:30.7857529Z [Licensing::Client] Successfully updated the access token
+2026-10-27T18:32:30.7859457Z [Licensing::Module] Successfully updated the access token 65kmHjA7qM...
+2026-10-27T18:32:31.0457354Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T18:32:31.0458120Z       Application is shutting down...
+2026-10-27T18:32:31.0554023Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T18:32:31.0555163Z       ALC ILPP context 1 is unloading
+2026-10-27T18:32:31.8668591Z [Licensing::Client] Successfully processed license management request
+2026-10-27T18:32:31.8669318Z [Licensing::Module] Successfully returned the entitlement license
+2026-10-27T18:32:31.9004127Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-10-27T18:32:33.2243314Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-10-27T18:32:33.2336958Z 
+2026-10-27T18:32:33.2337527Z ###########################
+2026-10-27T18:32:33.2337953Z #         Failure         #
+2026-10-27T18:32:33.2338265Z ###########################
+2026-10-27T18:32:33.2338455Z 
+2026-10-27T18:32:33.2338655Z Please note that the exit code is not very descriptive.
+2026-10-27T18:32:33.2339129Z Most likely it will not help you solve the issue.
+2026-10-27T18:32:33.2339408Z 
+2026-10-27T18:32:33.2339880Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-10-27T18:32:33.2340441Z 
+2026-10-27T18:32:33.4955082Z ##[error]Build failed with exit code 1
