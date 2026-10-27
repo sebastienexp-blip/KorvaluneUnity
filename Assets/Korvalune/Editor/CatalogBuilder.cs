@@ -79,10 +79,10 @@ namespace Korvalune.EditorTools
             cat.classes.Clear();
             foreach (var (id, label, desc) in Classes)
             {
-                var m = AssetDatabase.LoadAssetAtPath<GameObject>($"{ModelPipeline.Root}/Prefabs/Characters/{id}_M.prefab");
-                var f = AssetDatabase.LoadAssetAtPath<GameObject>($"{ModelPipeline.Root}/Prefabs/Characters/{id}_F.prefab");
-                if (!m && !f) m = AssetDatabase.LoadAssetAtPath<GameObject>($"{ModelPipeline.Root}/Prefabs/Characters/{id}.prefab");
-                if (m || f) cat.classes.Add(new CharacterCatalog.PlayableClass { id = id, label = label, description = desc, male = m, female = f });
+                string Pf(string n) => File.Exists($"{ModelPipeline.Root}/Resources/Prefabs/Characters/{n}.prefab") ? $"Prefabs/Characters/{n}" : "";
+                var m = Pf(id + "_M"); var f = Pf(id + "_F");
+                if (m == "" && f == "") m = Pf(id);
+                if (m != "" || f != "") cat.classes.Add(new CharacterCatalog.PlayableClass { id = id, label = label, description = desc, maleRes = m, femaleRes = f });
             }
             cat.morphsMale = Morphs("BaseMale"); cat.morphsFemale = Morphs("BaseFemale");
             EditorUtility.SetDirty(cat); AssetDatabase.SaveAssets();
@@ -95,12 +95,12 @@ namespace Korvalune.EditorTools
             foreach (var e in src ?? new JEntry[0])
             {
                 var p = new CharacterCatalog.Part { id = e.id, sex = e.sex ?? "MF", license = e.license, author = e.author };
-                p.male = AssetDatabase.LoadAssetAtPath<GameObject>($"{ModelPipeline.Root}/Prefabs/Catalog/{kind}/{e.id}_M.prefab");
-                p.female = AssetDatabase.LoadAssetAtPath<GameObject>($"{ModelPipeline.Root}/Prefabs/Catalog/{kind}/{e.id}_F.prefab");
+                string Pf(string n) => File.Exists($"{ModelPipeline.Root}/Resources/Prefabs/Catalog/{kind}/{n}.prefab") ? $"Prefabs/Catalog/{kind}/{n}" : "";
+                p.maleRes = Pf(e.id + "_M"); p.femaleRes = Pf(e.id + "_F");
                 if (e.variants != null)
                     foreach (var v in e.variants) p.variants.Add(new CharacterCatalog.Variant { id = v.id, baseMap = Tex<Texture2D>(v.file), normal = Tex<Texture2D>(v.normal) });
                 else if (!string.IsNullOrEmpty(e.file)) p.variants.Add(new CharacterCatalog.Variant { id = "default", baseMap = Tex<Texture2D>(e.file) });
-                if (p.male || p.female) list.Add(p);
+                if (p.maleRes != "" || p.femaleRes != "") list.Add(p);
             }
             return list;
         }

@@ -178,7 +178,7 @@ namespace Korvalune.EditorTools
             RenderSettings.skybox = sky; RenderSettings.sun = sun;
             RenderSettings.ambientMode = AmbientMode.Trilight;
             RenderSettings.ambientSkyColor = new Color(0.55f, 0.62f, 0.75f); RenderSettings.ambientEquatorColor = new Color(0.42f, 0.44f, 0.38f); RenderSettings.ambientGroundColor = new Color(0.18f, 0.17f, 0.13f);
-            RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Linear; RenderSettings.fogStartDistance = 140; RenderSettings.fogEndDistance = 520; RenderSettings.fogColor = new Color(0.70f, 0.76f, 0.84f);
+            RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Linear; RenderSettings.fogStartDistance = 170; RenderSettings.fogEndDistance = 820; RenderSettings.fogColor = new Color(0.70f, 0.76f, 0.84f);
 
             CI.Step("vallée : caméra, post-traitement, configuration");
             // ---- caméra et jeu
@@ -191,7 +191,7 @@ namespace Korvalune.EditorTools
             Ambience(cam.transform);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = Config();
-            game.playerSpawn = Ground(new Vector2(-3, -125));
+            game.playerSpawn = Ground(new Vector2(-8, -162));
             game.castleGate = Ground(Gate);
             game.camps.Add(new GameBootstrap.Camp { enemyId = "squelette", center = Ground(grave), count = 6, radius = 10 });
             game.camps.Add(new GameBootstrap.Camp { enemyId = "loup", center = Ground(new Vector2(45, 120)), count = 4, radius = 8 });
@@ -216,7 +216,7 @@ namespace Korvalune.EditorTools
 
         static GameObject Place(string rel, Vector3 pos, float yaw, float scale = 1f)
         {
-            var path = $"{Root}/Prefabs/World/{Path.GetFileName(rel)}.prefab";
+            var path = $"{Root}/Resources/Prefabs/World/{Path.GetFileName(rel)}.prefab";
             var p = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             if (!p) { Debug.LogWarning("[Monde] prefab absent : " + path); return null; }
             var go = (GameObject)PrefabUtility.InstantiatePrefab(p);
@@ -288,13 +288,13 @@ namespace Korvalune.EditorTools
         {
             var protos = new List<TreePrototype>();
             string[] names = { "Chene0", "Chene1", "Chene2", "Pin0", "Pin1", "Pin2" };
-            ModelPipeline.EnsureFolder(Root + "/Prefabs/World/Arbres");
+            ModelPipeline.EnsureFolder(Root + "/Resources/Prefabs/World/Arbres");
             foreach (var n in names)
             {
-                var p = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Prefabs/World/{n}.prefab");
+                var p = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Resources/Prefabs/World/{n}.prefab");
                 if (!p) continue;
                 // arbre du terrain : LODGroup à la racine — LOD0 détaillé, LOD1 allégé, disparition au loin
-                var p1 = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Prefabs/World/{n}_LOD1.prefab");
+                var p1 = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Resources/Prefabs/World/{n}_LOD1.prefab");
                 var go = new GameObject(n);
                 Renderer Lod(GameObject src, string nm)
                 {
@@ -310,7 +310,7 @@ namespace Korvalune.EditorTools
                 lg.SetLODs(r1 ? new[] { new LOD(0.22f, new[] { r0 }), new LOD(0.035f, new[] { r1 }) } : new[] { new LOD(0.035f, new[] { r0 }) });
                 lg.RecalculateBounds();
                 var cap = go.AddComponent<CapsuleCollider>(); cap.center = new Vector3(0, 2, 0); cap.height = 4; cap.radius = 0.45f;
-                var tp = $"{Root}/Prefabs/World/Arbres/{n}_Arbre.prefab";
+                var tp = $"{Root}/Resources/Prefabs/World/Arbres/{n}_Arbre.prefab";
                 var pf = PrefabUtility.SaveAsPrefabAsset(go, tp); Object.DestroyImmediate(go);
                 protos.Add(new TreePrototype { prefab = pf });
             }
@@ -397,11 +397,12 @@ namespace Korvalune.EditorTools
             var cfg = AssetDatabase.LoadAssetAtPath<GameConfig>(path);
             if (!cfg) { cfg = ScriptableObject.CreateInstance<GameConfig>(); AssetDatabase.CreateAsset(cfg, path); }
             cfg.catalog = AssetDatabase.LoadAssetAtPath<CharacterCatalog>(DataDir + "/CharacterCatalog.asset");
-            GameObject P(string p) => AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Prefabs/{p}.prefab");
-            cfg.heroes.Clear();
+            GameObject P(string p) => AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Resources/Prefabs/{p}.prefab");
+            string R(string p) => File.Exists($"{Root}/Resources/Prefabs/{p}.prefab") ? "Prefabs/" + p : null;
+            cfg.heroRes.Clear();
             foreach (var n in new[] { "KaelDraven", "ElyraNoctis", "Varek", "Morvanna", "Tharion" })
-                foreach (var s in new[] { "_M", "_F" }) { var h = P("Characters/" + n + s); if (h) cfg.heroes.Add(h); }
-            cfg.defaultHero = P("Characters/KaelDraven_M") ?? cfg.heroes.FirstOrDefault() ?? P("Characters/BaseMale");
+                foreach (var s in new[] { "_M", "_F" }) { var h = R("Characters/" + n + s); if (h != null) cfg.heroRes.Add(h); }
+            cfg.defaultHeroRes = R("Characters/KaelDraven_M") ?? cfg.heroRes.FirstOrDefault() ?? R("Characters/BaseMale");
             cfg.enemies.Clear();
             void E(string id, string label, string prefab, float hp, float dmg, float spd, float range, float cd, float aggro, float xp, float scale = 1, float armor = 0, float hitDelay = 0.45f)
                 => cfg.enemies.Add(new GameConfig.EnemyType { id = id, label = label, prefab = P("Enemies/" + prefab), hp = hp, damage = dmg, speed = spd, attackRange = range, attackCooldown = cd, aggro = aggro, xp = xp, scale = scale, armor = armor, hitDelay = hitDelay });

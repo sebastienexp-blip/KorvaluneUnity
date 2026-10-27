@@ -15,8 +15,10 @@ namespace Korvalune.Game
             public float hitDelay = 0.45f;
         }
         public CharacterCatalog catalog;
-        public GameObject defaultHero;
-        public List<GameObject> heroes = new List<GameObject>();
+        // héros : chemins Resources (un seul héros chargé en jeu, pas les dix)
+        public string defaultHeroRes;
+        public List<string> heroRes = new List<string>();
+        public GameObject defaultHero => Res.Load<GameObject>(defaultHeroRes);
         public List<EnemyType> enemies = new List<EnemyType>();
         public Material fxAdditive, fxAlpha, ringMat;
         public VfxLibrary vfx;

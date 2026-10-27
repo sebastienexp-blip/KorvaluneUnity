@@ -71,10 +71,11 @@ namespace Korvalune
             if (catalog == null || catalog.classes.Count == 0) return;
             classIndex = Mathf.Clamp(classIndex, 0, catalog.classes.Count - 1);
             var c = catalog.classes[classIndex];
-            var prefab = female ? (c.female ? c.female : c.male) : (c.male ? c.male : c.female);
+            var prefab = female ? (c.HasFemale ? c.female : c.male) : (c.HasMale ? c.male : c.female);
+            Res.Clear();                                   // libère le héros précédent (mémoire)
             if (!prefab) return;
             current = Instantiate(prefab, stage);
-            current.transform.localPosition = Vector3.zero;
+            current.transform.localPosition = Vector3.zero; current.transform.rotation = Quaternion.Euler(0, yaw, 0);   // de face dès l'apparition
             look = current.GetComponent<CharacterAppearance>(); if (!look) look = current.AddComponent<CharacterAppearance>();
             look.female = female;
             Reapply();

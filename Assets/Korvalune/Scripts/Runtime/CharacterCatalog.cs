@@ -20,12 +20,22 @@ namespace Korvalune
         [Serializable] public class Part : Credit
         {
             public string id; public string sex = "MF";
-            public GameObject male, female;              // modèles ajustés aux corps de base homme / femme
+            // modèles ajustés aux corps de base homme / femme : chemins Resources, chargés à la demande (mémoire mobile)
+            public string maleRes, femaleRes;
+            public GameObject male => Res.Load<GameObject>(maleRes);
+            public GameObject female => Res.Load<GameObject>(femaleRes);
             public List<Variant> variants = new List<Variant>();
-            public GameObject For(bool female) => female ? (this.female ? this.female : male) : (male ? male : this.female);
+            public GameObject For(bool female) => female ? (!string.IsNullOrEmpty(femaleRes) ? this.female : male) : (!string.IsNullOrEmpty(maleRes) ? male : this.female);
         }
         [Serializable] public class Morph { public string id; public string group; public string label; public bool face; public bool bipolar; }
-        [Serializable] public class PlayableClass { public string id; public string label; public string description; public GameObject male, female; }
+        [Serializable] public class PlayableClass
+        {
+            public string id; public string label; public string description;
+            public string maleRes, femaleRes;            // héros : chargés seulement quand on les affiche ou les joue
+            public GameObject male => Res.Load<GameObject>(maleRes);
+            public GameObject female => Res.Load<GameObject>(femaleRes);
+            public bool HasMale => !string.IsNullOrEmpty(maleRes); public bool HasFemale => !string.IsNullOrEmpty(femaleRes);
+        }
 
         public List<PlayableClass> classes = new List<PlayableClass>();
         public List<Skin> skins = new List<Skin>();
@@ -38,5 +48,26 @@ namespace Korvalune
 
         public List<Morph> Morphs(bool female) => female ? morphsFemale : morphsMale;
         public static bool Fits(string sex, bool female) => string.IsNullOrEmpty(sex) || sex == "MF" || sex == (female ? "F" : "M");
+    }
+
+    /// <summary>Chargement à la demande depuis Resources, avec cache : seuls les héros et pièces réellement affichés sont en mémoire
+    /// (tout charger d'un coup dépassait 7 Go dans l'éditeur, impossible sur téléphone).</summary>
+    public static class Res
+    {
+        static readonly Dictionary<string, UnityEngine.Object> cache = new Dictionary<string, UnityEngine.Object>();
+        public static T Load<T>(string path) where T : UnityEngine.Object
+        {
+            if (string.IsNullOrEmpty(path)) return null;
+            if (cache.TryGetValue(path, out var o) && o) return o as T;
+            var r = Resources.Load<T>(path); if (r) cache[path] = r; return r;
+        }
+        /// <summary>« Assets/Korvalune/Resources/Prefabs/X/Y.prefab » → « Prefabs/X/Y ».</summary>
+        public static string PathOf(string assetPath)
+        {
+            if (string.IsNullOrEmpty(assetPath)) return "";
+            int i = assetPath.IndexOf("/Resources/"); if (i < 0) return "";
+            var r = assetPath.Substring(i + 11); int dot = r.LastIndexOf('.'); return dot > 0 ? r.Substring(0, dot) : r;
+        }
+        public static void Clear() { cache.Clear(); Resources.UnloadUnusedAssets(); }
     }
 }

@@ -54,7 +54,7 @@ namespace Korvalune.Game
         {
             if (catalog == null || catalog.classes.Count == 0) return null;
             var c = catalog.classes[Mathf.Clamp(classIndex, 0, catalog.classes.Count - 1)];
-            return female ? (c.female ? c.female : c.male) : (c.male ? c.male : c.female);
+            return female ? (c.HasFemale ? c.female : c.male) : (c.HasMale ? c.male : c.female);
         }
         int ClassIndexOf(string id) { if (catalog == null) return 0; int i = catalog.classes.FindIndex(c => c.id == id); return Mathf.Max(0, i); }
 

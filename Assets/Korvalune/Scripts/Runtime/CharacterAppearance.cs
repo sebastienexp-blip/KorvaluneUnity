@@ -35,10 +35,20 @@ namespace Korvalune
             foreach (var t in GetComponentsInChildren<Transform>(true)) if (!bones.ContainsKey(t.name)) bones[t.name] = t;
         }
 
+        /// <summary>Matériaux propres à ce personnage : instances en jeu ; hors jeu (éditeur, captures), copies explicites pour ne pas
+        /// modifier les matériaux du projet ni déclencher l'erreur « renderer.material during edit mode ».</summary>
+        static readonly HashSet<Renderer> copied = new HashSet<Renderer>();
+        static Material[] Mats(Renderer r)
+        {
+            if (Application.isPlaying) return r.materials;
+            if (!copied.Contains(r)) { var ms = r.sharedMaterials; for (int i = 0; i < ms.Length; i++) if (ms[i]) ms[i] = new Material(ms[i]) { name = ms[i].name }; r.sharedMaterials = ms; copied.Add(r); }
+            return r.sharedMaterials;
+        }
+
         IEnumerable<Material> MaterialsEndingWith(string suffix)
         {
             foreach (var r in GetComponentsInChildren<Renderer>(true))
-                foreach (var m in r.materials)
+                foreach (var m in Mats(r))
                     if (m != null && m.name.Replace(" (Instance)", "").EndsWith(suffix)) yield return m;
         }
 
@@ -82,7 +92,7 @@ namespace Korvalune
                 if (part.variants.Count > 0)
                 {
                     var v = part.variants[Mathf.Clamp(variant, 0, part.variants.Count - 1)];
-                    foreach (var m in smr.materials)
+                    foreach (var m in Mats(smr))
                     {
                         if (v.baseMap) m.SetTexture(BaseMap, v.baseMap);
                         if (v.normal) { m.SetTexture(BumpMap, v.normal); m.EnableKeyword("_NORMALMAP"); }
@@ -113,7 +123,7 @@ namespace Korvalune
         {
             hairTint = c;
             if (attached.TryGetValue("Cheveux", out var go) && go)
-                foreach (var r in go.GetComponentsInChildren<Renderer>(true)) foreach (var m in r.materials) m.SetColor(BaseColor, c);
+                foreach (var r in go.GetComponentsInChildren<Renderer>(true)) foreach (var m in Mats(r)) m.SetColor(BaseColor, c);
         }
 
         // ------------------------------------------------------------------ morphologie

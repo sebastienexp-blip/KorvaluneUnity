@@ -58,7 +58,7 @@ def export(asset, tex, specs, subdir, kind='character', rig='Human', clips=(), a
         asset.clips = saved; info['clips'] = ainfo['clips']
     else:
         info = write_fbx(os.path.join(folder, asset.name + '.fbx'), asset)
-    man = dict(model=asset.name + '.fbx', kind=kind, rig=rig, prefab=f'Assets/Korvalune/Prefabs/{prefab_dir}/{asset.name}.prefab',
+    man = dict(model=asset.name + '.fbx', kind=kind, rig=rig, prefab=f'Assets/Korvalune/Resources/Prefabs/{prefab_dir}/{asset.name}.prefab',
                controller=controller if rig != 'None' and asset.clips else '', priority=priority, materials=mats,
                clips=[dict(name=n, loop=l, rootMotion=r, events=list(ev)) for n, l, r, ev in clips],
                attachments=[dict(socket=s, model=m) for s, m in attachments])

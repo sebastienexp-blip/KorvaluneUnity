@@ -120,7 +120,7 @@ def export(asset, tex):
     info = write_fbx(os.path.join(kdir, 'Knight.fbx'), asset)
     from knight.anims import CLIPS
     shared = {m['name']: {k: '../../Characters/Knight/' + v for k, v in m.items() if k.endswith('Map')} for m in kmats}
-    man = dict(model='Knight.fbx', kind='character', rig='Human', prefab='Assets/Korvalune/Prefabs/Characters/Knight.prefab',
+    man = dict(model='Knight.fbx', kind='character', rig='Human', prefab='Assets/Korvalune/Resources/Prefabs/Characters/Knight.prefab',
                controller='humanoid-combat', priority=10, materials=kmats,
                clips=[dict(name=n, loop=l, rootMotion=r, events=list(ev)) for n, l, r, ev in CLIPS],
                attachments=[dict(socket='Socket_Weapon_R', model='../../Weapons/Longsword/Longsword.fbx'),
@@ -136,7 +136,7 @@ def export(asset, tex):
         mats = mat_entries(g, gdir, 'Textures', shared)
         gi = write_fbx(os.path.join(gdir, gname + '.fbx'), g)
         allV = np.vstack([m.V for _, m, _ in g.parts]); size = allV.max(0) - allV.min(0); ctr = (allV.max(0) + allV.min(0)) / 2
-        gm = dict(model=gname + '.fbx', kind='prop', rig='None', prefab=f'Assets/Korvalune/Prefabs/Weapons/{gname}.prefab', priority=1, materials=mats,
+        gm = dict(model=gname + '.fbx', kind='prop', rig='None', prefab=f'Assets/Korvalune/Resources/Prefabs/Weapons/{gname}.prefab', priority=1, materials=mats,
                   collider=dict(type='box', center=[round(float(x), 4) for x in ctr], size=[round(float(x), 4) for x in size], trigger=True),
                   expect=dict(heightMin=float(size[1]) * 0.95, heightMax=float(size[1]) * 1.05, maxTriangles=20000))
         json.dump(gm, open(os.path.join(gdir, gname + '.forge.json'), 'w'), indent=2, ensure_ascii=False)

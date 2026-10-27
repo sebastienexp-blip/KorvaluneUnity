@@ -84,6 +84,7 @@ namespace Korvalune.EditorTools
                 var urp = GraphicsSettings.defaultRenderPipeline as UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset;
                 float shadowDist = urp ? urp.shadowDistance : 0; if (urp) urp.shadowDistance = 0;
                 // créateur en dernier : il charge tout le catalogue (140 pièces, 10 héros à curseurs de morphologie)
+                Progress("Catalogue"); CatalogBuilder.Build();                 // la vallée et la sélection s'en servent
                 Progress("WorldCheck"); WorldCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("SelectionCheck"); SelectionCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
@@ -268,7 +269,7 @@ namespace Korvalune.EditorTools
             if (cat == null) { Line("\n_Pas de catalogue de personnalisation (Art/Catalog/catalog.json absent)._"); return; }
             Line("\n## Créateur de personnage");
             Check("Catalogue", cat.skins.Count > 0 && cat.eyes.Count > 0, $"{cat.classes.Count} classes, {cat.skins.Count} peaux, {cat.eyes.Count} yeux, {cat.hair.Count} coiffures ({cat.hair.Sum(h => h.variants.Count)} variantes), {cat.eyebrows.Count} sourcils, {cat.eyelashes.Count} cils, {cat.morphsMale.Count}/{cat.morphsFemale.Count} curseurs homme/femme");
-            Check("Classes jouables en homme et en femme", cat.classes.Count > 0 && cat.classes.All(c => c.male && c.female), string.Join(", ", cat.classes.Select(c => $"{c.id} [{(c.male ? "H" : "-")}{(c.female ? "F" : "-")}]")));
+            Check("Classes jouables en homme et en femme", cat.classes.Count > 0 && cat.classes.All(c => c.HasMale && c.HasFemale), string.Join(", ", cat.classes.Select(c => $"{c.id} [{(c.HasMale ? "H" : "-")}{(c.HasFemale ? "F" : "-")}]")));
             CatalogBuilder.BuildScene(cat);
             Check("Scène du créateur", File.Exists(CatalogBuilder.ScenePath), CatalogBuilder.ScenePath);
             if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null) return;
@@ -316,9 +317,10 @@ namespace Korvalune.EditorTools
                 t ? $"{t.terrainData.size}, {t.terrainData.terrainLayers.Count(l => l && l.diffuseTexture)} couches texturées, {t.terrainData.treeInstanceCount} arbres" : "absent");
             Check("Château", GameObject.Find("ChateauKorvalune") != null);
             var cfg = game.config;
-            Check("Héros jouable", cfg.defaultHero != null, cfg.defaultHero ? cfg.defaultHero.name + $" ({cfg.heroes.Count} héros)" : "aucun prefab");
+            Check("Héros jouable", cfg.defaultHero != null, cfg.defaultHero ? cfg.defaultHero.name + $" ({cfg.heroRes.Count} héros, chargés à la demande)" : "aucun prefab");
             Check("Ennemis configurés", cfg.enemies.All(e => e.prefab), string.Join(", ", cfg.enemies.Select(e => e.id + (e.prefab ? "" : " (absent)"))));
             WorldBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
+            Check("Héros au sec (au-dessus de l'eau)", game.Player && game.Player.transform.position.y > WorldBuilder.WaterLevel + 0.3f, game.Player ? $"y = {game.Player.transform.position.y:0.0}, eau à {WorldBuilder.WaterLevel:0.0}" : "");
             Check("Héros posé sur le sol", game.Player && Mathf.Abs(game.Player.transform.position.y - WorldBuilder.Height(game.Player.transform.position.x, game.Player.transform.position.z)) < 1.5f,
                 game.Player ? $"y = {game.Player.transform.position.y:0.0}" : "");
         }
