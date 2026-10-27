@@ -1,0 +1,77 @@
+# Sons libres de droits (CC0 / CC-BY) : étape « lister » télécharge les packs et écrit leur contenu (durées) dans
+# ci-out/sons-libres.md ; étape « importer » copie les fichiers choisis dans Assets/Korvalune/Resources/Audio/<nom>.ogg
+# (découpe, fondu, normalisation du volume) — une ligne par son : nom|chemin dans les packs|début (s)|durée (s, 0 = entière).
+name: Sons — libres de droits
+
+on:
+  workflow_dispatch:
+    inputs:
+      etape:
+        description: "lister ou importer"
+        required: true
+        default: lister
+      correspondances:
+        description: "nom|chemin|début|durée (une ligne par son)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  sons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Outils
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg p7zip-full > /dev/null
+      - name: Télécharger les packs
+        run: |
+          mkdir -p /tmp/packs && cd /tmp/packs
+          get() { curl -sSfL --retry 3 -o "$1" "$2" && echo "✅ $1" || echo "❌ $1"; }
+          get jc.7z "https://opengameart.org/sites/default/files/fantasy_sfx_pack_vol_1.7z"
+          get kenney_rpg.zip "https://opengameart.org/sites/default/files/RPGsounds_Kenney.zip"
+          get creatures1.zip "https://opengameart.org/sites/default/files/80-CC0-creature-SFX_0.zip"
+          get creatures2.zip "https://opengameart.org/sites/default/files/80-CC0-creature-sfx-2.zip"
+          get betes.7z "https://opengameart.org/sites/default/files/beast_or_animal.7z"
+          get levelup.zip "https://opengameart.org/sites/default/files/Level%20Up%21.zip"
+          mkdir -p magie ambiances
+          for i in 1_0 2 3 4 5 6_0 7_0; do get "magie/magical_$i.ogg" "https://opengameart.org/sites/default/files/magical_$i.ogg"; done
+          get ambiances/donjon.ogg "https://opengameart.org/sites/default/files/dungeon_ambient_1_0.ogg"
+          get ambiances/foret.mp3 "https://opengameart.org/sites/default/files/Forest_Ambience.mp3"
+          get ambiances/feu.wav "https://opengameart.org/sites/default/files/fire.wav"
+          for z in *.zip; do mkdir -p "${z%.zip}"; unzip -q -o "$z" -d "${z%.zip}" || true; done
+          for z in *.7z; do mkdir -p "${z%.7z}"; 7z x -y -o"${z%.7z}" "$z" > /dev/null || true; done
+          rm -f *.zip *.7z
+      - name: Lister
+        if: github.event.inputs.etape == 'lister'
+        run: |
+          mkdir -p ci-out
+          { echo "# Sons libres disponibles"; echo; echo "| fichier | durée (s) |"; echo "|---|---|";
+            cd /tmp/packs && find . -type f \( -iname '*.ogg' -o -iname '*.wav' -o -iname '*.mp3' -o -iname '*.flac' \) | sort | while read -r f; do
+              d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f" 2>/dev/null | cut -c1-6); echo "| ${f#./} | $d |"; done; } > ci-out/sons-libres.md
+          wc -l ci-out/sons-libres.md
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add ci-out/sons-libres.md && git commit -m "Sons libres : inventaire [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done
+      - name: Importer
+        if: github.event.inputs.etape == 'importer'
+        env:
+          MAP: ${{ github.event.inputs.correspondances }}
+        run: |
+          mkdir -p Assets/Korvalune/Resources/Audio
+          while IFS='|' read -r nom src debut duree; do
+            nom="$(echo "$nom" | tr -cd 'a-zA-Z0-9_')"; [ -z "$nom" ] && continue
+            in="/tmp/packs/$src"; [ -f "$in" ] || { echo "❌ $nom : $src introuvable"; continue; }
+            debut=${debut:-0}; duree=${duree:-0}
+            args=(-y -v error -ss "$debut" -i "$in"); [ "$duree" != "0" ] && args+=(-t "$duree")
+            # volume homogène (EBU R128), fondu de sortie court pour éviter les clics
+            filt="loudnorm=I=-18:TP=-1.5:LRA=11"; [ "$duree" != "0" ] && filt="$filt,afade=t=out:st=$(echo "$duree - 0.08" | bc):d=0.08"
+            rm -f "Assets/Korvalune/Resources/Audio/$nom.mp3"
+            if ffmpeg "${args[@]}" -af "$filt" -ar 44100 -c:a libvorbis -q:a 6 "Assets/Korvalune/Resources/Audio/$nom.ogg"; then echo "✅ $nom ← $src"; else echo "❌ $nom"; fi
+          done <<< "$MAP"
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add -A Assets/Korvalune/Resources/Audio && git commit -m "Sons libres : import [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done
