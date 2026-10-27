@@ -89,7 +89,7 @@ class Tailor:
         return self.is_arm_v[self.tree.query(Q)[1]]
 
     # ------------------------------------------------------------------ haut
-    def shirt(self, mat, hem, sleeve=0.98, neck=0.04, ease=0.012, clear=None, layer=2, name='chemise', back_neck=0.0, slit=0.0, max_ease=None):
+    def shirt(self, mat, hem, sleeve=0.98, neck=0.04, ease=0.012, clear=None, layer=2, name='chemise', back_neck=0.0, slit=0.0, max_ease=None, hem_rise=0.035, iters=90):
         """Chemise / cotte (haut) : du bas `hem` à l'encolure ; manches jusqu'à `sleeve` (1 = poignet, 0,55 = coude).
         neck : profondeur de l'encolure devant ; slit : fente devant (lacée) en m."""
         Pn = self.P['Neck']
@@ -99,15 +99,15 @@ class Tailor:
             # encolure ronde : suit la base du cou, plus basse devant
             ny = Pn[1] - 0.010 - neck * np.exp(-(x / 0.065) ** 2) * (z > 0) - back_neck * np.exp(-(x / 0.07) ** 2) * (z < 0)
             r_neck = np.hypot(x / 0.075, (z - Pn[2]) / 0.065)
-            top = np.where(r_neck < 1.25, ny + 0.05 * np.clip(r_neck - 0.85, 0, None), 9)
+            top = ny + 0.06 * np.clip(r_neck - 0.85, 0, None)          # encolure lisse (sans palier)
             cut_slit = (slit > 0) & (z > 0) & (np.abs(x) < 0.004 + 0.002) & (y > Pn[1] - 0.02 - slit)
-            body_ok = np.minimum(y - hem, top - y)
+            body_ok = np.minimum(y - (hem + hem_rise * np.exp(-(x / 0.07) ** 2)), top - y)      # ourlet relevé à l'entrejambe
             arm_ok = sleeve - self.arm_t(Q)
             return np.where(arm, np.minimum(arm_ok * 0.6, top - y), body_ok) - cut_slit * 1.0
         coarse = (HP.bone_mask(self.body, self.sk, ['Hips', 'Spine', 'Chest', 'UpperChest', 'Neck', 'Shoulder', 'UpperArm', 'LowerArm', 'UpperLeg'], 0.05)
                   & (self.V[:, 1] > hem - 0.05) & (self.V[:, 1] < Pn[1] + 0.06))
         e = ease
-        m = D.drape(self.body, self.sk, coarse, inside, ease=e, clear=clear, iters=45, arm_mask=self.arm_of,
+        m = D.drape(self.body, self.sk, coarse, inside, ease=e, clear=clear, iters=iters, arm_mask=self.arm_of,
                     max_ease=max_ease if max_ease is not None else 2.6 * (e if not callable(e) else 0.02), under=self.under(layer, 0.008))
         self.inherit(m, layer, ymax=self.waist + 0.02)
         return self.add(name, m, mat, layer)
@@ -165,9 +165,68 @@ class Tailor:
             self.inherit(m, layer, reach=0.06)
             self.add('tablier_bavette', m, mat, layer)
             top_y = Pn[1] - 0.17
-            for sx in (-1, 1):
-                pts = [(sx * 0.10, top_y + 0.01, 0.2), (sx * 0.075, Pn[1] - 0.02, 0.06), (0, Pn[1] + 0.005, -0.10)]
-                self.add(f'tablier_sangle{sx}', HP.strap(self.body, pts, 0.046, 0.016, thick=0.003), strap_mat, layer + 1)
+            sh = self.P['LeftShoulder'] if 'LeftShoulder' in self.P else self.P['LeftUpperArm']
+            for sx in (1, -1):                                  # bretelles croisées dans le dos jusqu'à la ceinture
+                path = [(sx * 0.090, top_y, 0.12), (sx * 0.095, top_y + 0.08, 0.10), (sx * 0.10, sh[1] + 0.035, 0.0),
+                        (sx * 0.085, sh[1] - 0.05, -0.12), (-sx * 0.02, self.waist + 0.15, -0.12), (-sx * 0.09, self.waist - 0.01, -0.12)]
+                self.add(f'tablier_bretelle{sx}', self.strap(path, 0.018, layer + 1, gap=0.008), strap_mat, layer + 1)
+
+    def strap(self, rough, width, layer, gap=0.006, thick=0.003, n=48):
+        """Sangle posée sur ce qui est porté dessous : chaque point du tracé est d'abord placé sur la peau, puis sur la
+        surface extérieure la plus proche (vêtements), écarté de gap."""
+        from forge.geo import spline, Loft
+        from scipy.ndimage import uniform_filter1d
+        lower = [x for x in self.placed if x[2] < layer]
+        Vc = np.vstack([x[0] for x in lower]); Nc = np.vstack([x[1] for x in lower])
+        Jc = np.vstack([x[4] for x in lower]); Wc = np.vstack([x[5] for x in lower])
+        tr = cKDTree(Vc)
+        P = spline([np.asarray(p, float) for p in rough], n)
+        out = []; nrm = []
+        for p in P:
+            q, nb, _ = HP.surface_point(self.body, p, 0.0)          # sur la peau d'abord
+            idx = tr.query_ball_point(q, 0.08)
+            if idx:                                                  # puis la couche la plus extérieure au-dessus de ce point
+                Q = Vc[idx]; h = (Q - q) @ nb; lat = np.linalg.norm((Q - q) - np.outer(h, nb), axis=1)
+                ok = lat < 0.012
+                if ok.any():
+                    j = np.array(idx)[ok][np.argmax(h[ok])]; out.append(Vc[j] + Nc[j] * (gap + thick / 2)); nrm.append(Nc[j]); continue
+            out.append(q + nb * (gap + 0.01)); nrm.append(nb)
+        Q = uniform_filter1d(np.array(out), 5, axis=0, mode='nearest')
+        for _ in range(3):                                           # le lissage coupe les arrondis : on reprojette dehors
+            j = tr.query(Q)[1]; h = ((Q - Vc[j]) * Nc[j]).sum(1)
+            Q = Q + Nc[j] * np.clip(gap + thick / 2 - h, 0, None)[:, None]
+        mm = Loft(spline(Q, n), thick / 2, width / 2, p=4.0, segs=8, ref=tuple(np.mean(nrm, 0))).mesh(0.1)
+        i = tr.query(mm.V)[1]; mm.J, mm.W = Jc[i].copy(), Wc[i].copy()
+        return mm
+
+    def hide_covered(self, reach=0.07, border=0.025):
+        """Retire les faces de peau entièrement recouvertes (le dessous n'est jamais vu). Un sommet est couvert par un
+        vêtement s'il est sous lui (ou tout près) ET loin de ses bords (encolure, manches, ourlets : la peau y reste,
+        aucun trou n'est visible). Il suffit qu'un vêtement le couvre."""
+        gar = []
+        names = sum(self.layers.values(), [])
+        for n, m, _ in self.a.parts:
+            if n not in names: continue
+            no = getattr(m, 'n_outer', len(m.F))
+            idx, inv = D._weld(m.V, 1e-4); Fw = inv[m.F[:no]]
+            used = np.unique(Fw); Vw = m.V[idx]
+            Nw = vertex_normals(Mesh(Vw, Fw, np.zeros((len(Vw), 2))), weld=False)
+            bb, _ = D._border(Fw, len(Vw))
+            gar.append((cKDTree(Vw[used]), Vw[used], Nw[used], cKDTree(Vw[bb]) if bb.any() else None))
+        removed = 0
+        for n, m, mt in self.a.parts:
+            if not n.startswith('peau_'): continue
+            cov = np.zeros(len(m.V), bool)
+            for tv, V, NV, tb in gar:
+                d, j = tv.query(m.V)
+                behind = ((m.V - V[j]) * NV[j]).sum(1) < -0.002
+                c = (d < reach) | (behind & (d < 0.15))
+                if tb is not None: c &= tb.query(m.V)[0] > border
+                cov |= c
+            keep = ~cov[m.F].all(1)
+            removed += int((~keep).sum()); m.F = m.F[keep]
+        self.a.parts = [p for p in self.a.parts if len(p[1].F)]
+        return removed
 
     # ------------------------------------------------------------------ contrôle
     def check(self, clips=('Idle', 'Walk'), frames=6):

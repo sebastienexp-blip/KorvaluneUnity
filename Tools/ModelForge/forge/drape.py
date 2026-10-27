@@ -81,7 +81,7 @@ def thicken(P, F, UV, J, W, thick, rim_uv=0.02):
 
 # ------------------------------------------------------------------------------------------------ haut du corps
 def drape(body, sk, coarse_mask, inside, ease, clear=None, iters=40, subdiv=1, thick=0.003, arm_mask=None, tile=6.0,
-          smooth_w=6, max_ease=None, under=()):
+          smooth_w=6, max_ease=None, under=(), shrink=0.5):
     """Étoffe tombée sur une région du corps. inside(P) > 0 : partie gardée (bords exacts). ease : aisance (m) ou
     fonction(P) → aisance. clear : distance minimale à la peau (défaut 0,6 × aisance, au moins 6 mm).
     arm_mask(P) → bool : sommets des manches (UV autour du bras, couture d'emmanchure).
@@ -102,8 +102,9 @@ def drape(body, sk, coarse_mask, inside, ease, clear=None, iters=40, subdiv=1, t
     L = _laplacian(F, len(P)); brd, _ = _border(F, len(P))
     rate = np.where(brd, 0.35, 1.0)[:, None]
     for it in range(iters):
-        for lam in (0.5, -0.53):                                   # Taubin : lisse sans rétrécir
-            P = P + rate * lam * (L @ P - P)
+        # lissage rétrécissant + contrainte de distance : le tissu se tend sur les reliefs et enjambe les creux
+        # (omoplates, colonne, pectoraux) comme une vraie étoffe, au lieu de mouler l'anatomie
+        P = P + rate * shrink * (L @ P - P)
         d, i = tree.query(P)
         s_ = ((P - body.V[i]) * BN[i]).sum(1)
         need = c - s_
