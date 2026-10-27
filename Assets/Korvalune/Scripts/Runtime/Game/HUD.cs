@@ -80,7 +80,7 @@ namespace Korvalune.Game
                 int k = i;
                 var bg = RoundButton(root, "Compétence" + i, runner ? IconOf(runner.book[runner.loadout[i]]) : "stomp", new Vector2(1, 0), pos[i], 140,
                     () => { if (runner) runner.Use(k); else player?.UseSkill(k); }, out var cd, out var t);
-                skillIcons.Add(bg.transform.Find("Icône").GetComponent<Image>()); shownIcon.Add("");
+                skillIcons.Add(bg.transform.Find("Masque/Icône").GetComponent<Image>()); shownIcon.Add("");
                 skillButtons.Add((cd, t, i));
             }
             // menus (inventaire, compétences) — coins du haut
@@ -93,7 +93,7 @@ namespace Korvalune.Game
             goldText = Label(root, "Montant", "", 28, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(88, -212), new Vector2(300, 40)); goldText.color = new Color(1f, 0.86f, 0.45f);
             goldText.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
             var pb = RoundButton(root, "Potion", "potion", new Vector2(0, 0), new Vector2(390, 40), 112, () => { if (player && !player.DrinkPotion()) Notify(player.wallet.potions <= 0 ? "Plus de potions" : "Potion en recharge"); }, out potionCd, out _);
-            pb.transform.Find("Icône").GetComponent<Image>().color = new Color(1f, 0.35f, 0.3f);
+            pb.transform.Find("Masque/Icône").GetComponent<Image>().color = new Color(1f, 0.35f, 0.3f);
             potionCount = Label(pb.rectTransform, "Nombre", "", 28, TextAnchor.LowerRight, new Vector2(0.5f, 0.5f), new Vector2(-6, 4), new Vector2(100, 100));
             potionCount.gameObject.AddComponent<Outline>().effectColor = Color.black;
             if (player) BuildShop(root);
@@ -168,6 +168,28 @@ namespace Korvalune.Game
         }
 
         // ------------------------------------------------------------------------------------------ compétences
+        static readonly Dictionary<string, Sprite> painted = new Dictionary<string, Sprite>();
+
+        /// <summary>Icône peinte de la compétence (Resources/Icons/Skills/&lt;classe&gt;_&lt;rang&gt;), ou null si elle manque.</summary>
+        public static Sprite PaintedIcon(SkillDef d)
+        {
+            if (d == null) return null;
+            string key = "Icons/Skills/" + d.classId + "_" + d.index;
+            if (painted.TryGetValue(key, out var sp)) return sp;
+            var tex = Resources.Load<Texture2D>(key);
+            if (tex) { tex.wrapMode = TextureWrapMode.Clamp; sp = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100f); sp.name = key; }
+            return painted[key] = sp;
+        }
+
+        /// <summary>Pose l'icône d'une compétence : la peinture si elle existe (taille « painted »), sinon le symbole teinté.</summary>
+        public static void SetSkillIcon(Image img, SkillDef d, float mix, float symbolSize, float paintedSize)
+        {
+            var pic = PaintedIcon(d);
+            if (pic) { img.sprite = pic; img.preserveAspect = true; img.rectTransform.sizeDelta = new Vector2(paintedSize, paintedSize); return; }
+            var col = Vfx.Of(d.element).outer; col.a = 1;
+            img.sprite = UIStyle.Icon(IconOf(d), Color.Lerp(UIStyle.Gold, col, mix)); img.rectTransform.sizeDelta = new Vector2(symbolSize, symbolSize);
+        }
+
         public static string IconOf(SkillDef d)
         {
             switch (d.kind)
@@ -190,8 +212,7 @@ namespace Korvalune.Game
                 if (shownIcon[k] != key)
                 {
                     shownIcon[k] = key;
-                    var col = Vfx.Of(d.element).outer; col.a = 1;
-                    skillIcons[k].sprite = UIStyle.Icon(IconOf(d), Color.Lerp(UIStyle.Gold, col, 0.65f));
+                    SetSkillIcon(skillIcons[k], d, 0.65f, 140 * 0.62f, 140 * 0.8f);
                     skillIcons[k].color = runner.ranks[si] > 0 ? Color.white : new Color(0.35f, 0.35f, 0.35f, 1);
                 }
                 float rem = runner.Remaining(si), full = d.cooldown;
@@ -439,7 +460,10 @@ namespace Korvalune.Game
         Image RoundButton(RectTransform parent, string name, string icon, Vector2 anchor, Vector2 pos, float size, System.Action onClick, out Image cooldown, out Text cdText)
         {
             var bg = Img(parent, name, UIStyle.Button(), anchor, pos, new Vector2(size, size)); bg.raycastTarget = true;
-            Img(bg.rectTransform, "Icône", UIStyle.Icon(icon, UIStyle.Gold), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size * 0.62f, size * 0.62f));
+            // l'icône est découpée en disque (les icônes peintes sont carrées)
+            var mask = Img(bg.rectTransform, "Masque", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size * 0.8f, size * 0.8f));
+            mask.gameObject.AddComponent<Mask>().showMaskGraphic = false;
+            Img(mask.rectTransform, "Icône", UIStyle.Icon(icon, UIStyle.Gold), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size * 0.62f, size * 0.62f));
             cooldown = Img(bg.rectTransform, "Recharge", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size * 0.8f, size * 0.8f));
             cooldown.type = Image.Type.Filled; cooldown.fillMethod = Image.FillMethod.Radial360; cooldown.fillOrigin = 2; cooldown.fillClockwise = false; cooldown.fillAmount = 0; cooldown.color = new Color(0, 0, 0, 0.6f);
             cdText = Label(bg.rectTransform, "Temps", "", Mathf.RoundToInt(size * 0.3f), TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));

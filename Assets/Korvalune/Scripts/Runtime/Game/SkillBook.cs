@@ -9,6 +9,8 @@ namespace Korvalune.Game
     public class SkillDef
     {
         public string id, name, description, classId;
+        /// <summary>Rang de la compétence dans le livre de sa classe (sert à retrouver son icône peinte).</summary>
+        public int index;
         public SkillKind kind; public Element element;
         public int unlockLevel; public float cooldown, mana, mult, radius, range, duration; public int count;
         public bool stun, pierce, heal;
@@ -32,7 +34,7 @@ namespace Korvalune.Game
             var d = new SkillDef { classId = cls, id = cls + "." + name, name = name, kind = k, element = e, unlockLevel = lvl, cooldown = cd, mana = mana, mult = mult, radius = radius, range = range, count = count, duration = dur, description = desc, stun = stun, pierce = pierce, heal = heal };
             d.anim = SkillAnims.Pick(cls, name, k);
             if (!byClass.TryGetValue(cls, out var l)) byClass[cls] = l = new List<SkillDef>();
-            l.Add(d); return d;
+            d.index = l.Count; l.Add(d); return d;
         }
 
         public static List<SkillDef> For(string classId) { Init(); return byClass.TryGetValue(classId, out var l) ? l : byClass["KaelDraven"]; }

@@ -115,8 +115,10 @@ namespace Korvalune.Game
                 int k = i; var d = runner.book[i]; var p = NodePos(i);
                 var glow = Img(content, "Halo_" + i, UIStyle.Glow(), new Vector2(0, 1), p, new Vector2(NodeSize * 1.7f, NodeSize * 1.7f)); glow.rectTransform.pivot = new Vector2(0.5f, 0.5f);
                 var node = Img(content, d.name, UIStyle.Button(), new Vector2(0, 1), p, new Vector2(NodeSize, NodeSize)); node.rectTransform.pivot = new Vector2(0.5f, 0.5f); node.raycastTarget = true;
-                var col = Vfx.Of(d.element).outer; col.a = 1;
-                var icon = Img(node.rectTransform, "Icône", UIStyle.Icon(IconOf(d), Color.Lerp(UIStyle.Gold, col, 0.7f)), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(NodeSize * 0.6f, NodeSize * 0.6f));
+                var nodeMask = Img(node.rectTransform, "Masque", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(NodeSize * 0.84f, NodeSize * 0.84f));
+                nodeMask.gameObject.AddComponent<Mask>().showMaskGraphic = false;
+                var icon = Img(nodeMask.rectTransform, "Icône", null, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(NodeSize * 0.6f, NodeSize * 0.6f));
+                SetSkillIcon(icon, d, 0.7f, NodeSize * 0.6f, NodeSize * 0.84f);
                 var lk = Img(node.rectTransform, "Verrou", UIStyle.Icon("lock", new Color(0.75f, 0.68f, 0.6f)), new Vector2(1, 0), new Vector2(6, -6), new Vector2(34, 34));
                 var rank = Label(node.rectTransform, "Rang", "", 20, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0, -6), new Vector2(70, 26));
                 rank.gameObject.AddComponent<Outline>().effectColor = Color.black;
@@ -211,8 +213,7 @@ namespace Korvalune.Game
             for (int s = 0; s < treeSlots.Count; s++)
             {
                 var (bg, ic, num) = treeSlots[s]; var d = runner.book[runner.loadout[s]];
-                var col = Vfx.Of(d.element).outer; col.a = 1;
-                ic.sprite = UIStyle.Icon(IconOf(d), Color.Lerp(UIStyle.Gold, col, 0.7f)); ic.color = runner.ranks[runner.loadout[s]] > 0 ? Color.white : new Color(0.4f, 0.4f, 0.4f);
+                SetSkillIcon(ic, d, 0.7f, 76, 90); ic.color = runner.ranks[runner.loadout[s]] > 0 ? Color.white : new Color(0.4f, 0.4f, 0.4f);
                 bg.color = runner.loadout[s] == treeSel ? new Color(1f, 0.85f, 0.55f) : Color.white;
             }
             // fiche
