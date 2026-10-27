@@ -137,10 +137,21 @@ namespace Korvalune
             ApplyMorph(id, value);
         }
 
-        public void ApplyMorphs() { foreach (var m in morphs) ApplyMorph(m.id, m.value); }
+        public void ApplyMorphs() { batch = true; foreach (var m in morphs) ApplyMorph(m.id, m.value); batch = false; Rig?.Flush(); }
+        bool batch;
+        MorphRig rig;
+        MorphRig Rig { get { if (!rig) rig = GetComponentInChildren<MorphRig>(true); return rig && rig.Ready ? rig : null; } }
 
         void ApplyMorph(string id, float v)
         {
+            // morphologie compacte (MorphRig) : le corps se déforme et toutes les pièces le suivent
+            var r = Rig;
+            if (r != null)
+            {
+                r.SetWeight(id + "_plus", Mathf.Max(0, v)); r.SetWeight(id + "_moins", Mathf.Max(0, -v));
+                if (!batch) r.Flush();
+                return;
+            }
             foreach (var smr in GetComponentsInChildren<SkinnedMeshRenderer>(true))
             {
                 var mesh = smr.sharedMesh; if (!mesh) continue;
@@ -150,6 +161,6 @@ namespace Korvalune
             }
         }
 
-        public void ResetMorphs() { foreach (var m in morphs) ApplyMorph(m.id, 0); morphs.Clear(); }
+        public void ResetMorphs() { batch = true; foreach (var m in morphs) ApplyMorph(m.id, 0); batch = false; Rig?.Flush(); morphs.Clear(); }
     }
 }

@@ -88,6 +88,8 @@ namespace Korvalune.EditorTools
                 Progress("WorldCheck"); WorldCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("SelectionCheck"); SelectionCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("DungeonCheck"); DungeonCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress("CaveCheck"); CaveCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress("Lanceur"); LauncherBuilder.Build(); Check("Écran de lancement", File.Exists(LauncherBuilder.ScenePath), LauncherBuilder.ScenePath);
                 File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
                 Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
                 if (urp) { urp.shadowDistance = shadowDist; EditorUtility.SetDirty(urp); }
@@ -321,6 +323,18 @@ namespace Korvalune.EditorTools
             DungeonBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
         }
 
+        static void CaveCheck()
+        {
+            Line("\n## Terriers de l'Astral (donjon-parcours)");
+            if (!CaveBuilder.Available) { Line("_Terriers absents (layout.json)._"); return; }
+            var game = CaveBuilder.Build();
+            Check("Scène des terriers", File.Exists(CaveBuilder.ScenePath), CaveBuilder.ScenePath);
+            int lights = UnityEngine.Object.FindObjectsByType<Light>(FindObjectsSortMode.None).Length;
+            int chests = UnityEngine.Object.FindObjectsByType<Korvalune.Game.TreasureChest>(FindObjectsSortMode.None).Length;
+            Check("Parcours construit", UnityEngine.Object.FindObjectsByType<MeshCollider>(FindObjectsSortMode.None).Length >= 5, $"{lights} lumières, {chests} coffres, {game.camps.Count} groupes d'ennemis");
+            CaveBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
+        }
+
         static void WorldCheck()
         {
             Line("\n## Vallée de Korvalune (tranche jouable)");
@@ -328,7 +342,7 @@ namespace Korvalune.EditorTools
             var game = WorldBuilder.Build();
             Check("Scène de la vallée", File.Exists(WorldBuilder.ScenePath), WorldBuilder.ScenePath);
             var t = Terrain.activeTerrain;
-            Check("Terrain", t != null && t.terrainData.terrainLayers.Length == 5 && t.terrainData.treeInstanceCount > 500,
+            Check("Terrain", t != null && t.terrainData.terrainLayers.Length == 6 && t.terrainData.treeInstanceCount > 500,
                 t ? $"{t.terrainData.size}, {t.terrainData.terrainLayers.Count(l => l && l.diffuseTexture)} couches texturées, {t.terrainData.treeInstanceCount} arbres" : "absent");
             Check("Château", GameObject.Find("ChateauKorvalune") != null);
             var cfg = game.config;

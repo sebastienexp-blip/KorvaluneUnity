@@ -164,7 +164,8 @@ namespace Korvalune.Game
         {
             var t = Terrain.activeTerrain;
             if (t) p.y = t.SampleHeight(p) + t.transform.position.y + 0.05f;
-            if (Physics.Raycast(p + Vector3.up * 50, Vector3.down, out var hit, 200f, ~0, QueryTriggerInteraction.Ignore)) p.y = Mathf.Max(p.y, hit.point.y + 0.05f);
+            // sondage court au-dessus du point : sous un toit, une voûte ou la masse rocheuse d'une grotte, on reste au sol
+            if (Physics.Raycast(p + Vector3.up * 2.5f, Vector3.down, out var hit, 30f, ~0, QueryTriggerInteraction.Ignore)) p.y = Mathf.Max(t ? p.y : -1e6f, hit.point.y + 0.05f);
             return p;
         }
     }

@@ -149,6 +149,7 @@ namespace Korvalune.EditorTools
             // ---- château, pont, rochers
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
             TownBuilder.Build();
+            CaveBuilder.ValleyEntrance();
             BridgeObject();
             var rng = new System.Random(7);
             // cimetière (camp des squelettes) : pierres tombales et rochers
@@ -555,6 +556,9 @@ namespace Korvalune.EditorTools
                 foreach (var rf in Object.FindObjectsByType<RoofFade>(FindObjectsSortMode.None)) foreach (var r in rf.GetComponentsInChildren<Renderer>()) r.enabled = true;
                 cam.transform.position = new Vector3(0, 5, -26); cam.transform.LookAt(new Vector3(0, 4, 0)); Shot("13_cour_du_chateau");
                 TownBuilder.Checks(check);
+                // illustrations du jeu : fond de l'écran de lancement et icône de l'application
+                try { LauncherBuilder.RenderKeyArt(cam); check("Illustration du lanceur et icône", File.Exists(LauncherBuilder.ArtDir + "/Lanceur_Fond.png"), "ci-out/Lanceur_Fond.png, ci-out/Icone.png"); }
+                catch (System.Exception ex) { check("Illustration du lanceur et icône", false, ex.Message); }
                 // 5. galerie des ennemis vus en jeu
                 hud.enabled = false;
                 cam.transform.position = Ground(new Vector2(45, 104)) + new Vector3(0, 5, 0); cam.transform.LookAt(Ground(new Vector2(45, 120)) + Vector3.up); Shot("5_loups_lisiere");

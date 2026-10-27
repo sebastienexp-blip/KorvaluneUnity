@@ -36,6 +36,12 @@ def run(key, preview, anims, sexes=('M', 'F'), morph=True):
         if scale != 1.0: EX.scale_asset(a, scale)
         ex = EX.hero_expect((1.60, 1.98), getattr(mod, 'MAX_TRIS', 220000))
         folder = getattr(mod, 'FOLDER', 'Heroes')
+        if getattr(a, 'morph_table', None) is not None:
+            from forge import morphs as MO
+            if scale != 1.0: a.morph_table = (a.morph_table[0] * scale, {k: v * scale for k, v in a.morph_table[1].items()})
+            os.makedirs(os.path.join(EX.ART, folder, a.name), exist_ok=True)
+            ns = MO.write_table(os.path.join(EX.ART, folder, a.name, a.name + '_Morphs.bytes'), a.morph_table)
+            print(f'   table de morphologie : {ns} formes × {len(a.morph_table[0])} sommets du corps', flush=True)
         mats = EX.export(a, bank, bank.specs(), f'{folder}/{a.name}', clips=clips,
                          attachments=[(s, f'../../Weapons/{n}/{n}.fbx') for s, n in mod.GEAR],
                          collider=dict(type='capsule', center=[0, 0.93 * scale, 0], height=1.86 * scale, radius=0.33), expect=ex)

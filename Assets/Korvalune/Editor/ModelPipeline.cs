@@ -192,7 +192,7 @@ namespace Korvalune.EditorTools
             mi.globalScale = 1f;
             mi.useFileScale = true;
             mi.importCameras = false; mi.importLights = false;
-            mi.importBlendShapes = true; mi.importBlendShapeNormals = ModelImporterNormals.Calculate;   // curseurs de morphologie
+            mi.importBlendShapes = true; mi.importBlendShapeNormals = ModelImporterNormals.None;   // curseurs de morphologie (sans normales : moitié moins lourd, invisible sur des déformations douces)
             mi.importVisibility = false;
             mi.isReadable = false;
             mi.meshCompression = ModelImporterMeshCompression.Off;
@@ -383,6 +383,8 @@ namespace Korvalune.EditorTools
                         if (e.m.slots != null) foreach (var sl in e.m.slots) eq.SetHides(sl.name, sl.hides);
                         eq.Apply();
                     }
+                    // morphologie : table compacte des déplacements du corps (pas de blendshapes), si ModelForge l'a fournie
+                    MorphBaker.Attach(go, e.dir, go.name);
                 }
                 var dir = Path.GetDirectoryName(e.m.prefab).Replace('\\', '/');
                 EnsureFolder(dir);

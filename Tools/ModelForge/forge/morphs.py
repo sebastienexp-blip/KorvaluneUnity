@@ -28,6 +28,11 @@ def _tdir():
     raise FileNotFoundError('cibles MakeHuman : extraire makehuman/data/targets (git archive) dans /tmp/mh_targets_tmp')
 
 
+BODY_KEEP = [r'torso_torso_vshape$', r'torso_torso_scale_horiz$', r'torso_torso_muscle_pectoral$', r'hip_hip_scale_horiz$', r'hip_hip_waist$',
+             r'buttocks_buttocks_volume$', r'stomach_stomach_pregnant$', r'neck_neck_scale_horiz$', r'armslegs_upperarm_muscle$',
+             r'armslegs_upperleg_fat$', r'armslegs_upperleg_muscle$', r'measure_measure_bust_circ$', r'measure_measure_waist_circ$']
+
+
 def sliders(female, extra_dirs=()):
     """Liste des curseurs : dict(id, group, label, plus=[(cible, poids)], minus=[(cible, poids)])."""
     s = 'female' if female else 'male'
@@ -113,3 +118,17 @@ def apply(asset, body, base_deltas, k=6, rigid_parts=('yeux',)):
 
 def manifest(sl, female):
     return [dict(id=s['id'], group=s['group'], label=s['label'], face=s['group'] in FACE, bipolar=bool(s['minus'])) for s in sl]
+
+
+def write_table(path, table):
+    """Table de morphologie « KMT1 » : positions du corps (float32) puis, par forme, ses déplacements (float16).
+    Lue par Korvalune.MorphRig (Unity)."""
+    import struct
+    V, D = table; names = sorted(D)
+    with open(path, 'wb') as f:
+        f.write(b'KMT1'); f.write(struct.pack('<ii', len(V), len(names)))
+        for n in names:
+            b = n.encode('utf-8'); f.write(struct.pack('<i', len(b))); f.write(b)
+        f.write(np.asarray(V, '<f4').tobytes())
+        for n in names: f.write(np.asarray(D[n], '<f2').tobytes())
+    return len(names)

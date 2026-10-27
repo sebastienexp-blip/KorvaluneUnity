@@ -125,7 +125,7 @@ def write_fbx(path, asset, creator='Korvalune ModelForge', binary=True):
             for sn in sorted(shp):
                 Dfull = np.zeros((len(V), 3))
                 for k, D in shp[sn].items(): Dfull[starts[k]:starts[k + 1]] = D
-                nz = np.where(np.abs(Dfull).max(1) > 1e-6)[0]
+                nz = np.where(np.abs(Dfull).max(1) > 2.5e-4)[0]          # < 0,25 mm : invisible, ignoré (données creuses)
                 if len(nz) == 0: continue
                 sg = ids(); ch = ids(); nshapes += 1
                 O.append(f'\tGeometry: {sg}, "Geometry::{sn}", "Shape" {{\n\t\tVersion: 100\n\t\tIndexes: {_arr(nz)}\n'
