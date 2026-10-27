@@ -1,422 +1,415 @@
-# Journal du job d'intégration (run 40432336526)
+# Journal du job d'intégration (run 40435605117)
 ## Lignes importantes
-1175:2026-10-27T01:30:58.3025673Z [  1/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
-1697:2026-10-27T01:31:02.4528043Z Curl error 42: Callback aborted
-28135:2026-10-27T01:50:02.7465247Z Curl error 42: Callback aborted
-29690:2026-10-27T01:51:38.3185221Z Build failed, with exit code 1
-29750:2026-10-27T01:51:43.8498406Z Please note that the exit code is not very descriptive.
-29755:2026-10-27T01:51:44.1955637Z ##[error]Build failed with exit code 1
-30264:2026-10-27T01:52:12.6524087Z Curl error 42: Callback aborted
-30786:2026-10-27T01:53:00.9945852Z Killed
-30787:2026-10-27T01:53:01.0596232Z Build failed, with exit code 137
-30851:2026-10-27T01:53:07.0470035Z Please note that the exit code is not very descriptive.
-30856:2026-10-27T01:53:07.3702322Z ##[error]Build failed with exit code 137
-30861:2026-10-27T01:53:07.4327190Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-30863:2026-10-27T01:53:07.4330114Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-30938:01:51:35 - ❌ **Exécution CI** UnityEngine.MissingReferenceException: The object of type 'UnityEngine.Texture2D' has been destroyed but you are still trying to access it.
-30940:  at UnityEngine.Object+MarshalledUnityObject.TryThrowEditorNullExceptionObject (UnityEngine.Object unityObj, System.String parameterName) [0x00064] in /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/UnityEngineObject.bindings.cs:818 
-30941:  at UnityEngine.Bindings.ThrowHelper.ThrowNullReferenceException (System.Object obj) [0x00010] in /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/BindingsHelpers.cs:61 
-31140:2026-10-27T01:55:02.0329958Z ##[error]Process completed with exit code 1.
+1156:2026-10-27T02:04:43.1997532Z [  1/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+1678:2026-10-27T02:04:47.8804146Z Curl error 42: Callback aborted
+2778:2026-10-27T02:06:02.6023866Z Curl error 42: Callback aborted
+4271:2026-10-27T03:56:19.1961400Z Curl error 42: Callback aborted
+4445:2026-10-27T03:56:26.4872072Z Build failed, with exit code 134
+4505:2026-10-27T03:56:33.2981476Z Please note that the exit code is not very descriptive.
+4510:2026-10-27T03:56:33.4890649Z ##[error]Build failed with exit code 134
+4515:2026-10-27T03:56:33.5296251Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+4517:2026-10-27T03:56:33.5298952Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+4791:2026-10-27T03:58:33.4922938Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-2026-10-27T01:52:15.3081156Z Player connection [140180893713728] Host joined multi-casting on [225.0.0.222:54997]...
-2026-10-27T01:52:15.3083376Z Player connection [140180893713728] Host joined alternative multi-casting on [225.0.0.222:34997]...
-2026-10-27T01:52:15.3243134Z [Physics::Module] Initialized fallback backend.
-2026-10-27T01:52:15.3264493Z [Physics::Module] Id: 0xdecafbad
-2026-10-27T01:52:15.6679385Z [Package Manager] Connected to IPC stream "Upm-185" after 0.3 seconds.
-2026-10-27T01:52:15.6686734Z Library Redirect Path: Library/
-2026-10-27T01:52:15.6723556Z [Package Manager] Restoring resolved packages state from cache
-2026-10-27T01:52:15.6853039Z [Licensing::Client] Successfully resolved entitlement details
-2026-10-27T01:52:15.6860480Z [Package Manager] Registered 31 packages:
-2026-10-27T01:52:15.6862547Z   Packages from [https://packages.unity.com]:
-2026-10-27T01:52:15.6864440Z     com.unity.test-framework@1.4.5 (location: /github/workspace/Library/PackageCache/com.unity.test-framework)
-2026-10-27T01:52:15.6867074Z     com.unity.toolchain.linux-x86_64@2.0.11 (location: /github/workspace/Library/PackageCache/com.unity.toolchain.linux-x86_64)
-2026-10-27T01:52:15.6869797Z     com.unity.sysroot@2.0.10 (location: /github/workspace/Library/PackageCache/com.unity.sysroot)
-2026-10-27T01:52:15.6872373Z     com.unity.sysroot.linux-x86_64@2.0.9 (location: /github/workspace/Library/PackageCache/com.unity.sysroot.linux-x86_64)
-2026-10-27T01:52:15.6874016Z     com.unity.ext.nunit@2.0.5 (location: /github/workspace/Library/PackageCache/com.unity.ext.nunit)
-2026-10-27T01:52:15.6875410Z     com.unity.searcher@4.9.2 (location: /github/workspace/Library/PackageCache/com.unity.searcher)
-2026-10-27T01:52:15.6876790Z     com.unity.burst@1.8.18 (location: /github/workspace/Library/PackageCache/com.unity.burst)
-2026-10-27T01:52:15.6878156Z     com.unity.mathematics@1.3.2 (location: /github/workspace/Library/PackageCache/com.unity.mathematics)
-2026-10-27T01:52:15.6879606Z     com.unity.collections@2.5.1 (location: /github/workspace/Library/PackageCache/com.unity.collections)
-2026-10-27T01:52:15.6881428Z     com.unity.nuget.mono-cecil@1.11.4 (location: /github/workspace/Library/PackageCache/com.unity.nuget.mono-cecil)
-2026-10-27T01:52:15.6883418Z     com.unity.test-framework.performance@3.0.3 (location: /github/workspace/Library/PackageCache/com.unity.test-framework.performance)
-2026-10-27T01:52:15.6884839Z   Built-in packages:
-2026-10-27T01:52:15.6886076Z     com.unity.render-pipelines.universal@17.0.3 (location: /github/workspace/Library/PackageCache/com.unity.render-pipelines.universal)
-2026-10-27T01:52:15.6887834Z     com.unity.ugui@2.0.0 (location: /github/workspace/Library/PackageCache/com.unity.ugui)
-2026-10-27T01:52:15.6889090Z     com.unity.modules.ai@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.ai)
-2026-10-27T01:52:15.6890765Z     com.unity.modules.androidjni@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.androidjni)
-2026-10-27T01:52:15.6892908Z     com.unity.modules.animation@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.animation)
-2026-10-27T01:52:15.6894568Z     com.unity.modules.audio@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.audio)
-2026-10-27T01:52:15.6896275Z     com.unity.modules.imageconversion@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.imageconversion)
-2026-10-27T01:52:15.6898336Z     com.unity.modules.imgui@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.imgui)
-2026-10-27T01:52:15.6899962Z     com.unity.modules.jsonserialize@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.jsonserialize)
-2026-10-27T01:52:15.6902124Z     com.unity.modules.particlesystem@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.particlesystem)
-2026-10-27T01:52:15.6903853Z     com.unity.modules.physics@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.physics)
-2026-10-27T01:52:15.6905449Z     com.unity.modules.terrain@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.terrain)
-2026-10-27T01:52:15.6906975Z     com.unity.modules.ui@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.ui)
-2026-10-27T01:52:15.6908493Z     com.unity.modules.uielements@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.uielements)
-2026-10-27T01:52:15.6910570Z     com.unity.modules.unitywebrequest@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.unitywebrequest)
-2026-10-27T01:52:15.6912731Z     com.unity.modules.hierarchycore@1.0.0 (location: /github/workspace/Library/PackageCache/com.unity.modules.hierarchycore)
-2026-10-27T01:52:15.6914873Z     com.unity.render-pipelines.core@17.0.3 (location: /github/workspace/Library/PackageCache/com.unity.render-pipelines.core)
-2026-10-27T01:52:15.6916606Z     com.unity.shadergraph@17.0.3 (location: /github/workspace/Library/PackageCache/com.unity.shadergraph)
-2026-10-27T01:52:15.6918453Z     com.unity.render-pipelines.universal-config@17.0.3 (location: /github/workspace/Library/PackageCache/com.unity.render-pipelines.universal-config)
-2026-10-27T01:52:15.6920593Z     com.unity.rendering.light-transport@1.0.1 (location: /github/workspace/Library/PackageCache/com.unity.rendering.light-transport)
-2026-10-27T01:52:15.7013731Z [Physics::Module] Selected backend.
-2026-10-27T01:52:15.7014785Z [Physics::Module] Name: PhysX
-2026-10-27T01:52:15.7016043Z [Physics::Module] Id: 0xf2b8ea05
-2026-10-27T01:52:15.7016865Z [Physics::Module] SDK Version: 4.1.2
-2026-10-27T01:52:15.7017714Z [Physics::Module] Integration Version: 1.0.0
-2026-10-27T01:52:15.7018619Z [Physics::Module] Threading Mode: Multi-Threaded
-2026-10-27T01:52:15.7065163Z [Subsystems] No new subsystems found in resolved package list.
-2026-10-27T01:52:15.7083270Z Package Manager log level set to [2]
-2026-10-27T01:52:15.7084340Z [Package Manager] Done registering packages in 0.03 seconds
-2026-10-27T01:52:15.7630256Z Targeting platform: StandaloneLinux64
-2026-10-27T01:52:15.7637987Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T01:52:15.7639573Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T01:52:15.7640537Z Initialize engine version: 6000.0.32f1 (b2e806cf271c)
-2026-10-27T01:52:15.7642045Z [Subsystems] Discovering subsystems at path /opt/unity/Editor/Data/Resources/UnitySubsystems
-2026-10-27T01:52:15.7643301Z [Subsystems] Discovering subsystems at path /github/workspace/Assets
-2026-10-27T01:52:15.7652495Z kGfxThreadingModeNonThreaded is not supported on OpenGL Core. Reverting to kGfxThreadingModeDirect instead.
-2026-10-27T01:52:15.7654136Z GfxDevice: creating device client; kGfxThreadingModeDirect
-2026-10-27T01:52:15.7727403Z GLX Extensions: GLX_ARB_context_flush_control GLX_ARB_create_context GLX_ARB_create_context_no_error GLX_ARB_create_context_profile GLX_ARB_fbconfig_float GLX_ARB_framebuffer_sRGB GLX_ARB_get_proc_address GLX_ARB_multisample GLX_EXT_create_context_es2_profile GLX_EXT_create_context_es_profile GLX_EXT_fbconfig_packed_float GLX_EXT_framebuffer_sRGB GLX_EXT_no_config_cont
-2026-10-27T01:52:15.7761682Z Renderer: llvmpipe (LLVM 15.0.7, 256 bits)
-2026-10-27T01:52:15.7769101Z Vendor:   Mesa
-2026-10-27T01:52:15.7770105Z Version:  4.5 (Core Profile) Mesa 23.2.1-1ubuntu3.1~22.04.3
-2026-10-27T01:52:15.7771199Z GLES:     0
-2026-10-27T01:52:15.7778049Z  GL_3DFX_texture_compression_FXT1 GL_AMD_conservative_depth GL_AMD_draw_buffers_blend GL_AMD_gpu_shader_int64 GL_AMD_multi_draw_indirect GL_AMD_pinned_memory GL_AMD_query_buffer_object GL_AMD_seamless_cubemap_per_texture GL_AMD_shader_stencil_export GL_AMD_shader_trinary_minmax GL_AMD_texture_texture4 GL_AMD_vertex_shader_layer GL_AMD_vertex_shader_viewport_index GL_AN
-2026-10-27T01:52:15.7791087Z RB_draw_buffers_blend GL_ARB_draw_elements_base_vertex GL_ARB_draw_indirect GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_shader GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_get_p
-2026-10-27T01:52:15.7804381Z _ARB_query_buffer_object GL_ARB_robust_buffer_access_behavior GL_ARB_robustness GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_para
-2026-10-27T01:52:15.7817860Z GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map_array GL_ARB_texture_filter_anisotropic GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_multisample GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_textu
-2026-10-27T01:52:15.7831876Z minfo GL_ATI_texture_float GL_ATI_texture_mirror_once GL_EXT_EGL_image_storage GL_EXT_EGL_sync GL_EXT_abgr GL_EXT_blend_equation_separate GL_EXT_debug_label GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXT_framebuffer_multisample_blit_scaled GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_memory_object GL
-2026-10-27T01:52:15.7846086Z rm GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_IBM_multimode_draw_arrays GL_INTEL_shader_atomic_float_minmax GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_KHR_context_flush_control GL_KHR_debug GL_KHR_no_error GL_KHR_parallel_shader_compile GL_KHR_robust_buffer_ac
-2026-10-27T01:52:15.7852169Z OPENGL LOG: Creating OpenGL 4.5 graphics device ; Context level  <OpenGL 4.5> ; Context handle -1668530048
-2026-10-27T01:52:15.8621377Z Shader Hidden/ProbeVolume/VoxelizeScene is not supported: GPU does not support conservative rasterization
-2026-10-27T01:52:15.8832561Z [Licensing::Client] Successfully resolved entitlement details
-2026-10-27T01:52:15.8911686Z Initialize mono
-2026-10-27T01:52:15.8913635Z Mono path[0] = '/opt/unity/Editor/Data/Managed'
-2026-10-27T01:52:15.8915588Z Mono path[1] = '/opt/unity/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-linux'
-2026-10-27T01:52:15.8917246Z Mono config path = '/opt/unity/Editor/Data/MonoBleedingEdge/etc'
-2026-10-27T01:52:15.8921351Z Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56185
-2026-10-27T01:52:15.9397866Z Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
-2026-10-27T01:52:15.9399563Z Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
-2026-10-27T01:52:15.9401803Z ImportWorker Server TCP listen port: 0
-2026-10-27T01:52:15.9405331Z AcceleratorClientConnectionCallback - disconnected - :0
-2026-10-27T01:52:15.9502965Z Begin MonoManager ReloadAssembly
-2026-10-27T01:52:16.1583575Z Registering precompiled unity dll's ...
-2026-10-27T01:52:16.1619010Z Register platform support module: /opt/unity/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-2026-10-27T01:52:16.1629751Z Registered in 0.004374 seconds.
-2026-10-27T01:52:16.4359970Z - Loaded All Assemblies, in  0.485 seconds
-2026-10-27T01:52:16.4746449Z Native extension for LinuxStandalone target not found
-2026-10-27T01:52:17.2111100Z Mono: successfully reloaded assembly
-2026-10-27T01:52:17.2363644Z - Finished resetting the current domain, in  0.800 seconds
-2026-10-27T01:52:17.2374920Z Domain Reload Profiling: 1285ms
-2026-10-27T01:52:17.2375839Z 	BeginReloadAssembly (102ms)
-2026-10-27T01:52:17.2376576Z 		ExecutionOrderSort (0ms)
-2026-10-27T01:52:17.2377277Z 		DisableScriptedObjects (0ms)
-2026-10-27T01:52:17.2378010Z 		BackupInstance (0ms)
-2026-10-27T01:52:17.2378689Z 		ReleaseScriptingObjects (0ms)
-2026-10-27T01:52:17.2379422Z 		CreateAndSetChildDomain (1ms)
-2026-10-27T01:52:17.2380139Z 	RebuildCommonClasses (59ms)
-2026-10-27T01:52:17.2381144Z 	RebuildNativeTypeToScriptingClass (15ms)
-2026-10-27T01:52:17.2382030Z 	initialDomainReloadingComplete (86ms)
-2026-10-27T01:52:17.2382795Z 	LoadAllAssembliesAndSetupDomain (223ms)
-2026-10-27T01:52:17.2383557Z 		LoadAssemblies (99ms)
-2026-10-27T01:52:17.2384347Z 		RebuildTransferFunctionScriptingTraits (0ms)
-2026-10-27T01:52:17.2385237Z 		AnalyzeDomain (219ms)
-2026-10-27T01:52:17.2385916Z 			TypeCache.Refresh (218ms)
-2026-10-27T01:52:17.2386623Z 				TypeCache.ScanAssembly (201ms)
-2026-10-27T01:52:17.2387330Z 			BuildScriptInfoCaches (0ms)
-2026-10-27T01:52:17.2388068Z 			ResolveRequiredComponents (1ms)
-2026-10-27T01:52:17.2389166Z 	FinalizeReload (801ms)
-2026-10-27T01:52:17.2389891Z 		ReleaseScriptCaches (0ms)
-2026-10-27T01:52:17.2390585Z 		RebuildScriptCaches (0ms)
-2026-10-27T01:52:17.2391540Z 		SetupLoadedEditorAssemblies (748ms)
-2026-10-27T01:52:17.2392207Z 			LogAssemblyErrors (0ms)
-2026-10-27T01:52:17.2392900Z 			InitializePlatformSupportModulesInManaged (118ms)
-2026-10-27T01:52:17.2393699Z 			SetLoadedEditorAssemblies (11ms)
-2026-10-27T01:52:17.2394369Z 			BeforeProcessingInitializeOnLoad (109ms)
-2026-10-27T01:52:17.2395103Z 			ProcessInitializeOnLoadAttributes (333ms)
-2026-10-27T01:52:17.2395918Z 			ProcessInitializeOnLoadMethodAttributes (176ms)
-2026-10-27T01:52:17.2396684Z 			AfterProcessingInitializeOnLoad (0ms)
-2026-10-27T01:52:17.2397349Z 			EditorAssembliesLoaded (0ms)
-2026-10-27T01:52:17.2397951Z 		ExecutionOrderSort2 (0ms)
-2026-10-27T01:52:17.2398592Z 		AwakeInstancesAfterBackupRestoration (0ms)
-2026-10-27T01:52:17.2742065Z [Licensing::Client] Successfully resolved entitlement details
-2026-10-27T01:52:17.2759365Z Application.AssetDatabase Initial Refresh Start
-2026-10-27T01:52:18.2223588Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[14]
-2026-10-27T01:52:18.2224959Z       Now listening on: http://unix:/tmp/ilpp.sock-f07a9074cf124f978827f2e08a2ba3a4
-2026-10-27T01:52:18.2226355Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T01:52:18.2227222Z       Application started. Press Ctrl+C to shut down.
-2026-10-27T01:52:18.2228190Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T01:52:18.2228977Z       Hosting environment: Production
-2026-10-27T01:52:18.2229816Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T01:52:18.2231209Z       Content root path: /github/workspace/
-2026-10-27T01:52:18.2767842Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-2026-10-27T01:52:18.2769594Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
-2026-10-27T01:52:18.3036139Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-2026-10-27T01:52:18.3037372Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
-2026-10-27T01:52:18.3525014Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-2026-10-27T01:52:18.3526436Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
-2026-10-27T01:52:18.3601867Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-2026-10-27T01:52:18.3603515Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 84.2645ms
-2026-10-27T01:52:18.5352269Z Starting: /opt/unity/Editor/Data/bee_backend --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/2400b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
-2026-10-27T01:52:18.5361021Z WorkingDir: /github/workspace
-2026-10-27T01:52:18.7184360Z DisplayProgressbar: Compiling Scripts
-2026-10-27T01:52:20.1943429Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-2026-10-27T01:52:20.1944947Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc -
-2026-10-27T01:52:20.1946637Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-2026-10-27T01:52:20.1947863Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
-2026-10-27T01:52:20.2277489Z [40m[1m[33mwarn[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T01:52:20.2280313Z       Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/opt/unity/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
-2026-10-27T01:52:20.2305416Z [40m[1m[33mwarn[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T01:52:20.2308112Z       Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
-2026-10-27T01:52:20.2474954Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T01:52:20.2476889Z       Resolved Unity.Burst.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
-2026-10-27T01:52:20.2525053Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T01:52:20.2526834Z       Resolved Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil/Mono.Cecil.dll
-2026-10-27T01:52:20.2555675Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-2026-10-27T01:52:20.2556927Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
-2026-10-27T01:52:20.2558137Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-2026-10-27T01:52:20.2559661Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc - - 200 - application/grpc 69.7274ms
-2026-10-27T01:52:20.3134984Z ExitCode: 0 Duration: 1s778ms
-2026-10-27T01:52:20.3137621Z [403/512    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
-2026-10-27T01:52:20.3140027Z *** Tundra build success (1.73 seconds), 1 items updated, 512 evaluated
-2026-10-27T01:52:20.3425984Z Total cache size 661976
-2026-10-27T01:52:20.3592391Z Total cache size after purge 661976, took 00:00:00.0388631
-2026-10-27T01:52:20.3637489Z AssetDatabase: script compilation time: 2.696738s
-2026-10-27T01:52:20.5763598Z Begin MonoManager ReloadAssembly
-2026-10-27T01:52:21.3055583Z - Loaded All Assemblies, in  0.729 seconds
-2026-10-27T01:52:21.5554085Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T01:52:21.7342972Z Native extension for LinuxStandalone target not found
-2026-10-27T01:52:25.0842354Z Mono: successfully reloaded assembly
-2026-10-27T01:52:25.2760179Z - Finished resetting the current domain, in  3.720 seconds
-2026-10-27T01:52:25.2767689Z Domain Reload Profiling: 4446ms
-2026-10-27T01:52:25.2768395Z 	BeginReloadAssembly (183ms)
-2026-10-27T01:52:25.2769034Z 		ExecutionOrderSort (0ms)
-2026-10-27T01:52:25.2769653Z 		DisableScriptedObjects (16ms)
-2026-10-27T01:52:25.2770320Z 		BackupInstance (0ms)
-2026-10-27T01:52:25.2771135Z 		ReleaseScriptingObjects (0ms)
-2026-10-27T01:52:25.2771775Z 		CreateAndSetChildDomain (50ms)
-2026-10-27T01:52:25.2772432Z 	RebuildCommonClasses (66ms)
-2026-10-27T01:52:25.2773071Z 	RebuildNativeTypeToScriptingClass (16ms)
-2026-10-27T01:52:25.2773785Z 	initialDomainReloadingComplete (46ms)
-2026-10-27T01:52:25.2774520Z 	LoadAllAssembliesAndSetupDomain (414ms)
-2026-10-27T01:52:25.2775176Z 		LoadAssemblies (323ms)
-2026-10-27T01:52:25.2775842Z 		RebuildTransferFunctionScriptingTraits (0ms)
-2026-10-27T01:52:25.2776610Z 		AnalyzeDomain (167ms)
-2026-10-27T01:52:25.2777146Z 			TypeCache.Refresh (119ms)
-2026-10-27T01:52:25.2777730Z 				TypeCache.ScanAssembly (111ms)
-2026-10-27T01:52:25.2778429Z 			BuildScriptInfoCaches (34ms)
-2026-10-27T01:52:25.2779045Z 			ResolveRequiredComponents (12ms)
-2026-10-27T01:52:25.2779697Z 	FinalizeReload (3721ms)
-2026-10-27T01:52:25.2780247Z 		ReleaseScriptCaches (0ms)
-2026-10-27T01:52:25.2780817Z 		RebuildScriptCaches (0ms)
-2026-10-27T01:52:25.2781692Z 		SetupLoadedEditorAssemblies (3347ms)
-2026-10-27T01:52:25.2782346Z 			LogAssemblyErrors (0ms)
-2026-10-27T01:52:25.2783054Z 			InitializePlatformSupportModulesInManaged (75ms)
-2026-10-27T01:52:25.2783929Z 			SetLoadedEditorAssemblies (5ms)
-2026-10-27T01:52:25.2784607Z 			BeforeProcessingInitializeOnLoad (266ms)
-2026-10-27T01:52:25.2785829Z 			ProcessInitializeOnLoadAttributes (2597ms)
-2026-10-27T01:52:25.2786790Z 			ProcessInitializeOnLoadMethodAttributes (395ms)
-2026-10-27T01:52:25.2787554Z 			AfterProcessingInitializeOnLoad (10ms)
-2026-10-27T01:52:25.2788202Z 			EditorAssembliesLoaded (0ms)
-2026-10-27T01:52:25.2788779Z 		ExecutionOrderSort2 (0ms)
-2026-10-27T01:52:25.2789457Z 		AwakeInstancesAfterBackupRestoration (8ms)
-2026-10-27T01:52:25.6466255Z Asset Pipeline Refresh (id=b4b11ae4a2f99fc4ca28af2a838f1a34): Total: 8.369 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
-2026-10-27T01:52:25.6467787Z 	Summary:
-2026-10-27T01:52:25.6470429Z 		Imports: total=0 (actual=0, local cache=0, cache server=0)
-2026-10-27T01:52:25.6471458Z 		Asset DB Process Time: managed=0 ms, native=4817 ms
-2026-10-27T01:52:25.6472139Z 		Asset DB Callback time: managed=31 ms, native=0 ms
-2026-10-27T01:52:25.6473023Z 		Scripting: domain reloads=1, domain reload time=772 ms, compile time=2702 ms, other=46 ms
-2026-10-27T01:52:25.6473961Z 		Project Asset Count: scripts=925, non-scripts=4156
-2026-10-27T01:52:25.6474653Z 		Asset File Changes: new=0, changed=0, moved=0, deleted=0
-2026-10-27T01:52:25.6475274Z 		Scan Filter Count: 1
-2026-10-27T01:52:25.6475774Z 	InvokeCustomDependenciesCallbacks: 0.005ms
-2026-10-27T01:52:25.6476381Z 	InvokePackagesCallback: 0.978ms
-2026-10-27T01:52:25.6476910Z 	ApplyChangesToAssetFolders: 0.239ms
-2026-10-27T01:52:25.6477423Z 	Scan: 788.751ms
-2026-10-27T01:52:25.6477838Z 	OnSourceAssetsModified: 0.002ms
-2026-10-27T01:52:25.6478436Z 	CategorizeAssetsWithTransientArtifact: 34.231ms
-2026-10-27T01:52:25.6479176Z 	ProcessAssetsWithTransientArtifactChanges: 44.462ms
-2026-10-27T01:52:25.6479830Z 	CategorizeAssets: 68.953ms
-2026-10-27T01:52:25.6480651Z 	ImportOutOfDateAssets: 3734.967ms (1029.687ms without children)
-2026-10-27T01:52:25.6482408Z 		CompileScripts: 2701.604ms
-2026-10-27T01:52:25.6482861Z 		ReloadNativeAssets: 0.024ms
-2026-10-27T01:52:25.6483308Z 		UnloadImportedAssets: 1.058ms
-2026-10-27T01:52:25.6483886Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.870ms
-2026-10-27T01:52:25.6484513Z 		InitializingProgressBar: 0.001ms
-2026-10-27T01:52:25.6485136Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
-2026-10-27T01:52:25.6485794Z 		OnDemandSchedulerStart: 1.724ms
-2026-10-27T01:52:25.6486266Z 	PostProcessAllAssets: 31.479ms
-2026-10-27T01:52:25.6486796Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
-2026-10-27T01:52:25.6487375Z 	UnloadStreamsBegin: 4.212ms
-2026-10-27T01:52:25.6487818Z 	PersistCurrentRevisions: 0.189ms
-2026-10-27T01:52:25.6488282Z 	UnloadStreamsEnd: 0.001ms
-2026-10-27T01:52:25.6488719Z 	GenerateScriptTypeHashes: 6.070ms
-2026-10-27T01:52:25.6489178Z 	Untracked: 3660.993ms
-2026-10-27T01:52:25.6489437Z 
-2026-10-27T01:52:25.6489680Z Application.AssetDatabase Initial Refresh End
-2026-10-27T01:52:25.7108152Z Scanning for USB devices : 0.164ms
-2026-10-27T01:52:25.7134963Z Initializing Unity extensions:
-2026-10-27T01:52:25.8887261Z [Licensing::Client] Successfully resolved entitlement details
-2026-10-27T01:52:25.9082579Z UpdateMenuTitleForLanguage: 10
-2026-10-27T01:52:25.9255078Z [MODES] ModeService[none].Initialize
-2026-10-27T01:52:25.9261894Z [MODES] ModeService[none].LoadModes
-2026-10-27T01:52:26.0755564Z [MODES] Loading mode Default (0) for mode-current-id-Korvalune
-2026-10-27T01:52:26.4106976Z Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
-2026-10-27T01:52:26.4263115Z Unloading 3079 unused Assets / (2.4 MB). Loaded Objects now: 3776.
-2026-10-27T01:52:26.4264401Z Memory consumption went from 133.0 MB to 130.6 MB.
-2026-10-27T01:52:26.4266321Z Total: 15.118054 ms (FindLiveObjects: 1.163079 ms CreateObjectMapping: 0.532443 ms MarkObjects: 10.787769 ms  DeleteObjects: 2.633842 ms)
-2026-10-27T01:52:26.4267653Z 
-2026-10-27T01:52:27.3760269Z Asset Pipeline Refresh (id=f764f2ae57e84b8179a16cf9a2e5159d): Total: 0.695 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
-2026-10-27T01:52:27.3761892Z 	Summary:
-2026-10-27T01:52:27.3762940Z 		Imports: total=0 (actual=0, local cache=0, cache server=0)
-2026-10-27T01:52:27.3763807Z 		Asset DB Process Time: managed=0 ms, native=695 ms
-2026-10-27T01:52:27.3764666Z 		Asset DB Callback time: managed=0 ms, native=0 ms
-2026-10-27T01:52:27.3765637Z 		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
-2026-10-27T01:52:27.3766495Z 		Project Asset Count: scripts=925, non-scripts=4156
-2026-10-27T01:52:27.3767153Z 		Asset File Changes: new=0, changed=0, moved=0, deleted=0
-2026-10-27T01:52:27.3767740Z 		Scan Filter Count: 1
-2026-10-27T01:52:27.3768212Z 	InvokeCustomDependenciesCallbacks: 0.001ms
-2026-10-27T01:52:27.3768791Z 	InvokePackagesCallback: 0.001ms
-2026-10-27T01:52:27.3769305Z 	ApplyChangesToAssetFolders: 0.127ms
-2026-10-27T01:52:27.3769811Z 	Scan: 592.570ms
-2026-10-27T01:52:27.3770215Z 	OnSourceAssetsModified: 0.001ms
-2026-10-27T01:52:27.3770785Z 	CategorizeAssetsWithTransientArtifact: 0.002ms
-2026-10-27T01:52:27.3771866Z 	ProcessAssetsWithTransientArtifactChanges: 0.048ms
-2026-10-27T01:52:27.3772538Z 	CategorizeAssets: 78.141ms
-2026-10-27T01:52:27.3773112Z 	ImportOutOfDateAssets: 3.139ms (0.335ms without children)
-2026-10-27T01:52:27.3773740Z 		ReloadNativeAssets: 0.026ms
-2026-10-27T01:52:27.3774223Z 		UnloadImportedAssets: 0.132ms
-2026-10-27T01:52:27.3774809Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.648ms
-2026-10-27T01:52:27.3775462Z 		InitializingProgressBar: 0.000ms
-2026-10-27T01:52:27.3776141Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
-2026-10-27T01:52:27.3776842Z 		OnDemandSchedulerStart: 1.998ms
-2026-10-27T01:52:27.3777457Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.174ms
-2026-10-27T01:52:27.3778087Z 	UnloadStreamsBegin: 3.414ms
-2026-10-27T01:52:27.3778585Z 	PersistCurrentRevisions: 0.199ms
-2026-10-27T01:52:27.3779291Z 	UnloadStreamsEnd: 0.001ms
-2026-10-27T01:52:27.3779745Z 	Untracked: 17.197ms
-2026-10-27T01:52:27.3780138Z 
-2026-10-27T01:52:27.4230353Z Shader Hidden/ProbeVolume/VoxelizeScene is not supported: GPU does not support conservative rasterization
-2026-10-27T01:52:27.5289603Z Launched and connected shader compiler UnityShaderCompiler after 0.07 seconds
-2026-10-27T01:52:27.7672307Z Start importing ProjectSettings/QualitySettings.asset using Guid(00000000000000009000000000000000) (LibraryAssetImporter) -> (artifact id: '875af7d748d190de94555984dcf86d9f') in 0.019134334 seconds
-2026-10-27T01:52:27.7699170Z Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: '20f419efd18888105f700bddac0c96c2') in 0.002479364 seconds
-2026-10-27T01:52:27.7764502Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer_Mobile.asset using Guid(d085fe35dab3335e2845a764821da8bf) (NativeFormatImporter) -> (artifact id: 'a58bf23a6906c6a3cdf877fa158e9218') in 0.004852951 seconds
-2026-10-27T01:52:27.7789770Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '759a01f56f0c30c090388fdd5320648c') in 0.00214485 seconds
-2026-10-27T01:52:27.7821544Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer.asset using Guid(45dcf888724dd3f06b1c3653ce8a2375) (NativeFormatImporter) -> (artifact id: 'cd79d1476e2174ff55ca483083759014') in 0.002732606 seconds
-2026-10-27T01:52:27.7872485Z Start importing Assets/Korvalune/Rendering/Korvalune_URP_Mobile.asset using Guid(fef8269d245f099369074a8e31f89ba9) (NativeFormatImporter) -> (artifact id: '08dae930073b224dac2fc1ca70a4159a') in 0.003368281 seconds
-2026-10-27T01:52:28.0371287Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T01:52:28.0372833Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T01:52:28.0383201Z Asset Pipeline Refresh (id=27b6ad2f0dfcb945b88b3c40b57c66da): Total: 0.312 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-2026-10-27T01:52:28.0384604Z 	Summary:
-2026-10-27T01:52:28.0385233Z 		Imports: total=6 (actual=6, local cache=0, cache server=0)
-2026-10-27T01:52:28.0386359Z 		Asset DB Process Time: managed=10 ms, native=55 ms
-2026-10-27T01:52:28.0387209Z 		Asset DB Callback time: managed=244 ms, native=0 ms
-2026-10-27T01:52:28.0388174Z 		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
-2026-10-27T01:52:28.0389202Z 		Project Asset Count: scripts=925, non-scripts=4156
-2026-10-27T01:52:28.0390030Z 		Asset File Changes: new=0, changed=0, moved=0, deleted=0
-2026-10-27T01:52:28.0390768Z 		Scan Filter Count: 9
-2026-10-27T01:52:28.0391764Z 	InvokeCustomDependenciesCallbacks: 0.002ms
-2026-10-27T01:52:28.0392656Z 	InvokePackagesCallback: 0.000ms
-2026-10-27T01:52:28.0393639Z 	ApplyChangesToAssetFolders: 0.090ms
-2026-10-27T01:52:28.0394409Z 	Scan: 15.826ms
-2026-10-27T01:52:28.0395213Z 	OnSourceAssetsModified: 0.000ms
-2026-10-27T01:52:28.0395903Z 	CategorizeAssetsWithTransientArtifact: 0.012ms
-2026-10-27T01:52:28.0396937Z 	ProcessAssetsWithTransientArtifactChanges: 0.026ms
-2026-10-27T01:52:28.0397732Z 	CategorizeAssets: 2.107ms
-2026-10-27T01:52:28.0410159Z 	ImportOutOfDateAssets: 44.006ms (0.482ms without children)
-2026-10-27T01:52:28.0411272Z 		ImportManagerImport: 40.293ms (1.826ms without children)
-2026-10-27T01:52:28.0411931Z 			ImportInProcess: 38.417ms
-2026-10-27T01:52:28.0412443Z 			UpdateCategorizedAssets: 0.050ms
-2026-10-27T01:52:28.0412990Z 		ReloadNativeAssets: 0.034ms
-2026-10-27T01:52:28.0413476Z 		UnloadImportedAssets: 0.116ms
-2026-10-27T01:52:28.0413939Z 		ReloadImportedAssets: 0.001ms
-2026-10-27T01:52:28.0414515Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 2.679ms
-2026-10-27T01:52:28.0415176Z 		InitializingProgressBar: 0.004ms
-2026-10-27T01:52:28.0415846Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
-2026-10-27T01:52:28.0416544Z 		OnDemandSchedulerStart: 0.395ms
-2026-10-27T01:52:28.0417211Z 	PostProcessAllAssets: 245.018ms
-2026-10-27T01:52:28.0417683Z 	Hotreload: 0.338ms
-2026-10-27T01:52:28.0418328Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.178ms
-2026-10-27T01:52:28.0418969Z 	UnloadStreamsBegin: 0.001ms
-2026-10-27T01:52:28.0419480Z 	PersistCurrentRevisions: 0.183ms
-2026-10-27T01:52:28.0419983Z 	UnloadStreamsEnd: 0.001ms
-2026-10-27T01:52:28.0420430Z 	Untracked: 4.097ms
-2026-10-27T01:52:28.0420671Z 
-2026-10-27T01:52:33.7586038Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-2026-10-27T01:52:33.7778921Z Unloading 2 unused Assets / (1.0 KB). Loaded Objects now: 3803.
-2026-10-27T01:52:33.7780221Z Memory consumption went from 131.6 MB to 131.6 MB.
-2026-10-27T01:52:33.7782355Z Total: 16.598094 ms (FindLiveObjects: 0.237623 ms CreateObjectMapping: 0.137266 ms MarkObjects: 15.895444 ms  DeleteObjects: 0.326709 ms)
-2026-10-27T01:52:33.7783331Z 
-2026-10-27T01:53:00.9945852Z Killed
-2026-10-27T01:53:01.0596232Z Build failed, with exit code 137
-2026-10-27T01:53:02.2783555Z 
-2026-10-27T01:53:02.2784299Z ###########################
-2026-10-27T01:53:02.2785099Z #       Build output      #
-2026-10-27T01:53:02.2785758Z ###########################
-2026-10-27T01:53:02.2786213Z 
-2026-10-27T01:53:02.2843193Z total 8.0K
-2026-10-27T01:53:02.2843688Z drwxr-xr-x 2 1001 1001 4.0K Oct 27 01:31 .
-2026-10-27T01:53:02.2844267Z drwxr-xr-x 3 1001 1001 4.0K Oct 27 01:31 ..
-2026-10-27T01:53:02.6352620Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
-2026-10-27T01:53:02.6367093Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
-2026-10-27T01:53:02.6368397Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
-2026-10-27T01:53:02.6370332Z [UnityConnectServicesConfig] Service configuration:
-2026-10-27T01:53:02.6371225Z     "servicesConfigBaseUrl": "",
-2026-10-27T01:53:02.6371813Z     "disableServicesWindow": false,
-2026-10-27T01:53:02.6373385Z     "disableUserLogin": false,
-2026-10-27T01:53:02.6373865Z     "entitlementCacheTimeoutInSeconds": 60,
-2026-10-27T01:53:02.6374243Z     "clientConnectTimeoutSec": 5,
-2026-10-27T01:53:02.6374567Z     "clientHandshakeTimeoutSec": 10,
-2026-10-27T01:53:02.6374915Z     "clientResolveEntitlementsTimeoutSec": 30,
-2026-10-27T01:53:02.6376760Z     "clientUpdateLicenseTimeoutSec": 30,
-2026-10-27T01:53:02.6377135Z     "licensingServiceBaseUrl": "",
-2026-10-27T01:53:02.6377451Z     "enableProxyAutoconfig": "false"
-2026-10-27T01:53:02.6377656Z 
-2026-10-27T01:53:02.6563893Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
-2026-10-27T01:53:02.6564907Z Branch:                  6000.0/staging
-2026-10-27T01:53:02.6566751Z Build type:              Release
-2026-10-27T01:53:02.6567667Z Batch mode:              YES
-2026-10-27T01:53:02.6568267Z System name:             Linux
-2026-10-27T01:53:02.6568878Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
-2026-10-27T01:53:02.6572854Z Kernel version:          6.17.0-1022-azure
-2026-10-27T01:53:02.6573316Z Architecture:            x86_64
-2026-10-27T01:53:02.6573606Z Available memory:        7938 MB
-2026-10-27T01:53:02.8234285Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T01:53:02.8235123Z       Application is shutting down...
-2026-10-27T01:53:02.8517357Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T01:53:02.8518689Z       ALC ILPP context 1 is unloading
-2026-10-27T01:53:03.3618117Z User *** logged in successfully
-2026-10-27T01:53:03.3621039Z [UnityConnect::TryLogin] Request Succeeded.
-2026-10-27T01:53:03.3621985Z [Licensing::Module] Trying to connect to existing licensing client channel...
-2026-10-27T01:53:03.3623494Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
-2026-10-27T01:53:03.3624986Z [Licensing::Module] Successfully launched the LicensingClient (PId: 335)
-2026-10-27T01:53:04.2237460Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T01:53:04.221649Z"
-2026-10-27T01:53:04.2239251Z [SignatureVerifier] Application signature verification not supported on this platform.
-2026-10-27T01:53:04.3791814Z [Licensing::Client] Handshaking with LicensingClient:
-2026-10-27T01:53:04.3792732Z   Version:                 1.16.0+1c867a9
-2026-10-27T01:53:04.3793484Z   Session Id:              d0a812a745dc4df1989cd7b271b3df5c
-2026-10-27T01:53:04.3794787Z   Correlation Id:          464d6ff73cddc2f574157c4013c0097e
-2026-10-27T01:53:04.3796113Z   External correlation Id: 1469933993118968368
-2026-10-27T01:53:04.3797207Z   Machine Id:              /BFIwOuX5K5EmJ4Bz13eUwmpBG0=
-2026-10-27T01:53:04.3799254Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.86s, validation: 0.16s, handshake: 0.00s)
-2026-10-27T01:53:04.3803485Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T01:53:04.379622Z"
-2026-10-27T01:53:04.3805620Z [Licensing::Module] Connected to LicensingClient (PId: 335, launch time: 0.00, total connection time: 1.02s)
-2026-10-27T01:53:04.4064659Z [Licensing::Client] Successfully updated the access token
-2026-10-27T01:53:04.4067531Z [Licensing::Module] Successfully updated the access token ikorrYQ4Tl...
-2026-10-27T01:53:05.5976214Z [Licensing::Client] Successfully processed license management request
-2026-10-27T01:53:05.5978646Z [Licensing::Module] Successfully returned the entitlement license
-2026-10-27T01:53:05.6380064Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
-2026-10-27T01:53:07.0247316Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
-2026-10-27T01:53:07.0466638Z 
-2026-10-27T01:53:07.0468342Z ###########################
-2026-10-27T01:53:07.0469019Z #         Failure         #
-2026-10-27T01:53:07.0469454Z ###########################
-2026-10-27T01:53:07.0469758Z 
-2026-10-27T01:53:07.0470035Z Please note that the exit code is not very descriptive.
-2026-10-27T01:53:07.0470711Z Most likely it will not help you solve the issue.
-2026-10-27T01:53:07.0471456Z 
-2026-10-27T01:53:07.0472358Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
-2026-10-27T01:53:07.0473172Z 
-2026-10-27T01:53:07.3702322Z ##[error]Build failed with exit code 137
+2026-10-27T03:56:10.2464236Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T03:56:10.2729993Z Initialize mono
+2026-10-27T03:56:10.2732101Z Mono path[0] = '/opt/unity/Editor/Data/Managed'
+2026-10-27T03:56:10.2733148Z Mono path[1] = '/opt/unity/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-linux'
+2026-10-27T03:56:10.2734248Z Mono config path = '/opt/unity/Editor/Data/MonoBleedingEdge/etc'
+2026-10-27T03:56:10.2743337Z Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56028
+2026-10-27T03:56:10.4245553Z Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+2026-10-27T03:56:10.4248324Z Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+2026-10-27T03:56:10.4249593Z ImportWorker Server TCP listen port: 0
+2026-10-27T03:56:10.4258591Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-10-27T03:56:10.4529592Z Begin MonoManager ReloadAssembly
+2026-10-27T03:56:11.0250502Z Registering precompiled unity dll's ...
+2026-10-27T03:56:11.0294569Z Register platform support module: /opt/unity/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+2026-10-27T03:56:11.0309091Z Registered in 0.006149 seconds.
+2026-10-27T03:56:11.6203540Z - Loaded All Assemblies, in  1.167 seconds
+2026-10-27T03:56:11.7038421Z Native extension for LinuxStandalone target not found
+2026-10-27T03:56:12.9926472Z Mono: successfully reloaded assembly
+2026-10-27T03:56:13.0654114Z - Finished resetting the current domain, in  1.445 seconds
+2026-10-27T03:56:13.0679508Z Domain Reload Profiling: 2613ms
+2026-10-27T03:56:13.0680442Z 	BeginReloadAssembly (321ms)
+2026-10-27T03:56:13.0681501Z 		ExecutionOrderSort (0ms)
+2026-10-27T03:56:13.0682187Z 		DisableScriptedObjects (0ms)
+2026-10-27T03:56:13.0682829Z 		BackupInstance (0ms)
+2026-10-27T03:56:13.0683416Z 		ReleaseScriptingObjects (0ms)
+2026-10-27T03:56:13.0684057Z 		CreateAndSetChildDomain (2ms)
+2026-10-27T03:56:13.0684779Z 	RebuildCommonClasses (136ms)
+2026-10-27T03:56:13.0685644Z 	RebuildNativeTypeToScriptingClass (38ms)
+2026-10-27T03:56:13.0686428Z 	initialDomainReloadingComplete (174ms)
+2026-10-27T03:56:13.0687152Z 	LoadAllAssembliesAndSetupDomain (497ms)
+2026-10-27T03:56:13.0687836Z 		LoadAssemblies (321ms)
+2026-10-27T03:56:13.0688505Z 		RebuildTransferFunctionScriptingTraits (0ms)
+2026-10-27T03:56:13.0689243Z 		AnalyzeDomain (485ms)
+2026-10-27T03:56:13.0690021Z 			TypeCache.Refresh (481ms)
+2026-10-27T03:56:13.0690678Z 				TypeCache.ScanAssembly (445ms)
+2026-10-27T03:56:13.0691346Z 			BuildScriptInfoCaches (3ms)
+2026-10-27T03:56:13.0691976Z 			ResolveRequiredComponents (1ms)
+2026-10-27T03:56:13.0692644Z 	FinalizeReload (1448ms)
+2026-10-27T03:56:13.0693275Z 		ReleaseScriptCaches (0ms)
+2026-10-27T03:56:13.0693871Z 		RebuildScriptCaches (0ms)
+2026-10-27T03:56:13.0694498Z 		SetupLoadedEditorAssemblies (1314ms)
+2026-10-27T03:56:13.0695136Z 			LogAssemblyErrors (0ms)
+2026-10-27T03:56:13.0695806Z 			InitializePlatformSupportModulesInManaged (267ms)
+2026-10-27T03:56:13.0696574Z 			SetLoadedEditorAssemblies (21ms)
+2026-10-27T03:56:13.0697243Z 			BeforeProcessingInitializeOnLoad (204ms)
+2026-10-27T03:56:13.0697976Z 			ProcessInitializeOnLoadAttributes (559ms)
+2026-10-27T03:56:13.0698743Z 			ProcessInitializeOnLoadMethodAttributes (261ms)
+2026-10-27T03:56:13.0699498Z 			AfterProcessingInitializeOnLoad (0ms)
+2026-10-27T03:56:13.0700357Z 			EditorAssembliesLoaded (0ms)
+2026-10-27T03:56:13.0700959Z 		ExecutionOrderSort2 (0ms)
+2026-10-27T03:56:13.0701594Z 		AwakeInstancesAfterBackupRestoration (0ms)
+2026-10-27T03:56:13.1337133Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T03:56:13.1459893Z Application.AssetDatabase Initial Refresh Start
+2026-10-27T03:56:14.1808305Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[14]
+2026-10-27T03:56:14.1809345Z       Now listening on: http://unix:/tmp/ilpp.sock-6c2c88d26de89964a3589845e9f6b753
+2026-10-27T03:56:14.1816741Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T03:56:14.1817646Z       Application started. Press Ctrl+C to shut down.
+2026-10-27T03:56:14.1818620Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T03:56:14.1819529Z       Hosting environment: Production
+2026-10-27T03:56:14.1820720Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T03:56:14.1821512Z       Content root path: /BlankProject/
+2026-10-27T03:56:14.3360170Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+2026-10-27T03:56:14.3361592Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
+2026-10-27T03:56:14.3856061Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+2026-10-27T03:56:14.3857261Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+2026-10-27T03:56:14.4781458Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+2026-10-27T03:56:14.4783025Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+2026-10-27T03:56:14.4934223Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+2026-10-27T03:56:14.4935747Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 157.2231ms
+2026-10-27T03:56:14.8363871Z Starting: /opt/unity/Editor/Data/bee_backend --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/2400b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+2026-10-27T03:56:14.8372158Z WorkingDir: /BlankProject
+2026-10-27T03:56:15.0329411Z DisplayProgressbar: Compiling Scripts
+2026-10-27T03:56:16.4081424Z ExitCode: 0 Duration: 1s569ms
+2026-10-27T03:56:16.4082668Z *** Tundra build success (1.52 seconds), 0 items updated, 199 evaluated
+2026-10-27T03:56:16.4489580Z Total cache size 661976
+2026-10-27T03:56:16.4693422Z Total cache size after purge 661976, took 00:00:00.0444374
+2026-10-27T03:56:16.4931559Z AssetDatabase: script compilation time: 3.052350s
+2026-10-27T03:56:16.5113956Z Begin MonoManager ReloadAssembly
+2026-10-27T03:56:17.0311022Z - Loaded All Assemblies, in  0.521 seconds
+2026-10-27T03:56:17.1011352Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-27T03:56:17.2607341Z Native extension for LinuxStandalone target not found
+2026-10-27T03:56:18.1901432Z Mono: successfully reloaded assembly
+2026-10-27T03:56:18.4361199Z - Finished resetting the current domain, in  1.334 seconds
+2026-10-27T03:56:18.4421166Z Domain Reload Profiling: 1858ms
+2026-10-27T03:56:18.4421895Z 	BeginReloadAssembly (337ms)
+2026-10-27T03:56:18.4422623Z 		ExecutionOrderSort (0ms)
+2026-10-27T03:56:18.4423225Z 		DisableScriptedObjects (29ms)
+2026-10-27T03:56:18.4423855Z 		BackupInstance (0ms)
+2026-10-27T03:56:18.4424388Z 		ReleaseScriptingObjects (0ms)
+2026-10-27T03:56:18.4424991Z 		CreateAndSetChildDomain (63ms)
+2026-10-27T03:56:18.4425580Z 	RebuildCommonClasses (96ms)
+2026-10-27T03:56:18.4426211Z 	RebuildNativeTypeToScriptingClass (15ms)
+2026-10-27T03:56:18.4426937Z 	initialDomainReloadingComplete (38ms)
+2026-10-27T03:56:18.4427635Z 	LoadAllAssembliesAndSetupDomain (34ms)
+2026-10-27T03:56:18.4428292Z 		LoadAssemblies (169ms)
+2026-10-27T03:56:18.4428951Z 		RebuildTransferFunctionScriptingTraits (0ms)
+2026-10-27T03:56:18.4429664Z 		AnalyzeDomain (23ms)
+2026-10-27T03:56:18.4430857Z 			TypeCache.Refresh (14ms)
+2026-10-27T03:56:18.4431587Z 				TypeCache.ScanAssembly (7ms)
+2026-10-27T03:56:18.4432189Z 			BuildScriptInfoCaches (5ms)
+2026-10-27T03:56:18.4432780Z 			ResolveRequiredComponents (1ms)
+2026-10-27T03:56:18.4433393Z 	FinalizeReload (1338ms)
+2026-10-27T03:56:18.4433934Z 		ReleaseScriptCaches (0ms)
+2026-10-27T03:56:18.4434507Z 		RebuildScriptCaches (0ms)
+2026-10-27T03:56:18.4435112Z 		SetupLoadedEditorAssemblies (907ms)
+2026-10-27T03:56:18.4435756Z 			LogAssemblyErrors (0ms)
+2026-10-27T03:56:18.4436437Z 			InitializePlatformSupportModulesInManaged (115ms)
+2026-10-27T03:56:18.4437195Z 			SetLoadedEditorAssemblies (7ms)
+2026-10-27T03:56:18.4437876Z 			BeforeProcessingInitializeOnLoad (289ms)
+2026-10-27T03:56:18.4438602Z 			ProcessInitializeOnLoadAttributes (355ms)
+2026-10-27T03:56:18.4439350Z 			ProcessInitializeOnLoadMethodAttributes (104ms)
+2026-10-27T03:56:18.4440373Z 			AfterProcessingInitializeOnLoad (36ms)
+2026-10-27T03:56:18.4440905Z 			EditorAssembliesLoaded (1ms)
+2026-10-27T03:56:18.4441361Z 		ExecutionOrderSort2 (0ms)
+2026-10-27T03:56:18.4441854Z 		AwakeInstancesAfterBackupRestoration (30ms)
+2026-10-27T03:56:18.5461803Z Asset Pipeline Refresh (id=749703d4bebf2e3d1936f52d0a620c86): Total: 5.398 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+2026-10-27T03:56:18.5463104Z 	Summary:
+2026-10-27T03:56:18.5463690Z 		Imports: total=0 (actual=0, local cache=0, cache server=0)
+2026-10-27T03:56:18.5464534Z 		Asset DB Process Time: managed=0 ms, native=1730 ms
+2026-10-27T03:56:18.5465291Z 		Asset DB Callback time: managed=35 ms, native=0 ms
+2026-10-27T03:56:18.5466243Z 		Scripting: domain reloads=1, domain reload time=541 ms, compile time=3057 ms, other=33 ms
+2026-10-27T03:56:18.5467206Z 		Project Asset Count: scripts=98, non-scripts=114
+2026-10-27T03:56:18.5467968Z 		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+2026-10-27T03:56:18.5468653Z 		Scan Filter Count: 1
+2026-10-27T03:56:18.5469376Z 	InvokeCustomDependenciesCallbacks: 0.006ms
+2026-10-27T03:56:18.5470100Z 	InvokePackagesCallback: 0.943ms
+2026-10-27T03:56:18.5471248Z 	ApplyChangesToAssetFolders: 0.143ms
+2026-10-27T03:56:18.5471859Z 	Scan: 147.282ms
+2026-10-27T03:56:18.5472369Z 	OnSourceAssetsModified: 0.004ms
+2026-10-27T03:56:18.5473035Z 	CategorizeAssetsWithTransientArtifact: 2.869ms
+2026-10-27T03:56:18.5473846Z 	ProcessAssetsWithTransientArtifactChanges: 6.262ms
+2026-10-27T03:56:18.5474938Z 	CategorizeAssets: 6.642ms
+2026-10-27T03:56:18.5475650Z 	ImportOutOfDateAssets: 1367.764ms (-1689.950ms without children)
+2026-10-27T03:56:18.5476421Z 		CompileScripts: 3057.075ms
+2026-10-27T03:56:18.5476989Z 		ReloadNativeAssets: 0.001ms
+2026-10-27T03:56:18.5477569Z 		UnloadImportedAssets: 0.350ms
+2026-10-27T03:56:18.5478477Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.080ms
+2026-10-27T03:56:18.5479276Z 		InitializingProgressBar: 0.000ms
+2026-10-27T03:56:18.5480416Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+2026-10-27T03:56:18.5481230Z 		OnDemandSchedulerStart: 0.208ms
+2026-10-27T03:56:18.5481840Z 	PostProcessAllAssets: 35.973ms
+2026-10-27T03:56:18.5482540Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
+2026-10-27T03:56:18.5483248Z 	UnloadStreamsBegin: 9.827ms
+2026-10-27T03:56:18.5483823Z 	PersistCurrentRevisions: 0.009ms
+2026-10-27T03:56:18.5484428Z 	UnloadStreamsEnd: 0.001ms
+2026-10-27T03:56:18.5484992Z 	GenerateScriptTypeHashes: 3.672ms
+2026-10-27T03:56:18.5485582Z 	Untracked: 3820.667ms
+2026-10-27T03:56:18.5485919Z 
+2026-10-27T03:56:18.5486228Z Application.AssetDatabase Initial Refresh End
+2026-10-27T03:56:18.5831064Z Scanning for USB devices : 0.267ms
+2026-10-27T03:56:18.5832058Z Initializing Unity extensions:
+2026-10-27T03:56:18.7044680Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T03:56:18.7122713Z UpdateMenuTitleForLanguage: 10
+2026-10-27T03:56:18.7160812Z [MODES] ModeService[none].Initialize
+2026-10-27T03:56:18.7161553Z [MODES] ModeService[none].LoadModes
+2026-10-27T03:56:18.7484310Z [MODES] Loading mode Default (0) for mode-current-id-BlankProject
+2026-10-27T03:56:18.9536009Z Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T03:56:18.9697792Z Unloading 154 unused Assets / (0.6 MB). Loaded Objects now: 665.
+2026-10-27T03:56:18.9698735Z Memory consumption went from 71.8 MB to 71.2 MB.
+2026-10-27T03:56:18.9700139Z Total: 14.161040 ms (FindLiveObjects: 0.071623 ms CreateObjectMapping: 0.039514 ms MarkObjects: 13.324750 ms  DeleteObjects: 0.724301 ms)
+2026-10-27T03:56:18.9701182Z 
+2026-10-27T03:56:19.0295723Z Batchmode quit successfully invoked - shutting down!
+2026-10-27T03:56:19.1961400Z Curl error 42: Callback aborted
+2026-10-27T03:56:19.2501405Z [Physics::Module] Cleanup current backned.
+2026-10-27T03:56:19.2502283Z [Physics::Module] Id: 0xf2b8ea05
+2026-10-27T03:56:19.2503146Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-10-27T03:56:19.2504256Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-10-27T03:56:19.2673333Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-10-27T03:56:19.2737741Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T03:56:19.2738700Z       Application is shutting down...
+2026-10-27T03:56:23.6301844Z Cleanup mono
+2026-10-27T03:56:23.6996296Z debugger-agent: Unable to listen on 47
+2026-10-27T03:56:23.7073679Z Exiting batchmode successfully now!
+2026-10-27T03:56:23.7104173Z 
+2026-10-27T03:56:23.7104825Z SDL leaked 2 allocations
+2026-10-27T03:56:23.7620198Z Activation successful
+2026-10-27T03:56:23.7629001Z Activation complete.
+2026-10-27T03:56:23.7629952Z Using project path "/github/workspace/.".
+2026-10-27T03:56:23.7630759Z Using build name "StandaloneLinux64".
+2026-10-27T03:56:23.7631785Z Using build target "StandaloneLinux64".
+2026-10-27T03:56:23.7632439Z Doing a default "StandaloneLinux64" platform build.
+2026-10-27T03:56:23.7633274Z Using build path "build/StandaloneLinux64" to save file "StandaloneLinux64".
+2026-10-27T03:56:23.7644049Z Using build method "Korvalune.EditorTools.CI.Run".
+2026-10-27T03:56:23.7644638Z 
+2026-10-27T03:56:23.7645122Z ###########################
+2026-10-27T03:56:23.7645727Z #    Custom parameters    #
+2026-10-27T03:56:23.7646270Z ###########################
+2026-10-27T03:56:23.7646652Z 
+2026-10-27T03:56:23.7649204Z -ciPhaseScenes
+2026-10-27T03:56:23.7649610Z 
+2026-10-27T03:56:23.7650073Z ###########################
+2026-10-27T03:56:23.7650827Z #    Current build dir    #
+2026-10-27T03:56:23.7651267Z ###########################
+2026-10-27T03:56:23.7651528Z 
+2026-10-27T03:56:23.7651933Z Creating "/github/workspace/build/StandaloneLinux64" if it does not exist.
+2026-10-27T03:56:23.7722522Z total 8.0K
+2026-10-27T03:56:23.7723038Z drwxr-xr-x 2 1001 1001 4.0K Oct 27 02:04 .
+2026-10-27T03:56:23.7724140Z drwxr-xr-x 3 1001 1001 4.0K Oct 27 02:04 ..
+2026-10-27T03:56:23.7741304Z 
+2026-10-27T03:56:23.7742173Z ###########################
+2026-10-27T03:56:23.7743860Z #    Project directory    #
+2026-10-27T03:56:23.7744748Z ###########################
+2026-10-27T03:56:23.7745193Z 
+2026-10-27T03:56:23.7792587Z total 68K
+2026-10-27T03:56:23.7793286Z drwxr-xr-x 15 1001 1001 4.0K Oct 27 02:06 .
+2026-10-27T03:56:23.7794092Z drwxr-xr-x  4 root root 4.0K Oct 27 03:56 ..
+2026-10-27T03:56:23.7794879Z drwxr-xr-x  7 1001 1001 4.0K Oct 27 03:56 .git
+2026-10-27T03:56:23.7795602Z drwxr-xr-x  4 1001 1001 4.0K Oct 27 01:59 .github
+2026-10-27T03:56:23.7796345Z -rw-r--r--  1 1001 1001  170 Oct 27 01:59 .gitignore
+2026-10-27T03:56:23.7797123Z drwxr-xr-x  2 1001 1001 4.0K Oct 27 01:59 .licence
+2026-10-27T03:56:23.7797850Z drwxr-xr-x  3 1001 1001 4.0K Oct 27 01:59 Assets
+2026-10-27T03:56:23.7798564Z drwxr-xr-x 13 1001 1001 4.0K Oct 27 02:07 Library
+2026-10-27T03:56:23.7799287Z drwxr-xr-x  2 1001 1001 4.0K Oct 27 02:06 Logs
+2026-10-27T03:56:23.7800329Z drwxr-xr-x  2 1001 1001 4.0K Oct 27 01:59 Packages
+2026-10-27T03:56:23.7801141Z drwxr-xr-x  2 1001 1001 4.0K Oct 27 02:06 ProjectSettings
+2026-10-27T03:56:23.7801945Z -rw-r--r--  1 1001 1001 1.6K Oct 27 01:59 README.md
+2026-10-27T03:56:23.7802704Z drwxr-xr-x  3 1001 1001 4.0K Oct 27 02:07 Temp
+2026-10-27T03:56:23.7803440Z drwxr-xr-x  3 1001 1001 4.0K Oct 27 01:59 Tools
+2026-10-27T03:56:23.7804209Z drwxr-xr-x  2 1001 1001 4.0K Oct 27 02:05 UserSettings
+2026-10-27T03:56:23.7804971Z drwxr-xr-x  3 1001 1001 4.0K Oct 27 02:04 build
+2026-10-27T03:56:23.7805696Z drwxr-xr-x  2 1001 1001 4.0K Oct 27 02:39 ci-out
+2026-10-27T03:56:23.7814252Z 
+2026-10-27T03:56:23.7814703Z ###########################
+2026-10-27T03:56:23.7816427Z #    Building project     #
+2026-10-27T03:56:23.7817321Z ###########################
+2026-10-27T03:56:23.7817854Z 
+2026-10-27T03:56:23.9351926Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-10-27T03:56:23.9353481Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-10-27T03:56:23.9354786Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-10-27T03:56:23.9355908Z [UnityConnectServicesConfig] Service configuration:
+2026-10-27T03:56:23.9356718Z     "servicesConfigBaseUrl": "",
+2026-10-27T03:56:23.9357391Z     "disableServicesWindow": false,
+2026-10-27T03:56:23.9358076Z     "disableUserLogin": false,
+2026-10-27T03:56:23.9358765Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-10-27T03:56:23.9359506Z     "clientConnectTimeoutSec": 5,
+2026-10-27T03:56:23.9360495Z     "clientHandshakeTimeoutSec": 10,
+2026-10-27T03:56:23.9361265Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-10-27T03:56:23.9362052Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-10-27T03:56:23.9362780Z     "licensingServiceBaseUrl": "",
+2026-10-27T03:56:23.9363472Z     "enableProxyAutoconfig": "false"
+2026-10-27T03:56:23.9364116Z 
+2026-10-27T03:56:23.9552211Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-10-27T03:56:23.9553234Z Branch:                  6000.0/staging
+2026-10-27T03:56:23.9554110Z Build type:              Release
+2026-10-27T03:56:23.9555217Z Batch mode:              YES
+2026-10-27T03:56:23.9556008Z System name:             Linux
+2026-10-27T03:56:23.9556915Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
+2026-10-27T03:56:23.9557979Z Kernel version:          6.17.0-1022-azure
+2026-10-27T03:56:23.9558747Z Architecture:            x86_64
+2026-10-27T03:56:23.9559441Z Available memory:        7938 MB
+2026-10-27T03:56:23.9560698Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-10-27T03:56:23.9562570Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T03:56:23.94168Z"
+2026-10-27T03:56:23.9564170Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-10-27T03:56:23.9565537Z [Licensing::Client] Handshaking with LicensingClient:
+2026-10-27T03:56:23.9566340Z   Version:                 1.16.0+1c867a9
+2026-10-27T03:56:23.9567114Z   Session Id:              4bbf462900794e8d991410728e223a17
+2026-10-27T03:56:23.9567969Z   Correlation Id:          1316131ff02cc561ef87adf7a829bc12
+2026-10-27T03:56:23.9568791Z   External correlation Id: 6920135988873539882
+2026-10-27T03:56:23.9569606Z   Machine Id:              XUn2I9GOrdasQv6vHVwM8yiGmrM=
+2026-10-27T03:56:23.9586484Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.00s, validation: 0.01s, handshake: 0.00s)
+2026-10-27T03:56:23.9588633Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T03:56:23.955272Z"
+2026-10-27T03:56:23.9590612Z [Licensing::Module] Error: Access token is unavailable; failed to update
+2026-10-27T03:56:25.2042123Z [Licensing::Client] Successfully updated license
+2026-10-27T03:56:25.2152141Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T03:56:25.2153461Z [Licensing::Module] Serial number assigned to: "***"
+2026-10-27T03:56:25.2154288Z Pro License: NO
+2026-10-27T03:56:25.2738497Z The selected window backend is (null) 
+2026-10-27T03:56:25.5131398Z Desktop is 1280 x 1024 @ 60 Hz
+2026-10-27T03:56:25.5150537Z Initialize udev device monitor.
+2026-10-27T03:56:25.5259175Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T03:56:25.5439060Z 
+2026-10-27T03:56:25.5451790Z COMMAND LINE ARGUMENTS:
+2026-10-27T03:56:25.5452467Z /opt/unity/Editor/Unity
+2026-10-27T03:56:25.5453023Z -batchmode
+2026-10-27T03:56:25.5453505Z -logfile
+2026-10-27T03:56:25.5454016Z /dev/stdout
+2026-10-27T03:56:25.5454468Z -quit
+2026-10-27T03:56:25.5454933Z -customBuildName
+2026-10-27T03:56:25.5455461Z StandaloneLinux64
+2026-10-27T03:56:25.5455987Z -projectPath
+2026-10-27T03:56:25.5456478Z /github/workspace/.
+2026-10-27T03:56:25.5456995Z -buildTarget
+2026-10-27T03:56:25.5457513Z StandaloneLinux64
+2026-10-27T03:56:25.5458021Z -customBuildTarget
+2026-10-27T03:56:25.5458534Z StandaloneLinux64
+2026-10-27T03:56:25.5459031Z -customBuildPath
+2026-10-27T03:56:25.5459696Z /github/workspace/build/StandaloneLinux64/StandaloneLinux64
+2026-10-27T03:56:25.5461246Z -customBuildProfile
+2026-10-27T03:56:25.5469275Z 
+2026-10-27T03:56:25.5469514Z -executeMethod
+2026-10-27T03:56:25.5470221Z Korvalune.EditorTools.CI.Run
+2026-10-27T03:56:25.5470734Z -buildVersion
+2026-10-27T03:56:25.5471510Z 0.0.120
+2026-10-27T03:56:25.5472006Z -androidVersionCode
+2026-10-27T03:56:25.5472530Z 120
+2026-10-27T03:56:25.5472988Z -androidKeystoreName
+2026-10-27T03:56:25.5473357Z 
+2026-10-27T03:56:25.5473702Z -androidKeystorePass
+2026-10-27T03:56:25.5476771Z 
+2026-10-27T03:56:25.5476992Z -androidKeyaliasName
+2026-10-27T03:56:25.5477277Z 
+2026-10-27T03:56:25.5477454Z -androidKeyaliasPass
+2026-10-27T03:56:25.5477893Z 
+2026-10-27T03:56:25.5478079Z -androidTargetSdkVersion
+2026-10-27T03:56:25.5478374Z 
+2026-10-27T03:56:25.5478555Z -androidExportType
+2026-10-27T03:56:25.5478950Z androidPackage
+2026-10-27T03:56:25.5479337Z -androidSymbolType
+2026-10-27T03:56:25.5479707Z none
+2026-10-27T03:56:25.5480707Z -ciPhaseScenes
+2026-10-27T03:56:25.5481267Z Successfully changed project path to: /github/workspace/.
+2026-10-27T03:56:25.5481748Z 
+2026-10-27T03:56:25.5482250Z (Unity:184): Gtk-CRITICAL **: 03:56:25.531: gtk_label_set_text: assertion 'GTK_IS_LABEL (label)' failed
+2026-10-27T03:56:25.5482910Z 
+2026-10-27T03:56:25.5483376Z (Unity:184): Gtk-CRITICAL **: 03:56:25.533: gtk_label_set_text: assertion 'GTK_IS_LABEL (label)' failed
+2026-10-27T03:56:25.5484171Z /github/workspace
+2026-10-27T03:56:25.5484750Z It looks like another Unity instance is running with this project open.
+2026-10-27T03:56:25.5485539Z 
+2026-10-27T03:56:25.5485809Z Multiple Unity instances cannot open the same project.
+2026-10-27T03:56:25.5486246Z 
+2026-10-27T03:56:25.5486430Z Project: /github/workspace
+2026-10-27T03:56:25.5487311Z Fatal Error! It looks like another Unity instance is running with this project open.
+2026-10-27T03:56:25.5487928Z 
+2026-10-27T03:56:25.5488193Z Multiple Unity instances cannot open the same project.
+2026-10-27T03:56:25.5488620Z 
+2026-10-27T03:56:25.5488789Z Project: /github/workspace
+2026-10-27T03:56:25.5489065Z 
+2026-10-27T03:56:25.5489265Z Aborting batchmode due to fatal error:
+2026-10-27T03:56:25.5490462Z It looks like another Unity instance is running with this project open.
+2026-10-27T03:56:25.5490995Z 
+2026-10-27T03:56:25.5491260Z Multiple Unity instances cannot open the same project.
+2026-10-27T03:56:25.5491687Z 
+2026-10-27T03:56:25.5491864Z Project: /github/workspace
+2026-10-27T03:56:25.5492134Z 
+2026-10-27T03:56:25.5492148Z 
+2026-10-27T03:56:26.4770805Z Aborted (core dumped)
+2026-10-27T03:56:26.4872072Z Build failed, with exit code 134
+2026-10-27T03:56:27.1023472Z 
+2026-10-27T03:56:27.1025460Z ###########################
+2026-10-27T03:56:27.1026458Z #       Build output      #
+2026-10-27T03:56:27.1027192Z ###########################
+2026-10-27T03:56:27.1027725Z 
+2026-10-27T03:56:27.1043773Z total 8.0K
+2026-10-27T03:56:27.1044692Z drwxr-xr-x 2 1001 1001 4.0K Oct 27 02:04 .
+2026-10-27T03:56:27.1045610Z drwxr-xr-x 3 1001 1001 4.0K Oct 27 02:04 ..
+2026-10-27T03:56:27.4045278Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-10-27T03:56:27.4073287Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-10-27T03:56:27.4080703Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-10-27T03:56:27.4088951Z [UnityConnectServicesConfig] Service configuration:
+2026-10-27T03:56:27.4090236Z     "servicesConfigBaseUrl": "",
+2026-10-27T03:56:27.4091086Z     "disableServicesWindow": false,
+2026-10-27T03:56:27.4091805Z     "disableUserLogin": false,
+2026-10-27T03:56:27.4092510Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-10-27T03:56:27.4093284Z     "clientConnectTimeoutSec": 5,
+2026-10-27T03:56:27.4094000Z     "clientHandshakeTimeoutSec": 10,
+2026-10-27T03:56:27.4094758Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-10-27T03:56:27.4095534Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-10-27T03:56:27.4096280Z     "licensingServiceBaseUrl": "",
+2026-10-27T03:56:27.4096970Z     "enableProxyAutoconfig": "false"
+2026-10-27T03:56:27.4097493Z 
+2026-10-27T03:56:27.4274685Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-10-27T03:56:27.4281954Z Branch:                  6000.0/staging
+2026-10-27T03:56:27.4289413Z Build type:              Release
+2026-10-27T03:56:27.4296572Z Batch mode:              YES
+2026-10-27T03:56:27.4304418Z System name:             Linux
+2026-10-27T03:56:27.4311626Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
+2026-10-27T03:56:27.4318252Z Kernel version:          6.17.0-1022-azure
+2026-10-27T03:56:27.4324830Z Architecture:            x86_64
+2026-10-27T03:56:27.4332598Z Available memory:        7938 MB
+2026-10-27T03:56:28.1384980Z User *** logged in successfully
+2026-10-27T03:56:28.1393192Z [UnityConnect::TryLogin] Request Succeeded.
+2026-10-27T03:56:28.1401571Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-10-27T03:56:28.1412420Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-10-27T03:56:28.1448677Z [Licensing::Module] Successfully launched the LicensingClient (PId: 232)
+2026-10-27T03:56:30.1072863Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T03:56:30.106575Z"
+2026-10-27T03:56:30.1084546Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-10-27T03:56:30.2412365Z [Licensing::Client] Handshaking with LicensingClient:
+2026-10-27T03:56:30.2413754Z   Version:                 1.16.0+1c867a9
+2026-10-27T03:56:30.2414666Z   Session Id:              62fbd9107402458fa44f6ea540be222a
+2026-10-27T03:56:30.2415933Z   Correlation Id:          4c701b7270f7689bac0ca610f8a71c22
+2026-10-27T03:56:30.2416854Z   External correlation Id: 7681366427912501045
+2026-10-27T03:56:30.2417705Z   Machine Id:              XUn2I9GOrdasQv6vHVwM8yiGmrM=
+2026-10-27T03:56:30.2428386Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 1.96s, validation: 0.13s, handshake: 0.00s)
+2026-10-27T03:56:30.2441230Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T03:56:30.24374Z"
+2026-10-27T03:56:30.2452733Z [Licensing::Module] Connected to LicensingClient (PId: 232, launch time: 0.00, total connection time: 2.10s)
+2026-10-27T03:56:30.2661678Z [Licensing::Client] Successfully updated the access token
+2026-10-27T03:56:30.2672570Z [Licensing::Module] Successfully updated the access token t3TnZZzkGM...
+2026-10-27T03:56:31.7003344Z [Licensing::Client] Successfully processed license management request
+2026-10-27T03:56:31.7005689Z [Licensing::Module] Successfully returned the entitlement license
+2026-10-27T03:56:31.7710644Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-10-27T03:56:33.2742472Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-10-27T03:56:33.2977858Z 
+2026-10-27T03:56:33.2978624Z ###########################
+2026-10-27T03:56:33.2979476Z #         Failure         #
+2026-10-27T03:56:33.2980528Z ###########################
+2026-10-27T03:56:33.2980993Z 
+2026-10-27T03:56:33.2981476Z Please note that the exit code is not very descriptive.
+2026-10-27T03:56:33.2994803Z Most likely it will not help you solve the issue.
+2026-10-27T03:56:33.2995420Z 
+2026-10-27T03:56:33.2996255Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-10-27T03:56:33.2997230Z 
+2026-10-27T03:56:33.4890649Z ##[error]Build failed with exit code 134
