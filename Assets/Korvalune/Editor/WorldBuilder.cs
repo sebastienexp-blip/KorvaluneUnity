@@ -205,8 +205,10 @@ namespace Korvalune.EditorTools
             game.camps.Add(new GameBootstrap.Camp { enemyId = "demon", center = Ground(new Vector2(-30, -240)), count = 1, radius = 2 });
             // entrée de la crypte (escalier qui descend, portail) au bord du cimetière
             var stairs = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Resources/Prefabs/World/Crypte/D_Escalier.prefab");
-            if (stairs) { var st = (GameObject)PrefabUtility.InstantiatePrefab(stairs); st.name = "Entrée de la crypte"; st.transform.position = CryptEntrance + Vector3.down * 2.9f; st.transform.rotation = Quaternion.Euler(0, 180, 0); }
+            GameObject st = null;
+            if (stairs) { st = (GameObject)PrefabUtility.InstantiatePrefab(stairs); st.name = "Entrée de la crypte"; st.transform.position = CryptEntrance + Vector3.down * 2.9f; st.transform.rotation = Quaternion.Euler(0, 180, 0); }
             var door = new GameObject("Descendre dans la crypte").AddComponent<Portal>();
+            door.displayName = "Crypte de Korvalune"; if (st) door.highlightRoot = st.transform;
             door.transform.position = CryptEntrance; door.targetScene = "Korvalune_Crypte"; door.label = "Descendre";
             door.arrival = new Vector3(-4f + 3 * 4f, 0.05f, (5 - 9) * 4f);     // pied de l'escalier de la crypte (case E, un pas à côté)
             cam.transform.position = game.playerSpawn + new Vector3(0, 8, -9); cam.transform.LookAt(game.playerSpawn);

@@ -145,7 +145,7 @@ namespace Korvalune.EditorTools
             // portail de sortie (au pied de l'escalier) vers le cimetière de la vallée
             var exit = new GameObject("Sortie vers le cimetière").AddComponent<Portal>();
             exit.transform.position = entrance + new Vector3(0, 0.05f, -1.2f);
-            exit.targetScene = "Korvalune_Vallee"; exit.arrival = WorldBuilder.CryptEntrance + new Vector3(0, 0, 3f); exit.label = "Remonter";
+            exit.targetScene = "Korvalune_Vallee"; exit.arrival = WorldBuilder.CryptEntrance + new Vector3(0, 0, 3f); exit.label = "Remonter"; exit.displayName = "Remonter au cimetière";
             cam.transform.position = game.playerSpawn + new Vector3(0, 14, -9); cam.transform.LookAt(game.playerSpawn);
 
             EditorSceneManager.SaveScene(scene, ScenePath);

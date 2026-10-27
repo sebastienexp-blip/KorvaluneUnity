@@ -85,6 +85,18 @@ namespace Korvalune.Game
                 else { approach = false; Attack(); }
             }
             else if (mag >= 0.05f) approach = false;
+            // marche vers un point touché (entrée de donjon…) ; le joystick reprend la main
+            if (walkTo.HasValue)
+            {
+                var to = walkTo.Value - transform.position; to.y = 0;
+                if (mag >= 0.05f || Health.Stunned) { walkTo = null; arrived = null; }
+                else if (to.magnitude > 0.9f)
+                {
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(to), turnSpeed * Time.deltaTime);
+                    cc.Move(to.normalized * runSpeed * Time.deltaTime); Anim?.SetFloat(CharacterRig.SpeedId, runSpeed, 0.05f, Time.deltaTime); Speed = runSpeed;
+                }
+                else { walkTo = null; var a = arrived; arrived = null; a?.Invoke(); }
+            }
             if (Input.GetKeyDown(KeyCode.Space)) Attack();
             var runner = GetComponent<SkillRunner>();
             if (runner) { for (int i = 0; i < runner.loadout.Length; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) runner.Use(i); }
@@ -97,6 +109,9 @@ namespace Korvalune.Game
         public Health Target { get; private set; }
         public float autoAimRange = 12f;
         bool approach; float approachUntil;
+        /// <summary>Destination touchée (le héros y court seul) et action à l'arrivée.</summary>
+        public Vector3? walkTo; public System.Action arrived;
+        public void WalkTo(Vector3 p, System.Action onArrive) { walkTo = p; arrived = onArrive; approach = false; }
         Transform marker;
 
         void UpdateTarget(Vector2 stick)
