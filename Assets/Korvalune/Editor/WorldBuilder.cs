@@ -147,7 +147,7 @@ namespace Korvalune.EditorTools
             BridgeObject();
             var rng = new System.Random(7);
             // cimetière (camp des squelettes) : pierres tombales et rochers
-            var grave = new Vector2(-55, -95);
+            var grave = new Vector2(-20, -92);                     // hors du lit du fleuve (le camp était dans l'eau)
             for (int k = 0; k < 18; k++)
             {
                 var o = grave + new Vector2((float)rng.NextDouble() * 30 - 15, (float)rng.NextDouble() * 24 - 12);

@@ -30,6 +30,13 @@ jobs:
           haskell: true
           large-packages: true
 
+      - name: Mémoire d'échange (16 Go)
+        run: |
+          # la machine n'a que 8 Go : sans échange, Unity est tué pendant les gros imports / la construction Android
+          sudo swapoff -a || true
+          sudo fallocate -l 16G /mnt/korvalune.swap && sudo chmod 600 /mnt/korvalune.swap && sudo mkswap /mnt/korvalune.swap && sudo swapon /mnt/korvalune.swap
+          free -h
+
       - uses: actions/checkout@v4
         with:
           ref: main

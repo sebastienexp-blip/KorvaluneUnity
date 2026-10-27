@@ -320,7 +320,9 @@ namespace Korvalune.EditorTools
             Check("Héros jouable", cfg.defaultHero != null, cfg.defaultHero ? cfg.defaultHero.name + $" ({cfg.heroRes.Count} héros, chargés à la demande)" : "aucun prefab");
             Check("Ennemis configurés", cfg.enemies.All(e => e.prefab), string.Join(", ", cfg.enemies.Select(e => e.id + (e.prefab ? "" : " (absent)"))));
             WorldBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
-            Check("Héros au sec (au-dessus de l'eau)", game.Player && game.Player.transform.position.y > WorldBuilder.WaterLevel + 0.3f, game.Player ? $"y = {game.Player.transform.position.y:0.0}, eau à {WorldBuilder.WaterLevel:0.0}" : "");
+            Check("Départ du héros au sec (au-dessus de l'eau)", game.playerSpawn.y > WorldBuilder.WaterLevel + 0.3f, $"y = {game.playerSpawn.y:0.0}, eau à {WorldBuilder.WaterLevel:0.0}");
+            foreach (var camp in game.camps)
+                Check($"Camp « {camp.enemyId} » au sec", camp.center.y > WorldBuilder.WaterLevel + 0.3f, $"y = {camp.center.y:0.0}");
             Check("Héros posé sur le sol", game.Player && Mathf.Abs(game.Player.transform.position.y - WorldBuilder.Height(game.Player.transform.position.x, game.Player.transform.position.z)) < 1.5f,
                 game.Player ? $"y = {game.Player.transform.position.y:0.0}" : "");
         }
