@@ -1,21 +1,5 @@
-# Rapport d'intégration Unity — 2026-10-26 22:17 UTC
+# Rapport d'intégration Unity — 2026-10-27 01:31 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 187 modèle(s) ModelForge trouvé(s)
-- 47 modèle(s) intégré(s), 140 déjà à jour (inchangés)
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Enemies/ChevalierMaudit/ChevalierMaudit.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Enemies/DemonBrute/DemonBrute.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Enemies/LoupTenebres/LoupTenebres.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Enemies/SorcierCorrompu/SorcierCorrompu.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Enemies/SqueletteGuerrier/SqueletteGuerrier.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
-- ⚠️ journal : Error: [ModelForge] Aucune prise d'animation lue dans Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
+- 16 modèle(s) intégré(s), 171 déjà à jour (inchangés)
