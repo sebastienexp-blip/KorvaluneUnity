@@ -1,7 +1,347 @@
-# Journal de la construction Android (run 40489356790)
+# Journal de la construction Android (run 40492429252)
 ## Lignes importantes
+1827:2026-10-27T10:59:44.4429938Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+2052:2026-10-27T11:01:15.7053066Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2129:2026-10-27T11:01:38.3036185Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+16131:2026-10-27T11:45:40.6364341Z > Task :unityLibrary:bundleReleaseLocalLintAar FAILED
+16140:2026-10-27T11:45:40.6369346Z UnityEditor.Android.GradleInvokationException:ParseAndShowException ()
+16156:2026-10-27T11:45:40.6386099Z FAILURE: Build failed with an exception.
+16158:2026-10-27T11:45:40.6386476Z * What went wrong:
+16178:2026-10-27T11:45:40.6395058Z UnityEditor.Android.GradleInvokationException:ParseAndShowException ()
+16216:2026-10-27T11:45:40.6978866Z GITHUB_WORKFLOW = Android — APK testé
+16251:2026-10-27T11:45:40.6991986Z FAILURE: Build failed with an exception.
+16253:2026-10-27T11:45:40.6992391Z * What went wrong:
+16386:2026-10-27T11:45:40.7036120Z > Task :unityLibrary:bundleReleaseLocalLintAar FAILED
+16390:2026-10-27T11:45:40.7037431Z exit code: 1
+16396:2026-10-27T11:45:40.7047934Z Rethrow as GradleInvokationException: Gradle build failed
+16416:2026-10-27T11:45:41.8412791Z Build Finished, Result: Failure.
+16429:2026-10-27T11:45:50.9744441Z # Construction de l'APK Android
+16431:2026-10-27T11:45:50.9755002Z - Scènes : Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte
+16433:2026-10-27T11:45:50.9758160Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Vallee.unity). Local file identifier (14505433) doesn't exist!
+16434:2026-10-27T11:45:50.9760898Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Vallee.unity). Local file identifier (1302352528) doesn't exist!
+16435:2026-10-27T11:45:50.9763584Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Problem detected while opening the Scene file: 'Assets/Korvalune/Scenes/Korvalune_Vallee.unity'.
+16436:2026-10-27T11:45:50.9766184Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Inconsistency fixed: A Component cannot be part of a Prefab instance if its GameObject isn't part of a Prefab instance (GameObject: 'Terrain' and Component of type Transform)
+16437:2026-10-27T11:45:50.9769320Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Inconsistency fixed: A Component cannot be part of a Prefab instance if its GameObject isn't part of a Prefab instance (GameObject: 'Fumée' and Component of type Transform)
+16438:2026-10-27T11:45:50.9771679Z - ❌ Building Gradle project : Starting a Gradle Daemon (subsequent builds will be faster)
+16439:2026-10-27T11:45:50.9774034Z - ❌ Building Gradle project : Note: /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/java/com/unity3d/player/UnityPlayerGameActivity.java uses or overrides a deprecated API.
+16440:2026-10-27T11:45:50.9776147Z - ❌ Building Gradle project : CommandInvokationFailure: Gradle build failed. 
+16467:2026-10-27T11:45:58.1529495Z Build failed, with exit code 1
+16528:2026-10-27T11:46:03.4745558Z Please note that the exit code is not very descriptive.
+16533:2026-10-27T11:46:03.9929430Z ##[error]Build failed with exit code 1
+16538:2026-10-27T11:46:04.1383153Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+16539:2026-10-27T11:46:04.1384562Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+16590:2026-10-27T11:46:04.5405239Z # Construction de l'APK Android
+16592:2026-10-27T11:46:04.5406529Z - Scènes : Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte
+16594:2026-10-27T11:46:04.5409398Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Vallee.unity). Local file identifier (14505433) doesn't exist!
+16595:2026-10-27T11:46:04.5412018Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Vallee.unity). Local file identifier (1302352528) doesn't exist!
+16596:2026-10-27T11:46:04.5415068Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Problem detected while opening the Scene file: 'Assets/Korvalune/Scenes/Korvalune_Vallee.unity'.
+16597:2026-10-27T11:46:04.5418563Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Inconsistency fixed: A Component cannot be part of a Prefab instance if its GameObject isn't part of a Prefab instance (GameObject: 'Terrain' and Component of type Transform)
+16598:2026-10-27T11:46:04.5422213Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Inconsistency fixed: A Component cannot be part of a Prefab instance if its GameObject isn't part of a Prefab instance (GameObject: 'Fumée' and Component of type Transform)
+16599:2026-10-27T11:46:04.5424714Z - ❌ Building Gradle project : Starting a Gradle Daemon (subsequent builds will be faster)
+16600:2026-10-27T11:46:04.5426998Z - ❌ Building Gradle project : Note: /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/java/com/unity3d/player/UnityPlayerGameActivity.java uses or overrides a deprecated API.
+16601:2026-10-27T11:46:04.5429087Z - ❌ Building Gradle project : CommandInvokationFailure: Gradle build failed. 
+16765:2026-10-27T11:49:32.7704716Z ##[warning]Failed to save: "/usr/bin/tar" failed with error: The process '/usr/bin/tar' failed with exit code 2
+16809:2026-10-27T11:49:34.2860665Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-﻿<?xml version="1.0" encoding="utf-8"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.
-RequestId:d8671ed6-801e-0050-76fe-65d4e9000000
-Time:2026-10-27T10:33:35.3093323Z</Message></Error>
+2026-10-27T11:45:40.6986483Z HOME = /root
+2026-10-27T11:45:40.6986699Z BUILD_PATH = build/Android
+2026-10-27T11:45:40.6986992Z UNITY_EMAIL = ***
+2026-10-27T11:45:40.6987230Z GITHUB_REF = refs/heads/main
+2026-10-27T11:45:40.6987489Z MANUAL_EXIT = false
+2026-10-27T11:45:40.6987704Z VERSION = 0.0.115
+2026-10-27T11:45:40.6987919Z LC_ALL = C.UTF-8
+2026-10-27T11:45:40.6988137Z SKIP_ACTIVATION = false
+2026-10-27T11:45:40.6988481Z GITHUB_EVENT_PATH = /home/runner/work/_temp/_github_workflow/event.json
+2026-10-27T11:45:40.6988919Z GITHUB_REPOSITORY = sebastienexp-blip/KorvaluneUnity
+2026-10-27T11:45:40.6989267Z GITHUB_ACTOR = sebastienexp-blip
+2026-10-27T11:45:40.6989726Z __GL_SYNC_TO_VBLANK = 0
+2026-10-27T11:45:40.6989965Z 
+2026-10-27T11:45:40.6989970Z 
+2026-10-27T11:45:40.6990066Z stderr[
+2026-10-27T11:45:40.6990805Z Note: /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/java/com/unity3d/player/UnityPlayerGameActivity.java uses or overrides a deprecated API.
+2026-10-27T11:45:40.6991642Z Note: Recompile with -Xlint:deprecation for details.
+2026-10-27T11:45:40.6991875Z 
+2026-10-27T11:45:40.6991986Z FAILURE: Build failed with an exception.
+2026-10-27T11:45:40.6992195Z 
+2026-10-27T11:45:40.6992391Z * What went wrong:
+2026-10-27T11:45:40.6992757Z Execution failed for task ':unityLibrary:bundleReleaseLocalLintAar'.
+2026-10-27T11:45:40.6993181Z > Archive's size exceeds the limit of 4GByte.
+2026-10-27T11:45:40.6993866Z   
+2026-10-27T11:45:40.6994144Z   To build this archive, please enable the zip64 extension.
+2026-10-27T11:45:40.6994803Z   See: https://docs.gradle.org/8.4/dsl/org.gradle.api.tasks.bundling.Zip.html#org.gradle.api.tasks.bundling.Zip:zip64
+2026-10-27T11:45:40.6995282Z 
+2026-10-27T11:45:40.6995365Z * Try:
+2026-10-27T11:45:40.6995709Z > Run with --stacktrace option to get the stack trace.
+2026-10-27T11:45:40.6996110Z > Run with --info or --debug option to get more log output.
+2026-10-27T11:45:40.6996467Z > Run with --scan to get full insights.
+2026-10-27T11:45:40.6996786Z > Get more help at https://help.gradle.org.
+2026-10-27T11:45:40.6996999Z 
+2026-10-27T11:45:40.6997090Z BUILD FAILED in 5m 24s
+2026-10-27T11:45:40.6997312Z ]
+2026-10-27T11:45:40.6997495Z stdout[
+2026-10-27T11:45:40.6997768Z Starting a Gradle Daemon (subsequent builds will be faster)
+2026-10-27T11:45:40.6998024Z 
+2026-10-27T11:45:40.6998126Z > Configure project :unityLibrary
+2026-10-27T11:45:40.6998442Z Variant 'debug', will keep symbols in binaries for:
+2026-10-27T11:45:40.6998757Z   'libunity.so'
+2026-10-27T11:45:40.6998974Z   'libil2cpp.so'
+2026-10-27T11:45:40.6999180Z   'libmain.so'
+2026-10-27T11:45:40.6999459Z Variant 'release', symbols will be stripped from binaries.
+2026-10-27T11:45:40.6999709Z 
+2026-10-27T11:45:40.6999815Z > Configure project :launcher
+2026-10-27T11:45:40.7000109Z Variant 'debug', will keep symbols in binaries for:
+2026-10-27T11:45:40.7000418Z   'libunity.so'
+2026-10-27T11:45:40.7000624Z   'libil2cpp.so'
+2026-10-27T11:45:40.7000835Z   'libmain.so'
+2026-10-27T11:45:40.7001181Z Variant 'release', symbols will be stripped from binaries.
+2026-10-27T11:45:40.7001661Z WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 35
+2026-10-27T11:45:40.7002042Z 
+2026-10-27T11:45:40.7002237Z This Android Gradle plugin (8.3.0) was tested up to compileSdk = 34.
+2026-10-27T11:45:40.7002522Z 
+2026-10-27T11:45:40.7002706Z You are strongly encouraged to update your project to use a newer
+2026-10-27T11:45:40.7003159Z Android Gradle plugin that has been tested with compileSdk = 35.
+2026-10-27T11:45:40.7003669Z 
+2026-10-27T11:45:40.7003875Z If you are already using the latest version of the Android Gradle plugin,
+2026-10-27T11:45:40.7004413Z you may need to wait until a newer version with support for compileSdk = 35 is available.
+2026-10-27T11:45:40.7004761Z 
+2026-10-27T11:45:40.7004875Z To suppress this warning, add/update
+2026-10-27T11:45:40.7005204Z     android.suppressUnsupportedCompileSdk=35
+2026-10-27T11:45:40.7005534Z to this project's gradle.properties.
+2026-10-27T11:45:40.7005724Z 
+2026-10-27T11:45:40.7005841Z > Task :unityLibrary:preBuild UP-TO-DATE
+2026-10-27T11:45:40.7006161Z > Task :unityLibrary:preReleaseBuild UP-TO-DATE
+2026-10-27T11:45:40.7006485Z > Task :launcher:preBuild UP-TO-DATE
+2026-10-27T11:45:40.7006781Z > Task :launcher:preReleaseBuild UP-TO-DATE
+2026-10-27T11:45:40.7007110Z > Task :unityLibrary:generateReleaseResValues
+2026-10-27T11:45:40.7007429Z > Task :launcher:javaPreCompileRelease
+2026-10-27T11:45:40.7007733Z > Task :launcher:generateReleaseResValues
+2026-10-27T11:45:40.7008048Z > Task :unityLibrary:writeReleaseAarMetadata
+2026-10-27T11:45:40.7008368Z > Task :launcher:generateReleaseResources
+2026-10-27T11:45:40.7008686Z > Task :unityLibrary:generateReleaseResources
+2026-10-27T11:45:40.7009012Z > Task :launcher:packageReleaseResources
+2026-10-27T11:45:40.7009323Z > Task :unityLibrary:packageReleaseResources
+2026-10-27T11:45:40.7009646Z > Task :unityLibrary:extractDeepLinksRelease
+2026-10-27T11:45:40.7009966Z > Task :unityLibrary:processReleaseManifest
+2026-10-27T11:45:40.7010311Z > Task :unityLibrary:compileReleaseLibraryResources
+2026-10-27T11:45:40.7010654Z > Task :unityLibrary:javaPreCompileRelease
+2026-10-27T11:45:40.7010978Z > Task :unityLibrary:processReleaseJavaRes
+2026-10-27T11:45:40.7011416Z > Task :unityLibrary:extractProguardFiles
+2026-10-27T11:45:40.7011731Z > Task :unityLibrary:prepareLintJarForPublish
+2026-10-27T11:45:40.7012075Z > Task :unityLibrary:parseReleaseLocalResources
+2026-10-27T11:45:40.7012400Z > Task :launcher:checkReleaseAarMetadata
+2026-10-27T11:45:40.7012711Z > Task :launcher:mapReleaseSourceSetPaths
+2026-10-27T11:45:40.7013062Z > Task :launcher:createReleaseCompatibleScreenManifests
+2026-10-27T11:45:40.7013711Z > Task :launcher:extractDeepLinksRelease
+2026-10-27T11:45:40.7014149Z > Task :launcher:parseReleaseLocalResources
+2026-10-27T11:45:40.7014478Z > Task :launcher:mergeReleaseResources
+2026-10-27T11:45:40.7014780Z > Task :launcher:processReleaseMainManifest
+2026-10-27T11:45:40.7015100Z > Task :launcher:processReleaseManifest
+2026-10-27T11:45:40.7015397Z > Task :launcher:extractProguardFiles
+2026-10-27T11:45:40.7015748Z > Task :launcher:mergeReleaseNativeDebugMetadata NO-SOURCE
+2026-10-27T11:45:40.7016170Z > Task :unityLibrary:configureCMakeRelWithDebInfo[arm64-v8a]
+2026-10-27T11:45:40.7016572Z > Task :unityLibrary:generateReleaseRFile
+2026-10-27T11:45:40.7016901Z > Task :launcher:checkReleaseDuplicateClasses
+2026-10-27T11:45:40.7017262Z > Task :launcher:processReleaseManifestForPackage
+2026-10-27T11:45:40.7017595Z > Task :launcher:mergeReleaseShaders
+2026-10-27T11:45:40.7017913Z > Task :launcher:compileReleaseShaders NO-SOURCE
+2026-10-27T11:45:40.7018262Z > Task :launcher:generateReleaseAssets UP-TO-DATE
+2026-10-27T11:45:40.7018617Z > Task :launcher:extractReleaseVersionControlInfo
+2026-10-27T11:45:40.7018968Z > Task :launcher:processReleaseJavaRes NO-SOURCE
+2026-10-27T11:45:40.7019338Z > Task :unityLibrary:buildCMakeRelWithDebInfo[arm64-v8a]
+2026-10-27T11:45:40.7019708Z > Task :launcher:collectReleaseDependencies
+2026-10-27T11:45:40.7020214Z > Task :launcher:mergeReleaseJavaResource
+2026-10-27T11:45:40.7020531Z > Task :launcher:sdkReleaseDependencyData
+2026-10-27T11:45:40.7020840Z > Task :launcher:mergeReleaseJniLibFolders
+2026-10-27T11:45:40.7021214Z > Task :launcher:processReleaseResources
+2026-10-27T11:45:40.7021515Z > Task :launcher:validateSigningRelease
+2026-10-27T11:45:40.7021821Z > Task :launcher:writeReleaseAppMetadata
+2026-10-27T11:45:40.7022149Z > Task :launcher:writeReleaseSigningConfigVersions
+2026-10-27T11:45:40.7022490Z > Task :launcher:optimizeReleaseResources
+2026-10-27T11:45:40.7022809Z > Task :launcher:desugarReleaseFileDependencies
+2026-10-27T11:45:40.7023032Z 
+2026-10-27T11:45:40.7023165Z > Task :unityLibrary:compileReleaseJavaWithJavac
+2026-10-27T11:45:40.7023608Z 
+2026-10-27T11:45:40.7023745Z > Task :unityLibrary:bundleLibCompileToJarRelease
+2026-10-27T11:45:40.7024100Z > Task :unityLibrary:bundleLibRuntimeToJarRelease
+2026-10-27T11:45:40.7024456Z 
+2026-10-27T11:45:40.7024582Z > Task :unityLibrary:generateReleaseLintModel
+2026-10-27T11:45:40.7024989Z Generating lint files for backported methods only (compile API B)
+2026-10-27T11:45:40.7025271Z 
+2026-10-27T11:45:40.7025424Z > Task :launcher:compileReleaseJavaWithJavac NO-SOURCE
+2026-10-27T11:45:40.7025769Z > Task :launcher:dexBuilderRelease
+2026-10-27T11:45:40.7026055Z > Task :launcher:mergeExtDexRelease
+2026-10-27T11:45:40.7026359Z > Task :launcher:mergeReleaseGlobalSynthetics
+2026-10-27T11:45:40.7026682Z > Task :unityLibrary:createFullJarRelease
+2026-10-27T11:45:40.7027020Z > Task :launcher:generateReleaseLintVitalReportModel
+2026-10-27T11:45:40.7027411Z > Task :unityLibrary:configureCMakeRelWithDebInfo[x86_64]
+2026-10-27T11:45:40.7027798Z > Task :unityLibrary:buildCMakeRelWithDebInfo[x86_64]
+2026-10-27T11:45:40.7028161Z > Task :unityLibrary:mergeReleaseJniLibFolders
+2026-10-27T11:45:40.7028610Z > Task :unityLibrary:extractDeepLinksForAarRelease
+2026-10-27T11:45:40.7028959Z > Task :unityLibrary:mergeReleaseNativeLibs
+2026-10-27T11:45:40.7029287Z > Task :unityLibrary:extractReleaseAnnotations
+2026-10-27T11:45:40.7029662Z > Task :unityLibrary:mergeReleaseGeneratedProguardFiles
+2026-10-27T11:45:40.7030048Z > Task :unityLibrary:mergeReleaseConsumerProguardFiles
+2026-10-27T11:45:40.7030490Z > Task :unityLibrary:mergeReleaseShaders
+2026-10-27T11:45:40.7030816Z > Task :unityLibrary:compileReleaseShaders NO-SOURCE
+2026-10-27T11:45:40.7031186Z > Task :unityLibrary:generateReleaseAssets UP-TO-DATE
+2026-10-27T11:45:40.7031537Z > Task :unityLibrary:stripReleaseDebugSymbols
+2026-10-27T11:45:40.7031857Z > Task :unityLibrary:packageReleaseAssets
+2026-10-27T11:45:40.7032178Z > Task :unityLibrary:prepareReleaseArtProfile
+2026-10-27T11:45:40.7032498Z > Task :unityLibrary:mergeReleaseJavaResource
+2026-10-27T11:45:40.7032929Z > Task :unityLibrary:syncReleaseLibJars
+2026-10-27T11:45:40.7033610Z > Task :unityLibrary:writeReleaseLintModelMetadata
+2026-10-27T11:45:40.7034015Z > Task :unityLibrary:generateReleaseLintVitalModel
+2026-10-27T11:45:40.7034404Z > Task :unityLibrary:copyReleaseJniLibsProjectAndLocalJars
+2026-10-27T11:45:40.7034770Z > Task :launcher:mergeReleaseAssets
+2026-10-27T11:45:40.7035070Z > Task :unityLibrary:lintVitalAnalyzeRelease
+2026-10-27T11:45:40.7035413Z > Task :unityLibrary:bundleLibRuntimeToDirRelease
+2026-10-27T11:45:40.7035757Z > Task :unityLibrary:bundleReleaseLocalLintAar
+2026-10-27T11:45:40.7036120Z > Task :unityLibrary:bundleReleaseLocalLintAar FAILED
+2026-10-27T11:45:40.7036690Z > Task :launcher:mergeReleaseArtProfile
+2026-10-27T11:45:40.7037001Z 73 actionable tasks: 73 executed
+2026-10-27T11:45:40.7037246Z ]
+2026-10-27T11:45:40.7037431Z exit code: 1
+2026-10-27T11:45:40.7038390Z   at UnityEditor.Android.Command.WaitForProgramToRun (UnityEditor.Utils.Program p, UnityEditor.Android.Command+WaitingForProcessToExit waitingForProcessToExit, System.String errorMsg) [0x00033] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7040275Z   at UnityEditor.Android.Command.Run (System.Diagnostics.ProcessStartInfo psi, UnityEditor.Android.Command+WaitingForProcessToExit waitingForProcessToExit, System.String errorMsg) [0x00017] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7042807Z   at UnityEditor.Android.Command.Run (System.String command, System.String args, System.String workingdir, UnityEditor.Android.Command+WaitingForProcessToExit waitingForProcessToExit, System.String errorMsg, System.Text.Encoding inputEncoding) [0x0000c] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7044807Z   at UnityEditor.Android.AndroidJavaTools.RunJava (System.String args, System.String workingdir, System.Action`1[T] progress, System.String error) [0x0004c] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7046553Z   at UnityEditor.Android.GradleWrapper.Run (UnityEditor.Android.AndroidJavaTools javaTools, Unity.Android.Gradle.AndroidGradle androidGradle, System.String workingdir, System.String task, System.String[] extraArguments, System.Action`1[T] progress) [0x00070] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7047934Z Rethrow as GradleInvokationException: Gradle build failed
+2026-10-27T11:45:40.7049260Z   at UnityEditor.Android.GradleWrapper.Run (UnityEditor.Android.AndroidJavaTools javaTools, Unity.Android.Gradle.AndroidGradle androidGradle, System.String workingdir, System.String task, System.String[] extraArguments, System.Action`1[T] progress) [0x00092] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7052050Z   at UnityEditor.Android.PostProcessor.Tasks.TasksCommon.RunGradleTask (UnityEditor.Android.PostProcessor.PostProcessorContext context, System.String workingDirectory, System.String taskName, System.String[] extraArguments, UnityEditor.Android.PostProcessor.IPostProcessorTask owner, UnityEditor.Android.PostProcessor.ProgressHandler progress) [0x00036] in <5e2908a8533d4
+2026-10-27T11:45:40.7055300Z   at UnityEditor.Android.PostProcessor.Tasks.TasksCommon.RunLauncherGradleTask (UnityEditor.Android.PostProcessor.PostProcessorContext context, System.String taskName, System.String[] extraArguments, UnityEditor.Android.PostProcessor.IPostProcessorTask owner, UnityEditor.Android.PostProcessor.ProgressHandler progress) [0x0000d] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7057575Z   at UnityEditor.Android.PostProcessor.Tasks.BuildGradleProject.Execute (UnityEditor.Android.PostProcessor.PostProcessorContext context) [0x00139] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7059213Z   at UnityEditor.Android.PostProcessor.PostProcessRunner.RunAllTasks (UnityEditor.Android.PostProcessor.PostProcessorContext context) [0x00078] in <5e2908a8533d4f289879381d3d0403ff>:0 
+2026-10-27T11:45:40.7060885Z UnityEditor.BuildPipeline:BuildPlayerInternalNoCheck_Injected(String[], ManagedSpanWrapper&, ManagedSpanWrapper&, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[], Boolean)
+2026-10-27T11:45:40.7062132Z UnityEditor.BuildPipeline:BuildPlayerInternalNoCheck(String[], String, String, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[], Boolean)
+2026-10-27T11:45:40.7063717Z UnityEditor.BuildPipeline:BuildPlayerInternal(String[], String, String, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:531)
+2026-10-27T11:45:40.7065325Z UnityEditor.BuildPipeline:BuildPlayer(String[], String, String, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:415)
+2026-10-27T11:45:40.7066789Z UnityEditor.BuildPipeline:BuildPlayer(BuildPlayerOptions) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:361)
+2026-10-27T11:45:40.7067693Z Korvalune.EditorTools.AndroidBuild:Build() (at Assets/Korvalune/Editor/AndroidBuild.cs:56)
+2026-10-27T11:45:40.7068083Z 
+2026-10-27T11:45:40.7068254Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 56)
+2026-10-27T11:45:40.7068521Z 
+2026-10-27T11:45:40.9551378Z Unloading 19 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T11:45:41.8409757Z Unloading 51 unused Assets / (419.1 KB). Loaded Objects now: 6774.
+2026-10-27T11:45:41.8410538Z Memory consumption went from 258.2 MB to 257.8 MB.
+2026-10-27T11:45:41.8411753Z Total: 884.580059 ms (FindLiveObjects: 82.759812 ms CreateObjectMapping: 2.508635 ms MarkObjects: 734.621212 ms  DeleteObjects: 64.688046 ms)
+2026-10-27T11:45:41.8412622Z 
+2026-10-27T11:45:41.8412791Z Build Finished, Result: Failure.
+2026-10-27T11:45:42.1245066Z ##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793101542123,"processId":1591,"steps":[{"description":"Preprocess Player","duration":185},{"description":"Prepare For Build","duration":3770},{"description":"ProducePlayerScriptAssemblies","duration":32975},{"description":"Verify Build setup","duration":43},{"description":"Prepare assets for target
+2026-10-27T11:45:42.1340268Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T11:45:50.7622905Z Loaded scene 'Temp/__Backupscenes/0.backup'
+2026-10-27T11:45:50.7624431Z 	Deserialize:            6.921 ms
+2026-10-27T11:45:50.7625105Z 	Integration:            8628.214 ms
+2026-10-27T11:45:50.7625746Z 	Integration of assets:  0.007 ms
+2026-10-27T11:45:50.7626521Z 	Thread Wait Time:       0.021 ms
+2026-10-27T11:45:50.7627192Z 	Total Operation Time:   8635.162 ms
+2026-10-27T11:45:50.7822069Z Unloading 0 unused Assets / (0 B). Loaded Objects now: 6766.
+2026-10-27T11:45:50.7822798Z Memory consumption went from 256.8 MB to 256.8 MB.
+2026-10-27T11:45:50.7824283Z Total: 19.838980 ms (FindLiveObjects: 1.202235 ms CreateObjectMapping: 0.146273 ms MarkObjects: 18.475314 ms  DeleteObjects: 0.014256 ms)
+2026-10-27T11:45:50.7825290Z 
+2026-10-27T11:45:50.9744441Z # Construction de l'APK Android
+2026-10-27T11:45:50.9745220Z 
+2026-10-27T11:45:50.9755002Z - Scènes : Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte
+2026-10-27T11:45:50.9756303Z - Résultat : **Failed** en 27.8 min, 8 erreur(s), 2 avertissement(s)
+2026-10-27T11:45:50.9758160Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Vallee.unity). Local file identifier (14505433) doesn't exist!
+2026-10-27T11:45:50.9760898Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Vallee.unity). Local file identifier (1302352528) doesn't exist!
+2026-10-27T11:45:50.9763584Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Problem detected while opening the Scene file: 'Assets/Korvalune/Scenes/Korvalune_Vallee.unity'.
+2026-10-27T11:45:50.9766184Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Inconsistency fixed: A Component cannot be part of a Prefab instance if its GameObject isn't part of a Prefab instance (GameObject: 'Terrain' and Component of type Transform)
+2026-10-27T11:45:50.9769320Z - ❌ Building scene Assets/Korvalune/Scenes/Korvalune_Vallee.unity : Inconsistency fixed: A Component cannot be part of a Prefab instance if its GameObject isn't part of a Prefab instance (GameObject: 'Fumée' and Component of type Transform)
+2026-10-27T11:45:50.9771679Z - ❌ Building Gradle project : Starting a Gradle Daemon (subsequent builds will be faster)
+2026-10-27T11:45:50.9774034Z - ❌ Building Gradle project : Note: /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/java/com/unity3d/player/UnityPlayerGameActivity.java uses or overrides a deprecated API.
+2026-10-27T11:45:50.9776147Z - ❌ Building Gradle project : CommandInvokationFailure: Gradle build failed. 
+2026-10-27T11:45:50.9776971Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-10-27T11:45:50.9778258Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-10-27T11:45:50.9779800Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+2026-10-27T11:45:50.9781163Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+2026-10-27T11:45:50.9782197Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
+2026-10-27T11:45:50.9782748Z UnityEngine.Debug:Log (object)
+2026-10-27T11:45:50.9783672Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:66)
+2026-10-27T11:45:50.9784311Z 
+2026-10-27T11:45:50.9784576Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 66)
+2026-10-27T11:45:50.9785126Z 
+2026-10-27T11:45:51.1777884Z Starting: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/OpenJDK/bin/java -classpath "/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/gradle/lib/gradle-launcher-8.4.jar" org.gradle.launcher.GradleMain "-Dorg.gradle.jvmargs=-Xmx4096m" "--stop" 
+2026-10-27T11:45:51.1780501Z WorkingDir: 
+2026-10-27T11:45:53.2306395Z Killing ADB server in 0.359823 seconds.
+2026-10-27T11:45:54.5978889Z [Physics::Module] Cleanup current backned.
+2026-10-27T11:45:54.5979461Z [Physics::Module] Id: 0xf2b8ea05
+2026-10-27T11:45:54.6062422Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-10-27T11:45:54.6063898Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-10-27T11:45:54.6351717Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-10-27T11:45:54.7134949Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T11:45:54.7136007Z       Application is shutting down...
+2026-10-27T11:45:55.2989110Z Cleanup mono
+2026-10-27T11:45:56.6496419Z debugger-agent: Unable to listen on 44
+2026-10-27T11:45:56.8798508Z [Package Manager] Server process was shutdown
+2026-10-27T11:45:57.0846043Z Checking for leaked weakptr:
+2026-10-27T11:45:57.0846727Z   Found no leaked weakptrs.
+2026-10-27T11:45:57.2144408Z ##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1793101557211,"processId":1591,"allocatedMemory":20823678,"memoryLabels":[{"Default":22013},{"Permanent":16080},{"Thread":1084616},{"Manager":18066},{"VertexData":8},{"Geometry":408},{"Texture":160},{"Shader":112987},{"Material":10082},{"GfxDevice":36264},{"Animation":392},{"Audio":4032},{"Font":1782565
+2026-10-27T11:45:58.1529495Z Build failed, with exit code 1
+2026-10-27T11:45:58.8119285Z 
+2026-10-27T11:45:58.8119884Z ###########################
+2026-10-27T11:45:58.8120262Z #       Build output      #
+2026-10-27T11:45:58.8120754Z ###########################
+2026-10-27T11:45:58.8120943Z 
+2026-10-27T11:45:58.8144986Z total 12K
+2026-10-27T11:45:58.8145447Z drwxr-xr-x 3 root root 4.0K Oct 27 11:29 .
+2026-10-27T11:45:58.8146008Z drwxr-xr-x 3 root root 4.0K Oct 27 11:03 ..
+2026-10-27T11:45:58.8146514Z drwxr-xr-x 3 root root 4.0K Oct 27 11:29 Korvalune_BurstDebugInformation_DoNotShip
+2026-10-27T11:45:59.0553779Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-10-27T11:45:59.0555345Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-10-27T11:45:59.0556500Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-10-27T11:45:59.0557483Z [UnityConnectServicesConfig] Service configuration:
+2026-10-27T11:45:59.0558154Z     "servicesConfigBaseUrl": "",
+2026-10-27T11:45:59.0558661Z     "disableServicesWindow": false,
+2026-10-27T11:45:59.0559230Z     "disableUserLogin": false,
+2026-10-27T11:45:59.0559704Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-10-27T11:45:59.0560469Z     "clientConnectTimeoutSec": 5,
+2026-10-27T11:45:59.0560944Z     "clientHandshakeTimeoutSec": 10,
+2026-10-27T11:45:59.0561639Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-10-27T11:45:59.0562191Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-10-27T11:45:59.0562824Z     "licensingServiceBaseUrl": "",
+2026-10-27T11:45:59.0563525Z     "enableProxyAutoconfig": "false"
+2026-10-27T11:45:59.0563956Z 
+2026-10-27T11:45:59.0709882Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-10-27T11:45:59.0710870Z Branch:                  6000.0/staging
+2026-10-27T11:45:59.0712098Z Build type:              Release
+2026-10-27T11:45:59.0713124Z Batch mode:              YES
+2026-10-27T11:45:59.0713837Z System name:             Linux
+2026-10-27T11:45:59.0714406Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
+2026-10-27T11:45:59.0715030Z Kernel version:          6.17.0-1022-azure
+2026-10-27T11:45:59.0715508Z Architecture:            x86_64
+2026-10-27T11:45:59.0716096Z Available memory:        15989 MB
+2026-10-27T11:45:59.7736053Z User *** logged in successfully
+2026-10-27T11:45:59.7736984Z [UnityConnect::TryLogin] Request Succeeded.
+2026-10-27T11:45:59.7738110Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-10-27T11:45:59.7739613Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-10-27T11:45:59.7745929Z [Licensing::Module] Successfully launched the LicensingClient (PId: 8974)
+2026-10-27T11:46:00.6316412Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T11:46:00.630873Z"
+2026-10-27T11:46:00.6318675Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-10-27T11:46:00.7181970Z [Licensing::Client] Handshaking with LicensingClient:
+2026-10-27T11:46:00.7183862Z   Version:                 1.16.0+1c867a9
+2026-10-27T11:46:00.7184691Z   Session Id:              3ee7a1a75aff4256b0e005589f7f067c
+2026-10-27T11:46:00.7185398Z   Correlation Id:          56c5150220fa628a312422b97fde179b
+2026-10-27T11:46:00.7186051Z   External correlation Id: 8535511968169894127
+2026-10-27T11:46:00.7186646Z   Machine Id:              so/mhQRXMP2A/QY4Qy/KHByEfyU=
+2026-10-27T11:46:00.7187950Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.86s, validation: 0.09s, handshake: 0.00s)
+2026-10-27T11:46:00.7189839Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T11:46:00.717627Z"
+2026-10-27T11:46:00.7191528Z [Licensing::Module] Connected to LicensingClient (PId: 8974, launch time: 0.00, total connection time: 0.94s)
+2026-10-27T11:46:00.7353020Z [Licensing::Client] Successfully updated the access token
+2026-10-27T11:46:00.7355493Z [Licensing::Module] Successfully updated the access token JWGBk_xRvZ...
+2026-10-27T11:46:01.8735868Z [Licensing::Client] Successfully processed license management request
+2026-10-27T11:46:01.8736787Z [Licensing::Module] Successfully returned the entitlement license
+2026-10-27T11:46:01.9057972Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-10-27T11:46:03.4619223Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-10-27T11:46:03.4742925Z 
+2026-10-27T11:46:03.4744016Z ###########################
+2026-10-27T11:46:03.4744553Z #         Failure         #
+2026-10-27T11:46:03.4745030Z ###########################
+2026-10-27T11:46:03.4745275Z 
+2026-10-27T11:46:03.4745558Z Please note that the exit code is not very descriptive.
+2026-10-27T11:46:03.4746305Z Most likely it will not help you solve the issue.
+2026-10-27T11:46:03.4746699Z 
+2026-10-27T11:46:03.4747358Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-10-27T11:46:03.4748158Z 
+2026-10-27T11:46:03.9929430Z ##[error]Build failed with exit code 1
