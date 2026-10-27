@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-10-27 08:21 UTC
+# Rapport d'intégration Unity — 2026-10-27 08:41 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 187 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 187 déjà à jour (inchangés)
+- 47 modèle(s) intégré(s), 140 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-10-27 08:22 UTC
+# Rapport d'intégration Unity — 2026-10-27 08:52 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 187 modèle(s) ModelForge trouvé(s)
@@ -14,7 +14,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/AshCrossbow/AshCrossbow.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 3608 triangles, 2256 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/AshCrossbow.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/AshCrossbow.prefab
 - ✅ **Échelle (hauteur)** 0.877 m (attendu 0.8328336–0.9205003), boîte 0.67×0.88×0.14, pieds à y=-0.364
 - ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -27,7 +27,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/CorruptStaff/CorruptStaff.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 4164 triangles, 2601 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/CorruptStaff.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/CorruptStaff.prefab
 - ✅ **Échelle (hauteur)** 2.108 m (attendu 2.002186–2.212942), boîte 0.24×2.11×0.16, pieds à y=-0.813
 - ✅ **Matériau SC_Wood** shader Universal Render Pipeline/Lit, base SC_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -39,7 +39,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/CursedBlade/CursedBlade.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 11062 triangles, 6085 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/CursedBlade.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/CursedBlade.prefab
 - ✅ **Échelle (hauteur)** 1.249 m (attendu 1.186882–1.311818), boîte 0.25×1.25×0.04, pieds à y=-0.199
 - ✅ **Matériau CK_Blade** shader Universal Render Pipeline/Lit, base CK_Blade_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau CK_Steel** shader Universal Render Pipeline/Lit, base CK_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -51,7 +51,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/CursedShield/CursedShield.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 19796 triangles, 11226 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/CursedShield.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/CursedShield.prefab
 - ✅ **Échelle (hauteur)** 1.064 m (attendu 1.011127–1.117561), boîte 0.69×1.06×0.12, pieds à y=-0.663
 - ✅ **Matériau CK_ShieldFace** shader Universal Render Pipeline/Lit, base CK_ShieldFace_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -63,7 +63,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/HeaterShield/HeaterShield.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 19796 triangles, 11224 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/HeaterShield.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/HeaterShield.prefab
 - ✅ **Échelle (hauteur)** 0.774 m (attendu 0.7354972–0.812918), boîte 0.57×0.77×0.10, pieds à y=-0.373
 - ✅ **Matériau KN_Steel** shader Universal Render Pipeline/Lit, base KN_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -75,7 +75,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/LavaCleaver/LavaCleaver.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 2542 triangles, 1496 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/LavaCleaver.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/LavaCleaver.prefab
 - ✅ **Échelle (hauteur)** 2.570 m (attendu 2.441595–2.698605), boîte 0.39×2.57×0.11, pieds à y=-0.605
 - ✅ **Matériau DB_Blade** shader Universal Render Pipeline/Lit, base DB_Blade_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau DB_Iron** shader Universal Render Pipeline/Lit, base DB_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -86,7 +86,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/Longsword/Longsword.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 11062 triangles, 6085 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/Longsword.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/Longsword.prefab
 - ✅ **Échelle (hauteur)** 1.249 m (attendu 1.186882–1.311818), boîte 0.25×1.25×0.04, pieds à y=-0.199
 - ✅ **Matériau WP_Blade** shader Universal Render Pipeline/Lit, base WP_Blade_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KN_Steel** shader Universal Render Pipeline/Lit, base KN_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -98,7 +98,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/RustedShield/RustedShield.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 19796 triangles, 11224 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/RustedShield.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/RustedShield.prefab
 - ✅ **Échelle (hauteur)** 0.734 m (attendu 0.697547–0.770973), boîte 0.59×0.73×0.11, pieds à y=-0.333
 - ✅ **Matériau SK_Rust** shader Universal Render Pipeline/Lit, base SK_Rust_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -110,7 +110,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/RustedSword/RustedSword.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 11062 triangles, 6085 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/RustedSword.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/RustedSword.prefab
 - ✅ **Échelle (hauteur)** 1.249 m (attendu 1.186882–1.311818), boîte 0.25×1.25×0.04, pieds à y=-0.199
 - ✅ **Matériau SK_Blade** shader Universal Render Pipeline/Lit, base SK_Blade_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau SK_Rust** shader Universal Render Pipeline/Lit, base SK_Rust_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -122,7 +122,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/SoulStaff/SoulStaff.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 6840 triangles, 4473 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/SoulStaff.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/SoulStaff.prefab
 - ✅ **Échelle (hauteur)** 2.043 m (attendu 1.94123–2.14557), boîte 0.24×2.04×0.21, pieds à y=-0.862
 - ✅ **Matériau MO_Dark** shader Universal Render Pipeline/Lit, base MO_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Silver** shader Universal Render Pipeline/Lit, base MO_Silver_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -134,7 +134,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/SunHammer/SunHammer.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 7264 triangles, 4473 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/SunHammer.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/SunHammer.prefab
 - ✅ **Échelle (hauteur)** 1.359 m (attendu 1.290575–1.426425), boîte 0.33×1.36×0.15, pieds à y=-0.367
 - ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau TH_Leather** shader Universal Render Pipeline/Lit, base TH_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -146,7 +146,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/SunPavise/SunPavise.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 13744 triangles, 7755 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/SunPavise.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/SunPavise.prefab
 - ✅ **Échelle (hauteur)** 0.994 m (attendu 0.9439472–1.04331), boîte 0.57×0.99×0.09, pieds à y=-0.517
 - ✅ **Matériau TH_Plate** shader Universal Render Pipeline/Lit, base TH_Plate_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -158,7 +158,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/VoidStaff/VoidStaff.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 3486 triangles, 2221 sommets (max 25000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Weapons/VoidStaff.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/VoidStaff.prefab
 - ✅ **Échelle (hauteur)** 1.963 m (attendu 1.86523–2.06157), boîte 0.16×1.96×0.16, pieds à y=-0.862
 - ✅ **Matériau EL_Dark** shader Universal Render Pipeline/Lit, base EL_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -169,7 +169,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/ChateauKorvalune/ChateauKorvalune.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 14400 triangles, 18460 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/ChateauKorvalune.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/ChateauKorvalune.prefab
 - ✅ **Échelle (hauteur)** 53.350 m (attendu 50.6825–56.0175), boîte 76.49×53.35×76.49, pieds à y=-0.050
 - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -182,7 +182,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene0/Chene0.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 1816 triangles, 1884 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Chene0.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene0.prefab
 - ✅ **Échelle (hauteur)** 9.832 m (attendu 9.340084–10.32325), boîte 12.99×9.83×12.27, pieds à y=-0.003
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -192,7 +192,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene0_LOD1/Chene0_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 1204 triangles, 1094 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Chene0_LOD1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene0_LOD1.prefab
 - ✅ **Échelle (hauteur)** 9.490 m (attendu 9.015727–9.964751), boîte 12.61×9.49×12.56, pieds à y=-0.003
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -202,7 +202,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene1/Chene1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 1816 triangles, 1884 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Chene1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene1.prefab
 - ✅ **Échelle (hauteur)** 10.104 m (attendu 9.59914–10.60958), boîte 11.17×10.10×10.62, pieds à y=-0.012
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -212,7 +212,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene1_LOD1/Chene1_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 1204 triangles, 1094 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Chene1_LOD1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene1_LOD1.prefab
 - ✅ **Échelle (hauteur)** 12.456 m (attendu 11.83282–13.07839), boîte 11.38×12.46×14.22, pieds à y=-0.011
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -222,7 +222,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene2/Chene2.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 1816 triangles, 1884 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Chene2.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene2.prefab
 - ✅ **Échelle (hauteur)** 10.958 m (attendu 10.41041–11.50624), boîte 13.38×10.96×12.89, pieds à y=-0.007
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -232,7 +232,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene2_LOD1/Chene2_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 1204 triangles, 1094 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Chene2_LOD1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene2_LOD1.prefab
 - ✅ **Échelle (hauteur)** 12.566 m (attendu 11.93745–13.19402), boîte 12.13×12.57×11.42, pieds à y=-0.006
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -242,7 +242,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin0/Pin0.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Pin0.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin0.prefab
 - ✅ **Échelle (hauteur)** 11.034 m (attendu 10.4823–11.5857), boîte 6.63×11.03×6.83, pieds à y=0.000
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -252,7 +252,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin0_LOD1/Pin0_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Pin0_LOD1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin0_LOD1.prefab
 - ✅ **Échelle (hauteur)** 11.034 m (attendu 10.4823–11.5857), boîte 6.77×11.03×6.90, pieds à y=0.000
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -262,7 +262,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin1/Pin1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Pin1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin1.prefab
 - ✅ **Échelle (hauteur)** 13.034 m (attendu 12.3823–13.6857), boîte 6.48×13.03×6.69, pieds à y=0.000
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -272,7 +272,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin1_LOD1/Pin1_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Pin1_LOD1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin1_LOD1.prefab
 - ✅ **Échelle (hauteur)** 13.034 m (attendu 12.3823–13.6857), boîte 6.67×13.03×6.67, pieds à y=0.000
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -282,7 +282,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2/Pin2.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Pin2.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2.prefab
 - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.61×15.03×6.84, pieds à y=0.000
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -292,7 +292,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2_LOD1/Pin2_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Pin2_LOD1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2_LOD1.prefab
 - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.79×15.03×6.74, pieds à y=0.000
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -302,7 +302,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher0/Rocher0.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 5440 triangles, 3242 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Rocher0.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher0.prefab
 - ✅ **Échelle (hauteur)** 1.862 m (attendu 1.768934–1.955137), boîte 2.56×1.86×2.20, pieds à y=-1.039
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
@@ -311,7 +311,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher1/Rocher1.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 5600 triangles, 3383 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Rocher1.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher1.prefab
 - ✅ **Échelle (hauteur)** 3.867 m (attendu 3.673435–4.060112), boîte 4.38×3.87×3.73, pieds à y=-1.770
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
@@ -320,7 +320,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 7204 triangles, 4471 sommets (max 60000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/World/Rocher2.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
 - ✅ **Échelle (hauteur)** 5.552 m (attendu 5.274186–5.829364), boîte 7.00×5.55×7.49, pieds à y=-2.559
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
@@ -329,7 +329,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 52986 triangles, 31879 sommets (max 140000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/BaseFemale.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/BaseFemale.prefab
 - ✅ **Échelle (hauteur)** 1.874 m (attendu 1.6–1.98), boîte 1.05×1.87×0.86, pieds à y=-0.022
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.211
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.111 > LeftFoot.z=-0.023
@@ -365,7 +365,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseMale/BaseMale.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 46728 triangles, 26619 sommets (max 140000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/BaseMale.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/BaseMale.prefab
 - ✅ **Échelle (hauteur)** 1.875 m (attendu 1.6–1.98), boîte 1.04×1.87×0.84, pieds à y=-0.026
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.211
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.111 > LeftFoot.z=-0.023
@@ -400,7 +400,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 135168 triangles, 86500 sommets (max 200000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Enemies/AraigneeGeante.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/AraigneeGeante.prefab
 - ✅ **Échelle (hauteur)** 1.269 m (attendu 0.95–1.4), boîte 2.96×1.27×2.67, pieds à y=0.005
 - ✅ **Orientation gauche/droite** Leg0_Coxa_L.x = -0.140
 - ✅ **Orientation avant (+Z)** Thorax.z=0.300 > Abdomen.z=0.020
@@ -424,7 +424,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/ChevalierMaudit/ChevalierMaudit.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 113390 triangles, 67689 sommets (max 200000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Enemies/ChevalierMaudit.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/ChevalierMaudit.prefab
 - ✅ **Échelle (hauteur)** 2.040 m (attendu 1.8–2.15), boîte 1.90×2.04×0.55, pieds à y=-0.025
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -458,7 +458,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/DemonBrute/DemonBrute.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 86632 triangles, 48081 sommets (max 180000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Enemies/DemonBrute.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/DemonBrute.prefab
 - ✅ **Échelle (hauteur)** 2.996 m (attendu 2.6–3.1), boîte 2.97×3.00×0.72, pieds à y=-0.046
 - ✅ **Orientation gauche/droite** LeftHand.x = -1.103
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.168 > LeftFoot.z=-0.039
@@ -489,7 +489,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/LoupTenebres/LoupTenebres.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 112760 triangles, 106431 sommets (max 200000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Enemies/LoupTenebres.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/LoupTenebres.prefab
 - ✅ **Échelle (hauteur)** 1.404 m (attendu 1.3–1.65), boîte 0.71×1.40×2.27, pieds à y=-0.002
 - ✅ **Orientation gauche/droite** Ear_L.x = -0.065
 - ✅ **Orientation avant (+Z)** Head.z=0.710 > Hips.z=-0.450
@@ -516,7 +516,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/SorcierCorrompu/SorcierCorrompu.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 187550 triangles, 108163 sommets (max 200000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Enemies/SorcierCorrompu.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/SorcierCorrompu.prefab
 - ✅ **Échelle (hauteur)** 1.956 m (attendu 1.7–2.05), boîte 1.89×1.96×0.63, pieds à y=-0.005
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -579,7 +579,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/SqueletteGuerrier/SqueletteGuerrier.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 114438 triangles, 73217 sommets (max 200000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Enemies/SqueletteGuerrier.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/SqueletteGuerrier.prefab
 - ✅ **Échelle (hauteur)** 1.812 m (attendu 1.7–1.98), boîte 1.89×1.81×0.38, pieds à y=0.008
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -612,7 +612,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 156582 triangles, 109189 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/ElyraNoctis_F.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_F.prefab
 - ✅ **Échelle (hauteur)** 1.891 m (attendu 1.6–1.98), boîte 1.89×1.89×0.59, pieds à y=-0.010
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -689,7 +689,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 175146 triangles, 117436 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/ElyraNoctis_M.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_M.prefab
 - ✅ **Échelle (hauteur)** 1.884 m (attendu 1.6–1.98), boîte 1.89×1.88×0.58, pieds à y=-0.009
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -767,7 +767,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 163912 triangles, 115940 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/KaelDraven_F.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_F.prefab
 - ✅ **Échelle (hauteur)** 1.936 m (attendu 1.6–1.98), boîte 1.90×1.94×0.61, pieds à y=-0.033
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -853,7 +853,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 157654 triangles, 106905 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/KaelDraven_M.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_M.prefab
 - ✅ **Échelle (hauteur)** 1.926 m (attendu 1.6–1.98), boîte 1.90×1.93×0.62, pieds à y=-0.031
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -938,7 +938,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 184676 triangles, 135572 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/Morvanna_F.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_F.prefab
 - ✅ **Échelle (hauteur)** 1.929 m (attendu 1.6–1.98), boîte 1.89×1.93×0.59, pieds à y=-0.010
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -1020,7 +1020,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 195414 triangles, 133545 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/Morvanna_M.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_M.prefab
 - ✅ **Échelle (hauteur)** 1.884 m (attendu 1.6–1.98), boîte 1.89×1.88×0.58, pieds à y=-0.009
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -1103,7 +1103,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 149706 triangles, 105406 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/Tharion_F.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_F.prefab
 - ✅ **Échelle (hauteur)** 1.910 m (attendu 1.6–1.98), boîte 1.90×1.91×0.61, pieds à y=-0.033
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -1185,7 +1185,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 143574 triangles, 97055 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/Tharion_M.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_M.prefab
 - ✅ **Échelle (hauteur)** 1.906 m (attendu 1.6–1.98), boîte 1.90×1.91×0.61, pieds à y=-0.031
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -1266,7 +1266,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 189576 triangles, 138488 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/Varek_F.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_F.prefab
 - ✅ **Échelle (hauteur)** 1.964 m (attendu 1.6–1.98), boîte 1.89×1.96×0.66, pieds à y=-0.010
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -1356,7 +1356,7 @@
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
 - ✅ **Budget de triangles** 182500 triangles, 129967 sommets (max 220000)
-- ✅ **Prefab créé** Assets/Korvalune/Prefabs/Characters/Varek_M.prefab
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_M.prefab
 - ✅ **Échelle (hauteur)** 1.977 m (attendu 1.6–1.98), boîte 1.89×1.98×0.64, pieds à y=-0.009
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
@@ -1445,11 +1445,11 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 158 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_63 captures écrites dans ci-out/ (OpenGLCore) en 2.4 min._
+_63 captures écrites dans ci-out/ (OpenGLCore) en 2.0 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-10-27 08:26 UTC
+# Rapport d'intégration Unity — 2026-10-27 08:55 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 187 modèle(s) ModelForge trouvé(s)
@@ -1459,14 +1459,15 @@ _63 captures écrites dans ci-out/ (OpenGLCore) en 2.4 min._
 - ✅ **Scène de la vallée** Assets/Korvalune/Scenes/Korvalune_Vallee.unity
 - ✅ **Terrain** (640.00, 140.00, 640.00), 5 couches texturées, 4200 arbres
 - ✅ **Château** 
-- ✅ **Héros jouable** KaelDraven_M (10 héros)
+- ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
 - ✅ **Captures de la vallée** ci-out/Jeu_*.png
+- ❌ **Héros au sec (au-dessus de l'eau)** y = 8.5, eau à 10.4
 - ✅ **Héros posé sur le sol** y = 8.5
 
 ## Sélection des personnages
 - ✅ **Scène de sélection** Assets/Korvalune/Scenes/Korvalune_Selection.unity
-- ❌ **Classes proposées** 0 classes
+- ✅ **Classes proposées** 5 classes
 - ✅ **Ordre des scènes** Korvalune_Selection, Korvalune_Vallee, Showcase
 - ✅ **Écran de sélection (style Diablo 3)** ci-out/Selection_*.png, 3 héros d'essai, 5 emplacements
 
@@ -1477,6 +1478,6 @@ _63 captures écrites dans ci-out/ (OpenGLCore) en 2.4 min._
 - ✅ **Captures du créateur** ci-out/Createur_*.png
 
 ## Journal Unity (erreurs et avertissements)
-- ❌ Error: Instantiating material due to calling renderer.material during edit mode. This will leak materials into the scene. You most likely want to use renderer.sharedMaterial instead.
+Aucun.
 
 **RÉSULTAT : 1326 vérification(s) en échec.**
