@@ -76,7 +76,7 @@ namespace Korvalune.EditorTools
                 Prim(PrimitiveType.Cylinder, "Coupe", p + Vector3.up * 1.25f, new Vector3(0.75f, 0.08f, 0.75f), gold, env);
                 Prim(PrimitiveType.Sphere, "Flamme", p + Vector3.up * 1.45f, new Vector3(0.45f, 0.5f, 0.45f), fire, env);
                 var l = new GameObject("Feu").AddComponent<Light>(); l.transform.SetParent(env); l.transform.position = p + Vector3.up * 1.9f;
-                l.type = LightType.Point; l.color = new Color(1f, 0.6f, 0.28f); l.range = 9; l.intensity = 3.2f; l.shadows = LightShadows.Soft;
+                l.type = LightType.Point; l.color = new Color(1f, 0.6f, 0.28f); l.range = 11; l.intensity = 4.5f; l.shadows = LightShadows.Soft;
                 l.gameObject.AddComponent<Flicker>();
                 var ps = new GameObject("Braises").AddComponent<ParticleSystem>(); ps.transform.SetParent(env); ps.transform.position = p + Vector3.up * 1.5f;
                 var m = ps.main; m.startLifetime = 2.2f; m.startSpeed = new ParticleSystem.MinMaxCurve(0.4f, 1.4f); m.startSize = new ParticleSystem.MinMaxCurve(0.03f, 0.08f);
@@ -87,10 +87,13 @@ namespace Korvalune.EditorTools
                 ps.GetComponent<ParticleSystemRenderer>().sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(ModelPipeline.Root + "/Rendering/FX_Additif.mat");
             }
             // lumière lunaire froide par le haut, contre-jour violet
-            var moon = new GameObject("Lune").AddComponent<Light>(); moon.type = LightType.Spot; moon.spotAngle = 38; moon.range = 30; moon.intensity = 18; moon.color = new Color(0.62f, 0.70f, 1f);
+            var moon = new GameObject("Lune").AddComponent<Light>(); moon.type = LightType.Spot; moon.spotAngle = 44; moon.range = 32; moon.intensity = 30; moon.color = new Color(0.62f, 0.70f, 1f);
             moon.transform.position = new Vector3(0, 14, -2); moon.transform.LookAt(Vector3.up); moon.shadows = LightShadows.Soft;
-            var rim = new GameObject("Contre-jour").AddComponent<Light>(); rim.type = LightType.Directional; rim.intensity = 0.35f; rim.color = new Color(0.55f, 0.35f, 0.9f); rim.transform.rotation = Quaternion.Euler(15, 180, 0);
-            RenderSettings.skybox = null; RenderSettings.ambientMode = AmbientMode.Flat; RenderSettings.ambientLight = new Color(0.10f, 0.09f, 0.11f);
+            var rim = new GameObject("Contre-jour").AddComponent<Light>(); rim.type = LightType.Directional; rim.intensity = 0.8f; rim.color = new Color(0.55f, 0.35f, 0.9f); rim.transform.rotation = Quaternion.Euler(15, 180, 0);
+            RenderSettings.skybox = null; RenderSettings.ambientMode = AmbientMode.Flat; RenderSettings.ambientLight = new Color(0.24f, 0.21f, 0.22f);
+            // lumière de face, chaude, sur le héros présenté (l'écran était trop sombre pour juger l'apparence)
+            var key = new GameObject("Lumière de face").AddComponent<Light>(); key.type = LightType.Spot; key.spotAngle = 40; key.range = 25; key.intensity = 22;
+            key.color = new Color(1f, 0.88f, 0.74f); key.transform.position = new Vector3(1.5f, 3.2f, -6f); key.transform.LookAt(new Vector3(0, 1.1f, 0)); key.shadows = LightShadows.Soft;
             RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Exponential; RenderSettings.fogDensity = 0.045f; RenderSettings.fogColor = new Color(0.07f, 0.06f, 0.08f);
 
             var cam = new GameObject("Main Camera").AddComponent<Camera>(); cam.tag = "MainCamera";

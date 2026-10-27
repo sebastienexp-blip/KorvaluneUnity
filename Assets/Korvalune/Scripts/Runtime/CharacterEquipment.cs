@@ -82,6 +82,24 @@ namespace Korvalune
 
         public void Toggle(string name) { var s = Find(name); if (s != null) Equip(name, !s.equipped); }
 
+        /// <summary>Aperçu de morphologie (créateur, création de héros) : tout l'équipement est ôté, il ne reste que le corps et les
+        /// sous-vêtements ; « false » remet l'équipement tel qu'il était.</summary>
+        public void ShowUnderwear(bool on)
+        {
+            if (on == underwearView) return;
+            underwearView = on;
+            foreach (var s in slots)
+            {
+                if (s == null || IsBody(s.name) || s.name == Anatomy || s.name == UnderwearLower || s.name == UnderwearUpper) continue;
+                if (on) { if (s.equipped) savedGear.Add(s.name); s.equipped = false; }
+                else s.equipped = savedGear.Contains(s.name);
+            }
+            if (!on) savedGear.Clear();
+            Apply();
+        }
+        bool underwearView; readonly HashSet<string> savedGear = new HashSet<string>();
+        public bool UnderwearView => underwearView;
+
         /// <summary>Met à jour l'affichage : pièce visible si équipée et non masquée par une pièce couvrante équipée.</summary>
         public void Apply()
         {

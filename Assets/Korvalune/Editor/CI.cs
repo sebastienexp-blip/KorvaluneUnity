@@ -288,7 +288,7 @@ namespace Korvalune.EditorTools
             try
             {
                 cc.Init(); Shot("1_defaut");
-                cc.ShowTab("Visage"); cc.Randomize(); Shot("2_aleatoire_homme");
+                cc.ShowTab("Corps"); cc.Randomize(); Shot("2_aleatoire_homme_sous_vetements");
                 cc.female = true; cc.ShowTab("Cheveux"); cc.Randomize(); Shot("3_aleatoire_femme");
                 cc.classIndex = 1; cc.Rebuild(); cc.ShowTab("Équipement"); Shot("4_classe2_femme");
                 Check("Captures du créateur", true, "ci-out/Createur_*.png");

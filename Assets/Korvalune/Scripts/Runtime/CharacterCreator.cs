@@ -79,6 +79,7 @@ namespace Korvalune
             look = current.GetComponent<CharacterAppearance>(); if (!look) look = current.AddComponent<CharacterAppearance>();
             look.female = female;
             Reapply();
+            var g2 = current.GetComponent<CharacterEquipment>(); if (g2 && tab != "Classe" && tab != "Équipement") g2.ShowUnderwear(true);
             CharacterRig.EditorIdlePose(current);
         }
 
@@ -163,6 +164,9 @@ namespace Korvalune
         public void ShowTab(string t)
         {
             tab = t;
+            // morphologie, peau, visage… : héros en sous-vêtements ; classe et équipement : en tenue
+            var gear = current ? current.GetComponent<CharacterEquipment>() : null;
+            if (gear) gear.ShowUnderwear(t != "Classe" && t != "Équipement");
             if (!listContent || catalog == null) return;
             foreach (var c in listContent.Cast<Transform>().ToList()) Kill(c.gameObject);
             title.text = t;
