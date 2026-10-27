@@ -178,7 +178,8 @@ namespace Korvalune.EditorTools
             RenderSettings.skybox = sky; RenderSettings.sun = sun;
             RenderSettings.ambientMode = AmbientMode.Trilight;
             RenderSettings.ambientSkyColor = new Color(0.55f, 0.62f, 0.75f); RenderSettings.ambientEquatorColor = new Color(0.42f, 0.44f, 0.38f); RenderSettings.ambientGroundColor = new Color(0.18f, 0.17f, 0.13f);
-            RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Linear; RenderSettings.fogStartDistance = 170; RenderSettings.fogEndDistance = 820; RenderSettings.fogColor = new Color(0.70f, 0.76f, 0.84f);
+            RenderSettings.fog = false; RenderSettings.fogMode = FogMode.Linear;   // pas de brouillard (demande de Sébastien)
+            RenderSettings.fogStartDistance = 170; RenderSettings.fogEndDistance = 820; RenderSettings.fogColor = new Color(0.70f, 0.76f, 0.84f);
 
             CI.Step("vallée : caméra, post-traitement, configuration");
             // ---- caméra et jeu

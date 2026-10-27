@@ -94,7 +94,8 @@ namespace Korvalune.EditorTools
             // lumière de face, chaude, sur le héros présenté (l'écran était trop sombre pour juger l'apparence)
             var key = new GameObject("Lumière de face").AddComponent<Light>(); key.type = LightType.Spot; key.spotAngle = 40; key.range = 25; key.intensity = 22;
             key.color = new Color(1f, 0.88f, 0.74f); key.transform.position = new Vector3(1.5f, 3.2f, -6f); key.transform.LookAt(new Vector3(0, 1.1f, 0)); key.shadows = LightShadows.Soft;
-            RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Exponential; RenderSettings.fogDensity = 0.045f; RenderSettings.fogColor = new Color(0.07f, 0.06f, 0.08f);
+            RenderSettings.fog = false; RenderSettings.fogMode = FogMode.Exponential; RenderSettings.fogDensity = 0.045f;   // sans brouillard : le héros reste bien visible
+            RenderSettings.fogColor = new Color(0.07f, 0.06f, 0.08f);
 
             var cam = new GameObject("Main Camera").AddComponent<Camera>(); cam.tag = "MainCamera";
             cam.transform.position = new Vector3(0, 1.75f, -5.4f); cam.transform.LookAt(new Vector3(0, 1.15f, 0)); cam.fieldOfView = 36;
