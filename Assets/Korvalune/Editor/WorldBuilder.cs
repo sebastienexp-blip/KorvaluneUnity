@@ -26,6 +26,8 @@ namespace Korvalune.EditorTools
         static readonly Vector2 Gate = new Vector2(0, -36);
         /// <summary>Entrée de la crypte, au bord du vieux cimetière.</summary>
         public static Vector3 CryptEntrance => Ground(new Vector2(-28, -100));
+        /// <summary>Vieux cimetière (camp des squelettes), hors les murs entre l'enceinte de la ville et le fleuve.</summary>
+        public static readonly Vector2 Grave = new Vector2(-18, -99);
 
         // ------------------------------------------------------------------------------------------ relief
         static float Smooth(float a, float b, float x) { float t = Mathf.Clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); }
@@ -84,9 +86,9 @@ namespace Korvalune.EditorTools
             float east = Smooth(230, 310, x);                                                      // côte : falaises puis mer
             h = Mathf.Lerp(h, -6, east);
             h += 6 * Smooth(80, 0, (p - Vector2.zero).magnitude) * 0;                              // (butte du château : aplanie plus bas)
-            // plateau du château (rayon 46 m) légèrement surélevé
+            // plateau du château et de la ville (jusqu'à l'enceinte) légèrement surélevé
             float dc = p.magnitude;
-            h = Mathf.Lerp(h, Base + 1.5f, Smooth(60, 44, dc));
+            h = Mathf.Lerp(h, Base + 1.5f, Smooth(TownBuilder.WallR + 12, TownBuilder.WallR + 2, dc));   // château et ville
             // routes : aplanies
             float rd = RoadDist(p);
             h = Mathf.Lerp(h, Mathf.Min(h, Base + 1.0f + 0.5f * west * 40), Smooth(9, 3, rd) * (1 - west * 0.6f));
@@ -146,13 +148,14 @@ namespace Korvalune.EditorTools
 
             // ---- château, pont, rochers
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
+            TownBuilder.Build();
             BridgeObject();
             var rng = new System.Random(7);
             // cimetière (camp des squelettes) : pierres tombales et rochers
-            var grave = new Vector2(-20, -92);                     // hors du lit du fleuve (le camp était dans l'eau)
+            var grave = Grave;                                    // entre l'enceinte de la ville et le fleuve
             for (int k = 0; k < 18; k++)
             {
-                var o = grave + new Vector2((float)rng.NextDouble() * 30 - 15, (float)rng.NextDouble() * 24 - 12);
+                var o = grave + new Vector2((float)rng.NextDouble() * 26 - 13, (float)rng.NextDouble() * 10 - 5);
                 var g = GameObject.CreatePrimitive(PrimitiveType.Cube); g.name = "Tombe";
                 g.transform.position = Ground(o) + Vector3.up * 0.55f; g.transform.localScale = new Vector3(0.7f, 1.1f + (float)rng.NextDouble() * 0.5f, 0.22f);
                 g.transform.rotation = Quaternion.Euler((float)rng.NextDouble() * 14 - 7, (float)rng.NextDouble() * 40 - 20, (float)rng.NextDouble() * 14 - 7);
@@ -161,11 +164,11 @@ namespace Korvalune.EditorTools
             for (int k = 0; k < 70; k++)
             {
                 Vector2 o;
-                if (k < 10) o = grave + new Vector2((float)rng.NextDouble() * 40 - 20, (float)rng.NextDouble() * 34 - 17);
+                if (k < 10) o = grave + new Vector2((float)rng.NextDouble() * 34 - 17, (float)rng.NextDouble() * 10 - 5);
                 else
                 {
                     do { o = new Vector2((float)rng.NextDouble() * Size - Size / 2, (float)rng.NextDouble() * Size - Size / 2); }
-                    while (o.magnitude < 70 || RoadDist(o) < 10 || RiverDist(o) < 14 || o.x > 240);
+                    while (o.magnitude < TownBuilder.WallR + 12 || RoadDist(o) < 10 || RiverDist(o) < 14 || o.x > 240);
                 }
                 Place($"World/Rocher{k % 3}", Ground(o) - Vector3.up * 0.3f, (float)rng.NextDouble() * 360, 0.6f + (float)rng.NextDouble() * (o.x < -150 ? 2.5f : 1.2f));
             }
@@ -236,8 +239,8 @@ namespace Korvalune.EditorTools
         }
 
         // ------------------------------------------------------------------------------------------ textures et couches
-        static readonly string[] LayerNames = { "Herbe", "SousBois", "Chemin", "Roche", "Sable" };
-        static readonly float[] LayerTile = { 6, 8, 5, 14, 10 };
+        static readonly string[] LayerNames = { "Herbe", "SousBois", "Chemin", "Roche", "Sable", "Pave" };
+        static readonly float[] LayerTile = { 6, 8, 5, 14, 10, 3.5f };
 
         static void ConfigureTerrainTextures()
         {
@@ -287,10 +290,13 @@ namespace Korvalune.EditorTools
                 w4 = Smooth(-150, -210, z) + Smooth(6, 2, RiverDist(p)) * 0.6f;                        // sable : désert et berges
                 w3 = Smooth(0.18f, 0.35f, slope) * 2 + Smooth(60, 90, h);                                // roche : pentes et sommets
                 float rd = RoadDist(p);
-                w2 = Smooth(4.5f, 2.0f, rd + noise * 1.5f) * 3 + Smooth(48, 34, p.magnitude) * 2;        // chemins et cour du château
+                float town = Smooth(TownBuilder.WallR + 6, TownBuilder.WallR - 2, p.magnitude);
+                w2 = Smooth(4.5f, 2.0f, rd + noise * 1.5f) * 3 * (1 - town) + Smooth(40, 34, p.magnitude) * 2 + town * 0.35f;   // chemins, cour, terre battue en ville
+                w1 *= 1 - town; w3 *= 1 - town * 0.8f; w4 *= 1 - town;
+                float w5 = TownBuilder.Cobble(p) * 8;                                                   // rues pavées et place du marché
                 if (x > 230) w4 += Smooth(230, 260, x) * 2;
-                float s = w0 + w1 + w2 + w3 + w4;
-                map[j, i, 0] = w0 / s; map[j, i, 1] = w1 / s; map[j, i, 2] = w2 / s; map[j, i, 3] = w3 / s; map[j, i, 4] = w4 / s;
+                float s = w0 + w1 + w2 + w3 + w4 + w5;
+                map[j, i, 0] = w0 / s; map[j, i, 1] = w1 / s; map[j, i, 2] = w2 / s; map[j, i, 3] = w3 / s; map[j, i, 4] = w4 / s; map[j, i, 5] = w5 / s;
             }
             td.SetAlphamaps(0, 0, map);
         }
@@ -334,7 +340,7 @@ namespace Korvalune.EditorTools
             {
                 float x = (float)rng.NextDouble() * Size - Size / 2, z = (float)rng.NextDouble() * Size - Size / 2;
                 var p = new Vector2(x, z);
-                if (p.magnitude < 62 || RoadDist(p) < 7 || RiverDist(p) < 15 || x > 235) continue;
+                if (p.magnitude < TownBuilder.WallR + 10 || RoadDist(p) < 7 || RiverDist(p) < 15 || x > 235) continue;
                 float h = Height(x, z);
                 if (h > 85 || h < WaterLevel + 0.8f) continue;
                 float dens = 0.03f + 0.95f * Smooth(95, 160, z) + 0.4f * Smooth(-130, -190, x) * Smooth(70, 40, h) - 0.9f * Smooth(-160, -200, z);
@@ -529,10 +535,26 @@ namespace Korvalune.EditorTools
                 cam.transform.position = new Vector3(60, 230, -300); cam.transform.LookAt(new Vector3(-20, 0, 20)); Shot("3_vue_aerienne");
                 // 4. combat au cimetière : héros au milieu des squelettes, interface visible
                 hud.enabled = true;
-                var cc = p.GetComponent<CharacterController>(); cc.enabled = false; p.position = Ground(new Vector2(-20, -82)); cc.enabled = true;
+                var cc = p.GetComponent<CharacterController>(); cc.enabled = false; p.position = Ground(Grave + new Vector2(0, 2)); cc.enabled = true;
                 p.rotation = Quaternion.LookRotation(new Vector3(0, 0, -1));
                 Pose(game.Player.gameObject, "Attack", 0.35f);
                 cam.GetComponent<CameraRig>().Snap(); Shot("4_combat_cimetiere");
+                // 4b. la ville : porte sud, rue principale, place du marché, échoppes, château depuis la place
+                hud.enabled = false;
+                cam.transform.position = Ground(new Vector2(-6, -112)) + new Vector3(0, 9, 0); cam.transform.LookAt(Ground(new Vector2(0, -70)) + Vector3.up * 6); Shot("8_ville_porte_sud");
+                cam.transform.position = Ground(TownBuilder.Plaza + new Vector2(-16, -22)) + new Vector3(0, 22, 0); cam.transform.LookAt(Ground(TownBuilder.Plaza) + Vector3.up * 1.5f); Shot("9_place_du_marche");
+                cam.transform.position = Ground(TownBuilder.Plaza + new Vector2(2, -6)) + new Vector3(0, 3.2f, 0); cam.transform.LookAt(new Vector3(0, 14, 0)); Shot("10_chateau_depuis_la_place");
+                cam.transform.position = new Vector3(70, 120, -170); cam.transform.LookAt(new Vector3(0, 0, -30)); Shot("11_ville_vue_aerienne");
+                foreach (var m in Object.FindObjectsByType<Merchant>(FindObjectsSortMode.None).Take(9))
+                {
+                    var t = m.transform; var front = t.parent ? t.parent.TransformPoint(new Vector3(0, 0, -9f)) : t.position - t.forward * 9f;
+                    cam.transform.position = front + Vector3.up * 7.5f; cam.transform.LookAt(t.position + Vector3.up * 1.2f);
+                    foreach (var rf in Object.FindObjectsByType<RoofFade>(FindObjectsSortMode.None)) foreach (var r in rf.GetComponentsInChildren<Renderer>()) r.enabled = (rf.transform.position - t.position).sqrMagnitude > 64;
+                    Shot("12_echoppe_" + m.kind);
+                }
+                foreach (var rf in Object.FindObjectsByType<RoofFade>(FindObjectsSortMode.None)) foreach (var r in rf.GetComponentsInChildren<Renderer>()) r.enabled = true;
+                cam.transform.position = new Vector3(0, 5, -26); cam.transform.LookAt(new Vector3(0, 4, 0)); Shot("13_cour_du_chateau");
+                TownBuilder.Checks(check);
                 // 5. galerie des ennemis vus en jeu
                 hud.enabled = false;
                 cam.transform.position = Ground(new Vector2(45, 104)) + new Vector3(0, 5, 0); cam.transform.LookAt(Ground(new Vector2(45, 120)) + Vector3.up); Shot("5_loups_lisiere");

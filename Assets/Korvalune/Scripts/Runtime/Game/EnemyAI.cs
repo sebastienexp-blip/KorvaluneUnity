@@ -41,6 +41,18 @@ namespace Korvalune.Game
                     var off = Random.insideUnitCircle * 1.4f;
                     LootDrop.Spawn(it, GameBootstrap.Ground(transform.position + new Vector3(off.x, 0, off.y)));
                 }
+                // or (ramassé aussitôt), éclats d'ombre sur les élites, gemmes rares
+                if (p)
+                {
+                    long g = Economy.GoldDrop(rng, lvl, elite); p.AddGold(g);
+                    FX.Burst(transform.position + Vector3.up * 0.6f, new Color(1f, 0.82f, 0.25f), 14, 2.5f, 0.1f, 0.6f, 0.8f);
+                    if (elite > 0.3f) { int sh = 1 + rng.Next(1 + (int)(elite * 4)); p.wallet.shadow += sh; p.Notify?.Invoke($"+{sh} éclats d'ombre"); }
+                    if (rng.NextDouble() < 0.025 + 0.2 * elite)
+                    {
+                        var kind = Economy.GemKinds[rng.Next(Economy.GemKinds.Length)]; int tier = 1 + (lvl >= 25 && rng.NextDouble() < 0.3 ? 1 : 0);
+                        Economy.AddGem(p.wallet, kind, tier); p.Notify?.Invoke("Gemme trouvée : " + Economy.GemName(kind, tier));
+                    }
+                }
                 Destroy(gameObject, 8f);
             };
         }

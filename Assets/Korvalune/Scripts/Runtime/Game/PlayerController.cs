@@ -27,6 +27,20 @@ namespace Korvalune.Game
         public Skill[] skills;
         public System.Action<string> Notify;
         public System.Collections.Generic.List<ItemSave> inventory = new System.Collections.Generic.List<ItemSave>();
+        public Wallet wallet = new Wallet();
+        public float ElixirXp => wallet.elixir == "savoir" && Time.time < wallet.elixirUntil ? 1.2f : 1f;
+        float potionReady;
+        public float PotionCooldown => Mathf.Max(0, potionReady - Time.time);
+        /// <summary>Potion de soin : rend 45 % de la vie maximale, 15 s de recharge.</summary>
+        public bool DrinkPotion()
+        {
+            if (wallet.potions <= 0 || Time.time < potionReady || Health.Dead) return false;
+            wallet.potions--; potionReady = Time.time + 15f; Health.Heal(Health.maxHp * 0.45f);
+            FX.Burst(transform.position + Vector3.up, new Color(1f, 0.25f, 0.2f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
+            return true;
+        }
+        public void AddGold(long g) { wallet.gold += g; GoldGained?.Invoke(g); }
+        public System.Action<long> GoldGained;
 
         public Health Health { get; private set; }
         public Animator Anim { get; private set; }
@@ -202,7 +216,7 @@ namespace Korvalune.Game
 
         public void GainXp(float amount)
         {
-            xp += amount;
+            xp += amount * ElixirXp;
             if (level >= MaxLevel) { xp = 0; return; }
             while (xp >= xpNext && level < MaxLevel)
             {

@@ -56,6 +56,7 @@ namespace Korvalune.Game
                 Player.xpNext = PlayerController.XpForLevel(Player.level);
                 h.maxHp += 15 * (Player.level - 1); h.maxMana += 8 * (Player.level - 1); Player.attackDamage += 3 * (Player.level - 1); h.hp = h.maxHp; h.mana = h.maxMana;
                 Player.inventory.AddRange(save.inventory);
+                if (save.wallet != null) Player.wallet = save.wallet;
                 if (config) SaveSystem.ApplyLook(hero, config.catalog, save.look, save.female);
             }
             // compétences propres à la classe (32 par classe, rangs et barre de 5 emplacements sauvegardés)
@@ -143,6 +144,7 @@ namespace Korvalune.Game
             s.level = Player.level; s.xp = Player.xp; s.skillPoints = Player.skillPoints;
             if (Runner) { s.skillRanks = new List<int>(Runner.ranks); s.loadout = new List<int>(Runner.loadout); }
             var eqp = Player.GetComponent<Equipment>(); if (eqp) s.equipped = eqp.ToSave();
+            s.wallet = Player.wallet; s.gold = Player.wallet.gold;
             s.inventory = new List<ItemSave>(Player.inventory); s.playSeconds += 30f; s.lastPlayed = System.DateTime.UtcNow.ToString("o");
             SaveSystem.Save();
         }

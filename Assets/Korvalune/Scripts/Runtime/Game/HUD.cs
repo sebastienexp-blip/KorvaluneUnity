@@ -9,7 +9,7 @@ namespace Korvalune.Game
     /// expérience en haut à gauche, mini-carte ronde et quête actuelle en haut à droite, joystick en bas à gauche,
     /// grand bouton d'attaque et quatre compétences en arc en bas à droite (recharge circulaire), notifications,
     /// chiffres de dégâts, barres de vie des ennemis, écran de mort.</summary>
-    public class HUD : MonoBehaviour
+    public partial class HUD : MonoBehaviour
     {
         public PlayerController player;
         public SkillRunner runner;
@@ -90,6 +90,15 @@ namespace Korvalune.Game
             if (player && player.GetComponent<Equipment>()) BuildBag(root);
             RoundButton(root, "Arbre", "book", new Vector2(0.5f, 1), new Vector2(60, -24), 96, ToggleTree, out _, out _);
             if (runner) BuildTree(root);
+            // bourse (sous le portrait) et potions de soin (au-dessus du joystick, à droite)
+            var purse = Img(root, "Or", UIStyle.Icon("coin", new Color(1f, 0.82f, 0.3f)), new Vector2(0, 1), new Vector2(40, -212), new Vector2(40, 40));
+            goldText = Label(root, "Montant", "", 28, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(88, -212), new Vector2(300, 40)); goldText.color = new Color(1f, 0.86f, 0.45f);
+            goldText.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
+            var pb = RoundButton(root, "Potion", "potion", new Vector2(0, 0), new Vector2(390, 40), 112, () => { if (player && !player.DrinkPotion()) Notify(player.wallet.potions <= 0 ? "Plus de potions" : "Potion en recharge"); }, out potionCd, out _);
+            pb.transform.Find("Icône").GetComponent<Image>().color = new Color(1f, 0.35f, 0.3f);
+            potionCount = Label(pb.rectTransform, "Nombre", "", 28, TextAnchor.LowerRight, new Vector2(0.5f, 0.5f), new Vector2(-6, 4), new Vector2(100, 100));
+            potionCount.gameObject.AddComponent<Outline>().effectColor = Color.black;
+            if (player) BuildShop(root);
 
             notifyText = Label(root, "Notification", "", 38, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0, -170), new Vector2(1200, 60));
             notifyText.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
@@ -110,7 +119,8 @@ namespace Korvalune.Game
             Health.AnyDamaged += OnDamaged;
         }
 
-        void OnDestroy() { Health.AnyDamaged -= OnDamaged; }
+        void OnDestroy() { Health.AnyDamaged -= OnDamaged; Merchant.Opened -= OpenShop; }
+        Text goldText, potionCount; Image potionCd;
 
         Sprite arrowSprite;
         Sprite Arrow()
@@ -138,6 +148,8 @@ namespace Korvalune.Game
             hpFill.fillAmount = h.hp / h.maxHp; hpText.text = $"{Mathf.CeilToInt(h.hp)} / {Mathf.CeilToInt(h.maxHp)}";
             manaFill.fillAmount = h.maxMana > 0 ? h.mana / h.maxMana : 0;
             xpFill.fillAmount = player.xp / player.xpNext; levelText.text = "Nv " + player.level;
+            if (goldText) goldText.text = player.wallet.gold.ToString("N0");
+            if (potionCount) { potionCount.text = player.wallet.potions.ToString(); potionCd.fillAmount = player.PotionCooldown / 15f; }
             if (runner) RefreshSkills(h);
             else foreach (var (cd, t, i) in skillButtons)
             {

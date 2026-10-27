@@ -36,6 +36,8 @@ jobs:
           sudo swapoff -a || true
           sudo fallocate -l 16G /mnt/korvalune.swap && sudo chmod 600 /mnt/korvalune.swap && sudo mkswap /mnt/korvalune.swap && sudo swapon /mnt/korvalune.swap
           free -h
+          # relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)
+          mkdir -p /tmp/diag && (while true; do echo "$(date +%T) $(free -m | awk '/Mem/{print "ram " $3 "/" $2} /Swap/{print "swap " $3 "/" $2}' | tr '\n' ' ') $(ps -eo rss,comm --sort=-rss | sed -n 2,3p | tr '\n' ' ')"; sleep 5; done) > /tmp/diag/mem.log 2>&1 &
 
       - uses: actions/checkout@v4
         with:
@@ -71,6 +73,7 @@ jobs:
           targetPlatform: Android
           buildMethod: Korvalune.EditorTools.AndroidBuild.Build
           allowDirtyBuild: true
+          dockerMemoryLimit: 30g        # au-delà de la RAM physique : le conteneur peut s'appuyer sur l'échange
 
       - name: Rapport de construction
         if: always()
@@ -83,6 +86,8 @@ jobs:
               echo '```'; } > ci-out/android/build.md || true
           fi
           ls -la build/Android 2>/dev/null || true
+          { echo; echo "## Mémoire pendant la construction (dernières mesures)"; echo '```'; tail -40 /tmp/diag/mem.log 2>/dev/null; echo '```';
+            echo "## Noyau (OOM)"; echo '```'; sudo dmesg 2>/dev/null | grep -iE "killed process|out of memory|oom" | tail -10; echo '```'; } >> ci-out/android/build.md || true
           cat ci-out/android/build.md
 
       - uses: actions/upload-artifact@v4

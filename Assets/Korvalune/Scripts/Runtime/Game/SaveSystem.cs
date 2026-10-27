@@ -24,6 +24,7 @@ namespace Korvalune.Game
         public List<int> loadout = new List<int>();
         public List<ItemSave> inventory = new List<ItemSave>();
         public List<ItemSave> equipped = new List<ItemSave>();
+        public Wallet wallet = new Wallet();
         public AppearanceSave look = new AppearanceSave();
         public string created, lastPlayed;
         public float playSeconds;
@@ -35,6 +36,7 @@ namespace Korvalune.Game
         public string accountId = "local";
         public List<CharacterSave> characters = new List<CharacterSave>();
         public int lastSelected;
+        public List<ItemSave> stash = new List<ItemSave>();          // coffre de banque partagé entre les personnages
     }
 
     /// <summary>Sauvegarde locale par compte (JSON dans le dossier persistant de l'appareil) : jusqu'à 5 personnages par

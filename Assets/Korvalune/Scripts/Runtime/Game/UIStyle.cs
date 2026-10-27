@@ -109,6 +109,8 @@ namespace Korvalune.Game
                     case "warcry": { m = (r < 0.28f) ? 1 : 0; float ray = Mathf.Abs(Mathf.Repeat(a / (2 * Mathf.PI) * 10, 1) - 0.5f); if (r > 0.4f && r < 0.85f && ray < 0.12f) m = 1; } break;
                     case "stomp": { m = (Mathf.Abs(r - 0.25f) < 0.07f || Mathf.Abs(r - 0.52f) < 0.06f || Mathf.Abs(r - 0.78f) < 0.05f) && v < 0.35f ? 1 : 0; if (r < 0.12f) m = 1; } break;
                     case "bag": { m = (Mathf.Abs(u) < 0.55f - 0.15f * v && v < 0.35f && v > -0.7f) ? 1 : 0; if (Mathf.Abs(r - 0.0f) < 0 ) m = 0; if (v > 0.3f && v < 0.6f && Mathf.Abs(Mathf.Sqrt(u * u + (v - 0.35f) * (v - 0.35f)) - 0.22f) < 0.06f) m = 1; } break;
+                    case "potion": { float rb = Mathf.Sqrt(u * u + (v + 0.25f) * (v + 0.25f)); m = rb < 0.48f || (Mathf.Abs(u) < 0.14f && v > -0.3f && v < 0.55f) || (Mathf.Abs(u) < 0.2f && v >= 0.55f && v < 0.72f) ? 1 : 0; if (rb < 0.48f && v > -0.12f && v < -0.02f) m = 0.5f; } break;
+                    case "coin": { m = r < 0.62f ? 1 : 0; if (Mathf.Abs(r - 0.48f) < 0.035f) m = 0.45f; } break;
                     case "book": { m = (Mathf.Abs(u) < 0.7f && Mathf.Abs(v) < 0.55f && Mathf.Abs(u) > 0.04f) ? 1 : 0; if (Mathf.Abs(u) > 0.15f && Mathf.Abs(u) < 0.6f && Mathf.Abs(Mathf.Repeat(v * 5, 1) - 0.5f) < 0.08f && Mathf.Abs(v) < 0.4f) m = 0.4f; } break;
                 }
                 var c = col * (0.8f + 0.4f * (1 - r)); c.a = m; px[y * S + x] = c;

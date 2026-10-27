@@ -14,6 +14,8 @@ namespace Korvalune.Game
     {
         public string id, name, baseName; public Slot slot; public Rarity rarity; public int ilvl; public float power;
         public List<AffixSave> affixes = new List<AffixSave>();
+        public List<string> gems = new List<string>();      // gemmes serties « Rubis:3 »
+        public int rerolls;                                  // réenchantements déjà faits chez la mystique
     }
 
     public static class Loot
@@ -42,6 +44,7 @@ namespace Korvalune.Game
         static readonly string[] Prefix = { "Brisé", "Sinistre", "Ardent", "Glacial", "Funeste", "Céleste", "Sanglant", "Lunaire", "Infernal", "Ancien" };
         static readonly string[] Suffix = { "de la Comète", "des Pics Sélénites", "du Néant", "de l'Éclipse", "des Cendres", "du Roi sans aube", "de Korvalune", "de l'Astral" };
         static readonly string[] Uniques = { "Larme d'Auralith", "Croc de Ghorvax", "Couronne du Roi sans aube", "Cœur de Maldrakor", "Aile de Seralyth" };
+        public static IReadOnlyList<string> StatNames => Stats;
         static readonly string[] Stats = { "Dégâts", "Armure", "Vie", "Force", "Dextérité", "Intelligence", "Chances de coup critique", "Vitesse d'attaque", "Régénération de mana", "Réduction des temps de recharge" };
 
         /// <summary>Tire la rareté : les élites et boss améliorent les chances ; mythique et ancestral restent très rares.</summary>
@@ -57,6 +60,15 @@ namespace Korvalune.Game
             return Rarity.Commun;
         }
 
+        public static float Mult(Rarity rar) => rar switch { Rarity.Commun => 1f, Rarity.Magique => 1.15f, Rarity.Rare => 1.35f, Rarity.Legendaire => 1.6f, Rarity.Unique => 1.75f, Rarity.Mythique => 2.0f, _ => 2.3f };
+        public static bool IsPercent(string s) => s.StartsWith("Chances") || s.StartsWith("Vitesse") || s.StartsWith("Réduction");
+        /// <summary>Valeur d'un affixe selon le niveau d'objet et la rareté (pourcentages pour critique, vitesse, recharge).</summary>
+        public static float AffixValue(string s, int ilvl, Rarity rar, System.Random r)
+        {
+            float mult = Mult(rar) * (0.85f + 0.3f * (float)r.NextDouble());
+            return IsPercent(s) ? Mathf.Round((2 + ilvl * 0.06f) * mult * 10) / 10 : Mathf.Round((3 + ilvl * 1.4f) * mult);
+        }
+
         public static ItemSave Roll(System.Random r, int level, float luck = 0)
         {
             var rar = RollRarity(r, level, luck);
@@ -70,8 +82,7 @@ namespace Korvalune.Game
             for (int i = 0; i < naff && pool.Count > 0; i++)
             {
                 var s = pool[r.Next(pool.Count)]; pool.Remove(s);
-                float v = s.StartsWith("Chances") || s.StartsWith("Vitesse") || s.StartsWith("Réduction") ? Mathf.Round((2 + it.ilvl * 0.06f) * mult * 10) / 10 : Mathf.Round((3 + it.ilvl * 1.4f) * mult);
-                it.affixes.Add(new AffixSave { stat = s, value = v });
+                it.affixes.Add(new AffixSave { stat = s, value = AffixValue(s, it.ilvl, rar, r) });
             }
             it.name = rar switch
             {
@@ -90,7 +101,11 @@ namespace Korvalune.Game
         {
             var c = ColorUtility.ToHtmlStringRGB(ColorOf(it.rarity));
             var s = $"<color=#{c}><b>{it.name}</b></color>\n<color=#{c}>{LabelOf(it.rarity)} — {it.baseName}</color>\nPuissance {it.power} · niveau d'objet {it.ilvl}";
-            foreach (var a in it.affixes) s += $"\n+{a.value}{(a.stat.StartsWith("Chances") || a.stat.StartsWith("Vitesse") || a.stat.StartsWith("Réduction") ? " %" : "")} {a.stat}";
+            foreach (var a in it.affixes) s += $"\n+{a.value}{(IsPercent(a.stat) ? " %" : "")} {a.stat}";
+            int sockets = Economy.Sockets(it);
+            if (it.gems != null) foreach (var g in Economy.GemAffixes(it)) s += $"\n<color=#9fd7ff>• +{g.value}{(IsPercent(g.stat) ? " %" : "")} {g.stat}</color>";
+            for (int k = it.gems?.Count ?? 0; k < sockets; k++) s += "\n<color=#8a7a66>○ Châsse vide</color>";
+            s += $"\n<color=#e8c27a>Valeur : {Economy.SellPrice(it)} or</color>";
             return s;
         }
     }

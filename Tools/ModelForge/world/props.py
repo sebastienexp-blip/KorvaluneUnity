@@ -140,13 +140,31 @@ def castle():
         mid = (p0 + p1) / 2
         if np.dot(unit(mid), gate_dir) > 0.95:                 # côté sud : châtelet entre deux tronçons
             g = unit(p1 - p0)
-            wall(a, p0, mid - g * 7.5); wall(a, mid + g * 7.5, p1)
-            for s in (-1, 1): tower(a, mid + g * s * 6.0, 4.2, 17.0, roof=True, roof_h=11.0)
-            a.add('chatelet', box(mid + (0, 12.0, 0), (9.0, 6.0, 4.0), rot=np.arctan2(g[0], g[2]) + np.pi / 2), STONE)
-            a.add('creneau', merlons_line(mid - g * 4.5 + (0, 0, -1.6), mid + g * 4.5 + (0, 0, -1.6), 15.0, d=0.6), STONE)
-            # arche de la porte (ouverture sombre) et herse de bois
-            a.add('porte', box(mid + (0, 3.6, -2.05), (5.0, 7.2, 0.2)), DARK)
-            a.add('herse', box(mid + (0, 3.6, -2.15), (4.6, 6.8, 0.12)), WOOD)
+            wall(a, p0, mid - g * 8.5); wall(a, mid + g * 8.5, p1)
+            for s in (-1, 1): tower(a, mid + g * s * 7.2, 4.2, 17.0, roof=True, roof_h=11.0)
+            rot = np.arctan2(g[0], g[2]) + np.pi / 2
+            out = unit(mid)                                               # vers l'extérieur (sud)
+            # châtelet : corps au-dessus d'un passage voûté praticable (5 m × 7 m), herse relevée, vantaux ouverts
+            a.add('chatelet', box(mid + (0, 11.5, 0), (10.0, 7.0, 5.0), rot=rot), STONE)
+            for s in (-1, 1): a.add('chatelet', box(mid + g * s * 3.4 + (0, 4.0, 0), (1.8, 8.0, 5.0), rot=rot), STONE)
+            a.add('creneau', merlons_line(mid - g * 5.0 + out * 2.2, mid + g * 5.0 + out * 2.2, 15.0, d=0.6), STONE)
+            for k in range(13):                                           # voûte du passage
+                a0 = np.pi * k / 12
+                c = mid + g * np.cos(a0) * 2.4 + (0, 6.2 + np.sin(a0) * 1.8, 0)
+                a.add('chatelet', box(c, (0.45, 0.45, 5.0), rot=rot), STONE)
+            for sd in (-1, 1):                                            # archivoltes sur les deux faces
+                for k in range(11):
+                    a0 = np.pi * (k + 0.5) / 11
+                    c = mid + g * np.cos(a0) * 2.75 + (0, 6.2 + np.sin(a0) * 2.1, 0) + out * sd * 2.55
+                    a.add('chatelet', box(c, (0.55, 0.5, 0.35), rot=rot), STONE)
+            for k in range(9):                                            # herse relevée dans sa rainure
+                a.add('herse', box(mid + g * (-2.2 + k * 0.55) + out * 1.4 + (0, 7.0, 0), (0.12, 2.4, 0.12), rot=rot), DARK)
+            a.add('herse', box(mid + out * 1.4 + (0, 6.0, 0), (4.8, 0.14, 0.14), rot=rot), DARK)
+            for s in (-1, 1):                                             # vantaux de chêne ouverts contre les parois
+                a.add('porte', box(mid + g * s * 2.35 - out * 1.6 + (0, 2.9, 0) - out * 0.0, (0.18, 5.8, 2.4), rot=rot), WOOD)
+            a.add('cour', box(mid + (0, -0.02, 0), (5.2, 0.1, 6.0), rot=rot), STONE)    # seuil pavé
+            # bannières de part et d'autre de la porte
+            for s in (-1, 1): a.add('banniere', box(mid + g * s * 3.6 + out * 2.62 + (0, 10.5, 0), (1.4, 4.0, 0.06), rot=rot), 'T_ClothRed')
         else:
             wall(a, p0, p1)
     for k, p in enumerate(corners):
@@ -161,8 +179,17 @@ def castle():
         for sz, hh in ((-1, 27.0), (1, 25.0)):
             tower(a, (sx * 11.0, 0, 4.0 + sz * 8.0), 3.0, hh, roof=True, roof_h=10.0, wins=4)
         tower(a, (sx * 6.0, 0, -6.5), 2.2, 24.0, roof=True, roof_h=8.0, wins=3)
+    # porte du donjon : perron, ébrasement, grands vantaux (entrée de la grande salle)
+    a.add('donjon', box((0, 0.35, -5.6), (7.0, 0.7, 3.2)), STONE)
+    a.add('donjon', box((0, 0.12, -7.4), (8.0, 0.24, 1.0)), STONE)
+    a.add('fenetre', box((0, 2.6, -4.06), (3.0, 4.6, 0.15)), DARK)
+    for sx in (-1, 1): a.add('porte', box((sx * 0.74, 2.6, -4.12), (1.4, 4.4, 0.12)), WOOD)
+    for sx in (-1, 1): a.add('donjon', box((sx * 2.0, 2.8, -4.35), (0.8, 5.6, 0.7)), STONE)
+    for k in range(9):
+        a0 = np.pi * (k + 0.5) / 9
+        a.add('donjon', box((np.cos(a0) * 1.9, 4.9 + np.sin(a0) * 1.2, -4.35), (0.55, 0.5, 0.7)), STONE)
     # grande baie sombre et vitrail du donjon
-    a.add('fenetre', box((0, 14.0, -4.05), (3.0, 7.0, 0.15)), DARK)
+    a.add('fenetre', box((0, 15.0, -4.05), (3.0, 6.0, 0.15)), DARK)
     for sx in (-1, 1):
         for y in (8.0, 16.0):
             a.add('fenetre', box((sx * 6.5, y, -4.05), (1.2, 3.0, 0.15)), DARK)

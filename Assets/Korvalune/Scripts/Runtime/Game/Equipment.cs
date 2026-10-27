@@ -50,7 +50,19 @@ namespace Korvalune.Game
         public ItemSave In(Slot s) => worn.TryGetValue(s, out var it) ? it : null;
 
         /// <summary>Somme d'un affixe sur tout l'équipement porté.</summary>
-        public float Sum(string stat) { float v = 0; foreach (var it in worn.Values) foreach (var a in it.affixes) if (a.stat == stat) v += a.value; return v; }
+        public float Sum(string stat)
+        {
+            float v = 0;
+            foreach (var it in worn.Values)
+            {
+                foreach (var a in it.affixes) if (a.stat == stat) v += a.value;
+                foreach (var g in Economy.GemAffixes(it)) if (g.stat == stat) v += g.value;          // gemmes serties
+            }
+            if (p) foreach (var a in Economy.ActiveRelicAffixes(p.wallet)) if (a.stat == stat) v += a.value;   // pouvoirs du Reliquaire
+            return v;
+        }
+        /// <summary>Recalcule les caractéristiques (après sertissage, réenchantement, réceptacles, élixir).</summary>
+        public void Recompute() { Apply(true); Changed?.Invoke(); }
 
         void Apply(bool withItems)
         {
@@ -71,6 +83,11 @@ namespace Korvalune.Game
                 cd *= 1f - Mathf.Clamp(Sum("Vitesse d'attaque") / 100f, 0, 0.5f);
                 regen += 0.1f * Sum("Régénération de mana");
                 cdr = Mathf.Clamp(Sum("Réduction des temps de recharge") / 100f, 0, 0.5f);
+            }
+            if (p.wallet != null && Time.time < p.wallet.elixirUntil)
+            {
+                if (p.wallet.elixir == "force") dmg *= 1.15f;
+                if (p.wallet.elixir == "vie") hp *= 1.15f;
             }
             float ratio = h.maxHp > 0 ? h.hp / h.maxHp : 1;
             p.attackDamage = dmg; h.maxHp = hp; h.hp = Mathf.Clamp(hp * ratio, 1, hp); h.armor = armor;
