@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-10-27 08:41 UTC
+# Rapport d'intégration Unity — 2026-10-27 09:33 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 187 modèle(s) ModelForge trouvé(s)
-- 47 modèle(s) intégré(s), 140 déjà à jour (inchangés)
+- 0 modèle(s) intégré(s), 187 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-10-27 08:52 UTC
+# Rapport d'intégration Unity — 2026-10-27 09:33 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 187 modèle(s) ModelForge trouvé(s)
@@ -1445,11 +1445,11 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 158 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_63 captures écrites dans ci-out/ (OpenGLCore) en 2.0 min._
+_63 captures écrites dans ci-out/ (OpenGLCore) en 2.4 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-10-27 08:55 UTC
+# Rapport d'intégration Unity — 2026-10-27 09:37 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 187 modèle(s) ModelForge trouvé(s)
@@ -1462,7 +1462,14 @@ _63 captures écrites dans ci-out/ (OpenGLCore) en 2.0 min._
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
 - ✅ **Captures de la vallée** ci-out/Jeu_*.png
-- ❌ **Héros au sec (au-dessus de l'eau)** y = 8.5, eau à 10.4
+- ✅ **Départ du héros au sec (au-dessus de l'eau)** y = 11.7, eau à 10.4
+- ✅ **Camp « squelette » au sec** y = 12.4
+- ✅ **Camp « loup » au sec** y = 11.9
+- ✅ **Camp « sorcier » au sec** y = 11.7
+- ✅ **Camp « squelette » au sec** y = 11.8
+- ✅ **Camp « araignee » au sec** y = 34.7
+- ✅ **Camp « chevalier » au sec** y = 12.1
+- ✅ **Camp « demon » au sec** y = 17.6
 - ✅ **Héros posé sur le sol** y = 8.5
 
 ## Sélection des personnages
@@ -1480,4 +1487,4 @@ _63 captures écrites dans ci-out/ (OpenGLCore) en 2.0 min._
 ## Journal Unity (erreurs et avertissements)
 Aucun.
 
-**RÉSULTAT : 1326 vérification(s) en échec.**
+**RÉSULTAT : 1325 vérification(s) en échec.**
