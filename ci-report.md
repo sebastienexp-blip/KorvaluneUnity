@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-10-27 20:50 UTC
+# Rapport d'intégration Unity — 2026-10-27 21:49 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
 - 0 modèle(s) intégré(s), 257 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-10-27 20:50 UTC
+# Rapport d'intégration Unity — 2026-10-27 21:50 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -2468,7 +2468,7 @@ _133 captures écrites dans ci-out/ (OpenGLCore) en 4.8 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-10-27 20:56 UTC
+# Rapport d'intégration Unity — 2026-10-27 21:56 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -2480,7 +2480,7 @@ _133 captures écrites dans ci-out/ (OpenGLCore) en 4.8 min._
 - ✅ **Château** 
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
-- ✅ **Ville : échoppes des marchands** Marchand, Alchimiste, Armurier, Marchande de curiosités, Mystique, Forgeron, Joaillier, Reliquaire Céleste, Coffre
+- ✅ **Ville : échoppes des marchands** Armurier, Forgeron, Alchimiste, Reliquaire Céleste, Coffre, Mystique, Marchand, Joaillier, Marchande de curiosités
 - ✅ **Ville : maisons** 48 maisons
 - ✅ **Ville : rue principale praticable jusqu'au château** dégagée
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
