@@ -1,8 +1,8 @@
-# Rapport d'intégration Unity — 2026-10-27 09:33 UTC
+# Rapport d'intégration Unity — 2026-10-27 09:57 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
-- 187 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 187 déjà à jour (inchangés)
+- 201 modèle(s) ModelForge trouvé(s)
+- 0 modèle(s) intégré(s), 201 déjà à jour (inchangés)
 
 ## AshCrossbow.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/AshCrossbow/AshCrossbow.fbx
@@ -231,6 +231,141 @@
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
+
+## D_Arche.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Arche/D_Arche.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 168 triangles, 336 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Arche.prefab
+- ✅ **Échelle (hauteur)** 3.402 m (attendu 3.231777–3.571965), boîte 4.00×3.40×0.80, pieds à y=0.000
+- ✅ **Matériau D_Stone** shader Universal Render Pipeline/Lit, base D_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Brasero.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Brasero/D_Brasero.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 248 triangles, 229 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Brasero.prefab
+- ✅ **Échelle (hauteur)** 1.150 m (attendu 1.0925–1.2075), boîte 0.84×1.15×0.84, pieds à y=0.000
+- ✅ **Matériau D_Iron** shader Universal Render Pipeline/Lit, base D_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Escalier.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Escalier/D_Escalier.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 120 triangles, 240 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Escalier.prefab
+- ✅ **Échelle (hauteur)** 3.000 m (attendu 2.85–3.15), boîte 4.20×3.00×3.61, pieds à y=0.000
+- ✅ **Matériau D_Flag** shader Universal Render Pipeline/Lit, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Mur0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Mur0/D_Mur0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 384 triangles, 768 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Mur0.prefab
+- ✅ **Échelle (hauteur)** 3.200 m (attendu 3.04–3.36), boîte 4.00×3.20×0.80, pieds à y=0.000
+- ✅ **Matériau D_Stone** shader Universal Render Pipeline/Lit, base D_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Mur1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Mur1/D_Mur1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 420 triangles, 840 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Mur1.prefab
+- ✅ **Échelle (hauteur)** 3.200 m (attendu 3.04–3.36), boîte 4.00×3.20×0.80, pieds à y=0.000
+- ✅ **Matériau D_Stone** shader Universal Render Pipeline/Lit, base D_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Mur2.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Mur2/D_Mur2.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 408 triangles, 816 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Mur2.prefab
+- ✅ **Échelle (hauteur)** 3.200 m (attendu 3.04–3.36), boîte 4.00×3.20×0.79, pieds à y=0.000
+- ✅ **Matériau D_Stone** shader Universal Render Pipeline/Lit, base D_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Os0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Os0/D_Os0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 168 triangles, 282 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Os0.prefab
+- ✅ **Échelle (hauteur)** 0.180 m (attendu 0.171–0.189), boîte 1.18×0.18×1.33, pieds à y=0.000
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Os1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Os1/D_Os1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 168 triangles, 282 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Os1.prefab
+- ✅ **Échelle (hauteur)** 0.180 m (attendu 0.171–0.189), boîte 1.20×0.18×0.93, pieds à y=0.000
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Pilier.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Pilier/D_Pilier.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 72 triangles, 123 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Pilier.prefab
+- ✅ **Échelle (hauteur)** 3.200 m (attendu 3.04–3.36), boîte 1.00×3.20×1.00, pieds à y=0.000
+- ✅ **Matériau D_Stone** shader Universal Render Pipeline/Lit, base D_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Sarcophage0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Sarcophage0/D_Sarcophage0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 84 triangles, 168 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Sarcophage0.prefab
+- ✅ **Échelle (hauteur)** 1.150 m (attendu 1.0925–1.2075), boîte 1.10×1.15×2.40, pieds à y=0.000
+- ✅ **Matériau D_Stone** shader Universal Render Pipeline/Lit, base D_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Flag** shader Universal Render Pipeline/Lit, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Sol0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Sol0/D_Sol0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 192 triangles, 384 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Sol0.prefab
+- ✅ **Échelle (hauteur)** 0.269 m (attendu 0.2558983–0.2828349), boîte 4.00×0.27×4.00, pieds à y=-0.260
+- ✅ **Matériau D_Flag** shader Universal Render Pipeline/Lit, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Sol1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Sol1/D_Sol1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 204 triangles, 408 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Sol1.prefab
+- ✅ **Échelle (hauteur)** 0.271 m (attendu 0.2575258–0.2846338), boîte 4.00×0.27×4.00, pieds à y=-0.260
+- ✅ **Matériau D_Flag** shader Universal Render Pipeline/Lit, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Sol2.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Sol2/D_Sol2.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 180 triangles, 360 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Sol2.prefab
+- ✅ **Échelle (hauteur)** 0.268 m (attendu 0.2549626–0.2818007), boîte 4.00×0.27×4.00, pieds à y=-0.260
+- ✅ **Matériau D_Flag** shader Universal Render Pipeline/Lit, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## D_Torche.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Torche/D_Torche.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 78 triangles, 108 sommets (max 40000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Torche.prefab
+- ✅ **Échelle (hauteur)** 0.550 m (attendu 0.5225–0.5775), boîte 0.18×0.55×0.33, pieds à y=1.750
+- ✅ **Matériau D_Iron** shader Universal Render Pipeline/Lit, base D_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
 
 ## Pin0.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin0/Pin0.fbx
@@ -1439,4 +1574,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 158 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_63 captures écrites dans ci-out/ (OpenGLCore) en 2.4 min._
+_77 captures écrites dans ci-out/ (OpenGLCore) en 3.1 min._
