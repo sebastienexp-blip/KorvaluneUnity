@@ -21,8 +21,10 @@ echo >> $R; echo "## Partie automatique dans la vallée" >> $R
 adb shell am force-stop $PKG; sleep 2
 adb shell "mkdir -p /sdcard/Android/data/$PKG/files && echo 1 > /sdcard/Android/data/$PKG/files/autotest.txt"
 adb logcat -c
-adb shell monkey -p $PKG -c android.intent.category.LAUNCHER 1 > /dev/null 2>&1
-seen=""; start=$(date +%s)
+ACT=$(adb shell cmd package resolve-activity --brief $PKG | tail -1 | tr -d '\r')
+echo "- Activité : $ACT" >> $R
+adb shell am start -n "$ACT" -e autotest 1 > /dev/null 2>&1 || adb shell monkey -p $PKG -c android.intent.category.LAUNCHER 1 > /dev/null 2>&1
+seen=""; start=$(date +%s); shots=0
 while [ $(( $(date +%s) - start )) -lt 420 ]; do
   sleep 4
   adb logcat -d -s Unity:V > $OUT/partie_brut.txt 2>/dev/null
@@ -32,10 +34,13 @@ while [ $(( $(date +%s) - start )) -lt 420 ]; do
     if grep -q "\[Korvalune\]\[test\] .*$key" $OUT/partie_brut.txt; then sleep 3; adb exec-out screencap -p > $OUT/jeu_${name}.png; seen="$seen|$name|"; fi
   done
   case "$seen" in *"|7_fin|"*) break;; esac
+  # captures régulières, même sans repère dans le journal (pour voir où la partie s'arrête)
+  el=$(( $(date +%s) - start )); if [ $el -ge $(( (shots + 1) * 60 )) ] && [ $shots -lt 5 ]; then shots=$((shots+1)); adb exec-out screencap -p > $OUT/partie_${shots}min.png; fi
   adb shell pidof $PKG > /dev/null || { echo "- ❌ Le jeu s'est arrêté pendant la partie" >> $R; ok=0; break; }
 done
 grep -E "\[Korvalune\]" $OUT/partie_brut.txt | sed -E 's/^.*\[Korvalune\]/[Korvalune]/' > $OUT/partie.txt; rm -f $OUT/partie_brut.txt
 sed 's/^/    /' $OUT/partie.txt | head -40 >> $R
+[ -s $OUT/partie.txt ] || { echo "- Aucun repère [Korvalune] ; derniers messages Unity :" >> $R; adb logcat -d -s Unity:V | tail -15 | sed 's/^/    /' >> $R; }
 if grep -q "CHUTE\|chute rattrapée\|collision du terrain absente" $OUT/partie.txt; then echo "- ⚠️ Chute détectée (voir ci-dessus)" >> $R; fi
 if grep -q "TERMINÉ" $OUT/partie.txt; then echo "- ✅ Partie automatique terminée (captures jeu_*.png)" >> $R; else echo "- ⚠️ Partie automatique inachevée (voir partie.txt)" >> $R; fi
 grep -q " OK" $OUT/partie.txt && ! grep -q "→ CHUTE" $OUT/partie.txt && echo "- ✅ Le héros reste au sol dans la vallée" >> $R

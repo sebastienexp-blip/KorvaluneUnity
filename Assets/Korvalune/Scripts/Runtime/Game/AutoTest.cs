@@ -18,6 +18,19 @@ namespace Korvalune.Game
                 if (!isOn.HasValue)
                 {
                     try { isOn = File.Exists(Path.Combine(Application.persistentDataPath, "autotest.txt")); } catch { isOn = false; }
+#if UNITY_ANDROID && !UNITY_EDITOR
+                    // l'émulateur de la CI peut aussi lancer le jeu avec « -e autotest 1 » (plus fiable que le fichier)
+                    if (!isOn.Value)
+                        try
+                        {
+                            using var up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+                            using var act = up.GetStatic<AndroidJavaObject>("currentActivity");
+                            using var intent = act.Call<AndroidJavaObject>("getIntent");
+                            isOn = !string.IsNullOrEmpty(intent.Call<string>("getStringExtra", "autotest"));
+                        }
+                        catch { }
+#endif
+                    Debug.Log("[Korvalune] partie automatique : " + (isOn.Value ? "activée" : "non"));
                 }
                 return isOn.Value;
             }
