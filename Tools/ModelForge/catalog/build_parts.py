@@ -1,5 +1,5 @@
 """Modèles des pièces interchangeables du créateur de personnage : chaque coiffure, sourcil et cil du catalogue est ajusté
-(proxy MakeHuman) sur le corps de base homme ET femme, reçoit les mêmes curseurs de morphologie (blendshapes) que le corps,
+(proxy MakeHuman) sur le corps de base homme ET femme, suit la morphologie du corps sans blendshapes (MorphRig la rattache au corps dans Unity, au moment de l'équiper),
 et est exporté en FBX skinné sur le squelette commun (rattaché par nom d'os dans Unity).
 
   python3 catalog/build_parts.py [--only hair|eyebrows|eyelashes] [--sex M|F]
@@ -28,10 +28,8 @@ def main(only=None, sexes=('M', 'F')):
         t0 = time.time()
         sk = H.build(); a = Asset('tmp', sk)
         body, marks = MOD.base(sk, a, TexBank({}, True), 'TMP', female=female)
-        sl = MO.sliders(female, extra_dirs=[d for d in (os.path.join(os.path.dirname(MA.A), 'targets', 'hands'),) if os.path.isdir(d)])
-        D = MO.shape_deltas(marks, sl)
         base = (marks['base_V'], marks['base_J'], marks['base_W'])
-        print(f'== corps {S} prêt ({time.time() - t0:.0f}s), {len(D)} formes', flush=True)
+        print(f'== corps {S} prêt ({time.time() - t0:.0f}s), sans blendshapes', flush=True)
         for kind, cutoff in (('hair', 0.40), ('eyebrows', 0.30), ('eyelashes', 0.30)):
             if only and kind != only: continue
             for e in cat[kind]:
@@ -45,7 +43,6 @@ def main(only=None, sexes=('M', 'F')):
                 name = f"{e['id']}_{S}"
                 pa = Asset(name, sk); mat = f"CAT_{kind}_{e['id']}"
                 pa.add(kind, m, mat)
-                MO.apply(pa, body, D)
                 rel = '../../../'
                 vfile = (e.get('variants') or [{}])[0].get('file') if kind == 'hair' else e.get('file')
                 shared, tex = {}, {}

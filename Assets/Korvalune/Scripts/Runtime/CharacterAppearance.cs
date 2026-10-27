@@ -105,6 +105,7 @@ namespace Korvalune
             var dup = new List<GameObject>(); foreach (Transform c in go.transform) if (c.GetComponent<SkinnedMeshRenderer>() == null && c.name == "Hips") dup.Add(c.gameObject);
             foreach (var d in dup) Kill(d);
             attached[slot] = go;
+            var rg = Rig; if (rg != null) foreach (var smr in go.GetComponentsInChildren<SkinnedMeshRenderer>(true)) rg.Track(smr);
             ApplyMorphs();
             return go;
         }

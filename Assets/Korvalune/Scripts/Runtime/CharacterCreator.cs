@@ -123,7 +123,7 @@ namespace Korvalune
             // colonne des onglets (gauche)
             var tabs = Panel(root, "Onglets", new Vector2(0, 0), new Vector2(0, 1), new Vector2(20, 20), new Vector2(260, -20), new Color(0.05f, 0.05f, 0.07f, 0.85f));
             var tl = tabs.gameObject.AddComponent<VerticalLayoutGroup>(); tl.padding = new RectOffset(12, 12, 90, 12); tl.spacing = 6; tl.childForceExpandHeight = false;
-            var logo = Label(tabs, "CORVALUNE", 34, TextAnchor.MiddleCenter, new Color(0.85f, 0.78f, 0.6f)); logo.rectTransform.anchorMin = new Vector2(0, 1); logo.rectTransform.anchorMax = new Vector2(1, 1);
+            var logo = Label(tabs, "KORVALUNE", 34, TextAnchor.MiddleCenter, new Color(0.85f, 0.78f, 0.6f)); logo.rectTransform.anchorMin = new Vector2(0, 1); logo.rectTransform.anchorMax = new Vector2(1, 1);
             logo.rectTransform.offsetMin = new Vector2(0, -80); logo.rectTransform.offsetMax = new Vector2(0, -16); logo.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
             foreach (var t in Tabs) { var tt = t; Button(tabs, t, () => ShowTab(tt), 44); }
             Button(tabs, "Aléatoire", Randomize, 44);

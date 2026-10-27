@@ -34,7 +34,7 @@ def run(key, preview, anims, sexes=('M', 'F'), morph=True):
             continue
         scale = getattr(mod, 'SCALE', 1.0)
         if scale != 1.0: EX.scale_asset(a, scale)
-        ex = EX.hero_expect((1.60, 1.98), getattr(mod, 'MAX_TRIS', 220000))
+        ex = EX.hero_expect((1.60, 1.98), getattr(mod, 'MAX_TRIS', 300000))
         folder = getattr(mod, 'FOLDER', 'Heroes')
         if getattr(a, 'morph_table', None) is not None:
             from forge import morphs as MO

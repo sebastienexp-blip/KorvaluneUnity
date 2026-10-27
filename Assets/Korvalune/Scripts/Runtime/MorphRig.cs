@@ -89,6 +89,72 @@ namespace Korvalune
                 }
                 l.mesh.SetVertices(l.outV); l.mesh.RecalculateBounds();
             }
+            live.RemoveAll(l => { if (l.smr) return false; if (l.mesh) { if (Application.isPlaying) Destroy(l.mesh); else DestroyImmediate(l.mesh); } return true; });
+        }
+
+        // ------------------------------------------------------------------ pièces ajoutées en cours de route (créateur)
+        Vector3[] bodyT; Dictionary<long, List<int>> grid; const float Cell = 0.04f;
+        static long Key(int x, int y, int z) => ((long)(x + 100000) * 200003L + (y + 100000)) * 200003L + (z + 100000);
+
+        /// <summary>Fait suivre la morphologie à une pièce rapportée après l'import (cheveux, sourcils… du catalogue) :
+        /// la correspondance avec le corps est calculée sur place, comme MorphBaker le fait à l'import.</summary>
+        public void Track(SkinnedMeshRenderer smr)
+        {
+            if (!smr || !smr.sharedMesh || !Ready) return;
+            if (live == null) Bind();
+            foreach (var x in live) if (x.smr == smr) return;
+            if (bodyT == null)
+            {
+                Vector3[] P; MorphRig.ReadTable(raw, out P, out _);
+                bodyT = new Vector3[P.Length]; grid = new Dictionary<long, List<int>>();
+                for (int i = 0; i < P.Length; i++)
+                {
+                    var t = Vector3.Scale(P[i], map.axis) * map.scale; bodyT[i] = t;
+                    long k = Key(Mathf.FloorToInt(t.x / Cell), Mathf.FloorToInt(t.y / Cell), Mathf.FloorToInt(t.z / Cell));
+                    if (!grid.TryGetValue(k, out var l)) grid[k] = l = new List<int>(); l.Add(i);
+                }
+            }
+            var src = smr.sharedMesh; var v = src.vertices; int K = MorphMap.K;
+            var m = transform.worldToLocalMatrix * smr.transform.localToWorldMatrix; var inv = m.inverse;
+            var part = new MorphMap.Part
+            {
+                path = smr.name, vertexCount = v.Length, idx = new ushort[v.Length * K], w = new byte[v.Length * K],
+                c0 = inv.MultiplyVector(Vector3.right), c1 = inv.MultiplyVector(Vector3.up), c2 = inv.MultiplyVector(Vector3.forward)
+            };
+            var bi = new int[K]; var bd = new float[K];
+            for (int i = 0; i < v.Length; i++)
+            {
+                var q = m.MultiplyPoint3x4(v[i]);
+                int cx = Mathf.FloorToInt(q.x / Cell), cy = Mathf.FloorToInt(q.y / Cell), cz = Mathf.FloorToInt(q.z / Cell);
+                for (int k = 0; k < K; k++) { bi[k] = -1; bd[k] = float.MaxValue; }
+                for (int r = 1; r <= 8; r++)
+                {
+                    for (int x = -r; x <= r; x++) for (int y = -r; y <= r; y++) for (int z = -r; z <= r; z++)
+                    {
+                        if (Mathf.Max(Mathf.Abs(x), Mathf.Max(Mathf.Abs(y), Mathf.Abs(z))) != r && r > 1) continue;   // coquille seulement
+                        if (!grid.TryGetValue(Key(cx + x, cy + y, cz + z), out var l)) continue;
+                        foreach (int j in l)
+                        {
+                            float d = (bodyT[j] - q).sqrMagnitude; if (d >= bd[K - 1]) continue;
+                            int s = K - 1; while (s > 0 && bd[s - 1] > d) { bd[s] = bd[s - 1]; bi[s] = bi[s - 1]; s--; }
+                            bd[s] = d; bi[s] = j;
+                        }
+                    }
+                    if (bi[K - 1] >= 0 && Mathf.Sqrt(bd[K - 1]) <= (r - 1) * Cell) break;   // plus aucun voisin plus proche possible
+                }
+                if (bi[0] < 0) continue;
+                float sum = 0; var ws = new float[K];
+                for (int k = 0; k < K; k++) if (bi[k] >= 0) { ws[k] = 1f / Mathf.Pow(Mathf.Sqrt(bd[k]) + 2e-4f, 2); sum += ws[k]; }
+                int left = 255, last = K - 1; while (last > 0 && bi[last] < 0) last--;
+                for (int k = 0; k <= last; k++)
+                {
+                    int b = k == last ? left : Mathf.Clamp(Mathf.RoundToInt(ws[k] / sum * 255f), 0, left);
+                    part.idx[i * K + k] = (ushort)Mathf.Max(0, bi[k]); part.w[i * K + k] = (byte)b; left -= b;
+                }
+            }
+            var lv = new Live { smr = smr, src = src, part = part, mesh = Instantiate(src) };
+            lv.mesh.name = src.name + " (morphologie)"; lv.baseV = v; lv.outV = (Vector3[])v.Clone();
+            smr.sharedMesh = lv.mesh; live.Add(lv); dirty = true;
         }
 
         void Bind()
