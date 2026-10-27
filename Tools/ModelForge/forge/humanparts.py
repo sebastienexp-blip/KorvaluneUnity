@@ -297,6 +297,10 @@ def cloth_cut(body, coarse_mask, inside, offset=0.0025, thick=0.0016, subdiv=1, 
     from .hairgen import _subdivide
     s = submesh(body, region(body, coarse_mask, all_in=False))
     N0 = vertex_normals(s)
+    # sommets dédoublés sur les coutures UV du corps : même normale des deux côtés (sinon le décalage ouvre une fente)
+    key = np.round(s.V / 1e-5).astype(np.int64); _, inv = np.unique(key, axis=0, return_inverse=True); inv = inv.ravel()
+    acc = np.zeros((inv.max() + 1, 3)); np.add.at(acc, inv, N0); acc /= np.linalg.norm(acc, axis=1, keepdims=True) + 1e-12
+    N0 = acc[inv]
     V, F, N, J, W = _subdivide(s.V, s.F, N0, s.J, s.W, subdiv)
     V, N, J, W, F = _clip_faces(V, N, J, W, F, inside(V))
     off = offset + (bump(V) if bump is not None else 0.0)
