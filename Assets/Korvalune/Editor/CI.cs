@@ -80,11 +80,15 @@ namespace Korvalune.EditorTools
                         else { head.AppendLine($"- ❌ **{Path.GetFileName(f)}** absent : l'éditeur précédent s'est arrêté avant la fin"); failures++; }
                     Rep.Insert(0, head.ToString() + "\n# Scènes (éditeur 3)\n");
                 }
+                // rendu logiciel : ombres coupées pendant les captures de scènes (sinon une image peut prendre des dizaines de minutes)
+                var urp = GraphicsSettings.defaultRenderPipeline as UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset;
+                float shadowDist = urp ? urp.shadowDistance : 0; if (urp) urp.shadowDistance = 0;
                 // créateur en dernier : il charge tout le catalogue (140 pièces, 10 héros à curseurs de morphologie)
                 Progress("WorldCheck"); WorldCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("SelectionCheck"); SelectionCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
                 Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
+                if (urp) { urp.shadowDistance = shadowDist; EditorUtility.SetDirty(urp); }
             }
             catch (Exception ex) { Check("Exécution CI", false, ex.ToString()); }
             finally
@@ -125,6 +129,8 @@ namespace Korvalune.EditorTools
         static string Trim(string s) => s.Length > 300 ? s.Substring(0, 300) + "…" : s;
         static void Line(string s) { Rep.AppendLine(s); Progress(s); }
         /// <summary>Journal de progression écrit au fil de l'eau (survit à un plantage natif de l'éditeur).</summary>
+        /// <summary>Étape intermédiaire visible dans ci-out/progress.log (appelée par les constructeurs de scènes).</summary>
+        public static void Step(string s) => Progress("  · " + s);
         static void Progress(string s) { try { Directory.CreateDirectory("ci-out"); File.AppendAllText("ci-out/progress.log", DateTime.UtcNow.ToString("HH:mm:ss ") + s + "\n"); } catch { } }
         static void Check(string what, bool ok, string detail = "")
         {

@@ -107,6 +107,7 @@ namespace Korvalune.EditorTools
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
             // ---- terrain
+            CI.Step("vallée : relief");
             var td = new TerrainData { heightmapResolution = 513, alphamapResolution = 512, baseMapResolution = 1024 };
             td.SetDetailResolution(256, 16);
             td.size = new Vector3(Size, MaxH, Size);
@@ -117,6 +118,7 @@ namespace Korvalune.EditorTools
                 H[j, i] = (Height(x, z) + 8f) / MaxH;
             }
             td.SetHeights(0, 0, H);
+            CI.Step("vallée : peinture du terrain");
             td.terrainLayers = Layers();
             Paint(td);
             var tdPath = DataDir + "/Vallee_Terrain.asset";
@@ -129,8 +131,10 @@ namespace Korvalune.EditorTools
             var tmat = new Material(Shader.Find("Universal Render Pipeline/Terrain/Lit")); var tmp = Root + "/Rendering/Terrain.mat";
             AssetDatabase.DeleteAsset(tmp); AssetDatabase.CreateAsset(tmat, tmp); terrain.materialTemplate = tmat;
             Trees(td, terrain);
+            CI.Step("vallée : arbres");
             terrain.Flush();
 
+            CI.Step("vallée : eau, château, décor");
             // ---- eau (fleuve et mer)
             var water = GameObject.CreatePrimitive(PrimitiveType.Plane); water.name = "Eau";
             Object.DestroyImmediate(water.GetComponent<Collider>());
@@ -176,6 +180,7 @@ namespace Korvalune.EditorTools
             RenderSettings.ambientSkyColor = new Color(0.55f, 0.62f, 0.75f); RenderSettings.ambientEquatorColor = new Color(0.42f, 0.44f, 0.38f); RenderSettings.ambientGroundColor = new Color(0.18f, 0.17f, 0.13f);
             RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Linear; RenderSettings.fogStartDistance = 140; RenderSettings.fogEndDistance = 520; RenderSettings.fogColor = new Color(0.70f, 0.76f, 0.84f);
 
+            CI.Step("vallée : caméra, post-traitement, configuration");
             // ---- caméra et jeu
             var cam = new GameObject("Main Camera").AddComponent<Camera>(); cam.tag = "MainCamera"; cam.gameObject.AddComponent<AudioListener>();
             cam.clearFlags = CameraClearFlags.Skybox; cam.farClipPlane = 900; cam.nearClipPlane = 0.3f;
@@ -198,6 +203,7 @@ namespace Korvalune.EditorTools
             cam.transform.position = game.playerSpawn + new Vector3(0, 8, -9); cam.transform.LookAt(game.playerSpawn);
 
             EditorSceneManager.SaveScene(scene, ScenePath);
+            CI.Step("vallée : sauvegarde de la scène");
             var list = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();
             list.Insert(0, new EditorBuildSettingsScene(ScenePath, true));
             EditorBuildSettings.scenes = list.ToArray();
@@ -492,6 +498,7 @@ namespace Korvalune.EditorTools
                 var tex = new Texture2D(w, hgt, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, w, hgt), 0, 0); tex.Apply();
                 RenderTexture.active = null; cam.targetTexture = null;
                 File.WriteAllBytes($"ci-out/Jeu_{name}.png", tex.EncodeToPNG()); Object.DestroyImmediate(tex); rt.Release();
+                CI.Step("vallée : capture " + name);
             }
             try
             {
