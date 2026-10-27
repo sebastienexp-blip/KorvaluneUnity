@@ -13,6 +13,15 @@ namespace Korvalune
         public static readonly int SpeedId = Animator.StringToHash("Speed");
         public static readonly int BlockId = Animator.StringToHash("Block");
         public static readonly int AttackId = Animator.StringToHash("Attack");
+
+        /// <summary>Hors jeu (captures, aperçus d'éditeur) : pose le personnage dans sa posture de repos au lieu de la pose en T.</summary>
+        public static void EditorIdlePose(GameObject go)
+        {
+            if (Application.isPlaying || !go) return;
+            var an = go.GetComponentInChildren<Animator>();
+            if (!an || !an.runtimeAnimatorController) return;
+            foreach (var c in an.runtimeAnimatorController.animationClips) if (c && c.name == "Idle") { c.SampleAnimation(an.gameObject, 0.3f); return; }
+        }
         public static readonly int HitId = Animator.StringToHash("Hit");
         public static readonly int DodgeId = Animator.StringToHash("Dodge");
         public static readonly int DeadId = Animator.StringToHash("Dead");

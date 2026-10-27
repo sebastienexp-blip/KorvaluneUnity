@@ -62,7 +62,7 @@ namespace Korvalune.Game
         {
             if (shown) Kill(shown);
             var p = PrefabFor(classIndex, female); if (!p) return;
-            shown = Instantiate(p, stage); shown.transform.localPosition = Vector3.zero; yaw = 180;
+            shown = Instantiate(p, stage); shown.transform.localPosition = Vector3.zero; yaw = 180; shown.transform.rotation = Quaternion.Euler(0, yaw, 0); CharacterRig.EditorIdlePose(shown);
             SaveSystem.ApplyLook(shown, catalog, look, female);
         }
 

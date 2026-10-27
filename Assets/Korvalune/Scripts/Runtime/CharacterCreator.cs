@@ -79,6 +79,7 @@ namespace Korvalune
             look = current.GetComponent<CharacterAppearance>(); if (!look) look = current.AddComponent<CharacterAppearance>();
             look.female = female;
             Reapply();
+            CharacterRig.EditorIdlePose(current);
         }
 
         void Reapply()
@@ -229,6 +230,7 @@ namespace Korvalune
                     }
                     break;
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate(listContent);   // aussi hors jeu (captures)
         }
 
         static string Pretty(string id)

@@ -518,7 +518,7 @@ namespace Korvalune.EditorTools
                 cam.transform.position = new Vector3(60, 230, -300); cam.transform.LookAt(new Vector3(-20, 0, 20)); Shot("3_vue_aerienne");
                 // 4. combat au cimetière : héros au milieu des squelettes, interface visible
                 hud.enabled = true;
-                var cc = p.GetComponent<CharacterController>(); cc.enabled = false; p.position = Ground(new Vector2(-55, -84)); cc.enabled = true;
+                var cc = p.GetComponent<CharacterController>(); cc.enabled = false; p.position = Ground(new Vector2(-20, -82)); cc.enabled = true;
                 p.rotation = Quaternion.LookRotation(new Vector3(0, 0, -1));
                 Pose(game.Player.gameObject, "Attack", 0.35f);
                 cam.GetComponent<CameraRig>().Snap(); Shot("4_combat_cimetiere");
