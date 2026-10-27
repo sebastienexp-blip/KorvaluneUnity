@@ -30,6 +30,9 @@ namespace Korvalune.Game
         public static long Value(ItemSave it) => (long)Mathf.Round((8 + it.ilvl * 3f) * RarityValue[(int)it.rarity] + it.affixes.Count * 4);
         public static long SellPrice(ItemSave it) => Value(it);
         public static long BuyPrice(ItemSave it) => Value(it) * 5;
+        /// <summary>Réparation : prix selon la durabilité perdue et le niveau de l'objet.</summary>
+        public static long RepairCost(ItemSave it) => it.maxDurability <= 0 ? 0 : (long)Mathf.Ceil((it.maxDurability - it.durability) * (2 + it.ilvl * 0.5f) * (1 + 0.25f * (int)it.rarity));
+        public static bool Damaged(ItemSave it) => it.maxDurability > 0 && it.durability < it.maxDurability;
 
         // ---------------------------------------------------------------------------------------------- stocks
         /// <summary>Stock d'un marchand, renouvelé à chaque montée de niveau du héros (graine : marchand + niveau).</summary>

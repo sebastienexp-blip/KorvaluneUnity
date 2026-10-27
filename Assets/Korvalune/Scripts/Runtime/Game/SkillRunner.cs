@@ -40,15 +40,32 @@ namespace Korvalune.Game
         public bool Use(int slot)
         {
             if (slot < 0 || slot >= loadout.Length) return false;
-            int i = loadout[slot]; var d = book[i];
+            int i = loadout[slot]; var eqp = GetComponent<Equipment>();
+            float echo = 0; var d = eqp ? eqp.Modify(book[i], out echo) : book[i];   // pouvoirs légendaires et ensembles
             if (p.Health.Dead || p.Health.Stunned) return false;
             if (ranks[i] <= 0) { p.Notify?.Invoke($"« {d.name} » n'est pas encore apprise"); return false; }
             if (Time.time < readyAt[i]) return false;
             if (!p.Health.Spend(d.mana)) { p.Notify?.Invoke("Pas assez de mana"); return false; }
-            var eqp = GetComponent<Equipment>();
             readyAt[i] = Time.time + d.cooldown * (1 - 0.04f * (ranks[i] - 1)) * (1 - (eqp ? eqp.cooldownReduction : 0));
+            if (d.empowered) Vfx.Burst(Pos + Vector3.up * 1.2f, d.element, 14, 3f);         // éclat de l'élément : la compétence est transformée
             StartCoroutine(Run(d, ranks[i]));
+            if (echo > 0 && Echoable(d.kind)) StartCoroutine(Echo(d, ranks[i], echo));
             return true;
+        }
+
+        /// <summary>Types de compétences qu'un écho peut relancer (pas les déplacements ni les effets sur soi).</summary>
+        static bool Echoable(SkillKind k) => !(k == SkillKind.Leap || k == SkillKind.Dash || k == SkillKind.Teleport || k == SkillKind.Evade
+            || k == SkillKind.Buff || k == SkillKind.Shield || k == SkillKind.Heal || k == SkillKind.Whirl || k == SkillKind.Beam || k == SkillKind.Summon);
+
+        /// <summary>Écho légendaire : une copie spectrale de la compétence se déclenche juste après, à puissance réduite.</summary>
+        IEnumerator Echo(SkillDef d, int rank, float power)
+        {
+            yield return new WaitForSeconds(0.55f);
+            if (p.Health.Dead) yield break;
+            var e = d.Clone(); e.mult *= power; e.anim = ""; e.ghost = true;    // pas de seconde animation du héros : l'écho est spectral
+            var c = Vfx.Of(e.element);
+            Vfx.Shock(Pos, c.outer, 2.2f); Vfx.Burst(Pos + Vector3.up * 1.4f, e.element, 24, 4f);
+            yield return Run(e, rank);
         }
 
         float Dmg(SkillDef d, int rank) => p.attackDamage * p.damageMult * d.mult * (1 + 0.15f * (rank - 1));
@@ -83,6 +100,7 @@ namespace Korvalune.Game
         /// <summary>Joue l'animation propre au héros pour cette compétence (sinon l'attaque de base) ; renvoie l'instant d'impact.</summary>
         float Play(SkillDef d, float fallback)
         {
+            if (d.ghost) return fallback;
             if (HasState(d.anim))
             {
                 p.Anim.CrossFadeInFixedTime(d.anim, 0.08f, 0, 0f);

@@ -15,6 +15,11 @@ namespace Korvalune.Game
         /// <summary>Animation propre au héros (état « Sk_* » de son Animator) ; vide = attaque de base.</summary>
         public string anim;
         public int MaxRank => 5;
+        /// <summary>Vrai pour une copie transformée par un pouvoir légendaire ou un ensemble.</summary>
+        public bool empowered;
+        /// <summary>Copie spectrale (écho) : ne rejoue pas l'animation du héros.</summary>
+        public bool ghost;
+        public SkillDef Clone() => (SkillDef)MemberwiseClone();
     }
 
     /// <summary>Les 160 compétences des 5 classes (32 chacune), débloquées du niveau 1 au niveau 170.</summary>

@@ -55,7 +55,7 @@ namespace Korvalune.Game
         void OnPicked(ItemSave it)
         {
             inventory.Add(it);
-            Notify?.Invoke($"<color=#{ColorUtility.ToHtmlStringRGB(Loot.ColorOf(it.rarity))}>{it.name}</color> ({Loot.LabelOf(it.rarity)})");
+            Notify?.Invoke($"<color=#{ColorUtility.ToHtmlStringRGB(Loot.DisplayColor(it))}>{it.name}</color> ({(string.IsNullOrEmpty(it.set) ? Loot.LabelOf(it.rarity) : "ensemble")})");
         }
 
         /// <summary>Références et compétences (appelé par Awake ; appelable hors jeu pour les captures).</summary>

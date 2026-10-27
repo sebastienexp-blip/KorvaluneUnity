@@ -28,7 +28,7 @@ namespace Korvalune.Game
         void Build()
         {
             born = Time.time;
-            var c = Loot.ColorOf(item.rarity); int r = (int)item.rarity;
+            var c = Loot.DisplayColor(item); int r = (int)item.rarity;
             // objet : coffret de bois cerclé de métal, ferrures et serrure à la couleur de la rareté
             var box = new GameObject("Coffret").transform; box.SetParent(transform, false); box.localRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
             var wood = new Color(0.36f, 0.22f, 0.12f); var woodDark = new Color(0.22f, 0.13f, 0.07f);
@@ -101,7 +101,7 @@ namespace Korvalune.Game
             if (p && !p.Health.Dead && t > 0.6f && p.inventory.Count < Equipment.BagSize && (p.transform.position - transform.position).sqrMagnitude < pickupRadius * pickupRadius)
             {
                 Picked?.Invoke(item);
-                FX.Burst(transform.position + Vector3.up * 0.4f, Loot.ColorOf(item.rarity), 20, 3f, 0.12f, 0.5f, -0.3f);
+                FX.Burst(transform.position + Vector3.up * 0.4f, Loot.DisplayColor(item), 20, 3f, 0.12f, 0.5f, -0.3f);
                 Destroy(gameObject);
             }
         }

@@ -53,6 +53,7 @@ namespace Korvalune.Game
             }
             var side = Img(panel, "Fiche", UIStyle.Bar(), new Vector2(0, 1), new Vector2(990, -200), new Vector2(630, 700)); side.type = Image.Type.Sliced; side.color = new Color(0.06f, 0.045f, 0.035f, 0.95f);
             shopDetail = Label(side.rectTransform, "Texte", "", 23, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(22, -16), new Vector2(586, 300));
+            FitText(shopDetail, 13);
             for (int i = 0; i < 5; i++)
             {
                 int k = i;
@@ -124,9 +125,27 @@ namespace Korvalune.Game
                     new Act { label = "Vendre aussi les rares", can = () => player.inventory.Any(x => x.rarity <= Rarity.Rare), run = () => SellAll(Rarity.Rare) },
                 }
             };
+            long RepairTotal() => BagAndWorn().Where(x => Economy.Damaged(x.item)).Sum(x => Economy.RepairCost(x.item));
+            Tab Repair() => new Tab
+            {
+                name = "Réparer", multi = true,
+                list = () => BagAndWorn().Where(x => Economy.Damaged(x.item)).Select(x => { x.sub = Economy.RepairCost(x.item) + " or"; return x; }).ToList(),
+                detail = e => (e == null
+                        ? "<b>Réparation</b>\nLes objets s'usent au combat et perdent 10 % de durabilité à chaque mort. Un objet brisé ne donne plus aucun bonus."
+                        : Loot.Tooltip(e.item) + (e.worn ? "\n<color=#9fd7ff>(porté)</color>" : "") + $"\n\n<color=#e8c27a>Réparation : {Economy.RepairCost(e.item)} or</color>")
+                    + $"\n\n<color=#a08c6c>Tout réparer : {RepairTotal()} or</color>",
+                acts = e =>
+                {
+                    var l = new List<Act>();
+                    if (e != null && e.item != null)
+                        l.Add(new Act { label = $"Réparer ({Economy.RepairCost(e.item)} or)", can = () => W.gold >= Economy.RepairCost(e.item), run = () => { if (!Pay(Economy.RepairCost(e.item))) return; e.item.durability = e.item.maxDurability; Eq.Repaired(); Notify("Réparé : " + e.item.name); sel = null; multiSel.Clear(); } });
+                    l.Add(new Act { label = $"Tout réparer ({RepairTotal()} or)", can = () => RepairTotal() > 0, run = () => { RepairAll(); multiSel.Clear(); } });
+                    return l;
+                }
+            };
             switch (k)
             {
-                case MerchantKind.Armurier: list.Add(Buy()); list.Add(Sell()); break;
+                case MerchantKind.Armurier: list.Add(Buy()); list.Add(Sell()); list.Add(Repair()); break;
                 case MerchantKind.Marchand:
                     list.Add(Buy()); list.Add(Sell());
                     list.Add(new Tab
@@ -167,6 +186,7 @@ namespace Korvalune.Game
                             new Act { label = "Démonter jusqu'aux rares", can = () => player.inventory.Any(x => x.rarity <= Rarity.Rare), run = () => SalvageAll(Rarity.Rare) },
                         }
                     });
+                    list.Add(Repair());
                     break;
                 case MerchantKind.Joaillier:
                     list.Add(new Tab
@@ -329,6 +349,19 @@ namespace Korvalune.Game
             foreach (var x in l) { Economy.Salvage(W, x); player.inventory.Remove(x); }
             Notify($"{l.Count} objets démontés"); sel = null;
         }
+        /// <summary>Répare tout l'équipement porté puis le sac, tant que l'or suffit.</summary>
+        void RepairAll()
+        {
+            long spent = 0; int n = 0;
+            foreach (var e in BagAndWorn().Where(x => Economy.Damaged(x.item)))
+            {
+                long c = Economy.RepairCost(e.item); if (W.gold < c) continue;
+                W.gold -= c; spent += c; n++; e.item.durability = e.item.maxDurability;
+            }
+            Eq.Repaired(); sel = null;
+            Notify(n > 0 ? $"{n} objet(s) réparé(s) pour {spent} or" : "Pas assez d'or");
+        }
+
         void Craft(Slot s, bool legendary)
         {
             if (!Room()) return;

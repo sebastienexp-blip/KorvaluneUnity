@@ -241,7 +241,7 @@ namespace Korvalune.Game
             }
             var spr = ItemIcons.Get(it.baseName);
             if (icon) { icon.sprite = spr; icon.enabled = spr; }
-            var col = Loot.ColorOf(it.rarity);
+            var col = Loot.DisplayColor(it);
             c.frame.color = Color.Lerp(new Color(0.10f, 0.07f, 0.05f), col, 0.35f);
             c.glow.color = it.rarity >= Rarity.Legendaire ? new Color(col.r, col.g, col.b, 0.55f) : new Color(0, 0, 0, 0);   // aura comme au sol
             if (spr) { c.label.alignment = TextAnchor.LowerRight; c.label.text = $"<size=17><color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.power}</b></color></size>"; }
@@ -269,7 +269,8 @@ namespace Korvalune.Game
                 var slot = kv.Key;
                 slotCells[slot] = Cell(doll.rectTransform, "Porté_" + slot, new Vector2(0, 1), kv.Value, 120, () => { selected = eq.In(slot); selectedWorn = true; RefreshBag(); });
             }
-            bagStats = Label(panel, "Caractéristiques", "", 24, TextAnchor.UpperLeft, new Vector2(0, 0), new Vector2(40, 40), new Vector2(560, 120));
+            bagStats = Label(panel, "Caractéristiques", "", 24, TextAnchor.UpperLeft, new Vector2(0, 0), new Vector2(40, 30), new Vector2(560, 150));
+            FitText(bagStats, 14);
             // sac : 8 × 5
             for (int i = 0; i < Equipment.BagSize; i++)
             {
@@ -281,6 +282,7 @@ namespace Korvalune.Game
             // fiche de l'objet
             var tip = Img(panel, "Fiche", UIStyle.Bar(), new Vector2(0, 0), new Vector2(640, 30), new Vector2(940, 200)); tip.type = Image.Type.Sliced; tip.color = new Color(0.06f, 0.045f, 0.035f, 0.95f);
             bagTip = Label(tip.rectTransform, "Texte", "", 22, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(18, -10), new Vector2(640, 185));
+            FitText(bagTip, 13);   // fiches longues (ensembles, pouvoirs) : le texte se resserre au lieu de déborder
             Button Btn(string name, Vector2 p, System.Action a, out Text t)
             {
                 var im = Img(tip.rectTransform, name, UIStyle.Button(), new Vector2(1, 1), p, new Vector2(220, 70)); im.raycastTarget = true;
@@ -493,6 +495,13 @@ namespace Korvalune.Game
             t.font = font; t.fontSize = size; t.alignment = align; t.text = text; t.color = UIStyle.Parch; t.supportRichText = true; t.raycastTarget = false;
             t.horizontalOverflow = HorizontalWrapMode.Wrap; t.verticalOverflow = VerticalWrapMode.Overflow;
             return t;
+        }
+
+        /// <summary>Le texte rétrécit (jusqu'à minSize) pour tenir dans son cadre.</summary>
+        static void FitText(Text t, int minSize)
+        {
+            t.verticalOverflow = VerticalWrapMode.Truncate; t.resizeTextForBestFit = true;
+            t.resizeTextMinSize = minSize; t.resizeTextMaxSize = t.fontSize;
         }
 
         Image BarRow(RectTransform parent, string name, Color c, Vector2 pos, out Text label, float h = 26)
