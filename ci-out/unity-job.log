@@ -1,422 +1,407 @@
-# Journal du job d'intégration (run 40483742281)
+# Journal du job d'intégration (run 40485712010)
 ## Lignes importantes
-1169:2026-10-27T09:55:27.6138978Z [  2/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
-1690:2026-10-27T09:55:29.9785782Z Curl error 42: Callback aborted
-2270:2026-10-27T09:55:46.8706682Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
-2494:2026-10-27T09:55:46.8971832Z Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs(78,72): error CS0103: The name 'Equipment' does not exist in the current context
-2495:2026-10-27T09:55:46.8973938Z Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs(48,36): error CS0246: The type or namespace name 'Equipment' could not be found (are you missing a using directive or an assembly reference?)
-2496:2026-10-27T09:55:46.8976412Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(90,47): error CS0246: The type or namespace name 'Equipment' could not be found (are you missing a using directive or an assembly reference?)
-2497:2026-10-27T09:55:46.8978865Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(71,40): error CS0246: The type or namespace name 'Equipment' could not be found (are you missing a using directive or an assembly reference?)
-2498:2026-10-27T09:55:46.8981507Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(144,43): error CS0246: The type or namespace name 'Equipment' could not be found (are you missing a using directive or an assembly reference?)
-2499:2026-10-27T09:55:46.8984089Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(129,39): error CS0246: The type or namespace name 'Equipment' could not be found (are you missing a using directive or an assembly reference?)
-2500:2026-10-27T09:55:46.8986558Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(234,42): error CS0246: The type or namespace name 'Equipment' could not be found (are you missing a using directive or an assembly reference?)
-2501:2026-10-27T09:55:46.8988634Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(253,33): error CS0103: The name 'Equipment' does not exist in the current context
-2502:2026-10-27T09:55:46.8990719Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(281,51): error CS0246: The type or namespace name 'Equipment' could not be found (are you missing a using directive or an assembly reference?)
-2503:2026-10-27T09:55:46.8992695Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(284,91): error CS0103: The name 'Equipment' does not exist in the current context
-5234:2026-10-27T09:56:50.5189075Z Curl error 42: Callback aborted
-7006:2026-10-27T10:01:19.9524385Z Curl error 42: Callback aborted
-9114:2026-10-27T10:05:26.5168787Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-9116:2026-10-27T10:05:26.5171500Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+662:2026-10-27T10:09:26.8976294Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+664:2026-10-27T10:09:26.8977632Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+746:2026-10-27T10:09:29.6208592Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-2026-10-27T10:05:16.3984288Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.3984571Z 
-2026-10-27T10:05:16.3984775Z ## Pin2.fbx (prop, rig None)
-2026-10-27T10:05:16.3985571Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2/Pin2.fbx
-2026-10-27T10:05:16.3986339Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.3987143Z - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
-2026-10-27T10:05:16.3988105Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2.prefab
-2026-10-27T10:05:16.3989261Z - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.61×15.03×6.84, pieds à y=0.000
-2026-10-27T10:05:16.3990797Z - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.3992506Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.3993619Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.3993904Z 
-2026-10-27T10:05:16.3994095Z ## Pin2_LOD1.fbx (prop, rig None)
-2026-10-27T10:05:16.3994891Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2_LOD1/Pin2_LOD1.fbx
-2026-10-27T10:05:16.3995712Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.3996498Z - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
-2026-10-27T10:05:16.3997507Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2_LOD1.prefab
-2026-10-27T10:05:16.3998688Z - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.79×15.03×6.74, pieds à y=0.000
-2026-10-27T10:05:16.4000240Z - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4001997Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4003114Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4003397Z 
-2026-10-27T10:05:16.4003581Z ## Rocher0.fbx (prop, rig None)
-2026-10-27T10:05:16.4004335Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher0/Rocher0.fbx
-2026-10-27T10:05:16.4005287Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4006105Z - ✅ **Budget de triangles** 5440 triangles, 3242 sommets (max 60000)
-2026-10-27T10:05:16.4007101Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher0.prefab
-2026-10-27T10:05:16.4008314Z - ✅ **Échelle (hauteur)** 1.862 m (attendu 1.768934–1.955137), boîte 2.56×1.86×2.20, pieds à y=-1.039
-2026-10-27T10:05:16.4009808Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4011694Z - ✅ **Collider** mesh
-2026-10-27T10:05:16.4011964Z 
-2026-10-27T10:05:16.4012159Z ## Rocher1.fbx (prop, rig None)
-2026-10-27T10:05:16.4012914Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher1/Rocher1.fbx
-2026-10-27T10:05:16.4013730Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4014537Z - ✅ **Budget de triangles** 5600 triangles, 3383 sommets (max 60000)
-2026-10-27T10:05:16.4015765Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher1.prefab
-2026-10-27T10:05:16.4016957Z - ✅ **Échelle (hauteur)** 3.867 m (attendu 3.673435–4.060112), boîte 4.38×3.87×3.73, pieds à y=-1.770
-2026-10-27T10:05:16.4018573Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4019632Z - ✅ **Collider** mesh
-2026-10-27T10:05:16.4019887Z 
-2026-10-27T10:05:16.4020160Z ## Rocher2.fbx (prop, rig None)
-2026-10-27T10:05:16.4021215Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
-2026-10-27T10:05:16.4022019Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4022828Z - ✅ **Budget de triangles** 7204 triangles, 4471 sommets (max 60000)
-2026-10-27T10:05:16.4023817Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
-2026-10-27T10:05:16.4025015Z - ✅ **Échelle (hauteur)** 5.552 m (attendu 5.274186–5.829364), boîte 7.00×5.55×7.49, pieds à y=-2.559
-2026-10-27T10:05:16.4026512Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4027576Z - ✅ **Collider** mesh
-2026-10-27T10:05:16.4027841Z 
-2026-10-27T10:05:16.4028060Z ## BaseFemale.fbx (character, rig Human)
-2026-10-27T10:05:16.4028949Z - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale.fbx
-2026-10-27T10:05:16.4029830Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4030642Z - ✅ **Budget de triangles** 52986 triangles, 31879 sommets (max 140000)
-2026-10-27T10:05:16.4041728Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/BaseFemale.prefab
-2026-10-27T10:05:16.4042939Z - ✅ **Échelle (hauteur)** 1.874 m (attendu 1.6–1.98), boîte 1.05×1.87×0.86, pieds à y=-0.022
-2026-10-27T10:05:16.4043914Z - ✅ **Orientation gauche/droite** LeftHand.x = -0.211
-2026-10-27T10:05:16.4044780Z - ✅ **Orientation avant (+Z)** LeftToes.z=0.111 > LeftFoot.z=-0.023
-2026-10-27T10:05:16.4045569Z - ✅ **Point d'attache Socket_Weapon_R** 
-2026-10-27T10:05:16.4046238Z - ✅ **Point d'attache Socket_Shield_L** 
-2026-10-27T10:05:16.4046874Z - ✅ **Point d'attache Socket_Back** 
-2026-10-27T10:05:16.4048052Z - ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4049753Z - ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4053804Z - ✅ **Matériau BF_Eye** shader Universal Render Pipeline/Lit, base BF_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4055483Z - ✅ **Matériau BF_Hair** shader Universal Render Pipeline/Lit, base BF_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4057177Z - ✅ **Matériau BF_Brow** shader Universal Render Pipeline/Lit, base BF_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4058858Z - ✅ **Matériau BF_Lash** shader Universal Render Pipeline/Lit, base BF_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4060881Z - ✅ **Matériau BF_Teeth** shader Universal Render Pipeline/Lit, base BF_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4062619Z - ✅ **Matériau BF_Tongue** shader Universal Render Pipeline/Lit, base BF_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4064376Z - ✅ **Matériau BF_Under** shader Universal Render Pipeline/Lit, base BF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4066096Z - ✅ **Matériau BF_Under** shader Universal Render Pipeline/Lit, base BF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4067186Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4068251Z - ✅ **Équipement détachable** 3 pièce(s) : Anatomie (masqué), SousVetementBas (visible), SousVetementHaut (visible)
-2026-10-27T10:05:16.4069382Z - ✅ **Avatar** valide=True, humain=True, 52 os mappés
-2026-10-27T10:05:16.4070207Z - ✅ **Os humanoïdes obligatoires** tous mappés
-2026-10-27T10:05:16.4070847Z   - doigts mappés : 30/30
-2026-10-27T10:05:16.4071444Z - ✅ **Contrôleur d'animation** BaseFemale
-2026-10-27T10:05:16.4072387Z - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.053 m, événements 0
-2026-10-27T10:05:16.4073709Z - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-2026-10-27T10:05:16.4074889Z - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-2026-10-27T10:05:16.4076106Z - ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.137 m, événements 1
-2026-10-27T10:05:16.4077341Z - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.347 m, événements 0
-2026-10-27T10:05:16.4078481Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
-2026-10-27T10:05:16.4079691Z - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
-2026-10-27T10:05:16.4081025Z - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
-2026-10-27T10:05:16.4081671Z 
-2026-10-27T10:05:16.4081880Z ## BaseMale.fbx (character, rig Human)
-2026-10-27T10:05:16.4082716Z - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseMale/BaseMale.fbx
-2026-10-27T10:05:16.4083596Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4084417Z - ✅ **Budget de triangles** 46728 triangles, 26619 sommets (max 140000)
-2026-10-27T10:05:16.4085487Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/BaseMale.prefab
-2026-10-27T10:05:16.4086665Z - ✅ **Échelle (hauteur)** 1.875 m (attendu 1.6–1.98), boîte 1.04×1.87×0.84, pieds à y=-0.026
-2026-10-27T10:05:16.4087627Z - ✅ **Orientation gauche/droite** LeftHand.x = -0.211
-2026-10-27T10:05:16.4088494Z - ✅ **Orientation avant (+Z)** LeftToes.z=0.111 > LeftFoot.z=-0.023
-2026-10-27T10:05:16.4089279Z - ✅ **Point d'attache Socket_Weapon_R** 
-2026-10-27T10:05:16.4089924Z - ✅ **Point d'attache Socket_Shield_L** 
-2026-10-27T10:05:16.4090637Z - ✅ **Point d'attache Socket_Back** 
-2026-10-27T10:05:16.4091837Z - ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4093514Z - ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4095191Z - ✅ **Matériau BM_Eye** shader Universal Render Pipeline/Lit, base BM_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4096849Z - ✅ **Matériau BM_Hair** shader Universal Render Pipeline/Lit, base BM_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4098536Z - ✅ **Matériau BM_Brow** shader Universal Render Pipeline/Lit, base BM_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4100327Z - ✅ **Matériau BM_Lash** shader Universal Render Pipeline/Lit, base BM_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4102147Z - ✅ **Matériau BM_Teeth** shader Universal Render Pipeline/Lit, base BM_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4103885Z - ✅ **Matériau BM_Tongue** shader Universal Render Pipeline/Lit, base BM_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4105624Z - ✅ **Matériau BM_Under** shader Universal Render Pipeline/Lit, base BM_Under_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4106736Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4107584Z - ✅ **Équipement détachable** 2 pièce(s) : Anatomie (masqué), SousVetementBas (visible)
-2026-10-27T10:05:16.4108559Z - ✅ **Avatar** valide=True, humain=True, 52 os mappés
-2026-10-27T10:05:16.4109278Z - ✅ **Os humanoïdes obligatoires** tous mappés
-2026-10-27T10:05:16.4109922Z   - doigts mappés : 30/30
-2026-10-27T10:05:16.4110552Z - ✅ **Contrôleur d'animation** BaseMale
-2026-10-27T10:05:16.4111534Z - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.053 m, événements 0
-2026-10-27T10:05:16.4112763Z - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-2026-10-27T10:05:16.4113950Z - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-2026-10-27T10:05:16.4115174Z - ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.137 m, événements 1
-2026-10-27T10:05:16.4116507Z - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.347 m, événements 0
-2026-10-27T10:05:16.4117714Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
-2026-10-27T10:05:16.4118923Z - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
-2026-10-27T10:05:16.4120241Z - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
-2026-10-27T10:05:16.4120890Z 
-2026-10-27T10:05:16.4121124Z ## AraigneeGeante.fbx (character, rig Generic)
-2026-10-27T10:05:16.4122077Z - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
-2026-10-27T10:05:16.4123013Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4123846Z - ✅ **Budget de triangles** 135168 triangles, 86500 sommets (max 200000)
-2026-10-27T10:05:16.4125329Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/AraigneeGeante.prefab
-2026-10-27T10:05:16.4126545Z - ✅ **Échelle (hauteur)** 1.269 m (attendu 0.95–1.4), boîte 2.96×1.27×2.67, pieds à y=0.005
-2026-10-27T10:05:16.4127909Z - ✅ **Orientation gauche/droite** Leg0_Coxa_L.x = -0.140
-2026-10-27T10:05:16.4128751Z - ✅ **Orientation avant (+Z)** Thorax.z=0.300 > Abdomen.z=0.020
-2026-10-27T10:05:16.4130198Z - ✅ **Matériau SP_Shell** shader Universal Render Pipeline/Lit, base SP_Shell_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4131922Z - ✅ **Matériau SP_Chitin** shader Universal Render Pipeline/Lit, base SP_Chitin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4133641Z - ✅ **Matériau SP_Hair** shader Universal Render Pipeline/Lit, base SP_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4135333Z - ✅ **Matériau SP_Eye** shader Universal Render Pipeline/Lit, base SP_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4137013Z - ✅ **Matériau SP_Mouth** shader Universal Render Pipeline/Lit, base SP_Mouth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4138728Z - ✅ **Matériau SP_Fang** shader Universal Render Pipeline/Lit, base SP_Fang_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4139796Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4140490Z - ✅ **Avatar** valide=True, humain=False, 0 os mappés
-2026-10-27T10:05:16.4141200Z - ✅ **Contrôleur d'animation** AraigneeGeante
-2026-10-27T10:05:16.4142183Z - ✅ **Clip Idle** 3.00 s, boucle=True, humanoïde=False, déplacement max 0.035 m, événements 0
-2026-10-27T10:05:16.4143392Z - ✅ **Clip Walk** 1.10 s, boucle=True, humanoïde=False, déplacement max 0.378 m, événements 2
-2026-10-27T10:05:16.4144600Z - ✅ **Clip Run** 0.53 s, boucle=True, humanoïde=False, déplacement max 0.935 m, événements 2
-2026-10-27T10:05:16.4145993Z - ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.978 m, événements 1
-2026-10-27T10:05:16.4147238Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.287 m, événements 0
-2026-10-27T10:05:16.4148501Z - ✅ **Clip Death** 1.20 s, boucle=False, humanoïde=False, déplacement max 1.394 m, événements 0
-2026-10-27T10:05:16.4149152Z 
-2026-10-27T10:05:16.4149398Z ## ChevalierMaudit.fbx (character, rig Human)
-2026-10-27T10:05:16.4150455Z - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/ChevalierMaudit/ChevalierMaudit.fbx
-2026-10-27T10:05:16.4151388Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4152224Z - ✅ **Budget de triangles** 113390 triangles, 67689 sommets (max 200000)
-2026-10-27T10:05:16.4153384Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/ChevalierMaudit.prefab
-2026-10-27T10:05:16.4154601Z - ✅ **Échelle (hauteur)** 2.040 m (attendu 1.8–2.15), boîte 1.90×2.04×0.55, pieds à y=-0.025
-2026-10-27T10:05:16.4155575Z - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
-2026-10-27T10:05:16.4156426Z - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
-2026-10-27T10:05:16.4157206Z - ✅ **Point d'attache Socket_Weapon_R** 
-2026-10-27T10:05:16.4157950Z - ✅ **Point d'attache Socket_Shield_L** 
-2026-10-27T10:05:16.4158866Z - ✅ **Équipement posé sur Socket_Weapon_R** ../../Weapons/CursedBlade/CursedBlade.fbx
-2026-10-27T10:05:16.4160123Z - ✅ **Équipement posé sur Socket_Shield_L** ../../Weapons/CursedShield/CursedShield.fbx
-2026-10-27T10:05:16.4161668Z - ✅ **Matériau CK_Gambeson** shader Universal Render Pipeline/Lit, base CK_Gambeson_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4163407Z - ✅ **Matériau CK_Mail** shader Universal Render Pipeline/Lit, base CK_Mail_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4165100Z - ✅ **Matériau CK_Steel** shader Universal Render Pipeline/Lit, base CK_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4166855Z - ✅ **Matériau CK_Leather** shader Universal Render Pipeline/Lit, base CK_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4168566Z - ✅ **Matériau CK_Trim** shader Universal Render Pipeline/Lit, base CK_Trim_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4170396Z - ✅ **Matériau CK_Void** shader Universal Render Pipeline/Lit, base CK_Void_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4172052Z - ✅ **Matériau CK_Eye** shader Universal Render Pipeline/Lit, base CK_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4173732Z - ✅ **Matériau CK_Cloth** shader Universal Render Pipeline/Lit, base CK_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4174816Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4175438Z - ✅ **Avatar** valide=True, humain=True, 52 os mappés
-2026-10-27T10:05:16.4176201Z - ✅ **Os humanoïdes obligatoires** tous mappés
-2026-10-27T10:05:16.4176846Z   - doigts mappés : 30/30
-2026-10-27T10:05:16.4177455Z - ✅ **Contrôleur d'animation** ChevalierMaudit
-2026-10-27T10:05:16.4178427Z - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
-2026-10-27T10:05:16.4179601Z - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-2026-10-27T10:05:16.4180874Z - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-2026-10-27T10:05:16.4182093Z - ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
-2026-10-27T10:05:16.4183326Z - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
-2026-10-27T10:05:16.4184539Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
-2026-10-27T10:05:16.4185748Z - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
-2026-10-27T10:05:16.4186980Z - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
-2026-10-27T10:05:16.4187758Z 
-2026-10-27T10:05:16.4187984Z ## DemonBrute.fbx (character, rig Human)
-2026-10-27T10:05:16.4188856Z - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/DemonBrute/DemonBrute.fbx
-2026-10-27T10:05:16.4189751Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4190657Z - ✅ **Budget de triangles** 86632 triangles, 48081 sommets (max 180000)
-2026-10-27T10:05:16.4191887Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/DemonBrute.prefab
-2026-10-27T10:05:16.4193251Z - ✅ **Échelle (hauteur)** 2.996 m (attendu 2.6–3.1), boîte 2.97×3.00×0.72, pieds à y=-0.046
-2026-10-27T10:05:16.4194213Z - ✅ **Orientation gauche/droite** LeftHand.x = -1.103
-2026-10-27T10:05:16.4195066Z - ✅ **Orientation avant (+Z)** LeftToes.z=0.168 > LeftFoot.z=-0.039
-2026-10-27T10:05:16.4195881Z - ✅ **Point d'attache Socket_Weapon_R** 
-2026-10-27T10:05:16.4196814Z - ✅ **Équipement posé sur Socket_Weapon_R** ../../Weapons/LavaCleaver/LavaCleaver.fbx
-2026-10-27T10:05:16.4198294Z - ✅ **Matériau DB_Skin** shader Universal Render Pipeline/Lit, base DB_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4199969Z - ✅ **Matériau DB_Horn** shader Universal Render Pipeline/Lit, base DB_Horn_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4201899Z - ✅ **Matériau DB_Eye** shader Universal Render Pipeline/Lit, base DB_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4203581Z - ✅ **Matériau DB_Tooth** shader Universal Render Pipeline/Lit, base DB_Tooth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4205272Z - ✅ **Matériau DB_Claw** shader Universal Render Pipeline/Lit, base DB_Claw_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4207014Z - ✅ **Matériau DB_Leather** shader Universal Render Pipeline/Lit, base DB_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4208734Z - ✅ **Matériau DB_Iron** shader Universal Render Pipeline/Lit, base DB_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4209828Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4210509Z - ✅ **Avatar** valide=True, humain=True, 52 os mappés
-2026-10-27T10:05:16.4211239Z - ✅ **Os humanoïdes obligatoires** tous mappés
-2026-10-27T10:05:16.4211943Z   - doigts mappés : 30/30
-2026-10-27T10:05:16.4212506Z - ✅ **Contrôleur d'animation** DemonBrute
-2026-10-27T10:05:16.4213458Z - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 1.441 m, événements 0
-2026-10-27T10:05:16.4214655Z - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.797 m, événements 2
-2026-10-27T10:05:16.4215852Z - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 1.050 m, événements 2
-2026-10-27T10:05:16.4217069Z - ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.726 m, événements 1
-2026-10-27T10:05:16.4218310Z - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.528 m, événements 0
-2026-10-27T10:05:16.4219620Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.715 m, événements 0
-2026-10-27T10:05:16.4220926Z - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 2.714 m, événements 0
-2026-10-27T10:05:16.4222176Z - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 2.911 m, événements 1
-2026-10-27T10:05:16.4222827Z 
-2026-10-27T10:05:16.4223057Z ## LoupTenebres.fbx (character, rig Generic)
-2026-10-27T10:05:16.4223977Z - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/LoupTenebres/LoupTenebres.fbx
-2026-10-27T10:05:16.4224869Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4225724Z - ✅ **Budget de triangles** 112760 triangles, 106431 sommets (max 200000)
-2026-10-27T10:05:16.4226811Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/LoupTenebres.prefab
-2026-10-27T10:05:16.4228006Z - ✅ **Échelle (hauteur)** 1.404 m (attendu 1.3–1.65), boîte 0.71×1.40×2.27, pieds à y=-0.002
-2026-10-27T10:05:16.4228936Z - ✅ **Orientation gauche/droite** Ear_L.x = -0.065
-2026-10-27T10:05:16.4229748Z - ✅ **Orientation avant (+Z)** Head.z=0.710 > Hips.z=-0.450
-2026-10-27T10:05:16.4231104Z - ✅ **Matériau WF_Skin** shader Universal Render Pipeline/Lit, base WF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4232911Z - ✅ **Matériau WF_Fur** shader Universal Render Pipeline/Lit, base WF_Fur_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4234584Z - ✅ **Matériau WF_Mane** shader Universal Render Pipeline/Lit, base WF_Mane_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4236238Z - ✅ **Matériau WF_Eye** shader Universal Render Pipeline/Lit, base WF_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4237899Z - ✅ **Matériau WF_Nose** shader Universal Render Pipeline/Lit, base WF_Nose_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4239554Z - ✅ **Matériau WF_Gum** shader Universal Render Pipeline/Lit, base WF_Gum_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4241308Z - ✅ **Matériau WF_Bone** shader Universal Render Pipeline/Lit, base WF_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4242974Z - ✅ **Matériau WF_Claw** shader Universal Render Pipeline/Lit, base WF_Claw_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4244062Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4244664Z - ✅ **Avatar** valide=True, humain=False, 0 os mappés
-2026-10-27T10:05:16.4245378Z - ✅ **Contrôleur d'animation** LoupTenebres
-2026-10-27T10:05:16.4246343Z - ✅ **Clip Idle** 3.00 s, boucle=True, humanoïde=False, déplacement max 0.275 m, événements 0
-2026-10-27T10:05:16.4247561Z - ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=False, déplacement max 0.415 m, événements 2
-2026-10-27T10:05:16.4248774Z - ✅ **Clip Run** 0.50 s, boucle=True, humanoïde=False, déplacement max 0.666 m, événements 2
-2026-10-27T10:05:16.4249999Z - ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=False, déplacement max 1.436 m, événements 1
-2026-10-27T10:05:16.4251345Z - ✅ **Clip Howl** 2.80 s, boucle=False, humanoïde=False, déplacement max 0.653 m, événements 0
-2026-10-27T10:05:16.4252560Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.222 m, événements 0
-2026-10-27T10:05:16.4253809Z - ✅ **Clip Death** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.612 m, événements 0
-2026-10-27T10:05:16.4254461Z 
-2026-10-27T10:05:16.4254698Z ## SorcierCorrompu.fbx (character, rig Human)
-2026-10-27T10:05:16.4255675Z - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/SorcierCorrompu/SorcierCorrompu.fbx
-2026-10-27T10:05:16.4256625Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4257464Z - ✅ **Budget de triangles** 187550 triangles, 108163 sommets (max 200000)
-2026-10-27T10:05:16.4258576Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/SorcierCorrompu.prefab
-2026-10-27T10:05:16.4259784Z - ✅ **Échelle (hauteur)** 1.956 m (attendu 1.7–2.05), boîte 1.89×1.96×0.63, pieds à y=-0.005
-2026-10-27T10:05:16.4260823Z - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
-2026-10-27T10:05:16.4261789Z - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
-2026-10-27T10:05:16.4262580Z - ✅ **Point d'attache Socket_Weapon_R** 
-2026-10-27T10:05:16.4263524Z - ✅ **Équipement posé sur Socket_Weapon_R** ../../Weapons/CorruptStaff/CorruptStaff.fbx
-2026-10-27T10:05:16.4265071Z - ✅ **Matériau SC_Leather** shader Universal Render Pipeline/Lit, base SC_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4266802Z - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4268494Z - ✅ **Matériau SC_Metal** shader Universal Render Pipeline/Lit, base SC_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4270286Z - ✅ **Matériau SC_Metal** shader Universal Render Pipeline/Lit, base SC_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4271980Z - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4273690Z - ✅ **Matériau SC_Cloak** shader Universal Render Pipeline/Lit, base SC_Cloak_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4275474Z - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4277171Z - ✅ **Matériau SC_Cloak** shader Universal Render Pipeline/Lit, base SC_Cloak_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4278866Z - ✅ **Matériau SC_Dark** shader Universal Render Pipeline/Lit, base SC_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4280672Z - ✅ **Matériau SC_Leather** shader Universal Render Pipeline/Lit, base SC_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4282420Z - ✅ **Matériau SC_Metal** shader Universal Render Pipeline/Lit, base SC_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4284118Z - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4285849Z - ✅ **Matériau SC_Crystal** shader Universal Render Pipeline/Lit, base SC_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4287600Z - ✅ **Matériau SC_Metal** shader Universal Render Pipeline/Lit, base SC_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4289284Z - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4291083Z - ✅ **Matériau SC_Leather** shader Universal Render Pipeline/Lit, base SC_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4292806Z - ✅ **Matériau SC_Cloth** shader Universal Render Pipeline/Lit, base SC_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4294491Z - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4296212Z - ✅ **Matériau SC_Sleeve** shader Universal Render Pipeline/Lit, base SC_Sleeve_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4297950Z - ✅ **Matériau SC_Sleeve** shader Universal Render Pipeline/Lit, base SC_Sleeve_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4299672Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4301413Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4303086Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4304755Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4306427Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4308208Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4309884Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4311693Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4313401Z - ✅ **Matériau SC_Skin** shader Universal Render Pipeline/Lit, base SC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4315107Z - ✅ **Matériau SC_Robe** shader Universal Render Pipeline/Lit, base SC_Robe_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4316803Z - ✅ **Matériau SC_Gold** shader Universal Render Pipeline/Lit, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4318841Z - ✅ **Matériau SC_Metal** shader Universal Render Pipeline/Lit, base SC_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4320771Z - ✅ **Matériau SC_Crystal** shader Universal Render Pipeline/Lit, base SC_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4322597Z - ✅ **Matériau SC_Eye** shader Universal Render Pipeline/Lit, base SC_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4324302Z - ✅ **Matériau SC_Brow** shader Universal Render Pipeline/Lit, base SC_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4325971Z - ✅ **Matériau SC_Lash** shader Universal Render Pipeline/Lit, base SC_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4327672Z - ✅ **Matériau SC_Teeth** shader Universal Render Pipeline/Lit, base SC_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4329424Z - ✅ **Matériau SC_Tongue** shader Universal Render Pipeline/Lit, base SC_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4330643Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4334248Z - ✅ **Équipement détachable** 20 pièce(s) : Bottes (visible), Brassards (visible), Cape (visible), Capuche (visible), Ceinture (visible), Epaulieres (visible), Gants (visible), Jupe (visible), Manches (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (visible), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqu
-2026-10-27T10:05:16.4337586Z - ✅ **Avatar** valide=True, humain=True, 52 os mappés
-2026-10-27T10:05:16.4338353Z - ✅ **Os humanoïdes obligatoires** tous mappés
-2026-10-27T10:05:16.4339013Z   - doigts mappés : 30/30
-2026-10-27T10:05:16.4339609Z - ✅ **Contrôleur d'animation** SorcierCorrompu
-2026-10-27T10:05:16.4340675Z - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.934 m, événements 0
-2026-10-27T10:05:16.4341872Z - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-2026-10-27T10:05:16.4343113Z - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-2026-10-27T10:05:16.4344334Z - ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.838 m, événements 1
-2026-10-27T10:05:16.4345589Z - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.468 m, événements 0
-2026-10-27T10:05:16.4346790Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.480 m, événements 0
-2026-10-27T10:05:16.4348010Z - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
-2026-10-27T10:05:16.4349268Z - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
-2026-10-27T10:05:16.4349916Z 
-2026-10-27T10:05:16.4350235Z ## SqueletteGuerrier.fbx (character, rig Human)
-2026-10-27T10:05:16.4351270Z - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/SqueletteGuerrier/SqueletteGuerrier.fbx
-2026-10-27T10:05:16.4352237Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4353224Z - ✅ **Budget de triangles** 114438 triangles, 73217 sommets (max 200000)
-2026-10-27T10:05:16.4354363Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/SqueletteGuerrier.prefab
-2026-10-27T10:05:16.4355613Z - ✅ **Échelle (hauteur)** 1.812 m (attendu 1.7–1.98), boîte 1.89×1.81×0.38, pieds à y=0.008
-2026-10-27T10:05:16.4356563Z - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
-2026-10-27T10:05:16.4357458Z - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
-2026-10-27T10:05:16.4358237Z - ✅ **Point d'attache Socket_Weapon_R** 
-2026-10-27T10:05:16.4358888Z - ✅ **Point d'attache Socket_Shield_L** 
-2026-10-27T10:05:16.4359837Z - ✅ **Équipement posé sur Socket_Weapon_R** ../../Weapons/RustedSword/RustedSword.fbx
-2026-10-27T10:05:16.4361126Z - ✅ **Équipement posé sur Socket_Shield_L** ../../Weapons/RustedShield/RustedShield.fbx
-2026-10-27T10:05:16.4362606Z - ✅ **Matériau SK_Bone** shader Universal Render Pipeline/Lit, base SK_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4364299Z - ✅ **Matériau SK_Dark** shader Universal Render Pipeline/Lit, base SK_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4366116Z - ✅ **Matériau SK_Cartilage** shader Universal Render Pipeline/Lit, base SK_Cartilage_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4367999Z - ✅ **Matériau SK_Rust** shader Universal Render Pipeline/Lit, base SK_Rust_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4369721Z - ✅ **Matériau SK_Bronze** shader Universal Render Pipeline/Lit, base SK_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4371543Z - ✅ **Matériau SK_Cloth** shader Universal Render Pipeline/Lit, base SK_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4373292Z - ✅ **Matériau SK_Leather** shader Universal Render Pipeline/Lit, base SK_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4374449Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4375077Z - ✅ **Avatar** valide=True, humain=True, 52 os mappés
-2026-10-27T10:05:16.4375843Z - ✅ **Os humanoïdes obligatoires** tous mappés
-2026-10-27T10:05:16.4376469Z   - doigts mappés : 30/30
-2026-10-27T10:05:16.4377091Z - ✅ **Contrôleur d'animation** SqueletteGuerrier
-2026-10-27T10:05:16.4378091Z - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
-2026-10-27T10:05:16.4379309Z - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-2026-10-27T10:05:16.4380583Z - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-2026-10-27T10:05:16.4381811Z - ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
-2026-10-27T10:05:16.4383032Z - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
-2026-10-27T10:05:16.4384273Z - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
-2026-10-27T10:05:16.4385512Z - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
-2026-10-27T10:05:16.4386745Z - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
-2026-10-27T10:05:16.4387411Z 
-2026-10-27T10:05:16.4387627Z ## ElyraNoctis_F.fbx (character, rig Human)
-2026-10-27T10:05:16.4388541Z - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
-2026-10-27T10:05:16.4389438Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T10:05:16.4390341Z - ✅ **Budget de triangles** 156582 triangles, 109189 sommets (max 220000)
-2026-10-27T10:05:16.4391457Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_F.prefab
-2026-10-27T10:05:16.4392697Z - ✅ **Échelle (hauteur)** 1.891 m (attendu 1.6–1.98), boîte 1.89×1.89×0.59, pieds à y=-0.010
-2026-10-27T10:05:16.4393659Z - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
-2026-10-27T10:05:16.4394511Z - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
-2026-10-27T10:05:16.4395408Z - ✅ **Point d'attache Socket_Weapon_R** 
-2026-10-27T10:05:16.4396067Z - ✅ **Point d'attache Socket_Shield_L** 
-2026-10-27T10:05:16.4396695Z - ✅ **Point d'attache Socket_Back** 
-2026-10-27T10:05:16.4397590Z - ✅ **Équipement posé sur Socket_Weapon_R** ../../Weapons/VoidStaff/VoidStaff.fbx
-2026-10-27T10:05:16.4399044Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4400898Z - ✅ **Matériau EL_Leather** shader Universal Render Pipeline/Lit, base EL_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4402620Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4404313Z - ✅ **Matériau EL_Metal** shader Universal Render Pipeline/Lit, base EL_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4406027Z - ✅ **Matériau EL_Metal** shader Universal Render Pipeline/Lit, base EL_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4407725Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4409522Z - ✅ **Matériau EL_Cloak** shader Universal Render Pipeline/Lit, base EL_Cloak_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4411335Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4413069Z - ✅ **Matériau EL_Leather** shader Universal Render Pipeline/Lit, base EL_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4414803Z - ✅ **Matériau EL_Metal** shader Universal Render Pipeline/Lit, base EL_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4416494Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4418380Z - ✅ **Matériau EL_Crystal** shader Universal Render Pipeline/Lit, base EL_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4420118Z - ✅ **Matériau ELF_Hair** shader Universal Render Pipeline/Lit, base ELF_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4421867Z - ✅ **Matériau EL_Corset** shader Universal Render Pipeline/Lit, base EL_Corset_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4423576Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4425286Z - ✅ **Matériau EL_Corset** shader Universal Render Pipeline/Lit, base EL_Corset_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4426989Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4428664Z - ✅ **Matériau EL_Dark** shader Universal Render Pipeline/Lit, base EL_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4430439Z - ✅ **Matériau ELF_Eye** shader Universal Render Pipeline/Lit, base ELF_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4432133Z - ✅ **Matériau ELF_Brow** shader Universal Render Pipeline/Lit, base ELF_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4433858Z - ✅ **Matériau ELF_Lash** shader Universal Render Pipeline/Lit, base ELF_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4435577Z - ✅ **Matériau ELF_Teeth** shader Universal Render Pipeline/Lit, base ELF_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4437347Z - ✅ **Matériau ELF_Tongue** shader Universal Render Pipeline/Lit, base ELF_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4439092Z - ✅ **Matériau EL_Metal** shader Universal Render Pipeline/Lit, base EL_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4440988Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4442720Z - ✅ **Matériau EL_Leather** shader Universal Render Pipeline/Lit, base EL_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4444466Z - ✅ **Matériau EL_Cloth** shader Universal Render Pipeline/Lit, base EL_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4446160Z - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4447861Z - ✅ **Matériau EL_Sleeve** shader Universal Render Pipeline/Lit, base EL_Sleeve_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4449585Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4451369Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4453087Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4454799Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4456612Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4458323Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4460109Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4461830Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4463542Z - ✅ **Matériau ELF_Skin** shader Universal Render Pipeline/Lit, base ELF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4465285Z - ✅ **Matériau ELF_Under** shader Universal Render Pipeline/Lit, base ELF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4467027Z - ✅ **Matériau ELF_Under** shader Universal Render Pipeline/Lit, base ELF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T10:05:16.4468137Z - ✅ **Collider** capsule
-2026-10-27T10:05:16.4472968Z - ✅ **Équipement détachable** 23 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Corset (visible), Epaulieres (visible), Gants (visible), Jupe (visible), Manches (visible), Peau_AvantBras (masqué), Peau_Bassin (visible), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Ja
-2026-10-27T10:05:16.4478105Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '759a01f56f0c30c090388fdd5320648c') in 0.000980649 seconds
-2026-10-27T10:05:16.4480028Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T10:05:16.4480948Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T10:05:16.4482238Z Asset Pipeline Refresh (id=6f7a8ff9ae94dfb39bc87a6b02a61756): Total: 0.025 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-2026-10-27T10:05:16.4483623Z Unloading 2068 unused Assets / (280.2 MB). Loaded Objects now: 6453.
-2026-10-27T10:05:16.4484394Z Memory consumption went from 3.12 GB to 2.85 GB.
-2026-10-27T10:05:16.4485584Z Total: 17.643072 ms (FindLiveObjects: 0.449648 ms CreateObjectMapping: 0.232996 ms MarkObjects: 11.324399 ms  DeleteObjects: 5.635193 ms)
-2026-10-27T10:05:16.4486549Z 
-2026-10-27T10:05:16.7265121Z [Physics::Module] Cleanup current backned.
-2026-10-27T10:05:16.7265803Z [Physics::Module] Id: 0xf2b8ea05
-2026-10-27T10:05:16.7268238Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
-2026-10-27T10:05:16.7268797Z [Licensing::IpcConnector] License Client channel disconnected successfully.
-2026-10-27T10:05:16.7319424Z AcceleratorClientConnectionCallback - disconnected - :0
-2026-10-27T10:05:16.7390866Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T10:05:16.7391290Z       Application is shutting down...
+2026-10-27T10:09:02.3832115Z deleted: sha256:986b9bc056a95591724d198db403c3ff79ebc2a9eb678370eb849225e6cb6e14
+2026-10-27T10:09:02.3832415Z deleted: sha256:845473bd2c72941c1de8a0bbaf9cf9bccded3a177053f2e4ebb61b998153adba
+2026-10-27T10:09:02.3832717Z deleted: sha256:fe1381a944465ca08c94076501efb2c5af02880c370a665c2d67911a016c51ee
+2026-10-27T10:09:02.3833012Z deleted: sha256:1cda3198dc33d301b8b112f26e5628bc90e5e5c26d79ea0a6a6174fd918eac23
+2026-10-27T10:09:02.3833308Z deleted: sha256:ae4fd9037b501dec5cfb05e1f83ca04c636133e998d89d520411b36a947a5e7d
+2026-10-27T10:09:02.3833605Z deleted: sha256:9fecf9037d5d4b425a7db95b9e9db896f2c786bf517be6accef04d9b1858fcf4
+2026-10-27T10:09:02.3833906Z deleted: sha256:74fbe05a3fb74eabc46606fb21bfcdd547ca31892af3577c3388abee99709ee0
+2026-10-27T10:09:02.3834211Z deleted: sha256:d4cfb75713e7cfcd135cc71b3c80caadc432d96f2ddd0a2ea8475e117893399b
+2026-10-27T10:09:02.3834649Z deleted: sha256:9c745b5bd5a166422f81bb165ae5b0d11faf4a7d12384cd8a33d866e56bf2e5d
+2026-10-27T10:09:02.3834967Z deleted: sha256:7bef4835a0bbba6744a4c9b2708597845518261ee6db084bae1f40dcffecca97
+2026-10-27T10:09:02.3835373Z deleted: sha256:f49d3aa361fffa2b2e94a63d2b3e6c2673485c02a7b18dbcfb4d164a12cad5cc
+2026-10-27T10:09:02.3835802Z deleted: sha256:1fc800ab7c27044f68113e1c7f474000aa447219dbd77479447ab6ad1b86b2d7
+2026-10-27T10:09:02.3836220Z deleted: sha256:9c1e16c1243231b6b2b3f73fb3dadefc3d37c0c7c539e99409b3b1f5d41ee184
+2026-10-27T10:09:02.3836657Z deleted: sha256:ff9b85e5f9ce82bac83d2f8e3097d4b731eb1c268226154012db9a54f9da2cb2
+2026-10-27T10:09:02.3837139Z deleted: sha256:a8aabe94b66ee52be2cc5a04366a49ff3fc40c2945530afcced3919350ddfdf5
+2026-10-27T10:09:02.3837720Z deleted: sha256:74d97c428c51a828f9051a7a40a53ff1fc99e54fc30323ce36760701b0b7f711
+2026-10-27T10:09:02.3837970Z untagged: ghcr.io/github/github-mcp-server:latest
+2026-10-27T10:09:02.3838264Z untagged: ghcr.io/github/github-mcp-server@sha256:ffced0d76e77428532a2ced185516992d77fd146d69eec2f244e6237d1a97796
+2026-10-27T10:09:02.3838610Z deleted: sha256:9875fef5aa1fd407321d23d9a47d78f1515bfd794bcae2ce8fb1957627849146
+2026-10-27T10:09:02.3838891Z deleted: sha256:ecd8dd113ce637aabb894a9b03943b5c115c1804a2795f2f8ec102d01d4b9ec4
+2026-10-27T10:09:02.3839168Z deleted: sha256:1e1cabb4a65e50fb84bc4612619b0025e4a1d06d5e38699d1e67e5a8e4f333db
+2026-10-27T10:09:02.3839444Z deleted: sha256:86766d6a6e947f4a599c6e23307470f8f75732fc3d143ec1f3260e4406202bee
+2026-10-27T10:09:02.3839739Z deleted: sha256:2944471a0bbdfb4985f84f8d287edb5cd982d1060589e707a6cb0cbe82cdfe89
+2026-10-27T10:09:02.3840021Z deleted: sha256:5e555e7975e2202f21fb93d460d701a340ade876f3afccb70d702f1dc5ab80db
+2026-10-27T10:09:02.3840295Z deleted: sha256:2a080d78a1c5e3615170178f1c6f4c726340da9d5ff2926cb66e2fd97851da9d
+2026-10-27T10:09:02.3840748Z deleted: sha256:af4a114029fbf94a3cf75c5cfaa5e947019cd6faae4b800c9306ac9079363def
+2026-10-27T10:09:02.3841197Z deleted: sha256:c7b875d3de914680ec64ba55be5865955ec595e7370812894ee68a502e2e8391
+2026-10-27T10:09:02.3841638Z deleted: sha256:85d9b4c1ef131ee259952a35027e942f79626303ab143eff7ef00d55201bd06f
+2026-10-27T10:09:02.3842107Z deleted: sha256:492c6420fd79f4cd4e761bec1e74db6044d45adb5b073a82289af68aa3162e3f
+2026-10-27T10:09:02.3842675Z deleted: sha256:14b282df61c0316a80216cec27e753777da93de1d7e062072ef3b517f984fcf1
+2026-10-27T10:09:02.3843151Z deleted: sha256:fdaace00fc3f072b9060f703047b30a2c14d8bde7dbbf31a396802c032923732
+2026-10-27T10:09:02.3843632Z deleted: sha256:7f73eafc455b691b504d4d3c3f3c7be90e135c1d0ba4988b2cac29579cd6b567
+2026-10-27T10:09:02.3844083Z deleted: sha256:32a12b65383df6b6553c8d59f691675ca1980f8cec9c51cce163c3c8f7665a41
+2026-10-27T10:09:02.3844679Z deleted: sha256:5217b01660b515ac25ea055a8bd04a20790c7d6bd6085374b59b9081283911af
+2026-10-27T10:09:02.3845117Z deleted: sha256:7223ea1323e8c1159ec17f07d35acc27bdd1cc2bc3ed425b44ef21dac9915db0
+2026-10-27T10:09:02.3845391Z 
+2026-10-27T10:09:02.3845490Z Total reclaimed space: 1.869GB
+2026-10-27T10:09:02.3865808Z 
+2026-10-27T10:09:02.3869455Z ********************************************************************************
+2026-10-27T10:09:02.3883645Z => Docker images: Saved 1.9GiB
+2026-10-27T10:09:02.3888141Z ********************************************************************************
+2026-10-27T10:09:02.3888445Z 
+2026-10-27T10:09:02.4112345Z                total        used        free      shared  buff/cache   available
+2026-10-27T10:09:02.4112636Z Mem:            15Gi       908Mi        13Gi        46Mi       1.3Gi        14Gi
+2026-10-27T10:09:02.4112840Z Swap:             0B          0B          0B
+2026-10-27T10:09:02.4138272Z 
+2026-10-27T10:09:02.4154790Z ********************************************************************************
+2026-10-27T10:09:02.4155183Z => Swap storage: Saved 0B
+2026-10-27T10:09:02.4163268Z ********************************************************************************
+2026-10-27T10:09:02.4163503Z 
+2026-10-27T10:09:02.4209056Z 
+2026-10-27T10:09:02.4212922Z ================================================================================
+2026-10-27T10:09:02.4213250Z AFTER CLEAN-UP:
+2026-10-27T10:09:02.4213365Z 
+2026-10-27T10:09:02.4213744Z $ dh -h /
+2026-10-27T10:09:02.4213837Z 
+2026-10-27T10:09:02.4222438Z Filesystem      Size  Used Avail Use% Mounted on
+2026-10-27T10:09:02.4222701Z /dev/root       145G   36G  109G  25% /
+2026-10-27T10:09:02.4223864Z $ dh -a /
+2026-10-27T10:09:02.4223960Z 
+2026-10-27T10:09:02.4232226Z Filesystem     1K-blocks     Used Available Use% Mounted on
+2026-10-27T10:09:02.4232638Z /dev/root      151263856 37066568 114180904  25% /
+2026-10-27T10:09:02.4233056Z $ dh -a
+2026-10-27T10:09:02.4233163Z 
+2026-10-27T10:09:02.4243472Z Filesystem      1K-blocks     Used Available Use% Mounted on
+2026-10-27T10:09:02.4243809Z /dev/root       151263856 37066568 114180904  25% /
+2026-10-27T10:09:02.4244083Z devtmpfs          8181664        0   8181664   0% /dev
+2026-10-27T10:09:02.4244296Z proc                    0        0         0    - /proc
+2026-10-27T10:09:02.4244643Z sysfs                   0        0         0    - /sys
+2026-10-27T10:09:02.4244841Z securityfs              0        0         0    - /sys/kernel/security
+2026-10-27T10:09:02.4245054Z tmpfs             8186724       84   8186640   1% /dev/shm
+2026-10-27T10:09:02.4245285Z devpts                  0        0         0    - /dev/pts
+2026-10-27T10:09:02.4245465Z tmpfs             3274692     1008   3273684   1% /run
+2026-10-27T10:09:02.4245638Z tmpfs                5120        0      5120   0% /run/lock
+2026-10-27T10:09:02.4245824Z cgroup2                 0        0         0    - /sys/fs/cgroup
+2026-10-27T10:09:02.4246015Z none                    0        0         0    - /sys/fs/pstore
+2026-10-27T10:09:02.4246211Z efivarfs                0        0         0    - /sys/firmware/efi/efivars
+2026-10-27T10:09:02.4246407Z bpf                     0        0         0    - /sys/fs/bpf
+2026-10-27T10:09:02.4246605Z systemd-1               -        -         -    - /proc/sys/fs/binfmt_misc
+2026-10-27T10:09:02.4246814Z hugetlbfs               0        0         0    - /dev/hugepages
+2026-10-27T10:09:02.4247002Z mqueue                  0        0         0    - /dev/mqueue
+2026-10-27T10:09:02.4247191Z debugfs                 0        0         0    - /sys/kernel/debug
+2026-10-27T10:09:02.4247384Z tracefs                 0        0         0    - /sys/kernel/tracing
+2026-10-27T10:09:02.4247771Z fusectl                 0        0         0    - /sys/fs/fuse/connections
+2026-10-27T10:09:02.4247971Z configfs                0        0         0    - /sys/kernel/config
+2026-10-27T10:09:02.4248162Z /dev/nvme0n1p16    901520    65012    773380   8% /boot
+2026-10-27T10:09:02.4248351Z /dev/nvme0n1p15    106832     6250    100582   6% /boot/efi
+2026-10-27T10:09:02.4248549Z binfmt_misc             0        0         0    - /proc/sys/fs/binfmt_misc
+2026-10-27T10:09:02.4248750Z tmpfs             1637344       12   1637332   1% /run/user/1001
+2026-10-27T10:09:02.4249994Z ================================================================================
+2026-10-27T10:09:02.4250210Z 
+2026-10-27T10:09:02.4250492Z 
+2026-10-27T10:09:02.4250574Z /dev/root:
+2026-10-27T10:09:02.4250642Z 
+2026-10-27T10:09:02.4255377Z ********************************************************************************
+2026-10-27T10:09:02.4268464Z => Saved 22GiB
+2026-10-27T10:09:02.4271962Z ********************************************************************************
+2026-10-27T10:09:02.4272282Z 
+2026-10-27T10:09:02.4272516Z overall:
+2026-10-27T10:09:02.4272621Z 
+2026-10-27T10:09:02.4276362Z ********************************************************************************
+2026-10-27T10:09:02.4288900Z => Saved 22GiB
+2026-10-27T10:09:02.4292222Z ********************************************************************************
+2026-10-27T10:09:02.4292446Z 
+2026-10-27T10:09:02.4337229Z ##[end-action id=__jlumbroso_free-disk-space.__run;outcome=success;conclusion=success;duration_ms=123896]
+2026-10-27T10:09:02.4375039Z ##[group]Run # la machine n'a que 8 Go : sans échange, Unity est tué pendant les gros imports / la construction Android
+2026-10-27T10:09:02.4375491Z [36;1m# la machine n'a que 8 Go : sans échange, Unity est tué pendant les gros imports / la construction Android[0m
+2026-10-27T10:09:02.4375880Z [36;1msudo swapoff -a || true[0m
+2026-10-27T10:09:02.4376207Z [36;1msudo fallocate -l 16G /mnt/korvalune.swap && sudo chmod 600 /mnt/korvalune.swap && sudo mkswap /mnt/korvalune.swap && sudo swapon /mnt/korvalune.swap[0m
+2026-10-27T10:09:02.4376533Z [36;1mfree -h[0m
+2026-10-27T10:09:02.4425716Z shell: /usr/bin/bash -e {0}
+2026-10-27T10:09:02.4425866Z ##[endgroup]
+2026-10-27T10:09:02.4826953Z Setting up swapspace version 1, size = 16 GiB (17179865088 bytes)
+2026-10-27T10:09:02.4827297Z no label, UUID=910d7c81-97fb-4a81-9432-dbddbd6b442a
+2026-10-27T10:09:02.4912306Z                total        used        free      shared  buff/cache   available
+2026-10-27T10:09:02.4912833Z Mem:            15Gi       923Mi        13Gi        46Mi       1.3Gi        14Gi
+2026-10-27T10:09:02.4913134Z Swap:           15Gi          0B        15Gi
+2026-10-27T10:09:02.4998045Z ##[group]Run actions/checkout@v4
+2026-10-27T10:09:02.4998207Z with:
+2026-10-27T10:09:02.4998364Z   repository: sebastienexp-blip/KorvaluneUnity
+2026-10-27T10:09:02.4999802Z   token: ***
+2026-10-27T10:09:02.4999917Z   ssh-strict: true
+2026-10-27T10:09:02.5000030Z   ssh-user: git
+2026-10-27T10:09:02.5000152Z   persist-credentials: true
+2026-10-27T10:09:02.5000283Z   clean: true
+2026-10-27T10:09:02.5000404Z   sparse-checkout-cone-mode: true
+2026-10-27T10:09:02.5000541Z   fetch-depth: 1
+2026-10-27T10:09:02.5000654Z   fetch-tags: false
+2026-10-27T10:09:02.5000770Z   show-progress: true
+2026-10-27T10:09:02.5000884Z   lfs: false
+2026-10-27T10:09:02.5000987Z   submodules: false
+2026-10-27T10:09:02.5001107Z   set-safe-directory: true
+2026-10-27T10:09:02.5001243Z   allow-unsafe-pr-checkout: false
+2026-10-27T10:09:02.5001380Z ##[endgroup]
+2026-10-27T10:09:02.7121743Z Syncing repository: sebastienexp-blip/KorvaluneUnity
+2026-10-27T10:09:02.7122541Z ##[group]Getting Git version info
+2026-10-27T10:09:02.7122800Z Working directory is '/home/runner/work/KorvaluneUnity/KorvaluneUnity'
+2026-10-27T10:09:02.7123122Z [command]/usr/bin/git version
+2026-10-27T10:09:02.7181675Z git version 2.55.0
+2026-10-27T10:09:02.7195026Z ##[endgroup]
+2026-10-27T10:09:02.7204709Z Temporarily overriding HOME='/home/runner/work/_temp/87bedf2d-74ec-4845-b809-ae0125ab6b0d' before making global git config changes
+2026-10-27T10:09:02.7205357Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T10:09:02.7207846Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
+2026-10-27T10:09:02.7256018Z Deleting the contents of '/home/runner/work/KorvaluneUnity/KorvaluneUnity'
+2026-10-27T10:09:02.7259318Z ##[group]Initializing the repository
+2026-10-27T10:09:02.7262360Z [command]/usr/bin/git init /home/runner/work/KorvaluneUnity/KorvaluneUnity
+2026-10-27T10:09:02.7425124Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-27T10:09:02.7435400Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-27T10:09:02.7442232Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-27T10:09:02.7442774Z hint: call:
+2026-10-27T10:09:02.7443099Z hint:
+2026-10-27T10:09:02.7443462Z hint: 	git config --global init.defaultBranch <name>
+2026-10-27T10:09:02.7443837Z hint:
+2026-10-27T10:09:02.7444206Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-27T10:09:02.7444969Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-27T10:09:02.7445438Z hint:
+2026-10-27T10:09:02.7445744Z hint: 	git branch -m <name>
+2026-10-27T10:09:02.7446070Z hint:
+2026-10-27T10:09:02.7446497Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-27T10:09:02.7447167Z Initialized empty Git repository in /home/runner/work/KorvaluneUnity/KorvaluneUnity/.git/
+2026-10-27T10:09:02.7448768Z [command]/usr/bin/git remote add origin https://github.com/sebastienexp-blip/KorvaluneUnity
+2026-10-27T10:09:02.7497434Z ##[endgroup]
+2026-10-27T10:09:02.7497795Z ##[group]Disabling automatic garbage collection
+2026-10-27T10:09:02.7502089Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-27T10:09:02.7537204Z ##[endgroup]
+2026-10-27T10:09:02.7537558Z ##[group]Setting up auth
+2026-10-27T10:09:02.7543391Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T10:09:02.7572138Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T10:09:02.7863969Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T10:09:02.7890834Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T10:09:02.8054771Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T10:09:02.8082269Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T10:09:02.8247231Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-27T10:09:02.8279381Z ##[endgroup]
+2026-10-27T10:09:02.8279719Z ##[group]Fetching the repository
+2026-10-27T10:09:02.8288114Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ef8f21195f130f4323d0f06b658b1e29de2501fa:refs/remotes/origin/main
+2026-10-27T10:09:18.0168281Z From https://github.com/sebastienexp-blip/KorvaluneUnity
+2026-10-27T10:09:18.0168805Z  * [new ref]         ef8f21195f130f4323d0f06b658b1e29de2501fa -> origin/main
+2026-10-27T10:09:18.0172441Z ##[endgroup]
+2026-10-27T10:09:18.0172837Z ##[group]Determining the checkout info
+2026-10-27T10:09:18.0174731Z ##[endgroup]
+2026-10-27T10:09:18.0183406Z [command]/usr/bin/git sparse-checkout disable
+2026-10-27T10:09:18.1191288Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-27T10:09:18.1221751Z ##[group]Checking out the ref
+2026-10-27T10:09:18.1224749Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-27T10:09:19.1619222Z Updating files:  33% (2165/6537)
+2026-10-27T10:09:19.1814746Z Updating files:  34% (2223/6537)
+2026-10-27T10:09:19.1972357Z Updating files:  35% (2288/6537)
+2026-10-27T10:09:19.2212388Z Updating files:  36% (2354/6537)
+2026-10-27T10:09:19.2496849Z Updating files:  37% (2419/6537)
+2026-10-27T10:09:19.2539973Z Updating files:  38% (2485/6537)
+2026-10-27T10:09:19.2814241Z Updating files:  39% (2550/6537)
+2026-10-27T10:09:19.3011612Z Updating files:  40% (2615/6537)
+2026-10-27T10:09:19.3208961Z Updating files:  41% (2681/6537)
+2026-10-27T10:09:19.3446862Z Updating files:  42% (2746/6537)
+2026-10-27T10:09:19.4131073Z Updating files:  43% (2811/6537)
+2026-10-27T10:09:19.4478460Z Updating files:  44% (2877/6537)
+2026-10-27T10:09:19.4626031Z Updating files:  45% (2942/6537)
+2026-10-27T10:09:19.5398889Z Updating files:  46% (3008/6537)
+2026-10-27T10:09:19.5681382Z Updating files:  47% (3073/6537)
+2026-10-27T10:09:19.6462779Z Updating files:  48% (3138/6537)
+2026-10-27T10:09:19.6711138Z Updating files:  49% (3204/6537)
+2026-10-27T10:09:19.6945080Z Updating files:  50% (3269/6537)
+2026-10-27T10:09:19.7535415Z Updating files:  51% (3334/6537)
+2026-10-27T10:09:19.7816763Z Updating files:  52% (3400/6537)
+2026-10-27T10:09:19.7977633Z Updating files:  53% (3465/6537)
+2026-10-27T10:09:19.8911027Z Updating files:  54% (3530/6537)
+2026-10-27T10:09:19.9126961Z Updating files:  55% (3596/6537)
+2026-10-27T10:09:19.9198624Z Updating files:  56% (3661/6537)
+2026-10-27T10:09:20.0104032Z Updating files:  57% (3727/6537)
+2026-10-27T10:09:20.0298221Z Updating files:  58% (3792/6537)
+2026-10-27T10:09:20.0371703Z Updating files:  59% (3857/6537)
+2026-10-27T10:09:20.0634749Z Updating files:  60% (3923/6537)
+2026-10-27T10:09:20.0871529Z Updating files:  61% (3988/6537)
+2026-10-27T10:09:20.1170871Z Updating files:  62% (4053/6537)
+2026-10-27T10:09:20.1293630Z Updating files:  63% (4119/6537)
+2026-10-27T10:09:20.1811404Z Updating files:  63% (4159/6537)
+2026-10-27T10:09:20.1945895Z Updating files:  64% (4184/6537)
+2026-10-27T10:09:20.2173632Z Updating files:  65% (4250/6537)
+2026-10-27T10:09:20.3018238Z Updating files:  66% (4315/6537)
+2026-10-27T10:09:20.3195236Z Updating files:  67% (4380/6537)
+2026-10-27T10:09:20.3409645Z Updating files:  68% (4446/6537)
+2026-10-27T10:09:20.4168768Z Updating files:  69% (4511/6537)
+2026-10-27T10:09:20.4235814Z Updating files:  70% (4576/6537)
+2026-10-27T10:09:20.4297453Z Updating files:  71% (4642/6537)
+2026-10-27T10:09:20.4487482Z Updating files:  72% (4707/6537)
+2026-10-27T10:09:20.4604205Z Updating files:  73% (4773/6537)
+2026-10-27T10:09:20.4687112Z Updating files:  74% (4838/6537)
+2026-10-27T10:09:20.4816983Z Updating files:  75% (4903/6537)
+2026-10-27T10:09:20.4901789Z Updating files:  76% (4969/6537)
+2026-10-27T10:09:20.4945386Z Updating files:  77% (5034/6537)
+2026-10-27T10:09:20.5012005Z Updating files:  78% (5099/6537)
+2026-10-27T10:09:20.5096329Z Updating files:  79% (5165/6537)
+2026-10-27T10:09:20.5171891Z Updating files:  80% (5230/6537)
+2026-10-27T10:09:20.5243443Z Updating files:  81% (5295/6537)
+2026-10-27T10:09:20.5340415Z Updating files:  82% (5361/6537)
+2026-10-27T10:09:20.5434292Z Updating files:  83% (5426/6537)
+2026-10-27T10:09:20.5540105Z Updating files:  84% (5492/6537)
+2026-10-27T10:09:20.5628209Z Updating files:  85% (5557/6537)
+2026-10-27T10:09:20.5747174Z Updating files:  86% (5622/6537)
+2026-10-27T10:09:20.5762544Z Updating files:  87% (5688/6537)
+2026-10-27T10:09:20.5778212Z Updating files:  88% (5753/6537)
+2026-10-27T10:09:20.5794679Z Updating files:  89% (5818/6537)
+2026-10-27T10:09:20.5810010Z Updating files:  90% (5884/6537)
+2026-10-27T10:09:20.5827845Z Updating files:  91% (5949/6537)
+2026-10-27T10:09:20.5846475Z Updating files:  92% (6015/6537)
+2026-10-27T10:09:20.5876908Z Updating files:  93% (6080/6537)
+2026-10-27T10:09:20.5898043Z Updating files:  94% (6145/6537)
+2026-10-27T10:09:20.5928148Z Updating files:  95% (6211/6537)
+2026-10-27T10:09:20.6264105Z Updating files:  96% (6276/6537)
+2026-10-27T10:09:20.7035263Z Updating files:  97% (6341/6537)
+2026-10-27T10:09:20.7234339Z Updating files:  98% (6407/6537)
+2026-10-27T10:09:20.7383936Z Updating files:  99% (6472/6537)
+2026-10-27T10:09:20.7384136Z Updating files: 100% (6537/6537)
+2026-10-27T10:09:20.7384287Z Updating files: 100% (6537/6537), done.
+2026-10-27T10:09:20.7431547Z Switched to a new branch 'main'
+2026-10-27T10:09:20.7436714Z branch 'main' set up to track 'origin/main'.
+2026-10-27T10:09:20.7558926Z ##[endgroup]
+2026-10-27T10:09:20.7602195Z [command]/usr/bin/git log -1 --format=%H
+2026-10-27T10:09:20.7625633Z ef8f21195f130f4323d0f06b658b1e29de2501fa
+2026-10-27T10:09:20.8160588Z ##[group]Run actions/cache/restore@v4
+2026-10-27T10:09:20.8160751Z with:
+2026-10-27T10:09:20.8160886Z   path: Library
+2026-10-27T10:09:20.8161099Z   key: Library-Forge-a7ffedc4b807e8ebac8c666a7f2005ad038a318b4955dcce60f4682323830896
+2026-10-27T10:09:20.8161347Z   restore-keys: Library-Forge-
+2026-10-27T10:09:20.8161492Z   enableCrossOsArchive: false
+2026-10-27T10:09:20.8161634Z   fail-on-cache-miss: false
+2026-10-27T10:09:20.8161766Z   lookup-only: false
+2026-10-27T10:09:20.8161889Z ##[endgroup]
+2026-10-27T10:09:20.8836400Z (node:2296) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T10:09:20.8836915Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T10:09:21.0214111Z Cache hit for restore-key: Library-Forge-a7ffedc4b807e8ebac8c666a7f2005ad038a318b4955dcce60f4682323830896-40483742281
+2026-10-27T10:09:21.0305690Z (node:2296) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-27T10:09:22.1920060Z Received 100663296 of 4511810320 (2.2%), 96.0 MBs/sec
+2026-10-27T10:09:23.1925458Z Received 327155712 of 4511810320 (7.3%), 155.9 MBs/sec
+2026-10-27T10:09:24.1928707Z Received 562036736 of 4511810320 (12.5%), 178.6 MBs/sec
+2026-10-27T10:09:25.1956000Z Received 775946240 of 4511810320 (17.2%), 184.9 MBs/sec
+2026-10-27T10:09:26.1929962Z Received 968884224 of 4511810320 (21.5%), 184.8 MBs/sec
+2026-10-27T10:09:26.5767317Z ##[error]The operation was canceled.
+2026-10-27T10:09:26.5850938Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+2026-10-27T10:09:26.5851390Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
+2026-10-27T10:09:26.5851956Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
+2026-10-27T10:09:26.5852587Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
+2026-10-27T10:09:26.5853159Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
+2026-10-27T10:09:26.5853693Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
+2026-10-27T10:09:26.5904948Z shell: /usr/bin/bash -e {0}
+2026-10-27T10:09:26.5905112Z ##[endgroup]
+2026-10-27T10:09:26.7344886Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+2026-10-27T10:09:26.7345210Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
+2026-10-27T10:09:26.7345589Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
+2026-10-27T10:09:26.7345986Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
+2026-10-27T10:09:26.7346343Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
+2026-10-27T10:09:26.7346718Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
+2026-10-27T10:09:26.7397594Z shell: /usr/bin/bash -e {0}
+2026-10-27T10:09:26.7397746Z ##[endgroup]
+2026-10-27T10:09:26.8974272Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true
+2026-10-27T10:09:26.8974941Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true[0m
+2026-10-27T10:09:26.8975273Z [36;1mif [ ! -f ci-report.md ]; then[0m
+2026-10-27T10:09:26.8975665Z [36;1m  { echo "# Rapport absent : Unity s'est arrêté avant la fin"; echo; echo '```';[0m
+2026-10-27T10:09:26.8976294Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+2026-10-27T10:09:26.8976928Z [36;1m    echo '```'; echo; echo "## Erreurs de compilation (Library/Bee, Logs)"; echo '```';[0m
+2026-10-27T10:09:26.8977632Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+2026-10-27T10:09:26.8978744Z [36;1m    echo '```'; echo; echo "## Dernières étapes (ci-out/progress.log)"; echo '```'; tail -150 ci-out/progress.log 2>/dev/null || echo "(aucune : la méthode CI n'a pas démarré)"; echo '```'; } > ci-report.md || true[0m
+2026-10-27T10:09:26.8979446Z [36;1mfi[0m
+2026-10-27T10:09:26.8979765Z [36;1mM=$(head -c 60000 ci-report.md | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')[0m
+2026-10-27T10:09:26.8980422Z [36;1mif [ "skipped" = "success" ]; then echo "::notice title=Intégration Unity::${M}"; else echo "::error title=Intégration Unity::${M}"; fi[0m
+2026-10-27T10:09:26.8980960Z [36;1mmkdir -p ci-out[0m
+2026-10-27T10:09:26.8981331Z [36;1mtail -c 400000 unity-editor.log > ci-out/unity-editor-tail.log 2>/dev/null || true[0m
+2026-10-27T10:09:26.9049112Z shell: /usr/bin/bash -e {0}
+2026-10-27T10:09:26.9049371Z ##[endgroup]
+2026-10-27T10:09:26.9969419Z ##[error]# Rapport absent : Unity s'est arrêté avant la fin
+
+```
+```
+
+## Erreurs de compilation (Library/Bee, Logs)
+```
+```
+
+## Dernières étapes (ci-out/progress.log)
+```
+09:34:15 - ✅ **Matériau VR_Tooled** shader Universal Render Pipeline/Lit, base VR_Tooled_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Matériau VR_Scale** shader Universal Render Pipeline/Lit, base VR_Scale_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Matériau VRM_Eye** shader Universal Render Pipeline/Lit, base VRM_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Matériau VRM_Brow** shader Universal Render Pipeline/Lit, base VRM_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Matériau VRM_Lash** shader Universal Render Pipeline/Lit, base VRM_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Matériau VRM_Teeth** shader Universal Render Pipeline/Lit, base VRM_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Matériau VRM_Tongue** shader Universal Render Pipeline/Lit, base VRM_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+09:34:15 - ✅ **Collider** capsule
+09:34:15 - ✅ **Équipement détachable** 26 pièce(s) : Anatomie (masqué), Baudrier (visible), Bottes (visible), Brassards (visible), Cape (visible), Capuche (visible), Carquois (visible), Ceinture (visible), Cheveux (masqué), Epaulieres (visible), Gants (visible), Jambieres (visible), Pans (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Pea
+09:34:15 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
+09:34:15 - ✅ **Os humanoïdes obligatoires** tous mappés
+09:34:15   - doigts mappés : 30/30
+09:34:15 - ✅ **Contrôleur d'animation** Varek_M
+09:34:15 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.960 m, événements 0
+09:34:15 - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
+09:34:15 - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
+09:34:15 - ✅ **Clip Attack** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.874 m, événements 1
+09:34:15 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.402 m, événements 0
+09:34:15 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.550 m, événements 0
+09:34:15 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
+09:34:15 - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+09:34:15 - ✅ **Clip Sk_SkyShot** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.254 m, événements 0
+09:34:15 - ✅ **Clip Sk_KneelShot** 0.73 s, boucle=False, humanoïde=True, déplacement max 0.789 m, événements 0
+09:34:15 - ✅ **Clip Sk_RapidFire** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.761 m, événements 0
+09:34:15 - ✅ **Clip Sk_BackFlip** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.584 m, événements 0
+09:34:15 - ✅ **Clip Sk_Throw** 0.80 s, boucle=False, humanoïde=True, déplacement max 0.932 m, événements 0
+09:34:15 - ✅ **Clip Sk_Trap** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.040 m, événements 0
+09:34:15 - ✅ **Clip Sk_Kick** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.393 m, événements 0
+09:34:15 - ✅ **Clip Sk_Sweep** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.712 m, événements 0
+09:34:15 - ✅ **Clip Sk_Whistle** 1.10 s, boucle=False, humanoïde=True, déplacement max 0.615 m, événements 0
+09:34:15 - ✅ **Clip Sk_Dash** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.626 m, événements 0
+09:34:15 validation des pièces
+09:34:15 
+## Pièces du créateur de personnage (140 modèles : cheveux, sourcils, cils)
+09:34:27 - ✅ **Pièces impor
+2026-10-27T10:09:27.0463466Z ##[group]Run git config user.name "korvalune-ci"
+2026-10-27T10:09:27.0463860Z [36;1mgit config user.name "korvalune-ci"[0m
+2026-10-27T10:09:27.0464056Z [36;1mgit config user.email "ci@korvalune.invalid"[0m
+2026-10-27T10:09:27.0464337Z [36;1mgit add -A Assets ProjectSettings Packages ci-report.md ci-out 2>/dev/null || true[0m
+2026-10-27T10:09:27.0464785Z [36;1mif git diff --cached --quiet; then echo "rien à renvoyer"; exit 0; fi[0m
+2026-10-27T10:09:27.0465064Z [36;1mgit commit -m "CI Unity : fichiers générés et rapport [skip ci]"[0m
+2026-10-27T10:09:27.0465392Z [36;1mfor i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done[0m
+2026-10-27T10:09:27.0516421Z shell: /usr/bin/bash -e {0}
+2026-10-27T10:09:27.0516579Z ##[endgroup]
+2026-10-27T10:09:29.4888526Z rien à renvoyer
+2026-10-27T10:09:29.5298912Z ##[group]Run actions/cache/save@v4
+2026-10-27T10:09:29.5299071Z with:
+2026-10-27T10:09:29.5299184Z   path: Library
+2026-10-27T10:09:29.5299421Z   key: Library-Forge-a7ffedc4b807e8ebac8c666a7f2005ad038a318b4955dcce60f4682323830896-40485712010
+2026-10-27T10:09:29.5299719Z   enableCrossOsArchive: false
+2026-10-27T10:09:29.5299865Z ##[endgroup]
+2026-10-27T10:09:29.5954856Z (node:2398) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T10:09:29.5955247Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T10:09:29.6024906Z [warning]Path Validation Error: Path(s) specified in the action for caching do(es) not exist, hence no cache is being saved.
+2026-10-27T10:09:29.6028625Z ##[warning]Cache save failed.
+2026-10-27T10:09:29.6098729Z ##[group]Run if [ "skipped" = "success" ]; then exit 0; fi
+2026-10-27T10:09:29.6098965Z [36;1mif [ "skipped" = "success" ]; then exit 0; fi[0m
+2026-10-27T10:09:29.6099225Z [36;1mecho "::error::Échec de l'intégration Unity (voir ci-report.md)"; exit 1[0m
+2026-10-27T10:09:29.6147507Z shell: /usr/bin/bash -e {0}
+2026-10-27T10:09:29.6147656Z ##[endgroup]
+2026-10-27T10:09:29.6206885Z ##[error]Échec de l'intégration Unity (voir ci-report.md)
+2026-10-27T10:09:29.6208592Z ##[error]Process completed with exit code 1.
+2026-10-27T10:09:29.6267054Z Post job cleanup.
+2026-10-27T10:09:29.6788971Z [command]/usr/bin/git version
+2026-10-27T10:09:29.6826665Z git version 2.55.0
+2026-10-27T10:09:29.6857414Z Temporarily overriding HOME='/home/runner/work/_temp/cb06a5fa-e767-4f39-8dab-f7845af818d6' before making global git config changes
+2026-10-27T10:09:29.6858141Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T10:09:29.6861053Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
+2026-10-27T10:09:29.6896249Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T10:09:29.6924925Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T10:09:29.7135585Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T10:09:29.7160843Z http.https://github.com/.extraheader
+2026-10-27T10:09:29.7169510Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-27T10:09:29.7199406Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T10:09:29.7419360Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-27T10:09:29.7448619Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-27T10:09:29.7737544Z Cleaning up orphan processes
+2026-10-27T10:09:29.7917481Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache/restore@v4, actions/cache/save@v4, actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
