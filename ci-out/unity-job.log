@@ -1,415 +1,461 @@
-# Journal du job d'intégration (run 40561397053)
+# Journal du job d'intégration (run 40566383887)
 ## Lignes importantes
-1149:2026-10-27T18:40:35.5276731Z [  4/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
-1668:2026-10-27T18:40:37.3461546Z Curl error 42: Callback aborted
-2254:2026-10-27T18:40:49.9247460Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
-2494:2026-10-27T18:40:49.9385697Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,72): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
-2495:2026-10-27T18:40:49.9387680Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(112,109): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
-2496:2026-10-27T18:40:49.9389847Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(194,37): error CS1069: The type name 'TerrainCollider' could not be found in the namespace 'UnityEngine'. This type has been forwarded to assembly 'UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
-4145:2026-10-27T18:41:30.7286145Z Curl error 42: Callback aborted
-6401:2026-10-27T18:45:33.0809908Z Curl error 42: Callback aborted
-9412:2026-10-27T18:56:30.1343650Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-9414:2026-10-27T18:56:30.1344746Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+1156:2026-10-27T19:15:46.9422293Z [  2/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+1677:2026-10-27T19:15:49.3260994Z Curl error 42: Callback aborted
+2256:2026-10-27T19:16:02.9198884Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
+2497:2026-10-27T19:16:02.9476474Z Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs(95,13): error CS0103: The name 'Sound' does not exist in the current context
+2498:2026-10-27T19:16:02.9477278Z Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs(95,24): error CS0103: The name 'Sound' does not exist in the current context
+2499:2026-10-27T19:16:02.9478422Z Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs(32,17): error CS0103: The name 'Sound' does not exist in the current context
+2500:2026-10-27T19:16:02.9479569Z Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs(32,28): error CS0103: The name 'Sound' does not exist in the current context
+2501:2026-10-27T19:16:02.9480990Z Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs(78,48): error CS0103: The name 'Sound' does not exist in the current context
+2502:2026-10-27T19:16:02.9482957Z Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs(79,54): error CS0103: The name 'Sound' does not exist in the current context
+2503:2026-10-27T19:16:02.9484800Z Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs(164,13): error CS0103: The name 'Sound' does not exist in the current context
+2504:2026-10-27T19:16:02.9486439Z Assets/Korvalune/Scripts/Runtime/Game/Equipment.cs(49,45): error CS0103: The name 'Sound' does not exist in the current context
+2505:2026-10-27T19:16:02.9488321Z Assets/Korvalune/Scripts/Runtime/Game/TreasureChest.cs(35,13): error CS0103: The name 'Sound' does not exist in the current context
+2506:2026-10-27T19:16:02.9489853Z Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs(56,13): error CS0103: The name 'Sound' does not exist in the current context
+2507:2026-10-27T19:16:02.9491379Z Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs(56,24): error CS0103: The name 'Sound' does not exist in the current context
+2508:2026-10-27T19:16:02.9492250Z Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs(74,13): error CS0103: The name 'Sound' does not exist in the current context
+2509:2026-10-27T19:16:02.9493239Z Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs(74,48): error CS0103: The name 'Sound' does not exist in the current context
+2510:2026-10-27T19:16:02.9494062Z Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs(74,59): error CS0103: The name 'Sound' does not exist in the current context
+2511:2026-10-27T19:16:02.9494882Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(31,111): error CS0103: The name 'Sound' does not exist in the current context
+2512:2026-10-27T19:16:02.9496253Z Assets/Korvalune/Scripts/Runtime/Game/Health.cs(49,38): error CS0103: The name 'Sound' does not exist in the current context
+2513:2026-10-27T19:16:02.9498059Z Assets/Korvalune/Scripts/Runtime/Game/Health.cs(50,94): error CS0103: The name 'Sound' does not exist in the current context
+2514:2026-10-27T19:16:02.9499522Z Assets/Korvalune/Scripts/Runtime/Game/Health.cs(58,84): error CS0103: The name 'Sound' does not exist in the current context
+2515:2026-10-27T19:16:02.9501009Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(126,60): error CS0103: The name 'Sound' does not exist in the current context
+2516:2026-10-27T19:16:02.9502565Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(160,13): error CS0103: The name 'Sound' does not exist in the current context
+2517:2026-10-27T19:16:02.9504058Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(166,94): error CS0103: The name 'Sound' does not exist in the current context
+2518:2026-10-27T19:16:02.9505605Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(273,40): error CS0103: The name 'Sound' does not exist in the current context
+2519:2026-10-27T19:16:02.9507117Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(274,24): error CS0103: The name 'Sound' does not exist in the current context
+2520:2026-10-27T19:16:02.9508905Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(276,40): error CS0103: The name 'Sound' does not exist in the current context
+2521:2026-10-27T19:16:02.9510455Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(277,24): error CS0103: The name 'Sound' does not exist in the current context
+2522:2026-10-27T19:16:02.9512283Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(277,48): error CS0103: The name 'Sound' does not exist in the current context
+2523:2026-10-27T19:16:02.9513843Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(336,46): error CS0103: The name 'Sound' does not exist in the current context
+2524:2026-10-27T19:16:02.9515323Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(77,55): error CS0103: The name 'Sound' does not exist in the current context
+2525:2026-10-27T19:16:02.9516826Z Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs(25,13): error CS0103: The name 'Sound' does not exist in the current context
+2526:2026-10-27T19:16:02.9518619Z Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs(25,24): error CS0103: The name 'Sound' does not exist in the current context
+2527:2026-10-27T19:16:02.9520208Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(38,97): error CS0103: The name 'Sound' does not exist in the current context
+2528:2026-10-27T19:16:02.9522327Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(42,91): error CS0103: The name 'Sound' does not exist in the current context
+2529:2026-10-27T19:16:02.9524183Z Assets/Korvalune/Scripts/Runtime/Game/Quest.cs(49,13): error CS0103: The name 'Sound' does not exist in the current context
+2530:2026-10-27T19:16:02.9525814Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(57,32): error CS0103: The name 'Sound' does not exist in the current context
+2531:2026-10-27T19:16:02.9527666Z Assets/Korvalune/Scripts/Runtime/Game/Portal.cs(98,13): error CS0103: The name 'Sound' does not exist in the current context
+2532:2026-10-27T19:16:02.9529306Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(187,13): error CS0103: The name 'Sound' does not exist in the current context
+2533:2026-10-27T19:16:02.9531008Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(187,24): error CS0103: The name 'Sound' does not exist in the current context
+2534:2026-10-27T19:16:02.9532414Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(200,27): error CS0103: The name 'Sound' does not exist in the current context
+2535:2026-10-27T19:16:02.9534009Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(200,38): error CS0103: The name 'Sound' does not exist in the current context
+2536:2026-10-27T19:16:02.9535622Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(115,316): error CS0103: The name 'Sound' does not exist in the current context
+2537:2026-10-27T19:16:02.9537020Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(123,209): error CS0103: The name 'Sound' does not exist in the current context
+2538:2026-10-27T19:16:02.9538282Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(141,262): error CS0103: The name 'Sound' does not exist in the current context
+2539:2026-10-27T19:16:02.9539142Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(265,13): error CS0103: The name 'Sound' does not exist in the current context
+2540:2026-10-27T19:16:02.9540197Z Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs(284,17): error CS0103: The name 'Sound' does not exist in the current context
+2541:2026-10-27T19:16:02.9541386Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(361,51): error CS0103: The name 'Sound' does not exist in the current context
+2542:2026-10-27T19:16:02.9542237Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(372,39): error CS0103: The name 'Sound' does not exist in the current context
+2543:2026-10-27T19:16:02.9543036Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(221,13): error CS0103: The name 'Sound' does not exist in the current context
+2544:2026-10-27T19:16:02.9544367Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(230,117): error CS0103: The name 'Sound' does not exist in the current context
+2545:2026-10-27T19:16:02.9545870Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(446,188): error CS0103: The name 'Sound' does not exist in the current context
+3303:2026-10-27T19:16:42.6179989Z Curl error 42: Callback aborted
+5545:2026-10-27T19:22:35.4575216Z Curl error 42: Callback aborted
+8582:2026-10-27T19:41:37.3454762Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+8584:2026-10-27T19:41:37.3456274Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-2026-10-27T18:56:19.9616452Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9616919Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9617041Z 
-2026-10-27T18:56:19.9617137Z ## Rocher2.fbx (prop, rig None)
-2026-10-27T18:56:19.9617470Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
-2026-10-27T18:56:19.9617932Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9618301Z - ✅ **Budget de triangles** 7204 triangles, 4471 sommets (max 60000)
-2026-10-27T18:56:19.9618744Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
-2026-10-27T18:56:19.9619275Z - ✅ **Échelle (hauteur)** 5.552 m (attendu 5.274186–5.829364), boîte 7.00×5.55×7.49, pieds à y=-2.559
-2026-10-27T18:56:19.9619928Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9620396Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9620521Z 
-2026-10-27T18:56:19.9620619Z ## T_Troncon_0_0.fbx (prop, rig None)
-2026-10-27T18:56:19.9621046Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_0/T_Troncon_0_0.fbx
-2026-10-27T18:56:19.9621470Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9621847Z - ✅ **Budget de triangles** 22779 triangles, 17156 sommets (max 60000)
-2026-10-27T18:56:19.9622350Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_0.prefab
-2026-10-27T18:56:19.9623041Z - ✅ **Échelle (hauteur)** 9.882 m (attendu 8.893484–10.86981), boîte 51.60×9.88×51.58, pieds à y=-3.133
-2026-10-27T18:56:19.9623686Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9624377Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9625077Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9625784Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9626530Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9627244Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9628284Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9628760Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9628891Z 
-2026-10-27T18:56:19.9628982Z ## T_Troncon_0_1.fbx (prop, rig None)
-2026-10-27T18:56:19.9629413Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_1/T_Troncon_0_1.fbx
-2026-10-27T18:56:19.9629848Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9630241Z - ✅ **Budget de triangles** 16919 triangles, 12906 sommets (max 60000)
-2026-10-27T18:56:19.9630766Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_1.prefab
-2026-10-27T18:56:19.9631391Z - ✅ **Échelle (hauteur)** 11.108 m (attendu 9.997091–12.21867), boîte 44.14×11.11×51.66, pieds à y=-6.546
-2026-10-27T18:56:19.9632271Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9633044Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9633782Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9634489Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9635264Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9635973Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9636682Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9637151Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9637277Z 
-2026-10-27T18:56:19.9637380Z ## T_Troncon_0_2.fbx (prop, rig None)
-2026-10-27T18:56:19.9638018Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_2/T_Troncon_0_2.fbx
-2026-10-27T18:56:19.9638445Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9638818Z - ✅ **Budget de triangles** 29144 triangles, 21909 sommets (max 60000)
-2026-10-27T18:56:19.9639325Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_2.prefab
-2026-10-27T18:56:19.9639951Z - ✅ **Échelle (hauteur)** 12.344 m (attendu 11.10972–13.57855), boîte 51.25×12.34×51.54, pieds à y=-10.292
-2026-10-27T18:56:19.9640664Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9641386Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9642098Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9642926Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9643610Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9644156Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9644638Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9645360Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9645815Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9645998Z 
-2026-10-27T18:56:19.9646143Z ## T_Troncon_0_3.fbx (prop, rig None)
-2026-10-27T18:56:19.9646629Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_3/T_Troncon_0_3.fbx
-2026-10-27T18:56:19.9647104Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9647485Z - ✅ **Budget de triangles** 20654 triangles, 16189 sommets (max 60000)
-2026-10-27T18:56:19.9648099Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_3.prefab
-2026-10-27T18:56:19.9648704Z - ✅ **Échelle (hauteur)** 13.776 m (attendu 12.39875–15.15403), boîte 53.29×13.78×51.90, pieds à y=-15.585
-2026-10-27T18:56:19.9649355Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9649815Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9650260Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9650892Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9651676Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9652297Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9652760Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9653302Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9653791Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9653921Z 
-2026-10-27T18:56:19.9654021Z ## T_Troncon_0_4.fbx (prop, rig None)
-2026-10-27T18:56:19.9654354Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_4/T_Troncon_0_4.fbx
-2026-10-27T18:56:19.9654629Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9654874Z - ✅ **Budget de triangles** 7997 triangles, 5874 sommets (max 60000)
-2026-10-27T18:56:19.9655199Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_4.prefab
-2026-10-27T18:56:19.9655729Z - ✅ **Échelle (hauteur)** 7.752 m (attendu 6.976654–8.527021), boîte 38.04×7.75×25.31, pieds à y=-15.585
-2026-10-27T18:56:19.9656416Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9656875Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9657323Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9658033Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9658794Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9659375Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9659880Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9660669Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9661037Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9661125Z 
-2026-10-27T18:56:19.9661195Z ## T_Troncon_0_m1.fbx (prop, rig None)
-2026-10-27T18:56:19.9661482Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_m1/T_Troncon_0_m1.fbx
-2026-10-27T18:56:19.9661763Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9662045Z - ✅ **Budget de triangles** 492 triangles, 362 sommets (max 60000)
-2026-10-27T18:56:19.9662588Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_m1.prefab
-2026-10-27T18:56:19.9663136Z - ✅ **Échelle (hauteur)** 7.372 m (attendu 6.634953–8.109386), boîte 21.70×7.37×16.81, pieds à y=-0.518
-2026-10-27T18:56:19.9663560Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9664012Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9664736Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9665172Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9665255Z 
-2026-10-27T18:56:19.9665320Z ## T_Troncon_1_0.fbx (prop, rig None)
-2026-10-27T18:56:19.9665603Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_0/T_Troncon_1_0.fbx
-2026-10-27T18:56:19.9665990Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9666286Z - ✅ **Budget de triangles** 6105 triangles, 4532 sommets (max 60000)
-2026-10-27T18:56:19.9666818Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_0.prefab
-2026-10-27T18:56:19.9667356Z - ✅ **Échelle (hauteur)** 8.305 m (attendu 7.474657–9.135691), boîte 25.26×8.31×36.17, pieds à y=-2.999
-2026-10-27T18:56:19.9668012Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9668527Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9669365Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9669899Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9670371Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9671062Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9671762Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9672053Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9672142Z 
-2026-10-27T18:56:19.9672208Z ## T_Troncon_1_1.fbx (prop, rig None)
-2026-10-27T18:56:19.9672490Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_1/T_Troncon_1_1.fbx
-2026-10-27T18:56:19.9672922Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9673340Z - ✅ **Budget de triangles** 6461 triangles, 5284 sommets (max 60000)
-2026-10-27T18:56:19.9673759Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_1.prefab
-2026-10-27T18:56:19.9674176Z - ✅ **Échelle (hauteur)** 10.297 m (attendu 9.267158–11.32653), boîte 29.13×10.30×50.03, pieds à y=-5.632
-2026-10-27T18:56:19.9674616Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9675500Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9676264Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9676968Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9677659Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9678535Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9679310Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9679757Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9679883Z 
-2026-10-27T18:56:19.9679978Z ## T_Troncon_1_2.fbx (prop, rig None)
-2026-10-27T18:56:19.9680419Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_2/T_Troncon_1_2.fbx
-2026-10-27T18:56:19.9680827Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9681205Z - ✅ **Budget de triangles** 2290 triangles, 1664 sommets (max 60000)
-2026-10-27T18:56:19.9681695Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_2.prefab
-2026-10-27T18:56:19.9682361Z - ✅ **Échelle (hauteur)** 7.842 m (attendu 7.058225–8.626719), boîte 29.51×7.84×27.48, pieds à y=-5.884
-2026-10-27T18:56:19.9683060Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9683858Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9684318Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9684781Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9685455Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9685959Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9686086Z 
-2026-10-27T18:56:19.9686183Z ## T_Troncon_1_3.fbx (prop, rig None)
-2026-10-27T18:56:19.9686611Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_3/T_Troncon_1_3.fbx
-2026-10-27T18:56:19.9687045Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9687411Z - ✅ **Budget de triangles** 1674 triangles, 1454 sommets (max 60000)
-2026-10-27T18:56:19.9688058Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_3.prefab
-2026-10-27T18:56:19.9688655Z - ✅ **Échelle (hauteur)** 7.915 m (attendu 7.12352–8.706525), boîte 19.69×7.92×38.79, pieds à y=-15.271
-2026-10-27T18:56:19.9689345Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9690072Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9690775Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9691398Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9691927Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9692431Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9693181Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9693798Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9693931Z 
-2026-10-27T18:56:19.9694029Z ## T_Troncon_1_4.fbx (prop, rig None)
-2026-10-27T18:56:19.9694466Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_4/T_Troncon_1_4.fbx
-2026-10-27T18:56:19.9694896Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9695280Z - ✅ **Budget de triangles** 1825 triangles, 1351 sommets (max 60000)
-2026-10-27T18:56:19.9695798Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_4.prefab
-2026-10-27T18:56:19.9696400Z - ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.27, pieds à y=-15.588
-2026-10-27T18:56:19.9697055Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9697513Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9698228Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9698954Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9699722Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9700504Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9700997Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9701130Z 
-2026-10-27T18:56:19.9701231Z ## T_Troncon_m1_0.fbx (prop, rig None)
-2026-10-27T18:56:19.9701615Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_0/T_Troncon_m1_0.fbx
-2026-10-27T18:56:19.9701896Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9702161Z - ✅ **Budget de triangles** 1674 triangles, 1371 sommets (max 60000)
-2026-10-27T18:56:19.9702542Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_0.prefab
-2026-10-27T18:56:19.9703087Z - ✅ **Échelle (hauteur)** 8.249 m (attendu 7.424075–9.073869), boîte 17.66×8.25×28.55, pieds à y=-0.857
-2026-10-27T18:56:19.9703769Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9704515Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9705246Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9705885Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9706417Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9707171Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9708143Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9708707Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9708850Z 
-2026-10-27T18:56:19.9708960Z ## T_Troncon_m1_2.fbx (prop, rig None)
-2026-10-27T18:56:19.9709438Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_2/T_Troncon_m1_2.fbx
-2026-10-27T18:56:19.9709900Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9710266Z - ✅ **Budget de triangles** 573 triangles, 453 sommets (max 60000)
-2026-10-27T18:56:19.9710762Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_2.prefab
-2026-10-27T18:56:19.9711348Z - ✅ **Échelle (hauteur)** 8.029 m (attendu 7.225704–8.831416), boîte 15.16×8.03×34.64, pieds à y=-8.063
-2026-10-27T18:56:19.9712004Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9712700Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9713380Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9714069Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9714511Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9714636Z 
-2026-10-27T18:56:19.9714730Z ## T_Troncon_m1_3.fbx (prop, rig None)
-2026-10-27T18:56:19.9715140Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_3/T_Troncon_m1_3.fbx
-2026-10-27T18:56:19.9715684Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9716031Z - ✅ **Budget de triangles** 12 triangles, 27 sommets (max 60000)
-2026-10-27T18:56:19.9716526Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_3.prefab
-2026-10-27T18:56:19.9717099Z - ✅ **Échelle (hauteur)** 1.981 m (attendu 1.783069–2.179307), boîte 8.95×1.98×6.48, pieds à y=-3.652
-2026-10-27T18:56:19.9717727Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9718284Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9718402Z 
-2026-10-27T18:56:19.9718501Z ## T_Troncon_m1_m1.fbx (prop, rig None)
-2026-10-27T18:56:19.9718936Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_m1/T_Troncon_m1_m1.fbx
-2026-10-27T18:56:19.9719353Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9719716Z - ✅ **Budget de triangles** 289 triangles, 197 sommets (max 60000)
-2026-10-27T18:56:19.9720201Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_m1.prefab
-2026-10-27T18:56:19.9720775Z - ✅ **Échelle (hauteur)** 7.828 m (attendu 7.045424–8.611073), boîte 16.62×7.83×17.46, pieds à y=-0.524
-2026-10-27T18:56:19.9721427Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9722156Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9722872Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9723318Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9723439Z 
-2026-10-27T18:56:19.9723532Z ## M_Banc.fbx (prop, rig None)
-2026-10-27T18:56:19.9723871Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banc/M_Banc.fbx
-2026-10-27T18:56:19.9724252Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9724651Z - ✅ **Budget de triangles** 36 triangles, 72 sommets (max 40000)
-2026-10-27T18:56:19.9725144Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banc.prefab
-2026-10-27T18:56:19.9725787Z - ✅ **Échelle (hauteur)** 0.500 m (attendu 0.475–0.525), boîte 1.80×0.50×0.45, pieds à y=0.000
-2026-10-27T18:56:19.9726458Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9726931Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9727059Z 
-2026-10-27T18:56:19.9727160Z ## M_Banniere.fbx (prop, rig None)
-2026-10-27T18:56:19.9727552Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banniere/M_Banniere.fbx
-2026-10-27T18:56:19.9728073Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9728460Z - ✅ **Budget de triangles** 60 triangles, 99 sommets (max 40000)
-2026-10-27T18:56:19.9728948Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banniere.prefab
-2026-10-27T18:56:19.9729505Z - ✅ **Échelle (hauteur)** 6.000 m (attendu 5.7–6.3), boîte 1.21×6.00×0.12, pieds à y=0.000
-2026-10-27T18:56:19.9730137Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9730905Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9731722Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9732248Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9732377Z 
-2026-10-27T18:56:19.9732472Z ## M_Caisses.fbx (prop, rig None)
-2026-10-27T18:56:19.9732863Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Caisses/M_Caisses.fbx
-2026-10-27T18:56:19.9733262Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9733636Z - ✅ **Budget de triangles** 324 triangles, 648 sommets (max 40000)
-2026-10-27T18:56:19.9734234Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Caisses.prefab
-2026-10-27T18:56:19.9734786Z - ✅ **Échelle (hauteur)** 1.620 m (attendu 1.539–1.701), boîte 2.06×1.62×1.16, pieds à y=-0.010
-2026-10-27T18:56:19.9735447Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9736202Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9736676Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9736803Z 
-2026-10-27T18:56:19.9736897Z ## M_Charrette.fbx (prop, rig None)
-2026-10-27T18:56:19.9737299Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Charrette/M_Charrette.fbx
-2026-10-27T18:56:19.9737705Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9738202Z - ✅ **Budget de triangles** 396 triangles, 660 sommets (max 40000)
-2026-10-27T18:56:19.9738704Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Charrette.prefab
-2026-10-27T18:56:19.9739292Z - ✅ **Échelle (hauteur)** 1.475 m (attendu 1.40125–1.54875), boîte 2.04×1.48×4.39, pieds à y=0.000
-2026-10-27T18:56:19.9739970Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9740724Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9741481Z - ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9741966Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9742098Z 
-2026-10-27T18:56:19.9742199Z ## M_Etal0.fbx (prop, rig None)
-2026-10-27T18:56:19.9742577Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal0/M_Etal0.fbx
-2026-10-27T18:56:19.9742980Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9743371Z - ✅ **Budget de triangles** 756 triangles, 1512 sommets (max 40000)
-2026-10-27T18:56:19.9743862Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal0.prefab
-2026-10-27T18:56:19.9744445Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 4.46×2.96×2.41, pieds à y=-0.010
-2026-10-27T18:56:19.9745268Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9746039Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9746837Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9747662Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9748709Z - ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9749512Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9750351Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9750884Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9751015Z 
-2026-10-27T18:56:19.9751110Z ## M_Etal1.fbx (prop, rig None)
-2026-10-27T18:56:19.9751481Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal1/M_Etal1.fbx
-2026-10-27T18:56:19.9751879Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9752260Z - ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
-2026-10-27T18:56:19.9752741Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal1.prefab
-2026-10-27T18:56:19.9753320Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
-2026-10-27T18:56:19.9754127Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9754894Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9755692Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9756517Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9757339Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9758297Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9759102Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9759626Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9759757Z 
-2026-10-27T18:56:19.9759850Z ## M_Etal2.fbx (prop, rig None)
-2026-10-27T18:56:19.9760220Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal2/M_Etal2.fbx
-2026-10-27T18:56:19.9760645Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9761019Z - ✅ **Budget de triangles** 956 triangles, 1452 sommets (max 40000)
-2026-10-27T18:56:19.9761502Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal2.prefab
-2026-10-27T18:56:19.9762072Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
-2026-10-27T18:56:19.9762752Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9763516Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9764330Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9765154Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9766089Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9766841Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9767322Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9767452Z 
-2026-10-27T18:56:19.9767546Z ## M_Etal3.fbx (prop, rig None)
-2026-10-27T18:56:19.9768026Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal3/M_Etal3.fbx
-2026-10-27T18:56:19.9768418Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9768794Z - ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
-2026-10-27T18:56:19.9769351Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal3.prefab
-2026-10-27T18:56:19.9769918Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
-2026-10-27T18:56:19.9770613Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9771483Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9772380Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9773310Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9774201Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9774869Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9775012Z 
-2026-10-27T18:56:19.9775122Z ## M_Foin.fbx (prop, rig None)
-2026-10-27T18:56:19.9775518Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Foin/M_Foin.fbx
-2026-10-27T18:56:19.9775924Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9776290Z - ✅ **Budget de triangles** 48 triangles, 96 sommets (max 40000)
-2026-10-27T18:56:19.9776749Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Foin.prefab
-2026-10-27T18:56:19.9777277Z - ✅ **Échelle (hauteur)** 1.500 m (attendu 1.425–1.575), boîte 1.64×1.50×1.12, pieds à y=0.000
-2026-10-27T18:56:19.9778025Z - ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9778761Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9779261Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9779407Z 
-2026-10-27T18:56:19.9779507Z ## M_Fontaine.fbx (prop, rig None)
-2026-10-27T18:56:19.9779958Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Fontaine/M_Fontaine.fbx
-2026-10-27T18:56:19.9780349Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9780841Z - ✅ **Budget de triangles** 524 triangles, 701 sommets (max 40000)
-2026-10-27T18:56:19.9781620Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Fontaine.prefab
-2026-10-27T18:56:19.9782553Z - ✅ **Échelle (hauteur)** 4.300 m (attendu 4.085–4.515), boîte 7.18×4.30×7.18, pieds à y=0.000
-2026-10-27T18:56:19.9783332Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9784148Z - ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9784658Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9784793Z 
-2026-10-27T18:56:19.9784887Z ## M_Forge.fbx (prop, rig None)
-2026-10-27T18:56:19.9785275Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Forge/M_Forge.fbx
-2026-10-27T18:56:19.9785692Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9786101Z - ✅ **Budget de triangles** 1296 triangles, 2136 sommets (max 40000)
-2026-10-27T18:56:19.9786754Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Forge.prefab
-2026-10-27T18:56:19.9787315Z - ✅ **Échelle (hauteur)** 8.525 m (attendu 8.09875–8.95125), boîte 7.80×8.53×11.19, pieds à y=-0.400
-2026-10-27T18:56:19.9788228Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9789026Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9789824Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9790639Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9791507Z - ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9792329Z - ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9793148Z - ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9793650Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9793786Z 
-2026-10-27T18:56:19.9793890Z ## M_Lanterne.fbx (prop, rig None)
-2026-10-27T18:56:19.9794310Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Lanterne/M_Lanterne.fbx
-2026-10-27T18:56:19.9794740Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9795141Z - ✅ **Budget de triangles** 208 triangles, 309 sommets (max 40000)
-2026-10-27T18:56:19.9795662Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Lanterne.prefab
-2026-10-27T18:56:19.9796375Z - ✅ **Échelle (hauteur)** 3.430 m (attendu 3.2585–3.6015), boîte 1.07×3.43×0.44, pieds à y=0.000
-2026-10-27T18:56:19.9797028Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9797903Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9798672Z - ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9799162Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9799302Z 
-2026-10-27T18:56:19.9799408Z ## M_Maison0.fbx (prop, rig None)
-2026-10-27T18:56:19.9799836Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison0/M_Maison0.fbx
-2026-10-27T18:56:19.9800296Z - ✅ **Import sans erreur ni avertissement** 
-2026-10-27T18:56:19.9800699Z - ✅ **Budget de triangles** 5980 triangles, 11964 sommets (max 40000)
-2026-10-27T18:56:19.9801211Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison0.prefab
-2026-10-27T18:56:19.9801804Z - ✅ **Échelle (hauteur)** 17.877 m (attendu 16.98293–18.7706), boîte 10.32×17.88×9.52, pieds à y=-0.400
-2026-10-27T18:56:19.9802535Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9803341Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9804142Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9804916Z - ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9805697Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9806439Z - ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9807182Z - ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9808187Z - ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9809003Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9809842Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9810633Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9811488Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9812322Z - ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
-2026-10-27T18:56:19.9812832Z - ✅ **Collider** mesh
-2026-10-27T18:56:19.9812963Z 
-2026-10-27T18:56:19.9912317Z ## M_Maison1Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '9e09e0f692cd3f0f54095ee600f66291') in 0.001333559 seconds
-2026-10-27T18:56:19.9933632Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '759a01f56f0c30c090388fdd5320648c') in 0.000967263 seconds
-2026-10-27T18:56:19.9977433Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T18:56:19.9977965Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T18:56:19.9978897Z Asset Pipeline Refresh (id=2643987f1b418605ab113bdca0ac21d6): Total: 0.027 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-2026-10-27T18:56:20.0212019Z Unloading 2158 unused Assets / (398.5 MB). Loaded Objects now: 6587.
-2026-10-27T18:56:20.0212475Z Memory consumption went from 1.82 GB to 1.43 GB.
-2026-10-27T18:56:20.0213090Z Total: 19.418993 ms (FindLiveObjects: 0.574467 ms CreateObjectMapping: 0.101782 ms MarkObjects: 13.082783 ms  DeleteObjects: 5.658780 ms)
-2026-10-27T18:56:20.0213562Z 
-2026-10-27T18:56:20.3342137Z [Physics::Module] Cleanup current backned.
-2026-10-27T18:56:20.3342537Z [Physics::Module] Id: 0xf2b8ea05
-2026-10-27T18:56:20.3343027Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
-2026-10-27T18:56:20.3343518Z [Licensing::IpcConnector] License Client channel disconnected successfully.
-2026-10-27T18:56:20.3359886Z AcceleratorClientConnectionCallback - disconnected - :0
-2026-10-27T18:56:20.3501032Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T18:56:20.3502035Z       Application is shutting down...
+2026-10-27T19:41:28.9280993Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9282601Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9282858Z 
+2026-10-27T19:41:28.9295407Z ## Rocher2.fbx (prop, rig None)
+2026-10-27T19:41:28.9296201Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
+2026-10-27T19:41:28.9296922Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9297864Z - ✅ **Budget de triangles** 7204 triangles, 4471 sommets (max 60000)
+2026-10-27T19:41:28.9298759Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
+2026-10-27T19:41:28.9299817Z - ✅ **Échelle (hauteur)** 5.552 m (attendu 5.274186–5.829364), boîte 7.00×5.55×7.49, pieds à y=-2.559
+2026-10-27T19:41:28.9301123Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9302023Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9302256Z 
+2026-10-27T19:41:28.9302432Z ## T_Troncon_0_0.fbx (prop, rig None)
+2026-10-27T19:41:28.9303233Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_0/T_Troncon_0_0.fbx
+2026-10-27T19:41:28.9304039Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9304737Z - ✅ **Budget de triangles** 22779 triangles, 17156 sommets (max 60000)
+2026-10-27T19:41:28.9305689Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_0.prefab
+2026-10-27T19:41:28.9306814Z - ✅ **Échelle (hauteur)** 9.882 m (attendu 8.893484–10.86981), boîte 51.60×9.88×51.58, pieds à y=-3.133
+2026-10-27T19:41:28.9308323Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9309754Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9311133Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9312508Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9313952Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9315374Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9316734Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9317782Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9318015Z 
+2026-10-27T19:41:28.9318426Z ## T_Troncon_0_1.fbx (prop, rig None)
+2026-10-27T19:41:28.9319247Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_1/T_Troncon_0_1.fbx
+2026-10-27T19:41:28.9320056Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9320770Z - ✅ **Budget de triangles** 16919 triangles, 12906 sommets (max 60000)
+2026-10-27T19:41:28.9321726Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_1.prefab
+2026-10-27T19:41:28.9322873Z - ✅ **Échelle (hauteur)** 11.108 m (attendu 9.997091–12.21867), boîte 44.14×11.11×51.66, pieds à y=-6.546
+2026-10-27T19:41:28.9324157Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9325556Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9326915Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9328512Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9330148Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9331600Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9332969Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9333835Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9334064Z 
+2026-10-27T19:41:28.9334233Z ## T_Troncon_0_2.fbx (prop, rig None)
+2026-10-27T19:41:28.9335010Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_2/T_Troncon_0_2.fbx
+2026-10-27T19:41:28.9335804Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9336485Z - ✅ **Budget de triangles** 29144 triangles, 21909 sommets (max 60000)
+2026-10-27T19:41:28.9337639Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_2.prefab
+2026-10-27T19:41:28.9338800Z - ✅ **Échelle (hauteur)** 12.344 m (attendu 11.10972–13.57855), boîte 51.25×12.34×51.54, pieds à y=-10.292
+2026-10-27T19:41:28.9340092Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9341477Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9342839Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9344200Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9345561Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9347008Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9348669Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9350065Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9350925Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9351147Z 
+2026-10-27T19:41:28.9351314Z ## T_Troncon_0_3.fbx (prop, rig None)
+2026-10-27T19:41:28.9352098Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_3/T_Troncon_0_3.fbx
+2026-10-27T19:41:28.9352874Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9353564Z - ✅ **Budget de triangles** 20654 triangles, 16189 sommets (max 60000)
+2026-10-27T19:41:28.9354500Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_3.prefab
+2026-10-27T19:41:28.9355820Z - ✅ **Échelle (hauteur)** 13.776 m (attendu 12.39875–15.15403), boîte 53.29×13.78×51.90, pieds à y=-15.585
+2026-10-27T19:41:28.9357099Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9358717Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9360075Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9361438Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9362873Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9364287Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9365724Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9367282Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9368377Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9368600Z 
+2026-10-27T19:41:28.9368761Z ## T_Troncon_0_4.fbx (prop, rig None)
+2026-10-27T19:41:28.9369546Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_4/T_Troncon_0_4.fbx
+2026-10-27T19:41:28.9370350Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9371123Z - ✅ **Budget de triangles** 7997 triangles, 5874 sommets (max 60000)
+2026-10-27T19:41:28.9372059Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_4.prefab
+2026-10-27T19:41:28.9373192Z - ✅ **Échelle (hauteur)** 7.752 m (attendu 6.976654–8.527021), boîte 38.04×7.75×25.31, pieds à y=-15.585
+2026-10-27T19:41:28.9374499Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9375908Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9377271Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9378830Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9380269Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9381688Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9383108Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9384530Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9385392Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9385626Z 
+2026-10-27T19:41:28.9385800Z ## T_Troncon_0_m1.fbx (prop, rig None)
+2026-10-27T19:41:28.9386592Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_m1/T_Troncon_0_m1.fbx
+2026-10-27T19:41:28.9387571Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9388292Z - ✅ **Budget de triangles** 492 triangles, 362 sommets (max 60000)
+2026-10-27T19:41:28.9389822Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_m1.prefab
+2026-10-27T19:41:28.9390963Z - ✅ **Échelle (hauteur)** 7.372 m (attendu 6.634953–8.109386), boîte 21.70×7.37×16.81, pieds à y=-0.518
+2026-10-27T19:41:28.9392255Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9393899Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9395294Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9396171Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9396393Z 
+2026-10-27T19:41:28.9396554Z ## T_Troncon_1_0.fbx (prop, rig None)
+2026-10-27T19:41:28.9397539Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_0/T_Troncon_1_0.fbx
+2026-10-27T19:41:28.9398356Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9399037Z - ✅ **Budget de triangles** 6105 triangles, 4532 sommets (max 60000)
+2026-10-27T19:41:28.9399972Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_0.prefab
+2026-10-27T19:41:28.9401101Z - ✅ **Échelle (hauteur)** 8.305 m (attendu 7.474657–9.135691), boîte 25.26×8.31×36.17, pieds à y=-2.999
+2026-10-27T19:41:28.9402413Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9403981Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9405369Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9406745Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9408664Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9410125Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9411634Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9412533Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9412759Z 
+2026-10-27T19:41:28.9412917Z ## T_Troncon_1_1.fbx (prop, rig None)
+2026-10-27T19:41:28.9413717Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_1/T_Troncon_1_1.fbx
+2026-10-27T19:41:28.9414510Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9415223Z - ✅ **Budget de triangles** 6461 triangles, 5284 sommets (max 60000)
+2026-10-27T19:41:28.9416223Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_1.prefab
+2026-10-27T19:41:28.9417715Z - ✅ **Échelle (hauteur)** 10.297 m (attendu 9.267158–11.32653), boîte 29.13×10.30×50.03, pieds à y=-5.632
+2026-10-27T19:41:28.9419112Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9420617Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9422101Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9423564Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9425007Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9426482Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9428128Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9429038Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9429264Z 
+2026-10-27T19:41:28.9429438Z ## T_Troncon_1_2.fbx (prop, rig None)
+2026-10-27T19:41:28.9430237Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_2/T_Troncon_1_2.fbx
+2026-10-27T19:41:28.9431045Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9431980Z - ✅ **Budget de triangles** 2290 triangles, 1664 sommets (max 60000)
+2026-10-27T19:41:28.9432931Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_2.prefab
+2026-10-27T19:41:28.9434080Z - ✅ **Échelle (hauteur)** 7.842 m (attendu 7.058225–8.626719), boîte 29.51×7.84×27.48, pieds à y=-5.884
+2026-10-27T19:41:28.9435367Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9436769Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9438368Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9439750Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9441198Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9442151Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9442377Z 
+2026-10-27T19:41:28.9442545Z ## T_Troncon_1_3.fbx (prop, rig None)
+2026-10-27T19:41:28.9443506Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_3/T_Troncon_1_3.fbx
+2026-10-27T19:41:28.9444320Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9445015Z - ✅ **Budget de triangles** 1674 triangles, 1454 sommets (max 60000)
+2026-10-27T19:41:28.9445953Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_3.prefab
+2026-10-27T19:41:28.9447078Z - ✅ **Échelle (hauteur)** 7.915 m (attendu 7.12352–8.706525), boîte 19.69×7.92×38.79, pieds à y=-15.271
+2026-10-27T19:41:28.9448555Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9449957Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9451350Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9452743Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9454121Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9455579Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9456992Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9458042Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9458276Z 
+2026-10-27T19:41:28.9458451Z ## T_Troncon_1_4.fbx (prop, rig None)
+2026-10-27T19:41:28.9459229Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_4/T_Troncon_1_4.fbx
+2026-10-27T19:41:28.9460221Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9460899Z - ✅ **Budget de triangles** 1825 triangles, 1351 sommets (max 60000)
+2026-10-27T19:41:28.9461852Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_4.prefab
+2026-10-27T19:41:28.9463005Z - ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.27, pieds à y=-15.588
+2026-10-27T19:41:28.9464288Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9465686Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9467057Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9468672Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9470132Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9471851Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9472786Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9473011Z 
+2026-10-27T19:41:28.9473182Z ## T_Troncon_m1_0.fbx (prop, rig None)
+2026-10-27T19:41:28.9473995Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_0/T_Troncon_m1_0.fbx
+2026-10-27T19:41:28.9474805Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9475488Z - ✅ **Budget de triangles** 1674 triangles, 1371 sommets (max 60000)
+2026-10-27T19:41:28.9476441Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_0.prefab
+2026-10-27T19:41:28.9477780Z - ✅ **Échelle (hauteur)** 8.249 m (attendu 7.424075–9.073869), boîte 17.66×8.25×28.55, pieds à y=-0.857
+2026-10-27T19:41:28.9479092Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9480504Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9481881Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9483251Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9484690Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9486122Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9487656Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9488553Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9488778Z 
+2026-10-27T19:41:28.9489017Z ## T_Troncon_m1_2.fbx (prop, rig None)
+2026-10-27T19:41:28.9489843Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_2/T_Troncon_m1_2.fbx
+2026-10-27T19:41:28.9490657Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9491375Z - ✅ **Budget de triangles** 573 triangles, 453 sommets (max 60000)
+2026-10-27T19:41:28.9492307Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_2.prefab
+2026-10-27T19:41:28.9493441Z - ✅ **Échelle (hauteur)** 8.029 m (attendu 7.225704–8.831416), boîte 15.16×8.03×34.64, pieds à y=-8.063
+2026-10-27T19:41:28.9494725Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9496124Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9497871Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9499277Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9500164Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9500382Z 
+2026-10-27T19:41:28.9500548Z ## T_Troncon_m1_3.fbx (prop, rig None)
+2026-10-27T19:41:28.9501349Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_3/T_Troncon_m1_3.fbx
+2026-10-27T19:41:28.9502160Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9502818Z - ✅ **Budget de triangles** 12 triangles, 27 sommets (max 60000)
+2026-10-27T19:41:28.9503742Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_3.prefab
+2026-10-27T19:41:28.9504853Z - ✅ **Échelle (hauteur)** 1.981 m (attendu 1.783069–2.179307), boîte 8.95×1.98×6.48, pieds à y=-3.652
+2026-10-27T19:41:28.9506124Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9507002Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9507214Z 
+2026-10-27T19:41:28.9507714Z ## T_Troncon_m1_m1.fbx (prop, rig None)
+2026-10-27T19:41:28.9508588Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_m1/T_Troncon_m1_m1.fbx
+2026-10-27T19:41:28.9509412Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9510088Z - ✅ **Budget de triangles** 289 triangles, 197 sommets (max 60000)
+2026-10-27T19:41:28.9511022Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_m1.prefab
+2026-10-27T19:41:28.9512155Z - ✅ **Échelle (hauteur)** 7.828 m (attendu 7.045424–8.611073), boîte 16.62×7.83×17.46, pieds à y=-0.524
+2026-10-27T19:41:28.9513429Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9514855Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9516241Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9517116Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9517500Z 
+2026-10-27T19:41:28.9517666Z ## M_Banc.fbx (prop, rig None)
+2026-10-27T19:41:28.9518327Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banc/M_Banc.fbx
+2026-10-27T19:41:28.9519025Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9519681Z - ✅ **Budget de triangles** 36 triangles, 72 sommets (max 40000)
+2026-10-27T19:41:28.9520536Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banc.prefab
+2026-10-27T19:41:28.9521532Z - ✅ **Échelle (hauteur)** 0.500 m (attendu 0.475–0.525), boîte 1.80×0.50×0.45, pieds à y=0.000
+2026-10-27T19:41:28.9522902Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9523822Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9524038Z 
+2026-10-27T19:41:28.9524203Z ## M_Banniere.fbx (prop, rig None)
+2026-10-27T19:41:28.9524932Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banniere/M_Banniere.fbx
+2026-10-27T19:41:28.9525686Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9526354Z - ✅ **Budget de triangles** 60 triangles, 99 sommets (max 40000)
+2026-10-27T19:41:28.9527237Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banniere.prefab
+2026-10-27T19:41:28.9528791Z - ✅ **Échelle (hauteur)** 6.000 m (attendu 5.7–6.3), boîte 1.21×6.00×0.12, pieds à y=0.000
+2026-10-27T19:41:28.9530020Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9531537Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9533424Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9534448Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9534674Z 
+2026-10-27T19:41:28.9534855Z ## M_Caisses.fbx (prop, rig None)
+2026-10-27T19:41:28.9535561Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Caisses/M_Caisses.fbx
+2026-10-27T19:41:28.9536303Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9536976Z - ✅ **Budget de triangles** 324 triangles, 648 sommets (max 40000)
+2026-10-27T19:41:28.9538082Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Caisses.prefab
+2026-10-27T19:41:28.9539152Z - ✅ **Échelle (hauteur)** 1.620 m (attendu 1.539–1.701), boîte 2.06×1.62×1.16, pieds à y=-0.010
+2026-10-27T19:41:28.9540398Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9541835Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9542769Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9542998Z 
+2026-10-27T19:41:28.9543168Z ## M_Charrette.fbx (prop, rig None)
+2026-10-27T19:41:28.9544081Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Charrette/M_Charrette.fbx
+2026-10-27T19:41:28.9544862Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9545534Z - ✅ **Budget de triangles** 396 triangles, 660 sommets (max 40000)
+2026-10-27T19:41:28.9546448Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Charrette.prefab
+2026-10-27T19:41:28.9547693Z - ✅ **Échelle (hauteur)** 1.475 m (attendu 1.40125–1.54875), boîte 2.04×1.48×4.39, pieds à y=0.000
+2026-10-27T19:41:28.9548954Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9550346Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9551803Z - ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9552711Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9552959Z 
+2026-10-27T19:41:28.9553166Z ## M_Etal0.fbx (prop, rig None)
+2026-10-27T19:41:28.9553898Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal0/M_Etal0.fbx
+2026-10-27T19:41:28.9554649Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9555336Z - ✅ **Budget de triangles** 756 triangles, 1512 sommets (max 40000)
+2026-10-27T19:41:28.9556205Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal0.prefab
+2026-10-27T19:41:28.9557266Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 4.46×2.96×2.41, pieds à y=-0.010
+2026-10-27T19:41:28.9559852Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9561326Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9562851Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9564386Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9565879Z - ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9567539Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9569116Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9570157Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9570393Z 
+2026-10-27T19:41:28.9570559Z ## M_Etal1.fbx (prop, rig None)
+2026-10-27T19:41:28.9571512Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal1/M_Etal1.fbx
+2026-10-27T19:41:28.9572238Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9572946Z - ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
+2026-10-27T19:41:28.9573856Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal1.prefab
+2026-10-27T19:41:28.9574988Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+2026-10-27T19:41:28.9576288Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9577920Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9579430Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9580998Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9582720Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9584296Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9585775Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9586674Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9586899Z 
+2026-10-27T19:41:28.9587057Z ## M_Etal2.fbx (prop, rig None)
+2026-10-27T19:41:28.9587908Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal2/M_Etal2.fbx
+2026-10-27T19:41:28.9588630Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9589400Z - ✅ **Budget de triangles** 956 triangles, 1452 sommets (max 40000)
+2026-10-27T19:41:28.9590310Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal2.prefab
+2026-10-27T19:41:28.9591382Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+2026-10-27T19:41:28.9592670Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9594122Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9595645Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9597207Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9598908Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9600327Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9601218Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9601440Z 
+2026-10-27T19:41:28.9601607Z ## M_Etal3.fbx (prop, rig None)
+2026-10-27T19:41:28.9602269Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal3/M_Etal3.fbx
+2026-10-27T19:41:28.9602975Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9603652Z - ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
+2026-10-27T19:41:28.9604532Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal3.prefab
+2026-10-27T19:41:28.9605585Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+2026-10-27T19:41:28.9606846Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9608447Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9610139Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9611736Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9613214Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9614123Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9614341Z 
+2026-10-27T19:41:28.9614508Z ## M_Foin.fbx (prop, rig None)
+2026-10-27T19:41:28.9615158Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Foin/M_Foin.fbx
+2026-10-27T19:41:28.9615856Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9616527Z - ✅ **Budget de triangles** 48 triangles, 96 sommets (max 40000)
+2026-10-27T19:41:28.9617561Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Foin.prefab
+2026-10-27T19:41:28.9618685Z - ✅ **Échelle (hauteur)** 1.500 m (attendu 1.425–1.575), boîte 1.64×1.50×1.12, pieds à y=0.000
+2026-10-27T19:41:28.9620076Z - ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9626177Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9627971Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9628216Z 
+2026-10-27T19:41:28.9628391Z ## M_Fontaine.fbx (prop, rig None)
+2026-10-27T19:41:28.9629128Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Fontaine/M_Fontaine.fbx
+2026-10-27T19:41:28.9629884Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9630568Z - ✅ **Budget de triangles** 524 triangles, 701 sommets (max 40000)
+2026-10-27T19:41:28.9631466Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Fontaine.prefab
+2026-10-27T19:41:28.9632529Z - ✅ **Échelle (hauteur)** 4.300 m (attendu 4.085–4.515), boîte 7.18×4.30×7.18, pieds à y=0.000
+2026-10-27T19:41:28.9633755Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9635175Z - ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9636065Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9636290Z 
+2026-10-27T19:41:28.9636451Z ## M_Forge.fbx (prop, rig None)
+2026-10-27T19:41:28.9637124Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Forge/M_Forge.fbx
+2026-10-27T19:41:28.9638044Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9638728Z - ✅ **Budget de triangles** 1296 triangles, 2136 sommets (max 40000)
+2026-10-27T19:41:28.9639597Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Forge.prefab
+2026-10-27T19:41:28.9640640Z - ✅ **Échelle (hauteur)** 8.525 m (attendu 8.09875–8.95125), boîte 7.80×8.53×11.19, pieds à y=-0.400
+2026-10-27T19:41:28.9641914Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9643350Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9644716Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9646118Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9647702Z - ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9649103Z - ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9650511Z - ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9651689Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9651915Z 
+2026-10-27T19:41:28.9652078Z ## M_Lanterne.fbx (prop, rig None)
+2026-10-27T19:41:28.9652811Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Lanterne/M_Lanterne.fbx
+2026-10-27T19:41:28.9653553Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9654219Z - ✅ **Budget de triangles** 208 triangles, 309 sommets (max 40000)
+2026-10-27T19:41:28.9655104Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Lanterne.prefab
+2026-10-27T19:41:28.9656136Z - ✅ **Échelle (hauteur)** 3.430 m (attendu 3.2585–3.6015), boîte 1.07×3.43×0.44, pieds à y=0.000
+2026-10-27T19:41:28.9657618Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9659025Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9660429Z - ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9661325Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9661542Z 
+2026-10-27T19:41:28.9661875Z ## M_Maison0.fbx (prop, rig None)
+2026-10-27T19:41:28.9662585Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison0/M_Maison0.fbx
+2026-10-27T19:41:28.9663312Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-27T19:41:28.9664006Z - ✅ **Budget de triangles** 5980 triangles, 11964 sommets (max 40000)
+2026-10-27T19:41:28.9664911Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison0.prefab
+2026-10-27T19:41:28.9665993Z - ✅ **Échelle (hauteur)** 17.877 m (attendu 16.98293–18.7706), boîte 10.32×17.88×9.52, pieds à y=-0.400
+2026-10-27T19:41:28.9667267Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9669129Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9670533Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9671929Z - ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9673337Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9674736Z - ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9676153Z - ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9677799Z - ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9679329Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9680878Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9682372Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9683897Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9685358Z - ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-27T19:41:28.9686237Z - ✅ **Collider** mesh
+2026-10-27T19:41:28.9686461Z 
+2026-10-27T19:41:28.9687799Z ## M_Maison1Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '9e09e0f692cd3f0f54095ee600f66291') in 0.001406763 seconds
+2026-10-27T19:41:28.9690462Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '759a01f56f0c30c090388fdd5320648c') in 0.001224513 seconds
+2026-10-27T19:41:28.9692045Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-27T19:41:28.9692772Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-10-27T19:41:28.9693829Z Asset Pipeline Refresh (id=1a949ecc38343053c884b082e5955a20): Total: 0.028 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-10-27T19:41:28.9694981Z Unloading 2158 unused Assets / (398.3 MB). Loaded Objects now: 6588.
+2026-10-27T19:41:28.9695610Z Memory consumption went from 1.82 GB to 1.43 GB.
+2026-10-27T19:41:28.9696596Z Total: 24.319394 ms (FindLiveObjects: 0.449758 ms CreateObjectMapping: 0.189794 ms MarkObjects: 17.279769 ms  DeleteObjects: 6.399312 ms)
+2026-10-27T19:41:28.9697581Z 
+2026-10-27T19:41:29.2483789Z [Physics::Module] Cleanup current backned.
+2026-10-27T19:41:29.2484491Z [Physics::Module] Id: 0xf2b8ea05
+2026-10-27T19:41:29.2485428Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-10-27T19:41:29.2486425Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-10-27T19:41:29.2509890Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-10-27T19:41:29.2583149Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T19:41:29.2583748Z       Application is shutting down...
