@@ -109,6 +109,13 @@ namespace Korvalune
                 if (s == null) continue;
                 bool worn = s.equipped || IsBody(s.name) || (!contenuAdulte && (s.name == UnderwearLower || s.name == UnderwearUpper));
                 if (worn) foreach (var h in s.hides) hidden.Add(h);
+                // une vraie pièce de tenue portée remplace les haillons de départ (torse / jambes)
+                if (s.equipped && s.renderer && !IsBody(s.name))
+                {
+                    var slot = Game.HeroOutfit.SlotOf(s.name);
+                    if (slot == Game.Slot.Torse) hidden.Add(Game.HeroOutfit.RagsTop);
+                    else if (slot == Game.Slot.Jambes) hidden.Add(Game.HeroOutfit.RagsBottom);
+                }
             }
             foreach (var s in slots)
             {

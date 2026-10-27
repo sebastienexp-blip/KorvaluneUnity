@@ -75,11 +75,43 @@ def base(sk, a, bank, prefix, female=False, look=None):
             return np.maximum(np.maximum(cups, band), straps)
         coarse = (ch | HP.bone_mask(body, sk, ['Shoulder'], 0.3)) & (V[:, 1] > 1.12) & (V[:, 1] < 1.50) & (np.abs(V[:, 0]) < 0.20)
         a.add('sous_vetement_haut', HP.cloth_cut(body, coarse, bra_in, 0.0024), prefix + '_Under', slot='SousVetementHaut')
+    rags(sk, a, bank, body, prefix, female, waist)
     bank.recipes[prefix + '_Under'] = (lambda S: KM.linen(S, color=(0.60, 0.55, 0.46)), 512, 256, dict(metallic=0.0, smoothness=1.0))
     a.hides = getattr(a, 'hides', {})
     a.hides['SousVetementBas'] = ['Anatomie']
     a.base_body, a.base_marks, a.base_female = body, marks, female
     return body, marks
+
+
+def rags(sk, a, bank, body, prefix, female, waist):
+    """Tenue de départ du héros (« presque un vagabond ») : tunique de toile grossière à manches courtes et ourlet effiloché,
+    braies rapiécées s'arrêtant à mi-mollet, corde en guise de ceinture. Portée tant qu'aucun torse / aucune jambière n'est
+    équipé (Unity : HeroOutfit)."""
+    V = body.V; P = {n: np.asarray(p, float) for n, p in zip(sk.names, sk.pos)}
+    def along(Q, a_, b_):           # position relative le long d'un segment d'os (0 au début, 1 à la fin)
+        d = P[b_] - P[a_]; return ((Q - P[a_]) @ d) / (d @ d)
+    def side(Q, left, right):       # choisit la valeur du côté du sommet (x > 0 : gauche du personnage)
+        return np.where(Q[:, 0] > 0, left, right)
+    fray = lambda Q, k, amp: amp * (np.sin(Q[:, 0] * k + Q[:, 2] * k * 0.7) + 0.6 * np.sin(Q[:, 0] * k * 2.3 - Q[:, 2] * k * 1.9 + 1.3))
+    hem_y = (0.80 if female else 0.81)
+    neck_y = P['Neck'][1] - 0.035
+    def tunic_in(Q):
+        hem = Q[:, 1] - (hem_y + fray(Q, 38, 0.012))
+        neck = neck_y - Q[:, 1] - 0.03 * np.exp(-(Q[:, 0] / 0.045) ** 2) * (Q[:, 2] > 0)     # encolure en V lâche devant
+        sleeve = 0.42 + fray(Q, 60, 0.02) - side(Q, along(Q, 'LeftUpperArm', 'LeftLowerArm'), along(Q, 'RightUpperArm', 'RightLowerArm'))
+        return np.minimum(np.minimum(hem, neck), sleeve)
+    coarse = HP.bone_mask(body, sk, ['Hips', 'Spine', 'Chest', 'UpperChest', 'Shoulder', 'UpperArm', 'UpperLeg', 'Neck'], 0.15) & (V[:, 1] > 0.70)
+    a.add('haillons_haut', HP.cloth_cut(body, coarse, tunic_in, 0.011 if female else 0.012, thick=0.003, uv_scale=6.0), prefix + '_Rags', slot='HaillonsHaut')
+    def braies_in(Q):
+        top = waist + 0.015 - Q[:, 1]
+        calf = 0.5 + fray(Q, 55, 0.03) - side(Q, along(Q, 'LeftLowerLeg', 'LeftFoot'), along(Q, 'RightLowerLeg', 'RightFoot'))
+        return np.minimum(top, calf)
+    coarse = HP.bone_mask(body, sk, ['Hips', 'UpperLeg', 'LowerLeg', 'Spine'], 0.15) & (V[:, 1] < waist + 0.05)
+    a.add('haillons_bas', HP.cloth_cut(body, coarse, braies_in, 0.0075, thick=0.003, uv_scale=6.0), prefix + '_Rags', slot='HaillonsBas')
+    bank.recipes[prefix + '_Rags'] = (lambda S: KM.linen(S, seed=131, color=(0.40, 0.33, 0.24)), 512, 256, dict(metallic=0.0, smoothness=1.0))
+    a.hides = getattr(a, 'hides', {})
+    a.hides['HaillonsHaut'] = ['Peau_Torse', 'SousVetementHaut']
+    a.hides['HaillonsBas'] = ['Peau_Bassin', 'SousVetementBas', 'Anatomie']
 
 
 def assign(a, rules, default='Equipement'):

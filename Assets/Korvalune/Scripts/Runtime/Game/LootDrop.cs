@@ -29,10 +29,20 @@ namespace Korvalune.Game
         {
             born = Time.time;
             var c = Loot.ColorOf(item.rarity); int r = (int)item.rarity;
-            // objet : petit sac / éclat posé au sol
-            var o = GameObject.CreatePrimitive(PrimitiveType.Sphere); o.name = "Objet"; Kill(o.GetComponent<Collider>());
-            o.transform.SetParent(transform, false); o.transform.localPosition = new Vector3(0, 0.18f, 0); o.transform.localScale = new Vector3(0.32f, 0.22f, 0.32f);
-            var mr = o.GetComponent<Renderer>(); if (FX.additive) mr.sharedMaterial = new Material(mr.sharedMaterial) { color = Color.Lerp(c, Color.white, 0.2f) };
+            // objet : coffret de bois cerclé de métal, ferrures et serrure à la couleur de la rareté
+            var box = new GameObject("Coffret").transform; box.SetParent(transform, false); box.localRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+            var wood = new Color(0.36f, 0.22f, 0.12f); var woodDark = new Color(0.22f, 0.13f, 0.07f);
+            var trim = Color.Lerp(new Color(0.42f, 0.42f, 0.45f), c, r == 0 ? 0f : 0.75f);
+            Part(box, "Caisse", new Vector3(0, 0.17f, 0), new Vector3(0.56f, 0.30f, 0.38f), wood, 0f, 0.25f);
+            Part(box, "Couvercle", new Vector3(0, 0.355f, 0), new Vector3(0.60f, 0.08f, 0.42f), woodDark, 0f, 0.3f);
+            Part(box, "Bombé", new Vector3(0, 0.41f, 0), new Vector3(0.54f, 0.05f, 0.34f), wood, 0f, 0.3f);
+            foreach (var x in new[] { -0.19f, 0.19f })
+            {
+                Part(box, "Cerclage", new Vector3(x, 0.22f, 0), new Vector3(0.06f, 0.42f, 0.43f), trim, 0.9f, 0.55f);
+            }
+            foreach (var x in new[] { -0.27f, 0.27f }) foreach (var z in new[] { -0.18f, 0.18f })
+                Part(box, "Coin", new Vector3(x, 0.17f, z), new Vector3(0.06f, 0.32f, 0.06f), trim, 0.9f, 0.55f);
+            Part(box, "Serrure", new Vector3(0, 0.3f, 0.2f), new Vector3(0.1f, 0.12f, 0.03f), Color.Lerp(trim, Color.white, 0.25f), 1f, 0.7f, r >= 2 ? c * 1.6f : Color.black);
             // halo au sol
             if (FX.additive)
             {
@@ -67,6 +77,19 @@ namespace Korvalune.Game
                 ps.GetComponent<ParticleSystemRenderer>().sharedMaterial = FX.additive;
                 ps.Play();
             }
+        }
+
+        static Material litBase;
+        static void Part(Transform parent, string name, Vector3 pos, Vector3 size, Color col, float metal, float smooth, Color emission = default)
+        {
+            var g = GameObject.CreatePrimitive(PrimitiveType.Cube); g.name = name; Kill(g.GetComponent<Collider>());
+            g.transform.SetParent(parent, false); g.transform.localPosition = pos; g.transform.localScale = size;
+            var mr = g.GetComponent<Renderer>(); if (!litBase) litBase = mr.sharedMaterial;
+            var m = new Material(litBase); m.color = col; m.SetColor("_BaseColor", col);
+            if (m.HasProperty("_Metallic")) m.SetFloat("_Metallic", metal);
+            if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", smooth);
+            if (emission.maxColorComponent > 0.01f && m.HasProperty("_EmissionColor")) { m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", emission); }
+            mr.sharedMaterial = m;
         }
 
         void Update()

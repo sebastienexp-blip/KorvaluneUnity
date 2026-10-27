@@ -213,18 +213,27 @@ namespace Korvalune.Game
         {
             var glow = Img(parent, name + "_aura", UIStyle.Glow(), anchor, pos, new Vector2(size * 1.5f, size * 1.5f)); glow.color = new Color(0, 0, 0, 0);
             var frame = Img(parent, name, UIStyle.Bar(), anchor, pos, new Vector2(size, size)); frame.type = Image.Type.Sliced; frame.raycastTarget = true;
-            var label = Label(frame.rectTransform, "Texte", "", 18, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size - 8, size - 8));
+            var icon = Img(frame.rectTransform, "Icone", null, new Vector2(0.5f, 0.5f), new Vector2(0, 4), new Vector2(size * 0.84f, size * 0.84f)); icon.preserveAspect = true; icon.raycastTarget = false; icon.enabled = false;
+            var label = Label(frame.rectTransform, "Texte", "", 18, TextAnchor.LowerCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size - 8, size - 8));
             var b = frame.gameObject.AddComponent<Button>(); b.targetGraphic = frame; b.onClick.AddListener(() => onClick());
             return (frame, glow, label);
         }
 
         static void Paint((Image frame, Image glow, Text label) c, ItemSave it, string empty)
         {
-            if (it == null) { c.frame.color = new Color(0.12f, 0.09f, 0.07f, 0.9f); c.glow.color = new Color(0, 0, 0, 0); c.label.text = $"<color=#6b5a48>{empty}</color>"; return; }
+            var icon = c.frame.transform.Find("Icone")?.GetComponent<Image>();
+            if (it == null)
+            {
+                c.frame.color = new Color(0.12f, 0.09f, 0.07f, 0.9f); c.glow.color = new Color(0, 0, 0, 0); c.label.alignment = TextAnchor.MiddleCenter; c.label.text = $"<color=#6b5a48>{empty}</color>";
+                if (icon) icon.enabled = false; return;
+            }
+            var spr = ItemIcons.Get(it.baseName);
+            if (icon) { icon.sprite = spr; icon.enabled = spr; }
             var col = Loot.ColorOf(it.rarity);
             c.frame.color = Color.Lerp(new Color(0.10f, 0.07f, 0.05f), col, 0.35f);
             c.glow.color = it.rarity >= Rarity.Legendaire ? new Color(col.r, col.g, col.b, 0.55f) : new Color(0, 0, 0, 0);   // aura comme au sol
-            c.label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.baseName}</b></color>\n<size=15>{SlotName[it.slot]} · {it.power}</size>";
+            if (spr) { c.label.alignment = TextAnchor.LowerRight; c.label.text = $"<size=17><color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.power}</b></color></size>"; }
+            else { c.label.alignment = TextAnchor.MiddleCenter; c.label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.baseName}</b></color>\n<size=15>{SlotName[it.slot]} · {it.power}</size>"; }
         }
 
         /// <summary>Panneau d'inventaire : équipement porté (9 emplacements) à gauche, sac de 40 objets à droite, caractéristiques et
