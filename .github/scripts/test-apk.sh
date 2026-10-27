@@ -25,7 +25,7 @@ ACT=$(adb shell cmd package resolve-activity --brief $PKG | tail -1 | tr -d '\r'
 echo "- Activité : $ACT" >> $R
 adb shell am start -n "$ACT" -e autotest 1 > /dev/null 2>&1 || adb shell monkey -p $PKG -c android.intent.category.LAUNCHER 1 > /dev/null 2>&1
 seen=""; start=$(date +%s); shots=0
-while [ $(( $(date +%s) - start )) -lt 420 ]; do
+while [ $(( $(date +%s) - start )) -lt 1200 ]; do
   sleep 4
   adb logcat -d -s Unity:V > $OUT/partie_brut.txt 2>/dev/null
   for m in "arrivée:1_arrivee" "marche 10 s:2_marche" "panneau : arbre:3_arbre" "panneau : inventaire:4_inventaire" "panneau : menu:5_menu" "panneau : options:6_options" "TERMINÉ:7_fin"; do
@@ -35,7 +35,7 @@ while [ $(( $(date +%s) - start )) -lt 420 ]; do
   done
   case "$seen" in *"|7_fin|"*) break;; esac
   # captures régulières, même sans repère dans le journal (pour voir où la partie s'arrête)
-  el=$(( $(date +%s) - start )); if [ $el -ge $(( (shots + 1) * 60 )) ] && [ $shots -lt 5 ]; then shots=$((shots+1)); adb exec-out screencap -p > $OUT/partie_${shots}min.png; fi
+  el=$(( $(date +%s) - start )); if [ $el -ge $(( (shots + 1) * 120 )) ] && [ $shots -lt 9 ]; then shots=$((shots+1)); adb exec-out screencap -p > $OUT/partie_${shots}min.png; fi
   adb shell pidof $PKG > /dev/null || { echo "- ❌ Le jeu s'est arrêté pendant la partie" >> $R; ok=0; break; }
 done
 grep -E "\[Korvalune\]" $OUT/partie_brut.txt | sed -E 's/^.*\[Korvalune\]/[Korvalune]/' > $OUT/partie.txt; rm -f $OUT/partie_brut.txt
