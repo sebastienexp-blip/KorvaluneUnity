@@ -1,0 +1,45 @@
+# Importe les sons et musiques générés (ElevenLabs) dans le projet : chaque ligne de « liste » vaut « nom|url ».
+# Les fichiers sont rangés dans Assets/Korvalune/Resources/Audio/<nom>.mp3, puis le dépôt est mis à jour.
+name: Sons — import
+
+on:
+  workflow_dispatch:
+    inputs:
+      liste:
+        description: "Une ligne par son : nom|url"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sons-import
+  cancel-in-progress: false
+
+jobs:
+  importer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Télécharger les sons
+        env:
+          LISTE: ${{ github.event.inputs.liste }}
+        run: |
+          mkdir -p Assets/Korvalune/Resources/Audio
+          ok=0; ko=0
+          while IFS='|' read -r nom url; do
+            nom="$(echo "$nom" | tr -cd 'a-zA-Z0-9_')"; [ -z "$nom" ] || [ -z "$url" ] && continue
+            if curl -sSfL --retry 3 -o "Assets/Korvalune/Resources/Audio/$nom.mp3" "$url"; then
+              echo "✅ $nom ($(stat -c %s Assets/Korvalune/Resources/Audio/$nom.mp3) octets)"; ok=$((ok+1))
+            else echo "❌ $nom"; ko=$((ko+1)); fi
+          done <<< "$LISTE"
+          echo "Importés : $ok, échecs : $ko"
+          ls -la Assets/Korvalune/Resources/Audio | tail -n +2
+      - name: Enregistrer
+        run: |
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add Assets/Korvalune/Resources/Audio
+          git commit -m "Sons : import [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done
