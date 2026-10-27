@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-10-27 15:22 UTC
+# Rapport d'intégration Unity — 2026-10-27 17:50 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
 - 0 modèle(s) intégré(s), 257 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-10-27 15:22 UTC
+# Rapport d'intégration Unity — 2026-10-27 17:51 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -2464,11 +2464,11 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_133 captures écrites dans ci-out/ (OpenGLCore) en 4.9 min._
+_133 captures écrites dans ci-out/ (OpenGLCore) en 4.8 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-10-27 15:29 UTC
+# Rapport d'intégration Unity — 2026-10-27 17:56 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -2480,11 +2480,11 @@ _133 captures écrites dans ci-out/ (OpenGLCore) en 4.9 min._
 - ✅ **Château** 
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
-- ✅ **Ville : échoppes des marchands** Mystique, Armurier, Marchand, Reliquaire Céleste, Coffre, Alchimiste, Forgeron, Joaillier, Marchande de curiosités
+- ✅ **Ville : échoppes des marchands** Coffre, Joaillier, Reliquaire Céleste, Marchand, Alchimiste, Mystique, Armurier, Forgeron, Marchande de curiosités
 - ✅ **Ville : maisons** 48 maisons
 - ✅ **Ville : rue principale praticable jusqu'au château** dégagée
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
-- ✅ **Butin et inventaire** 6 objets portés, 20 dans le sac — Dégâts 693   Vie 814   Armure 195 Critique 31.9 %   Attaque 1.58/s   Recharge −8 %
+- ❌ **Butin et inventaire** 0 objets portés, 26 dans le sac — Dégâts 18   Vie 220   Armure 2 Critique 12 %   Attaque 1.33/s   Recharge −0 % Force 0
 - ✅ **Captures de la vallée** ci-out/Jeu_*.png
 - ✅ **Départ du héros au sec (au-dessus de l'eau)** y = 11.7, eau à 10.4
 - ✅ **Camp « squelette » au sec** y = 12.2
@@ -2525,4 +2525,4 @@ _133 captures écrites dans ci-out/ (OpenGLCore) en 4.9 min._
 ## Journal Unity (erreurs et avertissements)
 Aucun.
 
-**RÉSULTAT : tout est valide.**
+**RÉSULTAT : 1 vérification(s) en échec.**
