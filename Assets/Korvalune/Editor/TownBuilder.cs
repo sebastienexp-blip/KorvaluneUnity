@@ -99,12 +99,21 @@ namespace Korvalune.EditorTools
             Ramparts(rng);
             CI.Step("ville : enceinte");
 
+            // place du marché : étals des petits marchands en cercle autour de la fontaine, caisses et tonneaux
+            for (int k = 0; k < 6; k++)
+            {
+                float a = (30 + 60 * k) * Mathf.Deg2Rad; var q = Plaza + new Vector2(Mathf.Sin(a), Mathf.Cos(a)) * 8.6f;
+                if (Mathf.Abs(Mathf.Sin(a)) < 0.3f) continue;                                      // laisse passer la rue principale (nord-sud)
+                Put("M_Etal" + (k % 4), G(q) - Vector3.up * 0.05f, FaceYaw(Plaza - q));
+                var side = new Vector2(Mathf.Cos(a), -Mathf.Sin(a));
+                Put(k % 2 == 0 ? "M_Caisses" : "M_Tonneaux", G(q + side * 3.0f + (q - Plaza).normalized * 1.0f), (float)rng.NextDouble() * 360);
+            }
             // place du marché : fontaine, bancs, lanternes, bannières
             Put("M_Fontaine", G(Plaza) - Vector3.up * 0.05f, 0); taken.Add(new Spot { p = Plaza, r = 4.5f });
             for (int k = 0; k < 4; k++)
             {
                 float a = (45 + 90 * k) * Mathf.Deg2Rad; var q = Plaza + new Vector2(Mathf.Sin(a), Mathf.Cos(a)) * (PlazaR - 1.2f);
-                Lamp(q); var b = Plaza + new Vector2(Mathf.Sin(a + 0.35f), Mathf.Cos(a + 0.35f)) * 6.5f; Put("M_Banc", G(b), FaceYaw(Plaza - b) + 180);
+                Lamp(q); var b = Plaza + new Vector2(Mathf.Sin(a + 0.35f), Mathf.Cos(a + 0.35f)) * 5.3f; Put("M_Banc", G(b), FaceYaw(Plaza - b) + 180);
             }
 
             // échoppes autour de la place, façade vers la fontaine ; marchand derrière le comptoir
@@ -130,7 +139,7 @@ namespace Korvalune.EditorTools
             // coffre (près du marchand général) et Reliquaire Céleste (place secondaire)
             var stash = PlaceAt("S_Coffre", AroundPlaza(PlazaR + 2.2f), 1.2f, c => Plaza - c, 0);
             if (stash) Vendor(stash.transform, MerchantKind.Coffre, new Vector3(0, 0, 0.9f), standing: false);
-            var rel = PlaceAt("S_Reliquaire", AroundPlaza(PlazaR + 10f).Concat(AroundPlaza(PlazaR + 16f)), 5.4f, c => Plaza - c, 6f);
+            var rel = PlaceAt("S_Reliquaire", AroundPlaza(PlazaR + 10f).Concat(AroundPlaza(PlazaR + 16f)).Concat(RingSpots(RingR + 10f, 72)).Concat(RingSpots(RingR + 18f, 72)), 5.4f, c => Plaza - c, 6f);
             if (rel)
             {
                 Vendor(rel.transform, MerchantKind.Reliquaire, new Vector3(0, 0.75f, -1.2f), standing: false);
@@ -139,7 +148,7 @@ namespace Korvalune.EditorTools
             CI.Step("ville : marché et échoppes");
 
             // taverne et puits sur la rue principale, face à la rue
-            var tav = PlaceAt("M_Taverne", AlongStreet(Main[0], Main[1], 7.5f, 2f), 7.2f, c => new Vector2(-Mathf.Sign(c.x), 0), 4f);
+            var tav = PlaceAt("M_Taverne", RingSpots(RingR + 11f, 90).Concat(RingSpots(RingR + 20f, 90)), 7.2f, c => -c.normalized, 4f);
             if (tav) { Glow(tav.transform, new Vector3(-1.6f, 2.55f, -4.35f), new Color(1f, 0.7f, 0.35f), 1.0f, 5f); Glow(tav.transform, new Vector3(1.6f, 2.55f, -4.35f), new Color(1f, 0.7f, 0.35f), 1.0f, 5f); }
             PlaceAt("M_Puits", RingSpots(RingR + 5f, 40), 2.0f, c => -c, 3.2f);
 

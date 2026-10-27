@@ -126,7 +126,7 @@ namespace Korvalune.EditorTools
             cam.gameObject.AddComponent<CameraRig>();
             var camData = cam.GetComponent<UniversalAdditionalCameraData>(); if (!camData) camData = cam.gameObject.AddComponent<UniversalAdditionalCameraData>();
             camData.renderPostProcessing = true; camData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-            WorldBuilder.PostProcess();
+            WorldBuilder.PostProcess("Crypte", 0.25f);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = WorldBuilder.Config();
             game.zoneName = "Crypte de Korvalune"; game.questTitle = "Purger la crypte";

@@ -194,7 +194,7 @@ namespace Korvalune.EditorTools
             cam.gameObject.AddComponent<CameraRig>();
             var camData = cam.GetComponent<UniversalAdditionalCameraData>(); if (!camData) camData = cam.gameObject.AddComponent<UniversalAdditionalCameraData>();
             camData.renderPostProcessing = true; camData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-            PostProcess();
+            PostProcess("Vallee", 0.45f);
             Ambience(cam.transform);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = Config();
@@ -240,8 +240,9 @@ namespace Korvalune.EditorTools
         }
 
         // ------------------------------------------------------------------------------------------ textures et couches
-        static readonly string[] LayerNames = { "Herbe", "SousBois", "Chemin", "Roche", "Sable", "Pave" };
-        static readonly float[] LayerTile = { 6, 8, 5, 14, 10, 3.5f };
+        // les 4 premières couches sont rendues dans la passe principale du terrain (URP) : herbe, chemins, pavés, roche
+        static readonly string[] LayerNames = { "Herbe", "Chemin", "Pave", "Roche", "SousBois", "Sable" };
+        static readonly float[] LayerTile = { 6, 5, 3.5f, 14, 8, 10 };
 
         static void ConfigureTerrainTextures()
         {
@@ -297,7 +298,7 @@ namespace Korvalune.EditorTools
                 float w5 = TownBuilder.Cobble(p) * 8;                                                   // rues pavées et place du marché
                 if (x > 230) w4 += Smooth(230, 260, x) * 2;
                 float s = w0 + w1 + w2 + w3 + w4 + w5;
-                map[j, i, 0] = w0 / s; map[j, i, 1] = w1 / s; map[j, i, 2] = w2 / s; map[j, i, 3] = w3 / s; map[j, i, 4] = w4 / s; map[j, i, 5] = w5 / s;
+                map[j, i, 0] = w0 / s; map[j, i, 4] = w1 / s; map[j, i, 1] = w2 / s; map[j, i, 3] = w3 / s; map[j, i, 5] = w4 / s; map[j, i, 2] = w5 / s;
             }
             td.SetAlphamaps(0, 0, map);
         }
@@ -439,14 +440,16 @@ namespace Korvalune.EditorTools
         }
 
         /// <summary>Post-traitement global : bloom doux, tonemapping ACES, étalonnage chaud, vignette, lift/gamma/gain légers.</summary>
-        public static void PostProcess()
+        /// <summary>Profil de post-traitement propre à chaque scène (un profil partagé, supprimé puis recréé par une autre scène,
+        /// laisserait des références cassées dans les scènes déjà enregistrées).</summary>
+        public static void PostProcess(string tag = "Vallee", float exposure = 0.15f)
         {
-            var path = DataDir + "/Vallee_PostProcess.asset";
+            var path = DataDir + $"/{tag}_PostProcess.asset";
             AssetDatabase.DeleteAsset(path);
             var prof = ScriptableObject.CreateInstance<VolumeProfile>(); AssetDatabase.CreateAsset(prof, path);
             var bloom = prof.Add<Bloom>(true); bloom.intensity.Override(0.55f); bloom.threshold.Override(1.05f); bloom.scatter.Override(0.65f);
             var tm = prof.Add<Tonemapping>(true); tm.mode.Override(TonemappingMode.ACES);
-            var ca = prof.Add<ColorAdjustments>(true); ca.postExposure.Override(0.15f); ca.contrast.Override(12f); ca.saturation.Override(8f); ca.colorFilter.Override(new Color(1f, 0.97f, 0.92f));
+            var ca = prof.Add<ColorAdjustments>(true); ca.postExposure.Override(exposure); ca.contrast.Override(12f); ca.saturation.Override(8f); ca.colorFilter.Override(new Color(1f, 0.97f, 0.92f));
             var vg = prof.Add<Vignette>(true); vg.intensity.Override(0.28f); vg.smoothness.Override(0.45f);
             var smh = prof.Add<ShadowsMidtonesHighlights>(true); smh.shadows.Override(new Vector4(0.95f, 0.97f, 1.05f, 0f)); smh.highlights.Override(new Vector4(1.04f, 1.0f, 0.95f, 0f));
             foreach (var c in prof.components) AssetDatabase.AddObjectToAsset(c, prof);
@@ -554,7 +557,7 @@ namespace Korvalune.EditorTools
                     Shot("12_echoppe_" + m.kind);
                 }
                 foreach (var rf in Object.FindObjectsByType<RoofFade>(FindObjectsSortMode.None)) foreach (var r in rf.GetComponentsInChildren<Renderer>()) r.enabled = true;
-                cam.transform.position = new Vector3(0, 5, -26); cam.transform.LookAt(new Vector3(0, 4, 0)); Shot("13_cour_du_chateau");
+                cam.transform.position = Ground(new Vector2(0, -24)) + new Vector3(0, 7, 0); cam.transform.LookAt(Ground(new Vector2(0, -2)) + Vector3.up * 3); Shot("13_cour_du_chateau");
                 TownBuilder.Checks(check);
                 // illustrations du jeu : fond de l'écran de lancement et icône de l'application
                 try { LauncherBuilder.RenderKeyArt(cam); check("Illustration du lanceur et icône", File.Exists(LauncherBuilder.ArtDir + "/Lanceur_Fond.png"), "ci-out/Lanceur_Fond.png, ci-out/Icone.png"); }
