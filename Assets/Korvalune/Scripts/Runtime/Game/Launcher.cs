@@ -202,8 +202,17 @@ namespace Korvalune.Game
         void Ready()
         {
             play.interactable = true; play.targetGraphic.color = Color.white; playText.color = UIStyle.Gold;
-            if (AutoTest.Enabled) { AutoTest.Log("lanceur prêt : on joue"); Invoke(nameof(AutoPlay), 6f); }
+            if (AutoTest.Enabled) { AutoTest.Log("lanceur prêt : on joue"); StartCoroutine(AutoPlay()); }
         }
-        void AutoPlay() => SceneManager.LoadScene(nextScene);
+
+        IEnumerator AutoPlay()
+        {
+            yield return new WaitForSecondsRealtime(4f);
+            AutoTest.Log("chargement de la scène « " + nextScene + " »");
+            var op = SceneManager.LoadSceneAsync(nextScene);
+            if (op == null) { AutoTest.Log("ÉCHEC : scène introuvable"); yield break; }
+            float t = 0;
+            while (!op.isDone) { t += Time.unscaledDeltaTime; if (t > 15f) { t = 0; AutoTest.Log($"chargement {op.progress:P0}"); } yield return null; }
+        }
     }
 }

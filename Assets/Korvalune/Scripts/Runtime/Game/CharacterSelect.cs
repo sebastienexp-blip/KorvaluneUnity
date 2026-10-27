@@ -38,7 +38,7 @@ namespace Korvalune.Game
             if (returningFromCreator && draft != null) { returningFromCreator = false; StartCreate(false); }
             else if (SaveSystem.Account.characters.Count == 0) StartCreate(true);
             else ShowList();
-            if (Application.isPlaying && AutoTest.Enabled) Invoke(nameof(AutoPlay), 4f);
+            if (Application.isPlaying && AutoTest.Enabled) { AutoTest.Log("écran de sélection ouvert"); Invoke(nameof(AutoPlay), 4f); }
         }
 
         /// <summary>Test automatique : crée l'héroïne de test comme un joueur (classe, sexe, apparence aléatoire) puis lance la partie.</summary>
