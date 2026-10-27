@@ -1,8 +1,8 @@
-# Rapport d'intégration Unity — 2026-10-27 12:53 UTC
+# Rapport d'intégration Unity — 2026-10-27 13:33 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
-- 242 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 242 déjà à jour (inchangés)
+- 257 modèle(s) ModelForge trouvé(s)
+- 0 modèle(s) intégré(s), 257 déjà à jour (inchangés)
 
 ## AshCrossbow.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/AshCrossbow/AshCrossbow.fbx
@@ -453,6 +453,214 @@
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
 - ✅ **Échelle (hauteur)** 5.552 m (attendu 5.274186–5.829364), boîte 7.00×5.55×7.49, pieds à y=-2.559
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_0_0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_0/T_Troncon_0_0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 22779 triangles, 17156 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_0.prefab
+- ✅ **Échelle (hauteur)** 9.882 m (attendu 8.893484–10.86981), boîte 51.60×9.88×51.58, pieds à y=-3.133
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_0_1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_1/T_Troncon_0_1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 16919 triangles, 12906 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_1.prefab
+- ✅ **Échelle (hauteur)** 11.108 m (attendu 9.997091–12.21867), boîte 44.14×11.11×51.66, pieds à y=-6.546
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_0_2.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_2/T_Troncon_0_2.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 29144 triangles, 21909 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_2.prefab
+- ✅ **Échelle (hauteur)** 12.344 m (attendu 11.10972–13.57855), boîte 51.25×12.34×51.54, pieds à y=-10.292
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_0_3.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_3/T_Troncon_0_3.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 20654 triangles, 16189 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_3.prefab
+- ✅ **Échelle (hauteur)** 13.776 m (attendu 12.39875–15.15403), boîte 53.29×13.78×51.90, pieds à y=-15.585
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_0_4.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_4/T_Troncon_0_4.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 7997 triangles, 5874 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_4.prefab
+- ✅ **Échelle (hauteur)** 7.752 m (attendu 6.976654–8.527021), boîte 38.04×7.75×25.31, pieds à y=-15.585
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_0_m1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_m1/T_Troncon_0_m1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 492 triangles, 362 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_m1.prefab
+- ✅ **Échelle (hauteur)** 7.372 m (attendu 6.634953–8.109386), boîte 21.70×7.37×16.81, pieds à y=-0.518
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_1_0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_0/T_Troncon_1_0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 6105 triangles, 4532 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_0.prefab
+- ✅ **Échelle (hauteur)** 8.305 m (attendu 7.474657–9.135691), boîte 25.26×8.31×36.17, pieds à y=-2.999
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_1_1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_1/T_Troncon_1_1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 6461 triangles, 5284 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_1.prefab
+- ✅ **Échelle (hauteur)** 10.297 m (attendu 9.267158–11.32653), boîte 29.13×10.30×50.03, pieds à y=-5.632
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_1_2.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_2/T_Troncon_1_2.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2290 triangles, 1664 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_2.prefab
+- ✅ **Échelle (hauteur)** 7.842 m (attendu 7.058225–8.626719), boîte 29.51×7.84×27.48, pieds à y=-5.884
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_1_3.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_3/T_Troncon_1_3.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1674 triangles, 1454 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_3.prefab
+- ✅ **Échelle (hauteur)** 7.915 m (attendu 7.12352–8.706525), boîte 19.69×7.92×38.79, pieds à y=-15.271
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_1_4.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_4/T_Troncon_1_4.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1825 triangles, 1351 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_4.prefab
+- ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.27, pieds à y=-15.588
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_m1_0.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_0/T_Troncon_m1_0.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1674 triangles, 1371 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_0.prefab
+- ✅ **Échelle (hauteur)** 8.249 m (attendu 7.424075–9.073869), boîte 17.66×8.25×28.55, pieds à y=-0.857
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_m1_2.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_2/T_Troncon_m1_2.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 573 triangles, 453 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_2.prefab
+- ✅ **Échelle (hauteur)** 8.029 m (attendu 7.225704–8.831416), boîte 15.16×8.03×34.64, pieds à y=-8.063
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_m1_3.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_3/T_Troncon_m1_3.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 12 triangles, 27 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_3.prefab
+- ✅ **Échelle (hauteur)** 1.981 m (attendu 1.783069–2.179307), boîte 8.95×1.98×6.48, pieds à y=-3.652
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** mesh
+
+## T_Troncon_m1_m1.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_m1/T_Troncon_m1_m1.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 289 triangles, 197 sommets (max 60000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_m1.prefab
+- ✅ **Échelle (hauteur)** 7.828 m (attendu 7.045424–8.611073), boîte 16.62×7.83×17.46, pieds à y=-0.524
+- ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
 
 ## M_Banc.fbx (prop, rig None)
@@ -1081,35 +1289,46 @@
 ## BaseFemale.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 52986 triangles, 31879 sommets (max 140000)
+- ✅ **Budget de triangles** 138092 triangles, 83606 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/BaseFemale.prefab
-- ✅ **Échelle (hauteur)** 1.874 m (attendu 1.6–1.98), boîte 1.05×1.87×0.86, pieds à y=-0.022
-- ✅ **Orientation gauche/droite** LeftHand.x = -0.211
-- ✅ **Orientation avant (+Z)** LeftToes.z=0.111 > LeftFoot.z=-0.023
+- ✅ **Échelle (hauteur)** 1.849 m (attendu 1.6–1.98), boîte 1.88×1.85×0.35, pieds à y=-0.007
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
 - ✅ **Point d'attache Socket_Shield_L** 
 - ✅ **Point d'attache Socket_Back** 
 - ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Eye** shader Universal Render Pipeline/Lit, base BF_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-- ✅ **Matériau BF_Hair** shader Universal Render Pipeline/Lit, base BF_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Brow** shader Universal Render Pipeline/Lit, base BF_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Lash** shader Universal Render Pipeline/Lit, base BF_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Teeth** shader Universal Render Pipeline/Lit, base BF_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Tongue** shader Universal Render Pipeline/Lit, base BF_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Hair** shader Universal Render Pipeline/Lit, base BF_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_RagsDark** shader Universal Render Pipeline/Lit, base BF_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Rags** shader Universal Render Pipeline/Lit, base BF_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Rope** shader Universal Render Pipeline/Lit, base BF_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BF_Skin** shader Universal Render Pipeline/Lit, base BF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Under** shader Universal Render Pipeline/Lit, base BF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BF_Under** shader Universal Render Pipeline/Lit, base BF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 3 pièce(s) : Anatomie (masqué), SousVetementBas (visible), SousVetementHaut (visible)
+- ✅ **Équipement détachable** 15 pièce(s) : Anatomie (masqué), Cheveux (visible), HaillonsBas (visible), HaillonsHaut (visible), Peau_AvantBras (visible), Peau_Bassin (masqué), Peau_Bras (visible), Peau_Cuisses (visible), Peau_Jambes (visible), Peau_Mains (visible), Peau_Pieds (visible), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué), SousVetementHaut (masqué)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** BaseFemale
-- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.053 m, événements 0
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
 - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
 - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.137 m, événements 1
-- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.347 m, événements 0
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
 - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
@@ -1117,34 +1336,45 @@
 ## BaseMale.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Characters/BaseMale/BaseMale.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 46728 triangles, 26619 sommets (max 140000)
+- ✅ **Budget de triangles** 134546 triangles, 79595 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/BaseMale.prefab
-- ✅ **Échelle (hauteur)** 1.875 m (attendu 1.6–1.98), boîte 1.04×1.87×0.84, pieds à y=-0.026
-- ✅ **Orientation gauche/droite** LeftHand.x = -0.211
-- ✅ **Orientation avant (+Z)** LeftToes.z=0.111 > LeftFoot.z=-0.023
+- ✅ **Échelle (hauteur)** 1.853 m (attendu 1.6–1.98), boîte 1.88×1.85×0.34, pieds à y=-0.013
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
 - ✅ **Point d'attache Socket_Shield_L** 
 - ✅ **Point d'attache Socket_Back** 
 - ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
-- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Eye** shader Universal Render Pipeline/Lit, base BM_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
-- ✅ **Matériau BM_Hair** shader Universal Render Pipeline/Lit, base BM_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Brow** shader Universal Render Pipeline/Lit, base BM_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Lash** shader Universal Render Pipeline/Lit, base BM_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Teeth** shader Universal Render Pipeline/Lit, base BM_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Tongue** shader Universal Render Pipeline/Lit, base BM_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Hair** shader Universal Render Pipeline/Lit, base BM_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_RagsDark** shader Universal Render Pipeline/Lit, base BM_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Rags** shader Universal Render Pipeline/Lit, base BM_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Rope** shader Universal Render Pipeline/Lit, base BM_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau BM_Skin** shader Universal Render Pipeline/Lit, base BM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau BM_Under** shader Universal Render Pipeline/Lit, base BM_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 2 pièce(s) : Anatomie (masqué), SousVetementBas (visible)
+- ✅ **Équipement détachable** 14 pièce(s) : Anatomie (masqué), Cheveux (visible), HaillonsBas (visible), HaillonsHaut (visible), Peau_AvantBras (visible), Peau_Bassin (masqué), Peau_Bras (visible), Peau_Cuisses (visible), Peau_Jambes (visible), Peau_Mains (visible), Peau_Pieds (visible), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** BaseMale
-- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.053 m, événements 0
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
 - ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
 - ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.137 m, événements 1
-- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.347 m, événements 0
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
 - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
@@ -1364,9 +1594,9 @@
 ## ElyraNoctis_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 156582 triangles, 93246 sommets (max 220000)
+- ❌ **Budget de triangles** 241688 triangles, 144379 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_F.prefab
-- ✅ **Échelle (hauteur)** 1.891 m (attendu 1.6–1.98), boîte 1.89×1.89×0.59, pieds à y=-0.010
+- ✅ **Échelle (hauteur)** 1.849 m (attendu 1.6–1.98), boîte 1.89×1.85×0.51, pieds à y=-0.007
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1399,6 +1629,9 @@
 - ✅ **Matériau EL_Metal** shader Universal Render Pipeline/Lit, base EL_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Leather** shader Universal Render Pipeline/Lit, base EL_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau ELF_RagsDark** shader Universal Render Pipeline/Lit, base ELF_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau ELF_Rags** shader Universal Render Pipeline/Lit, base ELF_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau ELF_Rope** shader Universal Render Pipeline/Lit, base ELF_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Cloth** shader Universal Render Pipeline/Lit, base EL_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Sleeve** shader Universal Render Pipeline/Lit, base EL_Sleeve_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1414,7 +1647,7 @@
 - ✅ **Matériau ELF_Under** shader Universal Render Pipeline/Lit, base ELF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau ELF_Under** shader Universal Render Pipeline/Lit, base ELF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 23 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Corset (visible), Epaulieres (visible), Gants (visible), Jupe (visible), Manches (visible), Peau_AvantBras (masqué), Peau_Bassin (visible), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (visible), SousVetementBas (visible), SousVetementHaut (masqué)
+- ✅ **Équipement détachable** 25 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Corset (visible), Epaulieres (visible), Gants (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Jupe (visible), Manches (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué), SousVetementHaut (masqué)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -1441,9 +1674,9 @@
 ## ElyraNoctis_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 175146 triangles, 101814 sommets (max 220000)
+- ❌ **Budget de triangles** 262964 triangles, 154190 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/ElyraNoctis_M.prefab
-- ✅ **Échelle (hauteur)** 1.884 m (attendu 1.6–1.98), boîte 1.89×1.88×0.58, pieds à y=-0.009
+- ✅ **Échelle (hauteur)** 1.853 m (attendu 1.6–1.98), boîte 1.89×1.85×0.51, pieds à y=-0.013
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1473,6 +1706,9 @@
 - ✅ **Matériau EL_Metal** shader Universal Render Pipeline/Lit, base EL_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Leather** shader Universal Render Pipeline/Lit, base EL_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau ELM_RagsDark** shader Universal Render Pipeline/Lit, base ELM_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau ELM_Rags** shader Universal Render Pipeline/Lit, base ELM_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau ELM_Rope** shader Universal Render Pipeline/Lit, base ELM_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Cloth** shader Universal Render Pipeline/Lit, base EL_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Gold** shader Universal Render Pipeline/Lit, base EL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau EL_Sleeve** shader Universal Render Pipeline/Lit, base EL_Sleeve_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1492,7 +1728,7 @@
 - ✅ **Matériau EL_Crystal** shader Universal Render Pipeline/Lit, base EL_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau ELM_Under** shader Universal Render Pipeline/Lit, base ELM_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 23 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Epaulieres (visible), Gants (visible), Jupe (visible), Manches (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (visible), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (visible), Pourpoint (visible), SousVetementBas (masqué)
+- ✅ **Équipement détachable** 25 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Epaulieres (visible), Gants (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Jupe (visible), Manches (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), Pourpoint (visible), SousVetementBas (masqué)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -1519,9 +1755,9 @@
 ## KaelDraven_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 163912 triangles, 98788 sommets (max 220000)
+- ❌ **Budget de triangles** 249018 triangles, 149921 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_F.prefab
-- ✅ **Échelle (hauteur)** 1.936 m (attendu 1.6–1.98), boîte 1.90×1.94×0.61, pieds à y=-0.033
+- ✅ **Échelle (hauteur)** 1.890 m (attendu 1.6–1.98), boîte 1.90×1.89×0.53, pieds à y=-0.026
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1552,6 +1788,9 @@
 - ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KN_Steel** shader Universal Render Pipeline/Lit, base KN_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KDF_RagsDark** shader Universal Render Pipeline/Lit, base KDF_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KDF_Rags** shader Universal Render Pipeline/Lit, base KDF_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KDF_Rope** shader Universal Render Pipeline/Lit, base KDF_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KDF_Eye** shader Universal Render Pipeline/Lit, base KDF_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KDF_Brow** shader Universal Render Pipeline/Lit, base KDF_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KDF_Lash** shader Universal Render Pipeline/Lit, base KDF_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1578,7 +1817,7 @@
 - ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 28 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Casque (visible), Cheveux (masqué), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (masqué), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), SousVetementHaut (masqué), Tabard (visible), Tassettes (visible)
+- ✅ **Équipement détachable** 30 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Casque (visible), Cheveux (masqué), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (masqué), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), SousVetementHaut (masqué), Tabard (visible), Tassettes (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -1605,9 +1844,9 @@
 ## KaelDraven_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 157654 triangles, 93448 sommets (max 220000)
+- ❌ **Budget de triangles** 245472 triangles, 145824 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/KaelDraven_M.prefab
-- ✅ **Échelle (hauteur)** 1.926 m (attendu 1.6–1.98), boîte 1.90×1.93×0.62, pieds à y=-0.031
+- ✅ **Échelle (hauteur)** 1.885 m (attendu 1.6–1.98), boîte 1.90×1.88×0.55, pieds à y=-0.025
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1638,6 +1877,9 @@
 - ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KN_Steel** shader Universal Render Pipeline/Lit, base KN_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KDM_RagsDark** shader Universal Render Pipeline/Lit, base KDM_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KDM_Rags** shader Universal Render Pipeline/Lit, base KDM_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KDM_Rope** shader Universal Render Pipeline/Lit, base KDM_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KDM_Eye** shader Universal Render Pipeline/Lit, base KDM_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KDM_Brow** shader Universal Render Pipeline/Lit, base KDM_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KDM_Lash** shader Universal Render Pipeline/Lit, base KDM_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1663,7 +1905,7 @@
 - ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 27 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Casque (visible), Cheveux (masqué), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (masqué), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), Tabard (visible), Tassettes (visible)
+- ✅ **Équipement détachable** 29 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Casque (visible), Cheveux (masqué), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (masqué), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), Tabard (visible), Tassettes (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -1690,9 +1932,9 @@
 ## Morvanna_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 184676 triangles, 117828 sommets (max 220000)
+- ❌ **Budget de triangles** 269782 triangles, 168961 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_F.prefab
-- ✅ **Échelle (hauteur)** 1.929 m (attendu 1.6–1.98), boîte 1.89×1.93×0.59, pieds à y=-0.010
+- ✅ **Échelle (hauteur)** 1.888 m (attendu 1.6–1.98), boîte 1.89×1.89×0.51, pieds à y=-0.007
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1721,6 +1963,9 @@
 - ✅ **Matériau MO_Bone** shader Universal Render Pipeline/Lit, base MO_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Dark** shader Universal Render Pipeline/Lit, base MO_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Leather** shader Universal Render Pipeline/Lit, base MO_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau MOF_RagsDark** shader Universal Render Pipeline/Lit, base MOF_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau MOF_Rags** shader Universal Render Pipeline/Lit, base MOF_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau MOF_Rope** shader Universal Render Pipeline/Lit, base MOF_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Cloth** shader Universal Render Pipeline/Lit, base MO_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Silver** shader Universal Render Pipeline/Lit, base MO_Silver_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Sleeve** shader Universal Render Pipeline/Lit, base MO_Sleeve_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1741,7 +1986,7 @@
 - ✅ **Matériau MOF_Under** shader Universal Render Pipeline/Lit, base MOF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MOF_Under** shader Universal Render Pipeline/Lit, base MOF_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 23 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Corset (visible), Epaulieres (visible), Gants (visible), Jupe (visible), Manches (visible), Peau_AvantBras (masqué), Peau_Bassin (visible), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (visible), SousVetementBas (visible), SousVetementHaut (masqué)
+- ✅ **Équipement détachable** 25 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Corset (visible), Epaulieres (visible), Gants (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Jupe (visible), Manches (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué), SousVetementHaut (masqué)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -1772,9 +2017,9 @@
 ## Morvanna_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 195414 triangles, 115626 sommets (max 220000)
+- ❌ **Budget de triangles** 283232 triangles, 168002 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Morvanna_M.prefab
-- ✅ **Échelle (hauteur)** 1.884 m (attendu 1.6–1.98), boîte 1.89×1.88×0.58, pieds à y=-0.009
+- ✅ **Échelle (hauteur)** 1.853 m (attendu 1.6–1.98), boîte 1.89×1.85×0.53, pieds à y=-0.013
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1800,6 +2045,9 @@
 - ✅ **Matériau MO_Bone** shader Universal Render Pipeline/Lit, base MO_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Dark** shader Universal Render Pipeline/Lit, base MO_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Leather** shader Universal Render Pipeline/Lit, base MO_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau MOM_RagsDark** shader Universal Render Pipeline/Lit, base MOM_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau MOM_Rags** shader Universal Render Pipeline/Lit, base MOM_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau MOM_Rope** shader Universal Render Pipeline/Lit, base MOM_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Cloth** shader Universal Render Pipeline/Lit, base MO_Cloth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Silver** shader Universal Render Pipeline/Lit, base MO_Silver_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MO_Sleeve** shader Universal Render Pipeline/Lit, base MO_Sleeve_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1824,7 +2072,7 @@
 - ✅ **Matériau MO_Dark** shader Universal Render Pipeline/Lit, base MO_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau MOM_Under** shader Universal Render Pipeline/Lit, base MOM_Under_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 23 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Epaulieres (visible), Gants (visible), Jupe (visible), Manches (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (visible), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (visible), Pourpoint (visible), SousVetementBas (masqué)
+- ✅ **Équipement détachable** 25 pièce(s) : Anatomie (masqué), Bottes (visible), Brassards (visible), Cape (visible), Ceinture (visible), Cheveux (visible), Col (visible), Epaulieres (visible), Gants (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Jupe (visible), Manches (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (visible), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), Pourpoint (visible), SousVetementBas (masqué)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -1855,9 +2103,9 @@
 ## Tharion_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 149706 triangles, 90462 sommets (max 220000)
+- ❌ **Budget de triangles** 234812 triangles, 141595 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_F.prefab
-- ✅ **Échelle (hauteur)** 1.910 m (attendu 1.6–1.98), boîte 1.90×1.91×0.61, pieds à y=-0.033
+- ✅ **Échelle (hauteur)** 1.864 m (attendu 1.6–1.98), boîte 1.90×1.86×0.53, pieds à y=-0.026
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1884,6 +2132,9 @@
 - ✅ **Matériau TH_Plate** shader Universal Render Pipeline/Lit, base TH_Plate_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau TH_Gold** shader Universal Render Pipeline/Lit, base TH_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau TH_Plate** shader Universal Render Pipeline/Lit, base TH_Plate_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau THF_RagsDark** shader Universal Render Pipeline/Lit, base THF_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau THF_Rags** shader Universal Render Pipeline/Lit, base THF_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau THF_Rope** shader Universal Render Pipeline/Lit, base THF_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau TH_Mail** shader Universal Render Pipeline/Lit, base TH_Mail_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau THF_Skin** shader Universal Render Pipeline/Lit, base THF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau THF_Skin** shader Universal Render Pipeline/Lit, base THF_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1910,7 +2161,7 @@
 - ✅ **Matériau THF_Teeth** shader Universal Render Pipeline/Lit, base THF_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau THF_Tongue** shader Universal Render Pipeline/Lit, base THF_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 27 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Cheveux (visible), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), SousVetementHaut (masqué), Tabard (visible), Tassettes (visible)
+- ✅ **Équipement détachable** 29 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Cheveux (visible), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), SousVetementHaut (masqué), Tabard (visible), Tassettes (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -1937,9 +2188,9 @@
 ## Tharion_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 143574 triangles, 85032 sommets (max 220000)
+- ❌ **Budget de triangles** 231392 triangles, 137545 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Tharion_M.prefab
-- ✅ **Échelle (hauteur)** 1.906 m (attendu 1.6–1.98), boîte 1.90×1.91×0.61, pieds à y=-0.031
+- ✅ **Échelle (hauteur)** 1.865 m (attendu 1.6–1.98), boîte 1.90×1.86×0.54, pieds à y=-0.025
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -1966,6 +2217,9 @@
 - ✅ **Matériau TH_Plate** shader Universal Render Pipeline/Lit, base TH_Plate_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau TH_Gold** shader Universal Render Pipeline/Lit, base TH_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau TH_Plate** shader Universal Render Pipeline/Lit, base TH_Plate_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau THM_RagsDark** shader Universal Render Pipeline/Lit, base THM_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau THM_Rags** shader Universal Render Pipeline/Lit, base THM_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau THM_Rope** shader Universal Render Pipeline/Lit, base THM_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau TH_Mail** shader Universal Render Pipeline/Lit, base TH_Mail_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau THM_Skin** shader Universal Render Pipeline/Lit, base THM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau THM_Skin** shader Universal Render Pipeline/Lit, base THM_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -1991,7 +2245,7 @@
 - ✅ **Matériau THM_Teeth** shader Universal Render Pipeline/Lit, base THM_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau THM_Tongue** shader Universal Render Pipeline/Lit, base THM_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 26 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Cheveux (visible), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), Tabard (visible), Tassettes (visible)
+- ✅ **Équipement détachable** 28 pièce(s) : Anatomie (masqué), Brassards (visible), Cape (visible), Cheveux (visible), Cuissots (visible), Epaulieres (visible), Gambison (visible), Gantelets (visible), Genouilleres (visible), Gorgerin (visible), Greves (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Maille (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), Plastron (visible), Solerets (visible), SousVetementBas (masqué), Tabard (visible), Tassettes (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -2018,9 +2272,9 @@
 ## Varek_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 189576 triangles, 111966 sommets (max 220000)
+- ❌ **Budget de triangles** 274682 triangles, 163099 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_F.prefab
-- ✅ **Échelle (hauteur)** 1.964 m (attendu 1.6–1.98), boîte 1.89×1.96×0.66, pieds à y=-0.010
+- ✅ **Échelle (hauteur)** 1.922 m (attendu 1.6–1.98), boîte 1.89×1.92×0.60, pieds à y=-0.007
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -2055,6 +2309,9 @@
 - ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Leather** shader Universal Render Pipeline/Lit, base VR_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VRF_RagsDark** shader Universal Render Pipeline/Lit, base VRF_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VRF_Rags** shader Universal Render Pipeline/Lit, base VRF_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VRF_Rope** shader Universal Render Pipeline/Lit, base VRF_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Tooled** shader Universal Render Pipeline/Lit, base VR_Tooled_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -2081,7 +2338,7 @@
 - ✅ **Matériau VRF_Teeth** shader Universal Render Pipeline/Lit, base VRF_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VRF_Tongue** shader Universal Render Pipeline/Lit, base VRF_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 27 pièce(s) : Anatomie (masqué), Baudrier (visible), Bottes (visible), Brassards (visible), Cape (visible), Capuche (visible), Carquois (visible), Ceinture (visible), Cheveux (masqué), Epaulieres (visible), Gants (visible), Jambieres (visible), Pans (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué), SousVetementHaut (masqué), Spalieres (visible), Tunique (visible)
+- ✅ **Équipement détachable** 29 pièce(s) : Anatomie (masqué), Baudrier (visible), Bottes (visible), Brassards (visible), Cape (visible), Capuche (visible), Carquois (visible), Ceinture (visible), Cheveux (masqué), Epaulieres (visible), Gants (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Jambieres (visible), Pans (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué), SousVetementHaut (masqué), Spalieres (visible), Tunique (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -2108,9 +2365,9 @@
 ## Varek_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 182500 triangles, 105539 sommets (max 220000)
+- ❌ **Budget de triangles** 270318 triangles, 157915 sommets (max 220000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/Varek_M.prefab
-- ✅ **Échelle (hauteur)** 1.977 m (attendu 1.6–1.98), boîte 1.89×1.98×0.64, pieds à y=-0.009
+- ✅ **Échelle (hauteur)** 1.946 m (attendu 1.6–1.98), boîte 1.89×1.95×0.59, pieds à y=-0.013
 - ✅ **Orientation gauche/droite** LeftHand.x = -0.735
 - ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
 - ✅ **Point d'attache Socket_Weapon_R** 
@@ -2145,6 +2402,9 @@
 - ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Leather** shader Universal Render Pipeline/Lit, base VR_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VRM_RagsDark** shader Universal Render Pipeline/Lit, base VRM_RagsDark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VRM_Rags** shader Universal Render Pipeline/Lit, base VRM_Rags_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VRM_Rope** shader Universal Render Pipeline/Lit, base VRM_Rope_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Tooled** shader Universal Render Pipeline/Lit, base VR_Tooled_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -2170,7 +2430,7 @@
 - ✅ **Matériau VRM_Teeth** shader Universal Render Pipeline/Lit, base VRM_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VRM_Tongue** shader Universal Render Pipeline/Lit, base VRM_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
-- ✅ **Équipement détachable** 26 pièce(s) : Anatomie (masqué), Baudrier (visible), Bottes (visible), Brassards (visible), Cape (visible), Capuche (visible), Carquois (visible), Ceinture (visible), Cheveux (masqué), Epaulieres (visible), Gants (visible), Jambieres (visible), Pans (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué), Spalieres (visible), Tunique (visible)
+- ✅ **Équipement détachable** 28 pièce(s) : Anatomie (masqué), Baudrier (visible), Bottes (visible), Brassards (visible), Cape (visible), Capuche (visible), Carquois (visible), Ceinture (visible), Cheveux (masqué), Epaulieres (visible), Gants (visible), HaillonsBas (masqué), HaillonsHaut (masqué), Jambieres (visible), Pans (visible), Pantalon (visible), Peau_AvantBras (masqué), Peau_Bassin (masqué), Peau_Bras (masqué), Peau_Cuisses (masqué), Peau_Jambes (masqué), Peau_Mains (masqué), Peau_Pieds (masqué), Peau_Tete (visible), Peau_Torse (masqué), SousVetementBas (masqué), Spalieres (visible), Tunique (visible)
 - ✅ **Avatar** valide=True, humain=True, 52 os mappés
 - ✅ **Os humanoïdes obligatoires** tous mappés
   - doigts mappés : 30/30
@@ -2198,4 +2458,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 158 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_118 captures écrites dans ci-out/ (OpenGLCore) en 3.0 min._
+_133 captures écrites dans ci-out/ (OpenGLCore) en 2.8 min._

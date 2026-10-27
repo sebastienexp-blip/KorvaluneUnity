@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -8235927092925713564, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -129,6 +137,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -361401563211968417, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
       propertyPath: m_Quality
       value: 4
       objectReference: {fileID: 0}
@@ -235,6 +251,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2433180004904932035}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4748350102174886253}
   m_SourcePrefab: {fileID: 100100000, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
 --- !u!137 &82680480333774268 stripped
 SkinnedMeshRenderer:
@@ -274,6 +293,16 @@ SkinnedMeshRenderer:
 --- !u!137 &2368471690535516179 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9132900131629795433, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
+  m_PrefabInstance: {fileID: 2422914350586417028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2489163103779094209 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 221981933136294213, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
+  m_PrefabInstance: {fileID: 2422914350586417028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2748138134077932411 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8665854970764079873, guid: c2c79b8073c565839bee277ad15e077a, type: 3}
   m_PrefabInstance: {fileID: 2422914350586417028}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &2973673174386806418 stripped
@@ -400,6 +429,19 @@ MonoBehaviour:
     equipped: 1
     hides:
     - Peau_Jambes
+  - name: HaillonsBas
+    renderer: {fileID: 2748138134077932411}
+    equipped: 1
+    hides:
+    - Peau_Bassin
+    - SousVetementBas
+    - Anatomie
+  - name: HaillonsHaut
+    renderer: {fileID: 2489163103779094209}
+    equipped: 1
+    hides:
+    - Peau_Torse
+    - SousVetementHaut
   - name: Maille
     renderer: {fileID: 4527132792010354404}
     equipped: 1
@@ -475,6 +517,20 @@ MonoBehaviour:
     renderer: {fileID: 8569145533259916079}
     equipped: 1
     hides: []
+--- !u!114 &4748350102174886253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3269193394008322773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89ebeb7e8ee7d034bc2030c14f00c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  table: {fileID: 4900000, guid: ed9c3598153e13ac584500b813cd52e3, type: 3}
+  map: {fileID: 11400000, guid: e6eb83c3eafd8d8fbb6e9976ae1ea2f7, type: 2}
 --- !u!137 &3848139494048843564 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7712205761634858840, guid: c2c79b8073c565839bee277ad15e077a, type: 3}

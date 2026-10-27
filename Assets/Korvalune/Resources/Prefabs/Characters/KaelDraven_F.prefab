@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -8235927092925713564, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -137,6 +145,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -361401563211968417, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
       propertyPath: m_Quality
       value: 4
       objectReference: {fileID: 0}
@@ -247,6 +263,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 715985873335290532}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5591839940767271979}
   m_SourcePrefab: {fileID: 100100000, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
 --- !u!137 &643395951880339412 stripped
 SkinnedMeshRenderer:
@@ -408,6 +427,19 @@ MonoBehaviour:
     equipped: 1
     hides:
     - Peau_Jambes
+  - name: HaillonsBas
+    renderer: {fileID: 3452898973462610195}
+    equipped: 1
+    hides:
+    - Peau_Bassin
+    - SousVetementBas
+    - Anatomie
+  - name: HaillonsHaut
+    renderer: {fileID: 3117397933757414569}
+    equipped: 1
+    hides:
+    - Peau_Torse
+    - SousVetementHaut
   - name: Maille
     renderer: {fileID: 3971025921202973836}
     equipped: 1
@@ -483,6 +515,20 @@ MonoBehaviour:
     renderer: {fileID: 9161386205541196103}
     equipped: 1
     hides: []
+--- !u!114 &5591839940767271979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636561069263040701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89ebeb7e8ee7d034bc2030c14f00c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  table: {fileID: 4900000, guid: 96cf12cfd93215362a6804e080f445b9, type: 3}
+  map: {fileID: 11400000, guid: 1eff14b6609a91ac2b7a1b1dd38e14fc, type: 2}
 --- !u!137 &2730167030260219528 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -8235927092925713564, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
@@ -496,6 +542,16 @@ SkinnedMeshRenderer:
 --- !u!137 &2975525649119923582 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9143244769527709550, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
+  m_PrefabInstance: {fileID: 2906963072205786604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3117397933757414569 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 221981933136294213, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
+  m_PrefabInstance: {fileID: 2906963072205786604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3452898973462610195 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8665854970764079873, guid: 055c3bdb29546798fa478bd1ba6170fa, type: 3}
   m_PrefabInstance: {fileID: 2906963072205786604}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &3971025921202973836 stripped

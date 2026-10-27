@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -8235927092925713564, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -63,6 +71,10 @@ PrefabInstance:
     - target: {fileID: -8235927092925713564, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
       propertyPath: m_Quality
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -7712205761634858840, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7712205761634858840, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
       propertyPath: m_Quality
@@ -109,6 +121,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -361401563211968417, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
       propertyPath: m_Quality
       value: 4
       objectReference: {fileID: 0}
@@ -177,6 +197,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7423148231284467232, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423148231284467232, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
       propertyPath: m_Quality
       value: 4
       objectReference: {fileID: 0}
@@ -200,6 +224,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
       insertIndex: -1
       addedObject: {fileID: 759993336271677565}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8226987084242195877}
   m_SourcePrefab: {fileID: 100100000, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
 --- !u!137 &25150468919467836 stripped
 SkinnedMeshRenderer:
@@ -274,6 +301,16 @@ SkinnedMeshRenderer:
 --- !u!137 &4449823872956403526 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8864387211421734327, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+  m_PrefabInstance: {fileID: 5099290874363271921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4717767833027450382 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8665854970764079873, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
+  m_PrefabInstance: {fileID: 5099290874363271921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5030786230669077428 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 221981933136294213, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}
   m_PrefabInstance: {fileID: 5099290874363271921}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &5153588843676839270 stripped
@@ -384,6 +421,19 @@ MonoBehaviour:
     equipped: 1
     hides:
     - Peau_Mains
+  - name: HaillonsBas
+    renderer: {fileID: 4717767833027450382}
+    equipped: 1
+    hides:
+    - Peau_Bassin
+    - SousVetementBas
+    - Anatomie
+  - name: HaillonsHaut
+    renderer: {fileID: 5030786230669077428}
+    equipped: 1
+    hides:
+    - Peau_Torse
+    - SousVetementHaut
   - name: Jupe
     renderer: {fileID: 2862424564230766206}
     equipped: 1
@@ -445,6 +495,20 @@ MonoBehaviour:
     equipped: 1
     hides:
     - Anatomie
+--- !u!114 &8226987084242195877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5333735139314591648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89ebeb7e8ee7d034bc2030c14f00c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  table: {fileID: 4900000, guid: 444ca0cde7a3330c490bcfdff8af8679, type: 3}
+  map: {fileID: 11400000, guid: 10af69b422c072e4a8eec672783e0aae, type: 2}
 --- !u!137 &5435926086900115861 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -8235927092925713564, guid: 89fa8d5c3a381a9fa909b09a498d7841, type: 3}

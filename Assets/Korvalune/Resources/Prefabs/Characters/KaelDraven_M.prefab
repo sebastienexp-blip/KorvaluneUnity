@@ -184,6 +184,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8665854970764079873, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -8235927092925713564, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -249,6 +257,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -361401563211968417, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 221981933136294213, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
       propertyPath: m_Quality
       value: 4
       objectReference: {fileID: 0}
@@ -363,6 +379,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5751703941427434315}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5934065255321005308}
   m_SourcePrefab: {fileID: 100100000, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
 --- !u!137 &55076551920088886 stripped
 SkinnedMeshRenderer:
@@ -494,6 +513,11 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -6981913114310745672, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
   m_PrefabInstance: {fileID: 8387911176663379588}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &8348382983224386171 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8665854970764079873, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
+  m_PrefabInstance: {fileID: 8387911176663379588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &8441631852713400595 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9132900131629795433, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
@@ -502,6 +526,11 @@ SkinnedMeshRenderer:
 --- !u!137 &8465487008718319126 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9143244769527709550, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
+  m_PrefabInstance: {fileID: 8387911176663379588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8607359250490466241 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 221981933136294213, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
   m_PrefabInstance: {fileID: 8387911176663379588}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8693830846391620565 stripped
@@ -619,6 +648,19 @@ MonoBehaviour:
     equipped: 1
     hides:
     - Peau_Jambes
+  - name: HaillonsBas
+    renderer: {fileID: 8348382983224386171}
+    equipped: 1
+    hides:
+    - Peau_Bassin
+    - SousVetementBas
+    - Anatomie
+  - name: HaillonsHaut
+    renderer: {fileID: 8607359250490466241}
+    equipped: 1
+    hides:
+    - Peau_Torse
+    - SousVetementHaut
   - name: Maille
     renderer: {fileID: 7722451031260811236}
     equipped: 1
@@ -690,6 +732,20 @@ MonoBehaviour:
     renderer: {fileID: 2527517146183877167}
     equipped: 1
     hides: []
+--- !u!114 &5934065255321005308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693830846391620565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89ebeb7e8ee7d034bc2030c14f00c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  table: {fileID: 4900000, guid: d80f6d17a2155ba7595e30309027f584, type: 3}
+  map: {fileID: 11400000, guid: 8aa465839a89562daab4c467ae3f6087, type: 2}
 --- !u!137 &8778574743737015776 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -8235927092925713564, guid: d1fafb006bb09885a88217e2e7cda322, type: 3}
