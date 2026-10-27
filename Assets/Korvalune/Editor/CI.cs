@@ -80,9 +80,11 @@ namespace Korvalune.EditorTools
                         else { head.AppendLine($"- ❌ **{Path.GetFileName(f)}** absent : l'éditeur précédent s'est arrêté avant la fin"); failures++; }
                     Rep.Insert(0, head.ToString() + "\n# Scènes (éditeur 3)\n");
                 }
+                // créateur en dernier : il charge tout le catalogue (140 pièces, 10 héros à curseurs de morphologie)
+                Progress("WorldCheck"); WorldCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress("SelectionCheck"); SelectionCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
                 Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
-                Progress("WorldCheck"); WorldCheck();
-                Progress("SelectionCheck"); SelectionCheck();
             }
             catch (Exception ex) { Check("Exécution CI", false, ex.ToString()); }
             finally
@@ -369,8 +371,9 @@ namespace Korvalune.EditorTools
             Directory.CreateDirectory("ci-out");
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             SetupStage(out var cam);
-            var rt = new RenderTexture(512, 640, 24, RenderTextureFormat.ARGB32) { antiAliasing = 2 };
+            var rt = new RenderTexture(512, 640, 24, RenderTextureFormat.ARGB32) { antiAliasing = 4 };
             var tex = new Texture2D(512, 640, TextureFormat.RGB24, false);
+            rt.hideFlags = HideFlags.DontUnloadUnusedAsset; tex.hideFlags = HideFlags.DontUnloadUnusedAsset;   // sinon détruits par UnloadUnusedAssets
             int shots = 0; var t0 = DateTime.UtcNow;
             foreach (var e in entries.Where(x => !string.IsNullOrEmpty(x.m.prefab) && x.m.kind != "part"))
             {
