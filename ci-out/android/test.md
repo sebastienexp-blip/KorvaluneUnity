@@ -15,6 +15,7 @@
     [Korvalune][test] chargement de la scène « Korvalune_Selection »
     [Korvalune][test] chargement 90 %
     [Korvalune][test] écran de sélection ouvert
+    [Korvalune][test] sélection : partie lancée avec Testeuse
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
 - Erreurs Unity dans le journal : 0
