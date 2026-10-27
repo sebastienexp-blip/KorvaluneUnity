@@ -1,336 +1,321 @@
-# Journal de la construction Android (run 40508922344)
+# Journal de la construction Android (run 40515375958)
 ## Lignes importantes
-1829:2026-10-27T13:07:00.6500365Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
-2091:2026-10-27T13:09:44.4801770Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2168:2026-10-27T13:10:09.6543271Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-16475:2026-10-27T13:52:31.3852565Z > Task :unityLibrary:bundleReleaseLocalLintAar FAILED
-16484:2026-10-27T13:52:31.3858448Z UnityEditor.Android.GradleInvokationException:ParseAndShowException ()
-16500:2026-10-27T13:52:31.3877961Z FAILURE: Build failed with an exception.
-16502:2026-10-27T13:52:31.3878272Z * What went wrong:
-16522:2026-10-27T13:52:31.3902074Z UnityEditor.Android.GradleInvokationException:ParseAndShowException ()
-16560:2026-10-27T13:52:31.3956123Z GITHUB_WORKFLOW = Android — APK testé
-16595:2026-10-27T13:52:31.3969879Z FAILURE: Build failed with an exception.
-16597:2026-10-27T13:52:31.3970175Z * What went wrong:
-16730:2026-10-27T13:52:31.4020147Z > Task :unityLibrary:bundleReleaseLocalLintAar FAILED
-16734:2026-10-27T13:52:31.4021868Z exit code: 1
-16740:2026-10-27T13:52:31.4038282Z Rethrow as GradleInvokationException: Gradle build failed
-16760:2026-10-27T13:52:31.4338428Z Build Finished, Result: Failure.
-16773:2026-10-27T13:52:31.8792374Z # Construction de l'APK Android
-16775:2026-10-27T13:52:31.8799143Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte
-16778:2026-10-27T13:52:31.8801603Z - ❌ Building Gradle project : Starting a Gradle Daemon (subsequent builds will be faster)
-16779:2026-10-27T13:52:31.8803138Z - ❌ Building Gradle project : Note: /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/java/com/unity3d/player/UnityPlayerGameActivity.java uses or overrides a deprecated API.
-16780:2026-10-27T13:52:31.8804979Z - ❌ Building Gradle project : CommandInvokationFailure: Gradle build failed. 
-16855:2026-10-27T13:52:41.5684207Z Build failed, with exit code 1
-16916:2026-10-27T13:52:47.2242533Z Please note that the exit code is not very descriptive.
-16921:2026-10-27T13:52:47.7130567Z ##[error]Build failed with exit code 1
-16926:2026-10-27T13:52:47.8545864Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-16927:2026-10-27T13:52:47.8546805Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-16978:2026-10-27T13:52:48.2537596Z # Construction de l'APK Android
-16980:2026-10-27T13:52:48.2539384Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte
-16983:2026-10-27T13:52:48.2542076Z - ❌ Building Gradle project : Starting a Gradle Daemon (subsequent builds will be faster)
-16984:2026-10-27T13:52:48.2543589Z - ❌ Building Gradle project : Note: /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/java/com/unity3d/player/UnityPlayerGameActivity.java uses or overrides a deprecated API.
-16985:2026-10-27T13:52:48.2545407Z - ❌ Building Gradle project : CommandInvokationFailure: Gradle build failed. 
-17297:2026-10-27T13:57:00.3162959Z ##[error]Process completed with exit code 1.
+1827:2026-10-27T14:00:30.0665548Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+2162:2026-10-27T14:08:38.3961684Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2239:2026-10-27T14:09:12.6972968Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+9232:2026-10-27T14:14:55.6849654Z Build Finished, Result: Failure.
+9246:2026-10-27T14:14:56.0887146Z # Construction de l'APK Android
+9248:2026-10-27T14:14:56.0893789Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers
+9251:2026-10-27T14:14:56.0922132Z - ❌ Postprocess built player : Building Library/Bee/artifacts/Android/ManagedStripped failed with output:
+9324:2026-10-27T14:15:03.6994873Z Build failed, with exit code 1
+9384:2026-10-27T14:15:09.1962217Z Please note that the exit code is not very descriptive.
+9389:2026-10-27T14:15:09.7197947Z ##[error]Build failed with exit code 1
+9394:2026-10-27T14:15:09.8985468Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+9395:2026-10-27T14:15:09.8985884Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+9445:2026-10-27T14:15:10.2520718Z # Construction de l'APK Android
+9447:2026-10-27T14:15:10.2522086Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers
+9450:2026-10-27T14:15:10.2524065Z - ❌ Postprocess built player : Building Library/Bee/artifacts/Android/ManagedStripped failed with output:
+9756:2026-10-27T14:18:49.3901645Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-10-27T13:52:31.3978251Z 
-2026-10-27T13:52:31.3978355Z > Configure project :launcher
-2026-10-27T13:52:31.3978673Z Variant 'debug', will keep symbols in binaries for:
-2026-10-27T13:52:31.3979000Z   'libunity.so'
-2026-10-27T13:52:31.3979220Z   'libil2cpp.so'
-2026-10-27T13:52:31.3979435Z   'libmain.so'
-2026-10-27T13:52:31.3979805Z Variant 'release', symbols will be stripped from binaries.
-2026-10-27T13:52:31.3980326Z WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 35
-2026-10-27T13:52:31.3980694Z 
-2026-10-27T13:52:31.3980905Z This Android Gradle plugin (8.3.0) was tested up to compileSdk = 34.
-2026-10-27T13:52:31.3981229Z 
-2026-10-27T13:52:31.3981431Z You are strongly encouraged to update your project to use a newer
-2026-10-27T13:52:31.3981915Z Android Gradle plugin that has been tested with compileSdk = 35.
-2026-10-27T13:52:31.3982216Z 
-2026-10-27T13:52:31.3982431Z If you are already using the latest version of the Android Gradle plugin,
-2026-10-27T13:52:31.3983023Z you may need to wait until a newer version with support for compileSdk = 35 is available.
-2026-10-27T13:52:31.3983405Z 
-2026-10-27T13:52:31.3983518Z To suppress this warning, add/update
-2026-10-27T13:52:31.3984120Z     android.suppressUnsupportedCompileSdk=35
-2026-10-27T13:52:31.3984475Z to this project's gradle.properties.
-2026-10-27T13:52:31.3984686Z 
-2026-10-27T13:52:31.3984796Z > Task :launcher:preBuild UP-TO-DATE
-2026-10-27T13:52:31.3985101Z > Task :unityLibrary:preBuild UP-TO-DATE
-2026-10-27T13:52:31.3985517Z > Task :launcher:preReleaseBuild UP-TO-DATE
-2026-10-27T13:52:31.3985868Z > Task :unityLibrary:preReleaseBuild UP-TO-DATE
-2026-10-27T13:52:31.3986218Z > Task :launcher:javaPreCompileRelease
-2026-10-27T13:52:31.3986553Z > Task :unityLibrary:generateReleaseResValues
-2026-10-27T13:52:31.3986900Z > Task :launcher:generateReleaseResValues
-2026-10-27T13:52:31.3987236Z > Task :unityLibrary:writeReleaseAarMetadata
-2026-10-27T13:52:31.3987588Z > Task :unityLibrary:generateReleaseResources
-2026-10-27T13:52:31.3987940Z > Task :launcher:generateReleaseResources
-2026-10-27T13:52:31.3988266Z > Task :unityLibrary:packageReleaseResources
-2026-10-27T13:52:31.3988610Z > Task :unityLibrary:extractDeepLinksRelease
-2026-10-27T13:52:31.3988948Z > Task :unityLibrary:processReleaseManifest
-2026-10-27T13:52:31.3989330Z > Task :unityLibrary:compileReleaseLibraryResources
-2026-10-27T13:52:31.3989700Z > Task :unityLibrary:javaPreCompileRelease
-2026-10-27T13:52:31.3990034Z > Task :unityLibrary:processReleaseJavaRes
-2026-10-27T13:52:31.3990379Z > Task :unityLibrary:extractProguardFiles
-2026-10-27T13:52:31.3990714Z > Task :unityLibrary:prepareLintJarForPublish
-2026-10-27T13:52:31.3991076Z > Task :unityLibrary:parseReleaseLocalResources
-2026-10-27T13:52:31.3991426Z > Task :launcher:checkReleaseAarMetadata
-2026-10-27T13:52:31.3991842Z > Task :launcher:mapReleaseSourceSetPaths
-2026-10-27T13:52:31.3992383Z > Task :launcher:packageReleaseResources
-2026-10-27T13:52:31.3992724Z > Task :launcher:parseReleaseLocalResources
-2026-10-27T13:52:31.3993117Z > Task :launcher:createReleaseCompatibleScreenManifests
-2026-10-27T13:52:31.3993501Z > Task :launcher:extractDeepLinksRelease
-2026-10-27T13:52:31.3994191Z > Task :launcher:mergeReleaseResources
-2026-10-27T13:52:31.3994710Z > Task :unityLibrary:configureCMakeRelWithDebInfo[arm64-v8a]
-2026-10-27T13:52:31.3995137Z > Task :launcher:processReleaseMainManifest
-2026-10-27T13:52:31.3995477Z > Task :unityLibrary:generateReleaseRFile
-2026-10-27T13:52:31.3995805Z > Task :launcher:processReleaseManifest
-2026-10-27T13:52:31.3996125Z > Task :launcher:extractProguardFiles
-2026-10-27T13:52:31.3996500Z > Task :launcher:mergeReleaseNativeDebugMetadata NO-SOURCE
-2026-10-27T13:52:31.3996999Z > Task :unityLibrary:buildCMakeRelWithDebInfo[arm64-v8a]
-2026-10-27T13:52:31.3997411Z > Task :launcher:processReleaseManifestForPackage
-2026-10-27T13:52:31.3997779Z > Task :launcher:checkReleaseDuplicateClasses
-2026-10-27T13:52:31.3998116Z > Task :launcher:mergeReleaseShaders
-2026-10-27T13:52:31.3998442Z > Task :launcher:compileReleaseShaders NO-SOURCE
-2026-10-27T13:52:31.3998809Z > Task :launcher:generateReleaseAssets UP-TO-DATE
-2026-10-27T13:52:31.3999169Z > Task :launcher:extractReleaseVersionControlInfo
-2026-10-27T13:52:31.3999541Z > Task :launcher:processReleaseJavaRes NO-SOURCE
-2026-10-27T13:52:31.3999889Z > Task :launcher:processReleaseResources
-2026-10-27T13:52:31.4000289Z > Task :launcher:optimizeReleaseResources
-2026-10-27T13:52:31.4000622Z > Task :launcher:collectReleaseDependencies
-2026-10-27T13:52:31.4000969Z > Task :launcher:sdkReleaseDependencyData
-2026-10-27T13:52:31.4001300Z > Task :launcher:mergeReleaseJniLibFolders
-2026-10-27T13:52:31.4001624Z > Task :launcher:mergeReleaseJavaResource
-2026-10-27T13:52:31.4001940Z > Task :launcher:validateSigningRelease
-2026-10-27T13:52:31.4002586Z > Task :launcher:writeReleaseAppMetadata
-2026-10-27T13:52:31.4002952Z > Task :launcher:writeReleaseSigningConfigVersions
-2026-10-27T13:52:31.4003332Z > Task :launcher:desugarReleaseFileDependencies
-2026-10-27T13:52:31.4003577Z 
-2026-10-27T13:52:31.4003855Z > Task :unityLibrary:compileReleaseJavaWithJavac
-2026-10-27T13:52:31.4004093Z 
-2026-10-27T13:52:31.4004226Z > Task :unityLibrary:bundleLibCompileToJarRelease
-2026-10-27T13:52:31.4004603Z > Task :unityLibrary:bundleLibRuntimeToJarRelease
-2026-10-27T13:52:31.4004854Z 
-2026-10-27T13:52:31.4004979Z > Task :unityLibrary:generateReleaseLintModel
-2026-10-27T13:52:31.4005410Z Generating lint files for backported methods only (compile API B)
-2026-10-27T13:52:31.4005829Z 
-2026-10-27T13:52:31.4005984Z > Task :launcher:compileReleaseJavaWithJavac NO-SOURCE
-2026-10-27T13:52:31.4006349Z > Task :launcher:dexBuilderRelease
-2026-10-27T13:52:31.4006650Z > Task :launcher:mergeExtDexRelease
-2026-10-27T13:52:31.4006967Z > Task :launcher:mergeReleaseGlobalSynthetics
-2026-10-27T13:52:31.4007304Z > Task :unityLibrary:createFullJarRelease
-2026-10-27T13:52:31.4007657Z > Task :launcher:generateReleaseLintVitalReportModel
-2026-10-27T13:52:31.4008085Z > Task :unityLibrary:configureCMakeRelWithDebInfo[x86_64]
-2026-10-27T13:52:31.4008503Z > Task :unityLibrary:buildCMakeRelWithDebInfo[x86_64]
-2026-10-27T13:52:31.4008884Z > Task :unityLibrary:mergeReleaseJniLibFolders
-2026-10-27T13:52:31.4009252Z > Task :unityLibrary:extractDeepLinksForAarRelease
-2026-10-27T13:52:31.4009696Z > Task :unityLibrary:mergeReleaseNativeLibs
-2026-10-27T13:52:31.4010121Z > Task :unityLibrary:extractReleaseAnnotations
-2026-10-27T13:52:31.4010522Z > Task :unityLibrary:mergeReleaseGeneratedProguardFiles
-2026-10-27T13:52:31.4010943Z > Task :unityLibrary:mergeReleaseConsumerProguardFiles
-2026-10-27T13:52:31.4011326Z > Task :unityLibrary:mergeReleaseShaders
-2026-10-27T13:52:31.4011676Z > Task :unityLibrary:compileReleaseShaders NO-SOURCE
-2026-10-27T13:52:31.4012331Z > Task :unityLibrary:generateReleaseAssets UP-TO-DATE
-2026-10-27T13:52:31.4012942Z > Task :unityLibrary:stripReleaseDebugSymbols
-2026-10-27T13:52:31.4013484Z > Task :unityLibrary:packageReleaseAssets
-2026-10-27T13:52:31.4014209Z > Task :unityLibrary:prepareReleaseArtProfile
-2026-10-27T13:52:31.4014763Z > Task :unityLibrary:mergeReleaseJavaResource
-2026-10-27T13:52:31.4015272Z > Task :unityLibrary:syncReleaseLibJars
-2026-10-27T13:52:31.4015809Z > Task :unityLibrary:writeReleaseLintModelMetadata
-2026-10-27T13:52:31.4016561Z > Task :unityLibrary:generateReleaseLintVitalModel
-2026-10-27T13:52:31.4017229Z > Task :unityLibrary:copyReleaseJniLibsProjectAndLocalJars
-2026-10-27T13:52:31.4017832Z > Task :launcher:mergeReleaseAssets
-2026-10-27T13:52:31.4018320Z > Task :unityLibrary:lintVitalAnalyzeRelease
-2026-10-27T13:52:31.4018883Z > Task :unityLibrary:bundleLibRuntimeToDirRelease
-2026-10-27T13:52:31.4019446Z > Task :unityLibrary:bundleReleaseLocalLintAar
-2026-10-27T13:52:31.4020147Z > Task :unityLibrary:bundleReleaseLocalLintAar FAILED
-2026-10-27T13:52:31.4020712Z > Task :launcher:mergeReleaseArtProfile
-2026-10-27T13:52:31.4021183Z 73 actionable tasks: 73 executed
-2026-10-27T13:52:31.4021581Z ]
-2026-10-27T13:52:31.4021868Z exit code: 1
-2026-10-27T13:52:31.4023473Z   at UnityEditor.Android.Command.WaitForProgramToRun (UnityEditor.Utils.Program p, UnityEditor.Android.Command+WaitingForProcessToExit waitingForProcessToExit, System.String errorMsg) [0x00033] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4026729Z   at UnityEditor.Android.Command.Run (System.Diagnostics.ProcessStartInfo psi, UnityEditor.Android.Command+WaitingForProcessToExit waitingForProcessToExit, System.String errorMsg) [0x00017] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4030001Z   at UnityEditor.Android.Command.Run (System.String command, System.String args, System.String workingdir, UnityEditor.Android.Command+WaitingForProcessToExit waitingForProcessToExit, System.String errorMsg, System.Text.Encoding inputEncoding) [0x0000c] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4032939Z   at UnityEditor.Android.AndroidJavaTools.RunJava (System.String args, System.String workingdir, System.Action`1[T] progress, System.String error) [0x0004c] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4036117Z   at UnityEditor.Android.GradleWrapper.Run (UnityEditor.Android.AndroidJavaTools javaTools, Unity.Android.Gradle.AndroidGradle androidGradle, System.String workingdir, System.String task, System.String[] extraArguments, System.Action`1[T] progress) [0x00070] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4038282Z Rethrow as GradleInvokationException: Gradle build failed
-2026-10-27T13:52:31.4040432Z   at UnityEditor.Android.GradleWrapper.Run (UnityEditor.Android.AndroidJavaTools javaTools, Unity.Android.Gradle.AndroidGradle androidGradle, System.String workingdir, System.String task, System.String[] extraArguments, System.Action`1[T] progress) [0x00092] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4045177Z   at UnityEditor.Android.PostProcessor.Tasks.TasksCommon.RunGradleTask (UnityEditor.Android.PostProcessor.PostProcessorContext context, System.String workingDirectory, System.String taskName, System.String[] extraArguments, UnityEditor.Android.PostProcessor.IPostProcessorTask owner, UnityEditor.Android.PostProcessor.ProgressHandler progress) [0x00036] in <5e2908a8533d4
-2026-10-27T13:52:31.4050316Z   at UnityEditor.Android.PostProcessor.Tasks.TasksCommon.RunLauncherGradleTask (UnityEditor.Android.PostProcessor.PostProcessorContext context, System.String taskName, System.String[] extraArguments, UnityEditor.Android.PostProcessor.IPostProcessorTask owner, UnityEditor.Android.PostProcessor.ProgressHandler progress) [0x0000d] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4054348Z   at UnityEditor.Android.PostProcessor.Tasks.BuildGradleProject.Execute (UnityEditor.Android.PostProcessor.PostProcessorContext context) [0x00139] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4056024Z   at UnityEditor.Android.PostProcessor.PostProcessRunner.RunAllTasks (UnityEditor.Android.PostProcessor.PostProcessorContext context) [0x00078] in <5e2908a8533d4f289879381d3d0403ff>:0 
-2026-10-27T13:52:31.4057573Z UnityEditor.BuildPipeline:BuildPlayerInternalNoCheck_Injected(String[], ManagedSpanWrapper&, ManagedSpanWrapper&, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[], Boolean)
-2026-10-27T13:52:31.4059079Z UnityEditor.BuildPipeline:BuildPlayerInternalNoCheck(String[], String, String, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[], Boolean)
-2026-10-27T13:52:31.4060587Z UnityEditor.BuildPipeline:BuildPlayerInternal(String[], String, String, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:531)
-2026-10-27T13:52:31.4062275Z UnityEditor.BuildPipeline:BuildPlayer(String[], String, String, BuildTargetGroup, BuildTarget, Int32, BuildOptions, String[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:415)
-2026-10-27T13:52:31.4063987Z UnityEditor.BuildPipeline:BuildPlayer(BuildPlayerOptions) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:361)
-2026-10-27T13:52:31.4064958Z Korvalune.EditorTools.AndroidBuild:Build() (at Assets/Korvalune/Editor/AndroidBuild.cs:65)
-2026-10-27T13:52:31.4065388Z 
-2026-10-27T13:52:31.4065569Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 65)
-2026-10-27T13:52:31.4065864Z 
-2026-10-27T13:52:31.4066104Z Unloading 54 Unused Serialized files (Serialized files now loaded: 0)
-2026-10-27T13:52:31.4335389Z Unloading 86 unused Assets / (438.2 KB). Loaded Objects now: 6852.
-2026-10-27T13:52:31.4336222Z Memory consumption went from 261.2 MB to 260.7 MB.
-2026-10-27T13:52:31.4337122Z Total: 27.587276 ms (FindLiveObjects: 1.243963 ms CreateObjectMapping: 0.295362 ms MarkObjects: 24.130078 ms  DeleteObjects: 1.916749 ms)
-2026-10-27T13:52:31.4338210Z 
-2026-10-27T13:52:31.4338428Z Build Finished, Result: Failure.
-2026-10-27T13:52:31.5279790Z ##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793109151526,"processId":1598,"steps":[{"description":"Preprocess Player","duration":262},{"description":"Prepare For Build","duration":3808},{"description":"ProducePlayerScriptAssemblies","duration":32376},{"description":"Verify Build setup","duration":42},{"description":"Prepare assets for target
-2026-10-27T13:52:31.5292168Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-2026-10-27T13:52:31.7610515Z Loaded scene 'Temp/__Backupscenes/0.backup'
-2026-10-27T13:52:31.7611552Z 	Deserialize:            1.579 ms
-2026-10-27T13:52:31.7612247Z 	Integration:            231.536 ms
-2026-10-27T13:52:31.7612737Z 	Integration of assets:  0.002 ms
-2026-10-27T13:52:31.7613181Z 	Thread Wait Time:       0.078 ms
-2026-10-27T13:52:31.7613615Z 	Total Operation Time:   233.196 ms
-2026-10-27T13:52:31.7756149Z Unloading 0 unused Assets / (8.1 KB). Loaded Objects now: 6844.
-2026-10-27T13:52:31.7757143Z Memory consumption went from 258.4 MB to 258.3 MB.
-2026-10-27T13:52:31.7758460Z Total: 14.620748 ms (FindLiveObjects: 1.239195 ms CreateObjectMapping: 0.139540 ms MarkObjects: 13.217356 ms  DeleteObjects: 0.023575 ms)
-2026-10-27T13:52:31.7759101Z 
-2026-10-27T13:52:31.8792374Z # Construction de l'APK Android
-2026-10-27T13:52:31.8792884Z 
-2026-10-27T13:52:31.8799143Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte
-2026-10-27T13:52:31.8800075Z - Icône : Assets/Korvalune/Resources/UI/Icone.png
-2026-10-27T13:52:31.8800592Z - Résultat : **Failed** en 25.9 min, 3 erreur(s), 14 avertissement(s)
-2026-10-27T13:52:31.8801603Z - ❌ Building Gradle project : Starting a Gradle Daemon (subsequent builds will be faster)
-2026-10-27T13:52:31.8803138Z - ❌ Building Gradle project : Note: /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/java/com/unity3d/player/UnityPlayerGameActivity.java uses or overrides a deprecated API.
-2026-10-27T13:52:31.8804979Z - ❌ Building Gradle project : CommandInvokationFailure: Gradle build failed. 
-2026-10-27T13:52:31.8805635Z 
-2026-10-27T13:52:31.8805836Z ## Contenu empaqueté : 6739 Mo
-2026-10-27T13:52:31.8806123Z - Mesh : 5731.0 Mo (520)
-2026-10-27T13:52:31.8806400Z - Texture2D : 989.7 Mo (1878)
-2026-10-27T13:52:31.8806678Z - AnimationClip : 7.2 Mo (248)
-2026-10-27T13:52:31.8807184Z - Shader : 4.3 Mo (56)
-2026-10-27T13:52:31.8807776Z - Avatar : 2.3 Mo (158)
-2026-10-27T13:52:31.8808194Z - Material : 1.3 Mo (796)
-2026-10-27T13:52:31.8808593Z - Transform : 0.9 Mo (11254)
-2026-10-27T13:52:31.8808860Z - TerrainData : 0.7 Mo (1)
-2026-10-27T13:52:31.8809115Z - Cubemap : 0.5 Mo (1)
-2026-10-27T13:52:31.8809358Z - GameObject : 0.5 Mo (11602)
-2026-10-27T13:52:31.8809626Z - SkinnedMeshRenderer : 0.2 Mo (436)
-2026-10-27T13:52:31.8810303Z - MonoBehaviour : 0.1 Mo (476)
-2026-10-27T13:52:31.8810494Z 
-2026-10-27T13:52:31.8810592Z ### Plus gros fichiers sources
-2026-10-27T13:52:31.8811145Z - 270.4 Mo — Assets/Korvalune/Art/Catalog/Models/F/hair/learning_anime_hair_F.fbx
-2026-10-27T13:52:31.8812272Z - 267.1 Mo — Assets/Korvalune/Art/Catalog/Models/M/hair/learning_anime_hair_M.fbx
-2026-10-27T13:52:31.8813413Z - 138.9 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_14_F.fbx
-2026-10-27T13:52:31.8814521Z - 138.4 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_07_M.fbx
-2026-10-27T13:52:31.8815496Z - 137.1 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_14_M.fbx
-2026-10-27T13:52:31.8816687Z - 134.8 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_07_F.fbx
-2026-10-27T13:52:31.8817722Z - 128.9 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_11_M.fbx
-2026-10-27T13:52:31.8818422Z - 128.2 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_11_F.fbx
-2026-10-27T13:52:31.8819549Z - 117.5 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_10_M.fbx
-2026-10-27T13:52:31.8820868Z - 114.0 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_10_F.fbx
-2026-10-27T13:52:31.8822219Z - 111.3 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_05_F.fbx
-2026-10-27T13:52:31.8823452Z - 110.1 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_05_M.fbx
-2026-10-27T13:52:31.8825447Z - 110.0 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_06_M.fbx
-2026-10-27T13:52:31.8826653Z - 107.7 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_06_F.fbx
-2026-10-27T13:52:31.8828010Z - 103.6 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_12_M.fbx
-2026-10-27T13:52:31.8829164Z - 103.4 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_09_M.fbx
-2026-10-27T13:52:31.8830327Z - 102.6 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_04_M.fbx
-2026-10-27T13:52:31.8831439Z - 102.3 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_12_F.fbx
-2026-10-27T13:52:31.8832241Z - 102.2 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_04_F.fbx
-2026-10-27T13:52:31.8833365Z - 98.4 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_09_F.fbx
-2026-10-27T13:52:31.8834381Z - 94.2 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_08_M.fbx
-2026-10-27T13:52:31.8835069Z - 91.9 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_08_F.fbx
-2026-10-27T13:52:31.8836073Z - 84.5 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_13_M.fbx
-2026-10-27T13:52:31.8836830Z - 83.9 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyebrows/mindfront_eyebrows_13_F.fbx
-2026-10-27T13:52:31.8837801Z - 80.3 Mo — Assets/Korvalune/Art/Catalog/Models/M/hair/o4saken_long01_M.fbx
-2026-10-27T13:52:31.8838407Z - 79.0 Mo — Assets/Korvalune/Art/Catalog/Models/F/hair/o4saken_long01_F.fbx
-2026-10-27T13:52:31.8839268Z - 79.0 Mo — Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
-2026-10-27T13:52:31.8840230Z - 77.0 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyelashes/mindfront_eyelashes_05_M.fbx
-2026-10-27T13:52:31.8841177Z - 76.3 Mo — Assets/Korvalune/Art/Catalog/Models/F/eyelashes/mindfront_eyelashes_05_F.fbx
-2026-10-27T13:52:31.8842201Z - 73.9 Mo — Assets/Korvalune/Art/Catalog/Models/M/eyebrows/mindfront_eyebrows_03_M.fbx
-2026-10-27T13:52:31.8842896Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-10-27T13:52:31.8844144Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-10-27T13:52:31.8845589Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-2026-10-27T13:52:31.8846485Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-2026-10-27T13:52:31.8847517Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
-2026-10-27T13:52:31.8847896Z UnityEngine.Debug:Log (object)
-2026-10-27T13:52:31.8848389Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:87)
-2026-10-27T13:52:31.8848935Z 
-2026-10-27T13:52:31.8849126Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 87)
-2026-10-27T13:52:31.8849417Z 
-2026-10-27T13:52:32.0255580Z Starting: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/OpenJDK/bin/java -classpath "/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/gradle/lib/gradle-launcher-8.4.jar" org.gradle.launcher.GradleMain "-Dorg.gradle.jvmargs=-Xmx4096m" "--stop" 
-2026-10-27T13:52:32.0258192Z WorkingDir: 
-2026-10-27T13:52:33.9493344Z Killing ADB server in 0.335751 seconds.
-2026-10-27T13:52:34.8294905Z [Physics::Module] Cleanup current backned.
-2026-10-27T13:52:34.8295446Z [Physics::Module] Id: 0xf2b8ea05
-2026-10-27T13:52:34.8347687Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
-2026-10-27T13:52:34.8348512Z [Licensing::IpcConnector] License Client channel disconnected successfully.
-2026-10-27T13:52:34.8422223Z AcceleratorClientConnectionCallback - disconnected - :0
-2026-10-27T13:52:34.8892561Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T13:52:34.8893303Z       Application is shutting down...
-2026-10-27T13:52:34.9552080Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T13:52:34.9552975Z       ALC ILPP context 2 is unloading
-2026-10-27T13:52:39.8063559Z Cleanup mono
-2026-10-27T13:52:40.3388451Z debugger-agent: Unable to listen on 44
-2026-10-27T13:52:40.5574831Z [Package Manager] Server process was shutdown
-2026-10-27T13:52:40.6749074Z Checking for leaked weakptr:
-2026-10-27T13:52:40.6749699Z   Found no leaked weakptrs.
-2026-10-27T13:52:40.7080445Z ##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1793109160706,"processId":1598,"allocatedMemory":20828755,"memoryLabels":[{"Default":22013},{"Permanent":16080},{"Thread":1084616},{"Manager":18066},{"VertexData":8},{"Geometry":408},{"Texture":160},{"Shader":112987},{"Material":10082},{"GfxDevice":36264},{"Animation":392},{"Audio":4032},{"Font":1782565
-2026-10-27T13:52:41.5684207Z Build failed, with exit code 1
-2026-10-27T13:52:42.2864847Z 
-2026-10-27T13:52:42.2865256Z ###########################
-2026-10-27T13:52:42.2865611Z #       Build output      #
-2026-10-27T13:52:42.2866518Z ###########################
-2026-10-27T13:52:42.2866780Z 
-2026-10-27T13:52:42.2890914Z total 12K
-2026-10-27T13:52:42.2891318Z drwxr-xr-x 3 root root 4.0K Oct 27 13:37 .
-2026-10-27T13:52:42.2891679Z drwxr-xr-x 3 root root 4.0K Oct 27 13:12 ..
-2026-10-27T13:52:42.2892164Z drwxr-xr-x 3 root root 4.0K Oct 27 13:37 Korvalune_BurstDebugInformation_DoNotShip
-2026-10-27T13:52:42.5025680Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
-2026-10-27T13:52:42.5026714Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
-2026-10-27T13:52:42.5027731Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
-2026-10-27T13:52:42.5028432Z [UnityConnectServicesConfig] Service configuration:
-2026-10-27T13:52:42.5028908Z     "servicesConfigBaseUrl": "",
-2026-10-27T13:52:42.5029287Z     "disableServicesWindow": false,
-2026-10-27T13:52:42.5029666Z     "disableUserLogin": false,
-2026-10-27T13:52:42.5030053Z     "entitlementCacheTimeoutInSeconds": 60,
-2026-10-27T13:52:42.5030472Z     "clientConnectTimeoutSec": 5,
-2026-10-27T13:52:42.5030854Z     "clientHandshakeTimeoutSec": 10,
-2026-10-27T13:52:42.5031280Z     "clientResolveEntitlementsTimeoutSec": 30,
-2026-10-27T13:52:42.5031736Z     "clientUpdateLicenseTimeoutSec": 30,
-2026-10-27T13:52:42.5032162Z     "licensingServiceBaseUrl": "",
-2026-10-27T13:52:42.5032555Z     "enableProxyAutoconfig": "false"
-2026-10-27T13:52:42.5032814Z 
-2026-10-27T13:52:42.5186373Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
-2026-10-27T13:52:42.5188156Z Branch:                  6000.0/staging
-2026-10-27T13:52:42.5188957Z Build type:              Release
-2026-10-27T13:52:42.5189325Z Batch mode:              YES
-2026-10-27T13:52:42.5189641Z System name:             Linux
-2026-10-27T13:52:42.5190211Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
-2026-10-27T13:52:42.5190949Z Kernel version:          6.17.0-1022-azure
-2026-10-27T13:52:42.5191460Z Architecture:            x86_64
-2026-10-27T13:52:42.5191941Z Available memory:        15989 MB
-2026-10-27T13:52:43.3213439Z User *** logged in successfully
-2026-10-27T13:52:43.3214360Z [UnityConnect::TryLogin] Request Succeeded.
-2026-10-27T13:52:43.3215230Z [Licensing::Module] Trying to connect to existing licensing client channel...
-2026-10-27T13:52:43.3216922Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
-2026-10-27T13:52:43.3226657Z [Licensing::Module] Successfully launched the LicensingClient (PId: 8918)
-2026-10-27T13:52:44.1796968Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T13:52:44.178846Z"
-2026-10-27T13:52:44.1799692Z [SignatureVerifier] Application signature verification not supported on this platform.
-2026-10-27T13:52:44.2610251Z [Licensing::Client] Handshaking with LicensingClient:
-2026-10-27T13:52:44.2610889Z   Version:                 1.16.0+1c867a9
-2026-10-27T13:52:44.2611369Z   Session Id:              217a64a1dd504a31b5f6280d85270296
-2026-10-27T13:52:44.2611847Z   Correlation Id:          600651eced98c92a302f724bde0f3ec5
-2026-10-27T13:52:44.2612280Z   External correlation Id: 1385124044949153719
-2026-10-27T13:52:44.2612706Z   Machine Id:              p+nZH75l0eg9khEMbAc2Xt3Lv2o=
-2026-10-27T13:52:44.2613552Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.86s, validation: 0.08s, handshake: 0.00s)
-2026-10-27T13:52:44.2616210Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T13:52:44.260406Z"
-2026-10-27T13:52:44.2617988Z [Licensing::Module] Connected to LicensingClient (PId: 8918, launch time: 0.00, total connection time: 0.94s)
-2026-10-27T13:52:44.2765699Z [Licensing::Client] Successfully updated the access token
-2026-10-27T13:52:44.2766424Z [Licensing::Module] Successfully updated the access token 7eCTvZQyEm...
-2026-10-27T13:52:45.5847051Z [Licensing::Client] Successfully processed license management request
-2026-10-27T13:52:45.5847965Z [Licensing::Module] Successfully returned the entitlement license
-2026-10-27T13:52:45.6158684Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
-2026-10-27T13:52:47.2117490Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
-2026-10-27T13:52:47.2240222Z 
-2026-10-27T13:52:47.2241106Z ###########################
-2026-10-27T13:52:47.2241639Z #         Failure         #
-2026-10-27T13:52:47.2241932Z ###########################
-2026-10-27T13:52:47.2242100Z 
-2026-10-27T13:52:47.2242533Z Please note that the exit code is not very descriptive.
-2026-10-27T13:52:47.2243073Z Most likely it will not help you solve the issue.
-2026-10-27T13:52:47.2243323Z 
-2026-10-27T13:52:47.2244330Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
-2026-10-27T13:52:47.2245200Z 
-2026-10-27T13:52:47.7130567Z ##[error]Build failed with exit code 1
+2026-10-27T14:14:55.3433073Z [1200/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8c2e5e11c4ee3ba5aa0171828923cac4
+2026-10-27T14:14:55.3434326Z [1201/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8c49fbf7c077cd1178a73f43fd9b1763
+2026-10-27T14:14:55.3435481Z [1202/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b7c7587cee76a0c348388fab71f1d4f6
+2026-10-27T14:14:55.3436619Z [1203/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8ab2b052560435db794720f42b84be08
+2026-10-27T14:14:55.3437787Z [1204/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8c117ea070204a211bdb8084bc32c04f
+2026-10-27T14:14:55.3438939Z [1205/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8b5c1291346612460b0df89407c271c3
+2026-10-27T14:14:55.3440092Z [1206/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b5245ec088492834ba95b96000e70573
+2026-10-27T14:14:55.3441251Z [1207/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8a26e4e5365dc7c48b9338ae42f189e5
+2026-10-27T14:14:55.3442530Z [1208/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8a8dab547f6f38f50ba76af8109d1ea0
+2026-10-27T14:14:55.3443931Z [1209/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8a80bf948cb14cf1fbb3ecaead70c53e
+2026-10-27T14:14:55.3445115Z [1210/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bc703fee181a524ba8db0afdcec48387
+2026-10-27T14:14:55.3446286Z [1211/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b8bde0558da81007ba7f3a96e7234eb8
+2026-10-27T14:14:55.3447485Z [1212/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8b39b949c40b1834fa5984521720d6a6
+2026-10-27T14:14:55.3936794Z [1213/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b4d449f3b6ea6b1e68a4ef0dbd355ca8
+2026-10-27T14:14:55.3939111Z [1214/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b927a68192980abeab5a81960794e9e2
+2026-10-27T14:14:55.3940149Z [1215/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b48d76ca4c0e43767a2eb60e09c1e36d
+2026-10-27T14:14:55.3941190Z [1216/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b4dd6a9bb28d95c378125a24bea788a6
+2026-10-27T14:14:55.3942218Z [1217/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b5872e4ec1841eb0dab9a5a160109d36
+2026-10-27T14:14:55.3943376Z [1218/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b34c45ed4f569672cb083f690eaeda63
+2026-10-27T14:14:55.3944420Z [1219/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b55f3ab599991a933a49980368c520d1
+2026-10-27T14:14:55.3945621Z [1220/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b26e386550956050bb9aaa778a0cfbdc
+2026-10-27T14:14:55.3946658Z [1221/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b5d9837e12d0c15d785534b9dd70db0d
+2026-10-27T14:14:55.3947835Z [1222/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a0c70cf98e1cb27f89c807ddfb32a484
+2026-10-27T14:14:55.3948809Z [1223/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b31cfb7417efba92fa34e6ed90945d46
+2026-10-27T14:14:55.3949804Z [1224/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a1d835e421e5268079edf4af5820a3a7
+2026-10-27T14:14:55.3950748Z [1225/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b71a8c79585136014a6933230492e839
+2026-10-27T14:14:55.3951515Z [1226/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8d63be9cad21276f7a559793f2ac8917
+2026-10-27T14:14:55.3952156Z [1227/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/89c0b356729437642bf0e5f1102b2135
+2026-10-27T14:14:55.3952771Z [1228/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a5317a4bb3993cf88b061f4a89ad581c
+2026-10-27T14:14:55.3953555Z [1229/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b4b691f4a8897b43ca0e915457d6a465
+2026-10-27T14:14:55.3954137Z [1230/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b50a6a40a5d3a82c8ac029d7446507eb
+2026-10-27T14:14:55.3954703Z [1231/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b1df9b466e17ec203b3824fa0a356f3f
+2026-10-27T14:14:55.3955268Z [1232/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b1d2da15221d28d99910f37d794795fa
+2026-10-27T14:14:55.3955833Z [1233/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b267e5fd36a5c2b548bba64bcf0cfa1b
+2026-10-27T14:14:55.3956388Z [1234/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b3864a292216046fe8ed17b30c5e5a4a
+2026-10-27T14:14:55.3956953Z [1235/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b7ee02eb4cad952019fe27c764efbfe7
+2026-10-27T14:14:55.3957515Z [1236/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b524bed0d42eab169b6e07c9e2e1253a
+2026-10-27T14:14:55.3958084Z [1237/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b250a0cf63dcf0dbaa2cbd9d6f0e1752
+2026-10-27T14:14:55.3958646Z [1238/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8a699c4c620cab859b27df84f5e33df8
+2026-10-27T14:14:55.3959205Z [1239/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b706e32f4cd203665923c6d146c7222a
+2026-10-27T14:14:55.5094589Z [1240/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bc73e1b87f336bfc1897dee1ddb84a6a
+2026-10-27T14:14:55.5095472Z [1241/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/8d5e25fb6ce79516b8cc7e440c0cf85d
+2026-10-27T14:14:55.5096204Z [1242/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b7bcb07ed9b8a8700beabaf2ea8ba6fe
+2026-10-27T14:14:55.5097196Z [1243/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bffa0cff586e1af89a510be1c1f235f2
+2026-10-27T14:14:55.5098098Z [1244/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/c0d1df596169be6c383761f440208ff0
+2026-10-27T14:14:55.5098813Z [1245/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b7d4d94e0e2a7139aab46c974b829a73
+2026-10-27T14:14:55.5101954Z [1246/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/c16ca950ebf93d2dc9fa0d81a90d1689
+2026-10-27T14:14:55.5102965Z [1247/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b64cb8c3bdf303584b1173b2f3028597
+2026-10-27T14:14:55.5110028Z [1248/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bfa4aac9d325c45a69f4445b9ce95bf9
+2026-10-27T14:14:55.5111188Z [1249/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/d66530015b48ac9608df4fbf8ef5bf65
+2026-10-27T14:14:55.5112285Z [1250/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b6260ace2f7e52e9d92f889baca32012
+2026-10-27T14:14:55.5113375Z [1251/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b6449d1c14bd978dc84c3cd148358c42
+2026-10-27T14:14:55.5114322Z [1252/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b89758e9012322bb889ecaeab9d6419c
+2026-10-27T14:14:55.5115262Z [1253/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b5883a8cfd2dfeae6a76661d33a7f50e
+2026-10-27T14:14:55.5128807Z [1254/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b619eb1cc5eba1eeca72d377526249f6
+2026-10-27T14:14:55.5129865Z [1255/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/c003aa133309e3388be4898837e4d452
+2026-10-27T14:14:55.5130803Z [1256/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/ad72045569777f7f9b0e6467155f6952
+2026-10-27T14:14:55.5131731Z [1257/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/ad83bc56407925d44a77a5bd01cd6783
+2026-10-27T14:14:55.5132606Z [1258/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b80b942f7ec04399bb309ea7d950e1e5
+2026-10-27T14:14:55.5154346Z [1259/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bdb4513009ebeeeb68cc97e9953b6ebc
+2026-10-27T14:14:55.5155316Z [1260/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b7947897457d98c0182549ea7f05b3fe
+2026-10-27T14:14:55.5156230Z [1261/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b78e6521339a448dea03f63003a2806c
+2026-10-27T14:14:55.5157169Z [1262/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b72a3463ea0de591c92d786e06c1a9eb
+2026-10-27T14:14:55.5158143Z [1263/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a10732565446bc387ba17d68f1ccae0c
+2026-10-27T14:14:55.5163502Z [1264/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b8a50dd54d7ce22a68a72558b92c7021
+2026-10-27T14:14:55.5164787Z [1265/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b6e529dfe1189947fa722499987c6c81
+2026-10-27T14:14:55.5165730Z [1266/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b24eaefc99c9f10328eea65e73d8cbf2
+2026-10-27T14:14:55.5400972Z [1267/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a104ce6937e57766d8efff9c1702a22b
+2026-10-27T14:14:55.5403718Z [1268/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b5082b4bc388b395b94a0ab7e6626399
+2026-10-27T14:14:55.5405094Z [1269/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b53c47f39d130f01196adabd53c3a1ef
+2026-10-27T14:14:55.5406407Z [1270/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/acef0cf01c29b2cfcbad8d2d69e11f7b
+2026-10-27T14:14:55.5407780Z [1271/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bca9b1512d09eecb494530e988147528
+2026-10-27T14:14:55.5409073Z [1272/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b1c0181e8d944bfb4967198f5249465c
+2026-10-27T14:14:55.5410351Z [1273/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/afa4aed02160ce7a8ba2f2d08c4a5f2a
+2026-10-27T14:14:55.5411619Z [1274/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bbd58f224b422504bb3a405aa1ad1941
+2026-10-27T14:14:55.5413227Z [1275/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/c0adc5f245855e517abff8e59d28d5e2
+2026-10-27T14:14:55.5414655Z [1276/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bb7426e22b8f26b14bb5120474fd36af
+2026-10-27T14:14:55.5416035Z [1277/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bf5c6fbd8652e5730b055a964ecd5bf7
+2026-10-27T14:14:55.5417438Z [1278/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b818b308efe5f19f7b346530c5172903
+2026-10-27T14:14:55.5418729Z [1279/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a2fd3d8a8f38f2a07ab7f5afc46adab2
+2026-10-27T14:14:55.5420142Z [1280/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/aee66dd6c8ec92dab916479c26372943
+2026-10-27T14:14:55.5421628Z [1281/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/aea931edcc93e9b82939d5f3ffa80f7c
+2026-10-27T14:14:55.5423078Z [1282/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bc10abaf0a39628aeb71426297e2c02f
+2026-10-27T14:14:55.5424653Z [1283/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b0e8af5c6fcd90bdf9311ee97bd30e69
+2026-10-27T14:14:55.5426015Z [1284/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bb8147aed6768c3fa8572390bc28142a
+2026-10-27T14:14:55.5427322Z [1285/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/adc290cbed9bf68ab888dc10f4f888fc
+2026-10-27T14:14:55.5428757Z [1286/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bb06886396188773c885589be2abef99
+2026-10-27T14:14:55.5430260Z [1287/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b1b63846206ef80dbbcda78b89e1c7e8
+2026-10-27T14:14:55.5432028Z [1288/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b01bd25f0238310c69927beed9aa0d76
+2026-10-27T14:14:55.5433776Z [1289/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b1b4c3377b54ce1b1af4adc7f25cd0c3
+2026-10-27T14:14:55.5435294Z [1290/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bcd7fa63469910138879ef9e77d9ecd0
+2026-10-27T14:14:55.5436667Z [1291/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a43c39f561e367c25b18a539a54c985a
+2026-10-27T14:14:55.5438043Z [1292/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bcac475f166dbf115942652ef6640470
+2026-10-27T14:14:55.5439349Z [1293/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a334d712c2ff1fa698b08d10ecda97ed
+2026-10-27T14:14:55.6229352Z [1294/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bb4f9e8cb4f630fb0b8db46b8e273cd1
+2026-10-27T14:14:55.6231766Z [1295/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/aa161b7bf9cc4d3459989562f9fcbd7d
+2026-10-27T14:14:55.6236614Z [1296/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/ae3c3883789f038039bb1b56bafcc26e
+2026-10-27T14:14:55.6237641Z [1297/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a31609ebe4773247db3fb3747c647478
+2026-10-27T14:14:55.6238602Z [1298/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a3a96e1b351d7e4b397093c8b9d25619
+2026-10-27T14:14:55.6239618Z [1299/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a9ef975c67e3573f69f65dc86780ad33
+2026-10-27T14:14:55.6240631Z [1300/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/a51a89bf5c9d9ba69aae352caef319aa
+2026-10-27T14:14:55.6241652Z [1301/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/aaa633226459738be93061dae176823f
+2026-10-27T14:14:55.6242600Z [1302/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b47120c9167f3fb81b032c17513205fc
+2026-10-27T14:14:55.6243852Z [1303/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/bc9d34bb561f406c09932e13cf516595
+2026-10-27T14:14:55.6244831Z [1304/4938  0s] CopyFiles /github/workspace/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/b0d7ed97059539ff2ac601057aae0338
+2026-10-27T14:14:55.6245655Z [1305/4938  6s] UnityLinker /github/workspace/Library/Bee/artifacts/unitylinker_xy1a.traceevents
+2026-10-27T14:14:55.6246097Z ##### CommandLine
+2026-10-27T14:14:55.6334053Z "/opt/unity/Editor/Data/il2cpp/build/deploy/UnityLinker" --allowed-assembly="/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Managed/UnityEngine.AIModule.dll" --allowed-assembly="/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Managed/UnityEngine.ARModule.dll" --allowed-assembly="/opt/unity/Editor/Data/PlaybackEngines/Andro
+2026-10-27T14:14:55.6438332Z ##### ExitCode
+2026-10-27T14:14:55.6438558Z 139
+2026-10-27T14:14:55.6438740Z ##### Output
+2026-10-27T14:14:55.6538313Z /opt/unity/Editor/Data/il2cpp/build/deploy/UnityLinker --allowed-assembly=/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Managed/UnityEngine.AIModule.dll --allowed-assembly=/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Managed/UnityEngine.ARModule.dll --allowed-assembly=/opt/unity/Editor/Data/PlaybackEngines/AndroidPlaye
+2026-10-27T14:14:55.6603446Z Building Library/Bee/artifacts/Android/ManagedStripped failed with output:
+2026-10-27T14:14:55.6728031Z /opt/unity/Editor/Data/il2cpp/build/deploy/UnityLinker --allowed-assembly=/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Managed/UnityEngine.AIModule.dll --allowed-assembly=/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Variations/il2cpp/Managed/UnityEngine.ARModule.dll --allowed-assembly=/opt/unity/Editor/Data/PlaybackEngines/AndroidPlaye
+2026-10-27T14:14:55.6834594Z Segmentation fault (core dumped)
+2026-10-27T14:14:55.6834841Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-10-27T14:14:55.6835251Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-10-27T14:14:55.6835760Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+2026-10-27T14:14:55.6836212Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+2026-10-27T14:14:55.6836816Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
+2026-10-27T14:14:55.6837027Z UnityEngine.Debug:LogError (object)
+2026-10-27T14:14:55.6837628Z UnityEditor.Modules.BeeBuildPostprocessor:DefaultResultProcessor (Bee.BinLog.NodeFinishedMessage,bool,bool) (at /home/bokken/build/output/unity/unity/Editor/Mono/Modules/BeeBuildPostprocessor.cs:619)
+2026-10-27T14:14:55.6838408Z UnityEditor.Modules.BeeBuildPostprocessor:UnityLinkerResultProcessor (Bee.BinLog.NodeFinishedMessage) (at /home/bokken/build/output/unity/unity/Editor/Mono/Modules/BeeBuildPostprocessor.cs:574)
+2026-10-27T14:14:55.6839097Z UnityEditor.Modules.BeeBuildPostprocessor:ReportBuildResults () (at /home/bokken/build/output/unity/unity/Editor/Mono/Modules/BeeBuildPostprocessor.cs:628)
+2026-10-27T14:14:55.6839778Z UnityEditor.Modules.BeeBuildPostprocessor:PostProcess (UnityEditor.Modules.BuildPostProcessArgs) (at /home/bokken/build/output/unity/unity/Editor/Mono/Modules/BeeBuildPostprocessor.cs:788)
+2026-10-27T14:14:55.6840773Z UnityEditor.Modules.BeeBuildPostprocessor:PostProcess (UnityEditor.Modules.BuildPostProcessArgs,UnityEditor.BuildProperties&) (at /home/bokken/build/output/unity/unity/Editor/Mono/Modules/BeeBuildPostprocessor.cs:35)
+2026-10-27T14:14:55.6841557Z UnityEditor.Android.AndroidBuildPostprocessor:PostProcess (UnityEditor.Modules.BuildPostProcessArgs,UnityEditor.BuildProperties&)
+2026-10-27T14:14:55.6842567Z UnityEditor.PostprocessBuildPlayer:Postprocess (UnityEditor.BuildTarget,int,string,string,string,UnityEditor.BuildOptions,UnityEditor.RuntimeClassRegistry,UnityEditor.Build.Reporting.BuildReport) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline/PostprocessBuildPlayer.cs:285)
+2026-10-27T14:14:55.6843824Z UnityEditor.BuildPipeline:BuildPlayerInternalNoCheck (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[],bool)
+2026-10-27T14:14:55.6844748Z UnityEditor.BuildPipeline:BuildPlayerInternal (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:531)
+2026-10-27T14:14:55.6845781Z UnityEditor.BuildPipeline:BuildPlayer (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:415)
+2026-10-27T14:14:55.6846770Z UnityEditor.BuildPipeline:BuildPlayer (UnityEditor.BuildPlayerOptions) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:361)
+2026-10-27T14:14:55.6847261Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:65)
+2026-10-27T14:14:55.6847479Z 
+2026-10-27T14:14:55.6847673Z (Filename: /home/bokken/build/output/unity/unity/Editor/Mono/Modules/BeeBuildPostprocessor.cs Line: 619)
+2026-10-27T14:14:55.6847911Z 
+2026-10-27T14:14:55.6847975Z Total cache size 514180
+2026-10-27T14:14:55.6848161Z Total cache size after purge 514180, took 00:00:00.0183908
+2026-10-27T14:14:55.6848470Z Unloading 75 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T14:14:55.6848732Z Unloading 106 unused Assets / (449.0 KB). Loaded Objects now: 7221.
+2026-10-27T14:14:55.6848968Z Memory consumption went from 181.1 MB to 180.7 MB.
+2026-10-27T14:14:55.6849315Z Total: 24.954049 ms (FindLiveObjects: 1.704089 ms CreateObjectMapping: 0.386039 ms MarkObjects: 21.196668 ms  DeleteObjects: 1.665411 ms)
+2026-10-27T14:14:55.6849584Z 
+2026-10-27T14:14:55.6849654Z Build Finished, Result: Failure.
+2026-10-27T14:14:55.7147138Z ExitCode: 3 Duration: 7s581ms
+2026-10-27T14:14:55.7531467Z ##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793110495752,"processId":1585,"steps":[{"description":"Preprocess Player","duration":162},{"description":"Prepare For Build","duration":1993},{"description":"ProducePlayerScriptAssemblies","duration":2616},{"description":"Verify Build setup","duration":116},{"description":"Prepare assets for target
+2026-10-27T14:14:55.7541816Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T14:14:55.9701301Z Loaded scene 'Temp/__Backupscenes/0.backup'
+2026-10-27T14:14:55.9701865Z 	Deserialize:            1.015 ms
+2026-10-27T14:14:55.9702152Z 	Integration:            215.750 ms
+2026-10-27T14:14:55.9702467Z 	Integration of assets:  0.001 ms
+2026-10-27T14:14:55.9702799Z 	Thread Wait Time:       0.015 ms
+2026-10-27T14:14:55.9703096Z 	Total Operation Time:   216.781 ms
+2026-10-27T14:14:55.9817881Z Unloading 0 unused Assets / (0.5 KB). Loaded Objects now: 7213.
+2026-10-27T14:14:55.9818976Z Memory consumption went from 177.5 MB to 177.5 MB.
+2026-10-27T14:14:55.9819954Z Total: 11.742822 ms (FindLiveObjects: 1.362275 ms CreateObjectMapping: 0.177296 ms MarkObjects: 10.187517 ms  DeleteObjects: 0.014512 ms)
+2026-10-27T14:14:55.9820440Z 
+2026-10-27T14:14:56.0887146Z # Construction de l'APK Android
+2026-10-27T14:14:56.0888491Z 
+2026-10-27T14:14:56.0893789Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers
+2026-10-27T14:14:56.0913055Z - Icône : Assets/Korvalune/Resources/UI/Icone.png
+2026-10-27T14:14:56.0913731Z - Résultat : **Failed** en 1.8 min, 1 erreur(s), 14 avertissement(s)
+2026-10-27T14:14:56.0922132Z - ❌ Postprocess built player : Building Library/Bee/artifacts/Android/ManagedStripped failed with output:
+2026-10-27T14:14:56.0922601Z 
+2026-10-27T14:14:56.0922757Z ## Contenu empaqueté : 1605 Mo
+2026-10-27T14:14:56.0923027Z - Texture2D : 1055.3 Mo (2056)
+2026-10-27T14:14:56.0923374Z - Mesh : 278.6 Mo (579)
+2026-10-27T14:14:56.0923873Z - TextAsset : 233.3 Mo (15)
+2026-10-27T14:14:56.0924119Z - MonoBehaviour : 19.6 Mo (512)
+2026-10-27T14:14:56.0924366Z - AnimationClip : 7.2 Mo (248)
+2026-10-27T14:14:56.0924633Z - Shader : 4.3 Mo (56)
+2026-10-27T14:14:56.0924858Z - Avatar : 2.3 Mo (158)
+2026-10-27T14:14:56.0925084Z - Material : 1.5 Mo (920)
+2026-10-27T14:14:56.0925322Z - Transform : 0.9 Mo (11313)
+2026-10-27T14:14:56.0925566Z - TerrainData : 0.7 Mo (1)
+2026-10-27T14:14:56.0926104Z - Cubemap : 0.5 Mo (1)
+2026-10-27T14:14:56.0926334Z - GameObject : 0.5 Mo (11661)
+2026-10-27T14:14:56.0926494Z 
+2026-10-27T14:14:56.0926590Z ### Plus gros fichiers sources
+2026-10-27T14:14:56.0927463Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F_Morphs.bytes
+2026-10-27T14:14:56.0928015Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F_Morphs.bytes
+2026-10-27T14:14:56.0928563Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F_Morphs.bytes
+2026-10-27T14:14:56.0929467Z - 19.6 Mo — Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale_Morphs.bytes
+2026-10-27T14:14:56.0929965Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Varek_F/Varek_F_Morphs.bytes
+2026-10-27T14:14:56.0930464Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F_Morphs.bytes
+2026-10-27T14:14:56.0930966Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M_Morphs.bytes
+2026-10-27T14:14:56.0932038Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M_Morphs.bytes
+2026-10-27T14:14:56.0932577Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M_Morphs.bytes
+2026-10-27T14:14:56.0933096Z - 19.3 Mo — Assets/Korvalune/Art/Characters/BaseMale/BaseMale_Morphs.bytes
+2026-10-27T14:14:56.0934132Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Varek_M/Varek_M_Morphs.bytes
+2026-10-27T14:14:56.0934649Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M_Morphs.bytes
+2026-10-27T14:14:56.0935772Z - 13.5 Mo — Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
+2026-10-27T14:14:56.0936219Z - 13.5 Mo — Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
+2026-10-27T14:14:56.0936823Z - 13.0 Mo — Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
+2026-10-27T14:14:56.0937400Z - 12.6 Mo — Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
+2026-10-27T14:14:56.0937856Z - 12.6 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
+2026-10-27T14:14:56.0938571Z - 11.7 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
+2026-10-27T14:14:56.0939047Z - 11.2 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
+2026-10-27T14:14:56.0939822Z - 10.9 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
+2026-10-27T14:14:56.0940270Z - 10.7 Mo — Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
+2026-10-27T14:14:56.0940693Z - 10.4 Mo — Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
+2026-10-27T14:14:56.0941537Z - 9.0 Mo — Assets/Korvalune/Art/Enemies/LoupTenebres/LoupTenebres.fbx
+2026-10-27T14:14:56.0942043Z - 8.7 Mo — Assets/Korvalune/Art/Enemies/SorcierCorrompu/SorcierCorrompu.fbx
+2026-10-27T14:14:56.0942718Z - 7.8 Mo — Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
+2026-10-27T14:14:56.0943358Z - 6.7 Mo — Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale.fbx
+2026-10-27T14:14:56.0944523Z - 6.7 Mo — Assets/Korvalune/Art/Enemies/SqueletteGuerrier/SqueletteGuerrier.fbx
+2026-10-27T14:14:56.0945022Z - 6.4 Mo — Assets/Korvalune/Art/Characters/BaseMale/BaseMale.fbx
+2026-10-27T14:14:56.0945692Z - 6.2 Mo — Assets/Korvalune/Art/Enemies/ChevalierMaudit/ChevalierMaudit.fbx
+2026-10-27T14:14:56.0946226Z - 4.3 Mo — Assets/Korvalune/Art/Catalog/Models/F/hair/learning_anime_hair_F.fbx
+2026-10-27T14:14:56.0946683Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-10-27T14:14:56.0957077Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-10-27T14:14:56.0958043Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+2026-10-27T14:14:56.0958835Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+2026-10-27T14:14:56.0959397Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
+2026-10-27T14:14:56.0959738Z UnityEngine.Debug:Log (object)
+2026-10-27T14:14:56.0960166Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:87)
+2026-10-27T14:14:56.0960531Z 
+2026-10-27T14:14:56.0960698Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 87)
+2026-10-27T14:14:56.0960947Z 
+2026-10-27T14:14:56.5650712Z Killing ADB server in 0.394685 seconds.
+2026-10-27T14:14:56.9861400Z [Physics::Module] Cleanup current backned.
+2026-10-27T14:14:56.9861895Z [Physics::Module] Id: 0xf2b8ea05
+2026-10-27T14:14:56.9929082Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-10-27T14:14:56.9929563Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-10-27T14:14:57.0193405Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-10-27T14:14:57.0936153Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T14:14:57.0936429Z       Application is shutting down...
+2026-10-27T14:14:57.1388655Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T14:14:57.1388980Z       ALC ILPP context 2 is unloading
+2026-10-27T14:15:01.9202400Z Cleanup mono
+2026-10-27T14:15:02.4643984Z debugger-agent: Unable to listen on 43
+2026-10-27T14:15:02.6438393Z [Package Manager] Server process was shutdown
+2026-10-27T14:15:02.6958465Z Checking for leaked weakptr:
+2026-10-27T14:15:02.6958821Z   Found no leaked weakptrs.
+2026-10-27T14:15:02.7107558Z ##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1793110502709,"processId":1585,"allocatedMemory":15996938,"memoryLabels":[{"Default":22341},{"Permanent":16080},{"Thread":1084616},{"Manager":18066},{"VertexData":8},{"Geometry":408},{"Texture":160},{"Shader":79227},{"Material":24},{"GfxDevice":36264},{"Animation":392},{"Audio":4032},{"FontEngine":320},
+2026-10-27T14:15:03.6994873Z Build failed, with exit code 1
+2026-10-27T14:15:04.6174356Z 
+2026-10-27T14:15:04.6174961Z ###########################
+2026-10-27T14:15:04.6175244Z #       Build output      #
+2026-10-27T14:15:04.6175396Z ###########################
+2026-10-27T14:15:04.6175488Z 
+2026-10-27T14:15:04.6565209Z total 8.0K
+2026-10-27T14:15:04.6565503Z drwxr-xr-x 2 root root 4.0K Oct 27 14:11 .
+2026-10-27T14:15:04.6565770Z drwxr-xr-x 3 root root 4.0K Oct 27 14:11 ..
+2026-10-27T14:15:04.7902267Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-10-27T14:15:04.7902945Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-10-27T14:15:04.7903516Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-10-27T14:15:04.7903801Z [UnityConnectServicesConfig] Service configuration:
+2026-10-27T14:15:04.7904011Z     "servicesConfigBaseUrl": "",
+2026-10-27T14:15:04.7904181Z     "disableServicesWindow": false,
+2026-10-27T14:15:04.7904365Z     "disableUserLogin": false,
+2026-10-27T14:15:04.7904537Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-10-27T14:15:04.7904725Z     "clientConnectTimeoutSec": 5,
+2026-10-27T14:15:04.7904894Z     "clientHandshakeTimeoutSec": 10,
+2026-10-27T14:15:04.7905084Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-10-27T14:15:04.7905279Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-10-27T14:15:04.7905459Z     "licensingServiceBaseUrl": "",
+2026-10-27T14:15:04.7905626Z     "enableProxyAutoconfig": "false"
+2026-10-27T14:15:04.7905741Z 
+2026-10-27T14:15:04.8427512Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-10-27T14:15:04.8427853Z Branch:                  6000.0/staging
+2026-10-27T14:15:04.8428041Z Build type:              Release
+2026-10-27T14:15:04.8428205Z Batch mode:              YES
+2026-10-27T14:15:04.8428360Z System name:             Linux
+2026-10-27T14:15:04.8428563Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
+2026-10-27T14:15:04.8428880Z Kernel version:          6.17.0-1022-azure
+2026-10-27T14:15:04.8429053Z Architecture:            x86_64
+2026-10-27T14:15:04.8429212Z Available memory:        15989 MB
+2026-10-27T14:15:05.6454916Z User *** logged in successfully
+2026-10-27T14:15:05.6455248Z [UnityConnect::TryLogin] Request Succeeded.
+2026-10-27T14:15:05.6455493Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-10-27T14:15:05.6455949Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-10-27T14:15:05.6456371Z [Licensing::Module] Successfully launched the LicensingClient (PId: 2271)
+2026-10-27T14:15:06.2136766Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T14:15:06.212977Z"
+2026-10-27T14:15:06.2137768Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-10-27T14:15:06.2605963Z [Licensing::Client] Handshaking with LicensingClient:
+2026-10-27T14:15:06.2606538Z   Version:                 1.16.0+1c867a9
+2026-10-27T14:15:06.2606937Z   Session Id:              2245cd7ede924981b46ff65d613081b2
+2026-10-27T14:15:06.2607368Z   Correlation Id:          6924dd579bf27a77ad595850d04719df
+2026-10-27T14:15:06.2607745Z   External correlation Id: 115209769591788874
+2026-10-27T14:15:06.2608122Z   Machine Id:              RsNNq6Ea+BqaxC8tDVCJBmEkGeQ=
+2026-10-27T14:15:06.2608760Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.05s, handshake: 0.00s)
+2026-10-27T14:15:06.2609701Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T14:15:06.259963Z"
+2026-10-27T14:15:06.2610691Z [Licensing::Module] Connected to LicensingClient (PId: 2271, launch time: 0.00, total connection time: 0.61s)
+2026-10-27T14:15:06.2746397Z [Licensing::Client] Successfully updated the access token
+2026-10-27T14:15:06.2746908Z [Licensing::Module] Successfully updated the access token AEoDVUhjvh...
+2026-10-27T14:15:07.5501914Z [Licensing::Client] Successfully processed license management request
+2026-10-27T14:15:07.5502496Z [Licensing::Module] Successfully returned the entitlement license
+2026-10-27T14:15:07.5741905Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-10-27T14:15:09.1872279Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-10-27T14:15:09.1960969Z 
+2026-10-27T14:15:09.1961511Z ###########################
+2026-10-27T14:15:09.1961747Z #         Failure         #
+2026-10-27T14:15:09.1961948Z ###########################
+2026-10-27T14:15:09.1962052Z 
+2026-10-27T14:15:09.1962217Z Please note that the exit code is not very descriptive.
+2026-10-27T14:15:09.1962456Z Most likely it will not help you solve the issue.
+2026-10-27T14:15:09.1962590Z 
+2026-10-27T14:15:09.1962877Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-10-27T14:15:09.1963116Z 
+2026-10-27T14:15:09.7197947Z ##[error]Build failed with exit code 1
