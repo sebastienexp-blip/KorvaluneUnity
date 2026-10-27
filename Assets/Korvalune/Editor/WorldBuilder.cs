@@ -489,11 +489,15 @@ namespace Korvalune.EditorTools
                 if (c) c.SampleAnimation(anim.gameObject, t);
             }
             foreach (var h in Object.FindObjectsByType<Health>(FindObjectsSortMode.None)) Pose(h.gameObject, "Idle", 0.3f);
-            void Shot(string name, int w = 1600, int hgt = 900)
+            // rendu logiciel (CI sans GPU) : arbres et détails à courte distance, définition réduite
+            var ter = Terrain.activeTerrain;
+            if (ter) { ter.treeDistance = 160; ter.treeBillboardDistance = 50; ter.heightmapPixelError = 16; ter.basemapDistance = 80; ter.detailObjectDistance = 0; }
+            void Shot(string name, int w = 1280, int hgt = 720)
             {
                 game.Hud.Refresh();
                 Canvas.ForceUpdateCanvases();
-                var rt = new RenderTexture(w, hgt, 24, RenderTextureFormat.ARGB32) { antiAliasing = 4 };
+                CI.Step("vallée : rendu " + name);
+                var rt = new RenderTexture(w, hgt, 24, RenderTextureFormat.ARGB32) { antiAliasing = 1 };
                 cam.targetTexture = rt; cam.Render(); RenderTexture.active = rt;
                 var tex = new Texture2D(w, hgt, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, w, hgt), 0, 0); tex.Apply();
                 RenderTexture.active = null; cam.targetTexture = null;

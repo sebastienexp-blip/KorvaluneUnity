@@ -97,6 +97,37 @@ jobs:
       - name: Résultat
         run: test -f build/Android/Korvalune.apk
 
+  journal:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Journal de la construction Android
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p ci-out/android
+          JOB=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs --jq '.jobs[] | select(.name=="build") | .id')
+          curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/jobs/$JOB/logs" -o job.log || true
+          {
+            echo "# Journal de la construction Android (run ${{ github.run_id }})"
+            echo "## Lignes importantes"
+            grep -nE "Killed|exit code|error CS|Caught fatal|Exception|BuildFailedException|Build Finished|Result:|FAILURE|What went wrong|> Task.*FAILED|error:|Error building|Scènes|APK|❌" job.log | grep -v "ValidationExceptions" | head -200
+            echo; echo "## Fin du journal (300 dernières lignes avant l'arrêt)"
+            L=$(grep -n "Build failed\|Exiting batchmode\|Application is shutting down" job.log | tail -1 | cut -d: -f1)
+            [ -n "$L" ] && sed -n "$((L>300 ? L-300 : 1)),${L}p" job.log || tail -300 job.log
+          } | cut -c1-400 > ci-out/android/build-job.log
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add ci-out/android
+          git commit -m "Android : journal de construction [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+
   test:
     needs: build
     runs-on: ubuntu-latest

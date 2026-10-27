@@ -124,7 +124,7 @@ namespace Korvalune.EditorTools
             void Shot(string name)
             {
                 Canvas.ForceUpdateCanvases();
-                var rt = new RenderTexture(1600, 900, 24, RenderTextureFormat.ARGB32) { antiAliasing = 4 };
+                var rt = new RenderTexture(1600, 900, 24, RenderTextureFormat.ARGB32) { antiAliasing = 1 };
                 cam.targetTexture = rt; cam.Render(); RenderTexture.active = rt;
                 var tex = new Texture2D(1600, 900, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, 1600, 900), 0, 0); tex.Apply();
                 RenderTexture.active = null; cam.targetTexture = null;
