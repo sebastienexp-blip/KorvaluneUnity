@@ -525,6 +525,25 @@ namespace Korvalune.EditorTools
                 // 5. galerie des ennemis vus en jeu
                 hud.enabled = false;
                 cam.transform.position = Ground(new Vector2(45, 104)) + new Vector3(0, 5, 0); cam.transform.LookAt(Ground(new Vector2(45, 120)) + Vector3.up); Shot("5_loups_lisiere");
+                // 6. butin : un objet de chaque rareté au sol (faisceaux et auras comme dans Diablo 4)
+                var rng = new System.Random(7); var p0 = game.Player.transform.position;
+                for (int k = 0; k < 7; k++)
+                {
+                    var it = Loot.Roll(rng, 40); it.rarity = (Rarity)k; it.name = it.baseName + " (" + Loot.LabelOf(it.rarity) + ")";
+                    var at = Ground(p0 + game.Player.transform.right * ((k - 3) * 1.6f) + game.Player.transform.forward * 3f);
+                    LootDrop.Spawn(it, at);
+                }
+                cam.transform.position = p0 - game.Player.transform.forward * 4f + Vector3.up * 5.5f; cam.transform.LookAt(p0 + game.Player.transform.forward * 3f);
+                Shot("6_butin_raretes");
+                // 7. inventaire : sac rempli, quelques objets portés, fiche d'un légendaire
+                var pc = game.Player; var eq = pc.GetComponent<Equipment>();
+                pc.inventory.Clear();
+                for (int k = 0; k < 26; k++) { var it = Loot.Roll(rng, 45, k % 5 == 0 ? 6 : 1); pc.inventory.Add(it); }
+                foreach (var it in pc.inventory.Where(x => x.rarity >= Rarity.Rare).GroupBy(x => x.slot).Select(g => g.First()).ToList()) eq.Equip(it);
+                game.Hud.ToggleBag();
+                Shot("7_inventaire");
+                game.Hud.ToggleBag();
+                check("Butin et inventaire", eq.worn.Count > 0, $"{eq.worn.Count} objets portés, {pc.inventory.Count} dans le sac — {eq.Summary().Replace("<b>", "").Replace("</b>", "").Replace("\n", " ")}");
                 check("Captures de la vallée", true, "ci-out/Jeu_*.png");
             }
             catch (System.Exception ex) { check("Captures de la vallée", false, ex.Message); }

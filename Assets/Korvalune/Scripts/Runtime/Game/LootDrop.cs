@@ -75,7 +75,7 @@ namespace Korvalune.Game
             if (glow) glow.intensity = (0.8f + 0.5f * (int)item.rarity) * (0.85f + 0.15f * Mathf.Sin(t * 3));
             if (beam) beam.localRotation = Quaternion.Euler(0, t * 40, 0);
             var p = FindFirstObjectByType<PlayerController>();
-            if (p && !p.Health.Dead && t > 0.6f && (p.transform.position - transform.position).sqrMagnitude < pickupRadius * pickupRadius)
+            if (p && !p.Health.Dead && t > 0.6f && p.inventory.Count < Equipment.BagSize && (p.transform.position - transform.position).sqrMagnitude < pickupRadius * pickupRadius)
             {
                 Picked?.Invoke(item);
                 FX.Burst(transform.position + Vector3.up * 0.4f, Loot.ColorOf(item.rarity), 20, 3f, 0.12f, 0.5f, -0.3f);

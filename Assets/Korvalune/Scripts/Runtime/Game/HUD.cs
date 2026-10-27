@@ -86,7 +86,8 @@ namespace Korvalune.Game
                 skillButtons.Add((cd, t, i));
             }
             // menus (inventaire, compétences) — coins du haut
-            RoundButton(root, "Inventaire", "bag", new Vector2(0.5f, 1), new Vector2(-60, -24), 96, () => Notify("Inventaire : bientôt disponible"), out _, out _);
+            RoundButton(root, "Inventaire", "bag", new Vector2(0.5f, 1), new Vector2(-60, -24), 96, ToggleBag, out _, out _);
+            if (player && player.GetComponent<Equipment>()) BuildBag(root);
             RoundButton(root, "Arbre", "book", new Vector2(0.5f, 1), new Vector2(60, -24), 96, ToggleTree, out _, out _);
             if (runner) BuildTree(root);
 
@@ -190,11 +191,114 @@ namespace Korvalune.Game
                 if (noMana || runner.ranks[si] <= 0) cd.fillAmount = 1;
             }
             if (treePanel && treePanel.activeSelf) RefreshTree();
+            if (bagPanel && bagPanel.activeSelf && Time.frameCount % 15 == 0) RefreshBag();
+        }
+
+        // ------------------------------------------------------------------------------------------ inventaire et équipement
+        GameObject bagPanel; Text bagStats, bagTip; ItemSave selected; bool selectedWorn;
+        Button bEquip, bDrop; Text bEquipText;
+        readonly List<(Image frame, Image glow, Text label)> bagCells = new List<(Image, Image, Text)>();
+        readonly Dictionary<Slot, (Image frame, Image glow, Text label)> slotCells = new Dictionary<Slot, (Image, Image, Text)>();
+        static readonly Dictionary<Slot, string> SlotName = new Dictionary<Slot, string>
+        { {Slot.Arme,"Arme"},{Slot.MainGauche,"Main gauche"},{Slot.Casque,"Casque"},{Slot.Torse,"Torse"},{Slot.Gants,"Gants"},{Slot.Jambes,"Jambes"},{Slot.Bottes,"Bottes"},{Slot.Amulette,"Amulette"},{Slot.Anneau,"Anneau"} };
+
+        public void ToggleBag()
+        {
+            if (!bagPanel) { Notify("Inventaire indisponible"); return; }
+            if (treePanel) treePanel.SetActive(false);
+            bagPanel.SetActive(!bagPanel.activeSelf); selected = null; if (bagPanel.activeSelf) RefreshBag();
+        }
+
+        (Image, Image, Text) Cell(RectTransform parent, string name, Vector2 anchor, Vector2 pos, float size, System.Action onClick)
+        {
+            var glow = Img(parent, name + "_aura", UIStyle.Glow(), anchor, pos, new Vector2(size * 1.5f, size * 1.5f)); glow.color = new Color(0, 0, 0, 0);
+            var frame = Img(parent, name, UIStyle.Bar(), anchor, pos, new Vector2(size, size)); frame.type = Image.Type.Sliced; frame.raycastTarget = true;
+            var label = Label(frame.rectTransform, "Texte", "", 18, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size - 8, size - 8));
+            var b = frame.gameObject.AddComponent<Button>(); b.targetGraphic = frame; b.onClick.AddListener(() => onClick());
+            return (frame, glow, label);
+        }
+
+        static void Paint((Image frame, Image glow, Text label) c, ItemSave it, string empty)
+        {
+            if (it == null) { c.frame.color = new Color(0.12f, 0.09f, 0.07f, 0.9f); c.glow.color = new Color(0, 0, 0, 0); c.label.text = $"<color=#6b5a48>{empty}</color>"; return; }
+            var col = Loot.ColorOf(it.rarity);
+            c.frame.color = Color.Lerp(new Color(0.10f, 0.07f, 0.05f), col, 0.35f);
+            c.glow.color = it.rarity >= Rarity.Legendaire ? new Color(col.r, col.g, col.b, 0.55f) : new Color(0, 0, 0, 0);   // aura comme au sol
+            c.label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.baseName}</b></color>\n<size=15>{SlotName[it.slot]} · {it.power}</size>";
+        }
+
+        /// <summary>Panneau d'inventaire : équipement porté (9 emplacements) à gauche, sac de 40 objets à droite, caractéristiques et
+        /// fiche de l'objet choisi (couleur de rareté comme au sol, comparaison avec l'objet porté) ; équiper, retirer, jeter.</summary>
+        void BuildBag(RectTransform root)
+        {
+            var eq = player.GetComponent<Equipment>();
+            var panel = Panel(root, "Inventaire", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1640, 900)); bagPanel = panel.gameObject;
+            Label(panel, "Titre", "Équipement et inventaire", 40, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(40, -24), new Vector2(900, 56)).color = UIStyle.Gold;
+            RoundButton(panel, "Fermer", "attack", new Vector2(1, 1), new Vector2(-24, -20), 80, ToggleBag, out _, out _);
+            // équipement : disposition autour d'une silhouette
+            var doll = Img(panel, "Silhouette", UIStyle.Bar(), new Vector2(0, 1), new Vector2(40, -100), new Vector2(560, 620)); doll.type = Image.Type.Sliced; doll.color = new Color(0, 0, 0, 0.35f);
+            var pos = new Dictionary<Slot, Vector2>
+            {
+                { Slot.Casque, new Vector2(220, -20) }, { Slot.Amulette, new Vector2(370, -40) }, { Slot.Torse, new Vector2(220, -170) },
+                { Slot.Gants, new Vector2(60, -190) }, { Slot.Anneau, new Vector2(380, -190) }, { Slot.Arme, new Vector2(60, -340) },
+                { Slot.MainGauche, new Vector2(380, -340) }, { Slot.Jambes, new Vector2(220, -320) }, { Slot.Bottes, new Vector2(220, -470) },
+            };
+            foreach (var kv in pos)
+            {
+                var slot = kv.Key;
+                slotCells[slot] = Cell(doll.rectTransform, "Porté_" + slot, new Vector2(0, 1), kv.Value, 120, () => { selected = eq.In(slot); selectedWorn = true; RefreshBag(); });
+            }
+            bagStats = Label(panel, "Caractéristiques", "", 24, TextAnchor.UpperLeft, new Vector2(0, 0), new Vector2(40, 40), new Vector2(560, 120));
+            // sac : 8 × 5
+            for (int i = 0; i < Equipment.BagSize; i++)
+            {
+                int k = i;
+                var c = Cell(panel, "Sac_" + i, new Vector2(0, 1), new Vector2(640 + (i % 8) * 116, -100 - (i / 8) * 116), 106, () =>
+                { selected = k < player.inventory.Count ? player.inventory[k] : null; selectedWorn = false; RefreshBag(); });
+                bagCells.Add(c);
+            }
+            // fiche de l'objet
+            var tip = Img(panel, "Fiche", UIStyle.Bar(), new Vector2(0, 0), new Vector2(640, 30), new Vector2(940, 200)); tip.type = Image.Type.Sliced; tip.color = new Color(0.06f, 0.045f, 0.035f, 0.95f);
+            bagTip = Label(tip.rectTransform, "Texte", "", 22, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(18, -10), new Vector2(640, 185));
+            Button Btn(string name, Vector2 p, System.Action a, out Text t)
+            {
+                var im = Img(tip.rectTransform, name, UIStyle.Button(), new Vector2(1, 1), p, new Vector2(220, 70)); im.raycastTarget = true;
+                t = Label(im.rectTransform, "T", name, 26, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(220, 70)); t.color = UIStyle.Gold;
+                var b = im.gameObject.AddComponent<Button>(); b.targetGraphic = im; b.onClick.AddListener(() => a()); return b;
+            }
+            bEquip = Btn("Équiper", new Vector2(-20, -20), () =>
+            {
+                if (selected == null) return;
+                if (selectedWorn) eq.Unequip(selected.slot); else eq.Equip(selected);
+                selected = null; RefreshBag();
+            }, out bEquipText);
+            bDrop = Btn("Jeter", new Vector2(-20, -105), () => { if (selected != null && !selectedWorn) { eq.Discard(selected); selected = null; RefreshBag(); } }, out _);
+            bagPanel.SetActive(false);
+        }
+
+        void RefreshBag()
+        {
+            var eq = player ? player.GetComponent<Equipment>() : null; if (!eq) return;
+            foreach (var kv in slotCells) Paint(kv.Value, eq.In(kv.Key), SlotName[kv.Key]);
+            for (int i = 0; i < bagCells.Count; i++) Paint(bagCells[i], i < player.inventory.Count ? player.inventory[i] : null, "");
+            bagStats.text = eq.Summary() + $"\n<size=20>Sac : {player.inventory.Count} / {Equipment.BagSize}</size>";
+            if (selected == null) { bagTip.text = "<color=#a08c6c>Touchez un objet pour voir sa fiche.</color>"; bEquip.gameObject.SetActive(false); bDrop.gameObject.SetActive(false); return; }
+            var txt = Loot.Tooltip(selected);
+            var cur = eq.In(selected.slot);
+            if (!selectedWorn && cur != null)
+            {
+                float d = selected.power - cur.power;
+                txt += $"\n<color=#{(d >= 0 ? "7CFC7C" : "FF7070")}>{(d >= 0 ? "▲ +" : "▼ ")}{d:0} puissance par rapport à « {cur.name} »</color>";
+            }
+            bagTip.text = txt;
+            bEquip.gameObject.SetActive(true); bEquipText.text = selectedWorn ? "Retirer" : "Équiper";
+            bDrop.gameObject.SetActive(!selectedWorn);
         }
 
         void ToggleTree()
         {
             if (!treePanel) { Notify("Arbre de compétences indisponible"); return; }
+            if (bagPanel) bagPanel.SetActive(false);
             treePanel.SetActive(!treePanel.activeSelf); pickSlot = -1; if (treePanel.activeSelf) RefreshTree();
         }
 

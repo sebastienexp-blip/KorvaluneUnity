@@ -61,6 +61,10 @@ namespace Korvalune.Game
                 if (save.skillRanks != null && save.skillRanks.Count == Runner.book.Count) Runner.ranks = save.skillRanks.ToArray();
                 if (save.loadout != null && save.loadout.Count == Runner.loadout.Length) Runner.loadout = save.loadout.ToArray();
             }
+            // équipement : caractéristiques de base (niveau) + objets portés
+            var eq = hero.AddComponent<Equipment>(); eq.Init();
+            if (save != null) eq.FromSave(save.equipped);
+            h.hp = h.maxHp;
             h.modifyIncoming = dmgIn => Time.time < Runner.shieldUntil ? dmgIn * (1f - Runner.shieldPower) : dmgIn;
 
             // ---- interface
@@ -127,6 +131,7 @@ namespace Korvalune.Game
             var s = SaveSystem.Current; if (s == null || !Player) return;
             s.level = Player.level; s.xp = Player.xp; s.skillPoints = Player.skillPoints;
             if (Runner) { s.skillRanks = new List<int>(Runner.ranks); s.loadout = new List<int>(Runner.loadout); }
+            var eqp = Player.GetComponent<Equipment>(); if (eqp) s.equipped = eqp.ToSave();
             s.inventory = new List<ItemSave>(Player.inventory); s.playSeconds += 30f; s.lastPlayed = System.DateTime.UtcNow.ToString("o");
             SaveSystem.Save();
         }

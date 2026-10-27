@@ -45,7 +45,8 @@ namespace Korvalune.Game
             if (ranks[i] <= 0) { p.Notify?.Invoke($"« {d.name} » n'est pas encore apprise"); return false; }
             if (Time.time < readyAt[i]) return false;
             if (!p.Health.Spend(d.mana)) { p.Notify?.Invoke("Pas assez de mana"); return false; }
-            readyAt[i] = Time.time + d.cooldown * (1 - 0.04f * (ranks[i] - 1));
+            var eqp = GetComponent<Equipment>();
+            readyAt[i] = Time.time + d.cooldown * (1 - 0.04f * (ranks[i] - 1)) * (1 - (eqp ? eqp.cooldownReduction : 0));
             StartCoroutine(Run(d, ranks[i]));
             return true;
         }

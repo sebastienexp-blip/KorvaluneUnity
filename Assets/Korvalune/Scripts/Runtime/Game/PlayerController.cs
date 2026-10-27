@@ -125,7 +125,10 @@ namespace Korvalune.Game
             while (xp >= xpNext && level < MaxLevel)
             {
                 xp -= xpNext; level++; xpNext = XpForLevel(level); skillPoints++;
-                Health.maxHp += 15; Health.maxMana += 8; attackDamage += 3; Health.Heal(Health.maxHp);
+                Health.maxMana += 8;
+                var eq = GetComponent<Equipment>();
+                if (eq) eq.AddBase(3, 15); else { Health.maxHp += 15; attackDamage += 3; }
+                Health.Heal(Health.maxHp);
                 Health.mana = Health.maxMana;
                 FX.Burst(transform.position + Vector3.up, new Color(1f, 0.9f, 0.4f), 60, 4f, 0.25f, 1.0f, -0.3f);
                 Notify?.Invoke(level >= MaxLevel ? "Niveau maximum (200) atteint !" : $"Niveau {level} !");
