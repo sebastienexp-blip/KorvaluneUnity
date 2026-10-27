@@ -41,6 +41,80 @@ namespace Korvalune.Game
             return panel = Keep(Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(B, B, B, B)));
         }
 
+        static Sprite ornate, banner, slot, leather;
+        /// <summary>Grand panneau orné (menus, arbre, inventaire) façon maquette : fond de cuir sombre, cadre de bronze à
+        /// double filet d'or, rivets aux coins et fleurons en losange au milieu des côtés.</summary>
+        public static Sprite Ornate()
+        {
+            if (ornate) return ornate;
+            int S = 192, B = 56; var t = Tex(S, S); var px = new Color[S * S];
+            var leatherA = new Color(0.16f, 0.09f, 0.055f); var leatherB = new Color(0.27f, 0.155f, 0.09f);
+            for (int y = 0; y < S; y++) for (int x = 0; x < S; x++)
+            {
+                float dx = Mathf.Min(x, S - 1 - x), dy = Mathf.Min(y, S - 1 - y), e = Mathf.Min(dx, dy);
+                // coins coupés (octogone) pour une silhouette d'enluminure
+                float cut = dx + dy; float a = Mathf.Clamp01(cut - 13f);
+                float grain = 0.86f + 0.22f * Noise(x / 2, y / 2) + 0.06f * Noise(x / 7 + 40, y / 7);
+                var c = Color.Lerp(leatherA, leatherB, 0.35f + 0.4f * Mathf.Sin(y / (float)S * Mathf.PI)) * grain;
+                float ce = Mathf.Min(e, (cut - 13f) * 0.7071f);
+                if (ce < 2.5f) c = Color.Lerp(GoldDark, Gold, 0.35f + 0.5f * (y / (float)S));                 // filet extérieur
+                else if (ce < 12f) c = Color.Lerp(Copper * 0.75f, Copper * 1.15f, Noise(x / 3, y / 3)) * (1.05f - 0.04f * Mathf.Abs(ce - 7f)); // bronze
+                else if (ce < 14f) c = Color.Lerp(Gold, GoldDark, 0.3f);                                         // filet intérieur
+                else if (ce < 17f) c = c * 0.55f;                                                                 // ombre portée du cadre
+                // rivets aux coins
+                foreach (var (cx, cy) in new[] { (22f, 22f), (S - 23f, 22f), (22f, S - 23f), (S - 23f, S - 23f) })
+                {
+                    float r = Mathf.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
+                    if (r < 6f) c = Color.Lerp(Gold * 1.2f, GoldDark, r / 6f + 0.15f * ((y - cy) / 6f));
+                }
+                // fleurons en losange au milieu des côtés
+                float mx = Mathf.Abs(x - S / 2f), my = Mathf.Abs(y - S / 2f);
+                if ((e < 13f && dx >= dy && mx + (dy - 6.5f) * 1.6f < 0 + 14f && mx < 14f - Mathf.Abs(dy - 6.5f) * 1.6f) ||
+                    (e < 13f && dy > dx && my < 14f - Mathf.Abs(dx - 6.5f) * 1.6f))
+                    c = Color.Lerp(Gold, GoldDark, 0.25f);
+                c.a = a; px[y * S + x] = c;
+            }
+            t.SetPixels(px); t.Apply();
+            return ornate = Keep(Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(B, B, B, B)));
+        }
+
+        /// <summary>Bandeau de titre (parchemin bronze aux extrémités en queue d'aronde).</summary>
+        public static Sprite Banner()
+        {
+            if (banner) return banner;
+            int W = 256, H = 64, B = 40; var t = Tex(W, H); var px = new Color[W * H];
+            for (int y = 0; y < H; y++) for (int x = 0; x < W; x++)
+            {
+                float v = (y - H / 2f) / (H / 2f), ex = Mathf.Min(x, W - 1 - x);
+                float notch = ex < 22 ? (22 - ex) / 22f * 0.6f : 0;                       // queue d'aronde
+                bool inside = Mathf.Abs(v) < 0.92f && Mathf.Abs(v) > notch * (1 - Mathf.Abs(v) * 0.2f) - 0.001f || (notch == 0 && Mathf.Abs(v) < 0.92f);
+                if (ex < 22 && Mathf.Abs(v) < notch) inside = false;
+                var c = Color.Lerp(CopperDark, Copper, 0.5f + 0.45f * -v) * (0.9f + 0.15f * Noise(x / 2, y / 2));
+                if (Mathf.Abs(v) > 0.78f) c = Color.Lerp(Gold, GoldDark, (Mathf.Abs(v) - 0.78f) / 0.14f);
+                c.a = inside ? 1 : 0; px[y * W + x] = c;
+            }
+            t.SetPixels(px); t.Apply();
+            return banner = Keep(Sprite.Create(t, new Rect(0, 0, W, H), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(B, 0, B, 0)));
+        }
+
+        /// <summary>Case carrée d'objet / onglet : fond sombre, biseau de bronze.</summary>
+        public static Sprite Slot()
+        {
+            if (slot) return slot;
+            int S = 64, B = 12; var t = Tex(S, S); var px = new Color[S * S];
+            for (int y = 0; y < S; y++) for (int x = 0; x < S; x++)
+            {
+                float e = Mathf.Min(Mathf.Min(x, S - 1 - x), Mathf.Min(y, S - 1 - y));
+                var c = new Color(0.10f, 0.065f, 0.045f) * (0.9f + 0.2f * Noise(x, y));
+                if (e < 2) c = Color.Lerp(GoldDark, Gold, y / (float)S);
+                else if (e < 5) c = Copper * (0.8f + 0.3f * (y / (float)S));
+                else if (e < 6) c = CopperDark * 0.5f;
+                c.a = 1; px[y * S + x] = c;
+            }
+            t.SetPixels(px); t.Apply();
+            return slot = Keep(Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(B, B, B, B)));
+        }
+
         static Sprite Round(ref Sprite cache, int S, System.Func<float, float, float, Color> shade)
         {
             if (cache) return cache;
@@ -114,6 +188,10 @@ namespace Korvalune.Game
                     case "bag": { m = (Mathf.Abs(u) < 0.55f - 0.15f * v && v < 0.35f && v > -0.7f) ? 1 : 0; if (Mathf.Abs(r - 0.0f) < 0 ) m = 0; if (v > 0.3f && v < 0.6f && Mathf.Abs(Mathf.Sqrt(u * u + (v - 0.35f) * (v - 0.35f)) - 0.22f) < 0.06f) m = 1; } break;
                     case "potion": { float rb = Mathf.Sqrt(u * u + (v + 0.25f) * (v + 0.25f)); m = rb < 0.48f || (Mathf.Abs(u) < 0.14f && v > -0.3f && v < 0.55f) || (Mathf.Abs(u) < 0.2f && v >= 0.55f && v < 0.72f) ? 1 : 0; if (rb < 0.48f && v > -0.12f && v < -0.02f) m = 0.5f; } break;
                     case "coin": { m = r < 0.62f ? 1 : 0; if (Mathf.Abs(r - 0.48f) < 0.035f) m = 0.45f; } break;
+                    case "menu": { m = (Mathf.Abs(u) < 0.62f && (Mathf.Abs(v - 0.42f) < 0.09f || Mathf.Abs(v) < 0.09f || Mathf.Abs(v + 0.42f) < 0.09f)) ? 1 : 0; } break;
+                    case "gear": { float teeth = Mathf.Abs(Mathf.Repeat(a / (2 * Mathf.PI) * 8, 1) - 0.5f) < 0.22f ? 0.82f : 0.66f; m = r < teeth && r > 0.26f ? 1 : 0; } break;
+                    case "close": { float p = (u + v) * 0.7071f, q = (u - v) * 0.7071f; m = (Mathf.Abs(p) < 0.1f || Mathf.Abs(q) < 0.1f) && r < 0.75f ? 1 : 0; } break;
+                    case "lock": { m = (Mathf.Abs(u) < 0.45f && v < 0.05f && v > -0.6f) ? 1 : 0; float rr = Mathf.Sqrt(u * u + (v - 0.05f) * (v - 0.05f)); if (v >= 0.05f && rr < 0.38f && rr > 0.24f) m = 1; } break;
                     case "book": { m = (Mathf.Abs(u) < 0.7f && Mathf.Abs(v) < 0.55f && Mathf.Abs(u) > 0.04f) ? 1 : 0; if (Mathf.Abs(u) > 0.15f && Mathf.Abs(u) < 0.6f && Mathf.Abs(Mathf.Repeat(v * 5, 1) - 0.5f) < 0.08f && Mathf.Abs(v) < 0.4f) m = 0.4f; } break;
                 }
                 var c = col * (0.8f + 0.4f * (1 - r)); c.a = m; px[y * S + x] = c;

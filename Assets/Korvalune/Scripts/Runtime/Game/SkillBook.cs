@@ -37,6 +37,42 @@ namespace Korvalune.Game
 
         public static List<SkillDef> For(string classId) { Init(); return byClass.TryGetValue(classId, out var l) ? l : byClass["KaelDraven"]; }
 
+        // ------------------------------------------------------------------------------------------ arbre
+        /// <summary>Paliers de l'arbre (niveau d'accès minimal de chaque colonne).</summary>
+        public static readonly int[] TierLevels = { 1, 10, 21, 34, 50, 66, 100, 150 };
+        public class Tree { public List<List<int>> columns = new List<List<int>>(); public int[] parent, column, row; }
+        static readonly Dictionary<string, Tree> trees = new Dictionary<string, Tree>();
+
+        /// <summary>Arbre de compétences d'une classe : colonnes par palier de niveau ; chaque compétence descend de la plus
+        /// proche du palier précédent (même élément de préférence). Une compétence s'apprend quand son parent a au moins un rang.</summary>
+        public static Tree TreeOf(string classId)
+        {
+            if (trees.TryGetValue(classId ?? "", out var t)) return t;
+            var book = For(classId); t = new Tree { parent = new int[book.Count], column = new int[book.Count], row = new int[book.Count] };
+            for (int k = 0; k < TierLevels.Length; k++) t.columns.Add(new List<int>());
+            var order = new List<int>(); for (int i = 0; i < book.Count; i++) order.Add(i);
+            order.Sort((a, b) => book[a].unlockLevel != book[b].unlockLevel ? book[a].unlockLevel.CompareTo(book[b].unlockLevel) : a.CompareTo(b));
+            foreach (var i in order)
+            {
+                int c = 0; for (int k = 0; k < TierLevels.Length; k++) if (book[i].unlockLevel >= TierLevels[k]) c = k;
+                t.column[i] = c; t.row[i] = t.columns[c].Count; t.columns[c].Add(i);
+            }
+            for (int c = 0; c < t.columns.Count; c++)
+                foreach (var i in t.columns[c])
+                {
+                    t.parent[i] = -1; if (c == 0) continue;
+                    var prev = t.columns[c - 1]; if (prev.Count == 0) continue;
+                    float me = (t.row[i] + 0.5f) / t.columns[c].Count; int best = -1; float bd = float.MaxValue;
+                    foreach (var j in prev)
+                    {
+                        float d = Mathf.Abs((t.row[j] + 0.5f) / prev.Count - me) + (book[j].element == book[i].element ? 0 : 0.35f);
+                        if (d < bd) { bd = d; best = j; }
+                    }
+                    t.parent[i] = best;
+                }
+            return trees[classId ?? ""] = t;
+        }
+
         static bool done;
         static void Init()
         {

@@ -577,12 +577,24 @@ namespace Korvalune.EditorTools
                 Shot("6_butin_raretes");
                 // 7. inventaire : sac rempli, quelques objets portés, fiche d'un légendaire
                 var pc = game.Player; var eq = pc.GetComponent<Equipment>();
+                pc.level = 60; pc.skillPoints = 12; Loot.PlayerLevel = 60;          // héros avancé : objets portables, arbre bien rempli
                 pc.inventory.Clear();
                 for (int k = 0; k < 26; k++) { var it = Loot.Roll(rng, 45, k % 5 == 0 ? 6 : 1); pc.inventory.Add(it); }
                 foreach (var it in pc.inventory.Where(x => x.rarity >= Rarity.Rare).GroupBy(x => x.slot).Select(g => g.First()).ToList()) eq.Equip(it);
                 game.Hud.ToggleBag();
                 Shot("7_inventaire");
                 game.Hud.ToggleBag();
+                // 14-16. arbre de compétences, menu pause et options
+                var rn = game.Player.GetComponent<SkillRunner>();
+                if (rn)
+                {
+                    var tr = SkillBook.TreeOf(rn.classId);
+                    for (int i = 0; i < rn.book.Count; i++) if (rn.book[i].unlockLevel <= 60 && (tr.parent[i] < 0 || rn.ranks[tr.parent[i]] > 0) && i % 3 != 2) rn.ranks[i] = 1 + i % 4;
+                }
+                game.Hud.TestShow("arbre"); Shot("14_arbre_competences");
+                game.Hud.TestShow("menu"); Shot("15_menu_pause");
+                game.Hud.TestShow("options"); Shot("16_options");
+                game.Hud.TestShow("");
                 check("Butin et inventaire", eq.worn.Count > 0, $"{eq.worn.Count} objets portés, {pc.inventory.Count} dans le sac — {eq.Summary().Replace("<b>", "").Replace("</b>", "").Replace("\n", " ")}");
                 check("Captures de la vallée", true, "ci-out/Jeu_*.png");
             }

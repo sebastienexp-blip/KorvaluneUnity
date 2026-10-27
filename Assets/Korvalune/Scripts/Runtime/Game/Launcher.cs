@@ -202,6 +202,8 @@ namespace Korvalune.Game
         void Ready()
         {
             play.interactable = true; play.targetGraphic.color = Color.white; playText.color = UIStyle.Gold;
+            if (AutoTest.Enabled) { AutoTest.Log("lanceur prêt : on joue"); Invoke(nameof(AutoPlay), 6f); }
         }
+        void AutoPlay() => SceneManager.LoadScene(nextScene);
     }
 }

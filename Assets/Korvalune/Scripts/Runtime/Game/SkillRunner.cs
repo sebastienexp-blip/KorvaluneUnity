@@ -29,9 +29,14 @@ namespace Korvalune.Game
         public bool Unlocked(int i) => p && p.level >= book[i].unlockLevel;
         public float Remaining(int i) => readyAt == null ? 0 : Mathf.Max(0, readyAt[i] - Time.time);
 
+        /// <summary>Compétence parente dans l'arbre (-1 = racine).</summary>
+        public int ParentOf(int i) => SkillBook.TreeOf(classId).parent[i];
+        /// <summary>La branche est ouverte : la compétence parente a au moins un rang.</summary>
+        public bool BranchOpen(int i) { int pa = ParentOf(i); return pa < 0 || ranks[pa] > 0 || ranks[i] > 0; }
+
         public bool Learn(int i)
         {
-            if (p.skillPoints <= 0 || !Unlocked(i) || ranks[i] >= book[i].MaxRank) return false;
+            if (p.skillPoints <= 0 || !Unlocked(i) || !BranchOpen(i) || ranks[i] >= book[i].MaxRank) return false;
             ranks[i]++; p.skillPoints--; return true;
         }
 

@@ -32,6 +32,7 @@ namespace Korvalune.Game
             if (Started) return; Started = true;
             FX.additive = config ? config.fxAdditive : null; FX.alpha = config ? config.fxAlpha : null; Vfx.lib = config ? config.vfx : null;
             if (Application.isPlaying) GraphicsQuality.Apply(config, GraphicsQuality.Detect());
+            if (Application.isPlaying) EnsureGroundCollision();
             Cam = Camera.main;
             if (!Cam) { Cam = new GameObject("Caméra").AddComponent<Camera>(); Cam.tag = "MainCamera"; }
             Cam.fieldOfView = 45; Cam.farClipPlane = 900;
@@ -40,7 +41,8 @@ namespace Korvalune.Game
             // ---- héros
             var prefab = chosenHero ? chosenHero : config.defaultHero;
             if (Application.isPlaying && nextSpawn.HasValue) { playerSpawn = nextSpawn.Value; nextSpawn = null; }
-            var hero = prefab ? Instantiate(prefab, Ground(playerSpawn), Quaternion.identity) : GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            var spawnAt = Ground(playerSpawn) + Vector3.up * 0.3f;          // légèrement au-dessus du sol : jamais encastré dans le relief
+            var hero = prefab ? Instantiate(prefab, spawnAt, Quaternion.identity) : GameObject.CreatePrimitive(PrimitiveType.Capsule);
             hero.name = prefab ? prefab.name : "Héros";
             foreach (var c in hero.GetComponents<Collider>()) Kill(c);
             var cc = hero.AddComponent<CharacterController>(); cc.height = 1.8f; cc.radius = 0.35f; cc.center = new Vector3(0, 0.92f, 0); cc.slopeLimit = 50; cc.stepOffset = 0.4f;
@@ -101,6 +103,14 @@ namespace Korvalune.Game
 
             // ---- ennemis
             foreach (var camp in camps) SpawnCamp(camp);
+            if (Application.isPlaying)
+            {
+                var t = Terrain.activeTerrain;
+                Debug.Log($"[Korvalune] zone « {zoneName} » : héros {hero.name} en {hero.transform.position}, terrain {(t ? t.name : "aucun")}, " +
+                          $"collision du terrain {(t && t.GetComponent<TerrainCollider>() ? (t.GetComponent<TerrainCollider>().enabled ? "active" : "désactivée") : "absente")}, " +
+                          $"qualité {GraphicsQuality.Current}, {SystemInfo.graphicsDeviceType}, {SystemInfo.deviceModel}");
+                if (AutoTest.Enabled) hero.AddComponent<AutoTest>();
+            }
         }
 
         public void SpawnCamp(Camp camp)
@@ -164,6 +174,33 @@ namespace Korvalune.Game
             Player.transform.position = Ground(playerSpawn); cc.enabled = true;
             Player.Health.Revive();
             Cam.GetComponent<CameraRig>()?.Snap();
+        }
+
+        /// <summary>Garantit une collision au sol : si le collisionneur du terrain manque ou n'a pas de données, on construit un
+        /// maillage de collision équivalent à partir du relief.</summary>
+        static void EnsureGroundCollision()
+        {
+            var t = Terrain.activeTerrain; if (!t || !t.terrainData) return;
+            var tc = t.GetComponent<TerrainCollider>();
+            if (tc && tc.enabled && tc.terrainData) return;
+            Debug.LogWarning("[Korvalune] collision du terrain absente : maillage de secours");
+            var td = t.terrainData; const int N = 257;
+            var verts = new Vector3[N * N]; var tris = new int[(N - 1) * (N - 1) * 6];
+            for (int j = 0; j < N; j++) for (int i = 0; i < N; i++)
+            {
+                float u = i / (float)(N - 1), v = j / (float)(N - 1);
+                verts[j * N + i] = new Vector3(u * td.size.x, td.GetInterpolatedHeight(u, v), v * td.size.z);
+            }
+            int k = 0;
+            for (int j = 0; j < N - 1; j++) for (int i = 0; i < N - 1; i++)
+            {
+                int a = j * N + i;
+                tris[k++] = a; tris[k++] = a + N; tris[k++] = a + 1;
+                tris[k++] = a + 1; tris[k++] = a + N; tris[k++] = a + N + 1;
+            }
+            var mesh = new Mesh { indexFormat = UnityEngine.Rendering.IndexFormat.UInt32, vertices = verts, triangles = tris };
+            var go = new GameObject("Sol de secours"); go.transform.position = t.transform.position;
+            go.AddComponent<MeshCollider>().sharedMesh = mesh;
         }
 
         static void Kill(Object o) { if (Application.isPlaying) Destroy(o); else DestroyImmediate(o); }

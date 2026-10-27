@@ -82,8 +82,9 @@ namespace Korvalune.Game
             if (mag > 0.05f && !Health.Stunned)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
             else spd = 0;
-            vy = cc.isGrounded ? -2f : vy + gravity * Time.deltaTime;
+            vy = cc.isGrounded ? -2f : Mathf.Max(vy + gravity * Time.deltaTime, -30f);    // vitesse de chute limitée
             cc.Move((dir.normalized * spd + Vector3.up * vy) * Time.deltaTime);
+            FallGuard();
             Speed = spd;
             Anim?.SetFloat(CharacterRig.SpeedId, spd, 0.1f, Time.deltaTime);
             UpdateTarget(inp);
@@ -209,6 +210,38 @@ namespace Korvalune.Game
             s.readyAt = Time.time + s.cooldown;
             StartCoroutine(s.Run(this));
             return true;
+        }
+
+        // ------------------------------------------------------------------ filet de sécurité contre les chutes
+        Vector3 lastSafe; bool hasSafe; float fallingSince = -1;
+        /// <summary>Si le héros passe sous le relief (ou tombe longtemps), il est replacé au sol à son dernier appui sûr.
+        /// Protège contre toute faille de collision (terrain, bord de carte, décor mal fermé).</summary>
+        void FallGuard()
+        {
+            var pos = transform.position;
+            if (cc.isGrounded) { lastSafe = pos; hasSafe = true; fallingSince = -1; return; }
+            if (fallingSince < 0) fallingSince = Time.time;
+            var t = Terrain.activeTerrain;
+            bool underTerrain = t && t.terrainData && pos.y < t.SampleHeight(pos) + t.transform.position.y - 1.5f && InsideTerrain(t, pos);
+            bool tooLong = Time.time - fallingSince > 4f || (hasSafe && pos.y < lastSafe.y - 40f) || pos.y < -500f;
+            if (!underTerrain && !tooLong) return;
+            var back = underTerrain ? GameBootstrap.Ground(pos) : hasSafe ? lastSafe : GameBootstrap.Ground(pos);
+            Debug.LogWarning($"[Korvalune] chute rattrapée à {pos} → {back} (sous le relief : {underTerrain})");
+            Teleport(back + Vector3.up * 0.2f);
+        }
+
+        static bool InsideTerrain(Terrain t, Vector3 p)
+        {
+            var o = t.transform.position; var s = t.terrainData.size;
+            return p.x >= o.x && p.z >= o.z && p.x <= o.x + s.x && p.z <= o.z + s.z;
+        }
+
+        /// <summary>Déplace le héros instantanément (sans balayage de collision).</summary>
+        public void Teleport(Vector3 to)
+        {
+            bool was = cc.enabled; cc.enabled = false; transform.position = to; cc.enabled = was;
+            vy = -2f; fallingSince = -1;
+            FindFirstObjectByType<CameraRig>()?.Snap();
         }
 
         public void Lock(float seconds) { lockUntil = Mathf.Max(lockUntil, Time.time + seconds); }

@@ -55,13 +55,72 @@ namespace Korvalune
                 morphs.Clear(); foreach (var m in a.morphs) morphs[m.id] = m.v;
             }
             BuildUI();
+            SoftenLights();
             Rebuild();
             ShowTab(tab);
+            FrameCamera(true);
+        }
+
+        // ------------------------------------------------------------------ caméra : cadrage et zoom selon la partie éditée
+        Vector3 camPos; float camFov = 30f;
+        /// <summary>Partie du corps à cadrer pour l'onglet courant : tête (yeux, sourcils, cils, cheveux, visage, peau du visage),
+        /// buste (peau) ou corps entier.</summary>
+        string FocusOf(string t) => t switch
+        {
+            "Yeux" => "yeux", "Sourcils" => "yeux", "Cils" => "yeux", "Cheveux" => "tête", "Teinte" => "tête", "Visage" => "tête", "Peau" => "buste", _ => "corps"
+        };
+
+        void FrameCamera(bool snap)
+        {
+            if (!viewCamera || !current) return;
+            var anim = current.GetComponentInChildren<Animator>();
+            Transform head = anim && anim.isHuman ? anim.GetBoneTransform(HumanBodyBones.Head) : null;
+            var b = new Bounds(current.transform.position + Vector3.up, Vector3.one * 0.5f); bool any = false;
+            foreach (var r in current.GetComponentsInChildren<SkinnedMeshRenderer>()) { if (!r.enabled) continue; if (!any) { b = r.bounds; any = true; } else b.Encapsulate(r.bounds); }
+            float height = Mathf.Clamp(b.size.y, 1.2f, 2.4f), feet = b.min.y;
+            Vector3 headPos = head ? head.position + Vector3.up * 0.06f : new Vector3(b.center.x, feet + height * 0.93f, b.center.z);
+            Vector3 focus; float span;                      // point visé et hauteur à montrer
+            switch (FocusOf(tab))
+            {
+                case "yeux": focus = headPos + Vector3.up * 0.02f; span = 0.30f; break;
+                case "tête": focus = headPos; span = 0.55f; break;
+                case "buste": focus = new Vector3(headPos.x, feet + height * 0.75f, headPos.z); span = height * 0.62f; break;
+                default: focus = new Vector3(b.center.x, feet + height * 0.5f, b.center.z); span = height * 1.08f; break;
+            }
+            camFov = 30f;
+            float dist = span * 0.5f / Mathf.Tan(camFov * 0.5f * Mathf.Deg2Rad);
+            // le héros se place au centre de l'espace libre entre la colonne des onglets (gauche) et la liste des choix (droite)
+            float aspect = viewCamera.aspect > 0 ? viewCamera.aspect : 16f / 9f;
+            float halfW = Mathf.Tan(Mathf.Atan(Mathf.Tan(camFov * 0.5f * Mathf.Deg2Rad) * aspect)) * dist;
+            float freeCenter = ((280f + (1920f - 560f)) / 2f) / 1920f;                 // centre de l'espace libre (fraction de l'écran)
+            float shift = (0.5f - freeCenter) * 2f * halfW;
+            var fwd = Vector3.forward;                                                   // le héros regarde vers -Z (yaw 180) : caméra devant lui
+            camPos = focus - fwd * dist + Vector3.right * shift;
+            if (snap) { viewCamera.transform.position = camPos; viewCamera.fieldOfView = camFov; }
+            viewCamera.transform.rotation = Quaternion.LookRotation(fwd);
+        }
+
+        /// <summary>Éclairage de studio : plus d'ombre dure portée par l'arme ou le bouclier sur le corps, lumière d'appoint de face.</summary>
+        void SoftenLights()
+        {
+            foreach (var l in FindObjectsByType<Light>(FindObjectsSortMode.None))
+                if (l.type == LightType.Directional) l.shadows = LightShadows.None;
+            if (!viewCamera || viewCamera.transform.Find("Lumière d'appoint")) return;
+            var fill = new GameObject("Lumière d'appoint").AddComponent<Light>(); fill.transform.SetParent(viewCamera.transform, false);
+            fill.type = LightType.Directional; fill.intensity = 0.55f; fill.color = new Color(1f, 0.95f, 0.9f); fill.shadows = LightShadows.None;
+            fill.transform.localRotation = Quaternion.Euler(10, -20, 0);
         }
 
         void Update()
         {
             if (current) current.transform.rotation = Quaternion.Euler(0, yaw, 0);
+            if (viewCamera && current && Application.isPlaying)
+            {
+                FrameCamera(false);
+                float k = 1 - Mathf.Exp(-6f * Time.deltaTime);
+                viewCamera.transform.position = Vector3.Lerp(viewCamera.transform.position, camPos, k);
+                viewCamera.fieldOfView = Mathf.Lerp(viewCamera.fieldOfView, camFov, k);
+            }
         }
 
         // ------------------------------------------------------------------ personnage
@@ -81,6 +140,7 @@ namespace Korvalune
             Reapply();
             var g2 = current.GetComponent<CharacterEquipment>(); if (g2 && tab != "Classe" && tab != "Équipement") g2.ShowUnderwear(true);
             CharacterRig.EditorIdlePose(current);
+            FrameCamera(!Application.isPlaying);
         }
 
         void Reapply()
@@ -97,7 +157,7 @@ namespace Korvalune
         public void Randomize()
         {
             var r = new System.Random();
-            var sk = Enumerable.Range(0, catalog.skins.Count).Where(i => CharacterCatalog.Fits(catalog.skins[i].sex, female) && !catalog.skins[i].tags.Contains("adult")).ToList();
+            var sk = Enumerable.Range(0, catalog.skins.Count).Where(i => CharacterCatalog.Fits(catalog.skins[i].sex, female) && CreatorNames.SkinAllowed(catalog.skins[i].id, catalog.skins[i].tags)).ToList();
             if (sk.Count > 0) skinIndex = sk[r.Next(sk.Count)];
             if (catalog.eyes.Count > 0) eyeIndex = r.Next(catalog.eyes.Count);
             var hs = Enumerable.Range(0, catalog.hair.Count).Where(i => CharacterCatalog.Fits(catalog.hair[i].sex, female)).ToList();
@@ -121,7 +181,7 @@ namespace Korvalune
             var root = cgo.GetComponent<RectTransform>();
 
             // colonne des onglets (gauche)
-            var tabs = Panel(root, "Onglets", new Vector2(0, 0), new Vector2(0, 1), new Vector2(20, 20), new Vector2(260, -20), new Color(0.05f, 0.05f, 0.07f, 0.85f));
+            var tabs = Panel(root, "Onglets", new Vector2(0, 0), new Vector2(0, 1), new Vector2(20, 20), new Vector2(260, -20), new Color(0.07f, 0.05f, 0.04f, 0.88f));
             var tl = tabs.gameObject.AddComponent<VerticalLayoutGroup>(); tl.padding = new RectOffset(12, 12, 90, 12); tl.spacing = 6; tl.childForceExpandHeight = false;
             var logo = Label(tabs, "KORVALUNE", 34, TextAnchor.MiddleCenter, new Color(0.85f, 0.78f, 0.6f)); logo.rectTransform.anchorMin = new Vector2(0, 1); logo.rectTransform.anchorMax = new Vector2(1, 1);
             logo.rectTransform.offsetMin = new Vector2(0, -80); logo.rectTransform.offsetMax = new Vector2(0, -16); logo.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
@@ -130,20 +190,22 @@ namespace Korvalune
             if (Game.CharacterSelect.returningFromCreator) Button(tabs, "Valider", ConfirmToSelection, 52);
 
             // liste des choix (droite)
-            var right = Panel(root, "Choix", new Vector2(1, 0), new Vector2(1, 1), new Vector2(-560, 20), new Vector2(-20, -20), new Color(0.05f, 0.05f, 0.07f, 0.85f));
+            var right = Panel(root, "Choix", new Vector2(1, 0), new Vector2(1, 1), new Vector2(-560, 20), new Vector2(-20, -20), new Color(0.07f, 0.05f, 0.04f, 0.88f));
             title = Label(right, "", 30, TextAnchor.MiddleLeft, new Color(0.85f, 0.78f, 0.6f));
             title.rectTransform.anchorMin = new Vector2(0, 1); title.rectTransform.anchorMax = new Vector2(1, 1);
             title.rectTransform.offsetMin = new Vector2(20, -70); title.rectTransform.offsetMax = new Vector2(-20, -10);
-            var scroll = new GameObject("Défilement", typeof(RectTransform), typeof(ScrollRect), typeof(Image), typeof(Mask));
+            var scroll = new GameObject("Défilement", typeof(RectTransform), typeof(ScrollRect), typeof(Image), typeof(RectMask2D));
             var srt = scroll.GetComponent<RectTransform>(); srt.SetParent(right, false);
             srt.anchorMin = Vector2.zero; srt.anchorMax = Vector2.one; srt.offsetMin = new Vector2(10, 10); srt.offsetMax = new Vector2(-10, -80);
-            scroll.GetComponent<Image>().color = new Color(0, 0, 0, 0.01f); scroll.GetComponent<Mask>().showMaskGraphic = false;
+            scroll.GetComponent<Image>().color = new Color(0, 0, 0, 0.01f);
             var content = new GameObject("Contenu", typeof(RectTransform), typeof(VerticalLayoutGroup), typeof(ContentSizeFitter));
             listContent = content.GetComponent<RectTransform>(); listContent.SetParent(srt, false);
-            listContent.anchorMin = new Vector2(0, 1); listContent.anchorMax = new Vector2(1, 1); listContent.pivot = new Vector2(0.5f, 1);
-            var vl = content.GetComponent<VerticalLayoutGroup>(); vl.spacing = 4; vl.childForceExpandHeight = false; vl.padding = new RectOffset(6, 6, 6, 6);
+            listContent.anchorMin = new Vector2(0, 1); listContent.anchorMax = new Vector2(1, 1); listContent.pivot = new Vector2(0, 1);
+            listContent.offsetMin = new Vector2(0, listContent.offsetMin.y); listContent.offsetMax = new Vector2(0, 0); listContent.anchoredPosition = Vector2.zero;
+            var vl = content.GetComponent<VerticalLayoutGroup>(); vl.spacing = 5; vl.childForceExpandHeight = false; vl.padding = new RectOffset(6, 6, 6, 6);
+            vl.childControlWidth = true; vl.childForceExpandWidth = true; vl.childControlHeight = true; vl.childAlignment = TextAnchor.UpperLeft;
             content.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-            var sr = scroll.GetComponent<ScrollRect>(); sr.content = listContent; sr.horizontal = false; sr.scrollSensitivity = 30;
+            var sr = scroll.GetComponent<ScrollRect>(); sr.content = listContent; sr.viewport = srt; sr.horizontal = false; sr.scrollSensitivity = 30;
 
             // rotation (bas)
             var bottom = Panel(root, "Rotation", new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-300, 20), new Vector2(300, 70), new Color(0.05f, 0.05f, 0.07f, 0.7f));
@@ -170,6 +232,7 @@ namespace Korvalune
             if (!listContent || catalog == null) return;
             foreach (var c in listContent.Cast<Transform>().ToList()) Kill(c.gameObject);
             title.text = t;
+            if (!Application.isPlaying) FrameCamera(true);
             switch (t)
             {
                 case "Classe":
@@ -182,31 +245,31 @@ namespace Korvalune
                 case "Peau":
                     for (int i = 0; i < catalog.skins.Count; i++)
                     {
-                        var s = catalog.skins[i]; if (!CharacterCatalog.Fits(s.sex, female)) continue;
-                        int k = i; Button(listContent, Pretty(s.id) + (s.tags.Length > 0 ? $"  [{string.Join(", ", s.tags)}]" : ""), () => { skinIndex = k; look?.SetSkin(catalog.skins[k]); ShowTab("Peau"); }, 40, k == skinIndex);
+                        var s = catalog.skins[i]; if (!CharacterCatalog.Fits(s.sex, female) || !CreatorNames.SkinAllowed(s.id, s.tags)) continue;
+                        int k = i; Button(listContent, CreatorNames.SkinName(s.id), () => { skinIndex = k; look?.SetSkin(catalog.skins[k]); ShowTab("Peau"); }, 40, k == skinIndex);
                     }
                     break;
                 case "Yeux":
-                    for (int i = 0; i < catalog.eyes.Count; i++) { int k = i; Button(listContent, Pretty(catalog.eyes[i].id), () => { eyeIndex = k; look?.SetEyes(catalog.eyes[k]); ShowTab("Yeux"); }, 40, k == eyeIndex); }
+                    for (int i = 0; i < catalog.eyes.Count; i++) { int k = i; Button(listContent, CreatorNames.EyeName(catalog.eyes[i].id), () => { eyeIndex = k; look?.SetEyes(catalog.eyes[k]); ShowTab("Yeux"); }, 40, k == eyeIndex); }
                     break;
                 case "Cheveux":
                     Button(listContent, "Coiffure d'origine", () => { hairIndex = -1; Rebuild(); ShowTab("Cheveux"); }, 40, hairIndex < 0);
                     for (int i = 0; i < catalog.hair.Count; i++)
                     {
                         var h = catalog.hair[i]; if (!CharacterCatalog.Fits(h.sex, female) && !h.For(female)) continue;
-                        int k = i; Button(listContent, Pretty(h.id), () => { hairIndex = k; hairVariant = 0; look?.Attach("Cheveux", catalog.hair[k], 0, hairTint); ShowTab("Cheveux"); }, 40, k == hairIndex);
+                        int k = i; Button(listContent, CreatorNames.HairName(h.id), () => { hairIndex = k; hairVariant = 0; look?.Attach("Cheveux", catalog.hair[k], 0, hairTint); ShowTab("Cheveux"); }, 40, k == hairIndex);
                         if (k == hairIndex)
-                            for (int v = 0; v < h.variants.Count; v++) { int vv = v; Button(listContent, "    • " + Pretty(h.variants[v].id), () => { hairVariant = vv; look?.Attach("Cheveux", catalog.hair[k], vv, hairTint); ShowTab("Cheveux"); }, 34, vv == hairVariant); }
+                            for (int v = 0; v < h.variants.Count; v++) { int vv = v; Button(listContent, "      • " + CreatorNames.VariantName(h.variants[v].id, v), () => { hairVariant = vv; look?.Attach("Cheveux", catalog.hair[k], vv, hairTint); ShowTab("Cheveux"); }, 34, vv == hairVariant); }
                     }
                     break;
                 case "Teinte":
                     foreach (var col in HairColors) { var cc = col; var b = Button(listContent, "", () => { hairTint = cc; look?.SetHairTint(cc); }, 40); b.GetComponent<Image>().color = cc; }
                     break;
                 case "Sourcils":
-                    for (int i = 0; i < catalog.eyebrows.Count; i++) { int k = i; Button(listContent, Pretty(catalog.eyebrows[i].id), () => { browIndex = k; look?.Attach("Sourcils", catalog.eyebrows[k], 0, Color.white); ShowTab("Sourcils"); }, 40, k == browIndex); }
+                    for (int i = 0; i < catalog.eyebrows.Count; i++) { int k = i; Button(listContent, $"Sourcils {i + 1}", () => { browIndex = k; look?.Attach("Sourcils", catalog.eyebrows[k], 0, Color.white); ShowTab("Sourcils"); }, 40, k == browIndex); }
                     break;
                 case "Cils":
-                    for (int i = 0; i < catalog.eyelashes.Count; i++) { int k = i; Button(listContent, Pretty(catalog.eyelashes[i].id), () => { lashIndex = k; look?.Attach("Cils", catalog.eyelashes[k], 0, Color.white); ShowTab("Cils"); }, 40, k == lashIndex); }
+                    for (int i = 0; i < catalog.eyelashes.Count; i++) { int k = i; Button(listContent, $"Cils {i + 1}", () => { lashIndex = k; look?.Attach("Cils", catalog.eyelashes[k], 0, Color.white); ShowTab("Cils"); }, 40, k == lashIndex); }
                     break;
                 case "Corps":
                 case "Visage":
@@ -218,7 +281,8 @@ namespace Korvalune
                         var row = new GameObject(m.id, typeof(RectTransform), typeof(HorizontalLayoutGroup));
                         row.transform.SetParent(listContent, false); row.AddComponent<LayoutElement>().preferredHeight = 34;
                         var hl = row.GetComponent<HorizontalLayoutGroup>(); hl.spacing = 8; hl.childForceExpandWidth = false; hl.childControlWidth = true;
-                        var lab = Label(row.transform, m.label.Contains(":") ? m.label.Split(':')[1].Trim() : m.label, 18, TextAnchor.MiddleLeft, Color.white);
+                        var lab = Label(row.transform, CreatorNames.MorphLabel(m.label), 20, TextAnchor.MiddleLeft, Color.white);
+                        lab.horizontalOverflow = HorizontalWrapMode.Wrap; lab.resizeTextForBestFit = true; lab.resizeTextMinSize = 13; lab.resizeTextMaxSize = 20;
                         lab.gameObject.AddComponent<LayoutElement>().preferredWidth = 230;
                         var id = m.id;
                         var sl = Slider(row.transform, m.bipolar ? -1f : 0f, 1f, morphs.TryGetValue(id, out var cur) ? cur : 0f, v => { morphs[id] = v; look?.SetMorph(id, v); });
@@ -267,9 +331,11 @@ namespace Korvalune
             var go = new GameObject(text, typeof(RectTransform), typeof(Image), typeof(Button), typeof(LayoutElement));
             go.transform.SetParent(parent, false);
             go.GetComponent<LayoutElement>().preferredHeight = height;
-            go.GetComponent<Image>().color = selected ? new Color(0.45f, 0.32f, 0.12f, 0.95f) : new Color(0.16f, 0.16f, 0.2f, 0.95f);
+            go.GetComponent<Image>().color = selected ? new Color(0.55f, 0.36f, 0.14f, 0.97f) : new Color(0.17f, 0.12f, 0.09f, 0.95f);
             var b = go.GetComponent<Button>(); b.onClick.AddListener(() => onClick());
-            var l = Label(go.transform, text, 20, TextAnchor.MiddleLeft, Color.white);
+            var l = Label(go.transform, text, 24, TextAnchor.MiddleLeft, selected ? new Color(1f, 0.9f, 0.65f) : new Color(0.95f, 0.9f, 0.82f));
+            l.horizontalOverflow = HorizontalWrapMode.Wrap; l.resizeTextForBestFit = true; l.resizeTextMinSize = 14; l.resizeTextMaxSize = 24;
+            if (selected) l.fontStyle = FontStyle.Bold;
             l.rectTransform.anchorMin = Vector2.zero; l.rectTransform.anchorMax = Vector2.one; l.rectTransform.offsetMin = new Vector2(14, 0); l.rectTransform.offsetMax = new Vector2(-8, 0);
             return b;
         }

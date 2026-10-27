@@ -38,6 +38,21 @@ namespace Korvalune.Game
             if (returningFromCreator && draft != null) { returningFromCreator = false; StartCreate(false); }
             else if (SaveSystem.Account.characters.Count == 0) StartCreate(true);
             else ShowList();
+            if (Application.isPlaying && AutoTest.Enabled) Invoke(nameof(AutoPlay), 4f);
+        }
+
+        /// <summary>Test automatique : crée l'héroïne de test comme un joueur (classe, sexe, apparence aléatoire) puis lance la partie.</summary>
+        void AutoPlay()
+        {
+            if (SaveSystem.Account.characters.Count == 0)
+            {
+                int ci = catalog != null ? Mathf.Max(0, catalog.classes.FindIndex(c => c.id == "ElyraNoctis")) : 0;
+                var look = new AppearanceSave(); look.skin = 1; look.hair = 3;
+                var id = catalog != null && catalog.classes.Count > 0 ? catalog.classes[ci].id : "ElyraNoctis";
+                SaveSystem.Create("Testeuse", id, true, look);
+            }
+            selected = 0; AutoTest.Log("sélection : partie lancée avec " + SaveSystem.Account.characters[0].name);
+            Play();
         }
 
         void Update()

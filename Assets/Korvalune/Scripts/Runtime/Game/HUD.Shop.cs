@@ -33,14 +33,14 @@ namespace Korvalune.Game
 
         void BuildShop(RectTransform root)
         {
-            var panel = Panel(root, "Commerce", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1660, 940)); shopPanel = panel.gameObject;
-            shopTitle = Label(panel, "Titre", "", 40, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(40, -22), new Vector2(1100, 56)); shopTitle.color = UIStyle.Gold;
-            shopPurse = Label(panel, "Bourse", "", 23, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(40, -78), new Vector2(1500, 34));
-            RoundButton(panel, "Fermer", "attack", new Vector2(1, 1), new Vector2(-24, -20), 80, CloseShop, out _, out _);
+            var panel = OrnatePanel(root, "Commerce", new Vector2(1720, 1000), ""); shopPanel = panel.gameObject;
+            shopTitle = panel.Find("Bandeau/Titre").GetComponent<Text>();
+            shopPurse = Label(panel, "Bourse", "", 23, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(70, -70), new Vector2(1500, 34));
+            RoundButton(panel, "Fermer", "close", new Vector2(1, 1), new Vector2(-30, -26), 84, CloseShop, out _, out _);
             for (int i = 0; i < 4; i++)
             {
                 int k = i;
-                var bg = Img(panel, "Onglet" + i, UIStyle.Button(), new Vector2(0, 1), new Vector2(40 + i * 236, -122), new Vector2(226, 62)); bg.raycastTarget = true; bg.type = Image.Type.Simple;
+                var bg = Img(panel, "Onglet" + i, UIStyle.Slot(), new Vector2(0, 1), new Vector2(70 + i * 236, -112), new Vector2(226, 62)); bg.raycastTarget = true; bg.type = Image.Type.Sliced;
                 var t = Label(bg.rectTransform, "T", "", 25, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(226, 62));
                 var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => { tabIdx = k; sel = null; multiSel.Clear(); rerollOffer = null; RefreshShop(); });
                 shopTabs.Add((bg, t));
@@ -48,16 +48,16 @@ namespace Korvalune.Game
             for (int i = 0; i < 40; i++)
             {
                 int k = i;
-                var c = Cell(panel, "Case_" + i, new Vector2(0, 1), new Vector2(40 + (i % 8) * 116, -200 - (i / 8) * 116), 106, () => PickShop(k));
+                var c = Cell(panel, "Case_" + i, new Vector2(0, 1), new Vector2(70 + (i % 8) * 116, -196 - (i / 8) * 116), 106, () => PickShop(k));
                 shopCells.Add(c);
             }
-            var side = Img(panel, "Fiche", UIStyle.Bar(), new Vector2(0, 1), new Vector2(990, -200), new Vector2(630, 700)); side.type = Image.Type.Sliced; side.color = new Color(0.06f, 0.045f, 0.035f, 0.95f);
+            var side = Img(panel, "Fiche", UIStyle.Bar(), new Vector2(0, 1), new Vector2(1020, -196), new Vector2(630, 720)); side.type = Image.Type.Sliced; side.color = new Color(0.06f, 0.045f, 0.035f, 0.95f);
             shopDetail = Label(side.rectTransform, "Texte", "", 23, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(22, -16), new Vector2(586, 300));
             FitText(shopDetail, 13);
             for (int i = 0; i < 5; i++)
             {
                 int k = i;
-                var im = Img(side.rectTransform, "Action" + i, UIStyle.Button(), new Vector2(0.5f, 0), new Vector2(0, 20 + (4 - i) * 76), new Vector2(560, 66)); im.raycastTarget = true;
+                var im = Img(side.rectTransform, "Action" + i, UIStyle.Slot(), new Vector2(0.5f, 0), new Vector2(0, 20 + (4 - i) * 76), new Vector2(560, 66)); im.raycastTarget = true; im.type = Image.Type.Sliced;
                 var t = Label(im.rectTransform, "T", "", 24, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(540, 66)); t.color = UIStyle.Gold;
                 var b = im.gameObject.AddComponent<Button>(); b.targetGraphic = im; b.onClick.AddListener(() => RunAct(k));
                 shopActs.Add((im, t, b));

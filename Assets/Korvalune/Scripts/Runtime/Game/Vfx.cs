@@ -5,6 +5,15 @@ namespace Korvalune.Game
 {
     public enum Element { Physique, Feu, Foudre, Glace, Neant, Ombre, Sacre, Poison, Sang, Os, Cendre }
 
+    public static class ElementText
+    {
+        public static string Label(Element e) => e switch
+        {
+            Element.Physique => "Physique", Element.Feu => "Feu", Element.Foudre => "Foudre", Element.Glace => "Givre", Element.Neant => "Néant",
+            Element.Ombre => "Ombre", Element.Sacre => "Sacré", Element.Poison => "Poison", Element.Sang => "Sang", Element.Os => "Os", _ => "Cendres"
+        };
+    }
+
     /// <summary>Effets spéciaux des compétences, composés de couches comme dans les ARPG modernes : éclair de lumière
     /// dynamique, cœur (flammes animées, âmes, éclats), étincelles étirées, fumée, onde de choc au sol, débris,
     /// trace de lame, traînées de projectiles, éclairs tracés, rayons, cercles de runes, auras.</summary>
