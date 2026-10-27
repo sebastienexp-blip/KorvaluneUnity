@@ -24,7 +24,7 @@ namespace Korvalune.EditorTools
         /// <summary>Entrée des terriers dans la vallée (bouche rocheuse au pied des collines du nord-est).</summary>
         public static Vector2 ValleyMouth => new Vector2(62, 96);
 
-        [System.Serializable] public class V { public float x, y, z; public Vector3 P => new Vector3(x, y, z); }
+        [System.Serializable] public class V { public float x, y, z; public Vector3 P => new Vector3(-x, y, z); }   // FBX (repère direct) → Unity : X inversé à l'import des tronçons, donc aussi pour le plan
         [System.Serializable] public class LightDef { public V p; public Color color; public float intensity, range; }
         [System.Serializable] public class CaveDef { public string kind; public V p; public float ra, rb; }
         [System.Serializable] public class ChestDef { public V p, dir; }

@@ -14,7 +14,10 @@ namespace Korvalune.Game
 
         static float Noise(int x, int y) { unchecked { int n = x * 374761393 + y * 668265263; n = (n ^ (n >> 13)) * 1274126177; return ((n ^ (n >> 16)) & 1023) / 1023f; } }
 
-        static Texture2D Tex(int w, int h) => new Texture2D(w, h, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp, filterMode = FilterMode.Bilinear };
+        // textures et sprites créés en code : protégés du nettoyage des ressources au changement de scène
+        // (sinon les icônes deviennent des carrés blancs en entrant dans un donjon)
+        static Texture2D Tex(int w, int h) => new Texture2D(w, h, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp, filterMode = FilterMode.Bilinear, hideFlags = HideFlags.DontUnloadUnusedAsset };
+        static Sprite Keep(Sprite s) { if (s) s.hideFlags = HideFlags.DontUnloadUnusedAsset; return s; }
 
         /// <summary>Panneau : fond cuivre dégradé et patiné, double liseré or, coins arrondis.</summary>
         public static Sprite Panel()
@@ -35,7 +38,7 @@ namespace Korvalune.Game
                 c.a = a; px[y * S + x] = c;
             }
             t.SetPixels(px); t.Apply();
-            return panel = Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(B, B, B, B));
+            return panel = Keep(Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(B, B, B, B)));
         }
 
         static Sprite Round(ref Sprite cache, int S, System.Func<float, float, float, Color> shade)
@@ -48,7 +51,7 @@ namespace Korvalune.Game
                 var c = shade(u, v, r); c.a *= Mathf.Clamp01((1 - r) * R); px[y * S + x] = c;
             }
             t.SetPixels(px); t.Apply();
-            return cache = Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100);
+            return cache = Keep(Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100));
         }
 
         /// <summary>Bouton rond bombé : cuivre sombre, reflet, anneau d'or.</summary>
@@ -82,14 +85,14 @@ namespace Korvalune.Game
                 px[y * W + x] = new Color(k, k, k, 1);
             }
             t.SetPixels(px); t.Apply();
-            return bar = Sprite.Create(t, new Rect(0, 0, W, H), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(4, 4, 4, 4));
+            return bar = Keep(Sprite.Create(t, new Rect(0, 0, W, H), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(4, 4, 4, 4)));
         }
 
         /// <summary>Icônes dessinées (sur fond transparent) : attaque, tourbillon, bond, cri, piétinement, sac, livre.</summary>
         public static Sprite Icon(string id, Color col)
         {
             string cacheKey = id + ColorUtility.ToHtmlStringRGB(col);
-            if (icons.TryGetValue(cacheKey, out var s)) return s;
+            if (icons.TryGetValue(cacheKey, out var s) && s) return s;
             int S = 128; var t = Tex(S, S); var px = new Color[S * S];
             for (int y = 0; y < S; y++) for (int x = 0; x < S; x++)
             {
@@ -116,7 +119,7 @@ namespace Korvalune.Game
                 var c = col * (0.8f + 0.4f * (1 - r)); c.a = m; px[y * S + x] = c;
             }
             t.SetPixels(px); t.Apply();
-            return icons[cacheKey] = Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100);
+            return icons[cacheKey] = Keep(Sprite.Create(t, new Rect(0, 0, S, S), new Vector2(0.5f, 0.5f), 100));
         }
     }
 }

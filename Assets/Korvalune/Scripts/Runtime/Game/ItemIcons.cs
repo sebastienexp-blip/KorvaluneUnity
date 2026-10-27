@@ -23,13 +23,14 @@ namespace Korvalune.Game
             return sb.ToString().Trim('_');
         }
 
+        static readonly System.Collections.Generic.HashSet<string> missing = new System.Collections.Generic.HashSet<string>();
         public static Sprite Get(string baseName)
         {
             if (string.IsNullOrEmpty(baseName)) return null;
-            if (cache.TryGetValue(baseName, out var s)) return s;
+            if (cache.TryGetValue(baseName, out var s) && (s || missing.Contains(baseName))) return s;   // revalidé : déchargé au changement de scène ?
             s = Resources.Load<Sprite>("Icons/" + Slug(baseName));
             if (!s) { var t = Resources.Load<Texture2D>("Icons/" + Slug(baseName)); if (t) s = Sprite.Create(t, new Rect(0, 0, t.width, t.height), new Vector2(0.5f, 0.5f)); }
-            cache[baseName] = s; return s;
+            if (!s) missing.Add(baseName); cache[baseName] = s; return s;
         }
     }
 }
