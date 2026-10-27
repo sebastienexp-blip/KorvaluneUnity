@@ -13,6 +13,11 @@ namespace Korvalune.Game
         public Vector3 castleGate;
         public List<Camp> camps = new List<Camp>();
         public static GameObject chosenHero;            // posé par le créateur de personnage avant de charger la scène
+        public static Vector3? nextSpawn;               // posé par un portail avant de charger la scène suivante
+        // zone et quête propres à la scène (vallée par défaut)
+        public string zoneName = "Vallée de Korvalune";
+        public string questTitle = "Purifier la vallée";
+        public List<Quest.Objective> questSteps = new List<Quest.Objective>();
         public PlayerController Player { get; private set; }
         public HUD Hud { get; private set; }
         public Camera Cam { get; private set; }
@@ -32,6 +37,7 @@ namespace Korvalune.Game
 
             // ---- héros
             var prefab = chosenHero ? chosenHero : config.defaultHero;
+            if (Application.isPlaying && nextSpawn.HasValue) { playerSpawn = nextSpawn.Value; nextSpawn = null; }
             var hero = prefab ? Instantiate(prefab, Ground(playerSpawn), Quaternion.identity) : GameObject.CreatePrimitive(PrimitiveType.Capsule);
             hero.name = prefab ? prefab.name : "Héros";
             foreach (var c in hero.GetComponents<Collider>()) Kill(c);
@@ -69,15 +75,19 @@ namespace Korvalune.Game
 
             // ---- interface
             var ui = new GameObject("Interface"); Hud = ui.AddComponent<HUD>(); Hud.player = Player; Hud.runner = Runner; Hud.worldCam = Cam;
-            var q = ui.AddComponent<Quest>(); q.player = hero.transform;
-            q.steps.Add(new Quest.Objective { text = "Éliminer les squelettes du vieux cimetière", enemyId = "squelette", count = 5 });
-            q.steps.Add(new Quest.Objective { text = "Chasser les loups de la lisière", enemyId = "loup", count = 3 });
-            q.steps.Add(new Quest.Objective { text = "Vaincre le sorcier corrompu du pont", enemyId = "sorcier", count = 1 });
-            q.steps.Add(new Quest.Objective { text = "Rejoindre la porte du Château de Korvalune", place = castleGate, radius = 8f });
+            var q = ui.AddComponent<Quest>(); q.player = hero.transform; q.title = questTitle; Hud.zoneName = zoneName;
+            if (questSteps.Count > 0) foreach (var o in questSteps) q.steps.Add(new Quest.Objective { text = o.text, enemyId = o.enemyId, count = o.count, place = o.place, radius = o.radius });
+            else
+            {
+                q.steps.Add(new Quest.Objective { text = "Éliminer les squelettes du vieux cimetière", enemyId = "squelette", count = 5 });
+                q.steps.Add(new Quest.Objective { text = "Chasser les loups de la lisière", enemyId = "loup", count = 3 });
+                q.steps.Add(new Quest.Objective { text = "Vaincre le sorcier corrompu du pont", enemyId = "sorcier", count = 1 });
+                q.steps.Add(new Quest.Objective { text = "Rejoindre la porte du Château de Korvalune", place = castleGate, radius = 8f });
+            }
             Hud.quest = q;
             Hud.Build(Cam);
             Player.joystick = Hud.Joystick;
-            Hud.Notify("Vallée de Korvalune");
+            Hud.Notify(zoneName);
 
             // ---- ennemis
             foreach (var camp in camps) SpawnCamp(camp);

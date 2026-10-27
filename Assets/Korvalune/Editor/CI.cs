@@ -87,6 +87,7 @@ namespace Korvalune.EditorTools
                 Progress("Catalogue"); CatalogBuilder.Build();                 // la vallée et la sélection s'en servent
                 Progress("WorldCheck"); WorldCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("SelectionCheck"); SelectionCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress("DungeonCheck"); DungeonCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
                 Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
                 if (urp) { urp.shadowDistance = shadowDist; EditorUtility.SetDirty(urp); }
@@ -304,6 +305,20 @@ namespace Korvalune.EditorTools
             Check("Classes proposées", sel.catalog && sel.catalog.classes.Count == 5, sel.catalog ? $"{sel.catalog.classes.Count} classes" : "catalogue absent");
             Check("Ordre des scènes", EditorBuildSettings.scenes.Length > 0 && EditorBuildSettings.scenes[0].path == SelectionBuilder.ScenePath, string.Join(", ", EditorBuildSettings.scenes.Select(x => System.IO.Path.GetFileNameWithoutExtension(x.path))));
             SelectionBuilder.Captures(sel, (w, ok, d) => Check(w, ok, d));
+        }
+
+        static void DungeonCheck()
+        {
+            Line("\n## Crypte de Korvalune (premier donjon)");
+            if (!AssetDatabase.IsValidFolder(ModelPipeline.Root + "/Resources/Prefabs/World/Crypte")) { Line("_Kit de la crypte absent._"); return; }
+            var game = DungeonBuilder.Build();
+            Check("Scène de la crypte", File.Exists(DungeonBuilder.ScenePath), DungeonBuilder.ScenePath);
+            int pieces = UnityEngine.Object.FindObjectsByType<MeshRenderer>(FindObjectsSortMode.None).Length;
+            int fires = UnityEngine.Object.FindObjectsByType<Korvalune.Game.Flicker>(FindObjectsSortMode.None).Length;
+            Check("Salles construites", pieces > 100, $"{pieces} pièces de décor, {fires} flammes");
+            Check("Camps de la crypte", game.camps.Count >= 5, string.Join(", ", game.camps.Select(c => $"{c.enemyId}×{c.count}")));
+            Check("Sortie vers la vallée", UnityEngine.Object.FindFirstObjectByType<Korvalune.Game.Portal>() != null);
+            DungeonBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
         }
 
         static void WorldCheck()

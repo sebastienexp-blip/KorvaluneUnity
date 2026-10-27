@@ -24,6 +24,8 @@ namespace Korvalune.EditorTools
         const string DataDir = Root + "/Data", WorldArt = Root + "/Art/World";
         const float Size = 640f, MaxH = 140f, Base = 12f;
         static readonly Vector2 Gate = new Vector2(0, -36);
+        /// <summary>Entrée de la crypte, au bord du vieux cimetière.</summary>
+        public static Vector3 CryptEntrance => Ground(new Vector2(-28, -100));
 
         // ------------------------------------------------------------------------------------------ relief
         static float Smooth(float a, float b, float x) { float t = Mathf.Clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); }
@@ -201,6 +203,12 @@ namespace Korvalune.EditorTools
             game.camps.Add(new GameBootstrap.Camp { enemyId = "araignee", center = Ground(new Vector2(-150, 60)), count = 2, radius = 8 });
             game.camps.Add(new GameBootstrap.Camp { enemyId = "chevalier", center = Ground(new Vector2(150, 10)), count = 2, radius = 5 });
             game.camps.Add(new GameBootstrap.Camp { enemyId = "demon", center = Ground(new Vector2(-30, -240)), count = 1, radius = 2 });
+            // entrée de la crypte (escalier qui descend, portail) au bord du cimetière
+            var stairs = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Resources/Prefabs/World/Crypte/D_Escalier.prefab");
+            if (stairs) { var st = (GameObject)PrefabUtility.InstantiatePrefab(stairs); st.name = "Entrée de la crypte"; st.transform.position = CryptEntrance + Vector3.down * 2.9f; st.transform.rotation = Quaternion.Euler(0, 180, 0); }
+            var door = new GameObject("Descendre dans la crypte").AddComponent<Portal>();
+            door.transform.position = CryptEntrance; door.targetScene = "Korvalune_Crypte"; door.label = "Descendre";
+            door.arrival = new Vector3(-4f + 3 * 4f, 0.05f, (5 - 9) * 4f);     // pied de l'escalier de la crypte (case E, un pas à côté)
             cam.transform.position = game.playerSpawn + new Vector3(0, 8, -9); cam.transform.LookAt(game.playerSpawn);
 
             EditorSceneManager.SaveScene(scene, ScenePath);
@@ -392,7 +400,7 @@ namespace Korvalune.EditorTools
         }
 
         // ------------------------------------------------------------------------------------------ configuration de jeu
-        static GameConfig Config()
+        public static GameConfig Config()
         {
             var path = DataDir + "/GameConfig.asset";
             var cfg = AssetDatabase.LoadAssetAtPath<GameConfig>(path);
@@ -422,7 +430,7 @@ namespace Korvalune.EditorTools
         }
 
         /// <summary>Post-traitement global : bloom doux, tonemapping ACES, étalonnage chaud, vignette, lift/gamma/gain légers.</summary>
-        static void PostProcess()
+        public static void PostProcess()
         {
             var path = DataDir + "/Vallee_PostProcess.asset";
             AssetDatabase.DeleteAsset(path);
