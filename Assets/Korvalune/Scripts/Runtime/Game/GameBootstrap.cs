@@ -68,6 +68,7 @@ namespace Korvalune.Game
                 Player.inventory.AddRange(save.inventory);
                 if (save.wallet != null) Player.wallet = save.wallet;
                 if (config) SaveSystem.ApplyLook(hero, config.catalog, save.look, save.female);
+                StripChildColliders(hero);
             }
             // compétences propres à la classe (32 par classe, rangs et barre de 5 emplacements sauvegardés)
             Runner = hero.AddComponent<SkillRunner>();
@@ -81,7 +82,8 @@ namespace Korvalune.Game
             // équipement : caractéristiques de base (niveau) + objets portés
             var eq = hero.AddComponent<Equipment>(); eq.Init();
             if (save != null) eq.FromSave(save.equipped);
-            hero.AddComponent<HeroOutfit>().Init();     // haillons au départ, la tenue apparaît à mesure qu'on s'équipe
+            hero.AddComponent<HeroOutfit>().Init();
+            StripChildColliders(hero);     // haillons au départ, la tenue apparaît à mesure qu'on s'équipe
             h.hp = h.maxHp;
             h.modifyIncoming = dmgIn => Time.time < Runner.shieldUntil ? dmgIn * (1f - Runner.shieldPower) : dmgIn;
 
@@ -174,6 +176,14 @@ namespace Korvalune.Game
             Player.transform.position = Ground(playerSpawn); cc.enabled = true;
             Player.Health.Revive();
             Cam.GetComponent<CameraRig>()?.Snap();
+        }
+
+        /// <summary>Seule la collision du personnage (CharacterController) doit rester sur le héros : toute autre collision
+        /// rattachée (coiffure, pièce d'armure, arme) la chevaucherait et le pousserait à travers le sol.</summary>
+        public static void StripChildColliders(GameObject hero)
+        {
+            foreach (var c in hero.GetComponentsInChildren<Collider>(true)) if (!(c is CharacterController)) { c.enabled = false; Kill(c); }
+            foreach (var rb in hero.GetComponentsInChildren<Rigidbody>(true)) Kill(rb);
         }
 
         /// <summary>Garantit une collision au sol : si le collisionneur du terrain manque ou n'a pas de données, on construit un

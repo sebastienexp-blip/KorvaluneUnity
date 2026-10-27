@@ -82,6 +82,10 @@ namespace Korvalune
             if (bones.Count == 0) IndexBones();
             var go = Instantiate(src, transform);
             go.name = slot + "_" + part.id;
+            // les pièces du catalogue portent une capsule de collision de la taille du corps : rattachées au héros, elles
+            // chevaucheraient sa propre collision et le pousseraient à travers le sol — on les retire
+            foreach (var col in go.GetComponentsInChildren<Collider>(true)) Kill(col);
+            foreach (var rb in go.GetComponentsInChildren<Rigidbody>(true)) Kill(rb);
             foreach (var smr in go.GetComponentsInChildren<SkinnedMeshRenderer>(true))
             {
                 var nb = new Transform[smr.bones.Length];

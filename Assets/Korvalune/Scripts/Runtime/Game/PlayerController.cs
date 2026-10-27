@@ -216,8 +216,11 @@ namespace Korvalune.Game
         Vector3 lastSafe; bool hasSafe; float fallingSince = -1;
         /// <summary>Si le héros passe sous le relief (ou tombe longtemps), il est replacé au sol à son dernier appui sûr.
         /// Protège contre toute faille de collision (terrain, bord de carte, décor mal fermé).</summary>
+        float nextStrip;
         void FallGuard()
         {
+            // une pièce rapportée plus tard (tenue, arme) ne doit jamais apporter sa propre collision
+            if (Time.time > nextStrip) { nextStrip = Time.time + 1f; foreach (var c in GetComponentsInChildren<Collider>()) if (c != cc && c.enabled) { c.enabled = false; Destroy(c); } }
             var pos = transform.position;
             if (cc.isGrounded) { lastSafe = pos; hasSafe = true; fallingSince = -1; return; }
             if (fallingSince < 0) fallingSince = Time.time;
