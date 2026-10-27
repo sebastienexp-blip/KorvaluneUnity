@@ -1,0 +1,315 @@
+# Journal de la construction Android (run 40472094429)
+## Lignes importantes
+2022:2026-10-27T08:17:36.6605208Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2098:2026-10-27T08:17:58.3182540Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+4349:2026-10-27T08:23:46.4307067Z Killed
+4350:2026-10-27T08:23:46.4462553Z Build failed, with exit code 137
+4414:2026-10-27T08:23:51.9509832Z Please note that the exit code is not very descriptive.
+4419:2026-10-27T08:23:52.2571269Z ##[error]Build failed with exit code 137
+4424:2026-10-27T08:23:52.3169060Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+4425:2026-10-27T08:23:52.3169750Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+4473:2026-10-27T08:23:52.9541528Z # Construction de l'APK : Unity s'est arrêté avant la fin
+4643:2026-10-27T08:24:45.5491379Z ##[error]Process completed with exit code 1.
+
+## Fin du journal (300 dernières lignes avant l'arrêt)
+2026-10-27T08:23:06.2259656Z [288/407    2s] Csc Library/Bee/artifacts/Android_CodeGen/UnityEngine.UI.dll (+2 others)
+2026-10-27T08:23:06.2261181Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/UnityEngine.UI.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2262490Z [289/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TestRunner.ref.dll_80B890C2D7911DBF.mvfrm
+2026-10-27T08:23:06.2263828Z [290/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UI.ref.dll_DB7439BD0E712D01.mvfrm
+2026-10-27T08:23:06.2264874Z [291/407    2s] Csc Library/Bee/artifacts/1300b0aP.dag/UnityEngine.UI.dll (+2 others)
+2026-10-27T08:23:06.2266091Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/UnityEngine.UI.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2267654Z [292/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/Android_CodeGen/UnityEditor.TestRunner.dll.mvfrm
+2026-10-27T08:23:06.2268976Z [293/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UI.ref.dll_AFC2E85BC2EDBC0B.mvfrm
+2026-10-27T08:23:06.2270570Z [294/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll.mvfrm
+2026-10-27T08:23:06.2272106Z [295/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.Burst.dll.mvfrm
+2026-10-27T08:23:06.2273348Z [296/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.Mathematics.dll.mvfrm
+2026-10-27T08:23:06.2274800Z [297/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Shaders.dll.mvfrm
+2026-10-27T08:23:06.2276342Z [298/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.TextMeshPro.dll.mvfrm
+2026-10-27T08:23:06.2277775Z [299/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.ShaderLibrary.dll.mvfrm
+2026-10-27T08:23:06.2279227Z [300/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.ShaderLibrary.dll (+2 others)
+2026-10-27T08:23:06.2280827Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.ShaderLibrary.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2282311Z [301/407    2s] Csc Library/Bee/artifacts/Android_CodeGen/UnityEditor.TestRunner.dll (+2 others)
+2026-10-27T08:23:06.2283677Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/UnityEditor.TestRunner.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2285213Z [302/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TestRunner.ref.dll_B49A4614ABCDBFD4.mvfrm
+2026-10-27T08:23:06.2286653Z [303/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/Android_CodeGen/UnityEditor.UI.dll.mvfrm
+2026-10-27T08:23:06.2287737Z [304/407    3s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Burst.dll (+2 others)
+2026-10-27T08:23:06.2288850Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Burst.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2290039Z [305/407    1s] Csc Library/Bee/artifacts/Android_CodeGen/UnityEditor.UI.dll (+2 others)
+2026-10-27T08:23:06.2291283Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/UnityEditor.UI.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2292663Z [306/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Burst.ref.dll_59592FE1C19AAD4D.mvfrm
+2026-10-27T08:23:06.2293969Z [307/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UI.ref.dll_1F0E6362084F0496.mvfrm
+2026-10-27T08:23:06.2295240Z [308/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/Android_CodeGen/Unity.Burst.dll.mvfrm
+2026-10-27T08:23:06.2296615Z [309/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Shaders.dll (+2 others)
+2026-10-27T08:23:06.2298162Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Shaders.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2299901Z [310/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/Android_CodeGen/Unity.Mathematics.dll.mvfrm
+2026-10-27T08:23:06.2301072Z [311/407    4s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.TextMeshPro.dll (+2 others)
+2026-10-27T08:23:06.2302394Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.TextMeshPro.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2303913Z [312/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll (+2 others)
+2026-10-27T08:23:06.2305706Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2307268Z [313/407    3s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Burst.dll (+2 others)
+2026-10-27T08:23:06.2308427Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Burst.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2309620Z [314/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Burst.ref.dll_A570EA442BAEBF77.mvfrm
+2026-10-27T08:23:06.2310807Z [315/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/Android_CodeGen/Unity.Burst.CodeGen.dll.mvfrm
+2026-10-27T08:23:06.2311880Z [316/407    8s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Mathematics.dll (+2 others)
+2026-10-27T08:23:06.2313023Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Mathematics.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2314207Z [317/407    0s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Burst.CodeGen.dll (+2 others)
+2026-10-27T08:23:06.2315435Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Burst.CodeGen.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2316890Z [318/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Mathematics.ref.dll_92C0142275484313.mvfrm
+2026-10-27T08:23:06.2318152Z [319/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.Collections.dll.mvfrm
+2026-10-27T08:23:06.2319262Z [320/407    5s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Mathematics.dll (+2 others)
+2026-10-27T08:23:06.2320470Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Mathematics.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2321831Z [321/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Mathematics.ref.dll_26011928474328FD.mvfrm
+2026-10-27T08:23:06.2323117Z [322/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/Android_CodeGen/Unity.Collections.dll.mvfrm
+2026-10-27T08:23:06.2324235Z [323/407    2s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Collections.dll (+2 others)
+2026-10-27T08:23:06.2325413Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Collections.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2326835Z [324/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Collections.ref.dll_0F3DAD17CF6CCA92.mvfrm
+2026-10-27T08:23:06.2328228Z [325/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.dll.mvfrm
+2026-10-27T08:23:06.2329763Z [326/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.Rendering.LightTransport.Runtime.dll.mvfrm
+2026-10-27T08:23:06.2331175Z [327/407    1s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Rendering.LightTransport.Runtime.dll (+2 others)
+2026-10-27T08:23:06.2332649Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.Rendering.LightTransport.Runtime.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2333983Z [328/407    3s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Collections.dll (+2 others)
+2026-10-27T08:23:06.2335187Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Collections.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2336785Z [329/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Collections.ref.dll_A27EB21DA167B07C.mvfrm
+2026-10-27T08:23:06.2338125Z [330/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/Android_CodeGen/Unity.Collections.CodeGen.dll.mvfrm
+2026-10-27T08:23:06.2339497Z [331/407    2s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.dll (+2 others)
+2026-10-27T08:23:06.2340909Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2342276Z [332/407    0s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Collections.CodeGen.dll (+2 others)
+2026-10-27T08:23:06.2343604Z [           0s] Csc Library/Bee/artifacts/Android_CodeGen/Unity.Collections.CodeGen.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2345141Z [333/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.RenderPipelines.Core.Runtime.ref.dll_C67A4099BF12A775.mvfrm
+2026-10-27T08:23:06.2346910Z [334/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipeline.Universal.ShaderLibrary.dll.mvfrm
+2026-10-27T08:23:06.2348577Z [335/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Config.Runtime.dll.mvfrm
+2026-10-27T08:23:06.2350184Z [336/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.Shared.dll.mvfrm
+2026-10-27T08:23:06.2351459Z [337/407    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+2026-10-27T08:23:06.2352704Z [338/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.GPUDriven.Runtime.dll.mvfrm
+2026-10-27T08:23:06.2354187Z [339/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.Shared.dll (+2 others)
+2026-10-27T08:23:06.2355705Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.Shared.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2357349Z [340/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipeline.Universal.ShaderLibrary.dll (+2 others)
+2026-10-27T08:23:06.2358956Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipeline.Universal.ShaderLibrary.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2360536Z [341/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Config.Runtime.dll (+2 others)
+2026-10-27T08:23:06.2362139Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Config.Runtime.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2363899Z [342/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.RenderPipeline.Universal.ShaderLibrary.ref.dll_C33FC1AA6F3F1AD6.mvfrm
+2026-10-27T08:23:06.2365587Z [343/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.RenderPipelines.Core.Runtime.Shared.ref.dll_C6B5F88DEF417E04.mvfrm
+2026-10-27T08:23:06.2367517Z [344/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.Universal.Config.Runtime.dll (+pdb)
+2026-10-27T08:23:06.2369244Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Config.Runtime.dll, with 119 defines and 175 references
+2026-10-27T08:23:06.2370760Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2371693Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2372339Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2373458Z [345/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.Core.Runtime.Shared.dll (+pdb)
+2026-10-27T08:23:06.2375102Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.Shared.dll, with 119 defines and 175 references
+2026-10-27T08:23:06.2376860Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2377797Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2378518Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2379661Z [346/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipeline.Universal.ShaderLibrary.dll (+pdb)
+2026-10-27T08:23:06.2381366Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipeline.Universal.ShaderLibrary.dll, with 119 defines and 175 references
+2026-10-27T08:23:06.2382857Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2383793Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2384435Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2385639Z [347/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.RenderPipelines.Universal.Config.Runtime.ref.dll_2C26A14ADC1DDCEB.mvfrm
+2026-10-27T08:23:06.2387248Z [348/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.TextMeshPro.dll (+pdb)
+2026-10-27T08:23:06.2388554Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.TextMeshPro.dll, with 120 defines and 174 references
+2026-10-27T08:23:06.2389852Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2390787Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2391422Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2392363Z [349/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.Mathematics.dll (+pdb)
+2026-10-27T08:23:06.2393684Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.Mathematics.dll, with 119 defines and 174 references
+2026-10-27T08:23:06.2394991Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2395998Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2396648Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2397741Z [350/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.Universal.Shaders.dll (+pdb)
+2026-10-27T08:23:06.2399383Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Shaders.dll, with 119 defines and 174 references
+2026-10-27T08:23:06.2400832Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2401773Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2402401Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2403365Z [351/407    1s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.GPUDriven.Runtime.dll (+2 others)
+2026-10-27T08:23:06.2404871Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.GPUDriven.Runtime.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2406650Z [352/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.RenderPipelines.GPUDriven.Runtime.ref.dll_766D69CB02F04644.mvfrm
+2026-10-27T08:23:06.2408246Z [353/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Runtime.dll.mvfrm
+2026-10-27T08:23:06.2409807Z [354/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.Core.ShaderLibrary.dll (+pdb)
+2026-10-27T08:23:06.2411442Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.ShaderLibrary.dll, with 119 defines and 174 references
+2026-10-27T08:23:06.2412893Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2413838Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2414473Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2415688Z [355/407    1s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.Rendering.LightTransport.Runtime.dll (+pdb)
+2026-10-27T08:23:06.2417467Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.Rendering.LightTransport.Runtime.dll, with 119 defines and 177 references
+2026-10-27T08:23:06.2419007Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2419945Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2420579Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2421696Z [356/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.GPUDriven.Runtime.dll (+pdb)
+2026-10-27T08:23:06.2423334Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.GPUDriven.Runtime.dll, with 119 defines and 178 references
+2026-10-27T08:23:06.2424835Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2425930Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2426577Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2427820Z [357/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll (+pdb)
+2026-10-27T08:23:06.2429703Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll, with 119 defines and 174 references
+2026-10-27T08:23:06.2431464Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2432547Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2433113Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2434029Z [358/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.Burst.dll (+pdb)
+2026-10-27T08:23:06.2434894Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.Burst.dll, with 119 defines and 173 references
+2026-10-27T08:23:06.2435584Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2436295Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2436669Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2437339Z [359/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/UnityEngine.UI.dll (+pdb)
+2026-10-27T08:23:06.2438632Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/UnityEngine.UI.dll, with 122 defines and 173 references
+2026-10-27T08:23:06.2439371Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2439888Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2440243Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2440694Z [360/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/UnityEngine.UI.dll
+2026-10-27T08:23:06.2441292Z [361/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.GPUDriven.Runtime.dll
+2026-10-27T08:23:06.2441975Z [362/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Rendering.LightTransport.Runtime.dll
+2026-10-27T08:23:06.2442887Z [363/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Shared.dll
+2026-10-27T08:23:06.2443786Z [364/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll
+2026-10-27T08:23:06.2445062Z [365/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Config.Runtime.dll
+2026-10-27T08:23:06.2446282Z [366/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Mathematics.dll
+2026-10-27T08:23:06.2447366Z [367/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll
+2026-10-27T08:23:06.2448513Z [368/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.TextMeshPro.dll
+2026-10-27T08:23:06.2449816Z [369/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll
+2026-10-27T08:23:06.2451239Z [370/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+2026-10-27T08:23:06.2452542Z [371/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Burst.dll
+2026-10-27T08:23:06.2453488Z [372/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Mathematics.pdb
+2026-10-27T08:23:06.2454667Z [373/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.pdb
+2026-10-27T08:23:06.2456321Z [374/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Config.Runtime.pdb
+2026-10-27T08:23:06.2457689Z [375/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.pdb
+2026-10-27T08:23:06.2459050Z [376/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.pdb
+2026-10-27T08:23:06.2460419Z [377/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Rendering.LightTransport.Runtime.pdb
+2026-10-27T08:23:06.2461519Z [378/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.TextMeshPro.pdb
+2026-10-27T08:23:06.2462637Z [379/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Shared.pdb
+2026-10-27T08:23:06.2463946Z [380/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.pdb
+2026-10-27T08:23:06.2464832Z [381/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Burst.pdb
+2026-10-27T08:23:06.2465553Z [382/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/UnityEngine.UI.pdb
+2026-10-27T08:23:06.2466645Z [383/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.GPUDriven.Runtime.pdb
+2026-10-27T08:23:06.2468237Z [384/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.Core.Runtime.dll (+pdb)
+2026-10-27T08:23:06.2469853Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Core.Runtime.dll, with 119 defines and 177 references
+2026-10-27T08:23:06.2471302Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2472283Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2472954Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2473876Z [385/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.pdb
+2026-10-27T08:23:06.2475075Z [386/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll
+2026-10-27T08:23:06.2476492Z [387/407    2s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.Collections.dll (+pdb)
+2026-10-27T08:23:06.2477871Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.Collections.dll, with 121 defines and 176 references
+2026-10-27T08:23:06.2479237Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2480227Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2480880Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2481695Z [388/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Collections.dll
+2026-10-27T08:23:06.2482759Z [389/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Collections.pdb
+2026-10-27T08:23:06.2483861Z [390/407    1s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Runtime.dll (+2 others)
+2026-10-27T08:23:06.2485390Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Runtime.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2487184Z [391/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.Universal.Runtime.dll (+pdb)
+2026-10-27T08:23:06.2488972Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.Runtime.dll, with 121 defines and 181 references
+2026-10-27T08:23:06.2490430Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2491522Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2492172Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2493132Z [392/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.pdb
+2026-10-27T08:23:06.2494441Z [393/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll
+2026-10-27T08:23:06.2496104Z [394/407    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.RenderPipelines.Universal.Runtime.ref.dll_3578C5488867C88F.mvfrm
+2026-10-27T08:23:06.2497765Z [395/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.2D.Runtime.dll.mvfrm
+2026-10-27T08:23:06.2499146Z [396/407    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1300b0aP.dag/Korvalune.Runtime.dll.mvfrm
+2026-10-27T08:23:06.2500237Z [397/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Korvalune.Runtime.dll (+2 others)
+2026-10-27T08:23:06.2501686Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-10-27T08:23:06.2503272Z [398/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.2D.Runtime.dll (+2 others)
+2026-10-27T08:23:06.2504843Z [           0s] Csc Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.2D.Runtime.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-10-27T08:23:06.2506490Z [399/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Korvalune.Runtime.dll (+pdb)
+2026-10-27T08:23:06.2507844Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Korvalune.Runtime.dll, with 119 defines and 176 references
+2026-10-27T08:23:06.2509137Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2510076Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2510715Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2511527Z [400/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Korvalune.Runtime.dll
+2026-10-27T08:23:06.2512493Z [401/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Korvalune.Runtime.pdb
+2026-10-27T08:23:06.2513778Z [402/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Unity.RenderPipelines.Universal.2D.Runtime.dll (+pdb)
+2026-10-27T08:23:06.2515493Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Unity.RenderPipelines.Universal.2D.Runtime.dll, with 119 defines and 179 references
+2026-10-27T08:23:06.2517088Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2518062Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T08:23:06.2518724Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T08:23:06.2519738Z [403/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.2D.Runtime.pdb
+2026-10-27T08:23:06.2521084Z [404/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.2D.Runtime.dll
+2026-10-27T08:23:06.2522477Z [406/407    0s] BuildPlayerDataGenerator Library/BuildPlayerData/Player/RuntimeInitializeOnLoads.json (+1 other)
+2026-10-27T08:23:06.2523607Z *** Tundra build success (25.04 seconds), 275 items updated, 407 evaluated
+2026-10-27T08:23:06.2524966Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-10-27T08:23:06.2526324Z Total cache size 14031192
+2026-10-27T08:23:06.2526853Z Total cache size after purge 14031192, took 00:00:00.0216700
+2026-10-27T08:23:06.3288676Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T08:23:06.3373818Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T08:23:09.5651582Z Opening scene 'Assets/Korvalune/Scenes/Korvalune_Selection.unity'
+2026-10-27T08:23:09.6008182Z Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T08:23:09.9200769Z Loaded scene 'Assets/Korvalune/Scenes/Korvalune_Selection.unity'
+2026-10-27T08:23:09.9202705Z 	Deserialize:            22.815 ms
+2026-10-27T08:23:09.9203284Z 	Integration:            320.144 ms
+2026-10-27T08:23:09.9203840Z 	Integration of assets:  0.017 ms
+2026-10-27T08:23:09.9204381Z 	Thread Wait Time:       0.009 ms
+2026-10-27T08:23:09.9204901Z 	Total Operation Time:   342.985 ms
+2026-10-27T08:23:09.9374920Z Unloading 61 unused Assets / (0.6 MB). Loaded Objects now: 26982.
+2026-10-27T08:23:09.9376329Z Memory consumption went from 7.89 GB to 7.89 GB.
+2026-10-27T08:23:09.9378210Z Total: 17.252450 ms (FindLiveObjects: 1.607690 ms CreateObjectMapping: 1.538431 ms MarkObjects: 12.111827 ms  DeleteObjects: 1.993516 ms)
+2026-10-27T08:23:09.9378882Z 
+2026-10-27T08:23:09.9512938Z Created GICache directory at /root/.cache/unity3d/GiCache. Took: 0.006s, timestamps: [111.749 - 111.756]
+2026-10-27T08:23:46.4307067Z Killed
+2026-10-27T08:23:46.4462553Z Build failed, with exit code 137
+2026-10-27T08:23:46.9856162Z 
+2026-10-27T08:23:46.9856773Z ###########################
+2026-10-27T08:23:46.9857276Z #       Build output      #
+2026-10-27T08:23:46.9857668Z ###########################
+2026-10-27T08:23:46.9857912Z 
+2026-10-27T08:23:46.9904589Z total 8.0K
+2026-10-27T08:23:46.9904990Z drwxr-xr-x 2 root root 4.0K Oct 27 08:21 .
+2026-10-27T08:23:46.9905404Z drwxr-xr-x 3 root root 4.0K Oct 27 08:21 ..
+2026-10-27T08:23:47.4177582Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-10-27T08:23:47.4182245Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-10-27T08:23:47.4182938Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-10-27T08:23:47.4183533Z [UnityConnectServicesConfig] Service configuration:
+2026-10-27T08:23:47.4183962Z     "servicesConfigBaseUrl": "",
+2026-10-27T08:23:47.4184300Z     "disableServicesWindow": false,
+2026-10-27T08:23:47.4184657Z     "disableUserLogin": false,
+2026-10-27T08:23:47.4184989Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-10-27T08:23:47.4185364Z     "clientConnectTimeoutSec": 5,
+2026-10-27T08:23:47.4185696Z     "clientHandshakeTimeoutSec": 10,
+2026-10-27T08:23:47.4186331Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-10-27T08:23:47.4186732Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-10-27T08:23:47.4187082Z     "licensingServiceBaseUrl": "",
+2026-10-27T08:23:47.4187428Z     "enableProxyAutoconfig": "false"
+2026-10-27T08:23:47.4187640Z 
+2026-10-27T08:23:47.4406204Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-10-27T08:23:47.4407137Z Branch:                  6000.0/staging
+2026-10-27T08:23:47.4407589Z Build type:              Release
+2026-10-27T08:23:47.4408292Z Batch mode:              YES
+2026-10-27T08:23:47.4409012Z System name:             Linux
+2026-10-27T08:23:47.4409341Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
+2026-10-27T08:23:47.4410100Z Kernel version:          6.17.0-1022-azure
+2026-10-27T08:23:47.4410533Z Architecture:            x86_64
+2026-10-27T08:23:47.4411199Z Available memory:        15988 MB
+2026-10-27T08:23:48.2458593Z User *** logged in successfully
+2026-10-27T08:23:48.2462019Z [UnityConnect::TryLogin] Request Succeeded.
+2026-10-27T08:23:48.2462552Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-10-27T08:23:48.2463909Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-10-27T08:23:48.2466834Z [Licensing::Module] Successfully launched the LicensingClient (PId: 3651)
+2026-10-27T08:23:49.1029501Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T08:23:49.10149Z"
+2026-10-27T08:23:49.1031059Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-10-27T08:23:49.1750410Z [Licensing::Client] Handshaking with LicensingClient:
+2026-10-27T08:23:49.1751441Z   Version:                 1.16.0+1c867a9
+2026-10-27T08:23:49.1752023Z   Session Id:              0706d9612e2041bfad2de4a8c514adec
+2026-10-27T08:23:49.1752689Z   Correlation Id:          7e0dc3e06f342e3957ae3b6eea62943a
+2026-10-27T08:23:49.1753307Z   External correlation Id: 2481525293681655474
+2026-10-27T08:23:49.1753906Z   Machine Id:              fq5NjMW6wI2Khqshepp1HBgMLs4=
+2026-10-27T08:23:49.1755137Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.86s, validation: 0.07s, handshake: 0.00s)
+2026-10-27T08:23:49.1757128Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T08:23:49.174675Z"
+2026-10-27T08:23:49.1758783Z [Licensing::Module] Connected to LicensingClient (PId: 3651, launch time: 0.00, total connection time: 0.93s)
+2026-10-27T08:23:49.1906459Z [Licensing::Client] Successfully updated the access token
+2026-10-27T08:23:49.1907322Z [Licensing::Module] Successfully updated the access token J9hv_R2DAn...
+2026-10-27T08:23:50.0436956Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T08:23:50.0437661Z       Application is shutting down...
+2026-10-27T08:23:50.0865187Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T08:23:50.0865687Z       ALC ILPP context 2 is unloading
+2026-10-27T08:23:50.5499636Z [Licensing::Client] Successfully processed license management request
+2026-10-27T08:23:50.5500496Z [Licensing::Module] Successfully returned the entitlement license
+2026-10-27T08:23:50.5781847Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-10-27T08:23:51.9404138Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-10-27T08:23:51.9502454Z 
+2026-10-27T08:23:51.9507482Z ###########################
+2026-10-27T08:23:51.9508337Z #         Failure         #
+2026-10-27T08:23:51.9508955Z ###########################
+2026-10-27T08:23:51.9509426Z 
+2026-10-27T08:23:51.9509832Z Please note that the exit code is not very descriptive.
+2026-10-27T08:23:51.9510507Z Most likely it will not help you solve the issue.
+2026-10-27T08:23:51.9510959Z 
+2026-10-27T08:23:51.9511598Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-10-27T08:23:51.9512419Z 
+2026-10-27T08:23:52.2571269Z ##[error]Build failed with exit code 137
