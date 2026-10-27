@@ -1,315 +1,315 @@
-# Journal de la construction Android (run 40474013465)
+# Journal de la construction Android (run 40477444632)
 ## Lignes importantes
-2017:2026-10-27T08:34:24.1508975Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2093:2026-10-27T08:34:47.9455912Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-3665:2026-10-27T08:39:30.0737227Z Killed
-3666:2026-10-27T08:39:30.0815865Z Build failed, with exit code 137
-3730:2026-10-27T08:39:35.6572777Z Please note that the exit code is not very descriptive.
-3735:2026-10-27T08:39:35.9547840Z ##[error]Build failed with exit code 137
-3740:2026-10-27T08:39:36.0002342Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-3741:2026-10-27T08:39:36.0003386Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-3789:2026-10-27T08:39:36.7209392Z # Construction de l'APK : Unity s'est arrêté avant la fin
-3962:2026-10-27T08:40:33.0275440Z ##[error]Process completed with exit code 1.
+2030:2026-10-27T09:06:11.3105936Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2106:2026-10-27T09:06:31.8056581Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+3964:2026-10-27T09:10:40.7247722Z Killed
+3965:2026-10-27T09:10:40.7401540Z Build failed, with exit code 137
+4029:2026-10-27T09:10:45.6291933Z Please note that the exit code is not very descriptive.
+4034:2026-10-27T09:10:45.9504197Z ##[error]Build failed with exit code 137
+4039:2026-10-27T09:10:46.0044783Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+4040:2026-10-27T09:10:46.0045513Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+4088:2026-10-27T09:10:46.6701474Z # Construction de l'APK : Unity s'est arrêté avant la fin
+4259:2026-10-27T09:11:46.0690558Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-10-27T08:38:36.2813701Z 	GenerateScriptTypeHashes: 39.452ms
-2026-10-27T08:38:36.2814390Z 	Untracked: 4624.804ms
-2026-10-27T08:38:36.2814819Z 
-2026-10-27T08:38:36.2815231Z Application.AssetDatabase Initial Refresh End
-2026-10-27T08:38:36.3194787Z Scanning for USB devices : 0.148ms
-2026-10-27T08:38:36.3196573Z Initializing Unity extensions:
-2026-10-27T08:38:36.4130348Z [Licensing::Client] Successfully resolved entitlement details
-2026-10-27T08:38:36.4244131Z UpdateMenuTitleForLanguage: 10
-2026-10-27T08:38:36.4267875Z [MODES] ModeService[none].Initialize
-2026-10-27T08:38:36.4273131Z [MODES] ModeService[none].LoadModes
-2026-10-27T08:38:36.4470005Z [MODES] Loading mode Default (0) for mode-current-id-Korvalune
-2026-10-27T08:38:36.9358750Z Unloading 35 Unused Serialized files (Serialized files now loaded: 0)
-2026-10-27T08:38:36.9519177Z Unloading 3106 unused Assets / (4.4 MB). Loaded Objects now: 3764.
-2026-10-27T08:38:36.9520411Z Memory consumption went from 143.9 MB to 139.6 MB.
-2026-10-27T08:38:36.9521814Z Total: 15.563735 ms (FindLiveObjects: 0.545868 ms CreateObjectMapping: 0.249656 ms MarkObjects: 12.192559 ms  DeleteObjects: 2.573820 ms)
-2026-10-27T08:38:36.9523058Z 
-2026-10-27T08:38:37.4033251Z Asset Pipeline Refresh (id=02694286178cb2ae68d9d22025ed17ed): Total: 0.272 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
-2026-10-27T08:38:37.4275949Z Shader Hidden/ProbeVolume/VoxelizeScene is not supported: GPU does not support conservative rasterization
-2026-10-27T08:38:37.4787613Z Launched and connected shader compiler UnityShaderCompiler after 0.03 seconds
-2026-10-27T08:38:37.6767093Z Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '45ad7f6afda9e00fd2677f5636100c70') in 0.003747308 seconds
-2026-10-27T08:38:37.6796825Z Start importing ProjectSettings/QualitySettings.asset using Guid(00000000000000009000000000000000) (LibraryAssetImporter) -> (artifact id: '875af7d748d190de94555984dcf86d9f') in 0.002136534 seconds
-2026-10-27T08:38:37.6819845Z Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: '20f419efd18888105f700bddac0c96c2') in 0.001826837 seconds
-2026-10-27T08:38:37.6857853Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer_Mobile.asset using Guid(d085fe35dab3335e2845a764821da8bf) (NativeFormatImporter) -> (artifact id: 'a58bf23a6906c6a3cdf877fa158e9218') in 0.00200563 seconds
-2026-10-27T08:38:37.6885898Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '759a01f56f0c30c090388fdd5320648c') in 0.001913378 seconds
-2026-10-27T08:38:37.6913657Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer.asset using Guid(45dcf888724dd3f06b1c3653ce8a2375) (NativeFormatImporter) -> (artifact id: 'cd79d1476e2174ff55ca483083759014') in 0.00215535 seconds
-2026-10-27T08:38:37.6940566Z Start importing Assets/Korvalune/Rendering/Korvalune_URP_Mobile.asset using Guid(fef8269d245f099369074a8e31f89ba9) (NativeFormatImporter) -> (artifact id: '08dae930073b224dac2fc1ca70a4159a') in 0.00190848 seconds
-2026-10-27T08:38:37.7067982Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T08:38:37.7069318Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T08:38:37.7072730Z Asset Pipeline Refresh (id=6620a255c833327279614db0e9c524ce): Total: 0.063 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-2026-10-27T08:38:37.7446267Z Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: 'cd40356f6f35f5a33fbe4796cad1cf8b') in 0.003732341 seconds
-2026-10-27T08:38:37.7469779Z Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '07c3665e681e110bedaeb6eb0a2905d8') in 0.001670115 seconds
-2026-10-27T08:38:37.7502111Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer_Mobile.asset using Guid(d085fe35dab3335e2845a764821da8bf) (NativeFormatImporter) -> (artifact id: 'a58bf23a6906c6a3cdf877fa158e9218') in 0.001756686 seconds
-2026-10-27T08:38:37.7524607Z Start importing Assets/Korvalune/Rendering/Korvalune_URP_Mobile.asset using Guid(fef8269d245f099369074a8e31f89ba9) (NativeFormatImporter) -> (artifact id: '08dae930073b224dac2fc1ca70a4159a') in 0.001631593 seconds
-2026-10-27T08:38:37.7564759Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T08:38:37.7565927Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T08:38:37.7567342Z Asset Pipeline Refresh (id=c93271f2b49878532ac4c93f6b70ccd6): Total: 0.040 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-2026-10-27T08:38:37.8777107Z 1 URP assets included in build
-2026-10-27T08:38:37.8778009Z - Korvalune_URP - Assets/Korvalune/Rendering/Korvalune_URP.asset
-2026-10-27T08:38:37.8779520Z 	 - Korvalune_Renderer - Assets/Korvalune/Rendering/Korvalune_Renderer.asset - UnityEngine.Rendering.Universal.UniversalRendererData
-2026-10-27T08:38:37.8780983Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-10-27T08:38:37.8782677Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-10-27T08:38:37.8784723Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-2026-10-27T08:38:37.8786290Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-2026-10-27T08:38:37.8787702Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
-2026-10-27T08:38:37.8788485Z UnityEngine.Debug:Log (object)
-2026-10-27T08:38:37.8790735Z UnityEditor.Rendering.Universal.URPPreprocessBuild:LogIncludedAssets (System.Collections.Generic.List`1<UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset>) (at ./Library/PackageCache/com.unity.render-pipelines.universal/Editor/BuildProcessors/URPPreprocessBuild.cs:52)
-2026-10-27T08:38:37.8794520Z UnityEditor.Rendering.Universal.URPPreprocessBuild:OnPreprocessBuild (UnityEditor.Build.Reporting.BuildReport) (at ./Library/PackageCache/com.unity.render-pipelines.universal/Editor/BuildProcessors/URPPreprocessBuild.cs:30)
-2026-10-27T08:38:37.8798106Z UnityEditor.Build.BuildPipelineInterfaces/<>c__DisplayClass16_0:<OnBuildPreProcess>b__1 (UnityEditor.Build.IPreprocessBuildWithReport) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline/BuildPipelineInterfaces.cs:502)
-2026-10-27T08:38:37.8804016Z UnityEditor.Build.BuildPipelineInterfaces:InvokeCallbackInterfacesPair<UnityEditor.Build.IPreprocessBuild, UnityEditor.Build.IPreprocessBuildWithReport> (System.Collections.Generic.List`1<UnityEditor.Build.IPreprocessBuild>,System.Action`1<UnityEditor.Build.IPreprocessBuild>,System.Collections.Generic.List`1<UnityEditor.Build.IPreprocessBuildWithReport>,System.Action`1
-2026-10-27T08:38:37.8808951Z UnityEditor.Build.BuildPipelineInterfaces:OnBuildPreProcess (UnityEditor.Build.Reporting.BuildReport) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline/BuildPipelineInterfaces.cs:500)
-2026-10-27T08:38:37.8811709Z UnityEditor.BuildPipeline:BuildPlayerInternalNoCheck (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[],bool)
-2026-10-27T08:38:37.8815036Z UnityEditor.BuildPipeline:BuildPlayerInternal (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:531)
-2026-10-27T08:38:37.8818523Z UnityEditor.BuildPipeline:BuildPlayer (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:415)
-2026-10-27T08:38:37.8821287Z UnityEditor.BuildPipeline:BuildPlayer (UnityEditor.BuildPlayerOptions) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:361)
-2026-10-27T08:38:37.8823208Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:55)
-2026-10-27T08:38:37.8824058Z 
-2026-10-27T08:38:37.8824954Z (Filename: ./Library/PackageCache/com.unity.render-pipelines.universal/Editor/BuildProcessors/URPPreprocessBuild.cs Line: 52)
-2026-10-27T08:38:37.8826017Z 
-2026-10-27T08:38:38.0016595Z Start importing Assets/Resources using Guid(16ca1cea849a61643a6bbef4b5c843ca) (DefaultImporter) -> (artifact id: '5c97553361bf291129a27c40d5df1ccb') in 0.002017733 seconds
-2026-10-27T08:38:38.0060203Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T08:38:38.0061212Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T08:38:38.0069441Z Asset Pipeline Refresh (id=eb87ee4e1c76320c6a12791a73ae2b20): Total: 0.035 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-2026-10-27T08:38:38.1086965Z Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: '20f419efd18888105f700bddac0c96c2') in 0.005103458 seconds
-2026-10-27T08:38:38.1188877Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '180c4393ea4ffdf1dff3044ba5ec6f60') in 0.008486387 seconds
-2026-10-27T08:38:38.1221204Z Start importing Assets/UniversalRenderPipelineGlobalSettings.asset using Guid(d6b3af9a7d9c7c100853dc9b6a61802d) (NativeFormatImporter) -> (artifact id: '7e8f2be052e9f0a08283f1ad8a9544e8') in 0.002864181 seconds
-2026-10-27T08:38:38.1541505Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T08:38:38.1542320Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T08:38:38.1548247Z Asset Pipeline Refresh (id=a9d950b9a178caaec9ced8b038a588d4): Total: 0.076 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-2026-10-27T08:38:38.1996618Z DisplayProgressbar: Checking prerequisites
-2026-10-27T08:38:38.2341011Z Android PostProcess task "Checking prerequisites" took 34.44 ms
-2026-10-27T08:38:38.2342134Z DisplayProgressbar: Detect Java Development Kit (JDK)
-2026-10-27T08:38:38.3909665Z Android PostProcess task "Detect Java Development Kit (JDK)" took 156.8937 ms
-2026-10-27T08:38:38.3933062Z DisplayProgressbar: Detecting Android SDK
-2026-10-27T08:38:42.7088508Z AndroidSDKTools:
-2026-10-27T08:38:42.7089193Z 
-2026-10-27T08:38:42.7097007Z 	root          : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK
-2026-10-27T08:38:42.7098615Z 	cmdline-tools : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/cmdline-tools/6.0
-2026-10-27T08:38:42.7100186Z 	platform-tools: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/platform-tools
-2026-10-27T08:38:42.7101566Z 	build-tools   : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/34.0.0
-2026-10-27T08:38:42.7102798Z 
-2026-10-27T08:38:42.7103521Z 	adb           : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/platform-tools/adb
-2026-10-27T08:38:42.7104316Z 
-2026-10-27T08:38:42.7137427Z Android PostProcess task "Detecting Android SDK" took 4322.9865 ms
-2026-10-27T08:38:42.7160657Z DisplayProgressbar: Detect Android NDK
-2026-10-27T08:38:42.7171151Z Android PostProcess task "Detect Android NDK" took 3.3581 ms
-2026-10-27T08:38:42.7204150Z Android PostProcess task "Trying to find a suitable Android device" took 3.1597 ms
-2026-10-27T08:38:42.7211715Z DisplayProgressbar: Check resources
-2026-10-27T08:38:42.7212883Z Android PostProcess task "Check resources" took 0.5161 ms
-2026-10-27T08:38:42.7214110Z DisplayProgressbar: Check Android Player Settings
-2026-10-27T08:38:42.7221051Z Android PostProcess task "Check Android Player Settings" took 0.6953 ms
-2026-10-27T08:38:42.8789206Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-2026-10-27T08:38:42.8790691Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
-2026-10-27T08:38:42.8792876Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-2026-10-27T08:38:42.8794179Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
-2026-10-27T08:38:42.8795715Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-2026-10-27T08:38:42.8796845Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
-2026-10-27T08:38:42.8798129Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-2026-10-27T08:38:42.8799643Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 0.6457ms
-2026-10-27T08:38:42.9510534Z Starting: /opt/unity/Editor/Data/bee_backend --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/1300b0aESkipCompile.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssembliesAndTypeDB
-2026-10-27T08:38:42.9519058Z WorkingDir: /github/workspace
-2026-10-27T08:38:43.1873662Z DisplayProgressbar: Compiling Scripts
-2026-10-27T08:38:43.2063307Z ExitCode: 0 Duration: 0s252ms
-2026-10-27T08:38:43.2064450Z *** Tundra build success (0.14 seconds), 0 items updated, 3 evaluated
-2026-10-27T08:38:43.2688706Z Total cache size 514180
-2026-10-27T08:38:43.2892823Z Total cache size after purge 514180, took 00:00:00.0619625
-2026-10-27T08:38:43.6921512Z Start importing Assets/Resources/PerformanceTestRunInfo.json using Guid(cd77f99faccf022eaa2ab0e047f137e0) (TextScriptImporter) -> (artifact id: '1399906cd045c53acb5ae126a8f497f6') in 0.009032582 seconds
-2026-10-27T08:38:43.7033727Z Start importing Assets/Resources/PerformanceTestRunSettings.json using Guid(1f8a05c0d13c379eba23e3ab7e2102c2) (TextScriptImporter) -> (artifact id: 'd9832e8e6c6cd1febc45a8daedc56b85') in 0.007848347 seconds
-2026-10-27T08:38:43.7103878Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-27T08:38:43.7135510Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-27T08:38:43.7147538Z Asset Pipeline Refresh (id=f4e309fbee8923961ae4af6fb7578b47): Total: 0.311 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
-2026-10-27T08:38:43.7148848Z 	Summary:
-2026-10-27T08:38:43.7149653Z 		Imports: total=2 (actual=2, local cache=0, cache server=0)
-2026-10-27T08:38:43.7150655Z 		Asset DB Process Time: managed=0 ms, native=302 ms
-2026-10-27T08:38:43.7151389Z 		Asset DB Callback time: managed=3 ms, native=4 ms
-2026-10-27T08:38:43.7152240Z 		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
-2026-10-27T08:38:43.7153671Z 		Project Asset Count: scripts=928, non-scripts=4201
-2026-10-27T08:38:43.7154374Z 		Asset File Changes: new=2, changed=2, moved=0, deleted=0
-2026-10-27T08:38:43.7154978Z 		Scan Filter Count: 1
-2026-10-27T08:38:43.7155466Z 	InvokeCustomDependenciesCallbacks: 0.002ms
-2026-10-27T08:38:43.7156069Z 	InvokePackagesCallback: 0.001ms
-2026-10-27T08:38:43.7156603Z 	ApplyChangesToAssetFolders: 0.089ms
-2026-10-27T08:38:43.7157118Z 	Scan: 232.614ms
-2026-10-27T08:38:43.7157554Z 	OnSourceAssetsModified: 0.084ms
-2026-10-27T08:38:43.7158142Z 	CategorizeAssetsWithTransientArtifact: 0.008ms
-2026-10-27T08:38:43.7158858Z 	ProcessAssetsWithTransientArtifactChanges: 0.034ms
-2026-10-27T08:38:43.7159521Z 	CategorizeAssets: 34.275ms
-2026-10-27T08:38:43.7160099Z 	ImportOutOfDateAssets: 24.801ms (1.392ms without children)
-2026-10-27T08:38:43.7160859Z 		ImportManagerImport: 21.934ms (0.724ms without children)
-2026-10-27T08:38:43.7161509Z 			ImportInProcess: 21.176ms
-2026-10-27T08:38:43.7162001Z 			UpdateCategorizedAssets: 0.034ms
-2026-10-27T08:38:43.7162773Z 		ReloadNativeAssets: 0.037ms
-2026-10-27T08:38:43.7163286Z 		UnloadImportedAssets: 0.186ms
-2026-10-27T08:38:43.7163784Z 		ReloadImportedAssets: 0.001ms
-2026-10-27T08:38:43.7164433Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.801ms
-2026-10-27T08:38:43.7165072Z 		InitializingProgressBar: 0.007ms
-2026-10-27T08:38:43.7165719Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
-2026-10-27T08:38:43.7166406Z 		OnDemandSchedulerStart: 0.442ms
-2026-10-27T08:38:43.7166900Z 	PostProcessAllAssets: 3.184ms
-2026-10-27T08:38:43.7167347Z 	Hotreload: 4.674ms
-2026-10-27T08:38:43.7167831Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.368ms
-2026-10-27T08:38:43.7168445Z 	UnloadStreamsBegin: 0.004ms
-2026-10-27T08:38:43.7168910Z 	PersistCurrentRevisions: 0.324ms
-2026-10-27T08:38:43.7169388Z 	UnloadStreamsEnd: 0.001ms
-2026-10-27T08:38:43.7169796Z 	Untracked: 10.329ms
-2026-10-27T08:38:43.7170040Z 
-2026-10-27T08:38:43.7244481Z [ScriptCompilation] Requested script compilation because: Recompiling scripts for player build.
-2026-10-27T08:38:43.7248554Z BuildPlayer: start building target 13
-2026-10-27T08:38:43.9274323Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-2026-10-27T08:38:43.9275557Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
-2026-10-27T08:38:43.9298080Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-2026-10-27T08:38:43.9299090Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
-2026-10-27T08:38:43.9304298Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-2026-10-27T08:38:43.9305503Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
-2026-10-27T08:38:43.9306865Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-2026-10-27T08:38:43.9308693Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 1.4191ms
-2026-10-27T08:38:43.9429190Z Starting: /opt/unity/Editor/Data/bee_backend --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/1300b0aP.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssembliesAndTypeDB
-2026-10-27T08:38:43.9430685Z WorkingDir: /github/workspace
-2026-10-27T08:38:44.3049380Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-2026-10-27T08:38:44.3051027Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc -
-2026-10-27T08:38:44.3053732Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-2026-10-27T08:38:44.3055187Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
-2026-10-27T08:38:44.3098547Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T08:38:44.3099529Z       ALC ILPP context 1 is unloading
-2026-10-27T08:38:44.3136663Z [40m[1m[33mwarn[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T08:38:44.3140176Z       Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/opt/unity/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
-2026-10-27T08:38:44.3144149Z [40m[1m[33mwarn[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T08:38:44.3147078Z       Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
-2026-10-27T08:38:44.3237789Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T08:38:44.3240939Z       Resolved Unity.Burst.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
-2026-10-27T08:38:44.3297481Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T08:38:44.3300228Z       Resolved Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil/Mono.Cecil.dll
-2026-10-27T08:38:44.3302693Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-2026-10-27T08:38:44.3303939Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
-2026-10-27T08:38:44.3305173Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-2026-10-27T08:38:44.3306691Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc - - 200 - application/grpc 21.8230ms
-2026-10-27T08:38:45.6877840Z ExitCode: 0 Duration: 1s744ms
-2026-10-27T08:38:45.6878716Z [352/407    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
-2026-10-27T08:38:45.6879960Z [368/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll
-2026-10-27T08:38:45.6881341Z [369/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll
-2026-10-27T08:38:45.6882689Z [370/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/UnityEngine.UI.dll
-2026-10-27T08:38:45.6883638Z [372/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.TextMeshPro.dll
-2026-10-27T08:38:45.6884503Z [373/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Burst.dll
-2026-10-27T08:38:45.6885625Z [374/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
-2026-10-27T08:38:45.6887309Z [375/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Config.Runtime.dll
-2026-10-27T08:38:45.6888561Z [376/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll
-2026-10-27T08:38:45.6889748Z [377/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll
-2026-10-27T08:38:45.6890969Z [378/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll
-2026-10-27T08:38:45.6892235Z [379/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.2D.Runtime.dll
-2026-10-27T08:38:45.6894006Z [380/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Shared.dll
-2026-10-27T08:38:45.6895237Z [381/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Rendering.LightTransport.Runtime.dll
-2026-10-27T08:38:45.6896288Z [382/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Collections.dll
-2026-10-27T08:38:45.6897408Z [383/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Config.Runtime.pdb
-2026-10-27T08:38:45.6898514Z [384/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Mathematics.dll
-2026-10-27T08:38:45.6899561Z [385/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.GPUDriven.Runtime.dll
-2026-10-27T08:38:45.6900796Z [386/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.2D.Runtime.pdb
-2026-10-27T08:38:45.6902141Z [387/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.pdb
-2026-10-27T08:38:45.6903527Z [388/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.TextMeshPro.pdb
-2026-10-27T08:38:45.6904586Z [389/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Shared.pdb
-2026-10-27T08:38:45.6905838Z [390/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.pdb
-2026-10-27T08:38:45.6906930Z [391/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Collections.pdb
-2026-10-27T08:38:45.6907994Z [392/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.pdb
-2026-10-27T08:38:45.6909246Z [393/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.pdb
-2026-10-27T08:38:45.6910331Z [394/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/UnityEngine.UI.pdb
-2026-10-27T08:38:45.6911357Z [395/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Rendering.LightTransport.Runtime.pdb
-2026-10-27T08:38:45.6912548Z [396/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Burst.pdb
-2026-10-27T08:38:45.6913570Z [397/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.GPUDriven.Runtime.pdb
-2026-10-27T08:38:45.6914777Z [398/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.pdb
-2026-10-27T08:38:45.6915958Z [399/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.pdb
-2026-10-27T08:38:45.6916960Z [400/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Mathematics.pdb
-2026-10-27T08:38:45.6917859Z [401/407    1s] Csc Library/Bee/artifacts/1300b0aP.dag/Korvalune.Runtime.dll (+2 others)
-2026-10-27T08:38:45.6919223Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
-2026-10-27T08:38:45.6920572Z [403/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Korvalune.Runtime.dll
-2026-10-27T08:38:45.6921461Z [404/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Korvalune.Runtime.pdb
-2026-10-27T08:38:45.6922361Z *** Tundra build success (1.69 seconds), 36 items updated, 407 evaluated
-2026-10-27T08:38:45.7106433Z Total cache size 514180
-2026-10-27T08:38:45.7108262Z Total cache size after purge 514180, took 00:00:00.0056201
-2026-10-27T08:38:45.7214847Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
-2026-10-27T08:38:46.0447864Z Opening scene 'Assets/Korvalune/Scenes/Korvalune_Selection.unity'
-2026-10-27T08:38:49.3357832Z Unloading 415 Unused Serialized files (Serialized files now loaded: 0)
-2026-10-27T08:39:15.0559728Z Loaded scene 'Assets/Korvalune/Scenes/Korvalune_Selection.unity'
-2026-10-27T08:39:15.0564240Z 	Deserialize:            3275.412 ms
-2026-10-27T08:39:15.0564789Z 	Integration:            231.854 ms
-2026-10-27T08:39:15.0565772Z 	Integration of assets:  25495.611 ms
-2026-10-27T08:39:15.0566252Z 	Thread Wait Time:       -0.439 ms
-2026-10-27T08:39:15.0566716Z 	Total Operation Time:   29002.438 ms
-2026-10-27T08:39:15.0697015Z Unloading 35 unused Assets / (421.5 KB). Loaded Objects now: 26819.
-2026-10-27T08:39:15.0697922Z Memory consumption went from 7.90 GB to 7.90 GB.
-2026-10-27T08:39:15.0699169Z Total: 20.447012 ms (FindLiveObjects: 2.058078 ms CreateObjectMapping: 2.335385 ms MarkObjects: 14.136885 ms  DeleteObjects: 1.915332 ms)
-2026-10-27T08:39:15.0700111Z 
-2026-10-27T08:39:15.0916479Z Created GICache directory at /root/.cache/unity3d/GiCache. Took: 0.012s, timestamps: [58.923 - 58.935]
-2026-10-27T08:39:30.0737227Z Killed
-2026-10-27T08:39:30.0815865Z Build failed, with exit code 137
-2026-10-27T08:39:30.9524039Z 
-2026-10-27T08:39:30.9528150Z ###########################
-2026-10-27T08:39:30.9528582Z #       Build output      #
-2026-10-27T08:39:30.9528914Z ###########################
-2026-10-27T08:39:30.9529158Z 
-2026-10-27T08:39:30.9566785Z total 8.0K
-2026-10-27T08:39:30.9567330Z drwxr-xr-x 2 root root 4.0K Oct 27 08:38 .
-2026-10-27T08:39:30.9567938Z drwxr-xr-x 3 root root 4.0K Oct 27 08:38 ..
-2026-10-27T08:39:31.3598523Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
-2026-10-27T08:39:31.3605943Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
-2026-10-27T08:39:31.3607015Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
-2026-10-27T08:39:31.3607701Z [UnityConnectServicesConfig] Service configuration:
-2026-10-27T08:39:31.3608173Z     "servicesConfigBaseUrl": "",
-2026-10-27T08:39:31.3608542Z     "disableServicesWindow": false,
-2026-10-27T08:39:31.3608917Z     "disableUserLogin": false,
-2026-10-27T08:39:31.3609290Z     "entitlementCacheTimeoutInSeconds": 60,
-2026-10-27T08:39:31.3609713Z     "clientConnectTimeoutSec": 5,
-2026-10-27T08:39:31.3610086Z     "clientHandshakeTimeoutSec": 10,
-2026-10-27T08:39:31.3610533Z     "clientResolveEntitlementsTimeoutSec": 30,
-2026-10-27T08:39:31.3610995Z     "clientUpdateLicenseTimeoutSec": 30,
-2026-10-27T08:39:31.3611408Z     "licensingServiceBaseUrl": "",
-2026-10-27T08:39:31.3611780Z     "enableProxyAutoconfig": "false"
-2026-10-27T08:39:31.3612024Z 
-2026-10-27T08:39:31.3855314Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
-2026-10-27T08:39:31.3856076Z Branch:                  6000.0/staging
-2026-10-27T08:39:31.3861780Z Build type:              Release
-2026-10-27T08:39:31.3862204Z Batch mode:              YES
-2026-10-27T08:39:31.3862978Z System name:             Linux
-2026-10-27T08:39:31.3863494Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
-2026-10-27T08:39:31.3864057Z Kernel version:          6.17.0-1022-azure
-2026-10-27T08:39:31.3864467Z Architecture:            x86_64
-2026-10-27T08:39:31.3864811Z Available memory:        15989 MB
-2026-10-27T08:39:32.0908703Z User *** logged in successfully
-2026-10-27T08:39:32.0912702Z [UnityConnect::TryLogin] Request Succeeded.
-2026-10-27T08:39:32.0914097Z [Licensing::Module] Trying to connect to existing licensing client channel...
-2026-10-27T08:39:32.0915940Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
-2026-10-27T08:39:32.0917909Z [Licensing::Module] Successfully launched the LicensingClient (PId: 1992)
-2026-10-27T08:39:32.9487606Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T08:39:32.946725Z"
-2026-10-27T08:39:32.9489078Z [SignatureVerifier] Application signature verification not supported on this platform.
-2026-10-27T08:39:33.0420158Z [Licensing::Client] Handshaking with LicensingClient:
-2026-10-27T08:39:33.0421255Z   Version:                 1.16.0+1c867a9
-2026-10-27T08:39:33.0422091Z   Session Id:              5fc9aee4a1824368899192b6b810daf2
-2026-10-27T08:39:33.0423282Z   Correlation Id:          6ba88c90888de7dd19485dab0eadf02b
-2026-10-27T08:39:33.0424795Z   External correlation Id: 6163420984117945911
-2026-10-27T08:39:33.0425639Z   Machine Id:              A8ERDPCLHAS4tevFyloO6TKH5ao=
-2026-10-27T08:39:33.0427122Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.86s, validation: 0.09s, handshake: 0.00s)
-2026-10-27T08:39:33.0506454Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T08:39:33.034285Z"
-2026-10-27T08:39:33.0508185Z [Licensing::Module] Connected to LicensingClient (PId: 1992, launch time: 0.00, total connection time: 0.94s)
-2026-10-27T08:39:33.0546057Z [Licensing::Client] Successfully updated the access token
-2026-10-27T08:39:33.0547033Z [Licensing::Module] Successfully updated the access token oT9YE8w6F-...
-2026-10-27T08:39:33.1797737Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-27T08:39:33.1798531Z       Application is shutting down...
-2026-10-27T08:39:33.2140481Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-27T08:39:33.2142305Z       ALC ILPP context 2 is unloading
-2026-10-27T08:39:34.2223282Z [Licensing::Client] Successfully processed license management request
-2026-10-27T08:39:34.2224453Z [Licensing::Module] Successfully returned the entitlement license
-2026-10-27T08:39:34.2531136Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
-2026-10-27T08:39:35.6436041Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
-2026-10-27T08:39:35.6569827Z 
-2026-10-27T08:39:35.6570445Z ###########################
-2026-10-27T08:39:35.6571181Z #         Failure         #
-2026-10-27T08:39:35.6571751Z ###########################
-2026-10-27T08:39:35.6572298Z 
-2026-10-27T08:39:35.6572777Z Please note that the exit code is not very descriptive.
-2026-10-27T08:39:35.6573946Z Most likely it will not help you solve the issue.
-2026-10-27T08:39:35.6574499Z 
-2026-10-27T08:39:35.6575240Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
-2026-10-27T08:39:35.6576103Z 
-2026-10-27T08:39:35.9547840Z ##[error]Build failed with exit code 137
+2026-10-27T09:09:21.2955894Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.934ms
+2026-10-27T09:09:21.2956504Z 		InitializingProgressBar: 0.016ms
+2026-10-27T09:09:21.2957021Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+2026-10-27T09:09:21.2957539Z 		OnDemandSchedulerStart: 0.519ms
+2026-10-27T09:09:21.2957955Z 	PostProcessAllAssets: 169.586ms
+2026-10-27T09:09:21.2958576Z 	Hotreload: 1.684ms
+2026-10-27T09:09:21.2959068Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
+2026-10-27T09:09:21.2959658Z 	UnloadStreamsBegin: 1.239ms
+2026-10-27T09:09:21.2960129Z 	PersistCurrentRevisions: 1.307ms
+2026-10-27T09:09:21.2960585Z 	UnloadStreamsEnd: 0.001ms
+2026-10-27T09:09:21.2960999Z 	GenerateScriptTypeHashes: 2.354ms
+2026-10-27T09:09:21.2961388Z 	Untracked: 3568.990ms
+2026-10-27T09:09:21.2961645Z 
+2026-10-27T09:09:21.2961887Z Application.AssetDatabase Initial Refresh End
+2026-10-27T09:09:21.3179372Z Scanning for USB devices : 0.117ms
+2026-10-27T09:09:21.3180475Z Initializing Unity extensions:
+2026-10-27T09:09:21.3766758Z [Licensing::Client] Successfully resolved entitlement details
+2026-10-27T09:09:21.3833206Z UpdateMenuTitleForLanguage: 10
+2026-10-27T09:09:21.3845375Z [MODES] ModeService[none].Initialize
+2026-10-27T09:09:21.3846189Z [MODES] ModeService[none].LoadModes
+2026-10-27T09:09:21.3952246Z [MODES] Loading mode Default (0) for mode-current-id-Korvalune
+2026-10-27T09:09:21.5452881Z Unloading 19 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T09:09:21.5546283Z Unloading 3084 unused Assets / (4.2 MB). Loaded Objects now: 3764.
+2026-10-27T09:09:21.5546839Z Memory consumption went from 145.4 MB to 141.2 MB.
+2026-10-27T09:09:21.5547398Z Total: 9.237894 ms (FindLiveObjects: 0.341419 ms CreateObjectMapping: 0.205446 ms MarkObjects: 6.382458 ms  DeleteObjects: 2.307732 ms)
+2026-10-27T09:09:21.5547866Z 
+2026-10-27T09:09:21.7280507Z Asset Pipeline Refresh (id=bfa61a3d241050212a25d657068745f7): Total: 0.136 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+2026-10-27T09:09:21.7477052Z Shader Hidden/ProbeVolume/VoxelizeScene is not supported: GPU does not support conservative rasterization
+2026-10-27T09:09:21.7986114Z Launched and connected shader compiler UnityShaderCompiler after 0.03 seconds
+2026-10-27T09:09:21.9007257Z Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '45ad7f6afda9e00fd2677f5636100c70') in 0.001687123 seconds
+2026-10-27T09:09:21.9017343Z Start importing ProjectSettings/QualitySettings.asset using Guid(00000000000000009000000000000000) (LibraryAssetImporter) -> (artifact id: '875af7d748d190de94555984dcf86d9f') in 0.000879062 seconds
+2026-10-27T09:09:21.9026348Z Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: '20f419efd18888105f700bddac0c96c2') in 0.000749403 seconds
+2026-10-27T09:09:21.9042953Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer_Mobile.asset using Guid(d085fe35dab3335e2845a764821da8bf) (NativeFormatImporter) -> (artifact id: 'a58bf23a6906c6a3cdf877fa158e9218') in 0.000817234 seconds
+2026-10-27T09:09:21.9054339Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '759a01f56f0c30c090388fdd5320648c') in 0.000813186 seconds
+2026-10-27T09:09:21.9065899Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer.asset using Guid(45dcf888724dd3f06b1c3653ce8a2375) (NativeFormatImporter) -> (artifact id: 'cd79d1476e2174ff55ca483083759014') in 0.000787856 seconds
+2026-10-27T09:09:21.9077109Z Start importing Assets/Korvalune/Rendering/Korvalune_URP_Mobile.asset using Guid(fef8269d245f099369074a8e31f89ba9) (NativeFormatImporter) -> (artifact id: '08dae930073b224dac2fc1ca70a4159a') in 0.000758916 seconds
+2026-10-27T09:09:21.9139085Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-27T09:09:21.9139596Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-10-27T09:09:21.9140327Z Asset Pipeline Refresh (id=a470902d3f1999706984206325ec9b42): Total: 0.033 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-10-27T09:09:21.9339709Z Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: 'cd40356f6f35f5a33fbe4796cad1cf8b') in 0.001351188 seconds
+2026-10-27T09:09:21.9349164Z Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '07c3665e681e110bedaeb6eb0a2905d8') in 0.000750365 seconds
+2026-10-27T09:09:21.9363961Z Start importing Assets/Korvalune/Rendering/Korvalune_Renderer_Mobile.asset using Guid(d085fe35dab3335e2845a764821da8bf) (NativeFormatImporter) -> (artifact id: 'a58bf23a6906c6a3cdf877fa158e9218') in 0.000776209 seconds
+2026-10-27T09:09:21.9374541Z Start importing Assets/Korvalune/Rendering/Korvalune_URP_Mobile.asset using Guid(fef8269d245f099369074a8e31f89ba9) (NativeFormatImporter) -> (artifact id: '08dae930073b224dac2fc1ca70a4159a') in 0.000729221 seconds
+2026-10-27T09:09:21.9398905Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-27T09:09:21.9399410Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-10-27T09:09:21.9400142Z Asset Pipeline Refresh (id=57b6be14833af15a08b0bf3cc484252f): Total: 0.021 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-10-27T09:09:21.9941984Z 1 URP assets included in build
+2026-10-27T09:09:21.9942494Z - Korvalune_URP - Assets/Korvalune/Rendering/Korvalune_URP.asset
+2026-10-27T09:09:21.9943457Z 	 - Korvalune_Renderer - Assets/Korvalune/Rendering/Korvalune_Renderer.asset - UnityEngine.Rendering.Universal.UniversalRendererData
+2026-10-27T09:09:21.9944252Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-10-27T09:09:21.9945041Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-10-27T09:09:21.9946368Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+2026-10-27T09:09:21.9947255Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+2026-10-27T09:09:21.9947876Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
+2026-10-27T09:09:21.9948349Z UnityEngine.Debug:Log (object)
+2026-10-27T09:09:21.9949796Z UnityEditor.Rendering.Universal.URPPreprocessBuild:LogIncludedAssets (System.Collections.Generic.List`1<UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset>) (at ./Library/PackageCache/com.unity.render-pipelines.universal/Editor/BuildProcessors/URPPreprocessBuild.cs:52)
+2026-10-27T09:09:21.9952139Z UnityEditor.Rendering.Universal.URPPreprocessBuild:OnPreprocessBuild (UnityEditor.Build.Reporting.BuildReport) (at ./Library/PackageCache/com.unity.render-pipelines.universal/Editor/BuildProcessors/URPPreprocessBuild.cs:30)
+2026-10-27T09:09:21.9954037Z UnityEditor.Build.BuildPipelineInterfaces/<>c__DisplayClass16_0:<OnBuildPreProcess>b__1 (UnityEditor.Build.IPreprocessBuildWithReport) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline/BuildPipelineInterfaces.cs:502)
+2026-10-27T09:09:21.9957255Z UnityEditor.Build.BuildPipelineInterfaces:InvokeCallbackInterfacesPair<UnityEditor.Build.IPreprocessBuild, UnityEditor.Build.IPreprocessBuildWithReport> (System.Collections.Generic.List`1<UnityEditor.Build.IPreprocessBuild>,System.Action`1<UnityEditor.Build.IPreprocessBuild>,System.Collections.Generic.List`1<UnityEditor.Build.IPreprocessBuildWithReport>,System.Action`1
+2026-10-27T09:09:21.9960378Z UnityEditor.Build.BuildPipelineInterfaces:OnBuildPreProcess (UnityEditor.Build.Reporting.BuildReport) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline/BuildPipelineInterfaces.cs:500)
+2026-10-27T09:09:21.9962020Z UnityEditor.BuildPipeline:BuildPlayerInternalNoCheck (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[],bool)
+2026-10-27T09:09:21.9963899Z UnityEditor.BuildPipeline:BuildPlayerInternal (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:531)
+2026-10-27T09:09:21.9966012Z UnityEditor.BuildPipeline:BuildPlayer (string[],string,string,UnityEditor.BuildTargetGroup,UnityEditor.BuildTarget,int,UnityEditor.BuildOptions,string[]) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:415)
+2026-10-27T09:09:21.9967686Z UnityEditor.BuildPipeline:BuildPlayer (UnityEditor.BuildPlayerOptions) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:361)
+2026-10-27T09:09:21.9968830Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:55)
+2026-10-27T09:09:21.9969265Z 
+2026-10-27T09:09:21.9969731Z (Filename: ./Library/PackageCache/com.unity.render-pipelines.universal/Editor/BuildProcessors/URPPreprocessBuild.cs Line: 52)
+2026-10-27T09:09:21.9970299Z 
+2026-10-27T09:09:22.0606152Z Start importing Assets/Resources using Guid(16ca1cea849a61643a6bbef4b5c843ca) (DefaultImporter) -> (artifact id: '5c97553361bf291129a27c40d5df1ccb') in 0.001071877 seconds
+2026-10-27T09:09:22.0634815Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-27T09:09:22.0635440Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-10-27T09:09:22.0639175Z Asset Pipeline Refresh (id=2871df7c77dea39e58465d8a8bc05c76): Total: 0.020 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-10-27T09:09:22.1091136Z Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: '20f419efd18888105f700bddac0c96c2') in 0.000959951 seconds
+2026-10-27T09:09:22.1107897Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '180c4393ea4ffdf1dff3044ba5ec6f60') in 0.00085196 seconds
+2026-10-27T09:09:22.1119767Z Start importing Assets/UniversalRenderPipelineGlobalSettings.asset using Guid(d6b3af9a7d9c7c100853dc9b6a61802d) (NativeFormatImporter) -> (artifact id: '7e8f2be052e9f0a08283f1ad8a9544e8') in 0.000873869 seconds
+2026-10-27T09:09:22.1159110Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-27T09:09:22.1160034Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-10-27T09:09:22.1161019Z Asset Pipeline Refresh (id=d251f6d6686e5ce3c9148ddd7b3c2b4e): Total: 0.021 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-10-27T09:09:22.1284159Z DisplayProgressbar: Checking prerequisites
+2026-10-27T09:09:22.1462700Z Android PostProcess task "Checking prerequisites" took 17.814 ms
+2026-10-27T09:09:22.1463365Z DisplayProgressbar: Detect Java Development Kit (JDK)
+2026-10-27T09:09:22.2875357Z Android PostProcess task "Detect Java Development Kit (JDK)" took 140.9447 ms
+2026-10-27T09:09:22.2885954Z DisplayProgressbar: Detecting Android SDK
+2026-10-27T09:09:23.9492849Z AndroidSDKTools:
+2026-10-27T09:09:23.9493363Z 
+2026-10-27T09:09:23.9506451Z 	root          : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK
+2026-10-27T09:09:23.9507256Z 	cmdline-tools : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/cmdline-tools/6.0
+2026-10-27T09:09:23.9508147Z 	platform-tools: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/platform-tools
+2026-10-27T09:09:23.9509110Z 	build-tools   : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/34.0.0
+2026-10-27T09:09:23.9510231Z 
+2026-10-27T09:09:23.9510850Z 	adb           : /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/platform-tools/adb
+2026-10-27T09:09:23.9511694Z 
+2026-10-27T09:09:23.9512141Z Android PostProcess task "Detecting Android SDK" took 1662.645 ms
+2026-10-27T09:09:23.9512608Z DisplayProgressbar: Detect Android NDK
+2026-10-27T09:09:23.9515933Z Android PostProcess task "Detect Android NDK" took 1.6877 ms
+2026-10-27T09:09:23.9520539Z Android PostProcess task "Trying to find a suitable Android device" took 0.4422 ms
+2026-10-27T09:09:23.9521850Z DisplayProgressbar: Check resources
+2026-10-27T09:09:23.9522407Z Android PostProcess task "Check resources" took 0.1762 ms
+2026-10-27T09:09:23.9524615Z DisplayProgressbar: Check Android Player Settings
+2026-10-27T09:09:23.9526295Z Android PostProcess task "Check Android Player Settings" took 0.3651 ms
+2026-10-27T09:09:24.0233024Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+2026-10-27T09:09:24.0233935Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
+2026-10-27T09:09:24.0234772Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+2026-10-27T09:09:24.0235409Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+2026-10-27T09:09:24.0236126Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+2026-10-27T09:09:24.0236743Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+2026-10-27T09:09:24.0237388Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+2026-10-27T09:09:24.0238209Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 0.3074ms
+2026-10-27T09:09:24.0506549Z Starting: /opt/unity/Editor/Data/bee_backend --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/1300b0aESkipCompile.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssembliesAndTypeDB
+2026-10-27T09:09:24.0509280Z WorkingDir: /github/workspace
+2026-10-27T09:09:24.1453274Z DisplayProgressbar: Compiling Scripts
+2026-10-27T09:09:24.6660268Z ExitCode: 0 Duration: 0s615ms
+2026-10-27T09:09:24.6660987Z [2/3        0s] BuildPlayerDataGenerator Library/BuildPlayerData/Editor/TypeDb-All.json
+2026-10-27T09:09:24.6661894Z *** Tundra build success (0.55 seconds), 1 items updated, 3 evaluated
+2026-10-27T09:09:24.6806474Z Total cache size 514180
+2026-10-27T09:09:24.6850777Z Total cache size after purge 514180, took 00:00:00.0100789
+2026-10-27T09:09:24.7838203Z Start importing Assets/Resources/PerformanceTestRunInfo.json using Guid(cd77f99faccf022eaa2ab0e047f137e0) (TextScriptImporter) -> (artifact id: '1399906cd045c53acb5ae126a8f497f6') in 0.001615742 seconds
+2026-10-27T09:09:24.7852853Z Start importing Assets/Resources/PerformanceTestRunSettings.json using Guid(1f8a05c0d13c379eba23e3ab7e2102c2) (TextScriptImporter) -> (artifact id: 'd9832e8e6c6cd1febc45a8daedc56b85') in 0.001121155 seconds
+2026-10-27T09:09:24.7884119Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-27T09:09:24.7884789Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-10-27T09:09:24.7889750Z Asset Pipeline Refresh (id=db097c4fb51aaae3e90a125295680a58): Total: 0.079 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+2026-10-27T09:09:24.7984532Z [ScriptCompilation] Requested script compilation because: Recompiling scripts for player build.
+2026-10-27T09:09:24.7990207Z BuildPlayer: start building target 13
+2026-10-27T09:09:24.8761706Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+2026-10-27T09:09:24.8762719Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
+2026-10-27T09:09:24.8763804Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+2026-10-27T09:09:24.8764654Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+2026-10-27T09:09:24.8765468Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+2026-10-27T09:09:24.8766267Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+2026-10-27T09:09:24.8767075Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+2026-10-27T09:09:24.8768051Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 0.4878ms
+2026-10-27T09:09:24.8839741Z Starting: /opt/unity/Editor/Data/bee_backend --dont-print-to-structured-log --ipc --defer-dag-verification --dagfile="Library/Bee/1300b0aP.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssembliesAndTypeDB
+2026-10-27T09:09:24.8841524Z WorkingDir: /github/workspace
+2026-10-27T09:09:25.0002896Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+2026-10-27T09:09:25.0004377Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc -
+2026-10-27T09:09:25.0011364Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+2026-10-27T09:09:25.0012646Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+2026-10-27T09:09:25.0062201Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T09:09:25.0063151Z       ALC ILPP context 1 is unloading
+2026-10-27T09:09:25.0079876Z [40m[1m[33mwarn[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T09:09:25.0082243Z       Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/opt/unity/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+2026-10-27T09:09:25.0084446Z [40m[1m[33mwarn[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T09:09:25.0086321Z       Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+2026-10-27T09:09:25.0122294Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T09:09:25.0123926Z       Resolved Unity.Burst.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
+2026-10-27T09:09:25.0151785Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T09:09:25.0153958Z       Resolved Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil/Mono.Cecil.dll
+2026-10-27T09:09:25.0155328Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+2026-10-27T09:09:25.0156168Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+2026-10-27T09:09:25.0157043Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+2026-10-27T09:09:25.0158191Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors application/grpc - - 200 - application/grpc 15.2006ms
+2026-10-27T09:09:25.5647928Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+2026-10-27T09:09:25.5648705Z       Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly application/grpc -
+2026-10-27T09:09:25.5649353Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+2026-10-27T09:09:25.5649823Z       Executing endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+2026-10-27T09:09:25.5679931Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingPipeline[0]
+2026-10-27T09:09:25.5681065Z       Processing assembly Library/Bee/artifacts/1300b0aP.dag/Korvalune.Runtime.dll, with 119 defines and 176 references
+2026-10-27T09:09:25.5681748Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingPipeline[0]
+2026-10-27T09:09:25.5682671Z       processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T09:09:25.5684262Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingPipeline[0]
+2026-10-27T09:09:25.5685055Z       running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T09:09:25.5686615Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingPipeline[0]
+2026-10-27T09:09:25.5687283Z       running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T09:09:25.5688215Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+2026-10-27T09:09:25.5689085Z       Executed endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+2026-10-27T09:09:25.5689801Z [40m[32minfo[39m[22m[49m: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+2026-10-27T09:09:25.5690610Z       Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly application/grpc - - 200 - application/grpc 3.5830ms
+2026-10-27T09:09:25.9480242Z ExitCode: 0 Duration: 1s64ms
+2026-10-27T09:09:25.9482490Z [352/407    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+2026-10-27T09:09:25.9483490Z [369/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Config.Runtime.dll
+2026-10-27T09:09:25.9484453Z [370/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+2026-10-27T09:09:25.9485221Z [371/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Burst.dll
+2026-10-27T09:09:25.9485952Z [372/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.GPUDriven.Runtime.dll
+2026-10-27T09:09:25.9486796Z [373/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.2D.Runtime.dll
+2026-10-27T09:09:25.9487606Z [374/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll
+2026-10-27T09:09:25.9488539Z [375/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Shared.dll
+2026-10-27T09:09:25.9489674Z [376/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Rendering.LightTransport.Runtime.dll
+2026-10-27T09:09:25.9490402Z [377/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Collections.dll
+2026-10-27T09:09:25.9491290Z [378/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Mathematics.dll
+2026-10-27T09:09:25.9492672Z [379/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll
+2026-10-27T09:09:25.9499762Z [380/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll
+2026-10-27T09:09:25.9500688Z [381/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll
+2026-10-27T09:09:25.9501439Z [382/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/UnityEngine.UI.dll
+2026-10-27T09:09:25.9502200Z [383/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.pdb
+2026-10-27T09:09:25.9502894Z [384/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.TextMeshPro.dll
+2026-10-27T09:09:25.9503575Z [385/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.pdb
+2026-10-27T09:09:25.9504398Z [386/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Shared.pdb
+2026-10-27T09:09:25.9505113Z [387/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.pdb
+2026-10-27T09:09:25.9505816Z [388/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.TextMeshPro.pdb
+2026-10-27T09:09:25.9506528Z [389/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Rendering.LightTransport.Runtime.pdb
+2026-10-27T09:09:25.9509145Z [390/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll
+2026-10-27T09:09:25.9509921Z [391/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.2D.Runtime.pdb
+2026-10-27T09:09:25.9510556Z [392/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Burst.pdb
+2026-10-27T09:09:25.9511118Z [393/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Collections.pdb
+2026-10-27T09:09:25.9511784Z [394/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.pdb
+2026-10-27T09:09:25.9512542Z [395/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.GPUDriven.Runtime.pdb
+2026-10-27T09:09:25.9513372Z [396/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.pdb
+2026-10-27T09:09:25.9514092Z [397/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/UnityEngine.UI.pdb
+2026-10-27T09:09:25.9514751Z [398/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.Mathematics.pdb
+2026-10-27T09:09:25.9516441Z [399/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Universal.Config.Runtime.pdb
+2026-10-27T09:09:25.9517102Z [400/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Unity.RenderPipelines.Core.Runtime.pdb
+2026-10-27T09:09:25.9517683Z [401/407    0s] Csc Library/Bee/artifacts/1300b0aP.dag/Korvalune.Runtime.dll (+2 others)
+2026-10-27T09:09:25.9518657Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-10-27T09:09:25.9525800Z [402/407    0s] ILPostProcess Library/Bee/artifacts/1300b0aP.dag/post-processed/Korvalune.Runtime.dll (+pdb)
+2026-10-27T09:09:25.9526729Z Processing assembly Library/Bee/artifacts/1300b0aP.dag/Korvalune.Runtime.dll, with 119 defines and 176 references
+2026-10-27T09:09:25.9527538Z processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T09:09:25.9528105Z running Unity.Jobs.CodeGen.JobsILPostProcessor
+2026-10-27T09:09:25.9529030Z running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+2026-10-27T09:09:25.9529568Z [403/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Korvalune.Runtime.dll
+2026-10-27T09:09:25.9530397Z [404/407    0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Korvalune.Runtime.pdb
+2026-10-27T09:09:25.9531125Z [406/407    0s] BuildPlayerDataGenerator Library/BuildPlayerData/Player/RuntimeInitializeOnLoads.json (+1 other)
+2026-10-27T09:09:25.9531814Z *** Tundra build success (1.00 seconds), 38 items updated, 407 evaluated
+2026-10-27T09:09:25.9532268Z Total cache size 514180
+2026-10-27T09:09:25.9532666Z Total cache size after purge 514180, took 00:00:00.0014208
+2026-10-27T09:09:25.9553579Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-10-27T09:09:26.0342581Z Opening scene 'Assets/Korvalune/Scenes/Korvalune_Selection.unity'
+2026-10-27T09:09:26.3946692Z Unloading 265 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-27T09:09:31.9242062Z Loaded scene 'Assets/Korvalune/Scenes/Korvalune_Selection.unity'
+2026-10-27T09:09:31.9242560Z 	Deserialize:            316.728 ms
+2026-10-27T09:09:31.9242846Z 	Integration:            234.215 ms
+2026-10-27T09:09:31.9243070Z 	Integration of assets:  5335.686 ms
+2026-10-27T09:09:31.9243277Z 	Thread Wait Time:       2.020 ms
+2026-10-27T09:09:31.9243487Z 	Total Operation Time:   5888.649 ms
+2026-10-27T09:09:31.9325644Z Unloading 35 unused Assets / (0.7 MB). Loaded Objects now: 4410.
+2026-10-27T09:09:31.9326339Z Memory consumption went from 0.50 GB to 0.50 GB.
+2026-10-27T09:09:31.9327341Z Total: 9.351206 ms (FindLiveObjects: 0.328557 ms CreateObjectMapping: 0.107877 ms MarkObjects: 8.055584 ms  DeleteObjects: 0.858183 ms)
+2026-10-27T09:09:31.9327922Z 
+2026-10-27T09:09:31.9439102Z Created GICache directory at /root/.cache/unity3d/GiCache. Took: 0.004s, timestamps: [36.892 - 36.896]
+2026-10-27T09:10:40.7246293Z [40m[1m[33mwarn[39m[22m[49m: Microsoft.AspNetCore.Server.Kestrel[22]
+2026-10-27T09:10:40.7247133Z       As of "10/27/2026 09:10:08 +00:00", the heartbeat has been running for "00:00:04.7041713" which is longer than "00:00:01". This could be caused by thread pool starvation.
+2026-10-27T09:10:40.7247722Z Killed
+2026-10-27T09:10:40.7401540Z Build failed, with exit code 137
+2026-10-27T09:10:41.0393782Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-27T09:10:41.0394322Z       Application is shutting down...
+2026-10-27T09:10:41.0717263Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-10-27T09:10:41.0717694Z       ALC ILPP context 2 is unloading
+2026-10-27T09:10:41.3121591Z 
+2026-10-27T09:10:41.3121904Z ###########################
+2026-10-27T09:10:41.3122349Z #       Build output      #
+2026-10-27T09:10:41.3122589Z ###########################
+2026-10-27T09:10:41.3122731Z 
+2026-10-27T09:10:41.3169283Z total 8.0K
+2026-10-27T09:10:41.3169518Z drwxr-xr-x 2 root root 4.0K Oct 27 09:08 .
+2026-10-27T09:10:41.3169776Z drwxr-xr-x 3 root root 4.0K Oct 27 09:08 ..
+2026-10-27T09:10:41.7513206Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-10-27T09:10:41.7519047Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-10-27T09:10:41.7519536Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-10-27T09:10:41.7519895Z [UnityConnectServicesConfig] Service configuration:
+2026-10-27T09:10:41.7520145Z     "servicesConfigBaseUrl": "",
+2026-10-27T09:10:41.7520361Z     "disableServicesWindow": false,
+2026-10-27T09:10:41.7520566Z     "disableUserLogin": false,
+2026-10-27T09:10:41.7520804Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-10-27T09:10:41.7521023Z     "clientConnectTimeoutSec": 5,
+2026-10-27T09:10:41.7521238Z     "clientHandshakeTimeoutSec": 10,
+2026-10-27T09:10:41.7521462Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-10-27T09:10:41.7521710Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-10-27T09:10:41.7521921Z     "licensingServiceBaseUrl": "",
+2026-10-27T09:10:41.7522128Z     "enableProxyAutoconfig": "false"
+2026-10-27T09:10:41.7522691Z 
+2026-10-27T09:10:41.7896634Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-10-27T09:10:41.7896975Z Branch:                  6000.0/staging
+2026-10-27T09:10:41.7897185Z Build type:              Release
+2026-10-27T09:10:41.7897366Z Batch mode:              YES
+2026-10-27T09:10:41.7897553Z System name:             Linux
+2026-10-27T09:10:41.7897779Z Distro version:          #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026
+2026-10-27T09:10:41.7898041Z Kernel version:          6.17.0-1022-azure
+2026-10-27T09:10:41.7898411Z Architecture:            x86_64
+2026-10-27T09:10:41.7898829Z Available memory:        15988 MB
+2026-10-27T09:10:42.4945936Z User *** logged in successfully
+2026-10-27T09:10:42.4949063Z [UnityConnect::TryLogin] Request Succeeded.
+2026-10-27T09:10:42.4949381Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-10-27T09:10:42.4949938Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-10-27T09:10:42.4950584Z [Licensing::Module] Successfully launched the LicensingClient (PId: 2064)
+2026-10-27T09:10:43.0630640Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-27T09:10:43.061611Z"
+2026-10-27T09:10:43.0631472Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-10-27T09:10:43.1187145Z [Licensing::Client] Handshaking with LicensingClient:
+2026-10-27T09:10:43.1187507Z   Version:                 1.16.0+1c867a9
+2026-10-27T09:10:43.1187845Z   Session Id:              13564139958f40b398584080d0543ade
+2026-10-27T09:10:43.1188189Z   Correlation Id:          14b89b6f0dada9699da5d1f3bbe736ad
+2026-10-27T09:10:43.1188728Z   External correlation Id: 9222520791869366974
+2026-10-27T09:10:43.1189048Z   Machine Id:              vL1/I3XDy7kO4qlO+Xj6EPQtKVQ=
+2026-10-27T09:10:43.1198533Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.06s, handshake: 0.00s)
+2026-10-27T09:10:43.1199567Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-27T09:10:43.118342Z"
+2026-10-27T09:10:43.1200421Z [Licensing::Module] Connected to LicensingClient (PId: 2064, launch time: 0.00, total connection time: 0.62s)
+2026-10-27T09:10:43.1336592Z [Licensing::Client] Successfully updated the access token
+2026-10-27T09:10:43.1337057Z [Licensing::Module] Successfully updated the access token MDpnNr1i-i...
+2026-10-27T09:10:44.2607101Z [Licensing::Client] Successfully processed license management request
+2026-10-27T09:10:44.2607621Z [Licensing::Module] Successfully returned the entitlement license
+2026-10-27T09:10:44.2845454Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-10-27T09:10:45.6199346Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-10-27T09:10:45.6290353Z 
+2026-10-27T09:10:45.6290870Z ###########################
+2026-10-27T09:10:45.6291273Z #         Failure         #
+2026-10-27T09:10:45.6291542Z ###########################
+2026-10-27T09:10:45.6291755Z 
+2026-10-27T09:10:45.6291933Z Please note that the exit code is not very descriptive.
+2026-10-27T09:10:45.6292387Z Most likely it will not help you solve the issue.
+2026-10-27T09:10:45.6292637Z 
+2026-10-27T09:10:45.6331195Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-10-27T09:10:45.6331986Z 
+2026-10-27T09:10:45.9504197Z ##[error]Build failed with exit code 137
