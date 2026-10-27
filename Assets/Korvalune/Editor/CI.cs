@@ -361,6 +361,85 @@ namespace Korvalune.EditorTools
         }
 
         // ------------------------------------------------------------------------------------------ captures
+        /// <summary>Captures de contrôle : une scène unique (lumières, sol, caméra), chaque modèle posé au repos puis dans
+        /// quelques clips choisis (le rendu logiciel du conteneur coûte ~1 min par image : on s'en tient à l'essentiel).</summary>
+        static void Captures(List<ModelPipeline.Entry> entries)
+        {
+            if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null) { Line("\n_Captures : aucun processeur graphique dans ce conteneur (Unity lancé sans rendu)._"); return; }
+            Directory.CreateDirectory("ci-out");
+            EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            SetupStage(out var cam);
+            var rt = new RenderTexture(512, 640, 24, RenderTextureFormat.ARGB32) { antiAliasing = 2 };
+            var tex = new Texture2D(512, 640, TextureFormat.RGB24, false);
+            int shots = 0; var t0 = DateTime.UtcNow;
+            foreach (var e in entries.Where(x => !string.IsNullOrEmpty(x.m.prefab) && x.m.kind != "part"))
+            {
+                var p = AssetDatabase.LoadAssetAtPath<GameObject>(e.m.prefab);
+                if (!p) continue;
+                var name = Path.GetFileNameWithoutExtension(e.m.model);
+                bool hero = e.modelPath.Contains("/Heroes/"), male = name.EndsWith("_M"), enemy = e.modelPath.Contains("/Enemies/");
+                var clips = ModelPipeline.Clips(e.AnimPath);
+                var poses = new List<(string, AnimationClip, float)> { ("repos", null, 0) };
+                foreach (var c in clips)
+                {
+                    bool want = (hero && male && c.name.StartsWith("Sk_")) || (hero && male && c.name == "Attack") || (enemy && (c.name == "Attack" || c.name == "Walk"));
+                    if (!want) continue;
+                    float at = SkillImpact(c.name, c.length);
+                    poses.Add((c.name, c, at));
+                }
+                var go = (GameObject)PrefabUtility.InstantiatePrefab(p);
+                try
+                {
+                    go.transform.rotation = Quaternion.Euler(0, 200, 0);
+                    foreach (var (label, clip, time) in poses)
+                    {
+                        if (clip) clip.SampleAnimation(go, time);
+                        var b = Bounds(go.GetComponentsInChildren<Renderer>());
+                        float h = Mathf.Max(b.size.y, b.size.x * 0.8f, 0.5f);
+                        cam.transform.position = b.center + new Vector3(0, h * 0.12f, -h * 2.1f); cam.transform.LookAt(b.center);
+                        cam.targetTexture = rt; cam.Render(); RenderTexture.active = rt;
+                        tex.ReadPixels(new Rect(0, 0, 512, 640), 0, 0); tex.Apply();
+                        RenderTexture.active = null; cam.targetTexture = null;
+                        File.WriteAllBytes($"ci-out/{name}_{label}.png", tex.EncodeToPNG()); shots++;
+                    }
+                }
+                finally { UnityEngine.Object.DestroyImmediate(go); }
+                Progress($"captures {name} : {poses.Count} ({(DateTime.UtcNow - t0).TotalMinutes:0.0} min)");
+                EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+            }
+            UnityEngine.Object.DestroyImmediate(tex); rt.Release();
+            Line($"\n_{shots} captures écrites dans ci-out/ ({SystemInfo.graphicsDeviceType}) en {(DateTime.UtcNow - t0).TotalMinutes:0.0} min._");
+        }
+
+        static float SkillImpact(string clip, float length)
+        {
+            if (clip == "Death") return length;
+            return Korvalune.Game.SkillAnims.Impact.TryGetValue(clip, out var t) ? Mathf.Min(t, length) : length * 0.4f;
+        }
+
+        static void SetupStage(out Camera cam)
+        {
+            var sun = new GameObject("Soleil").AddComponent<Light>();
+            sun.type = LightType.Directional; sun.intensity = 2.2f; sun.color = new Color(1f, 0.92f, 0.82f);
+            sun.shadows = LightShadows.Soft; sun.transform.rotation = Quaternion.Euler(42, -35, 0);
+            var fill = new GameObject("Contre-jour").AddComponent<Light>();
+            fill.type = LightType.Directional; fill.intensity = 0.7f; fill.color = new Color(0.55f, 0.65f, 1f); fill.shadows = LightShadows.None;
+            fill.transform.rotation = Quaternion.Euler(20, 150, 0);
+            RenderSettings.ambientMode = AmbientMode.Trilight;
+            RenderSettings.ambientSkyColor = new Color(0.32f, 0.34f, 0.40f); RenderSettings.ambientEquatorColor = new Color(0.2f, 0.19f, 0.2f); RenderSettings.ambientGroundColor = new Color(0.09f, 0.08f, 0.07f);
+            var ground = GameObject.CreatePrimitive(PrimitiveType.Plane); ground.name = "Sol"; ground.transform.localScale = new Vector3(4, 1, 4);
+            var gm = new Material(Shader.Find("Universal Render Pipeline/Lit")); gm.SetColor("_BaseColor", new Color(0.16f, 0.15f, 0.14f)); gm.SetFloat("_Smoothness", 0.2f);
+            ModelPipeline.EnsureFolder(ModelPipeline.Root + "/Rendering");
+            var gp = ModelPipeline.Root + "/Rendering/Showcase_Ground.mat";
+            if (!File.Exists(gp)) AssetDatabase.CreateAsset(gm, gp);
+            ground.GetComponent<Renderer>().sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(gp) ?? gm;
+            cam = new GameObject("Caméra").AddComponent<Camera>();
+            cam.transform.position = new Vector3(0, 1.6f, -4.2f); cam.transform.LookAt(new Vector3(0, 1.0f, 0));
+            cam.fieldOfView = 32; cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = new Color(0.10f, 0.10f, 0.12f);
+            cam.gameObject.tag = "MainCamera";
+        }
+
+        // ------------------------------------------------------------------------------------------ captures
         static void Captures(List<ModelPipeline.Entry> entries)
         {
             if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null) { Line("\n_Captures : aucun processeur graphique dans ce conteneur (Unity lancé sans rendu)._"); return; }

@@ -72,13 +72,16 @@ jobs:
 
       - name: Préparer la vérification
         if: always()
-        run: sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+          # licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue
+          sudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true
 
       - name: Unity — vérification des modèles et captures (éditeur 2)
         id: validate
         uses: game-ci/unity-builder@v4
         continue-on-error: true
-        timeout-minutes: 80
+        timeout-minutes: 110
         env:
           UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
@@ -91,7 +94,10 @@ jobs:
 
       - name: Préparer les scènes
         if: always()
-        run: sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
+          # licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue
+          sudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true
 
       - name: Unity — créateur, vallée et sélection (éditeur 3)
         id: unity

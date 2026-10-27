@@ -253,6 +253,10 @@ References:  {{
             + 'Objects:  {\n' + '\n'.join(O) + '\n}\n' + 'Connections:  {\n' + '\n'.join(C) + '\n}\n'
             + 'Takes:  {\n\tCurrent: "' + (takes[0][0] if takes else '') + '"\n'
             + ''.join(f'\tTake: "{n}" {{\n\t\tFileName: "{n}.tak"\n\t\tLocalTime: 0,{t}\n\t\tReferenceTime: 0,{t}\n\t}}\n' for n, t in takes) + '}\n')
+    if not binary:
+        # ASCII : section Takes vide, exactement comme les FBX ASCII qu'Unity importe avec leurs clips (BaseMale…) ;
+        # les prises détaillées empêchaient Unity de lire les animations
+        body = body[:body.index('Takes:  {')] + 'Takes:  {\n\tCurrent: ""\n}\n'
     if binary:
         from .fbxbin import to_binary
         with open(path, 'wb') as f: f.write(to_binary(body))
