@@ -35,11 +35,11 @@ namespace Korvalune.Game
         public bool DrinkPotion()
         {
             if (wallet.potions <= 0 || Time.time < potionReady || Health.Dead) return false;
-            wallet.potions--; potionReady = Time.time + 15f; Health.Heal(Health.maxHp * 0.45f);
+            wallet.potions--; potionReady = Time.time + 15f; Health.Heal(Health.maxHp * 0.45f); Sound.UI("sfx_potion", 0.9f);
             FX.Burst(transform.position + Vector3.up, new Color(1f, 0.25f, 0.2f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
             return true;
         }
-        public void AddGold(long g) { wallet.gold += g; GoldGained?.Invoke(g); }
+        public void AddGold(long g) { wallet.gold += g; GoldGained?.Invoke(g); if (g > 0) Sound.Play("sfx_or", transform.position, 0.55f, 0.06f, 0.25f); }
         public System.Action<long> GoldGained;
 
         public Health Health { get; private set; }
@@ -54,7 +54,7 @@ namespace Korvalune.Game
         void OnDisable() { LootDrop.Picked -= OnPicked; }
         void OnPicked(ItemSave it)
         {
-            inventory.Add(it);
+            inventory.Add(it); Sound.UI("sfx_ramasser", 0.7f);
             Notify?.Invoke($"<color=#{ColorUtility.ToHtmlStringRGB(Loot.DisplayColor(it))}>{it.name}</color> ({(string.IsNullOrEmpty(it.set) ? Loot.LabelOf(it.rarity) : "ensemble")})");
         }
 
@@ -86,6 +86,7 @@ namespace Korvalune.Game
             cc.Move((dir.normalized * spd + Vector3.up * vy) * Time.deltaTime);
             FallGuard();
             Speed = spd;
+            Footsteps(spd);
             Anim?.SetFloat(CharacterRig.SpeedId, spd, 0.1f, Time.deltaTime);
             UpdateTarget(inp);
             if (approach && Target && !Target.Dead && mag < 0.05f && !Health.Stunned)
@@ -183,6 +184,7 @@ namespace Korvalune.Game
             nextAttack = Time.time + attackCooldown;
             FaceNearest(attackRange + 2.5f);
             Anim?.SetTrigger(CharacterRig.AttackId);
+            Sound.Play(Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, 0.75f);
             lockUntil = Time.time + 0.45f;
             StartCoroutine(Hit(0.38f));
         }
@@ -195,6 +197,7 @@ namespace Korvalune.Game
             {
                 bool crit = Random.value < critChance;
                 h.TakeDamage(attackDamage * damageMult * (crit ? 2f : 1f) * Random.Range(0.9f, 1.1f), Health, crit);
+                if (!any) Sound.Play(Sound.WeaponOf(Loot.PlayerClass).hit, h.transform.position, 0.85f);
                 FX.Burst(h.transform.position + Vector3.up * 1.1f, crit ? new Color(1f, 0.85f, 0.3f) : new Color(1f, 0.55f, 0.25f), crit ? 30 : 16);
                 any = true;
             }
@@ -247,6 +250,21 @@ namespace Korvalune.Game
             FindFirstObjectByType<CameraRig>()?.Snap();
         }
 
+        // ------------------------------------------------------------------ pas
+        float stepTimer;
+        /// <summary>Bruit de pas au rythme de la course : herbe sur le terrain, pierre sur les pavés, dalles et planchers.</summary>
+        void Footsteps(float spd)
+        {
+            if (spd < 0.4f || !cc.isGrounded) { stepTimer = 0.1f; return; }
+            stepTimer -= Time.deltaTime * Mathf.Lerp(1.6f, 3.1f, spd / runSpeed);
+            if (stepTimer > 0) return;
+            stepTimer = 1f;
+            bool grass = false;
+            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out var hit, 1.5f, ~0, QueryTriggerInteraction.Ignore))
+                grass = hit.collider is TerrainCollider;
+            Sound.Play(grass ? "sfx_pas_herbe" : "sfx_pas_pierre", transform.position, grass ? 0.35f : 0.45f, 0.12f, 0.12f);
+        }
+
         public void Lock(float seconds) { lockUntil = Mathf.Max(lockUntil, Time.time + seconds); }
         public void Move(Vector3 delta) { if (cc.enabled) cc.Move(delta); }
 
@@ -263,6 +281,7 @@ namespace Korvalune.Game
                 Health.Heal(Health.maxHp);
                 Health.mana = Health.maxMana;
                 FX.Burst(transform.position + Vector3.up, new Color(1f, 0.9f, 0.4f), 60, 4f, 0.25f, 1.0f, -0.3f);
+                Sound.UI("sfx_niveau", 1f);
                 Notify?.Invoke(level >= MaxLevel ? "Niveau maximum (200) atteint !" : $"Niveau {level} !");
             }
             if (level >= MaxLevel) xp = 0;

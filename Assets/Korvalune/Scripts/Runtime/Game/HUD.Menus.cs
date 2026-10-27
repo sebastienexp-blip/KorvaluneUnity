@@ -28,7 +28,7 @@ namespace Korvalune.Game
             var bg = Img(parent, name, UIStyle.Slot(), anchor, pos, size); bg.type = Image.Type.Sliced; bg.raycastTarget = true;
             text = Label(bg.rectTransform, "Texte", label, fontSize, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, size - new Vector2(16, 6));
             text.color = UIStyle.Gold;
-            var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => onClick());
+            var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.5f); onClick(); });
             var cb = b.colors; cb.highlightedColor = new Color(1f, 0.92f, 0.75f); cb.pressedColor = new Color(1f, 0.8f, 0.5f); b.colors = cb;
             return bg;
         }
@@ -123,7 +123,7 @@ namespace Korvalune.Game
                 var name = Label(content, "Nom_" + i, d.name, 18, TextAnchor.UpperCenter, new Vector2(0, 1), p + new Vector2(-ColW / 2f + 8, -NodeSize / 2f - 6), new Vector2(ColW - 16, 44));
                 name.rectTransform.pivot = new Vector2(0, 1);
                 var b = node.gameObject.AddComponent<Button>(); b.targetGraphic = node;
-                b.onClick.AddListener(() => { treeSel = k; RefreshTree(); });
+                b.onClick.AddListener(() => { treeSel = k; Sound.UI("sfx_ui_clic", 0.45f); RefreshTree(); });
                 treeNodes[i] = (node, glow, icon, lk, rank, name);
             }
             var scroll = view.gameObject.AddComponent<ScrollRect>(); scroll.content = content; scroll.viewport = view.rectTransform; scroll.vertical = false;
@@ -157,12 +157,13 @@ namespace Korvalune.Game
             if (!treePanel) { Notify("Arbre de compétences indisponible"); return; }
             if (bagPanel) bagPanel.SetActive(false);
             treePanel.SetActive(!treePanel.activeSelf); if (treePanel.activeSelf) RefreshTree();
+            Sound.UI(treePanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
 
         void LearnSelected()
         {
             if (treeSel < 0) return; var d = runner.book[treeSel];
-            if (runner.Learn(treeSel)) Notify($"{d.name} : rang {runner.ranks[treeSel]}");
+            if (runner.Learn(treeSel)) { Notify($"{d.name} : rang {runner.ranks[treeSel]}"); Sound.UI("sfx_soin", 0.6f); }
             else if (!runner.Unlocked(treeSel)) Notify($"Niveau {d.unlockLevel} requis");
             else if (!runner.BranchOpen(treeSel)) Notify($"Apprenez d'abord « {runner.book[runner.ParentOf(treeSel)].name} »");
             else if (runner.ranks[treeSel] >= d.MaxRank) Notify("Rang maximum");
@@ -262,15 +263,18 @@ namespace Korvalune.Game
             TextButton(p, "Quitter", "Quitter le jeu", new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(520, 92), QuitGame, out _, 34);
             Label(p, "Sauvegarde", "Votre progression est sauvegardée automatiquement.", 20, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0, 44), new Vector2(620, 30)).color = new Color(0.8f, 0.72f, 0.6f);
 
-            var o = OrnatePanel(root, "Options", new Vector2(1060, 860), "Options"); optionsPanel = o.gameObject;
+            var o = OrnatePanel(root, "Options", new Vector2(1060, 980), "Options"); optionsPanel = o.gameObject;
             float oy = -120;
             var cfg = FindFirstObjectByType<GameBootstrap>()?.config;
             OptionRow(o, ref oy, "Qualité graphique", new[] { "Haute", "Mobile" },
                 () => GraphicsQuality.Current == GraphicsQuality.Tier.Haute ? 0 : 1,
                 k => GraphicsQuality.Apply(cfg, k == 0 ? GraphicsQuality.Tier.Haute : GraphicsQuality.Tier.Mobile, true));
-            OptionRow(o, ref oy, "Volume", new[] { "Muet", "25 %", "50 %", "75 %", "100 %" },
-                () => Mathf.RoundToInt(AudioListener.volume * 4),
-                k => { AudioListener.volume = k / 4f; PlayerPrefs.SetFloat("korvalune.volume", AudioListener.volume); });
+            OptionRow(o, ref oy, "Musique", new[] { "Muet", "25 %", "50 %", "75 %", "100 %" },
+                () => Mathf.RoundToInt(Sound.Music * 4),
+                k => { Sound.Music = k / 4f; });
+            OptionRow(o, ref oy, "Effets sonores", new[] { "Muet", "25 %", "50 %", "75 %", "100 %" },
+                () => Mathf.RoundToInt(Sound.Effects * 4),
+                k => { Sound.Effects = k / 4f; Sound.UI("sfx_epee_coup"); });
             OptionRow(o, ref oy, "Taille de l'interface", new[] { "Petite", "Normale", "Grande" },
                 () => PlayerPrefs.GetInt("korvalune.ui", 1),
                 k => { PlayerPrefs.SetInt("korvalune.ui", k); ApplyUiScale(); });
@@ -284,7 +288,7 @@ namespace Korvalune.Game
 
             pausePanel.SetActive(false); optionsPanel.SetActive(false); pauseShade.SetActive(false);
             // réglages mémorisés
-            AudioListener.volume = PlayerPrefs.GetFloat("korvalune.volume", 1f);
+            AudioListener.volume = 1f;
             ShowDamageNumbers = PlayerPrefs.GetInt("korvalune.degats", 0) == 0;
             ApplyUiScale(); ApplyCameraZoom();
         }
@@ -320,7 +324,7 @@ namespace Korvalune.Game
                     buttons[k].t.color = on ? Color.white : UIStyle.Gold; buttons[k].t.fontStyle = on ? FontStyle.Bold : FontStyle.Normal;
                 }
             });
-            y -= 120;
+            y -= 112;
         }
 
         void RefreshOptions() { foreach (var r in optionRefreshers) r(); }
@@ -329,6 +333,7 @@ namespace Korvalune.Game
         {
             if (!pausePanel) return;
             if (on) CloseAllPanels();
+            if (on != pausePanel.activeSelf) Sound.UI(on ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
             pausePanel.SetActive(on); pauseShade.SetActive(on);
             if (!on && optionsPanel) optionsPanel.SetActive(false);
             Time.timeScale = on ? 0f : 1f;

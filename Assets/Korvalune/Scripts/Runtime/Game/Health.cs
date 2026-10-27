@@ -20,7 +20,7 @@ namespace Korvalune.Game
         public static event Action<Health, float, bool> AnyDamaged;   // (cible, montant, critique) — chiffres flottants
         public static event Action<Health> AnyDied;
         Animator anim;
-        float lastHitAnim;
+        float lastHitAnim, lastGrunt;
 
         void Awake() { anim = GetComponentInChildren<Animator>(); hp = maxHp; mana = maxMana; }
 
@@ -45,6 +45,9 @@ namespace Korvalune.Game
             amount = Mathf.Max(1f, amount - armor);
             hp = Mathf.Max(0, hp - amount);
             Damaged?.Invoke(amount, source);
+            if (faction == Faction.Player && hp > 0 && GetComponent<PlayerController>() && Time.time - lastGrunt > 0.9f)
+            { lastGrunt = Time.time; Sound.Play(SaveSystem.Current != null && SaveSystem.Current.female ? "sfx_heros_touche_f" : "sfx_heros_touche_h", transform.position, 0.8f); }
+            else if (faction == Faction.Enemy && source && source.faction == Faction.Player) Sound.Play(crit ? "sfx_critique" : "sfx_ennemi_touche", transform.position, crit ? 0.9f : 0.45f, 0.12f, 0.06f);
             AnyDamaged?.Invoke(this, amount, crit);
             if (anim && hp > 0 && Time.time - lastHitAnim > 0.6f) { anim.SetTrigger(CharacterRig.HitId); lastHitAnim = Time.time; }
             if (hp <= 0)
@@ -52,6 +55,7 @@ namespace Korvalune.Game
                 if (anim) anim.SetBool(CharacterRig.DeadId, true);
                 foreach (var c in GetComponents<Collider>()) c.enabled = false;
                 var cc = GetComponent<CharacterController>(); if (cc) cc.enabled = false;
+                if (faction == Faction.Player && GetComponent<PlayerController>()) Sound.Play("sfx_heros_mort", transform.position);
                 Died?.Invoke(this); AnyDied?.Invoke(this);
             }
         }

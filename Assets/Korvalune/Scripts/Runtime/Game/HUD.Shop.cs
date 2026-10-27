@@ -74,7 +74,7 @@ namespace Korvalune.Game
             if (stockLevel != player.level) { stocks.Clear(); stockLevel = player.level; }
             tabs = TabsFor(m.kind);
             shopTitle.text = m.title + (string.IsNullOrEmpty(m.displayName) ? "" : " — " + m.displayName);
-            shopPanel.SetActive(true); RefreshShop();
+            shopPanel.SetActive(true); RefreshShop(); Sound.UI("sfx_ui_ouvrir", 0.7f);
         }
 
         public void CloseShop() { if (shopPanel) shopPanel.SetActive(false); FindFirstObjectByType<GameBootstrap>()?.Persist(); }
@@ -112,7 +112,7 @@ namespace Korvalune.Game
             {
                 name = "Acheter", list = () => StockOf(k).Select(x => new Entry { item = x, sub = Economy.BuyPrice(x) + " or" }).ToList(),
                 detail = e => Loot.Tooltip(e.item) + $"\n\n<color=#e8c27a>Prix : {Economy.BuyPrice(e.item)} or</color>" + Compare(e.item),
-                acts = e => new List<Act> { new Act { label = $"Acheter ({Economy.BuyPrice(e.item)} or)", can = () => W.gold >= Economy.BuyPrice(e.item), run = () => { if (!Room() || !Pay(Economy.BuyPrice(e.item))) return; StockOf(k).Remove(e.item); player.inventory.Add(e.item); Notify("Acheté : " + e.item.name); sel = null; } } }
+                acts = e => new List<Act> { new Act { label = $"Acheter ({Economy.BuyPrice(e.item)} or)", can = () => W.gold >= Economy.BuyPrice(e.item), run = () => { if (!Room() || !Pay(Economy.BuyPrice(e.item))) return; StockOf(k).Remove(e.item); player.inventory.Add(e.item); Notify("Acheté : " + e.item.name); Sound.UI("sfx_achat"); sel = null; } } }
             };
             Tab Sell() => new Tab
             {
@@ -120,7 +120,7 @@ namespace Korvalune.Game
                 detail = e => Loot.Tooltip(e.item),
                 acts = e => new List<Act>
                 {
-                    new Act { label = $"Vendre ({Economy.SellPrice(e.item)} or)", can = () => true, run = () => { W.gold += Economy.SellPrice(e.item); player.inventory.Remove(e.item); StockOf(k).Add(e.item); sel = null; } },
+                    new Act { label = $"Vendre ({Economy.SellPrice(e.item)} or)", can = () => true, run = () => { W.gold += Economy.SellPrice(e.item); player.inventory.Remove(e.item); StockOf(k).Add(e.item); Sound.UI("sfx_or"); sel = null; } },
                     new Act { label = "Vendre tous les communs et magiques", can = () => player.inventory.Any(x => x.rarity <= Rarity.Magique), run = () => SellAll(Rarity.Magique) },
                     new Act { label = "Vendre aussi les rares", can = () => player.inventory.Any(x => x.rarity <= Rarity.Rare), run = () => SellAll(Rarity.Rare) },
                 }
@@ -138,7 +138,7 @@ namespace Korvalune.Game
                 {
                     var l = new List<Act>();
                     if (e != null && e.item != null)
-                        l.Add(new Act { label = $"Réparer ({Economy.RepairCost(e.item)} or)", can = () => W.gold >= Economy.RepairCost(e.item), run = () => { if (!Pay(Economy.RepairCost(e.item))) return; e.item.durability = e.item.maxDurability; Eq.Repaired(); Notify("Réparé : " + e.item.name); sel = null; multiSel.Clear(); } });
+                        l.Add(new Act { label = $"Réparer ({Economy.RepairCost(e.item)} or)", can = () => W.gold >= Economy.RepairCost(e.item), run = () => { if (!Pay(Economy.RepairCost(e.item))) return; e.item.durability = e.item.maxDurability; Eq.Repaired(); Sound.UI("sfx_forge", 0.8f); Notify("Réparé : " + e.item.name); sel = null; multiSel.Clear(); } });
                     l.Add(new Act { label = $"Tout réparer ({RepairTotal()} or)", can = () => RepairTotal() > 0, run = () => { RepairAll(); multiSel.Clear(); } });
                     return l;
                 }
@@ -358,7 +358,7 @@ namespace Korvalune.Game
                 long c = Economy.RepairCost(e.item); if (W.gold < c) continue;
                 W.gold -= c; spent += c; n++; e.item.durability = e.item.maxDurability;
             }
-            Eq.Repaired(); sel = null;
+            Eq.Repaired(); sel = null; if (n > 0) Sound.UI("sfx_forge", 0.8f);
             Notify(n > 0 ? $"{n} objet(s) réparé(s) pour {spent} or" : "Pas assez d'or");
         }
 
@@ -369,7 +369,7 @@ namespace Korvalune.Game
             if (!Pay(c.gold, c.scrap, c.essence, c.shard)) return;
             var it = Economy.Craft(shopRng, player.level, s, legendary);
             if (it == null) { W.gold += c.gold; W.scrap += c.scrap; W.essence += c.essence; W.starShard += c.shard; Notify("La forge a échoué, rien n'est perdu"); return; }
-            player.inventory.Add(it); Notify($"Forgé : <color=#{ColorUtility.ToHtmlStringRGB(Loot.ColorOf(it.rarity))}>{it.name}</color>");
+            player.inventory.Add(it); Sound.UI("sfx_forge", 0.9f); Notify($"Forgé : <color=#{ColorUtility.ToHtmlStringRGB(Loot.ColorOf(it.rarity))}>{it.name}</color>");
         }
 
         // ------------------------------------------------------------------------------------------ interaction

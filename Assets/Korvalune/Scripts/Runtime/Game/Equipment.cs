@@ -46,7 +46,7 @@ namespace Korvalune.Game
             p.inventory.Remove(it);
             if (worn.TryGetValue(it.slot, out var old) && old != null) p.inventory.Add(old);
             worn[it.slot] = it;
-            Apply(true); Changed?.Invoke();
+            Apply(true); Changed?.Invoke(); Sound.UI("sfx_equiper");
             return true;
         }
 

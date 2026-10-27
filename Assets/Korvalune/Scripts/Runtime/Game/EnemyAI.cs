@@ -29,6 +29,7 @@ namespace Korvalune.Game
             hp.Died += _ =>
             {
                 if (side == Faction.Player) { FX.Burst(transform.position + Vector3.up, new Color(0.5f, 0.8f, 1f), 20, 3f); Destroy(gameObject, 3f); return; }
+                Sound.Play(Sound.DeathOf(type != null ? type.id : ""), transform.position, 0.9f, 0.08f, 0.12f);
                 var p = FindFirstObjectByType<PlayerController>();
                 if (p) p.GainXp(type.xp);                      // XP fixe par ennemi : les niveaux deviennent de plus en plus longs
                 // butin : les ennemis forts lâchent plus d'objets, de meilleure rareté
@@ -71,7 +72,12 @@ namespace Korvalune.Game
             switch (state)
             {
                 case S.Idle:
-                    if (target && th && !th.Dead && dist < type.aggro) state = S.Chase;
+                    if (target && th && !th.Dead && dist < type.aggro)
+                    {
+                        state = S.Chase;
+                        if (type.id == "loup") Sound.Play("sfx_loup_grogne", transform.position, 0.8f, 0.1f, 0.6f);
+                        else if (type.id == "demon") Sound.Play("sfx_demon_rugit", transform.position, 1f, 0.05f, 1.5f);
+                    }
                     else
                     {
                         if (Time.time > wanderAt) { wanderAt = Time.time + Random.Range(3f, 7f); var r = Random.insideUnitCircle * 4f; wanderTo = home + new Vector3(r.x, 0, r.y); }
@@ -155,6 +161,7 @@ namespace Korvalune.Game
         System.Collections.IEnumerator Strike(Health th)
         {
             if (anim) anim.SetTrigger(CharacterRig.AttackId);
+            Sound.Play(type != null && type.id == "loup" ? "sfx_loup_grogne" : type != null && type.id == "araignee" ? "sfx_araignee" : "sfx_ennemi_attaque", transform.position, 0.7f, 0.12f, 0.15f);
             yield return new WaitForSeconds(type.hitDelay);
             if (hp.Dead || hp.Stunned || th == null || th.Dead) yield break;
             var d = Flat(th.transform.position - transform.position);

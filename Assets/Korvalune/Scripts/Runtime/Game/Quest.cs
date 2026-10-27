@@ -46,6 +46,7 @@ namespace Korvalune.Game
         {
             if (!Current.Complete) return;
             Notify?.Invoke("Objectif accompli : " + Current.text);
+            Sound.UI("sfx_quete", 0.9f);
             current++;
             if (Finished) Notify?.Invoke($"Quête terminée : {title} !");
             else Notify?.Invoke("Nouvel objectif : " + Current.text);

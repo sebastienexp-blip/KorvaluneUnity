@@ -95,6 +95,7 @@ namespace Korvalune.Game
             used = true;
             FX.Burst(transform.position + Vector3.up, glowColor, 40, 4f, 0.15f, 0.8f, -0.4f);
             FindFirstObjectByType<GameBootstrap>()?.Persist();
+            Sound.UI("sfx_portail", 1f);
             GameBootstrap.nextSpawn = arrival;
             SceneManager.LoadScene(targetScene);
         }

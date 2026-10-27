@@ -53,6 +53,7 @@ namespace Korvalune.Game
             if (!p.Health.Spend(d.mana)) { p.Notify?.Invoke("Pas assez de mana"); return false; }
             readyAt[i] = Time.time + d.cooldown * (1 - 0.04f * (ranks[i] - 1)) * (1 - (eqp ? eqp.cooldownReduction : 0));
             if (d.empowered) Vfx.Burst(Pos + Vector3.up * 1.2f, d.element, 14, 3f);         // éclat de l'élément : la compétence est transformée
+            Sound.Play(Sound.CastOf(d), Pos, 0.9f);
             StartCoroutine(Run(d, ranks[i]));
             if (echo > 0 && Echoable(d.kind)) StartCoroutine(Echo(d, ranks[i], echo));
             return true;
@@ -70,6 +71,7 @@ namespace Korvalune.Game
             var e = d.Clone(); e.mult *= power; e.anim = ""; e.ghost = true;    // pas de seconde animation du héros : l'écho est spectral
             var c = Vfx.Of(e.element);
             Vfx.Shock(Pos, c.outer, 2.2f); Vfx.Burst(Pos + Vector3.up * 1.4f, e.element, 24, 4f);
+            Sound.Play("sfx_echo", Pos, 0.8f); Sound.Play(Sound.CastOf(e), Pos, 0.6f, 0.12f, 0f);
             yield return Run(e, rank);
         }
 

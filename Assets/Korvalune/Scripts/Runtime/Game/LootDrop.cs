@@ -22,6 +22,7 @@ namespace Korvalune.Game
             var go = new GameObject("Butin " + it.name);
             go.transform.position = pos + Vector3.up * 0.05f;
             var d = go.AddComponent<LootDrop>(); d.item = it; d.Build(); if (!All.Contains(d)) All.Add(d);
+            Sound.Play(Sound.DropOf(it.rarity), pos, it.rarity >= Rarity.Legendaire ? 1f : 0.6f, 0.04f, 0.1f);
             return d;
         }
 

@@ -218,6 +218,7 @@ namespace Korvalune.Game
             if (!bagPanel) { Notify("Inventaire indisponible"); return; }
             if (treePanel) treePanel.SetActive(false);
             bagPanel.SetActive(!bagPanel.activeSelf); selected = null; if (bagPanel.activeSelf) RefreshBag();
+            Sound.UI(bagPanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
 
         (Image, Image, Text) Cell(RectTransform parent, string name, Vector2 anchor, Vector2 pos, float size, System.Action onClick)
@@ -226,7 +227,7 @@ namespace Korvalune.Game
             var frame = Img(parent, name, UIStyle.Bar(), anchor, pos, new Vector2(size, size)); frame.type = Image.Type.Sliced; frame.raycastTarget = true;
             var icon = Img(frame.rectTransform, "Icone", null, new Vector2(0.5f, 0.5f), new Vector2(0, 4), new Vector2(size * 0.84f, size * 0.84f)); icon.preserveAspect = true; icon.raycastTarget = false; icon.enabled = false;
             var label = Label(frame.rectTransform, "Texte", "", 18, TextAnchor.LowerCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size - 8, size - 8));
-            var b = frame.gameObject.AddComponent<Button>(); b.targetGraphic = frame; b.onClick.AddListener(() => onClick());
+            var b = frame.gameObject.AddComponent<Button>(); b.targetGraphic = frame; b.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.45f); onClick(); });
             return (frame, glow, label);
         }
 
@@ -442,7 +443,7 @@ namespace Korvalune.Game
             cooldown = Img(bg.rectTransform, "Recharge", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size * 0.8f, size * 0.8f));
             cooldown.type = Image.Type.Filled; cooldown.fillMethod = Image.FillMethod.Radial360; cooldown.fillOrigin = 2; cooldown.fillClockwise = false; cooldown.fillAmount = 0; cooldown.color = new Color(0, 0, 0, 0.6f);
             cdText = Label(bg.rectTransform, "Temps", "", Mathf.RoundToInt(size * 0.3f), TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
-            var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => onClick());
+            var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => { if (name != "Attaque" && !name.StartsWith("Compétence") && name != "Potion") Sound.UI("sfx_ui_clic", 0.5f); onClick(); });
             var cb = b.colors; cb.pressedColor = new Color(1f, 0.85f, 0.6f); b.colors = cb;
             return bg;
         }

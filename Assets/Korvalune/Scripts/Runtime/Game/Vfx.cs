@@ -92,6 +92,7 @@ namespace Korvalune.Game
         /// <summary>Explosion : éclair, boule de flammes / énergie animée, gerbe d'étincelles, fumée qui s'élève, onde au sol, débris.</summary>
         public static void Explosion(Vector3 pos, Element e, float radius = 3f)
         {
+            Sound.Play(Sound.ImpactOf(e), pos, Mathf.Clamp(0.5f + radius * 0.12f, 0.5f, 1f), 0.08f, 0.08f);
             if (!lib) { FX.Burst(pos, Of(e).outer, 30); return; }
             var p = Of(e); var root = Root(pos, 4f, "Explosion");
             Flash(pos + Vector3.up, p.light, radius * 3.5f, 6f, 0.35f);
