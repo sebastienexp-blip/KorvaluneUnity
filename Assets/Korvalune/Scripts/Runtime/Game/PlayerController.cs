@@ -16,7 +16,13 @@ namespace Korvalune.Game
         public int level = 1; public float xp, xpNext = 100; public int skillPoints = 1;
 
         /// <summary>Expérience nécessaire pour passer du niveau l au niveau l+1 (courbe longue jusqu'au niveau 200).</summary>
-        public static float XpForLevel(int l) => Mathf.Round(80f * Mathf.Pow(l, 1.6f) + 40f * l);
+        /// <summary>Chaque niveau coûte nettement plus que le précédent (courbe en puissance 2,15), avec des paliers à 50, 100 et 150 où la
+        /// progression ralentit encore : niveau 2 ≈ 285 XP, niveau 10 ≈ 5 600, niveau 50 ≈ 210 000, niveau 100 ≈ 1,2 million.</summary>
+        public static float XpForLevel(int l)
+        {
+            float tier = l >= 150 ? 2.2f : l >= 100 ? 1.7f : l >= 50 ? 1.3f : 1f;
+            return Mathf.Round((35f * Mathf.Pow(l, 2.15f) + 65f * l) * tier);
+        }
         public float damageMult = 1f, buffUntil;
         public Skill[] skills;
         public System.Action<string> Notify;
@@ -66,23 +72,84 @@ namespace Korvalune.Game
             cc.Move((dir.normalized * spd + Vector3.up * vy) * Time.deltaTime);
             Speed = spd;
             Anim?.SetFloat(CharacterRig.SpeedId, spd, 0.1f, Time.deltaTime);
+            UpdateTarget(inp);
+            if (approach && Target && !Target.Dead && mag < 0.05f && !Health.Stunned)
+            {
+                // ciblage automatique : le héros court vers sa cible puis frappe
+                var to = Target.transform.position - transform.position; to.y = 0;
+                if (to.magnitude > attackRange * 0.85f && Time.time < approachUntil)
+                {
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(to), turnSpeed * Time.deltaTime);
+                    cc.Move(to.normalized * runSpeed * Time.deltaTime); Anim?.SetFloat(CharacterRig.SpeedId, runSpeed, 0.05f, Time.deltaTime); Speed = runSpeed;
+                }
+                else { approach = false; Attack(); }
+            }
+            else if (mag >= 0.05f) approach = false;
             if (Input.GetKeyDown(KeyCode.Space)) Attack();
             var runner = GetComponent<SkillRunner>();
             if (runner) { for (int i = 0; i < runner.loadout.Length; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) runner.Use(i); }
             else for (int i = 0; i < skills.Length && i < 4; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) UseSkill(i);
         }
 
-        /// <summary>Tourne vers l'ennemi le plus proche à portée (assistance de visée mobile).</summary>
+        // ------------------------------------------------------------------ ciblage automatique
+        /// <summary>Cible automatique : l'ennemi le plus pertinent dans un rayon de 12 m — le plus proche, en privilégiant celui
+        /// qui se trouve dans la direction du joystick (ou devant le héros) ; la cible est conservée tant qu'elle reste valable.</summary>
+        public Health Target { get; private set; }
+        public float autoAimRange = 12f;
+        bool approach; float approachUntil;
+        Transform marker;
+
+        void UpdateTarget(Vector2 stick)
+        {
+            Vector3 want = transform.forward;
+            if (stick.sqrMagnitude > 0.04f && cam)
+            {
+                var f = Vector3.ProjectOnPlane(cam.forward, Vector3.up).normalized; var r = Vector3.Cross(Vector3.up, f);
+                want = (f * stick.y + r * stick.x).normalized;
+            }
+            Health best = null; float bs = float.MaxValue;
+            foreach (var h in Health.Around(transform.position, autoAimRange, Faction.Player))
+            {
+                var d = h.transform.position - transform.position; d.y = 0; float dist = d.magnitude;
+                float ang = dist > 0.01f ? Vector3.Angle(want, d) : 0;
+                float score = dist * (1f + ang / 90f) * (h == Target ? 0.7f : 1f);     // proche, devant, et un peu de constance
+                if (score < bs) { bs = score; best = h; }
+            }
+            Target = best;
+            // marqueur au sol sous la cible
+            if (!marker) marker = TargetMarker();
+            marker.gameObject.SetActive(Target);
+            if (Target) { marker.position = Target.transform.position + Vector3.up * 0.06f; marker.Rotate(0, 90 * Time.deltaTime, 0); }
+        }
+
+        static Transform TargetMarker()
+        {
+            var go = new GameObject("Cible"); var lr = go.AddComponent<LineRenderer>();
+            lr.useWorldSpace = false; lr.loop = true; lr.positionCount = 40; lr.widthMultiplier = 0.07f;
+            for (int i = 0; i < 40; i++) { float a = i / 40f * Mathf.PI * 2; lr.SetPosition(i, new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * 0.9f); }
+            lr.sharedMaterial = FX.additive ? FX.additive : new Material(Shader.Find("Sprites/Default"));
+            lr.startColor = lr.endColor = new Color(1f, 0.35f, 0.15f, 0.9f);
+            return go.transform;
+        }
+
+        /// <summary>Tourne vers la cible automatique (ou l'ennemi le plus proche à portée).</summary>
         public void FaceNearest(float range)
         {
-            Health best = null; float bd = range;
-            foreach (var h in Health.Around(transform.position, range, Faction.Player)) { float d = Vector3.Distance(h.transform.position, transform.position); if (d < bd) { bd = d; best = h; } }
+            Health best = Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= range ? Target : null;
+            if (!best)
+            {
+                float bd = range;
+                foreach (var h in Health.Around(transform.position, range, Faction.Player)) { float d = Vector3.Distance(h.transform.position, transform.position); if (d < bd) { bd = d; best = h; } }
+            }
             if (best) { var d = best.transform.position - transform.position; d.y = 0; if (d.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(d); }
         }
 
         public void Attack()
         {
             if (Health.Dead || Health.Stunned || Time.time < nextAttack || Busy) return;
+            // cible hors de portée : le héros va la chercher automatiquement (1,5 s au plus)
+            if (Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) > attackRange + 0.4f)
+            { approach = true; approachUntil = Time.time + 1.5f; return; }
             nextAttack = Time.time + attackCooldown;
             FaceNearest(attackRange + 2.5f);
             Anim?.SetTrigger(CharacterRig.AttackId);

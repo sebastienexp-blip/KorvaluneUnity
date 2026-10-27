@@ -57,8 +57,9 @@ namespace Korvalune.Game
 
         Vector3 TargetPoint(float range)
         {
-            Health best = null; float bd = range;
-            foreach (var h in Health.Around(Pos, range, Faction.Player)) { float dd = Vector3.Distance(h.transform.position, Pos); if (dd < bd) { bd = dd; best = h; } }
+            // ciblage automatique : la cible du héros si elle est à portée, sinon l'ennemi le plus proche
+            Health best = p.Target && !p.Target.Dead && Vector3.Distance(p.Target.transform.position, Pos) <= range ? p.Target : null; float bd = range;
+            if (!best) foreach (var h in Health.Around(Pos, range, Faction.Player)) { float dd = Vector3.Distance(h.transform.position, Pos); if (dd < bd) { bd = dd; best = h; } }
             if (best) { var dir = best.transform.position - Pos; dir.y = 0; if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); return best.transform.position; }
             return GameBootstrap.Ground(Pos + Fwd * Mathf.Min(range, 6f));
         }

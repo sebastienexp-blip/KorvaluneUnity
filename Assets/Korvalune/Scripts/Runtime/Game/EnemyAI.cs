@@ -30,7 +30,7 @@ namespace Korvalune.Game
             {
                 if (side == Faction.Player) { FX.Burst(transform.position + Vector3.up, new Color(0.5f, 0.8f, 1f), 20, 3f); Destroy(gameObject, 3f); return; }
                 var p = FindFirstObjectByType<PlayerController>();
-                if (p) p.GainXp(type.xp * (1 + 0.04f * (p.level - 1)));
+                if (p) p.GainXp(type.xp);                      // XP fixe par ennemi : les niveaux deviennent de plus en plus longs
                 // butin : les ennemis forts lâchent plus d'objets, de meilleure rareté
                 var rng = new System.Random();
                 int lvl = p ? p.level : 1; float elite = Mathf.Clamp01(type.xp / 300f);
