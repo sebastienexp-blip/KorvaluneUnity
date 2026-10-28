@@ -418,9 +418,10 @@ namespace Korvalune.EditorTools
                     {
                         var cur = Feet(Vector3.Lerp(path[i], path[i + 1], k / (float)n));
                         var a = prev + Vector3.up * 1.2f; var b = cur + Vector3.up * 1.2f;
-                        bool steep = cur.y - prev.y > 1.1f;
-                        if (steep || Physics.Raycast(a, (b - a).normalized, out var h, (b - a).magnitude) && !h.collider.isTrigger && h.collider.GetComponentInParent<Health>() == null)
-                        { blocked++; where = $"tronçon {i}, pas {k} ({(steep ? "pente" : h.collider.name)})"; break; }
+                        string hit = null;
+                        if (cur.y - prev.y > 1.1f) hit = "pente";
+                        else if (Physics.Raycast(a, (b - a).normalized, out var h, (b - a).magnitude) && !h.collider.isTrigger && h.collider.GetComponentInParent<Health>() == null) hit = h.collider.name;
+                        if (hit != null) { blocked++; where = $"tronçon {i}, pas {k} ({hit})"; break; }
                         prev = cur;
                     }
                 }
