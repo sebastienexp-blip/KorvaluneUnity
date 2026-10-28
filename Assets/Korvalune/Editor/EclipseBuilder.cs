@@ -188,10 +188,10 @@ namespace Korvalune.EditorTools
             int k = 0;
             foreach (var s in spires)
             {
-                for (float y = Sea; y < s.h; y += 6f)
+                for (float y = Sea; y < s.h; y += 3.2f)
                 {
-                    float w = Mathf.Lerp(9f, 6f, (y - Sea) / (s.h - Sea));
-                    Rock(new Vector3(s.p.x + (float)rng.NextDouble() * 2 - 1, y, s.p.y + (float)rng.NextDouble() * 2 - 1), new Vector3(w, 4.5f, w), rng.Next(360), env, k++);
+                    float w = Mathf.Lerp(3.4f, 2.1f, (y - Sea) / (s.h - Sea));
+                    Rock(new Vector3(s.p.x + (float)rng.NextDouble() * 1.6f - 0.8f, y, s.p.y + (float)rng.NextDouble() * 1.6f - 0.8f), new Vector3(w, 2.6f, w), rng.Next(360), env, k++);
                 }
             }
             // plateforme du sanctuaire, au sommet du piton principal
@@ -239,8 +239,8 @@ namespace Korvalune.EditorTools
             Object.DestroyImmediate(crystal.GetComponent<Collider>());
             crystal.transform.position = c + Vector3.up * 11f; crystal.transform.rotation = Quaternion.Euler(45, 0, 45); crystal.transform.localScale = new Vector3(3.2f, 7.5f, 3.2f);
             var m = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-            m.SetColor("_BaseColor", new Color(0.55f, 0.85f, 1f, 1f)); m.SetFloat("_Smoothness", 0.95f); m.SetFloat("_Metallic", 0.2f);
-            m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", new Color(0.35f, 0.75f, 1.4f) * 2.2f); m.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+            m.SetColor("_BaseColor", new Color(0.25f, 0.5f, 0.85f, 1f)); m.SetFloat("_Smoothness", 0.95f); m.SetFloat("_Metallic", 0.2f);
+            m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", new Color(0.2f, 0.5f, 1f) * 0.9f); m.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
             var mp = Root + "/Rendering/Cristal_Eclipse.mat"; AssetDatabase.DeleteAsset(mp); AssetDatabase.CreateAsset(m, mp);
             crystal.GetComponent<Renderer>().sharedMaterial = m;
             crystal.AddComponent<Floater>().spin = 14f;
@@ -344,7 +344,7 @@ namespace Korvalune.EditorTools
                 float h = Height(x, z), hx = Height(x + 2, z), hz = Height(x, z + 2);
                 float slope = Mathf.Max(Mathf.Abs(hx - h), Mathf.Abs(hz - h)) / 2f;
                 var w = new float[L];
-                w[0] = 1f;                                                             // herbe
+                w[0] = 1f - Smooth(CityR - 1, CityR - 6, (p - City).magnitude) * 0.95f; // herbe (pas sur la place)
                 if (L > 4) w[4] = 0.4f * Mathf.PerlinNoise(x * 0.05f, z * 0.05f);     // sous-bois
                 float city = Smooth(CityR - 1, CityR - 6, (p - City).magnitude);
                 bool road = Mathf.Abs(z) < 4.5f && x < City.x;
@@ -407,11 +407,22 @@ namespace Korvalune.EditorTools
                 // praticabilité : chemin de l'arrivée à la place puis au sanctuaire
                 Physics.SyncTransforms();
                 int blocked = 0; string where = "";
-                var path = new List<Vector3> { Ground(Arrival), Ground(WestGate + new Vector2(-30, 0)), Ground(WestGate + new Vector2(6, 0)), Ground(City + new Vector2(-6, 0)), new Vector3(City.x + CityR - 4, CityH, 0), new Vector3(Spire.x - 6, CityH, Spire.y) };
-                for (int i = 0; i < path.Count - 1; i++)
+                var path = new List<Vector3> { Ground(Arrival), Ground(WestGate + new Vector2(-30, 0)), Ground(WestGate + new Vector2(6, 0)), Ground(City + new Vector2(-8, 0)), Ground(City + new Vector2(-4, -6)), Ground(City + new Vector2(4, -6)), Ground(City + new Vector2(8, 0)), new Vector3(City.x + CityR - 4, CityH, 0), new Vector3(Spire.x - 6, CityH, Spire.y) };
+                // on suit le sol mètre par mètre : pente franchissable et rien à hauteur de buste entre deux pas
+                Vector3 Feet(Vector3 q) => Physics.Raycast(new Vector3(q.x, 200f, q.z), Vector3.down, out var g, 400f) ? g.point : q;
+                for (int i = 0; i < path.Count - 1 && blocked == 0; i++)
                 {
-                    var a = path[i] + Vector3.up * 1.4f; var b = path[i + 1] + Vector3.up * 1.4f;
-                    if (Physics.Raycast(a, (b - a).normalized, out var h, (b - a).magnitude) && !h.collider.isTrigger && h.collider.GetComponentInParent<Health>() == null) { blocked++; if (where == "") where = $"tronçon {i} ({h.collider.name})"; }
+                    int n = Mathf.CeilToInt(Vector3.Distance(path[i], path[i + 1]));
+                    var prev = Feet(path[i]);
+                    for (int k = 1; k <= n; k++)
+                    {
+                        var cur = Feet(Vector3.Lerp(path[i], path[i + 1], k / (float)n));
+                        var a = prev + Vector3.up * 1.2f; var b = cur + Vector3.up * 1.2f;
+                        bool steep = cur.y - prev.y > 1.1f;
+                        if (steep || Physics.Raycast(a, (b - a).normalized, out var h, (b - a).magnitude) && !h.collider.isTrigger && h.collider.GetComponentInParent<Health>() == null)
+                        { blocked++; where = $"tronçon {i}, pas {k} ({(steep ? "pente" : h.collider.name)})"; break; }
+                        prev = cur;
+                    }
                 }
                 check("Cité : chemin libre jusqu'au sanctuaire", blocked == 0, blocked == 0 ? "arrivée → porte ouest → place → pont → cristal" : where);
             }
