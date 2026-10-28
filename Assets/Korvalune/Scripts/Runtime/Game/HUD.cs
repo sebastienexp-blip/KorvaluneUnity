@@ -55,6 +55,7 @@ namespace Korvalune.Game
             // ---- mini-carte et quête (haut droite)
             var mm = new GameObject("MiniCarte", typeof(RectTransform), typeof(Image), typeof(Mask)).GetComponent<RectTransform>();
             Place(mm, root, new Vector2(1, 1), new Vector2(-40, -36), new Vector2(300, 300)); mm.GetComponent<Image>().sprite = UIStyle.Disc(); mm.GetComponent<Mask>().showMaskGraphic = false;
+            mapRect = mm;
             mapRT = new RenderTexture(512, 512, 16) { name = "MiniCarte" };
             var raw = new GameObject("Carte", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>(); Place((RectTransform)raw.transform, mm, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(300, 300)); raw.texture = mapRT;
             var ringImg = Img(root, "Cadre", UIStyle.Ring(), new Vector2(1, 1), new Vector2(-22, -18), new Vector2(336, 336));
@@ -168,7 +169,7 @@ namespace Korvalune.Game
             if (arrow) arrow.localRotation = Quaternion.Euler(0, 0, -player.transform.eulerAngles.y);
             if (notifyText && Time.time > notifyUntil) notifyText.color = Color.Lerp(notifyText.color, new Color(1, 1, 1, 0), 4 * Time.deltaTime);
             deathPanel.SetActive(h.Dead);
-            UpdatePopups(); UpdateBars(); UpdateLootLabels();
+            UpdatePopups(); UpdateBars(); UpdateLootLabels(); UpdateMapDots();
         }
 
         // ------------------------------------------------------------------------------------------ compétences
@@ -371,6 +372,33 @@ namespace Korvalune.Game
             }
         }
 
+        RectTransform mapRect; readonly List<Image> mapDots = new List<Image>(); float nextDots;
+        /// <summary>Points de la mini-carte : monstres en rouge, champions en or, entrées de donjon en violet, ville en vert.</summary>
+        void UpdateMapDots()
+        {
+            if (!mapRect || !player || !mapCam || Time.unscaledTime < nextDots) return;
+            nextDots = Time.unscaledTime + 0.25f;
+            float half = mapCam.orthographicSize, scale = mapRect.sizeDelta.x * 0.5f / half;
+            var pp = player.transform.position; int k = 0;
+            void Dot(Vector3 w, Color c, float size)
+            {
+                var d = w - pp; if (Mathf.Abs(d.x) > half || Mathf.Abs(d.z) > half) return;
+                if (k >= mapDots.Count) { var im = Img(mapRect, "Point", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.one * 10); im.rectTransform.pivot = new Vector2(0.5f, 0.5f); mapDots.Add(im); }
+                var dot = mapDots[k++]; dot.gameObject.SetActive(true); dot.color = c; dot.rectTransform.sizeDelta = Vector2.one * size;
+                dot.rectTransform.anchoredPosition = new Vector2(d.x, d.z) * scale;
+            }
+            foreach (var h in Health.All)
+            {
+                if (!h || h.Dead || h.faction != Faction.Enemy) continue;
+                var ai = h.GetComponent<EnemyAI>(); if (ai && ai.side != Faction.Enemy) continue;
+                bool ch = ai && ai.champion;
+                Dot(h.transform.position, ch ? new Color(1f, 0.78f, 0.25f) : new Color(0.95f, 0.18f, 0.12f), ch ? 15 : 10);
+            }
+            foreach (var por in FindObjectsByType<Portal>(FindObjectsSortMode.None)) Dot(por.transform.position, new Color(0.7f, 0.4f, 1f), 16);
+            for (int i = k; i < mapDots.Count; i++) mapDots[i].gameObject.SetActive(false);
+            if (arrow) arrow.SetAsLastSibling();
+        }
+
         class Plate { public RectTransform root; public Image fill; public Text name; public int shownLevel = -1; public bool shownTarget; }
         readonly Dictionary<Health, Plate> plates = new Dictionary<Health, Plate>();
 
@@ -409,6 +437,7 @@ namespace Korvalune.Game
                     pl.shownLevel = h.level + (player ? player.level * 1000 : 0); pl.shownTarget = isT;
                     var c = LevelColor(h.level - (player ? player.level : 1));
                     string lv = h.level > 0 ? $"<b>Nv {h.level}</b>  " : "";
+                    if (ai && ai.champion) lv = "<color=#f2c14e>★</color> " + lv;
                     pl.name.text = $"<color=#{ColorUtility.ToHtmlStringRGB(c)}>{lv}{h.displayName}</color>";
                     pl.name.fontSize = isT ? 23 : 20;
                 }

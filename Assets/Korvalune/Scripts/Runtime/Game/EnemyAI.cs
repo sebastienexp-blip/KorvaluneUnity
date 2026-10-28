@@ -18,6 +18,8 @@ namespace Korvalune.Game
         public float damageOverride;          // invocations : dégâts calqués sur le héros
         /// <summary>Dégâts et expérience de cette créature, ajustés à son niveau (0 = valeurs du type).</summary>
         public float damage, xp;
+        /// <summary>Créature d'élite (champion) : meilleur butin garanti.</summary>
+        public bool champion;
         float Damage => damageOverride > 0 ? damageOverride : damage > 0 ? damage : type.damage;
         float bornAt;
         Health hp; Animator anim; CharacterController cc;
@@ -38,7 +40,8 @@ namespace Korvalune.Game
                 // butin : les ennemis forts lâchent plus d'objets, de meilleure rareté
                 var rng = new System.Random();
                 int lvl = Mathf.Max(1, hp.level > 0 ? Mathf.Min(hp.level, (p ? p.level : 1) + 3) : p ? p.level : 1); float elite = Mathf.Clamp01(type.xp / 300f);   // butin au niveau du monstre (portable sous peu)
-                int n = (rng.NextDouble() < 0.45 + 0.5 * elite + 0.05 * Difficulty.Current ? 1 : 0) + (elite > 0.9f ? 2 : 0);
+                if (champion) elite = Mathf.Max(elite, 0.6f);
+                int n = (rng.NextDouble() < 0.45 + 0.5 * elite + 0.05 * Difficulty.Current ? 1 : 0) + (elite > 0.9f ? 2 : 0) + (champion ? 2 : 0);
                 for (int i = 0; i < n; i++)
                 {
                     var it = Loot.Roll(rng, lvl, elite * 3f + Difficulty.Luck);

@@ -140,6 +140,19 @@ namespace Korvalune.Game
             }
         }
 
+        /// <summary>Champion : plus grand, deux fois et demie plus résistant, plus fort, aura dorée ; triple expérience et meilleur butin.</summary>
+        static void MakeChampion(GameObject e)
+        {
+            var h = e.GetComponent<Health>(); var ai = e.GetComponent<EnemyAI>(); if (!h || !ai) return;
+            ai.champion = true;
+            h.maxHp = Mathf.Round(h.maxHp * 2.5f); h.hp = h.maxHp; h.armor *= 1.3f;
+            ai.damage = (ai.damage > 0 ? ai.damage : ai.type.damage) * 1.4f; ai.xp = (ai.xp > 0 ? ai.xp : ai.type.xp) * 3f;
+            h.displayName = "Champion " + h.displayName.ToLowerInvariant();
+            e.transform.localScale *= 1.2f;
+            var l = new GameObject("Aura du champion").AddComponent<Light>(); l.transform.SetParent(e.transform, false);
+            l.transform.localPosition = Vector3.up * 1.2f; l.type = LightType.Point; l.color = new Color(1f, 0.75f, 0.25f); l.intensity = 2.2f; l.range = 4.5f; l.shadows = LightShadows.None;
+        }
+
         /// <summary>Range tous les camps actifs : ils réapparaîtront aussitôt avec la nouvelle difficulté.</summary>
         public void Refresh()
         {
@@ -155,6 +168,8 @@ namespace Korvalune.Game
         {
             var cfg = game.config; if (!cfg) return;
             int n = c.ids.Count;
+            // champion : une créature d'élite par camp de temps en temps (plus souvent dans les difficultés élevées)
+            int champ = n >= 2 && Random.value < 0.15f + 0.05f * Difficulty.Current ? Random.Range(0, n) : -1;
             for (int i = 0; i < n; i++)
             {
                 var t = cfg.Enemy(c.ids[i]); if (t == null || !t.prefab) continue;
@@ -162,7 +177,9 @@ namespace Korvalune.Game
                 var p = c.center + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * c.radius * Random.Range(0.35f, 1f);
                 int lvl = Mathf.Max(1, c.level + (t.id == "demon" ? 2 : Random.Range(0, 2)));
                 var e = game.Spawn(t, GameBootstrap.Ground(p), lvl);
-                if (e) c.alive.Add(e.GetComponent<Health>());
+                if (!e) continue;
+                if (i == champ) MakeChampion(e);
+                c.alive.Add(e.GetComponent<Health>());
             }
             c.active = c.alive.Count > 0; c.everSpawned = true;
         }
