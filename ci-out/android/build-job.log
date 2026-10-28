@@ -1,320 +1,318 @@
-# Journal de la construction Android (run 40669063197)
+# Journal de la construction Android (run 40670564959)
 ## Lignes importantes
-1832:2026-10-28T10:07:30.1423214Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
-2114:2026-10-28T10:11:57.6829979Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2191:2026-10-28T10:12:49.5984947Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-3917:2026-10-28T10:15:32.2069387Z Assets/Korvalune/Editor/EclipseBuilder.cs(423,90): error CS0165: Use of unassigned local variable 'h'
-3922:2026-10-28T10:15:32.2073162Z Assets/Korvalune/Editor/EclipseBuilder.cs(423,90): error CS0165: Use of unassigned local variable 'h'
-3927:2026-10-28T10:15:32.2077045Z Assets/Korvalune/Editor/EclipseBuilder.cs(423,90): error CS0165: Use of unassigned local variable 'h'
-3936:2026-10-28T10:15:32.3212336Z Build failed, with exit code 1
-4000:2026-10-28T10:15:37.4344036Z Please note that the exit code is not very descriptive.
-4005:2026-10-28T10:15:37.7661213Z ##[error]Build failed with exit code 1
-4010:2026-10-28T10:15:37.8149497Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-4011:2026-10-28T10:15:37.8149918Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-4061:2026-10-28T10:15:38.1732809Z # Construction de l'APK Android
-4063:2026-10-28T10:15:38.1734203Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers
-4066:2026-10-28T10:15:38.1735656Z - APK : 708.9 Mo, version 0.1.1
-4415:2026-10-28T10:18:11.7210888Z ##[error]Process completed with exit code 1.
+1827:2026-10-28T10:20:50.5953791Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+2134:2026-10-28T10:24:51.6136127Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2211:2026-10-28T10:25:52.7477532Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+14809:2026-10-28T10:35:03.3980465Z  0.2 kb	 0.0% Packages/com.unity.rendering.light-transport/Runtime/UnifiedRayTracing/UnifiedRayTracingException.cs
+15747:2026-10-28T10:35:03.4550611Z Build Finished, Result: Success.
+15760:2026-10-28T10:35:04.6697136Z # Construction de l'APK Android
+15762:2026-10-28T10:35:04.6728548Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse
+15765:2026-10-28T10:35:04.6731543Z - APK : 719.4 Mo, version 0.1.1
+15899:2026-10-28T10:35:20.7048060Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+15900:2026-10-28T10:35:20.7049162Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+15952:2026-10-28T10:35:21.2221534Z # Construction de l'APK Android
+15954:2026-10-28T10:35:21.2223316Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse
+15957:2026-10-28T10:35:21.2225512Z - APK : 719.4 Mo, version 0.1.1
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-10-28T10:15:32.1940753Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll"
-2026-10-28T10:15:32.1941290Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll"
-2026-10-28T10:15:32.1941819Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll"
-2026-10-28T10:15:32.1942475Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll"
-2026-10-28T10:15:32.1942992Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll"
-2026-10-28T10:15:32.1943563Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.SubsystemsModule.dll"
-2026-10-28T10:15:32.1944055Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll"
-2026-10-28T10:15:32.1944544Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll"
-2026-10-28T10:15:32.1945063Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll"
-2026-10-28T10:15:32.1945637Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreFontEngineModule.dll"
-2026-10-28T10:15:32.1946227Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreTextEngineModule.dll"
-2026-10-28T10:15:32.1946793Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll"
-2026-10-28T10:15:32.1947320Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.TilemapModule.dll"
-2026-10-28T10:15:32.1947825Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll"
-2026-10-28T10:15:32.1948319Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll"
-2026-10-28T10:15:32.1948794Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UmbraModule.dll"
-2026-10-28T10:15:32.1949344Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsCommonModule.dll"
-2026-10-28T10:15:32.1949922Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll"
-2026-10-28T10:15:32.1950472Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll"
-2026-10-28T10:15:32.1950992Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityCurlModule.dll"
-2026-10-28T10:15:32.1951551Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityTestProtocolModule.dll"
-2026-10-28T10:15:32.1952584Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAssetBundleModule.dll"
-2026-10-28T10:15:32.1953222Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll"
-2026-10-28T10:15:32.1953815Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll"
-2026-10-28T10:15:32.1954404Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll"
-2026-10-28T10:15:32.1955005Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll"
-2026-10-28T10:15:32.1955529Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll"
-2026-10-28T10:15:32.1955991Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll"
-2026-10-28T10:15:32.1956468Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll"
-2026-10-28T10:15:32.1956967Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll"
-2026-10-28T10:15:32.1957493Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.VirtualTexturingModule.dll"
-2026-10-28T10:15:32.1958014Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll"
-2026-10-28T10:15:32.1958621Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll"
-2026-10-28T10:15:32.1959214Z -r:"/opt/unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll"
-2026-10-28T10:15:32.1959687Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll"
-2026-10-28T10:15:32.1960216Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
-2026-10-28T10:15:32.1960790Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
-2026-10-28T10:15:32.1961486Z -r:"/opt/unity/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll"
-2026-10-28T10:15:32.1962323Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/Microsoft.Win32.Primitives.dll"
-2026-10-28T10:15:32.1963007Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.AppContext.dll"
-2026-10-28T10:15:32.1963677Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Buffers.dll"
-2026-10-28T10:15:32.1964391Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Collections.Concurrent.dll"
-2026-10-28T10:15:32.1965157Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Collections.NonGeneric.dll"
-2026-10-28T10:15:32.1965909Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Collections.Specialized.dll"
-2026-10-28T10:15:32.1966595Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Collections.dll"
-2026-10-28T10:15:32.1967298Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ComponentModel.Annotations.dll"
-2026-10-28T10:15:32.1968069Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ComponentModel.EventBasedAsync.dll"
-2026-10-28T10:15:32.1968827Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ComponentModel.Primitives.dll"
-2026-10-28T10:15:32.1969581Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ComponentModel.TypeConverter.dll"
-2026-10-28T10:15:32.1970304Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ComponentModel.dll"
-2026-10-28T10:15:32.1970948Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Console.dll"
-2026-10-28T10:15:32.1971572Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Data.Common.dll"
-2026-10-28T10:15:32.1972386Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.Contracts.dll"
-2026-10-28T10:15:32.1973099Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.Debug.dll"
-2026-10-28T10:15:32.1973834Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.FileVersionInfo.dll"
-2026-10-28T10:15:32.1974557Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.Process.dll"
-2026-10-28T10:15:32.1975279Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.StackTrace.dll"
-2026-10-28T10:15:32.1976049Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.TextWriterTraceListener.dll"
-2026-10-28T10:15:32.1976801Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.Tools.dll"
-2026-10-28T10:15:32.1977507Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Diagnostics.TraceSource.dll"
-2026-10-28T10:15:32.1978217Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Drawing.Primitives.dll"
-2026-10-28T10:15:32.1978899Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Dynamic.Runtime.dll"
-2026-10-28T10:15:32.1979592Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Globalization.Calendars.dll"
-2026-10-28T10:15:32.1980446Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Globalization.Extensions.dll"
-2026-10-28T10:15:32.1981234Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Globalization.dll"
-2026-10-28T10:15:32.1982025Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.Compression.ZipFile.dll"
-2026-10-28T10:15:32.1982748Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.FileSystem.DriveInfo.dll"
-2026-10-28T10:15:32.1983489Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.FileSystem.Primitives.dll"
-2026-10-28T10:15:32.1984214Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.FileSystem.Watcher.dll"
-2026-10-28T10:15:32.1984895Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.FileSystem.dll"
-2026-10-28T10:15:32.1985573Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.IsolatedStorage.dll"
-2026-10-28T10:15:32.1986282Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.MemoryMappedFiles.dll"
-2026-10-28T10:15:32.1986949Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.Pipes.dll"
-2026-10-28T10:15:32.1987633Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.UnmanagedMemoryStream.dll"
-2026-10-28T10:15:32.1988284Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.IO.dll"
-2026-10-28T10:15:32.1988912Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Linq.Expressions.dll"
-2026-10-28T10:15:32.1989578Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Linq.Parallel.dll"
-2026-10-28T10:15:32.1990236Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Linq.Queryable.dll"
-2026-10-28T10:15:32.1990857Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Linq.dll"
-2026-10-28T10:15:32.1991465Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Memory.dll"
-2026-10-28T10:15:32.1992227Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.Http.Rtc.dll"
-2026-10-28T10:15:32.1992894Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.NameResolution.dll"
-2026-10-28T10:15:32.1993605Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.NetworkInformation.dll"
-2026-10-28T10:15:32.1994269Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.Ping.dll"
-2026-10-28T10:15:32.1994913Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.Primitives.dll"
-2026-10-28T10:15:32.1995565Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.Requests.dll"
-2026-10-28T10:15:32.1996214Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.Security.dll"
-2026-10-28T10:15:32.1996859Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.Sockets.dll"
-2026-10-28T10:15:32.1997544Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.WebHeaderCollection.dll"
-2026-10-28T10:15:32.1998263Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.WebSockets.Client.dll"
-2026-10-28T10:15:32.1998948Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Net.WebSockets.dll"
-2026-10-28T10:15:32.1999601Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ObjectModel.dll"
-2026-10-28T10:15:32.2000291Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Reflection.DispatchProxy.dll"
-2026-10-28T10:15:32.2001038Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Reflection.Emit.ILGeneration.dll"
-2026-10-28T10:15:32.2002030Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Reflection.Emit.Lightweight.dll"
-2026-10-28T10:15:32.2002845Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Reflection.Emit.dll"
-2026-10-28T10:15:32.2003540Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Reflection.Extensions.dll"
-2026-10-28T10:15:32.2004251Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Reflection.Primitives.dll"
-2026-10-28T10:15:32.2004926Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Reflection.dll"
-2026-10-28T10:15:32.2005582Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Resources.Reader.dll"
-2026-10-28T10:15:32.2006291Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Resources.ResourceManager.dll"
-2026-10-28T10:15:32.2006992Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Resources.Writer.dll"
-2026-10-28T10:15:32.2007739Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.CompilerServices.VisualC.dll"
-2026-10-28T10:15:32.2008484Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.Extensions.dll"
-2026-10-28T10:15:32.2009166Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.Handles.dll"
-2026-10-28T10:15:32.2009941Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.RuntimeInformation.dll"
-2026-10-28T10:15:32.2010802Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll"
-2026-10-28T10:15:32.2011594Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.dll"
-2026-10-28T10:15:32.2012422Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.Numerics.dll"
-2026-10-28T10:15:32.2013167Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.Serialization.Formatters.dll"
-2026-10-28T10:15:32.2013937Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.Serialization.Json.dll"
-2026-10-28T10:15:32.2014714Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.Serialization.Primitives.dll"
-2026-10-28T10:15:32.2015481Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.Serialization.Xml.dll"
-2026-10-28T10:15:32.2016153Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.dll"
-2026-10-28T10:15:32.2016798Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.Claims.dll"
-2026-10-28T10:15:32.2017534Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.Cryptography.Algorithms.dll"
-2026-10-28T10:15:32.2018333Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.Cryptography.Csp.dll"
-2026-10-28T10:15:32.2019094Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.Cryptography.Encoding.dll"
-2026-10-28T10:15:32.2019881Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.Cryptography.Primitives.dll"
-2026-10-28T10:15:32.2020753Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.Cryptography.X509Certificates.dll"
-2026-10-28T10:15:32.2021590Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.Principal.dll"
-2026-10-28T10:15:32.2022421Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Security.SecureString.dll"
-2026-10-28T10:15:32.2023154Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ServiceModel.Duplex.dll"
-2026-10-28T10:15:32.2023857Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ServiceModel.Http.dll"
-2026-10-28T10:15:32.2024782Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ServiceModel.NetTcp.dll"
-2026-10-28T10:15:32.2025527Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ServiceModel.Primitives.dll"
-2026-10-28T10:15:32.2026263Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ServiceModel.Security.dll"
-2026-10-28T10:15:32.2026998Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Text.Encoding.Extensions.dll"
-2026-10-28T10:15:32.2027719Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Text.Encoding.dll"
-2026-10-28T10:15:32.2028432Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Text.RegularExpressions.dll"
-2026-10-28T10:15:32.2029221Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.Overlapped.dll"
-2026-10-28T10:15:32.2029991Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.Tasks.Extensions.dll"
-2026-10-28T10:15:32.2030761Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.Tasks.Parallel.dll"
-2026-10-28T10:15:32.2031511Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.Tasks.dll"
-2026-10-28T10:15:32.2032484Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.Thread.dll"
-2026-10-28T10:15:32.2033184Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.ThreadPool.dll"
-2026-10-28T10:15:32.2033872Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.Timer.dll"
-2026-10-28T10:15:32.2034527Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Threading.dll"
-2026-10-28T10:15:32.2035163Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.ValueTuple.dll"
-2026-10-28T10:15:32.2035835Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Xml.ReaderWriter.dll"
-2026-10-28T10:15:32.2036551Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Xml.XDocument.dll"
-2026-10-28T10:15:32.2037244Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Xml.XPath.XDocument.dll"
-2026-10-28T10:15:32.2037905Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Xml.XPath.dll"
-2026-10-28T10:15:32.2038547Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Xml.XmlDocument.dll"
-2026-10-28T10:15:32.2039221Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Xml.XmlSerializer.dll"
-2026-10-28T10:15:32.2039854Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Facades/netstandard.dll"
-2026-10-28T10:15:32.2040432Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/Microsoft.CSharp.dll"
-2026-10-28T10:15:32.2041079Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll"
-2026-10-28T10:15:32.2041696Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Core.dll"
-2026-10-28T10:15:32.2042389Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Data.DataSetExtensions.dll"
-2026-10-28T10:15:32.2042990Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Data.dll"
-2026-10-28T10:15:32.2043569Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Drawing.dll"
-2026-10-28T10:15:32.2044184Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.IO.Compression.FileSystem.dll"
-2026-10-28T10:15:32.2044834Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.IO.Compression.dll"
-2026-10-28T10:15:32.2045417Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Net.Http.dll"
-2026-10-28T10:15:32.2046135Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Numerics.Vectors.dll"
-2026-10-28T10:15:32.2046827Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Numerics.dll"
-2026-10-28T10:15:32.2047437Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Runtime.Serialization.dll"
-2026-10-28T10:15:32.2048080Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Transactions.dll"
-2026-10-28T10:15:32.2048652Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Xml.Linq.dll"
-2026-10-28T10:15:32.2049195Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Xml.dll"
-2026-10-28T10:15:32.2049710Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.dll"
-2026-10-28T10:15:32.2050215Z -r:"/opt/unity/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/mscorlib.dll"
-2026-10-28T10:15:32.2050901Z -r:"Library/PackageCache/com.unity.collections/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll"
-2026-10-28T10:15:32.2051618Z -r:"Library/PackageCache/com.unity.ext.nunit/net40/unity-custom/nunit.framework.dll"
-2026-10-28T10:15:32.2052293Z -r:"Library/PackageCache/com.unity.ext.nunit/net40/unity-custom/nunit.framework.dll"
-2026-10-28T10:15:32.2052788Z -r:"Library/PackageCache/com.unity.nuget.mono-cecil/Mono.Cecil.dll"
-2026-10-28T10:15:32.2053221Z -r:"Library/Bee/artifacts/1300b0aE.dag/Korvalune.Runtime.ref.dll"
-2026-10-28T10:15:32.2053698Z -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.RenderPipelines.Core.Runtime.ref.dll"
-2026-10-28T10:15:32.2054261Z -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.RenderPipelines.Universal.Runtime.ref.dll"
-2026-10-28T10:15:32.2054777Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.TestRunner.ref.dll"
-2026-10-28T10:15:32.2055200Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"
-2026-10-28T10:15:32.2055617Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.TestRunner.ref.dll"
-2026-10-28T10:15:32.2056043Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
-2026-10-28T10:15:32.2056579Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
-2026-10-28T10:15:32.2057224Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-2026-10-28T10:15:32.2057847Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
-2026-10-28T10:15:32.2058328Z "Assets/Korvalune/Editor/AndroidBuild.cs"
-2026-10-28T10:15:32.2058608Z "Assets/Korvalune/Editor/CI.cs"
-2026-10-28T10:15:32.2058869Z "Assets/Korvalune/Editor/CatalogBuilder.cs"
-2026-10-28T10:15:32.2059158Z "Assets/Korvalune/Editor/CaveBuilder.cs"
-2026-10-28T10:15:32.2059440Z "Assets/Korvalune/Editor/DungeonBuilder.cs"
-2026-10-28T10:15:32.2059731Z "Assets/Korvalune/Editor/EclipseBuilder.cs"
-2026-10-28T10:15:32.2060018Z "Assets/Korvalune/Editor/ForgeManifest.cs"
-2026-10-28T10:15:32.2060303Z "Assets/Korvalune/Editor/IconImporter.cs"
-2026-10-28T10:15:32.2060596Z "Assets/Korvalune/Editor/LauncherBuilder.cs"
-2026-10-28T10:15:32.2060894Z "Assets/Korvalune/Editor/ModelPipeline.cs"
-2026-10-28T10:15:32.2061180Z "Assets/Korvalune/Editor/MorphBaker.cs"
-2026-10-28T10:15:32.2061463Z "Assets/Korvalune/Editor/ProjectSetup.cs"
-2026-10-28T10:15:32.2061757Z "Assets/Korvalune/Editor/SelectionBuilder.cs"
-2026-10-28T10:15:32.2062145Z "Assets/Korvalune/Editor/TownBuilder.cs"
-2026-10-28T10:15:32.2062420Z "Assets/Korvalune/Editor/VfxBuilder.cs"
-2026-10-28T10:15:32.2062693Z "Assets/Korvalune/Editor/WorldBuilder.cs"
-2026-10-28T10:15:32.2062953Z -langversion:9.0
-2026-10-28T10:15:32.2063164Z /deterministic
-2026-10-28T10:15:32.2063362Z /optimize+
-2026-10-28T10:15:32.2063547Z /debug:portable
-2026-10-28T10:15:32.2063738Z /nologo
-2026-10-28T10:15:32.2063939Z /RuntimeMetadataVersion:v4.0.30319
-2026-10-28T10:15:32.2064190Z /nowarn:0169
-2026-10-28T10:15:32.2064383Z /nowarn:0649
-2026-10-28T10:15:32.2064563Z /nowarn:0282
-2026-10-28T10:15:32.2064747Z /nowarn:1701
-2026-10-28T10:15:32.2065061Z /nowarn:1702
-2026-10-28T10:15:32.2065245Z /utf8output
-2026-10-28T10:15:32.2065433Z /preferreduilang:en-US
-2026-10-28T10:15:32.2065939Z /additionalfile:"Library/Bee/artifacts/1300b0aE.dag/Korvalune.Editor.UnityAdditionalFile.txt"
-2026-10-28T10:15:32.2066410Z ##### Custom Environment Variables
-2026-10-28T10:15:32.2066667Z DOTNET_MULTILEVEL_LOOKUP=0
-2026-10-28T10:15:32.2066890Z ##### ExitCode
-2026-10-28T10:15:32.2068816Z 1
-2026-10-28T10:15:32.2069000Z ##### Output
-2026-10-28T10:15:32.2069387Z Assets/Korvalune/Editor/EclipseBuilder.cs(423,90): error CS0165: Use of unassigned local variable 'h'
-2026-10-28T10:15:32.2069920Z *** Tundra build failed (1.84 seconds), 8 items updated, 515 evaluated
-2026-10-28T10:15:32.2070456Z ## Script Compilation Error for: Csc Library/Bee/artifacts/1300b0aE.dag/Korvalune.Editor.dll (+2 others)
-2026-10-28T10:15:32.2071640Z ## CmdLine: "/opt/unity/Editor/Data/NetCoreRuntime/dotnet" exec "/opt/unity/Editor/Data/DotNetSdkRoslyn/csc.dll" /nostdlib /noconfig /shared "@Library/Bee/artifacts/1300b0aE.dag/Korvalune.Editor.rsp" "@Library/Bee/artifacts/1300b0aE.dag/Korvalune.Editor.rsp2"
-2026-10-28T10:15:32.2072743Z ## Output:
-2026-10-28T10:15:32.2073162Z Assets/Korvalune/Editor/EclipseBuilder.cs(423,90): error CS0165: Use of unassigned local variable 'h'
-2026-10-28T10:15:32.2073701Z elect.creating' is assigned but its value is never used
-2026-10-28T10:15:32.2074040Z Total cache size 514180
-2026-10-28T10:15:32.2074623Z Total cache size after purge 514180, took 00:00:00.0113748
-2026-10-28T10:15:32.2075772Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
-2026-10-28T10:15:32.2077045Z Assets/Korvalune/Editor/EclipseBuilder.cs(423,90): error CS0165: Use of unassigned local variable 'h'
-2026-10-28T10:15:32.2077800Z AssetDatabase: script compilation time: 4.514513s
-2026-10-28T10:15:32.2762348Z Scripts have compiler errors.
-2026-10-28T10:15:32.2762673Z 
-2026-10-28T10:15:32.2763052Z Aborting batchmode due to failure:
-2026-10-28T10:15:32.2763898Z Scripts have compiler errors.
-2026-10-28T10:15:32.2764201Z 
-2026-10-28T10:15:32.2765608Z 
-2026-10-28T10:15:32.2765724Z SDL leaked 2 allocations
-2026-10-28T10:15:32.3212336Z Build failed, with exit code 1
-2026-10-28T10:15:32.7791036Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-28T10:15:32.7800852Z       Application is shutting down...
-2026-10-28T10:15:32.7883130Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-10-28T10:15:32.7883871Z       ALC ILPP context 1 is unloading
-2026-10-28T10:15:33.1163886Z 
-2026-10-28T10:15:33.1164771Z ###########################
-2026-10-28T10:15:33.1165113Z #       Build output      #
-2026-10-28T10:15:33.1165530Z ###########################
-2026-10-28T10:15:33.1165755Z 
-2026-10-28T10:15:33.1181112Z total 8.0K
-2026-10-28T10:15:33.1181523Z drwxr-xr-x 2 root root 4.0K Oct 28 10:15 .
-2026-10-28T10:15:33.1182257Z drwxr-xr-x 3 root root 4.0K Oct 28 10:15 ..
-2026-10-28T10:15:33.1942646Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
-2026-10-28T10:15:33.1943375Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
-2026-10-28T10:15:33.1943929Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
-2026-10-28T10:15:33.1944425Z [UnityConnectServicesConfig] Service configuration:
-2026-10-28T10:15:33.1944835Z     "servicesConfigBaseUrl": "",
-2026-10-28T10:15:33.1945287Z     "disableServicesWindow": false,
-2026-10-28T10:15:33.1945789Z     "disableUserLogin": false,
-2026-10-28T10:15:33.1946305Z     "entitlementCacheTimeoutInSeconds": 60,
-2026-10-28T10:15:33.1946818Z     "clientConnectTimeoutSec": 5,
-2026-10-28T10:15:33.1947292Z     "clientHandshakeTimeoutSec": 10,
-2026-10-28T10:15:33.1947789Z     "clientResolveEntitlementsTimeoutSec": 30,
-2026-10-28T10:15:33.1948169Z     "clientUpdateLicenseTimeoutSec": 30,
-2026-10-28T10:15:33.1948655Z     "licensingServiceBaseUrl": "",
-2026-10-28T10:15:33.1949269Z     "enableProxyAutoconfig": "false"
-2026-10-28T10:15:33.1949643Z 
-2026-10-28T10:15:33.2081788Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
-2026-10-28T10:15:33.2082349Z Branch:                  6000.0/staging
-2026-10-28T10:15:33.2082609Z Build type:              Release
-2026-10-28T10:15:33.2085531Z Batch mode:              YES
-2026-10-28T10:15:33.2085853Z System name:             Linux
-2026-10-28T10:15:33.2086470Z Distro version:          #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026
-2026-10-28T10:15:33.2086846Z Kernel version:          7.0.0-1017-azure
-2026-10-28T10:15:33.2087300Z Architecture:            x86_64
-2026-10-28T10:15:33.2087974Z Available memory:        15983 MB
-2026-10-28T10:15:34.0097826Z User *** logged in successfully
-2026-10-28T10:15:34.0100733Z [UnityConnect::TryLogin] Request Succeeded.
-2026-10-28T10:15:34.0101595Z [Licensing::Module] Trying to connect to existing licensing client channel...
-2026-10-28T10:15:34.0103160Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
-2026-10-28T10:15:34.0114237Z [Licensing::Module] Successfully launched the LicensingClient (PId: 1885)
-2026-10-28T10:15:34.3874032Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-10-28T10:15:34.386588Z"
-2026-10-28T10:15:34.3876310Z [SignatureVerifier] Application signature verification not supported on this platform.
-2026-10-28T10:15:34.4280954Z [Licensing::Client] Handshaking with LicensingClient:
-2026-10-28T10:15:34.4281389Z   Version:                 1.16.0+1c867a9
-2026-10-28T10:15:34.4282074Z   Session Id:              615838ff1f624399b77321b3bc2f7b89
-2026-10-28T10:15:34.4282540Z   Correlation Id:          ac20d54c9e2262814c7c755a4e85b724
-2026-10-28T10:15:34.4283222Z   External correlation Id: 7906569211298525279
-2026-10-28T10:15:34.4283680Z   Machine Id:              3Xt+mnHA+mOMGZqzQXPKWgJKL28=
-2026-10-28T10:15:34.4285970Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.38s, validation: 0.04s, handshake: 0.00s)
-2026-10-28T10:15:34.4286918Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-10-28T10:15:34.427594Z"
-2026-10-28T10:15:34.4287764Z [Licensing::Module] Connected to LicensingClient (PId: 1885, launch time: 0.00, total connection time: 0.42s)
-2026-10-28T10:15:34.4436135Z [Licensing::Client] Successfully updated the access token
-2026-10-28T10:15:34.4436657Z [Licensing::Module] Successfully updated the access token K7-rsrDtOT...
-2026-10-28T10:15:35.9294480Z [Licensing::Client] Successfully processed license management request
-2026-10-28T10:15:35.9294984Z [Licensing::Module] Successfully returned the entitlement license
-2026-10-28T10:15:35.9527112Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
-2026-10-28T10:15:37.4255540Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
-2026-10-28T10:15:37.4342627Z 
-2026-10-28T10:15:37.4343190Z ###########################
-2026-10-28T10:15:37.4343528Z #         Failure         #
-2026-10-28T10:15:37.4343748Z ###########################
-2026-10-28T10:15:37.4343884Z 
-2026-10-28T10:15:37.4344036Z Please note that the exit code is not very descriptive.
-2026-10-28T10:15:37.4344378Z Most likely it will not help you solve the issue.
-2026-10-28T10:15:37.4344580Z 
-2026-10-28T10:15:37.4344894Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
-2026-10-28T10:15:37.4345273Z 
-2026-10-28T10:15:37.7661213Z ##[error]Build failed with exit code 1
+2026-10-28T10:35:03.4464663Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/NativeStream.cs
+2026-10-28T10:35:03.4464946Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Jobs/EarlyInitHelpers.cs
+2026-10-28T10:35:03.4465787Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/SimdDebugViews.cs
+2026-10-28T10:35:03.4466281Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Editor/BurstReflection.cs
+2026-10-28T10:35:03.4466618Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstCompilerOptions.cs
+2026-10-28T10:35:03.4466912Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/ShowcaseCycler.cs
+2026-10-28T10:35:03.4467212Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs
+2026-10-28T10:35:03.4467515Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CharacterCatalog.cs
+2026-10-28T10:35:03.4467829Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TextMeshProUGUI.cs
+2026-10-28T10:35:03.4468131Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TextContainer.cs
+2026-10-28T10:35:03.4468432Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_TextElement.cs
+2026-10-28T10:35:03.4468723Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_SubMeshUI.cs
+2026-10-28T10:35:03.4468967Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_StyleSheet.cs
+2026-10-28T10:35:03.4469132Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_SpriteGlyph.cs
+2026-10-28T10:35:03.4469309Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_SpriteAsset.cs
+2026-10-28T10:35:03.4469475Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_InputField.cs
+2026-10-28T10:35:03.4469634Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_FontAsset.cs
+2026-10-28T10:35:03.4469814Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_CoroutineTween.cs
+2026-10-28T10:35:03.4470229Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Character.cs
+2026-10-28T10:35:03.4470631Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.universal/Shaders/Shaders.cs
+2026-10-28T10:35:03.4471002Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4x4.gen.cs
+2026-10-28T10:35:03.4471366Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4x3.gen.cs
+2026-10-28T10:35:03.4471751Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4x2.gen.cs
+2026-10-28T10:35:03.4472102Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4.gen.cs
+2026-10-28T10:35:03.4472463Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3x4.gen.cs
+2026-10-28T10:35:03.4473012Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3x3.gen.cs
+2026-10-28T10:35:03.4473216Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3x2.gen.cs
+2026-10-28T10:35:03.4473475Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3.gen.cs
+2026-10-28T10:35:03.4473838Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2x4.gen.cs
+2026-10-28T10:35:03.4474049Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2x3.gen.cs
+2026-10-28T10:35:03.4474252Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2x2.gen.cs
+2026-10-28T10:35:03.4474505Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2.gen.cs
+2026-10-28T10:35:03.4474852Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x4.gen.cs
+2026-10-28T10:35:03.4475201Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x3.gen.cs
+2026-10-28T10:35:03.4475552Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x2.gen.cs
+2026-10-28T10:35:03.4475905Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x4.gen.cs
+2026-10-28T10:35:03.4476259Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x3.gen.cs
+2026-10-28T10:35:03.4476614Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x2.gen.cs
+2026-10-28T10:35:03.4476966Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x4.gen.cs
+2026-10-28T10:35:03.4477324Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x3.gen.cs
+2026-10-28T10:35:03.4477544Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x2.gen.cs
+2026-10-28T10:35:03.4477735Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half4.gen.cs
+2026-10-28T10:35:03.4478045Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half3.gen.cs
+2026-10-28T10:35:03.4478632Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half2.gen.cs
+2026-10-28T10:35:03.4479013Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x4.gen.cs
+2026-10-28T10:35:03.4479378Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x3.gen.cs
+2026-10-28T10:35:03.4479745Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x2.gen.cs
+2026-10-28T10:35:03.4480113Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4.gen.cs
+2026-10-28T10:35:03.4480483Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x4.gen.cs
+2026-10-28T10:35:03.4480845Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x3.gen.cs
+2026-10-28T10:35:03.4481187Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x2.gen.cs
+2026-10-28T10:35:03.4481686Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3.gen.cs
+2026-10-28T10:35:03.4481897Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x4.gen.cs
+2026-10-28T10:35:03.4482287Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x3.gen.cs
+2026-10-28T10:35:03.4482840Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x2.gen.cs
+2026-10-28T10:35:03.4483206Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2.gen.cs
+2026-10-28T10:35:03.4483771Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double4.gen.cs
+2026-10-28T10:35:03.4484166Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double3.gen.cs
+2026-10-28T10:35:03.4484547Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double2.gen.cs
+2026-10-28T10:35:03.4484919Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x4.gen.cs
+2026-10-28T10:35:03.4485282Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x3.gen.cs
+2026-10-28T10:35:03.4485645Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x2.gen.cs
+2026-10-28T10:35:03.4485884Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4.gen.cs
+2026-10-28T10:35:03.4486100Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x4.gen.cs
+2026-10-28T10:35:03.4486298Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x3.gen.cs
+2026-10-28T10:35:03.4486493Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x2.gen.cs
+2026-10-28T10:35:03.4486872Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3.gen.cs
+2026-10-28T10:35:03.4487259Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x4.gen.cs
+2026-10-28T10:35:03.4487617Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x3.gen.cs
+2026-10-28T10:35:03.4487975Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x2.gen.cs
+2026-10-28T10:35:03.4488328Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2.gen.cs
+2026-10-28T10:35:03.4488737Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/psrdnoise2D.cs
+2026-10-28T10:35:03.4489156Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise3Dgrad.cs
+2026-10-28T10:35:03.4489553Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular3D.cs
+2026-10-28T10:35:03.4489843Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular2x2.cs
+2026-10-28T10:35:03.4490067Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular2D.cs
+2026-10-28T10:35:03.4490276Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/xxHash3.AVX2.cs
+2026-10-28T10:35:03.4490489Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_rdma.cs
+2026-10-28T10:35:03.4490866Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_dotprod.cs
+2026-10-28T10:35:03.4491266Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_crypto.cs
+2026-10-28T10:35:03.4491576Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/VfxLibrary.cs
+2026-10-28T10:35:03.4492123Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs
+2026-10-28T10:35:03.4492420Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillBook.cs
+2026-10-28T10:35:03.4492938Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillAnims.cs
+2026-10-28T10:35:03.4493234Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SaveSystem.cs
+2026-10-28T10:35:03.4493576Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/LegendaryPowers.cs
+2026-10-28T10:35:03.4493871Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/ItemIcons.cs
+2026-10-28T10:35:03.4494053Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/IntroPlayer.cs
+2026-10-28T10:35:03.4494215Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/HeroOutfit.cs
+2026-10-28T10:35:03.4494377Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/GameConfig.cs
+2026-10-28T10:35:03.4494539Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Equipment.cs
+2026-10-28T10:35:03.4494697Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Difficulty.cs
+2026-10-28T10:35:03.4494857Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/CameraRig.cs
+2026-10-28T10:35:03.4495261Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Utility/VertexHelper.cs
+2026-10-28T10:35:03.4495602Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ToggleGroup.cs
+2026-10-28T10:35:03.4496139Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/SpriteState.cs
+2026-10-28T10:35:03.4496526Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Selectable.cs
+2026-10-28T10:35:03.4496863Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Scrollbar.cs
+2026-10-28T10:35:03.4497197Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ScrollRect.cs
+2026-10-28T10:35:03.4497526Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/RectMask2D.cs
+2026-10-28T10:35:03.4497870Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Navigation.cs
+2026-10-28T10:35:03.4498204Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/LayoutGroup.cs
+2026-10-28T10:35:03.4498431Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/CanvasScaler.cs
+2026-10-28T10:35:03.4498615Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/InputField.cs
+2026-10-28T10:35:03.4498792Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/IMaskable.cs
+2026-10-28T10:35:03.4499115Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ColorBlock.cs
+2026-10-28T10:35:03.4499453Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/random.cs
+2026-10-28T10:35:03.4499820Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/matrix.gen.cs
+2026-10-28T10:35:03.4500155Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/matrix.cs
+2026-10-28T10:35:03.4500537Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise4D.cs
+2026-10-28T10:35:03.4500910Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise3D.cs
+2026-10-28T10:35:03.4501278Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise2D.cs
+2026-10-28T10:35:03.4501620Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/common.cs
+2026-10-28T10:35:03.4501836Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/xxHash3.cs
+2026-10-28T10:35:03.4502029Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Unicode.cs
+2026-10-28T10:35:03.4502224Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Memory.cs
+2026-10-28T10:35:03.4502840Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Jobs/IJobFilter.cs
+2026-10-28T10:35:03.4503112Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/BitField.cs
+2026-10-28T10:35:03.4503396Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/NoAliasAttribute.cs
+2026-10-28T10:35:03.4503719Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/FunctionPointer.cs
+2026-10-28T10:35:03.4504035Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Editor/BurstLoader.cs
+2026-10-28T10:35:03.4504636Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Constant.cs
+2026-10-28T10:35:03.4504999Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Aliasing.cs
+2026-10-28T10:35:03.4505317Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstString.Float.cs
+2026-10-28T10:35:03.4505633Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstCompiler.cs
+2026-10-28T10:35:03.4505925Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Items.cs
+2026-10-28T10:35:03.4506190Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CreatorNames.cs
+2026-10-28T10:35:03.4506358Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CharacterRig.cs
+2026-10-28T10:35:03.4506572Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Culling/IClipRegion.cs
+2026-10-28T10:35:03.4506741Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TextMeshPro.cs
+2026-10-28T10:35:03.4506904Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_TextInfo.cs
+2026-10-28T10:35:03.4507111Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_SubMesh.cs
+2026-10-28T10:35:03.4507392Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Style.cs
+2026-10-28T10:35:03.4507668Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Sprite.cs
+2026-10-28T10:35:03.4507953Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Settings.cs
+2026-10-28T10:35:03.4508252Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_MeshInfo.cs
+2026-10-28T10:35:03.4508731Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_LineInfo.cs
+2026-10-28T10:35:03.4509048Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Dropdown.cs
+2026-10-28T10:35:03.4509326Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Asset.cs
+2026-10-28T10:35:03.4509613Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/FastAction.cs
+2026-10-28T10:35:03.4509976Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4.gen.cs
+2026-10-28T10:35:03.4510229Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3.gen.cs
+2026-10-28T10:35:03.4510567Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2.gen.cs
+2026-10-28T10:35:03.4510882Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Common.cs
+2026-10-28T10:35:03.4511088Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_ctor.cs
+2026-10-28T10:35:03.4511477Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64.cs
+2026-10-28T10:35:03.4511776Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/UIStyle.cs
+2026-10-28T10:35:03.4512044Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Sound.cs
+2026-10-28T10:35:03.4512338Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Skill.cs
+2026-10-28T10:35:03.4512819Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/RoofFade.cs
+2026-10-28T10:35:03.4513088Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Quest.cs
+2026-10-28T10:35:03.4513376Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Portal.cs
+2026-10-28T10:35:03.4513657Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Merchant.cs
+2026-10-28T10:35:03.4513823Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs
+2026-10-28T10:35:03.4513968Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs
+2026-10-28T10:35:03.4514117Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Health.cs
+2026-10-28T10:35:03.4514423Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Floater.cs
+2026-10-28T10:35:03.4514697Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Flicker.cs
+2026-10-28T10:35:03.4514861Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs
+2026-10-28T10:35:03.4515011Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Economy.cs
+2026-10-28T10:35:03.4515218Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/AutoTest.cs
+2026-10-28T10:35:03.4515597Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/VertexModifiers/Shadow.cs
+2026-10-28T10:35:03.4515974Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/VertexModifiers/Outline.cs
+2026-10-28T10:35:03.4516270Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Toggle.cs
+2026-10-28T10:35:03.4516855Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Slider.cs
+2026-10-28T10:35:03.4517180Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/RawImage.cs
+2026-10-28T10:35:03.4517484Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Image.cs
+2026-10-28T10:35:03.4517781Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/IMask.cs
+2026-10-28T10:35:03.4518103Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Graphic.cs
+2026-10-28T10:35:03.4518427Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/FontData.cs
+2026-10-28T10:35:03.4518784Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Dropdown.cs
+2026-10-28T10:35:03.4519158Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Culling/Clipping.cs
+2026-10-28T10:35:03.4519485Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Button.cs
+2026-10-28T10:35:03.4519782Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/svd.cs
+2026-10-28T10:35:03.4520106Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/math.cs
+2026-10-28T10:35:03.4520422Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half.cs
+2026-10-28T10:35:03.4520708Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/SharedStatic.cs
+2026-10-28T10:35:03.4521029Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Ssse3.cs
+2026-10-28T10:35:03.4521540Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse4_2.cs
+2026-10-28T10:35:03.4521912Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse4_1.cs
+2026-10-28T10:35:03.4522239Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Popcnt.cs
+2026-10-28T10:35:03.4522547Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Common.cs
+2026-10-28T10:35:03.4523055Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Hint.cs
+2026-10-28T10:35:03.4523327Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstString.cs
+2026-10-28T10:35:03.4523618Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstRuntime.cs
+2026-10-28T10:35:03.4523897Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/MorphRig.cs
+2026-10-28T10:35:03.4524077Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/MorphMap.cs
+2026-10-28T10:35:03.4524233Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Text.cs
+2026-10-28T10:35:03.4524474Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse3.cs
+2026-10-28T10:35:03.4524782Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse2.cs
+2026-10-28T10:35:03.4525090Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse.cs
+2026-10-28T10:35:03.4525384Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Fma.cs
+2026-10-28T10:35:03.4525663Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/F16C.cs
+2026-10-28T10:35:03.4525951Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Csr.cs
+2026-10-28T10:35:03.4526255Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Bmi2.cs
+2026-10-28T10:35:03.4526572Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Bmi1.cs
+2026-10-28T10:35:03.4526860Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Avx2.cs
+2026-10-28T10:35:03.4527049Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Avx.cs
+2026-10-28T10:35:03.4527215Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v64.cs
+2026-10-28T10:35:03.4527382Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v256.cs
+2026-10-28T10:35:03.4527542Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v128.cs
+2026-10-28T10:35:03.4527710Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON.cs
+2026-10-28T10:35:03.4527859Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs
+2026-10-28T10:35:03.4528002Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/HUD.cs
+2026-10-28T10:35:03.4528146Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/FX.cs
+2026-10-28T10:35:03.4528482Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Text.cs
+2026-10-28T10:35:03.4528969Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Misc.cs
+2026-10-28T10:35:03.4529252Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Mask.cs
+2026-10-28T10:35:03.4529534Z  0.1 kb	 0.0% Assets/Resources/PerformanceTestRunSettings.json
+2026-10-28T10:35:03.4529773Z  0.1 kb	 0.0% Assets/DefaultVolumeProfile.asset
+2026-10-28T10:35:03.4530150Z -------------------------------------------------------------------------------
+2026-10-28T10:35:03.4530501Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-28T10:35:03.4547265Z Unloading 239 unused Assets / (0.7 MB). Loaded Objects now: 7543.
+2026-10-28T10:35:03.4547971Z Memory consumption went from 179.3 MB to 178.6 MB.
+2026-10-28T10:35:03.4549253Z Total: 110.866458 ms (FindLiveObjects: 33.975602 ms CreateObjectMapping: 0.340306 ms MarkObjects: 28.835063 ms  DeleteObjects: 47.713394 ms)
+2026-10-28T10:35:03.4550313Z 
+2026-10-28T10:35:03.4550611Z Build Finished, Result: Success.
+2026-10-28T10:35:04.2787304Z ##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793183704277,"processId":1602,"steps":[{"description":"Preprocess Player","duration":181},{"description":"Prepare For Build","duration":2806},{"description":"ProducePlayerScriptAssemblies","duration":4432},{"description":"Verify Build setup","duration":162},{"description":"Prepare assets for target
+2026-10-28T10:35:04.2853994Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+2026-10-28T10:35:04.4855388Z Loaded scene 'Temp/__Backupscenes/0.backup'
+2026-10-28T10:35:04.4856152Z 	Deserialize:            2.967 ms
+2026-10-28T10:35:04.4856705Z 	Integration:            199.690 ms
+2026-10-28T10:35:04.4857244Z 	Integration of assets:  0.002 ms
+2026-10-28T10:35:04.4857754Z 	Thread Wait Time:       0.015 ms
+2026-10-28T10:35:04.4858257Z 	Total Operation Time:   202.674 ms
+2026-10-28T10:35:04.4949118Z Unloading 0 unused Assets / (8.6 KB). Loaded Objects now: 7536.
+2026-10-28T10:35:04.4949948Z Memory consumption went from 177.9 MB to 177.9 MB.
+2026-10-28T10:35:04.4951093Z Total: 9.809645 ms (FindLiveObjects: 1.271364 ms CreateObjectMapping: 0.168635 ms MarkObjects: 8.346362 ms  DeleteObjects: 0.022612 ms)
+2026-10-28T10:35:04.4951988Z 
+2026-10-28T10:35:04.6697136Z # Construction de l'APK Android
+2026-10-28T10:35:04.6697708Z 
+2026-10-28T10:35:04.6728548Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse
+2026-10-28T10:35:04.6729914Z - Icône : Assets/Korvalune/Resources/UI/Icone.png
+2026-10-28T10:35:04.6730896Z - Résultat : **Succeeded** en 6.1 min, 0 erreur(s), 13 avertissement(s)
+2026-10-28T10:35:04.6731543Z - APK : 719.4 Mo, version 0.1.1
+2026-10-28T10:35:04.6731839Z 
+2026-10-28T10:35:04.6732076Z ## Contenu empaqueté : 1614 Mo
+2026-10-28T10:35:04.6732515Z - Texture2D : 1061.0 Mo (2219)
+2026-10-28T10:35:04.6733144Z - Mesh : 278.6 Mo (579)
+2026-10-28T10:35:04.6733562Z - TextAsset : 233.3 Mo (15)
+2026-10-28T10:35:04.6733971Z - MonoBehaviour : 19.6 Mo (518)
+2026-10-28T10:35:04.6734423Z - AnimationClip : 7.2 Mo (248)
+2026-10-28T10:35:04.6734829Z - Shader : 4.4 Mo (56)
+2026-10-28T10:35:04.6735214Z - AudioClip : 3.1 Mo (144)
+2026-10-28T10:35:04.6735613Z - Avatar : 2.3 Mo (158)
+2026-10-28T10:35:04.6735996Z - Material : 1.5 Mo (922)
+2026-10-28T10:35:04.6736578Z - Transform : 0.9 Mo (11313)
+2026-10-28T10:35:04.6737105Z - TerrainData : 0.9 Mo (2)
+2026-10-28T10:35:04.6737583Z - Cubemap : 0.5 Mo (1)
+2026-10-28T10:35:04.6737887Z 
+2026-10-28T10:35:04.6738426Z ### Plus gros fichiers sources
+2026-10-28T10:35:04.6744041Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F_Morphs.bytes
+2026-10-28T10:35:04.6745209Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F_Morphs.bytes
+2026-10-28T10:35:04.6746239Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F_Morphs.bytes
+2026-10-28T10:35:04.6747344Z - 19.6 Mo — Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale_Morphs.bytes
+2026-10-28T10:35:04.6748367Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Varek_F/Varek_F_Morphs.bytes
+2026-10-28T10:35:04.6749327Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F_Morphs.bytes
+2026-10-28T10:35:04.6750290Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M_Morphs.bytes
+2026-10-28T10:35:04.6751350Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M_Morphs.bytes
+2026-10-28T10:35:04.6752404Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M_Morphs.bytes
+2026-10-28T10:35:04.6753654Z - 19.3 Mo — Assets/Korvalune/Art/Characters/BaseMale/BaseMale_Morphs.bytes
+2026-10-28T10:35:04.6754659Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Varek_M/Varek_M_Morphs.bytes
+2026-10-28T10:35:04.6755531Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M_Morphs.bytes
+2026-10-28T10:35:04.6756463Z - 13.5 Mo — Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
+2026-10-28T10:35:04.6757595Z - 13.5 Mo — Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
+2026-10-28T10:35:04.6758491Z - 13.0 Mo — Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
+2026-10-28T10:35:04.6759314Z - 12.6 Mo — Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
+2026-10-28T10:35:04.6760235Z - 12.6 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
+2026-10-28T10:35:04.6761217Z - 11.7 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
+2026-10-28T10:35:04.6762194Z - 11.2 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
+2026-10-28T10:35:04.6763364Z - 10.9 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
+2026-10-28T10:35:04.6764270Z - 10.7 Mo — Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
+2026-10-28T10:35:04.6765114Z - 10.4 Mo — Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
+2026-10-28T10:35:04.6765988Z - 9.0 Mo — Assets/Korvalune/Art/Enemies/LoupTenebres/LoupTenebres.fbx
+2026-10-28T10:35:04.6766969Z - 8.7 Mo — Assets/Korvalune/Art/Enemies/SorcierCorrompu/SorcierCorrompu.fbx
+2026-10-28T10:35:04.6767975Z - 7.8 Mo — Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
+2026-10-28T10:35:04.6768943Z - 6.7 Mo — Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale.fbx
+2026-10-28T10:35:04.6769952Z - 6.7 Mo — Assets/Korvalune/Art/Enemies/SqueletteGuerrier/SqueletteGuerrier.fbx
+2026-10-28T10:35:04.6770944Z - 6.4 Mo — Assets/Korvalune/Art/Characters/BaseMale/BaseMale.fbx
+2026-10-28T10:35:04.6771918Z - 6.2 Mo — Assets/Korvalune/Art/Enemies/ChevalierMaudit/ChevalierMaudit.fbx
+2026-10-28T10:35:04.6773173Z - 4.3 Mo — Assets/Korvalune/Art/Catalog/Models/F/hair/learning_anime_hair_F.fbx
+2026-10-28T10:35:04.6774100Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-10-28T10:35:04.6775361Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-10-28T10:35:04.6777135Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+2026-10-28T10:35:04.6778568Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+2026-10-28T10:35:04.6779588Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
+2026-10-28T10:35:04.6780277Z UnityEngine.Debug:Log (object)
+2026-10-28T10:35:04.6781189Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:88)
+2026-10-28T10:35:04.6781956Z 
+2026-10-28T10:35:04.6782345Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 88)
+2026-10-28T10:35:04.6783674Z 
+2026-10-28T10:35:04.7287054Z Starting: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/OpenJDK/bin/java -classpath "/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/gradle/lib/gradle-launcher-8.4.jar" org.gradle.launcher.GradleMain "-Dorg.gradle.jvmargs=-Xmx4096m" "--stop" 
+2026-10-28T10:35:04.7289218Z WorkingDir: 
+2026-10-28T10:35:06.7963714Z Killing ADB server in 0.369887 seconds.
+2026-10-28T10:35:07.8932920Z [Physics::Module] Cleanup current backned.
+2026-10-28T10:35:07.8933702Z [Physics::Module] Id: 0xf2b8ea05
+2026-10-28T10:35:07.9039969Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-10-28T10:35:07.9041026Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-10-28T10:35:07.9258855Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-10-28T10:35:08.0345064Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-28T10:35:08.0346044Z       Application is shutting down...
