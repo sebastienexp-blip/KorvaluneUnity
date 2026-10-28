@@ -67,7 +67,7 @@ namespace Korvalune.Game
         }
 
         static Vector3 Flat(Vector3 v) { v.y = 0; return v; }
-        void Face(Health h) { var dir = Flat(h.transform.position - Pos); if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); }
+        void Face(Health h) { p.AimAt = h; var dir = Flat(h.transform.position - Pos); if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); }
 
         /// <summary>Compétences qui visent un ennemi (les effets sur soi — buff, soin, bouclier, invocation — ne visent pas).</summary>
         static bool Aimable(SkillKind k) => !(k == SkillKind.Buff || k == SkillKind.Heal || k == SkillKind.Shield || k == SkillKind.Summon || k == SkillKind.Evade);
@@ -126,7 +126,7 @@ namespace Korvalune.Game
             // ciblage automatique : la cible du héros si elle est à portée, sinon l'ennemi le plus proche
             Health best = p.Target && !p.Target.Dead && Vector3.Distance(p.Target.transform.position, Pos) <= range && Sight.Clear(Pos, p.Target) ? p.Target : null; float bd = range;
             if (!best) foreach (var h in Health.Around(Pos, range, Faction.Player)) { float dd = Vector3.Distance(h.transform.position, Pos); if (dd < bd && Sight.Clear(Pos, h)) { bd = dd; best = h; } }
-            if (best) { var dir = best.transform.position - Pos; dir.y = 0; if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); return best.transform.position; }
+            if (best) { p.AimAt = best; var dir = best.transform.position - Pos; dir.y = 0; if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); return best.transform.position; }
             // cible plus loin que la portée : on vise dans sa direction, au bout de la portée
             if (p.Target && !p.Target.Dead)
             {

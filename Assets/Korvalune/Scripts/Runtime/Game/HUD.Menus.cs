@@ -316,7 +316,7 @@ namespace Korvalune.Game
             // réglages mémorisés
             AudioListener.volume = 1f;
             ShowDamageNumbers = PlayerPrefs.GetInt("korvalune.degats", 0) == 0;
-            ApplyUiScale(); ApplyCameraZoom();
+            ApplySettings();
         }
 
         void Update()
@@ -368,8 +368,11 @@ namespace Korvalune.Game
 
         void ShowOptions(bool on)
         {
-            optionsPanel.SetActive(on); pausePanel.SetActive(!on);
-            if (on) RefreshOptions();
+            // fenêtre d'options complète (onglets Graphismes, Son, Jeu, Interface) ; la pause réapparaît à la fermeture
+            optionsPanel.SetActive(false);
+            if (!on) { pausePanel.SetActive(Paused); return; }
+            pausePanel.SetActive(false);
+            OptionsMenu.Open(font, () => { if (pausePanel) pausePanel.SetActive(Paused); ApplySettings(); });
         }
 
         void BackToSelection()

@@ -168,7 +168,12 @@ namespace Korvalune.Game
             }
             if (glow) glow.intensity = (0.8f + 0.5f * (int)item.rarity) * (0.85f + 0.15f * Mathf.Sin(t * 3));
             if (beam) beam.localRotation = Quaternion.Euler(0, t * 40, 0);
-            // objets : on touche leur nom pour les ramasser (plus de ramassage automatique au passage)
+            // objets : on touche leur nom pour les ramasser ; ramassage automatique optionnel des raretés modestes
+            if (Settings.AutoLoot > 0 && (int)item.rarity < Settings.AutoLoot && t > 0.6f)
+            {
+                var hero = FindFirstObjectByType<PlayerController>();
+                if (hero && (hero.transform.position - transform.position).sqrMagnitude < pickupRadius * pickupRadius && hero.inventory.Count < Equipment.BagSize) TryPick(hero);
+            }
         }
     }
 }

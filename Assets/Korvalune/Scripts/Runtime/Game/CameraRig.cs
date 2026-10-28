@@ -14,7 +14,7 @@ namespace Korvalune.Game
         float shake;
         Camera cam;
 
-        public void Shake(float amount) { shake = Mathf.Max(shake, amount); }
+        public void Shake(float amount) { if (Settings.Shake == 0) shake = Mathf.Max(shake, amount); }
 
         Vector3 Offset => Quaternion.Euler(pitch, yaw, 0) * new Vector3(0, 0, -distance * zoom);
 

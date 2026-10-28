@@ -56,7 +56,7 @@ namespace Korvalune.Game
             v.Play();
         }
 
-        public static void UI(string id, float volume = 0.8f) => Play(id, null, volume, 0.03f, 0.03f);
+        public static void UI(string id, float volume = 0.8f) => Play(id, null, volume * Settings.UiVolume / Mathf.Max(0.01f, Effects), 0.03f, 0.03f);
 
         // ------------------------------------------------------------------ correspondances du jeu
         /// <summary>Son lancé avec une compétence (selon son type et son élément).</summary>
@@ -167,7 +167,7 @@ namespace Korvalune.Game
             float mv = Sound.Music;
             var on = aActive ? a : b; var off = aActive ? b : a;
             on.volume = mv * fade; off.volume = mv * (1 - fade); if (off.volume <= 0.001f && off.isPlaying) off.Stop();
-            amb.volume = Mathf.MoveTowards(amb.volume, string.IsNullOrEmpty(currentAmb) ? 0 : 0.55f * Sound.Effects, Time.unscaledDeltaTime * 0.5f);
+            amb.volume = Mathf.MoveTowards(amb.volume, string.IsNullOrEmpty(currentAmb) ? 0 : 0.55f * Settings.AmbienceVolume, Time.unscaledDeltaTime * 0.5f);
         }
 
         void Choose()

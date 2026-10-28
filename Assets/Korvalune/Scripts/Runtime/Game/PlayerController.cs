@@ -45,7 +45,7 @@ namespace Korvalune.Game
         public Health Health { get; private set; }
         public Animator Anim { get; private set; }
         CharacterController cc;
-        float vy, nextAttack, lockUntil;
+        float vy, nextAttack, lockUntil, nextBuzz; bool vibrateHooked;
         public float Speed { get; private set; }
         public bool Busy => Time.time < lockUntil;
 
@@ -63,6 +63,7 @@ namespace Korvalune.Game
         {
             cc = GetComponent<CharacterController>(); Health = GetComponent<Health>(); Anim = GetComponentInChildren<Animator>();
             if (skills == null || skills.Length == 0) skills = Skill.Defaults();
+            if (Health && !vibrateHooked) { vibrateHooked = true; Health.Damaged += (amt, src) => { if (amt > Health.maxHp * 0.08f && Time.unscaledTime > nextBuzz) { nextBuzz = Time.unscaledTime + 0.6f; OptionsMenu.Vibrate(); } }; }
             xpNext = XpForLevel(level);
         }
 
@@ -77,9 +78,18 @@ namespace Korvalune.Game
             Vector3 right = Vector3.Cross(Vector3.up, fwd);
             Vector3 dir = fwd * inp.y + right * inp.x;
             float mag = Mathf.Clamp01(dir.magnitude);
-            if (Busy) mag *= 0.15f;
+            // en attaquant ou en lançant une compétence, on peut continuer à se déplacer (moins vite au corps à corps)
+            // et le héros reste tourné vers sa cible : tir et sorts partent vers le monstre visé, pas vers le joystick
+            bool aiming = Busy && AimAt && !AimAt.Dead;
+            if (Busy) mag *= Ranged ? 0.6f : 0.35f;
             float spd = mag < 0.6f ? walkSpeed * mag / 0.6f : Mathf.Lerp(walkSpeed, runSpeed, (mag - 0.6f) / 0.4f);
-            if (mag > 0.05f && !Health.Stunned)
+            if (aiming)
+            {
+                var to = AimAt.transform.position - transform.position; to.y = 0;
+                if (to.sqrMagnitude > 0.01f) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(to), turnSpeed * 2f * Time.deltaTime);
+                if (mag <= 0.05f || Health.Stunned) spd = 0;
+            }
+            else if (mag > 0.05f && !Health.Stunned)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
             else spd = 0;
             UpdateSwim();
@@ -140,6 +150,7 @@ namespace Korvalune.Game
 
         void UpdateTarget(Vector2 stick)
         {
+            if (Settings.AutoAim == 1) { if (Target && (Target.Dead || (Target.transform.position - transform.position).sqrMagnitude > 16f)) Target = null; return; }
             Vector3 want = transform.forward;
             if (stick.sqrMagnitude > 0.04f && cam)
             {
@@ -187,6 +198,7 @@ namespace Korvalune.Game
         /// <summary>Cible des compétences : la cible automatique, sinon l'ennemi vivant le plus proche dans le rayon donné.</summary>
         public Health AcquireTarget(float range)
         {
+            if (Settings.AutoAim == 1) range = Mathf.Min(range, 3.5f);   // visée automatique coupée : seulement au contact
             if (Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= range) return Target;
             Health best = null; float bd = range;
             foreach (var h in Health.Around(transform.position, range, Faction.Player)) { float d = Vector3.Distance(h.transform.position, transform.position); if (d < bd && Sight.Clear(transform.position, h)) { bd = d; best = h; } }
@@ -235,15 +247,27 @@ namespace Korvalune.Game
         public bool Ranged => Loot.PlayerClass == Powers.V || Loot.PlayerClass == Powers.E;
         public float AttackReach => Ranged ? 13f : attackRange;
 
+        /// <summary>Monstre vers lequel le héros reste tourné pendant une attaque ou une compétence (même en se déplaçant).</summary>
+        public Health AimAt { get; set; }
+        bool Moving => (joystick && joystick.Value.sqrMagnitude > 0.04f) || new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).sqrMagnitude > 0.04f;
+
         public void Attack()
         {
             if (Health.Dead || Health.Stunned || Time.time < nextAttack || Busy) return;
             if (Ranged && (!Target || Target.Dead)) Target = AcquireTarget(AttackReach + 2f);
+            if (Moving)
+            {   // en mouvement : pas de course vers la cible, on frappe (ou on tire) sur le monstre visible le plus proche à portée
+                var near = AcquireTarget(AttackReach + (Ranged ? 1f : 1.2f));
+                if (near) Target = near;
+                if (Target && !Target.Dead && (Vector3.Distance(Target.transform.position, transform.position) > AttackReach + 1.5f || !Sight.Clear(transform.position, Target))) Target = null;
+            }
+            else
             // cible hors de portée ou cachée derrière un mur : le héros va la chercher automatiquement (1,5 s au plus)
             if (Target && !Target.Dead && (Vector3.Distance(Target.transform.position, transform.position) > AttackReach + 0.4f || !Sight.Clear(transform.position, Target)))
             { approach = true; approachUntil = Time.time + 1.5f; return; }
             nextAttack = Time.time + attackCooldown;
             FaceNearest(AttackReach + 2.5f);
+            AimAt = Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= AttackReach + 2.5f ? Target : null;
             Anim?.SetTrigger(CharacterRig.AttackId);
             Sound.Play(Loot.PlayerClass == Powers.E ? "sfx_trait_neant" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, 0.75f);
             lockUntil = Time.time + (Ranged ? 0.3f : 0.45f);

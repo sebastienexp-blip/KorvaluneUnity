@@ -69,7 +69,7 @@ namespace Korvalune.Game
         {
             if (Started) return; Started = true; Instance = this;
             FX.additive = config ? config.fxAdditive : null; FX.alpha = config ? config.fxAlpha : null; Vfx.lib = config ? config.vfx : null;
-            if (Application.isPlaying) GraphicsQuality.Apply(config, GraphicsQuality.Detect());
+            if (Application.isPlaying) { GraphicsQuality.Apply(config, GraphicsQuality.Detect()); Settings.Apply(); }
             if (Application.isPlaying) EnsureGroundCollision();
             Cam = Camera.main;
             if (!Cam) { Cam = new GameObject("Caméra").AddComponent<Camera>(); Cam.tag = "MainCamera"; }

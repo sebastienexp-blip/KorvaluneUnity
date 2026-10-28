@@ -59,11 +59,12 @@ namespace Korvalune.Game
             mapRect = mm;
             mapRT = new RenderTexture(512, 512, 16) { name = "MiniCarte" };
             var raw = new GameObject("Carte", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>(); Place((RectTransform)raw.transform, mm, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(300, 300)); raw.texture = mapRT;
-            var ringImg = Img(root, "Cadre", UIStyle.Ring(), new Vector2(1, 1), new Vector2(-22, -18), new Vector2(336, 336));
+            var ringImg = Img(root, "Cadre", UIStyle.Ring(), new Vector2(1, 1), new Vector2(-22, -18), new Vector2(336, 336)); mapFrame = ringImg.gameObject;
             arrow = Img(mm, "Joueur", UIStyle.Icon("leap", Color.white), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34)).rectTransform;
             arrow.GetComponent<Image>().sprite = Arrow();
             zoneText = Label(root, "Zone", zoneName, 24, TextAnchor.UpperCenter, new Vector2(1, 1), new Vector2(-40, -352), new Vector2(300, 32)); zoneText.verticalOverflow = VerticalWrapMode.Overflow;
-            var qp = Panel(root, "Quête", new Vector2(1, 1), new Vector2(-30, -400), new Vector2(380, 150));
+            var qp = Panel(root, "Quête", new Vector2(1, 1), new Vector2(-30, -400), new Vector2(380, 150)); questPanel = qp.gameObject;
+            fpsText = Label(root, "Images", "", 20, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(40, -250), new Vector2(200, 30)); fpsText.color = new Color(0.8f, 0.9f, 0.7f);
             Label(qp, "Titre", "Quête actuelle :", 24, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -16), new Vector2(340, 30)).color = UIStyle.Gold;
             questText = Label(qp, "Texte", "", 22, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -48), new Vector2(340, 90));
 
@@ -171,6 +172,7 @@ namespace Korvalune.Game
             if (notifyText && Time.time > notifyUntil) notifyText.color = Color.Lerp(notifyText.color, new Color(1, 1, 1, 0), 4 * Time.deltaTime);
             deathPanel.SetActive(h.Dead);
             UpdatePopups(); UpdateBars(); UpdateLootLabels(); UpdateMapDots();
+            if (fpsText && fpsText.gameObject.activeSelf) { fpsAcc += Time.unscaledDeltaTime; fpsFrames++; if (fpsAcc >= 0.5f) { fpsText.text = $"{Mathf.RoundToInt(fpsFrames / fpsAcc)} images/s"; fpsAcc = 0; fpsFrames = 0; } }
         }
 
         // ------------------------------------------------------------------------------------------ compétences
@@ -373,6 +375,18 @@ namespace Korvalune.Game
             }
         }
 
+        GameObject mapFrame, questPanel; Text fpsText; float fpsAcc; int fpsFrames;
+        /// <summary>Réglages d'interface (fenêtre d'options) : taille, zoom, carte, quête, compteur d'images.</summary>
+        public void ApplySettings()
+        {
+            ApplyUiScale(); ApplyCameraZoom();
+            ShowDamageNumbers = PlayerPrefs.GetInt("korvalune.degats", 0) == 0;
+            bool map = Settings.Minimap == 0; if (mapRect) mapRect.gameObject.SetActive(map); if (mapFrame) mapFrame.SetActive(map); if (zoneText) zoneText.gameObject.SetActive(map);
+            if (questPanel) questPanel.SetActive(Settings.QuestPanel == 0 && Settings.Minimap == 0);
+            if (fpsText) fpsText.gameObject.SetActive(Settings.FpsCounter == 0);
+            foreach (var kv in plates) kv.Value.shownLevel = -1;     // les noms se redessinent (taille)
+        }
+
         RectTransform mapRect; readonly List<Image> mapDots = new List<Image>(); float nextDots;
         /// <summary>Points de la mini-carte : monstres en rouge, champions en or, entrées de donjon en violet, ville en vert.</summary>
         void UpdateMapDots()
@@ -417,7 +431,7 @@ namespace Korvalune.Game
                 if (h.faction != Faction.Enemy) continue;
                 var ai = h.GetComponent<EnemyAI>(); if (ai && ai.side != Faction.Enemy) continue;     // pas les invocations du héros
                 float d2 = player ? (h.transform.position - player.transform.position).sqrMagnitude : 1e9f;
-                bool show = !h.Dead && d2 < 30 * 30;
+                bool show = !h.Dead && d2 < 30 * 30 && (Settings.EnemyNames == 0 || (Settings.EnemyNames == 1 && h == tgt));
                 if (!plates.TryGetValue(h, out var pl))
                 {
                     if (!show) continue;
@@ -440,7 +454,8 @@ namespace Korvalune.Game
                     string lv = h.level > 0 ? $"<b>Nv {h.level}</b>  " : "";
                     if (ai && ai.champion) lv = "<color=#f2c14e>★</color> " + lv;
                     pl.name.text = $"<color=#{ColorUtility.ToHtmlStringRGB(c)}>{lv}{h.displayName}</color>";
-                    pl.name.fontSize = isT ? 23 : 20;
+                    int ns = Settings.NameSize == 0 ? -4 : Settings.NameSize == 2 ? 5 : 0;
+                    pl.name.fontSize = (isT ? 23 : 20) + ns;
                 }
                 pl.fill.fillAmount = h.hp / h.maxHp;
                 var cc = h.GetComponent<CharacterController>();

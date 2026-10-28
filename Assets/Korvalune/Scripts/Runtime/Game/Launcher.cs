@@ -99,6 +99,38 @@ namespace Korvalune.Game
             var ib = Img(root, "Introduction", UIStyle.Slot(), new Vector2(1, 0), new Vector2(-110, 215), new Vector2(380, 64)); ib.type = Image.Type.Sliced; ib.raycastTarget = true;
             var it = Label(ib.rectTransform, "T", "Revoir l'introduction", 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 64)); it.color = UIStyle.Parch;
             var ibb = ib.gameObject.AddComponent<Button>(); ibb.targetGraphic = ib; ibb.onClick.AddListener(() => { if (!IntroPlayer.Playing) IntroPlayer.Show(font); });
+            // menu principal : options, crédits, quitter (au-dessus de « Revoir l'introduction »)
+            MenuButton(root, "Options", 290, () => OptionsMenu.Open(font));
+            MenuButton(root, "Crédits", 365, ShowCredits);
+            MenuButton(root, "Quitter", 440, () => Application.Quit());
+            Settings.Apply();
+        }
+
+        void MenuButton(RectTransform root, string label, float y, System.Action click)
+        {
+            var b = Img(root, label, UIStyle.Slot(), new Vector2(1, 0), new Vector2(-110, y), new Vector2(380, 64)); b.type = Image.Type.Sliced; b.raycastTarget = true;
+            var t = Label(b.rectTransform, "T", label, 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 64)); t.color = UIStyle.Parch;
+            var bb = b.gameObject.AddComponent<Button>(); bb.targetGraphic = b; bb.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.6f); click(); });
+        }
+
+        GameObject credits;
+        void ShowCredits()
+        {
+            if (credits) { Destroy(credits); return; }
+            var shade = Img(root, "Crédits", null, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(4000, 4000)); shade.color = new Color(0, 0, 0, 0.8f); shade.raycastTarget = true;
+            credits = shade.gameObject; shade.rectTransform.SetAsLastSibling();
+            var p = Img(shade.rectTransform, "Cadre", UIStyle.Ornate(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1000, 760)); p.type = Image.Type.Sliced;
+            var title = Label(p.rectTransform, "Titre", "KORVALUNE", 56, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0, -80), new Vector2(800, 80)); title.color = UIStyle.Gold; title.fontStyle = FontStyle.Bold;
+            var body = Label(p.rectTransform, "Texte",
+                "Une création de Sébastien\n\n" +
+                "Conception, programmation, modèles 3D, animations et décors :\nSébastien, avec l'aide de Claude (Anthropic)\n\n" +
+                "Sons, icônes peintes et cinématique : générés avec ElevenLabs\n" +
+                "Moteur : Unity 6 (URP)\n" +
+                "Corps humains : MakeHuman (CC0)\n\n" +
+                "Merci d'avoir joué !", 28, TextAnchor.UpperCenter, new Vector2(0.5f, 1), new Vector2(0, -170), new Vector2(860, 480));
+            body.color = UIStyle.Parch;
+            var close = shade.gameObject.AddComponent<Button>(); close.targetGraphic = shade; close.onClick.AddListener(() => { Destroy(credits); credits = null; });
+            Label(p.rectTransform, "Fermer", "Toucher pour fermer", 22, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0, 50), new Vector2(600, 40)).color = new Color(0.8f, 0.72f, 0.6f);
         }
 
         static string NotesText()
