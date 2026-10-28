@@ -461,11 +461,22 @@ namespace Korvalune.Game
                 if (!d) continue;
                 if (!lootLabels.TryGetValue(d, out var t))
                 {
-                    t = Label(root, "NomObjet", d.item.name, 22, TextAnchor.MiddleCenter, Vector2.zero, Vector2.zero, new Vector2(360, 30));
-                    t.color = Loot.ColorOf(d.item.rarity); t.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.9f);
+                    bool isGold = d.gold > 0;
+                    t = Label(root, "NomObjet", isGold ? $"{d.gold} or" : d.item.name, isGold ? 18 : 22, TextAnchor.MiddleCenter, Vector2.zero, Vector2.zero, new Vector2(360, 30));
+                    t.color = isGold ? new Color(1f, 0.82f, 0.3f) : Loot.ColorOf(d.item.rarity); t.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.9f);
+                    if (!isGold)
+                    {   // toucher le nom : le héros va chercher l'objet et le ramasse
+                        t.raycastTarget = true; t.rectTransform.sizeDelta = new Vector2(360, 44);   // zone de toucher confortable
+                        var drop = d; var b = t.gameObject.AddComponent<Button>(); b.transition = Selectable.Transition.None;
+                        b.onClick.AddListener(() =>
+                        {
+                            if (!drop || !player) return;
+                            if (!drop.TryPick(player)) player.WalkTo(drop.transform.position, () => { if (drop) drop.TryPick(player); });
+                        });
+                    }
                     lootLabels[d] = t;
                 }
-                Screen2Canvas(d.transform.position + Vector3.up * 0.9f, t.rectTransform);
+                Screen2Canvas(d.transform.position + Vector3.up * (d.gold > 0 ? 0.5f : 0.9f), t.rectTransform);
             }
             var gone = new List<LootDrop>();
             foreach (var kv in lootLabels) if (!kv.Key) { if (kv.Value) Destroy(kv.Value.gameObject); gone.Add(kv.Key); }
@@ -476,7 +487,10 @@ namespace Korvalune.Game
         {
             var sp = worldCam.WorldToScreenPoint(world);
             if (sp.z < 0) { rt.anchoredPosition = new Vector2(-9999, -9999); return; }
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(root, sp, Canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Canvas.worldCamera, out var lp);
+            // conversion directe écran → canevas : ne dépend pas de la position du canevas (en mode caméra, il ne suit la caméra
+            // qu'au rendu, avec une image de retard, d'où des noms qui sautaient quand la caméra bougeait)
+            var size = root.rect.size;
+            var lp = new Vector2((sp.x / Screen.width - 0.5f) * size.x, (sp.y / Screen.height - 0.5f) * size.y);
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f); rt.anchoredPosition = lp;
         }
 

@@ -34,13 +34,13 @@ namespace Korvalune.Game
             if (opened) return; opened = true;
             Sound.Play("sfx_coffre", transform.position);
             var r = new System.Random();
-            long g = Economy.GoldDrop(r, p.level, 1.5f) * 3; p.AddGold(g); p.Notify?.Invoke($"Trésor : +{g} or");
+            long g = Economy.GoldDrop(r, p.level, 1.5f) * 3; LootDrop.SpawnGold(g, LootDrop.Near(transform.position, transform.forward * 1.2f));
             int n = 2 + r.Next(3);
             for (int i = 0; i < n; i++)
             {
                 var it = Loot.Roll(r, p.level, luck);
                 var off = Quaternion.Euler(0, -60 + 120f * i / Mathf.Max(1, n - 1), 0) * (-transform.forward) * 1.6f;
-                LootDrop.Spawn(it, GameBootstrap.Ground(transform.position + off));
+                LootDrop.Spawn(it, LootDrop.Near(transform.position, off));
             }
             FX.Burst(transform.position + Vector3.up * 0.8f, new Color(1f, 0.82f, 0.3f), 50, 4f, 0.15f, 0.9f, 0.5f);
             if (glow) glow.intensity = 0.4f;

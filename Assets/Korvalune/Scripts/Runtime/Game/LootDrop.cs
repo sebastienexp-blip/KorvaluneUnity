@@ -8,6 +8,7 @@ namespace Korvalune.Game
     public class LootDrop : MonoBehaviour
     {
         public ItemSave item;
+        public long gold;                 // tas d'or : ramassé en marchant dessus (comme dans Diablo)
         public float pickupRadius = 1.6f;
         Light glow; Transform beam; float born;
         public static System.Action<ItemSave> Picked;
@@ -16,6 +17,49 @@ namespace Korvalune.Game
         void OnEnable() { All.Add(this); }
         void OnDisable() { All.Remove(this); }
         static void Kill(Object o) { if (!o) return; if (Application.isPlaying) Destroy(o); else DestroyImmediate(o); }
+
+        /// <summary>Point de chute près d'une source, jamais de l'autre côté d'un mur : on recule jusqu'avant l'obstacle.</summary>
+        public static Vector3 Near(Vector3 origin, Vector3 offset)
+        {
+            var a = origin + Vector3.up * 0.6f; var b = a + new Vector3(offset.x, 0, offset.z);
+            if (Sight.Obstacle(a, b, out var wall)) { var back = (wall - a); back.y = 0; b = a + back * Mathf.Max(0, (back.magnitude - 0.5f) / Mathf.Max(0.01f, back.magnitude)); }
+            return GameBootstrap.Ground(new Vector3(b.x, origin.y, b.z));
+        }
+
+        /// <summary>Tas de pièces d'or au sol (petit, moyen ou gros selon la somme).</summary>
+        public static LootDrop SpawnGold(long amount, Vector3 pos)
+        {
+            if (amount <= 0) return null;
+            var go = new GameObject($"Or {amount}"); go.transform.position = pos + Vector3.up * 0.02f;
+            var d = go.AddComponent<LootDrop>(); d.gold = amount; d.born = Time.time; d.pickupRadius = 1.4f;
+            int n = Mathf.Clamp(3 + (int)Mathf.Log(amount + 1, 2), 4, 14);
+            var gold = new Color(1f, 0.78f, 0.25f);
+            for (int i = 0; i < n; i++)
+            {
+                var o = Random.insideUnitCircle * (0.08f + 0.03f * n);
+                var c = GameObject.CreatePrimitive(PrimitiveType.Cylinder); c.name = "Pièce"; Kill(c.GetComponent<Collider>());
+                c.transform.SetParent(go.transform, false); c.transform.localPosition = new Vector3(o.x, 0.02f + 0.012f * (i % 3), o.y);
+                c.transform.localRotation = Quaternion.Euler(Random.Range(-12f, 12f), 0, Random.Range(-12f, 12f)); c.transform.localScale = new Vector3(0.11f, 0.008f, 0.11f);
+                var r = c.GetComponent<Renderer>(); r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                if (litBase) { var m = new Material(litBase); m.SetColor("_BaseColor", gold); m.SetFloat("_Metallic", 1f); m.SetFloat("_Smoothness", 0.75f); m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", gold * 0.35f); r.sharedMaterial = m; }
+            }
+            var l = new GameObject("Éclat").AddComponent<Light>(); l.transform.SetParent(go.transform, false); l.transform.localPosition = Vector3.up * 0.4f;
+            l.type = LightType.Point; l.color = gold; l.range = 1.6f; l.intensity = 0.8f; l.shadows = LightShadows.None;
+            if (!All.Contains(d)) All.Add(d);
+            Sound.Play("sfx_or", pos, 0.45f, 0.08f, 0.15f);
+            return d;
+        }
+
+        /// <summary>Ramassage d'un objet (toucher son nom) : seulement à portée et s'il reste de la place dans le sac.</summary>
+        public bool TryPick(PlayerController p)
+        {
+            if (!p || p.Health.Dead || gold > 0) return false;
+            if ((p.transform.position - transform.position).sqrMagnitude > (pickupRadius + 0.6f) * (pickupRadius + 0.6f)) return false;
+            if (p.inventory.Count >= Equipment.BagSize) { p.Notify?.Invoke("Sac plein"); return false; }
+            Picked?.Invoke(item);
+            FX.Burst(transform.position + Vector3.up * 0.4f, Loot.DisplayColor(item), 20, 3f, 0.12f, 0.5f, -0.3f);
+            Destroy(gameObject); return true;
+        }
 
         public static LootDrop Spawn(ItemSave it, Vector3 pos)
         {
@@ -96,15 +140,20 @@ namespace Korvalune.Game
         void Update()
         {
             float t = Time.time - born;
+            if (gold > 0)
+            {   // l'or se ramasse en marchant dessus
+                var hero = FindFirstObjectByType<PlayerController>();
+                if (hero && !hero.Health.Dead && t > 0.3f && (hero.transform.position - transform.position).sqrMagnitude < pickupRadius * pickupRadius)
+                {
+                    hero.AddGold(gold); hero.Notify?.Invoke($"<color=#ffd24a>+{gold} or</color>");
+                    FX.Burst(transform.position + Vector3.up * 0.3f, new Color(1f, 0.82f, 0.25f), 12, 2.5f, 0.1f, 0.5f, 0.6f);
+                    Destroy(gameObject);
+                }
+                return;
+            }
             if (glow) glow.intensity = (0.8f + 0.5f * (int)item.rarity) * (0.85f + 0.15f * Mathf.Sin(t * 3));
             if (beam) beam.localRotation = Quaternion.Euler(0, t * 40, 0);
-            var p = FindFirstObjectByType<PlayerController>();
-            if (p && !p.Health.Dead && t > 0.6f && p.inventory.Count < Equipment.BagSize && (p.transform.position - transform.position).sqrMagnitude < pickupRadius * pickupRadius)
-            {
-                Picked?.Invoke(item);
-                FX.Burst(transform.position + Vector3.up * 0.4f, Loot.DisplayColor(item), 20, 3f, 0.12f, 0.5f, -0.3f);
-                Destroy(gameObject);
-            }
+            // objets : on touche leur nom pour les ramasser (plus de ramassage automatique au passage)
         }
     }
 }

@@ -70,9 +70,16 @@ namespace Korvalune.Game
             {
                 var c = hits[i].collider;
                 if (c is TerrainCollider || c.GetComponentInParent<Health>() || c.transform.IsChildOf(target)) continue;
-                foreach (var r in c.GetComponentsInChildren<Renderer>())
+                // le collider est souvent posé à part du maillage visible (pont, arche, porte) : on remonte jusqu'à deux parents
+                // et on ne masque que les morceaux réellement traversés par la ligne de vue
+                var from = c.transform; for (int up = 0; up < 2 && from.parent && from.GetComponentsInChildren<Renderer>().Length == 0; up++) from = from.parent;
+                if (from.GetComponentsInChildren<Renderer>().Length == 0 && from.parent) from = from.parent;
+                var ray = new Ray(cam, dir);
+                foreach (var r in from.GetComponentsInChildren<Renderer>())
                 {
                     if (r is ParticleSystemRenderer || r is LineRenderer) continue;
+                    var bb = r.bounds; bb.Expand(radius * 2f);
+                    if (!bb.IntersectRay(ray, out var at) || at > dist) continue;
                     seen.Add(r);
                     if (!hidden.ContainsKey(r)) { hidden[r] = r.shadowCastingMode; r.shadowCastingMode = ShadowCastingMode.ShadowsOnly; }
                 }

@@ -46,12 +46,12 @@ namespace Korvalune.Game
                 {
                     var it = Loot.Roll(rng, lvl, elite * 1.2f + Difficulty.Luck);
                     var off = Random.insideUnitCircle * 1.4f;
-                    LootDrop.Spawn(it, GameBootstrap.Ground(transform.position + new Vector3(off.x, 0, off.y)));
+                    LootDrop.Spawn(it, LootDrop.Near(transform.position, new Vector3(off.x, 0, off.y)));
                 }
                 // or (ramassé aussitôt), éclats d'ombre sur les élites, gemmes rares
                 if (p)
                 {
-                    long g = (long)(Economy.GoldDrop(rng, lvl, elite) * Difficulty.Gold); p.AddGold(g);
+                    long g = (long)(Economy.GoldDrop(rng, lvl, elite) * Difficulty.Gold); var go2 = Random.insideUnitCircle * 0.9f; LootDrop.SpawnGold(g, LootDrop.Near(transform.position, new Vector3(go2.x, 0, go2.y)));
                     FX.Burst(transform.position + Vector3.up * 0.6f, new Color(1f, 0.82f, 0.25f), 14, 2.5f, 0.1f, 0.6f, 0.8f);
                     if (elite > 0.3f) { int sh = 1 + rng.Next(1 + (int)(elite * 4)); p.wallet.shadow += sh; p.Notify?.Invoke($"+{sh} éclats d'ombre"); }
                     if (rng.NextDouble() < 0.025 + 0.2 * elite)
