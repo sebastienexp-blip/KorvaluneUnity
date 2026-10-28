@@ -62,6 +62,22 @@ def rock(S=1024, seed=1004):
     return _tex(col, 1.5 * g + 0.8 * strata - 2.0 * cr, 0.25 + 0.1 * g, 0.9)
 
 
+def boulder(S=1024, seed=1014):
+    """Rochers isolés : granit gris-brun à grandes plages de teinte, grain fin, quelques fissures sombres, lichens clairs et
+    mousse verte (pas de strates serrées : vues de haut, elles faisaient des « empreintes digitales »)."""
+    r = np.random.default_rng(seed)
+    big = n01(fbm(S, S, r, base=S / 3, octaves=5)); mid = n01(fbm(S, S, r, base=S / 12, octaves=5))
+    grain = n01(noise(S, S, 1.2, r))
+    cr = gaussian_filter(scratches(S, S, r, 26, (0.08, 0.35), (1, 2), angle=1.0, spread=1.2), 1.0, mode='wrap')
+    lich = np.clip((n01(fbm(S, S, r, base=S / 16, octaves=4)) - 0.68) * 5, 0, 1)
+    moss = np.clip((n01(fbm(S, S, r, base=S / 7, octaves=4)) - 0.62) * 3.5, 0, 1)
+    base = np.array([0.46, 0.43, 0.39])[None, None] * (0.72 + 0.28 * big[..., None]) * (0.85 + 0.2 * mid[..., None]) * (0.92 + 0.12 * grain[..., None])
+    col = base * (1 - 0.55 * cr[..., None])
+    col = col * (1 - lich[..., None] * 0.5) + np.array([0.70, 0.71, 0.60])[None, None] * lich[..., None] * 0.5
+    col = col * (1 - moss[..., None] * 0.75) + np.array([0.22, 0.30, 0.12])[None, None] * moss[..., None] * 0.75
+    return _tex(col, 1.2 * mid + 0.4 * big + 0.5 * grain - 1.6 * cr + 0.3 * moss, 0.18 + 0.12 * mid + 0.1 * moss, 0.8)
+
+
 def sand(S=1024, seed=1005):
     """Sable du Désert des Étoiles : rides éoliennes, grains, paillettes."""
     r = np.random.default_rng(seed)
@@ -127,6 +143,7 @@ def leaves(S=1024, seed=1009, c1=(0.16, 0.30, 0.08), c2=(0.34, 0.46, 0.14), kind
     col = np.zeros((S, S, 3)); alpha = np.zeros((S, S)); hgt = np.zeros((S, S))
     yy, xx = np.mgrid[0:S, 0:S].astype(float)
     cw = S // cols
+    if kind == 'broad': return _leaf_clumps(S, r, c1, c2)
     for c in range(cols):
         for k in range(110 if kind == 'broad' else 320):
             cx = c * cw + r.uniform(0.12, 0.88) * cw; cy = r.uniform(0.08, 0.92) * S
@@ -152,6 +169,34 @@ def leaves(S=1024, seed=1009, c1=(0.16, 0.30, 0.08), c2=(0.34, 0.46, 0.14), kind
             x = int(c * cw + cw * (0.5 + 0.05 * np.sin(p * 6))); y = int((1 - p) * (S - 1))
             col[y, max(x - 2, 0):x + 2] = (0.25, 0.18, 0.10); alpha[y, max(x - 2, 0):x + 2] = 1
     return TexSet(np.clip(col, 0, 1), height_to_normal(gaussian_filter(hgt, 1), 0.8), np.zeros((S, S)), np.full((S, S), 0.3), np.clip(0.6 + 0.4 * hgt, 0, 1), None, alpha)
+
+
+def _leaf_clumps(S, r, c1, c2, cells=2):
+    """Atlas 2 × 2 de touffes rondes : feuilles ovales pointues rayonnant autour d'un rameau, denses au cœur et clairsemées
+    au bord (silhouette découpée, pas de carré visible), plus claires en haut (lumière du ciel), nervure centrale."""
+    col = np.zeros((S, S, 3)); alpha = np.zeros((S, S)); hgt = np.zeros((S, S))
+    yy, xx = np.mgrid[0:S, 0:S].astype(float); C = S // cells
+    for ci in range(cells):
+        for cj in range(cells):
+            ox, oy = ci * C, cj * C; cxc, cyc = ox + C / 2, oy + C / 2
+            for k in range(150):
+                rr = 0.44 * C * np.sqrt(r.uniform()) ; th = r.uniform(0, 2 * np.pi)
+                cx, cy = cxc + rr * np.cos(th), cyc + rr * np.sin(th)
+                L = r.uniform(0.07, 0.12) * C; W = L * 0.42
+                a = th + r.uniform(-0.6, 0.6)                                  # feuilles tournées vers l'extérieur
+                ca, sa = np.cos(a), np.sin(a)
+                x0, x1 = int(max(cx - L, ox)), int(min(cx + L, ox + C - 1)); y0, y1 = int(max(cy - L, oy)), int(min(cy + L, oy + C - 1))
+                if x1 <= x0 or y1 <= y0: continue
+                X = xx[y0:y1, x0:x1] - cx; Y = yy[y0:y1, x0:x1] - cy
+                u = (X * ca + Y * sa) / L; v = (-X * sa + Y * ca) / W
+                inside = (np.abs(v) < np.sqrt(np.clip(1 - u ** 2, 0, 1)) * (1 - 0.35 * u)) & (np.abs(u) < 1)
+                t = r.uniform(); light = 0.8 + 0.35 * (1 - (cy - oy) / C) + 0.15 * (rr / (0.44 * C))
+                cc = (np.array(c1) * (1 - t) + np.array(c2) * t) * light
+                hv = np.clip(1 - np.abs(v), 0, 1)
+                shade = (0.78 + 0.28 * hv) * (1 - 0.3 * (np.abs(v) < 0.07))
+                blk = col[y0:y1, x0:x1]; blk[inside] = cc[None] * shade[inside][..., None]
+                alpha[y0:y1, x0:x1][inside] = 1.0; hgt[y0:y1, x0:x1][inside] = hv[inside]
+    return TexSet(np.clip(col, 0, 1), height_to_normal(gaussian_filter(hgt, 1), 0.8), np.zeros((S, S)), np.full((S, S), 0.3), np.clip(0.55 + 0.45 * hgt, 0, 1), None, alpha)
 
 
 def water(S=512, seed=1010):

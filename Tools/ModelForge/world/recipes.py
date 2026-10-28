@@ -8,5 +8,5 @@ RECIPES = {
     'W_Bark':    (lambda S: WM.bark(S), 1024, 256, dict(metallic=0.0, smoothness=1.0)),
     'W_Leaves':  (lambda S: WM.leaves(S), 1024, 512, dict(metallic=0.0, smoothness=1.0, cutoff=0.5)),
     'W_Needles': (lambda S: WM.leaves(S, kind='needle', c1=(0.07, 0.17, 0.07), c2=(0.15, 0.27, 0.11)), 1024, 512, dict(metallic=0.0, smoothness=1.0, cutoff=0.5)),
-    'W_Rock':    (lambda S: WM.rock(S), 1024, 512, dict(metallic=0.0, smoothness=1.0)),
+    'W_Rock':    (lambda S: WM.boulder(S), 1024, 512, dict(metallic=0.0, smoothness=1.0)),
 }

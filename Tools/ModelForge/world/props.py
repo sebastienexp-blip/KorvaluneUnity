@@ -208,19 +208,29 @@ def castle():
 
 
 # ------------------------------------------------------------------------------------------- arbres
-def _cards(centers, size, rng, up_bias=0.3):
-    """Cartes de feuillage croisées (deux quads perpendiculaires) orientées au hasard autour de chaque centre."""
+def _cards(centers, size, rng, up_bias=0.3, atlas=2):
+    """Cartes de feuillage croisées (deux quads perpendiculaires) orientées au hasard autour de chaque centre ; chaque carte
+    prend une touffe ronde de l'atlas (2 × 2), à sa vraie proportion (plus de feuilles étirées)."""
     ms = []
     for c in centers:
         n = unit(rng.normal(0, 1, 3) + np.array([0, up_bias, 0]))
         t = unit(np.cross(n, (0, 1, 0)) + 1e-6); b = np.cross(n, t)
         s = size * rng.uniform(0.75, 1.25)
-        col = rng.integers(0, 2)
+        i, j = rng.integers(0, atlas, 2); u0, v0, du = i / atlas, j / atlas, 1 / atlas
         for ax1, ax2 in ((t, b), (unit(t + n), unit(b - n * 0.3))):
             P = np.array([c - ax1 * s / 2 - ax2 * s / 2, c + ax1 * s / 2 - ax2 * s / 2, c + ax1 * s / 2 + ax2 * s / 2, c - ax1 * s / 2 + ax2 * s / 2])
-            UV = np.array([[col * 0.5, 0], [col * 0.5 + 0.5, 0], [col * 0.5 + 0.5, 1], [col * 0.5, 1]])
+            UV = np.array([[u0, v0], [u0 + du, v0], [u0 + du, v0 + du], [u0, v0 + du]])
             ms.append(Mesh(P, np.array([[0, 1, 2], [0, 2, 3]]), UV))
     return concat(ms)
+
+
+def _canopy_normals(m, center, squash=(1.0, 0.8, 1.0), up=0.35):
+    """Normales « en dôme » : chaque carte prend la normale de la sphère du houppier à sa position. L'éclairage devient doux
+    et continu (on ne voit plus des dizaines de plaques à plat), le dessus est clair, le dessous sombre."""
+    d = (m.V - np.asarray(center)) / np.asarray(squash)
+    d = d / (np.linalg.norm(d, axis=1, keepdims=True) + 1e-9) + np.array([0, up, 0])
+    m.N = d / np.linalg.norm(d, axis=1, keepdims=True)
+    return m
 
 
 def oak(seed=0, H=9.0, lod=0):
@@ -239,12 +249,13 @@ def oak(seed=0, H=9.0, lod=0):
         end = top + unit(d) * L
         mid = top + unit(d) * L * 0.5 + np.array([0, 0.4, 0])
         a.add('branche', Loft(spline([top, mid, end], 10), curve([(0, .20), (1, .05)], 10), curve([(0, .20), (1, .05)], 10), p=2.2, segs=8, cap1=1).mesh(0.6), BARK)
-        for j in range(16 if not lod else 7):
+        for j in range(22 if not lod else 8):
             centers.append(end + rng.normal(0, 1.0, 3) * np.array([1.0, 0.7, 1.0]))
     crown = top + np.array([0, H * 0.25, 0])
-    for j in range(40 if not lod else 16):
+    for j in range(60 if not lod else 22):
         centers.append(crown + rng.normal(0, 1, 3) * np.array([2.3, 1.4, 2.3]))
-    a.add('feuillage', _cards(centers, 2.0 if not lod else 2.9, rng), LEAF)
+    leaves = _cards(centers, 1.7 if not lod else 2.7, rng)
+    a.add('feuillage', _canopy_normals(leaves, crown, (2.6, 1.9, 2.6)), LEAF)
     return a
 
 
@@ -268,20 +279,49 @@ def pine(seed=0, H=13.0, lod=0):
             for lift in (up, -up * 0.6):
                 Q = P + np.array([np.zeros(3), lift, lift, np.zeros(3)])
                 ms.append(Mesh(Q, np.array([[0, 1, 2], [0, 2, 3]]), np.array([[col * 0.5, 0], [col * 0.5, 1], [col * 0.5 + 0.5, 1], [col * 0.5 + 0.5, 0]])))
-    a.add('aiguilles', concat(ms), NEEDLE)
+    needles = concat(ms)
+    a.add('aiguilles', _canopy_normals(needles, (0, H * 0.45, 0), (1.0, 2.6, 1.0), 0.45), NEEDLE)
     return a
 
 
 def rock(seed=0, size=2.5):
-    rng = np.random.default_rng(seed)
-    s = SC.Sculpt(k=0.12 * size)
-    for k in range(5):
-        c = rng.normal(0, 0.35, 3) * size; c[1] = abs(c[1]) * 0.6
-        s.ell('root', c, rng.uniform(0.35, 0.7, 3) * size * np.array([1.0, 0.7, 1.0]), fwd=unit(rng.normal(0, 1, 3)))
-    det = lambda X: 0.06 * size * SC.noise3(X, 0.35 * size, seed=seed, octaves=3)
-    m = s.mesh(res=0.06 * size, detail=det, smooth=2)
-    m.V[:, 1] -= 0.15 * size
-    SC.box_uv(m, 2.0)
+    """Rocher anguleux : enveloppe convexe de points tirés sur un ellipsoïde écrasé (grandes faces planes et arêtes vives,
+    comme une pierre fendue), faces subdivisées puis légèrement bosselées (bruit commun aux arêtes : pas de fissure),
+    strates horizontales creusées, base enfoncée dans le sol. Normales par face : les arêtes restent nettes."""
+    from scipy.spatial import ConvexHull
+    rng = np.random.default_rng(100 + seed)
+    ax = np.array([1.0, 0.62 + 0.12 * rng.random(), 0.8 + 0.2 * rng.random()]) * size * 0.55
+    P = rng.normal(0, 1, (26 + 6 * seed, 3)); P /= np.linalg.norm(P, axis=1, keepdims=True)
+    P *= rng.uniform(0.78, 1.0, (len(P), 1)); P *= ax; P[:, 1] = np.maximum(P[:, 1], -0.35 * ax[1])
+    hull = ConvexHull(P); cen = P.mean(0)
+    def disp(X):
+        n = 0.05 * size * SC.noise3(X, 0.55 * size, seed=seed, octaves=3)
+        strata = 0.025 * size * np.sin(X[:, 1] / (0.11 * size) * np.pi) ** 8          # strates horizontales
+        return n - strata
+    Vs, Fs = [], []
+    for tri in hull.simplices:
+        a_, b_, c_ = P[tri]
+        if np.dot(np.cross(b_ - a_, c_ - a_), a_ - cen) < 0: b_, c_ = c_, b_
+        n = 4                                                                            # subdivision de chaque face
+        base = len(Vs); idx = {}
+        for i in range(n + 1):
+            for j in range(n + 1 - i):
+                k = n - i - j; idx[(i, j)] = len(Vs); Vs.append((a_ * i + b_ * j + c_ * k) / n)
+        for i in range(n):
+            for j in range(n - i):
+                Fs.append((idx[(i, j)], idx[(i + 1, j)], idx[(i, j + 1)]))
+                if i + j < n - 1: Fs.append((idx[(i + 1, j)], idx[(i + 1, j + 1)], idx[(i, j + 1)]))
+    V = np.array(Vs); F = np.array(Fs)
+    out = V - cen; out /= np.linalg.norm(out, axis=1, keepdims=True) + 1e-9
+    V = V + out * disp(V)[:, None]
+    V[:, 1] -= 0.22 * ax[1]                                                              # base enfoncée
+    m = Mesh(V, F)                    # sommets propres à chaque grande face : arêtes vives à l'ombrage
+    SC.box_uv(m, 2.6)
     m.J = np.zeros((len(m.V), 4), np.int64); m.W = np.tile([1.0, 0, 0, 0], (len(m.V), 1))
     a = Asset(f'Rocher{seed}'); a.add('roche', m, ROCK)
     return a
+
+
+def _weld(m, inv):
+    n = inv.max() + 1; V = np.zeros((n, 3)); V[inv] = m.V
+    return Mesh(V, inv[m.F])

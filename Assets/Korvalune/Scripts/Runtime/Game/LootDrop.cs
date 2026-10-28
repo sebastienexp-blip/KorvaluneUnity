@@ -32,22 +32,37 @@ namespace Korvalune.Game
             if (amount <= 0) return null;
             var go = new GameObject($"Or {amount}"); go.transform.position = pos + Vector3.up * 0.02f;
             var d = go.AddComponent<LootDrop>(); d.gold = amount; d.born = Time.time; d.pickupRadius = 1.4f;
-            int n = Mathf.Clamp(3 + (int)Mathf.Log(amount + 1, 2), 4, 14);
-            var gold = new Color(1f, 0.78f, 0.25f);
+            // vraies pièces : disques d'or épais à tranche plus sombre, empilés en petites piles, d'autres à plat ou sur la tranche
+            int n = Mathf.Clamp(4 + (int)(Mathf.Log(amount + 1, 2) * 1.5f), 6, 22);
+            var face = new Color(1f, 0.80f, 0.32f); var rim = new Color(0.62f, 0.42f, 0.12f);
+            Material Mat(Color c, float sm) { if (!litBase) return null; var m = new Material(litBase); m.SetColor("_BaseColor", c); m.SetFloat("_Metallic", 1f); m.SetFloat("_Smoothness", sm); return m; }
+            var mFace = Mat(face, 0.82f); var mRim = Mat(rim, 0.55f);
+            int piles = 1 + n / 7; var pileAt = new Vector2[piles]; var pileH = new int[piles];
+            for (int k = 0; k < piles; k++) pileAt[k] = Random.insideUnitCircle * 0.16f;
             for (int i = 0; i < n; i++)
             {
-                var o = Random.insideUnitCircle * (0.08f + 0.03f * n);
-                var c = GameObject.CreatePrimitive(PrimitiveType.Cylinder); c.name = "Pièce"; Kill(c.GetComponent<Collider>());
-                c.transform.SetParent(go.transform, false); c.transform.localPosition = new Vector3(o.x, 0.02f + 0.012f * (i % 3), o.y);
-                c.transform.localRotation = Quaternion.Euler(Random.Range(-12f, 12f), 0, Random.Range(-12f, 12f)); c.transform.localScale = new Vector3(0.11f, 0.008f, 0.11f);
-                var r = c.GetComponent<Renderer>(); r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-                if (litBase) { var m = new Material(litBase); m.SetColor("_BaseColor", gold); m.SetFloat("_Metallic", 1f); m.SetFloat("_Smoothness", 0.75f); m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", gold * 0.35f); r.sharedMaterial = m; }
+                var coin = new GameObject("Pièce").transform; coin.SetParent(go.transform, false);
+                if (i % 5 == 4) { var o = Random.insideUnitCircle * 0.3f; coin.localPosition = new Vector3(o.x, 0.055f, o.y); coin.localRotation = Quaternion.Euler(Random.Range(70f, 90f), Random.Range(0f, 360f), 0); }
+                else if (i % 3 == 0) { var o = Random.insideUnitCircle * 0.28f; coin.localPosition = new Vector3(o.x, 0.008f, o.y); coin.localRotation = Quaternion.Euler(Random.Range(-8f, 8f), Random.Range(0f, 360f), Random.Range(-8f, 8f)); }
+                else { int k = i % piles; var o = pileAt[k] + Random.insideUnitCircle * 0.012f; coin.localPosition = new Vector3(o.x, 0.008f + 0.017f * pileH[k]++, o.y); coin.localRotation = Quaternion.Euler(Random.Range(-4f, 4f), Random.Range(0f, 360f), Random.Range(-4f, 4f)); }
+                // disque (tranche sombre) + deux faces légèrement en relief (plus claires) + petit anneau gravé
+                Disc(coin, Vector3.zero, new Vector3(0.11f, 0.0075f, 0.11f), mRim);
+                Disc(coin, Vector3.up * 0.0035f, new Vector3(0.096f, 0.0045f, 0.096f), mFace);
+                Disc(coin, Vector3.down * 0.0035f, new Vector3(0.096f, 0.0045f, 0.096f), mFace);
+                Disc(coin, Vector3.up * 0.0062f, new Vector3(0.05f, 0.0015f, 0.05f), mRim);
             }
             var l = new GameObject("Éclat").AddComponent<Light>(); l.transform.SetParent(go.transform, false); l.transform.localPosition = Vector3.up * 0.4f;
-            l.type = LightType.Point; l.color = gold; l.range = 1.6f; l.intensity = 0.8f; l.shadows = LightShadows.None;
+            l.type = LightType.Point; l.color = face; l.range = 1.4f; l.intensity = 0.5f; l.shadows = LightShadows.None;
             if (!All.Contains(d)) All.Add(d);
             Sound.Play("sfx_or", pos, 0.45f, 0.08f, 0.15f);
             return d;
+        }
+
+        static void Disc(Transform parent, Vector3 pos, Vector3 scale, Material m)
+        {
+            var c = GameObject.CreatePrimitive(PrimitiveType.Cylinder); Kill(c.GetComponent<Collider>());
+            c.transform.SetParent(parent, false); c.transform.localPosition = pos; c.transform.localScale = scale;
+            var r = c.GetComponent<Renderer>(); r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; if (m) r.sharedMaterial = m;
         }
 
         /// <summary>Ramassage d'un objet (toucher son nom) : seulement à portée et s'il reste de la place dans le sac.</summary>
