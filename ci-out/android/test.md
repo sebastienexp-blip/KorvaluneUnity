@@ -1,7 +1,7 @@
 # Test de l'APK dans un émulateur Android (API 30, x86_64)
 
 - Android 11
-- APK : 778.8 Mo
+- APK : 764.6 Mo
 - ✅ Installation
 - ✅ Jeu en cours d'exécution à 20 s (capture ecran_20s.png)
 - ✅ Jeu en cours d'exécution à 45 s (capture ecran_45s.png)
@@ -13,7 +13,6 @@
     [Korvalune] partie automatique : activée
     [Korvalune][test] lanceur prêt : on joue
     [Korvalune][test] chargement de la scène « Korvalune_Vallee » avec Testeur
-    [Korvalune][test] chargement 90 %
     [Korvalune][test] chargement 90 %
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
