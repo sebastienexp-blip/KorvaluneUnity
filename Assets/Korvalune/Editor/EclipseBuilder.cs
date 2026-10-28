@@ -409,14 +409,14 @@ namespace Korvalune.EditorTools
                 int blocked = 0; string where = "";
                 var path = new List<Vector3> { Ground(Arrival), Ground(WestGate + new Vector2(-30, 0)), Ground(WestGate + new Vector2(6, 0)), Ground(City + new Vector2(-8, 0)), Ground(City + new Vector2(-4, -6)), Ground(City + new Vector2(4, -6)), Ground(City + new Vector2(8, 0)), new Vector3(City.x + CityR - 4, CityH, 0), new Vector3(Spire.x - 6, CityH, Spire.y) };
                 // on suit le sol mètre par mètre : pente franchissable et rien à hauteur de buste entre deux pas
-                Vector3 Feet(Vector3 q) => Physics.Raycast(new Vector3(q.x, 200f, q.z), Vector3.down, out var g, 400f) ? g.point : q;
+                Vector3 Feet(Vector3 q, float from) => Physics.Raycast(new Vector3(q.x, from + 2.5f, q.z), Vector3.down, out var g, 12f) ? g.point : q;   // sous les arches, pas sur leur toit
                 for (int i = 0; i < path.Count - 1 && blocked == 0; i++)
                 {
                     int n = Mathf.CeilToInt(Vector3.Distance(path[i], path[i + 1]));
-                    var prev = Feet(path[i]);
+                    var prev = Feet(path[i], path[i].y);
                     for (int k = 1; k <= n; k++)
                     {
-                        var cur = Feet(Vector3.Lerp(path[i], path[i + 1], k / (float)n));
+                        var cur = Feet(Vector3.Lerp(path[i], path[i + 1], k / (float)n), prev.y);
                         var a = prev + Vector3.up * 1.2f; var b = cur + Vector3.up * 1.2f;
                         string hit = null;
                         if (cur.y - prev.y > 1.1f) hit = "pente";
