@@ -131,7 +131,7 @@ reg('PNJ_Armurier', False, dict(skin='young_caucasian_male', hair='short02', hai
 def _marchand(T):
     T.hose('NM_Brown', low=0.36); T.boots('NM_Boot', 0.40)
     T.shirt('NM_Green', hem=T.waist - 0.06, sleeve=0.95, neck=0.03, ease=0.022, max_ease=0.06, hem_rise=0.0)
-    T.skirt('NM_Green', T.waist - 0.02, 0.50, ease=0.018, flare=0.10, layer=3, name='cotte_pans')
+    T.skirt('NM_Green', T.waist - 0.02, 0.56, ease=0.018, flare=0.10, layer=3, name='cotte_pans')
     T.trim('chemise', 'NM_Gold', r=0.004, sel=lambda c: c[1] > T.waist + 0.15)
     T.trim('cotte_pans', 'NM_Gold', r=0.004, sel=lambda c: c[1] < 0.7)
     T.belt('NM_Boot', 'NM_Gold', layer=4); T.hat('NM_Felt', 'NM_Band')
