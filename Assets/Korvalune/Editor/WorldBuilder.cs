@@ -135,6 +135,7 @@ namespace Korvalune.EditorTools
             var tmat = new Material(Shader.Find("Universal Render Pipeline/Terrain/Lit")); var tmp = Root + "/Rendering/Terrain.mat";
             AssetDatabase.DeleteAsset(tmp); AssetDatabase.CreateAsset(tmat, tmp); terrain.materialTemplate = tmat;
             Trees(td, terrain);
+            Grass(td);
             CI.Step("vallée : arbres");
             terrain.Flush();
 
@@ -149,6 +150,7 @@ namespace Korvalune.EditorTools
             // ---- château, pont, rochers
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
             TownBuilder.Build();
+            Hamlets();
             CaveBuilder.ValleyEntrance();
             BridgeObject();
             var rng = new System.Random(7);
@@ -169,7 +171,7 @@ namespace Korvalune.EditorTools
                 else
                 {
                     do { o = new Vector2((float)rng.NextDouble() * Size - Size / 2, (float)rng.NextDouble() * Size - Size / 2); }
-                    while (o.magnitude < TownBuilder.WallR + 12 || RoadDist(o) < 10 || RiverDist(o) < 14 || o.x > 240);
+                    while (o.magnitude < TownBuilder.WallR + 12 || RoadDist(o) < 10 || RiverDist(o) < 14 || o.x > 240 || NearHamlet(o, 20));
                 }
                 Place($"World/Rocher{k % 3}", Ground(o) - Vector3.up * 0.3f, (float)rng.NextDouble() * 360, 0.6f + (float)rng.NextDouble() * (o.x < -150 ? 2.5f : 1.2f));
             }
@@ -198,7 +200,10 @@ namespace Korvalune.EditorTools
             Ambience(cam.transform);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = Config();
-            game.playerSpawn = Ground(new Vector2(-8, -162));
+            game.playerSpawn = Ground(new Vector2(0, -68));            // en ville, rue principale au sud de la place du marché
+            game.safeCenter = Vector3.zero; game.safeRadius = TownBuilder.WallR + 6f;   // la ville : aucun monstre
+            game.waterLevel = WaterLevel; game.populate = true; game.metersPerLevel = 13f;
+            game.noCamps.Clear(); foreach (var h in HamletSites) game.noCamps.Add(Ground(h));   // pas de camp de monstres dans les hameaux
             game.castleGate = Ground(Gate);
             game.camps.Add(new GameBootstrap.Camp { enemyId = "squelette", center = Ground(grave), count = 6, radius = 10 });
             game.camps.Add(new GameBootstrap.Camp { enemyId = "loup", center = Ground(new Vector2(45, 120)), count = 4, radius = 8 });
@@ -227,6 +232,112 @@ namespace Korvalune.EditorTools
         }
 
         public static Vector3 Ground(Vector2 p) => new Vector3(p.x, Height(p.x, p.y), p.y);
+
+        // ------------------------------------------------------------------------------------------ hameaux et herbe
+        /// <summary>Hameaux le long des routes, hors les murs : fermes et maisons autour d'un puits, foin, charrette, tonneaux.</summary>
+        public static readonly Vector2[] HamletSites = { new Vector2(112, 24), new Vector2(-30, -158), new Vector2(140, -150), new Vector2(60, 92), new Vector2(-42, -208) };
+        static bool NearHamlet(Vector2 p, float r) { foreach (var h in HamletSites) if ((p - h).magnitude < r) return true; return false; }
+
+        static GameObject Ville(string name, Vector3 pos, float yaw)
+        {
+            var p = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Resources/Prefabs/World/Ville/{name}.prefab");
+            if (!p) { Debug.LogWarning("[Monde] pièce de hameau absente : " + name); return null; }
+            var go = (GameObject)PrefabUtility.InstantiatePrefab(p);
+            go.transform.position = pos; go.transform.rotation = Quaternion.Euler(0, yaw, 0); return go;
+        }
+
+        static void Hamlets()
+        {
+            var rng = new System.Random(11);
+            var root = new GameObject("Hameaux").transform;
+            foreach (var c in HamletSites)
+            {
+                var well = Ville("M_Puits", Ground(c) - Vector3.up * 0.15f, (float)rng.NextDouble() * 360);
+                if (well) well.transform.SetParent(root, true);
+                int houses = 3 + rng.Next(2);
+                float a0 = (float)rng.NextDouble() * 360;
+                for (int k = 0; k < houses; k++)
+                {
+                    float a = (a0 + k * 360f / houses + (float)rng.NextDouble() * 20 - 10) * Mathf.Deg2Rad;
+                    var p = c + new Vector2(Mathf.Cos(a), Mathf.Sin(a)) * (12f + (float)rng.NextDouble() * 3f);
+                    if (RoadDist(p) < 6.5f || RiverDist(p) < 16f) continue;
+                    var face = c - p; float yaw = Mathf.Atan2(-face.x, -face.y) * Mathf.Rad2Deg;        // façade (−Z local) vers le puits
+                    var h = Ville($"M_Maison{rng.Next(8)}", Ground(p) - Vector3.up * 0.35f, yaw);
+                    if (h) h.transform.SetParent(root, true);
+                }
+                string[] small = { "M_Foin", "M_Charrette", "M_Tonneaux", "M_Caisses", "M_Banc", "M_Lanterne" };
+                for (int k = 0; k < 4; k++)
+                {
+                    float a = (float)rng.NextDouble() * Mathf.PI * 2;
+                    var p = c + new Vector2(Mathf.Cos(a), Mathf.Sin(a)) * (5f + (float)rng.NextDouble() * 3f);
+                    if (RoadDist(p) < 4f) continue;
+                    var g = Ville(small[rng.Next(small.Length)], Ground(p) - Vector3.up * 0.05f, (float)rng.NextDouble() * 360);
+                    if (g) g.transform.SetParent(root, true);
+                }
+            }
+            foreach (var t in root.GetComponentsInChildren<Transform>()) t.gameObject.isStatic = true;
+        }
+
+        /// <summary>Herbes hautes peintes sur le terrain (prairies, lisières), absentes des routes, de la ville, du désert et des crêtes.</summary>
+        static void Grass(TerrainData td)
+        {
+            var tex = GrassTexture(); if (!tex) return;
+            var proto = new DetailPrototype
+            {
+                prototypeTexture = tex, renderMode = DetailRenderMode.GrassBillboard, usePrototypeMesh = false,
+                minWidth = 0.7f, maxWidth = 1.3f, minHeight = 0.45f, maxHeight = 0.95f, noiseSpread = 0.4f,
+                healthyColor = new Color(0.58f, 0.70f, 0.34f), dryColor = new Color(0.74f, 0.68f, 0.40f)
+            };
+            td.detailPrototypes = new[] { proto };
+            int R = td.detailResolution; var map = new int[R, R];
+            for (int j = 0; j < R; j++) for (int i = 0; i < R; i++)
+            {
+                float x = -Size / 2 + Size * (i + 0.5f) / R, z = -Size / 2 + Size * (j + 0.5f) / R; var p = new Vector2(x, z);
+                if (p.magnitude < TownBuilder.WallR + 6 || RoadDist(p) < 4.5f || RiverDist(p) < 9f || x > 232 || NearHamlet(p, 9)) continue;
+                float h = Height(x, z);
+                if (h < WaterLevel + 0.6f || h > 48f) continue;
+                float dens = Mathf.PerlinNoise(x * 0.035f + 3.1f, z * 0.035f - 1.7f);
+                dens *= 1f - 0.85f * Smooth(-170, -215, z);                         // le désert du sud est nu
+                dens *= 1f - 0.6f * Smooth(-130, -175, x);                          // la montagne est rase
+                map[j, i] = Mathf.RoundToInt(Mathf.Clamp01((dens - 0.25f) * 1.6f) * 7f);
+            }
+            td.SetDetailLayer(0, 0, 0, map);
+        }
+
+        /// <summary>Texture de touffe d'herbe (brins effilés, transparence), créée une fois dans Art/World/Terrain.</summary>
+        static Texture2D GrassTexture()
+        {
+            var path = WorldArt + "/Terrain/Herbe_Touffe.png";
+            if (!File.Exists(path))
+            {
+                ModelPipeline.EnsureFolder(WorldArt + "/Terrain");
+                const int W = 128, H = 128; var t = new Texture2D(W, H, TextureFormat.RGBA32, false);
+                var px = new Color[W * H]; var rng = new System.Random(5);
+                for (int b = 0; b < 26; b++)
+                {
+                    float x0 = 10 + (float)rng.NextDouble() * (W - 20), lean = ((float)rng.NextDouble() - 0.5f) * 30f, hgt = H * (0.55f + 0.42f * (float)rng.NextDouble());
+                    float wid = 2.5f + (float)rng.NextDouble() * 2.5f; float shade = 0.75f + 0.25f * (float)rng.NextDouble();
+                    for (int y = 0; y < hgt; y++)
+                    {
+                        float f = y / hgt; float cx = x0 + lean * f * f; float w = wid * (1 - f);
+                        for (int x = Mathf.FloorToInt(cx - w - 1); x <= Mathf.CeilToInt(cx + w + 1); x++)
+                        {
+                            if (x < 0 || x >= W) continue;
+                            float a = Mathf.Clamp01(w + 0.6f - Mathf.Abs(x - cx));
+                            if (a <= 0) continue;
+                            var c = Color.Lerp(new Color(0.30f, 0.42f, 0.16f), new Color(0.78f, 0.86f, 0.52f), f) * shade; c.a = a;
+                            int k = y * W + x; if (c.a > px[k].a) px[k] = c;
+                        }
+                    }
+                }
+                t.SetPixels(px); t.Apply();
+                File.WriteAllBytes(path, t.EncodeToPNG()); Object.DestroyImmediate(t);
+                AssetDatabase.ImportAsset(path);
+                var imp = (TextureImporter)AssetImporter.GetAtPath(path);
+                imp.alphaIsTransparency = true; imp.wrapMode = TextureWrapMode.Clamp; imp.mipmapEnabled = true; imp.SaveAndReimport();
+            }
+            return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        }
         public static Vector3 Ground(Vector3 p) => new Vector3(p.x, Height(p.x, p.z), p.z);
 
         static GameObject Place(string rel, Vector3 pos, float yaw, float scale = 1f)
@@ -342,7 +453,7 @@ namespace Korvalune.EditorTools
             {
                 float x = (float)rng.NextDouble() * Size - Size / 2, z = (float)rng.NextDouble() * Size - Size / 2;
                 var p = new Vector2(x, z);
-                if (p.magnitude < TownBuilder.WallR + 10 || RoadDist(p) < 7 || RiverDist(p) < 15 || x > 235) continue;
+                if (p.magnitude < TownBuilder.WallR + 10 || RoadDist(p) < 7 || RiverDist(p) < 15 || x > 235 || NearHamlet(p, 22)) continue;
                 float h = Height(x, z);
                 if (h > 85 || h < WaterLevel + 0.8f) continue;
                 float dens = 0.03f + 0.95f * Smooth(95, 160, z) + 0.4f * Smooth(-130, -190, x) * Smooth(70, 40, h) - 0.9f * Smooth(-160, -200, z);
@@ -423,14 +534,15 @@ namespace Korvalune.EditorTools
                 foreach (var s in new[] { "_M", "_F" }) { var h = R("Characters/" + n + s); if (h != null) cfg.heroRes.Add(h); }
             cfg.defaultHeroRes = R("Characters/KaelDraven_M") ?? cfg.heroRes.FirstOrDefault() ?? R("Characters/BaseMale");
             cfg.enemies.Clear();
-            void E(string id, string label, string prefab, float hp, float dmg, float spd, float range, float cd, float aggro, float xp, float scale = 1, float armor = 0, float hitDelay = 0.45f)
-                => cfg.enemies.Add(new GameConfig.EnemyType { id = id, label = label, prefab = P("Enemies/" + prefab), hp = hp, damage = dmg, speed = spd, attackRange = range, attackCooldown = cd, aggro = aggro, xp = xp, scale = scale, armor = armor, hitDelay = hitDelay });
-            E("squelette", "Squelette guerrier", "SqueletteGuerrier", 70, 9, 3.0f, 1.9f, 1.7f, 13, 20);
-            E("loup", "Loup des Ténèbres", "LoupTenebres", 90, 12, 6.2f, 2.0f, 1.3f, 16, 30, hitDelay: 0.5f);
-            E("sorcier", "Sorcier corrompu", "SorcierCorrompu", 160, 16, 2.8f, 2.4f, 2.0f, 15, 80, armor: 1);
-            E("araignee", "Araignée géante", "AraigneeGeante", 220, 18, 4.5f, 2.6f, 1.8f, 14, 90, armor: 2);
-            E("chevalier", "Chevalier maudit", "ChevalierMaudit", 260, 20, 3.2f, 2.1f, 1.6f, 14, 110, armor: 5);
-            E("demon", "Démon brute", "DemonBrute", 650, 34, 3.4f, 3.2f, 2.4f, 18, 300, armor: 6, hitDelay: 0.6f);
+            // niveau naturel (dernier nombre) : les caractéristiques valent pour ce niveau puis suivent le niveau réel du monstre
+            void E(string id, string label, string prefab, float hp, float dmg, float spd, float range, float cd, float aggro, float xp, float scale = 1, float armor = 0, float hitDelay = 0.45f, int level = 1)
+                => cfg.enemies.Add(new GameConfig.EnemyType { id = id, label = label, prefab = P("Enemies/" + prefab), hp = hp, damage = dmg, speed = spd, attackRange = range, attackCooldown = cd, aggro = aggro, xp = xp, scale = scale, armor = armor, hitDelay = hitDelay, level = level });
+            E("squelette", "Squelette guerrier", "SqueletteGuerrier", 70, 9, 3.0f, 1.9f, 1.7f, 13, 20, level: 1);
+            E("loup", "Loup des Ténèbres", "LoupTenebres", 90, 12, 6.2f, 2.0f, 1.3f, 16, 30, hitDelay: 0.5f, level: 2);
+            E("sorcier", "Sorcier corrompu", "SorcierCorrompu", 160, 16, 2.8f, 2.4f, 2.0f, 15, 80, armor: 1, level: 5);
+            E("araignee", "Araignée géante", "AraigneeGeante", 220, 18, 4.5f, 2.6f, 1.8f, 14, 90, armor: 2, level: 4);
+            E("chevalier", "Chevalier maudit", "ChevalierMaudit", 260, 20, 3.2f, 2.1f, 1.6f, 14, 110, armor: 5, level: 7);
+            E("demon", "Démon brute", "DemonBrute", 650, 34, 3.4f, 3.2f, 2.4f, 18, 300, armor: 6, hitDelay: 0.6f, level: 12);
             cfg.highPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP.asset");
             cfg.mobilePipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Mobile.asset");
             cfg.fxAdditive = FxMaterial("FX_Additif", true); cfg.fxAlpha = FxMaterial("FX_Poussiere", false);

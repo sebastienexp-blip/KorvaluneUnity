@@ -82,11 +82,19 @@ namespace Korvalune.Game
             if (mag > 0.05f && !Health.Stunned)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
             else spd = 0;
-            vy = cc.isGrounded ? -2f : Mathf.Max(vy + gravity * Time.deltaTime, -30f);    // vitesse de chute limitée
+            UpdateSwim();
+            if (Swimming)
+            {   // nage : le héros flotte, la tête hors de l'eau, et avance plus lentement
+                spd *= 0.55f;
+                float surfaceY = GameBootstrap.WaterLevel - SwimDepth;
+                vy = Mathf.Clamp((surfaceY - transform.position.y) * 4f, -3f, 3f);
+            }
+            else vy = cc.isGrounded ? -2f : Mathf.Max(vy + gravity * Time.deltaTime, -30f);    // vitesse de chute limitée
             cc.Move((dir.normalized * spd + Vector3.up * vy) * Time.deltaTime);
+            KeepInsideWorld();
             FallGuard();
             Speed = spd;
-            Footsteps(spd);
+            if (Swimming) SwimStrokes(spd); else Footsteps(spd);
             Anim?.SetFloat(CharacterRig.SpeedId, spd, 0.1f, Time.deltaTime);
             UpdateTarget(inp);
             if (approach && Target && !Target.Dead && mag < 0.05f && !Health.Stunned)
@@ -123,7 +131,7 @@ namespace Korvalune.Game
         /// <summary>Cible automatique : l'ennemi le plus pertinent dans un rayon de 12 m — le plus proche, en privilégiant celui
         /// qui se trouve dans la direction du joystick (ou devant le héros) ; la cible est conservée tant qu'elle reste valable.</summary>
         public Health Target { get; private set; }
-        public float autoAimRange = 12f;
+        public float autoAimRange = 14f;
         bool approach; float approachUntil;
         /// <summary>Destination touchée (le héros y court seul) et action à l'arrivée.</summary>
         public Vector3? walkTo; public System.Action arrived;
@@ -172,7 +180,55 @@ namespace Korvalune.Game
                 float bd = range;
                 foreach (var h in Health.Around(transform.position, range, Faction.Player)) { float d = Vector3.Distance(h.transform.position, transform.position); if (d < bd) { bd = d; best = h; } }
             }
+            if (!best && Target && !Target.Dead) best = Target;           // hors de portée : on se tourne quand même vers la cible
             if (best) { var d = best.transform.position - transform.position; d.y = 0; if (d.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(d); }
+        }
+
+        /// <summary>Cible des compétences : la cible automatique, sinon l'ennemi vivant le plus proche dans le rayon donné.</summary>
+        public Health AcquireTarget(float range)
+        {
+            if (Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= range) return Target;
+            Health best = null; float bd = range;
+            foreach (var h in Health.Around(transform.position, range, Faction.Player)) { float d = Vector3.Distance(h.transform.position, transform.position); if (d < bd) { bd = d; best = h; } }
+            return best;
+        }
+
+        // ------------------------------------------------------------------ eau et bords du monde
+        public bool Swimming { get; private set; }
+        const float SwimDepth = 1.25f;       // pieds sous la surface : épaules à fleur d'eau
+        float strokeTimer;
+        /// <summary>Le héros nage dès que le fond est trop profond pour avoir pied (eau de la vallée).</summary>
+        void UpdateSwim()
+        {
+            float w = GameBootstrap.WaterLevel;
+            bool was = Swimming;
+            if (w < -9000f) { Swimming = false; return; }
+            var t = Terrain.activeTerrain;
+            float floor = t ? t.SampleHeight(transform.position) + t.transform.position.y : transform.position.y;
+            float depth = w - floor;
+            Swimming = Swimming ? depth > SwimDepth - 0.15f : depth > SwimDepth + 0.05f && transform.position.y < w - SwimDepth + 0.35f;
+            if (Swimming && !was) { Sound.Play("sfx_plouf", transform.position, 0.8f, 0.08f, 0.5f); FX.Burst(new Vector3(transform.position.x, w + 0.05f, transform.position.z), new Color(0.75f, 0.85f, 0.95f), 26, 3f, 0.12f, 0.6f, 0.5f); }
+            if (Swimming) { fallingSince = -1; hasSafe = false; }
+        }
+
+        void SwimStrokes(float spd)
+        {
+            if (spd < 0.3f) { strokeTimer = 0.2f; return; }
+            strokeTimer -= Time.deltaTime;
+            if (strokeTimer > 0) return;
+            strokeTimer = 0.95f;
+            Sound.Play("sfx_nage", transform.position, 0.5f, 0.1f, 0.3f);
+            FX.Burst(new Vector3(transform.position.x, GameBootstrap.WaterLevel + 0.05f, transform.position.z) + transform.forward * 0.5f, new Color(0.8f, 0.88f, 0.95f), 10, 2f, 0.1f, 0.4f, 0.4f);
+        }
+
+        /// <summary>Bords du monde : le héros ne peut pas quitter le terrain (plus de chute dans le vide aux extrémités).</summary>
+        void KeepInsideWorld()
+        {
+            var t = Terrain.activeTerrain; if (!t || !t.terrainData) return;
+            var o = t.transform.position; var s = t.terrainData.size; const float m = 6f;
+            var p = transform.position;
+            float x = Mathf.Clamp(p.x, o.x + m, o.x + s.x - m), z = Mathf.Clamp(p.z, o.z + m, o.z + s.z - m);
+            if (!Mathf.Approximately(x, p.x) || !Mathf.Approximately(z, p.z)) { bool was = cc.enabled; cc.enabled = false; transform.position = new Vector3(x, p.y, z); cc.enabled = was; }
         }
 
         public void Attack()
@@ -225,6 +281,7 @@ namespace Korvalune.Game
             // une pièce rapportée plus tard (tenue, arme) ne doit jamais apporter sa propre collision
             if (Time.time > nextStrip) { nextStrip = Time.time + 1f; foreach (var c in GetComponentsInChildren<Collider>()) if (c != cc && c.enabled) { c.enabled = false; Destroy(c); } }
             var pos = transform.position;
+            if (Swimming) { fallingSince = -1; return; }
             if (cc.isGrounded) { lastSafe = pos; hasSafe = true; fallingSince = -1; return; }
             if (fallingSince < 0) fallingSince = Time.time;
             var t = Terrain.activeTerrain;

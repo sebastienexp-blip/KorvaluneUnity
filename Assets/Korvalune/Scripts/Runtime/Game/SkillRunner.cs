@@ -53,10 +53,52 @@ namespace Korvalune.Game
             if (!p.Health.Spend(d.mana)) { p.Notify?.Invoke("Pas assez de mana"); return false; }
             readyAt[i] = Time.time + d.cooldown * (1 - 0.04f * (ranks[i] - 1)) * (1 - (eqp ? eqp.cooldownReduction : 0));
             if (d.empowered) Vfx.Burst(Pos + Vector3.up * 1.2f, d.element, 14, 3f);         // éclat de l'élément : la compétence est transformée
+            // ciblage automatique pour toutes les compétences : le monstre le plus proche (ou la cible en cours) ;
+            // une compétence de corps à corps hors d'atteinte fait d'abord courir le héros jusqu'à lui
+            var tgt = Aimable(d.kind) ? p.AcquireTarget(Mathf.Max(p.autoAimRange, d.range + 2f)) : null;
+            float reach = Reach(d);
+            if (tgt && reach > 0 && Flat(tgt.transform.position - Pos).magnitude > reach + 0.3f)
+            { StartCoroutine(ApproachThenRun(d, ranks[i], tgt, reach, echo)); return true; }
+            if (tgt) Face(tgt);
             Sound.Play(Sound.CastOf(d), Pos, 0.9f);
             StartCoroutine(Run(d, ranks[i]));
             if (echo > 0 && Echoable(d.kind)) StartCoroutine(Echo(d, ranks[i], echo));
             return true;
+        }
+
+        static Vector3 Flat(Vector3 v) { v.y = 0; return v; }
+        void Face(Health h) { var dir = Flat(h.transform.position - Pos); if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); }
+
+        /// <summary>Compétences qui visent un ennemi (les effets sur soi — buff, soin, bouclier, invocation — ne visent pas).</summary>
+        static bool Aimable(SkillKind k) => !(k == SkillKind.Buff || k == SkillKind.Heal || k == SkillKind.Shield || k == SkillKind.Summon || k == SkillKind.Evade);
+
+        /// <summary>Portée utile d'une compétence de mêlée ou centrée sur le héros (0 = à distance, pas besoin d'approcher).</summary>
+        static float Reach(SkillDef d) => d.kind switch
+        {
+            SkillKind.Strike or SkillKind.Cleave or SkillKind.Combo => d.radius + 0.6f,
+            SkillKind.Whirl or SkillKind.Nova => Mathf.Max(1.6f, d.radius * 0.75f),
+            _ => 0f,
+        };
+
+        /// <summary>Le héros court vers sa cible (1,6 s au plus, le joystick reprend la main), puis lance la compétence.</summary>
+        IEnumerator ApproachThenRun(SkillDef d, int rank, Health tgt, float reach, float echo)
+        {
+            float until = Time.time + 1.6f;
+            while (tgt && !tgt.Dead && Time.time < until && !p.Health.Dead && !p.Health.Stunned)
+            {
+                var to = Flat(tgt.transform.position - Pos);
+                if (to.magnitude <= reach) break;
+                if (p.joystick && p.joystick.Value.sqrMagnitude > 0.04f) break;
+                p.transform.rotation = Quaternion.RotateTowards(p.transform.rotation, Quaternion.LookRotation(to), p.turnSpeed * Time.deltaTime);
+                p.Move(to.normalized * p.runSpeed * Time.deltaTime);
+                p.Anim?.SetFloat(CharacterRig.SpeedId, p.runSpeed, 0.05f, Time.deltaTime);
+                yield return null;
+            }
+            if (p.Health.Dead) yield break;
+            if (tgt && !tgt.Dead) Face(tgt);
+            Sound.Play(Sound.CastOf(d), Pos, 0.9f);
+            StartCoroutine(Run(d, rank));
+            if (echo > 0 && Echoable(d.kind)) StartCoroutine(Echo(d, rank, echo));
         }
 
         /// <summary>Types de compétences qu'un écho peut relancer (pas les déplacements ni les effets sur soi).</summary>
@@ -85,6 +127,12 @@ namespace Korvalune.Game
             Health best = p.Target && !p.Target.Dead && Vector3.Distance(p.Target.transform.position, Pos) <= range ? p.Target : null; float bd = range;
             if (!best) foreach (var h in Health.Around(Pos, range, Faction.Player)) { float dd = Vector3.Distance(h.transform.position, Pos); if (dd < bd) { bd = dd; best = h; } }
             if (best) { var dir = best.transform.position - Pos; dir.y = 0; if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); return best.transform.position; }
+            // cible plus loin que la portée : on vise dans sa direction, au bout de la portée
+            if (p.Target && !p.Target.Dead)
+            {
+                var dir = Flat(p.Target.transform.position - Pos);
+                if (dir.sqrMagnitude > 0.01f) { p.transform.rotation = Quaternion.LookRotation(dir); return GameBootstrap.Ground(Pos + dir.normalized * Mathf.Min(range, dir.magnitude)); }
+            }
             return GameBootstrap.Ground(Pos + Fwd * Mathf.Min(range, 6f));
         }
 
@@ -410,7 +458,7 @@ namespace Korvalune.Game
                     {
                         var o = Random.insideUnitCircle * 2.5f; var pt = GameBootstrap.Ground(Pos + new Vector3(o.x, 0, o.y));
                         Vfx.Runes(pt, d.element, 1.5f, 1.2f); Vfx.Explosion(pt + Vector3.up * 0.5f, d.element, 1.2f);
-                        var m = boot ? boot.Spawn(t, pt) : null; if (!m) continue;
+                        var m = boot ? boot.Spawn(t, pt, p.level) : null; if (!m) continue;
                         var ai = m.GetComponent<EnemyAI>(); ai.side = Faction.Player; ai.owner = p.transform; ai.lifetime = d.duration;
                         var h = m.GetComponent<Health>(); h.faction = Faction.Player; h.maxHp = h.hp = p.Health.maxHp * 0.5f * d.mult * (1 + 0.2f * (rank - 1));
                         ai.damageOverride = p.attackDamage * d.mult;

@@ -16,6 +16,9 @@ namespace Korvalune.Game
         public Transform owner;               // invocations : le héros à suivre
         public float lifetime;                // invocations : durée de vie (s), 0 = permanente
         public float damageOverride;          // invocations : dégâts calqués sur le héros
+        /// <summary>Dégâts et expérience de cette créature, ajustés à son niveau (0 = valeurs du type).</summary>
+        public float damage, xp;
+        float Damage => damageOverride > 0 ? damageOverride : damage > 0 ? damage : type.damage;
         float bornAt;
         Health hp; Animator anim; CharacterController cc;
         float nextAttack, vy, wanderAt; Vector3 wanderTo;
@@ -31,10 +34,10 @@ namespace Korvalune.Game
                 if (side == Faction.Player) { FX.Burst(transform.position + Vector3.up, new Color(0.5f, 0.8f, 1f), 20, 3f); Destroy(gameObject, 3f); return; }
                 Sound.Play(Sound.DeathOf(type != null ? type.id : ""), transform.position, 0.9f, 0.08f, 0.12f);
                 var p = FindFirstObjectByType<PlayerController>();
-                if (p) p.GainXp(type.xp);                      // XP fixe par ennemi : les niveaux deviennent de plus en plus longs
+                if (p) p.GainXp(xp > 0 ? xp : type.xp);        // XP selon le niveau du monstre : les niveaux deviennent de plus en plus longs
                 // butin : les ennemis forts lâchent plus d'objets, de meilleure rareté
                 var rng = new System.Random();
-                int lvl = p ? p.level : 1; float elite = Mathf.Clamp01(type.xp / 300f);
+                int lvl = Mathf.Max(1, hp.level > 0 ? Mathf.Min(hp.level, (p ? p.level : 1) + 3) : p ? p.level : 1); float elite = Mathf.Clamp01(type.xp / 300f);   // butin au niveau du monstre (portable sous peu)
                 int n = (rng.NextDouble() < 0.45 + 0.5 * elite ? 1 : 0) + (elite > 0.9f ? 2 : 0);
                 for (int i = 0; i < n; i++)
                 {
@@ -72,7 +75,7 @@ namespace Korvalune.Game
             switch (state)
             {
                 case S.Idle:
-                    if (target && th && !th.Dead && dist < type.aggro)
+                    if (target && th && !th.Dead && dist < type.aggro && !GameBootstrap.InSafeZone(target.position))
                     {
                         state = S.Chase;
                         if (type.id == "loup") Sound.Play("sfx_loup_grogne", transform.position, 0.8f, 0.1f, 0.6f);
@@ -86,7 +89,7 @@ namespace Korvalune.Game
                     }
                     break;
                 case S.Chase:
-                    if (!target || th == null || th.Dead || fromHome > leash) { state = S.Return; break; }
+                    if (!target || th == null || th.Dead || fromHome > leash || GameBootstrap.InSafeZone(target.position) || GameBootstrap.InSafeZone(transform.position)) { state = S.Return; break; }
                     var dir = Flat(target.position - transform.position);
                     if (dist > type.attackRange * 0.9f) { move = dir.normalized; speed = type.speed; }
                     else
@@ -99,7 +102,7 @@ namespace Korvalune.Game
                     var back = Flat(home - transform.position);
                     if (back.magnitude < 1.5f) { state = S.Idle; hp.Heal(hp.maxHp); }
                     else { move = back.normalized; speed = type.speed * 1.2f; }
-                    if (target && th && !th.Dead && dist < type.aggro * 0.6f && fromHome < leash * 0.7f) state = S.Chase;
+                    if (target && th && !th.Dead && dist < type.aggro * 0.6f && fromHome < leash * 0.7f && !GameBootstrap.InSafeZone(target.position)) state = S.Chase;
                     break;
             }
             // séparation entre ennemis
@@ -167,7 +170,7 @@ namespace Korvalune.Game
             var d = Flat(th.transform.position - transform.position);
             if (d.magnitude <= type.attackRange + 0.6f && Vector3.Angle(transform.forward, d) < 75f)
             {
-                th.TakeDamage((damageOverride > 0 ? damageOverride : type.damage) * Random.Range(0.85f, 1.15f), hp);
+                th.TakeDamage(Damage * Random.Range(0.85f, 1.15f), hp);
                 FX.Burst(th.transform.position + Vector3.up * 1.1f, new Color(0.9f, 0.1f, 0.08f), 14, 4f, 0.15f, 0.4f);
             }
         }

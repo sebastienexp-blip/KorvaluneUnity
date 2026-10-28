@@ -371,25 +371,55 @@ namespace Korvalune.Game
             }
         }
 
+        class Plate { public RectTransform root; public Image fill; public Text name; public int shownLevel = -1; public bool shownTarget; }
+        readonly Dictionary<Health, Plate> plates = new Dictionary<Health, Plate>();
+
+        /// <summary>Couleur du niveau d'un monstre par rapport au héros : gris (bien plus faible), clair (à sa mesure),
+        /// orange (plus fort), rouge (dangereux).</summary>
+        static Color LevelColor(int diff) => diff <= -5 ? new Color(0.62f, 0.62f, 0.62f) : diff <= 2 ? new Color(0.95f, 0.90f, 0.78f)
+            : diff <= 5 ? new Color(1f, 0.62f, 0.22f) : new Color(1f, 0.26f, 0.22f);
+
+        /// <summary>Plaque au-dessus de chaque monstre proche : niveau et nom (couleur selon la difficulté) et barre de vie.</summary>
         void UpdateBars()
         {
+            var tgt = player ? player.Target : null;
             foreach (var h in Health.All)
             {
                 if (h.faction != Faction.Enemy) continue;
-                bool show = !h.Dead && h.hp < h.maxHp && player && (h.transform.position - player.transform.position).sqrMagnitude < 40 * 40;
-                if (!bars.TryGetValue(h, out var b))
+                var ai = h.GetComponent<EnemyAI>(); if (ai && ai.side != Faction.Enemy) continue;     // pas les invocations du héros
+                float d2 = player ? (h.transform.position - player.transform.position).sqrMagnitude : 1e9f;
+                bool show = !h.Dead && d2 < 30 * 30;
+                if (!plates.TryGetValue(h, out var pl))
                 {
                     if (!show) continue;
-                    var bg = Img(root, "BarreEnnemi", UIStyle.Bar(), new Vector2(0, 0), Vector2.zero, new Vector2(110, 14)); bg.color = new Color(0.1f, 0.05f, 0.04f, 0.85f); bg.type = Image.Type.Sliced;
-                    var f = Img((RectTransform)bg.transform, "Remplissage", UIStyle.Bar(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(104, 9)); f.type = Image.Type.Filled; f.fillMethod = Image.FillMethod.Horizontal; f.color = new Color(0.85f, 0.15f, 0.1f);
-                    b = (bg.rectTransform, f); bars[h] = b;
+                    pl = new Plate();
+                    var bg = Img(root, "PlaqueEnnemi", UIStyle.Bar(), new Vector2(0, 0), Vector2.zero, new Vector2(150, 16)); bg.color = new Color(0.1f, 0.05f, 0.04f, 0.88f); bg.type = Image.Type.Sliced;
+                    bg.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+                    pl.fill = Img(bg.rectTransform, "Remplissage", UIStyle.Bar(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(144, 10)); pl.fill.type = Image.Type.Filled; pl.fill.fillMethod = Image.FillMethod.Horizontal; pl.fill.color = new Color(0.85f, 0.15f, 0.1f);
+                    pl.name = Label(bg.rectTransform, "Nom", "", 21, TextAnchor.LowerCenter, new Vector2(0.5f, 1), new Vector2(-150, 2), new Vector2(300, 28));
+                    pl.name.rectTransform.pivot = new Vector2(0.5f, 0); pl.name.rectTransform.anchoredPosition = new Vector2(0, 2);
+                    pl.name.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.9f);
+                    pl.root = bg.rectTransform; plates[h] = pl;
                 }
-                b.root.gameObject.SetActive(show);
-                if (show) { b.fill.fillAmount = h.hp / h.maxHp; Screen2Canvas(h.transform.position + Vector3.up * (h.GetComponent<CharacterController>() ? h.GetComponent<CharacterController>().height + 0.4f : 2.2f), b.root); }
+                pl.root.gameObject.SetActive(show);
+                if (!show) continue;
+                bool isT = h == tgt;
+                if (pl.shownLevel != h.level + (player ? player.level * 1000 : 0) || pl.shownTarget != isT)
+                {
+                    pl.shownLevel = h.level + (player ? player.level * 1000 : 0); pl.shownTarget = isT;
+                    var c = LevelColor(h.level - (player ? player.level : 1));
+                    string lv = h.level > 0 ? $"<b>Nv {h.level}</b>  " : "";
+                    pl.name.text = $"<color=#{ColorUtility.ToHtmlStringRGB(c)}>{lv}{h.displayName}</color>";
+                    pl.name.fontSize = isT ? 23 : 20;
+                }
+                pl.fill.fillAmount = h.hp / h.maxHp;
+                var cc = h.GetComponent<CharacterController>();
+                float top = cc ? cc.height * h.transform.lossyScale.y + 0.5f : 2.3f;
+                Screen2Canvas(h.transform.position + Vector3.up * top, pl.root);
             }
             var dead = new List<Health>();
-            foreach (var kv in bars) if (kv.Key == null) { if (kv.Value.root) Destroy(kv.Value.root.gameObject); dead.Add(kv.Key); }
-            foreach (var d in dead) bars.Remove(d);
+            foreach (var kv in plates) if (kv.Key == null) { if (kv.Value.root) Destroy(kv.Value.root.gameObject); dead.Add(kv.Key); }
+            foreach (var d in dead) plates.Remove(d);
         }
 
         readonly Dictionary<LootDrop, Text> lootLabels = new Dictionary<LootDrop, Text>();

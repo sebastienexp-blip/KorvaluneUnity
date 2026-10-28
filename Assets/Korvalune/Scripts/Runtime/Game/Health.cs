@@ -12,6 +12,8 @@ namespace Korvalune.Game
         public float maxHp = 100, hp = 100, maxMana = 0, mana = 0, manaRegen = 4f, hpRegen = 0f;
         public float armor = 0f;                         // réduction plate des dégâts
         public string displayName = "";
+        /// <summary>Niveau affiché au-dessus de la créature (0 = non affiché).</summary>
+        public int level;
         public float StunnedUntil { get; private set; }
         public bool Dead => hp <= 0;
         public bool Stunned => Time.time < StunnedUntil;

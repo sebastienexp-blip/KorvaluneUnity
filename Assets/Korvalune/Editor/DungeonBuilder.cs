@@ -129,7 +129,7 @@ namespace Korvalune.EditorTools
             WorldBuilder.PostProcess("Crypte", 0.6f);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = WorldBuilder.Config();
-            game.heroLight = 2.0f; game.zoneName = "Crypte de Korvalune"; game.questTitle = "Purger la crypte";
+            game.heroLight = 2.0f; game.zoneLevel = 3; game.zoneName = "Crypte de Korvalune"; game.questTitle = "Purger la crypte";
             game.playerSpawn = entrance + new Vector3(-T, 0.05f, 0);
             game.castleGate = entrance;
             game.questSteps.Add(new Quest.Objective { text = "Détruire les morts-vivants de la crypte", enemyId = "squelette", count = 8 });

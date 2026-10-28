@@ -86,7 +86,7 @@ namespace Korvalune.EditorTools
             WorldBuilder.PostProcess("Terriers", 0.75f);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = WorldBuilder.Config();
-            game.heroLight = 2.2f;
+            game.heroLight = 2.2f; game.zoneLevel = 6;
             game.zoneName = "Terriers de l'Astral"; game.questTitle = "Les Terriers de l'Astral";
             var ent = L.entrance.P; var dir = L.entranceDir.P.normalized;
             game.playerSpawn = ent + dir * 3f + Vector3.up * 0.1f;

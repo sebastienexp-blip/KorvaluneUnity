@@ -13,6 +13,9 @@ namespace Korvalune.Game
             public GameObject prefab;
             public float hp = 60, damage = 8, speed = 3.2f, attackRange = 1.8f, attackCooldown = 1.6f, aggro = 13f, xp = 20, scale = 1f, armor = 0f;
             public float hitDelay = 0.45f;
+            /// <summary>Niveau « naturel » du monstre : ses caractéristiques de base valent pour ce niveau, puis suivent le niveau
+            /// réel de la créature (fixé par la distance à la ville dans la vallée, par la zone dans les donjons).</summary>
+            public int level = 1;
         }
         public CharacterCatalog catalog;
         // héros : chemins Resources (un seul héros chargé en jeu, pas les dix)

@@ -44,8 +44,9 @@ namespace Korvalune.Game
             var boot = FindFirstObjectByType<GameBootstrap>();
             yield return new WaitForSeconds(3f);
             Report(p, cc, "arrivée");
-            // marche vers la porte du château pendant une dizaine de secondes
-            var goal = boot ? boot.castleGate : transform.position + Vector3.forward * 30f;
+            // sortie de la ville par la porte sud, vers le vieux cimetière (premiers monstres, niveau 1)
+            var goal = transform.position + Vector3.back * 36f;
+            Log($"en ville : {(GameBootstrap.InSafeZone(transform.position) ? "oui" : "NON")}, niveau des monstres aux portes : {GameBootstrap.LevelAt(transform.position + Vector3.back * 40f)}");
             p.WalkTo(goal, null);
             for (int i = 0; i < 5; i++) { yield return new WaitForSeconds(2f); Report(p, cc, $"marche {2 * (i + 1)} s"); }
             p.walkTo = null;
@@ -67,7 +68,9 @@ namespace Korvalune.Game
             var pos = transform.position; var t = Terrain.activeTerrain;
             float ground = t ? t.SampleHeight(pos) + t.transform.position.y : float.NaN;
             bool ok = cc.isGrounded || (t && pos.y > ground - 1f);
-            Log($"{when} : position {pos}, sol {ground:0.00}, au sol {cc.isGrounded} → {(ok ? "OK" : "CHUTE")}");
+            var near = Health.Around(pos, 45f, Faction.Player); string lv = "";
+            foreach (var h in near) lv += (lv.Length > 0 ? "," : "") + h.level;
+            Log($"{when} : position {pos}, sol {ground:0.00}, au sol {cc.isGrounded} → {(ok ? "OK" : "CHUTE")} ; monstres à 45 m : {near.Count} (niv. {lv})");
         }
     }
 }

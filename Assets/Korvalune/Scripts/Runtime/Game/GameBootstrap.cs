@@ -19,6 +19,42 @@ namespace Korvalune.Game
         [Tooltip("Lumière portée par le héros (donjons) : halo chaud qui éclaire le sol et les ennemis autour de lui, 0 = aucune")]
         public float heroLight = 0f;
         public string questTitle = "Purifier la vallée";
+        [Header("Monde ouvert")]
+        [Tooltip("Rayon (m) de la zone sûre autour de safeCenter : aucun monstre n'y apparaît ni n'y entre (0 = aucune)")]
+        public float safeRadius = 0f;
+        public Vector3 safeCenter;
+        [Tooltip("Niveau fixe des monstres de la zone (donjons) ; 0 = niveau selon la distance à la zone sûre")]
+        public int zoneLevel = 0;
+        [Tooltip("Mètres à parcourir depuis le bord de la zone sûre pour gagner un niveau de monstre")]
+        public float metersPerLevel = 13f;
+        [Tooltip("Hauteur de la surface de l'eau (nage) ; très bas = pas d'eau")]
+        public float waterLevel = -10000f;
+        [Tooltip("Peupler la zone de camps de monstres générés (vallée)")]
+        public bool populate = false;
+        [Tooltip("Lieux (hameaux) où aucun camp de monstres n'est généré")]
+        public List<Vector3> noCamps = new List<Vector3>();
+        public static GameBootstrap Instance { get; private set; }
+        public static float WaterLevel => Instance ? Instance.waterLevel : -10000f;
+
+        /// <summary>Le point est-il dans la zone sûre (la ville) ?</summary>
+        public static bool InSafeZone(Vector3 p)
+        {
+            if (!Instance || Instance.safeRadius <= 0) return false;
+            var d = p - Instance.safeCenter; d.y = 0; return d.magnitude < Instance.safeRadius;
+        }
+
+        /// <summary>Niveau des monstres à cet endroit : fixe dans un donjon ; dans la vallée, 1 aux portes de la ville puis
+        /// un niveau tous les « metersPerLevel » mètres, et +3 dans les montagnes de l'ouest.</summary>
+        public static int LevelAt(Vector3 p)
+        {
+            if (!Instance) return 1;
+            if (Instance.zoneLevel > 0) return Instance.zoneLevel;
+            var d = p - Instance.safeCenter; d.y = 0;
+            float beyond = Mathf.Max(0, d.magnitude - Instance.safeRadius - 8f);
+            int l = 1 + Mathf.FloorToInt(beyond / Mathf.Max(1f, Instance.metersPerLevel));
+            if (p.x < -140f) l += 3;
+            return Mathf.Clamp(l, 1, 80);
+        }
         public List<Quest.Objective> questSteps = new List<Quest.Objective>();
         public PlayerController Player { get; private set; }
         public HUD Hud { get; private set; }
@@ -29,7 +65,7 @@ namespace Korvalune.Game
 
         public void Begin()
         {
-            if (Started) return; Started = true;
+            if (Started) return; Started = true; Instance = this;
             FX.additive = config ? config.fxAdditive : null; FX.alpha = config ? config.fxAlpha : null; Vfx.lib = config ? config.vfx : null;
             if (Application.isPlaying) GraphicsQuality.Apply(config, GraphicsQuality.Detect());
             if (Application.isPlaying) EnsureGroundCollision();
@@ -103,8 +139,9 @@ namespace Korvalune.Game
             Player.joystick = Hud.Joystick;
             Hud.Notify(zoneName);
 
-            // ---- ennemis
-            foreach (var camp in camps) SpawnCamp(camp);
+            // ---- ennemis : camps vivants (apparition à l'approche, réapparition après nettoyage) ; la ville reste sûre
+            if (Application.isPlaying) { var pop = gameObject.AddComponent<WorldPopulation>(); pop.Init(this, camps, populate); }
+            else foreach (var camp in camps) SpawnCamp(camp);
             if (Application.isPlaying)
             {
                 var t = Terrain.activeTerrain;
@@ -137,8 +174,14 @@ namespace Korvalune.Game
             return "KaelDraven";
         }
 
-        public GameObject Spawn(GameConfig.EnemyType t, Vector3 pos)
+        /// <summary>Courbes de progression des monstres : vie +30 %, dégâts +20 %, expérience +35 % par niveau.</summary>
+        public static float HpAt(int l) => 1f + 0.30f * (l - 1);
+        public static float DmgAt(int l) => 1f + 0.20f * (l - 1);
+        public static float XpAt(int l) => 1f + 0.35f * (l - 1);
+
+        public GameObject Spawn(GameConfig.EnemyType t, Vector3 pos, int level = 0)
         {
+            if (level <= 0) level = LevelAt(pos);
             var e = Instantiate(t.prefab, pos, Quaternion.Euler(0, Random.Range(0, 360f), 0));
             e.name = t.label;
             e.transform.localScale *= t.scale;
@@ -147,8 +190,10 @@ namespace Korvalune.Game
             if (cap) { height = cap.height * t.scale; radius = Mathf.Min(cap.radius * t.scale, height * 0.45f); }
             foreach (var c in e.GetComponents<Collider>()) Kill(c);
             var cc = e.AddComponent<CharacterController>(); cc.height = height / e.transform.localScale.y; cc.radius = radius / e.transform.localScale.y; cc.center = new Vector3(0, cc.height / 2 + 0.02f, 0);
-            var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = t.hp; h.hp = t.hp; h.armor = t.armor; h.displayName = t.label;
-            var ai = e.AddComponent<EnemyAI>(); ai.type = t;
+            int bl = Mathf.Max(1, t.level);
+            float hpM = Mathf.Max(0.55f, HpAt(level) / HpAt(bl)), dmgM = Mathf.Max(0.6f, DmgAt(level) / DmgAt(bl)), xpM = Mathf.Max(0.5f, XpAt(level) / XpAt(bl));
+            var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = Mathf.Round(t.hp * hpM); h.hp = h.maxHp; h.armor = t.armor * Mathf.Min(2f, dmgM); h.displayName = t.label; h.level = level;
+            var ai = e.AddComponent<EnemyAI>(); ai.type = t; ai.damage = t.damage * dmgM; ai.xp = Mathf.Round(t.xp * xpM);
             return e;
         }
 
@@ -169,9 +214,15 @@ namespace Korvalune.Game
             SaveSystem.Save();
         }
 
+        /// <summary>Après la mort : retour en ville. Depuis un donjon, on recharge la vallée (apparition en ville).</summary>
         public void RespawnPlayer()
         {
             if (!Player) return;
+            if (safeRadius <= 0 && Application.isPlaying && Application.CanStreamedLevelBeLoaded("Korvalune_Vallee"))
+            {
+                Player.Health.Revive(); Persist(); nextSpawn = null;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Korvalune_Vallee"); return;
+            }
             var cc = Player.GetComponent<CharacterController>(); cc.enabled = false;
             Player.transform.position = Ground(playerSpawn); cc.enabled = true;
             Player.Health.Revive();
