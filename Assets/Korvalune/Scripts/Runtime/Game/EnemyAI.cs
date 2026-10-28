@@ -41,10 +41,10 @@ namespace Korvalune.Game
                 var rng = new System.Random();
                 int lvl = Mathf.Max(1, hp.level > 0 ? Mathf.Min(hp.level, (p ? p.level : 1) + 3) : p ? p.level : 1); float elite = Mathf.Clamp01(type.xp / 300f);   // butin au niveau du monstre (portable sous peu)
                 if (champion) elite = Mathf.Max(elite, 0.6f);
-                int n = (rng.NextDouble() < 0.45 + 0.5 * elite + 0.05 * Difficulty.Current ? 1 : 0) + (elite > 0.9f ? 2 : 0) + (champion ? 2 : 0);
+                int n = (rng.NextDouble() < 0.35 + 0.45 * elite + 0.05 * Difficulty.Current ? 1 : 0) + (elite > 0.9f ? 2 : 0) + (champion ? 2 : 0);
                 for (int i = 0; i < n; i++)
                 {
-                    var it = Loot.Roll(rng, lvl, elite * 3f + Difficulty.Luck);
+                    var it = Loot.Roll(rng, lvl, elite * 1.2f + Difficulty.Luck);
                     var off = Random.insideUnitCircle * 1.4f;
                     LootDrop.Spawn(it, GameBootstrap.Ground(transform.position + new Vector3(off.x, 0, off.y)));
                 }
@@ -94,9 +94,11 @@ namespace Korvalune.Game
                 case S.Chase:
                     if (!target || th == null || th.Dead || fromHome > leash || GameBootstrap.InSafeZone(target.position) || GameBootstrap.InSafeZone(transform.position)) { state = S.Return; break; }
                     var dir = Flat(target.position - transform.position);
-                    if (dist > type.attackRange * 0.9f) { move = dir.normalized; speed = type.speed; }
+                    // hystérésis : on ne repart pas au moindre pas de recul de la cible (sinon marche/arrêt à chaque image)
+                    if (dist > type.attackRange * (closing ? 0.8f : 1.0f)) { closing = true; move = dir.normalized; speed = type.speed; }
                     else
                     {
+                        closing = false;
                         Face(dir);
                         if (Time.time > nextAttack) { nextAttack = Time.time + type.attackCooldown; StartCoroutine(Strike(th)); }
                     }
@@ -115,9 +117,9 @@ namespace Korvalune.Game
                 var d = Flat(transform.position - o.transform.position); float m = d.magnitude;
                 if (m < 1.2f * type.scale && m > 0.001f) move += d / m * (1.2f * type.scale - m) * 1.5f;
             }
-            if (move.sqrMagnitude > 0.0001f && speed > 0.01f) Face(move);
             Gravity(move.normalized * speed);
-            Anim(speed);
+            if (vel.sqrMagnitude > 0.04f && speed > 0.01f) Face(vel);
+            Anim(vel.magnitude);
         }
 
         /// <summary>Cible la plus proche du camp adverse (héros ou ses invocations) ; le héros par défaut.</summary>
@@ -178,8 +180,12 @@ namespace Korvalune.Game
             }
         }
 
+        bool closing; Vector3 vel;
         void Gravity(Vector3 v)
         {
+            // vitesse lissée : la séparation entre monstres et les changements de cap ne font plus trembler
+            vel = Vector3.MoveTowards(vel, v, 24f * Time.deltaTime);
+            v = vel;
             if (cc && cc.enabled)
             {
                 vy = cc.isGrounded ? -2f : vy - 20f * Time.deltaTime;

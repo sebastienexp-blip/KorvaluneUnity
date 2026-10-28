@@ -104,13 +104,14 @@ namespace Korvalune.Game
         /// <summary>Tire la rareté : les élites et boss améliorent les chances ; mythique et ancestral restent très rares.</summary>
         public static Rarity RollRarity(System.Random r, int level, float luck)
         {
-            double x = r.NextDouble() / (1 + luck);
-            if (level >= 30 && x < 0.0015) return Rarity.Ancestral;
-            if (level >= 20 && x < 0.004) return Rarity.Mythique;
-            if (x < 0.015) return Rarity.Unique;
-            if (x < 0.06) return Rarity.Legendaire;
-            if (x < 0.22) return Rarity.Rare;
-            if (x < 0.55) return Rarity.Magique;
+            // raretés façon Diablo : un légendaire reste un événement (~1 objet sur 90 au départ, davantage avec la chance)
+            double x = r.NextDouble() / (1 + 0.5 * luck);
+            if (level >= 30 && x < 0.0004) return Rarity.Ancestral;
+            if (level >= 20 && x < 0.0012) return Rarity.Mythique;
+            if (x < 0.003) return Rarity.Unique;
+            if (x < (level >= 5 ? 0.011 : 0.006)) return Rarity.Legendaire;
+            if (x < 0.075) return Rarity.Rare;
+            if (x < 0.36) return Rarity.Magique;
             return Rarity.Commun;
         }
 

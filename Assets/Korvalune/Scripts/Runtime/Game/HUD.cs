@@ -9,6 +9,7 @@ namespace Korvalune.Game
     /// expérience en haut à gauche, mini-carte ronde et quête actuelle en haut à droite, joystick en bas à gauche,
     /// grand bouton d'attaque et quatre compétences en arc en bas à droite (recharge circulaire), notifications,
     /// chiffres de dégâts, barres de vie des ennemis, écran de mort.</summary>
+    [DefaultExecutionOrder(100)]   // après la caméra : noms et barres suivent les monstres sans trembler
     public partial class HUD : MonoBehaviour
     {
         public PlayerController player;

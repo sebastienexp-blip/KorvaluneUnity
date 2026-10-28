@@ -26,6 +26,16 @@ namespace Korvalune.Game
         {
             if (!Application.isPlaying) return;
             if (string.IsNullOrEmpty(title)) title = DefaultTitle(kind);
+            // le marchand en personne, derrière son étal
+            if (kind != MerchantKind.Coffre && kind != MerchantKind.Reliquaire && transform.Find("PNJ") == null)
+            {
+                var pf = Resources.Load<GameObject>("Prefabs/Characters/PNJ_" + kind);
+                if (pf)
+                {
+                    var npc = Instantiate(pf, transform); npc.name = "PNJ"; npc.transform.localPosition = Vector3.zero; npc.transform.localRotation = Quaternion.identity;
+                    foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) Destroy(c);
+                }
+            }
             var go = new GameObject("Nom"); go.transform.SetParent(transform, false); go.transform.localPosition = Vector3.up * 2.45f; tagT = go.transform;
             nameTag = go.AddComponent<TextMesh>(); nameTag.text = string.IsNullOrEmpty(displayName) ? title : $"{displayName}\n<size=40>{title}</size>";
             nameTag.richText = true; nameTag.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); nameTag.GetComponent<MeshRenderer>().sharedMaterial = nameTag.font.material;

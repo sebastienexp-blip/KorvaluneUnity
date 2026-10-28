@@ -4,6 +4,7 @@ namespace Korvalune.Game
 {
     /// <summary>Caméra façon Diablo 4 : plongée haute (≈ 55°) et lointaine, orientation fixe (le nord en haut de l'écran),
     /// suivi lissé avec léger amorti, zoom limité (molette / pincement à deux doigts), tremblement d'impact.</summary>
+    [DefaultExecutionOrder(-100)]   // la caméra se place avant que l'interface ne projette noms et barres de vie
     public class CameraRig : MonoBehaviour
     {
         public Transform target;
