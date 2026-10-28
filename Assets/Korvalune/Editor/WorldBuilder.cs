@@ -151,6 +151,7 @@ namespace Korvalune.EditorTools
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
             TownBuilder.Build();
             Hamlets();
+            EclipseBuilder.ValleyEntrance();
             CaveBuilder.ValleyEntrance();
             BridgeObject();
             var rng = new System.Random(7);
@@ -370,7 +371,7 @@ namespace Korvalune.EditorTools
             }
         }
 
-        static TerrainLayer[] Layers()
+        public static TerrainLayer[] Layers()
         {
             var list = new List<TerrainLayer>();
             for (int i = 0; i < LayerNames.Length; i++)
@@ -474,7 +475,7 @@ namespace Korvalune.EditorTools
         }
 
         // ------------------------------------------------------------------------------------------ matériaux simples
-        static Material WaterMaterial()
+        public static Material WaterMaterial()
         {
             var path = Root + "/Rendering/Eau.mat";
             var m = AssetDatabase.LoadAssetAtPath<Material>(path);
@@ -489,7 +490,7 @@ namespace Korvalune.EditorTools
         }
 
         static Material stone;
-        static Material StoneMaterial()
+        public static Material StoneMaterial()
         {
             if (stone) return stone;
             var path = Root + "/Rendering/PierreTombale.mat";

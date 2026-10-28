@@ -89,6 +89,7 @@ namespace Korvalune.EditorTools
                 Progress("SelectionCheck"); SelectionCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("DungeonCheck"); DungeonCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("CaveCheck"); CaveCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress("EclipseCheck"); EclipseCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("Lanceur"); LauncherBuilder.Build(); Check("Écran de lancement", File.Exists(LauncherBuilder.ScenePath), LauncherBuilder.ScenePath);
                 File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
                 Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
@@ -333,6 +334,21 @@ namespace Korvalune.EditorTools
             int chests = UnityEngine.Object.FindObjectsByType<Korvalune.Game.TreasureChest>(FindObjectsSortMode.None).Length;
             Check("Parcours construit", UnityEngine.Object.FindObjectsByType<MeshCollider>(FindObjectsSortMode.None).Length >= 5, $"{lights} lumières, {chests} coffres, {game.camps.Count} groupes d'ennemis");
             CaveBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
+        }
+
+        static void EclipseCheck()
+        {
+            Line("\n## Cité de l'Éclipse (deuxième ville)");
+            try
+            {
+                var game = EclipseBuilder.Build();
+                Check("Scène de la Cité de l'Éclipse", File.Exists(EclipseBuilder.ScenePath), EclipseBuilder.ScenePath);
+                int merchants = UnityEngine.Object.FindObjectsByType<Korvalune.Game.Merchant>(FindObjectsSortMode.None).Length;
+                int portals = UnityEngine.Object.FindObjectsByType<Korvalune.Game.Portal>(FindObjectsSortMode.None).Length;
+                Check("Cité peuplée", merchants >= 3 && portals >= 1, $"{merchants} marchands, {portals} portail(s), {game.camps.Count} groupes fixes, niveau +{game.levelOffset}");
+                EclipseBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
+            }
+            catch (Exception ex) { Check("Cité de l'Éclipse", false, ex.Message); }
         }
 
         static void WorldCheck()

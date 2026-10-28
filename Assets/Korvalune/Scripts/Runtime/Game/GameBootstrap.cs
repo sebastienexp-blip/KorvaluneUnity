@@ -27,6 +27,8 @@ namespace Korvalune.Game
         public int zoneLevel = 0;
         [Tooltip("Mètres à parcourir depuis le bord de la zone sûre pour gagner un niveau de monstre")]
         public float metersPerLevel = 13f;
+        [Tooltip("Niveaux ajoutés à ceux de la distance (régions lointaines : Cité de l'Éclipse)")]
+        public int levelOffset = 0;
         [Tooltip("Hauteur de la surface de l'eau (nage) ; très bas = pas d'eau")]
         public float waterLevel = -10000f;
         [Tooltip("Peupler la zone de camps de monstres générés (vallée)")]
@@ -51,7 +53,7 @@ namespace Korvalune.Game
             if (Instance.zoneLevel > 0) return Instance.zoneLevel;
             var d = p - Instance.safeCenter; d.y = 0;
             float beyond = Mathf.Max(0, d.magnitude - Instance.safeRadius - 8f);
-            int l = 1 + Mathf.FloorToInt(beyond / Mathf.Max(1f, Instance.metersPerLevel));
+            int l = 1 + Instance.levelOffset + Mathf.FloorToInt(beyond / Mathf.Max(1f, Instance.metersPerLevel));
             if (p.x < -140f) l += 3;
             return Mathf.Clamp(l, 1, 80);
         }
