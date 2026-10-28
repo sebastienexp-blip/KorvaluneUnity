@@ -1,0 +1,85 @@
+# Assemble la cinématique d'introduction : plans vidéo générés (une URL par ligne, dans l'ordre) + voix off.
+# Fondus entre les plans, carte titre « KORVALUNE » à la fin, voix off mixée au-dessus du son des plans.
+# Résultat : Assets/StreamingAssets/Intro.mp4 (H.264 1080p, AAC) et un aperçu dans ci-out/intro/.
+name: Cinématique — assemblage
+
+on:
+  workflow_dispatch:
+    inputs:
+      plans:
+        description: "URL des plans vidéo, une par ligne, dans l'ordre"
+        required: true
+      voix:
+        description: "URL de la voix off (mp3)"
+        required: true
+      decalage:
+        description: "Départ de la voix off (s)"
+        required: false
+        default: "0.8"
+
+permissions:
+  contents: write
+
+jobs:
+  assembler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Outils
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fonts-dejavu-core > /dev/null
+      - name: Télécharger
+        env:
+          PLANS: ${{ github.event.inputs.plans }}
+          VOIX: ${{ github.event.inputs.voix }}
+        run: |
+          mkdir -p /tmp/intro && cd /tmp/intro
+          i=0
+          while read -r url; do
+            [ -z "$url" ] && continue; i=$((i+1))
+            curl -sSfL --retry 3 -o "brut_$i.mp4" "$url" && echo "✅ plan $i ($(ffprobe -v error -show_entries format=duration -of csv=p=0 brut_$i.mp4) s)" || { echo "❌ plan $i"; exit 1; }
+          done <<< "$PLANS"
+          curl -sSfL --retry 3 -o voix.mp3 "$VOIX" && echo "✅ voix ($(ffprobe -v error -show_entries format=duration -of csv=p=0 voix.mp3) s)"
+          echo $i > nb
+      - name: Monter
+        env:
+          DEC: ${{ github.event.inputs.decalage }}
+        run: |
+          cd /tmp/intro; n=$(cat nb); F=/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf; FI=/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf
+          # plans normalisés (1080p, 25 i/s, stéréo 48 kHz) avec fondus d'entrée et de sortie
+          : > liste.txt
+          for k in $(seq 1 $n); do
+            d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 brut_$k.mp4); fo=$(echo "$d - 0.45" | bc)
+            fi=0.35; [ $k = 1 ] && fi=1.2
+            if ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 brut_$k.mp4 | grep -q .; then A="-map 0:a:0"; AF="aresample=48000,aformat=channel_layouts=stereo,afade=t=in:d=$fi,afade=t=out:st=$fo:d=0.45"; else A=""; fi
+            if [ -n "$A" ]; then
+              ffmpeg -y -v error -i brut_$k.mp4 -map 0:v:0 $A -vf "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=25,format=yuv420p,fade=t=in:d=$fi,fade=t=out:st=$fo:d=0.45" -af "$AF" -c:v libx264 -preset veryfast -crf 18 -c:a aac -b:a 192k plan_$k.mp4
+            else
+              ffmpeg -y -v error -i brut_$k.mp4 -f lavfi -t "$d" -i anullsrc=r=48000:cl=stereo -map 0:v:0 -map 1:a -vf "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=25,format=yuv420p,fade=t=in:d=$fi,fade=t=out:st=$fo:d=0.45" -c:v libx264 -preset veryfast -crf 18 -c:a aac -b:a 192k -shortest plan_$k.mp4
+            fi
+            echo "file 'plan_$k.mp4'" >> liste.txt
+          done
+          ffmpeg -y -v error -f concat -safe 0 -i liste.txt -c copy plans.mp4
+          vd=$(ffprobe -v error -show_entries format=duration -of csv=p=0 plans.mp4); voixd=$(ffprobe -v error -show_entries format=duration -of csv=p=0 voix.mp3)
+          # carte titre : assez longue pour que la voix off se termine dessus
+          titre=$(python3 -c "print(max(4.0, ${DEC:-0.8} + $voixd + 1.2 - $vd))")
+          ffmpeg -y -v error -f lavfi -i "color=c=black:s=1920x1080:r=25:d=$titre" -f lavfi -t "$titre" -i anullsrc=r=48000:cl=stereo \
+            -vf "drawtext=fontfile=$F:text='KORVALUNE':fontsize=150:fontcolor=0xF2CC7A:x=(w-text_w)/2:y=(h-text_h)/2-50:alpha='min(1,t/1.2)':borderw=3:bordercolor=0x2A1206,drawtext=fontfile=$FI:text='Les ombres du Cœur Céleste':fontsize=50:fontcolor=0xDCCDB4:x=(w-text_w)/2:y=(h/2)+80:alpha='min(1,max(0,(t-0.8)/1.2))',fade=t=out:st=$(echo "$titre - 0.8" | bc):d=0.8,format=yuv420p" \
+            -c:v libx264 -preset veryfast -crf 18 -c:a aac -b:a 192k -shortest titre.mp4
+          printf "file 'plans.mp4'\nfile 'titre.mp4'\n" > final.txt
+          ffmpeg -y -v error -f concat -safe 0 -i final.txt -c copy images.mp4
+          # mixage : son des plans en fond, voix off devant
+          ms=$(python3 -c "print(int(${DEC:-0.8}*1000))")
+          mkdir -p "$GITHUB_WORKSPACE/Assets/StreamingAssets" "$GITHUB_WORKSPACE/ci-out/intro"
+          ffmpeg -y -v error -i images.mp4 -i voix.mp3 -filter_complex "[0:a]volume=0.55[f];[1:a]aresample=48000,aformat=channel_layouts=stereo,adelay=${ms}|${ms},volume=1.7[v];[f][v]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-16:TP=-1.5:LRA=11[a]" \
+            -map 0:v -map "[a]" -c:v libx264 -preset veryfast -crf 23 -profile:v main -pix_fmt yuv420p -c:a aac -b:a 160k -ar 48000 -movflags +faststart "$GITHUB_WORKSPACE/Assets/StreamingAssets/Intro.mp4"
+          ls -la "$GITHUB_WORKSPACE/Assets/StreamingAssets/Intro.mp4"
+          ffprobe -v error -show_entries format=duration -of csv=p=0 "$GITHUB_WORKSPACE/Assets/StreamingAssets/Intro.mp4"
+          ffmpeg -y -v error -i "$GITHUB_WORKSPACE/Assets/StreamingAssets/Intro.mp4" -vf "fps=1/2.5,scale=480:-1,tile=4x4" -frames:v 1 "$GITHUB_WORKSPACE/ci-out/intro/apercu.jpg"
+      - name: Enregistrer
+        run: |
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add Assets/StreamingAssets ci-out/intro
+          git commit -m "Cinématique d'introduction : assemblage [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done
