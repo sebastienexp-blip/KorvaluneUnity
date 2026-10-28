@@ -1,8 +1,8 @@
-# Rapport d'intégration Unity — 2026-10-28 11:27 UTC
+# Rapport d'intégration Unity — 2026-10-28 12:15 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
-- 257 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 257 déjà à jour (inchangés)
+- 264 modèle(s) ModelForge trouvé(s)
+- 0 modèle(s) intégré(s), 264 déjà à jour (inchangés)
 
 ## AshCrossbow.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/AshCrossbow/AshCrossbow.fbx
@@ -1379,6 +1379,284 @@
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
 - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
 
+## PNJ_Alchimiste.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Characters/PNJ_Alchimiste/PNJ_Alchimiste.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 104360 triangles, 60380 sommets (max 120000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Alchimiste.prefab
+- ✅ **Échelle (hauteur)** 1.846 m (attendu 1.55–1.95), boîte 1.88×1.85×0.59, pieds à y=0.000
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Point d'attache Socket_Shield_L** 
+- ✅ **Point d'attache Socket_Back** 
+- ✅ **Matériau NPALCH_Hair** shader Universal Render Pipeline/Lit, base NPALCH_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Skin** shader Universal Render Pipeline/Lit, base NPALCH_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Skin** shader Universal Render Pipeline/Lit, base NPALCH_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Skin** shader Universal Render Pipeline/Lit, base NPALCH_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Eye** shader Universal Render Pipeline/Lit, base NPALCH_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Brow** shader Universal Render Pipeline/Lit, base NPALCH_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Lash** shader Universal Render Pipeline/Lit, base NPALCH_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Teeth** shader Universal Render Pipeline/Lit, base NPALCH_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPALCH_Tongue** shader Universal Render Pipeline/Lit, base NPALCH_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NL_Boot** shader Universal Render Pipeline/Lit, base NL_Boot_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NL_Linen** shader Universal Render Pipeline/Lit, base NL_Linen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NL_Moss** shader Universal Render Pipeline/Lit, base NL_Moss_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NL_Gold** shader Universal Render Pipeline/Lit, base NL_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NL_Apron** shader Universal Render Pipeline/Lit, base NL_Apron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Équipement détachable** 5 pièce(s) : Cheveux (visible), Peau_AvantBras (visible), Peau_Mains (visible), Peau_Tete (visible), Tenue (visible)
+- ✅ **Avatar** valide=True, humain=True, 52 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 30/30
+- ✅ **Contrôleur d'animation** PNJ_Alchimiste
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.945 m, événements 0
+- ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.294 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.673 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.361 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.573 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
+## PNJ_Armurier.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Characters/PNJ_Armurier/PNJ_Armurier.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 109188 triangles, 62108 sommets (max 120000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Armurier.prefab
+- ✅ **Échelle (hauteur)** 1.836 m (attendu 1.55–1.95), boîte 1.88×1.84×0.35, pieds à y=0.000
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Point d'attache Socket_Shield_L** 
+- ✅ **Point d'attache Socket_Back** 
+- ✅ **Matériau NPARMU_Hair** shader Universal Render Pipeline/Lit, base NPARMU_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Skin** shader Universal Render Pipeline/Lit, base NPARMU_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Skin** shader Universal Render Pipeline/Lit, base NPARMU_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Skin** shader Universal Render Pipeline/Lit, base NPARMU_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Eye** shader Universal Render Pipeline/Lit, base NPARMU_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Brow** shader Universal Render Pipeline/Lit, base NPARMU_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Lash** shader Universal Render Pipeline/Lit, base NPARMU_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Teeth** shader Universal Render Pipeline/Lit, base NPARMU_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPARMU_Tongue** shader Universal Render Pipeline/Lit, base NPARMU_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NA_Wool** shader Universal Render Pipeline/Lit, base NA_Wool_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NA_Boot** shader Universal Render Pipeline/Lit, base NA_Boot_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NA_Gamb** shader Universal Render Pipeline/Lit, base NA_Gamb_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NA_Iron** shader Universal Render Pipeline/Lit, base NA_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Équipement détachable** 5 pièce(s) : Cheveux (visible), Peau_AvantBras (visible), Peau_Mains (visible), Peau_Tete (visible), Tenue (visible)
+- ✅ **Avatar** valide=True, humain=True, 52 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 30/30
+- ✅ **Contrôleur d'animation** PNJ_Armurier
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.945 m, événements 0
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.361 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.573 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
+## PNJ_Curiosites.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Characters/PNJ_Curiosites/PNJ_Curiosites.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 113962 triangles, 73367 sommets (max 120000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Curiosites.prefab
+- ✅ **Échelle (hauteur)** 1.885 m (attendu 1.55–1.95), boîte 1.88×1.89×0.68, pieds à y=0.000
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Point d'attache Socket_Shield_L** 
+- ✅ **Point d'attache Socket_Back** 
+- ✅ **Matériau NPCURI_Hair** shader Universal Render Pipeline/Lit, base NPCURI_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Skin** shader Universal Render Pipeline/Lit, base NPCURI_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Skin** shader Universal Render Pipeline/Lit, base NPCURI_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Skin** shader Universal Render Pipeline/Lit, base NPCURI_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Eye** shader Universal Render Pipeline/Lit, base NPCURI_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Brow** shader Universal Render Pipeline/Lit, base NPCURI_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Lash** shader Universal Render Pipeline/Lit, base NPCURI_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Teeth** shader Universal Render Pipeline/Lit, base NPCURI_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPCURI_Tongue** shader Universal Render Pipeline/Lit, base NPCURI_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NC_Boot** shader Universal Render Pipeline/Lit, base NC_Boot_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NC_Cream** shader Universal Render Pipeline/Lit, base NC_Cream_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NC_Red** shader Universal Render Pipeline/Lit, base NC_Red_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NC_Gold** shader Universal Render Pipeline/Lit, base NC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NC_Teal** shader Universal Render Pipeline/Lit, base NC_Teal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NC_Gem** shader Universal Render Pipeline/Lit, base NC_Gem_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Équipement détachable** 5 pièce(s) : Cheveux (visible), Peau_AvantBras (visible), Peau_Mains (visible), Peau_Tete (visible), Tenue (visible)
+- ✅ **Avatar** valide=True, humain=True, 52 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 30/30
+- ✅ **Contrôleur d'animation** PNJ_Curiosites
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.945 m, événements 0
+- ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.294 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.673 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.361 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.573 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
+## PNJ_Forgeron.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Characters/PNJ_Forgeron/PNJ_Forgeron.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 119108 triangles, 68199 sommets (max 120000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Forgeron.prefab
+- ✅ **Échelle (hauteur)** 1.836 m (attendu 1.55–1.95), boîte 1.88×1.84×0.38, pieds à y=0.000
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Point d'attache Socket_Shield_L** 
+- ✅ **Point d'attache Socket_Back** 
+- ✅ **Matériau NPFORG_Hair** shader Universal Render Pipeline/Lit, base NPFORG_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Skin** shader Universal Render Pipeline/Lit, base NPFORG_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Skin** shader Universal Render Pipeline/Lit, base NPFORG_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Skin** shader Universal Render Pipeline/Lit, base NPFORG_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Eye** shader Universal Render Pipeline/Lit, base NPFORG_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Brow** shader Universal Render Pipeline/Lit, base NPFORG_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Lash** shader Universal Render Pipeline/Lit, base NPFORG_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Teeth** shader Universal Render Pipeline/Lit, base NPFORG_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPFORG_Tongue** shader Universal Render Pipeline/Lit, base NPFORG_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NF_Wool** shader Universal Render Pipeline/Lit, base NF_Wool_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NF_Boot** shader Universal Render Pipeline/Lit, base NF_Boot_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NF_Linen** shader Universal Render Pipeline/Lit, base NF_Linen_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NF_Apron** shader Universal Render Pipeline/Lit, base NF_Apron_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Équipement détachable** 5 pièce(s) : Cheveux (visible), Peau_AvantBras (visible), Peau_Mains (visible), Peau_Tete (visible), Tenue (visible)
+- ✅ **Avatar** valide=True, humain=True, 52 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 30/30
+- ✅ **Contrôleur d'animation** PNJ_Forgeron
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.945 m, événements 0
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.361 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.573 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
+## PNJ_Joaillier.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Characters/PNJ_Joaillier/PNJ_Joaillier.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 99030 triangles, 55648 sommets (max 120000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Joaillier.prefab
+- ✅ **Échelle (hauteur)** 1.836 m (attendu 1.55–1.95), boîte 1.88×1.84×0.66, pieds à y=0.000
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Point d'attache Socket_Shield_L** 
+- ✅ **Point d'attache Socket_Back** 
+- ✅ **Matériau NPJOAI_Hair** shader Universal Render Pipeline/Lit, base NPJOAI_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Skin** shader Universal Render Pipeline/Lit, base NPJOAI_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Skin** shader Universal Render Pipeline/Lit, base NPJOAI_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Skin** shader Universal Render Pipeline/Lit, base NPJOAI_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Eye** shader Universal Render Pipeline/Lit, base NPJOAI_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Brow** shader Universal Render Pipeline/Lit, base NPJOAI_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Lash** shader Universal Render Pipeline/Lit, base NPJOAI_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Teeth** shader Universal Render Pipeline/Lit, base NPJOAI_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPJOAI_Tongue** shader Universal Render Pipeline/Lit, base NPJOAI_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NJ_Boot** shader Universal Render Pipeline/Lit, base NJ_Boot_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NJ_Navy** shader Universal Render Pipeline/Lit, base NJ_Navy_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NJ_Gold** shader Universal Render Pipeline/Lit, base NJ_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NJ_Gem** shader Universal Render Pipeline/Lit, base NJ_Gem_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Équipement détachable** 5 pièce(s) : Cheveux (visible), Peau_AvantBras (visible), Peau_Mains (visible), Peau_Tete (visible), Tenue (visible)
+- ✅ **Avatar** valide=True, humain=True, 52 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 30/30
+- ✅ **Contrôleur d'animation** PNJ_Joaillier
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.945 m, événements 0
+- ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.294 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.673 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.361 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.573 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
+## PNJ_Marchand.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Characters/PNJ_Marchand/PNJ_Marchand.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 114176 triangles, 65032 sommets (max 120000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Marchand.prefab
+- ✅ **Échelle (hauteur)** 1.867 m (attendu 1.55–1.95), boîte 1.88×1.87×0.50, pieds à y=0.000
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Point d'attache Socket_Shield_L** 
+- ✅ **Point d'attache Socket_Back** 
+- ✅ **Matériau NPMARC_Hair** shader Universal Render Pipeline/Lit, base NPMARC_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Skin** shader Universal Render Pipeline/Lit, base NPMARC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Skin** shader Universal Render Pipeline/Lit, base NPMARC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Skin** shader Universal Render Pipeline/Lit, base NPMARC_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Eye** shader Universal Render Pipeline/Lit, base NPMARC_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Brow** shader Universal Render Pipeline/Lit, base NPMARC_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Lash** shader Universal Render Pipeline/Lit, base NPMARC_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Teeth** shader Universal Render Pipeline/Lit, base NPMARC_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMARC_Tongue** shader Universal Render Pipeline/Lit, base NPMARC_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NM_Brown** shader Universal Render Pipeline/Lit, base NM_Brown_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NM_Boot** shader Universal Render Pipeline/Lit, base NM_Boot_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NM_Green** shader Universal Render Pipeline/Lit, base NM_Green_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NM_Gold** shader Universal Render Pipeline/Lit, base NM_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NM_Felt** shader Universal Render Pipeline/Lit, base NM_Felt_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NM_Band** shader Universal Render Pipeline/Lit, base NM_Band_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Équipement détachable** 5 pièce(s) : Cheveux (visible), Peau_AvantBras (visible), Peau_Mains (visible), Peau_Tete (visible), Tenue (visible)
+- ✅ **Avatar** valide=True, humain=True, 52 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 30/30
+- ✅ **Contrôleur d'animation** PNJ_Marchand
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.945 m, événements 0
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.361 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.573 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
+## PNJ_Mystique.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Characters/PNJ_Mystique/PNJ_Mystique.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 106483 triangles, 60385 sommets (max 120000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Mystique.prefab
+- ✅ **Échelle (hauteur)** 1.916 m (attendu 1.55–1.95), boîte 1.88×1.92×0.65, pieds à y=0.000
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.735
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.112 > LeftFoot.z=-0.026
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Point d'attache Socket_Shield_L** 
+- ✅ **Point d'attache Socket_Back** 
+- ✅ **Matériau NPMYST_Hair** shader Universal Render Pipeline/Lit, base NPMYST_Hair_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Skin** shader Universal Render Pipeline/Lit, base NPMYST_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Skin** shader Universal Render Pipeline/Lit, base NPMYST_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Skin** shader Universal Render Pipeline/Lit, base NPMYST_Skin_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Eye** shader Universal Render Pipeline/Lit, base NPMYST_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Brow** shader Universal Render Pipeline/Lit, base NPMYST_Brow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Lash** shader Universal Render Pipeline/Lit, base NPMYST_Lash_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Teeth** shader Universal Render Pipeline/Lit, base NPMYST_Teeth_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NPMYST_Tongue** shader Universal Render Pipeline/Lit, base NPMYST_Tongue_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NY_Dark** shader Universal Render Pipeline/Lit, base NY_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NY_Violet** shader Universal Render Pipeline/Lit, base NY_Violet_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NY_Gold** shader Universal Render Pipeline/Lit, base NY_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau NY_Crystal** shader Universal Render Pipeline/Lit, base NY_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Équipement détachable** 5 pièce(s) : Cheveux (visible), Peau_AvantBras (visible), Peau_Mains (visible), Peau_Tete (visible), Tenue (visible)
+- ✅ **Avatar** valide=True, humain=True, 52 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 30/30
+- ✅ **Contrôleur d'animation** PNJ_Mystique
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.945 m, événements 0
+- ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.294 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.673 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.361 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.573 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
 ## AraigneeGeante.fbx (character, rig Generic)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
 - ✅ **Import sans erreur ni avertissement** 
@@ -2458,4 +2736,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_133 captures écrites dans ci-out/ (OpenGLCore) en 5.9 min._
+_140 captures écrites dans ci-out/ (OpenGLCore) en 4.0 min._
