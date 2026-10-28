@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6373261078849183309
+--- !u!114 &-7087293156503132923
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,56 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
-  m_Name: Tonemapping
+  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
+  m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
   active: 1
-  mode:
+  shadows:
     m_OverrideState: 1
-    m_Value: 2
-  neutralHDRRangeReductionMode:
+    m_Value: {x: 0.95, y: 0.97, z: 1.05, w: 0}
+  midtones:
     m_OverrideState: 1
-    m_Value: 2
-  acesPreset:
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  highlights:
     m_OverrideState: 1
-    m_Value: 3
-  hueShiftAmount:
-    m_OverrideState: 1
-    m_Value: 0
-  detectPaperWhite:
+    m_Value: {x: 1.04, y: 1, z: 0.95, w: 0}
+  shadowsStart:
     m_OverrideState: 1
     m_Value: 0
-  paperWhite:
+  shadowsEnd:
     m_OverrideState: 1
-    m_Value: 300
-  detectBrightnessLimits:
+    m_Value: 0.3
+  highlightsStart:
+    m_OverrideState: 1
+    m_Value: 0.55
+  highlightsEnd:
     m_OverrideState: 1
     m_Value: 1
-  minNits:
-    m_OverrideState: 1
-    m_Value: 0.005
-  maxNits:
-    m_OverrideState: 1
-    m_Value: 1000
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Eclipse_PostProcess
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: 1632538221999618234}
-  - {fileID: -6373261078849183309}
-  - {fileID: 7725574104489759393}
-  - {fileID: 4787317643851506502}
-  - {fileID: 7292205635386637422}
---- !u!114 &1632538221999618234
+--- !u!114 &-6867439246051569958
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +81,25 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &4787317643851506502
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Eclipse_PostProcess
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: -6867439246051569958}
+  - {fileID: 4820709775255040687}
+  - {fileID: 5751322292630147640}
+  - {fileID: 3893364607999591640}
+  - {fileID: -7087293156503132923}
+--- !u!114 &3893364607999591640
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +127,7 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &7292205635386637422
+--- !u!114 &4820709775255040687
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,32 +136,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
-  m_Name: ShadowsMidtonesHighlights
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
   m_EditorClassIdentifier: 
   active: 1
-  shadows:
+  mode:
     m_OverrideState: 1
-    m_Value: {x: 0.95, y: 0.97, z: 1.05, w: 0}
-  midtones:
+    m_Value: 2
+  neutralHDRRangeReductionMode:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
-  highlights:
+    m_Value: 2
+  acesPreset:
     m_OverrideState: 1
-    m_Value: {x: 1.04, y: 1, z: 0.95, w: 0}
-  shadowsStart:
+    m_Value: 3
+  hueShiftAmount:
     m_OverrideState: 1
     m_Value: 0
-  shadowsEnd:
+  detectPaperWhite:
     m_OverrideState: 1
-    m_Value: 0.3
-  highlightsStart:
+    m_Value: 0
+  paperWhite:
     m_OverrideState: 1
-    m_Value: 0.55
-  highlightsEnd:
+    m_Value: 300
+  detectBrightnessLimits:
     m_OverrideState: 1
     m_Value: 1
---- !u!114 &7725574104489759393
+  minNits:
+    m_OverrideState: 1
+    m_Value: 0.005
+  maxNits:
+    m_OverrideState: 1
+    m_Value: 1000
+--- !u!114 &5751322292630147640
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}

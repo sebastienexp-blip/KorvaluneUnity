@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-10-28 12:15 UTC
+# Rapport d'intégration Unity — 2026-10-28 18:26 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 264 modèle(s) ModelForge trouvé(s)
@@ -176,9 +176,9 @@
 ## Chene0.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene0/Chene0.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1816 triangles, 1884 sommets (max 60000)
+- ✅ **Budget de triangles** 2040 triangles, 2332 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene0.prefab
-- ✅ **Échelle (hauteur)** 9.832 m (attendu 9.340084–10.32325), boîte 12.99×9.83×12.27, pieds à y=-0.003
+- ✅ **Échelle (hauteur)** 9.307 m (attendu 8.841953–9.772685), boîte 15.68×9.31×10.51, pieds à y=-0.003
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
@@ -186,9 +186,9 @@
 ## Chene0_LOD1.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene0_LOD1/Chene0_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1204 triangles, 1094 sommets (max 60000)
+- ✅ **Budget de triangles** 1252 triangles, 1190 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene0_LOD1.prefab
-- ✅ **Échelle (hauteur)** 9.490 m (attendu 9.015727–9.964751), boîte 12.61×9.49×12.56, pieds à y=-0.003
+- ✅ **Échelle (hauteur)** 10.895 m (attendu 10.34992–11.43939), boîte 12.12×10.89×12.87, pieds à y=-0.003
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
@@ -196,9 +196,9 @@
 ## Chene1.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene1/Chene1.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1816 triangles, 1884 sommets (max 60000)
+- ✅ **Budget de triangles** 2040 triangles, 2332 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene1.prefab
-- ✅ **Échelle (hauteur)** 10.104 m (attendu 9.59914–10.60958), boîte 11.17×10.10×10.62, pieds à y=-0.012
+- ✅ **Échelle (hauteur)** 10.407 m (attendu 9.886622–10.92732), boîte 13.94×10.41×12.36, pieds à y=-0.012
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
@@ -206,9 +206,9 @@
 ## Chene1_LOD1.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene1_LOD1/Chene1_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1204 triangles, 1094 sommets (max 60000)
+- ✅ **Budget de triangles** 1252 triangles, 1190 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene1_LOD1.prefab
-- ✅ **Échelle (hauteur)** 12.456 m (attendu 11.83282–13.07839), boîte 11.38×12.46×14.22, pieds à y=-0.011
+- ✅ **Échelle (hauteur)** 10.262 m (attendu 9.749259–10.7755), boîte 13.59×10.26×13.04, pieds à y=-0.011
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
@@ -216,9 +216,9 @@
 ## Chene2.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene2/Chene2.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1816 triangles, 1884 sommets (max 60000)
+- ✅ **Budget de triangles** 2040 triangles, 2332 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene2.prefab
-- ✅ **Échelle (hauteur)** 10.958 m (attendu 10.41041–11.50624), boîte 13.38×10.96×12.89, pieds à y=-0.007
+- ✅ **Échelle (hauteur)** 12.968 m (attendu 12.31989–13.61672), boîte 11.73×12.97×13.34, pieds à y=-0.007
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
@@ -226,9 +226,9 @@
 ## Chene2_LOD1.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Chene2_LOD1/Chene2_LOD1.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1204 triangles, 1094 sommets (max 60000)
+- ✅ **Budget de triangles** 1252 triangles, 1190 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Chene2_LOD1.prefab
-- ✅ **Échelle (hauteur)** 12.566 m (attendu 11.93745–13.19402), boîte 12.13×12.57×11.42, pieds à y=-0.006
+- ✅ **Échelle (hauteur)** 12.295 m (attendu 11.68035–12.90986), boîte 12.02×12.30×13.40, pieds à y=-0.006
 - ✅ **Matériau W_Bark** shader Universal Render Pipeline/Lit, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau W_Leaves** shader Universal Render Pipeline/Lit, base W_Leaves_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** capsule
@@ -431,27 +431,27 @@
 ## Rocher0.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher0/Rocher0.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 5440 triangles, 3242 sommets (max 60000)
+- ✅ **Budget de triangles** 736 triangles, 588 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher0.prefab
-- ✅ **Échelle (hauteur)** 1.862 m (attendu 1.768934–1.955137), boîte 2.56×1.86×2.20, pieds à y=-1.039
+- ✅ **Échelle (hauteur)** 0.713 m (attendu 0.6775863–0.7489111), boîte 1.37×0.71×1.38, pieds à y=-0.339
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
 
 ## Rocher1.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher1/Rocher1.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 5600 triangles, 3383 sommets (max 60000)
+- ✅ **Budget de triangles** 736 triangles, 583 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher1.prefab
-- ✅ **Échelle (hauteur)** 3.867 m (attendu 3.673435–4.060112), boîte 4.38×3.87×3.73, pieds à y=-1.770
+- ✅ **Échelle (hauteur)** 1.337 m (attendu 1.269715–1.403369), boîte 2.39×1.34×1.90, pieds à y=-0.620
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
 
 ## Rocher2.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 7204 triangles, 4471 sommets (max 60000)
+- ✅ **Budget de triangles** 800 triangles, 721 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
-- ✅ **Échelle (hauteur)** 5.552 m (attendu 5.274186–5.829364), boîte 7.00×5.55×7.49, pieds à y=-2.559
+- ✅ **Échelle (hauteur)** 1.484 m (attendu 1.409374–1.557729), boîte 3.57×1.48×3.09, pieds à y=-0.779
 - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** mesh
 
@@ -2736,4 +2736,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_140 captures écrites dans ci-out/ (OpenGLCore) en 4.0 min._
+_140 captures écrites dans ci-out/ (OpenGLCore) en 3.9 min._
