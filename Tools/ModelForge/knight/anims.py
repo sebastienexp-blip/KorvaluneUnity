@@ -64,8 +64,9 @@ class Style:
     name = 'sword_shield'
     def guard(self, p): return _guard_sword(p)
     def gait_arms(self, p, w, run, arm_amp):
-        p.arm('R', down=72, fwd=16 + arm_amp * np.sin(w + np.pi), twist=-10, elbow=40 + (30 if run else 0), wrist=(-8, 0, -15))
-        p.arm('L', down=64, fwd=22 + 0.35 * arm_amp * np.sin(w), twist=35, elbow=62 + (15 if run else 0))
+        e = np.sin(w + np.pi)
+        p.arm('R', down=68 if run else 72, fwd=(22 if run else 16) + arm_amp * e, twist=-10, elbow=(72 + 14 * e) if run else 40, wrist=(-8, 0, -15))
+        p.arm('L', down=60 if run else 64, fwd=24 + (0.6 if run else 0.35) * arm_amp * np.sin(w), twist=35, elbow=(80 - 10 * np.sin(w)) if run else 62)
     attack = None; block = None
     def idle_arms(self, p, br):
         """Respiration au repos : par défaut, l'épée oscille légèrement (les autres styles gardent leur garde)."""
@@ -117,18 +118,42 @@ def idle(sk):
 
 
 def gait(sk, name, period, amp, knee, arm_amp, lean, bob, run=False):
+    if run: return run_cycle(sk, name, period, amp, knee, arm_amp, lean, bob)
     ks = []
     for k in range(9):
         ph = k / 8; w = 2 * np.pi * ph
-        p = Pose().spine(lean, 8 * np.sin(w) * amp / 30, 0).head(-lean * 0.7, -6 * np.sin(w) * amp / 30)
+        # marche : le buste tourne à l'inverse du bassin, la tête reste dans l'axe
+        p = Pose().spine(lean, -4 * np.sin(w) * amp / 30, 0).head(-lean * 0.7, 5 * np.sin(w) * amp / 30)
         for side, off in (('L', 0), ('R', np.pi)):
             s = np.sin(w + off); c = np.cos(w + off)
-            kb = knee * max(0.0, -c) ** 1.3 + 6 + (knee * 0.35 if run else 0) * max(0.0, s)
-            p.leg(side, thigh=amp * s + (8 if run else 2), knee=kb, foot=-0.4 * amp * s * (s < 0) + 6 * (c > 0.6), spread=1)
+            kb = knee * max(0.0, c) ** 1.3 + 6
+            p.leg(side, thigh=amp * s + 2, knee=kb, foot=-0.4 * amp * s * (s < 0) + 6 * (c > 0.6), spread=1)
         guard(p)
-        _STYLE.gait_arms(p, w, run, arm_amp)
-        ks.append(key(k * period / 8, p, hips=(0.018 * np.sin(w), -bob * np.cos(2 * w) - (0.06 if run else 0.02), 0),
-                      hips_rot=(lean * 0.3, 6 * np.sin(w) * amp / 30, 3 * np.cos(w))))
+        _STYLE.gait_arms(p, w, False, arm_amp)
+        ks.append(key(k * period / 8, p, hips=(0.018 * np.sin(w), -bob * np.cos(2 * w) - 0.02, 0),
+                      hips_rot=(lean * 0.3, 8 * np.sin(w) * amp / 30, 3 * np.cos(w))))
+    return build_qclip(name, ks, BONES(sk), loop=True)
+
+
+def run_cycle(sk, name, period, amp, knee, arm_amp, lean, bob):
+    """Course dynamique : buste penché, bassin et épaules en contre-rotation, talon qui remonte vers la fesse pendant le
+    retour de la jambe, poussée sur la pointe, phase de vol (bassin au plus haut juste après l'impulsion), bras pompés."""
+    ks = []; N = 12
+    for k in range(N + 1):
+        w = 2 * np.pi * k / N
+        yaw = 11 * np.sin(w)                                   # bassin : la hanche de la jambe avant avance
+        p = Pose().spine(lean, -7.5 * np.sin(w), -1.5 * np.cos(w)).head(-lean * 0.55 + 2 * np.cos(2 * w), 9 * np.sin(w), 1.5 * np.cos(w))
+        for side, off in (('L', 0), ('R', np.pi)):
+            s = np.sin(w + off); c = np.cos(w + off)
+            # c > 0 : la jambe revient vers l'avant (retour) ; s ~ +1 : attaque du sol ; s ~ -1 : poussée
+            swing = max(0.0, c) ** 1.4
+            kb = 14 + knee * swing + 22 * max(0.0, s) * (1 - swing)          # talon-fesse au retour, genou souple à l'impact
+            foot = 14 * swing - 28 * max(0.0, -s) ** 2 * (c < 0.2) + 4 * max(0.0, s)   # pointe tendue à la poussée
+            p.leg(side, thigh=amp * s + 12 + 10 * swing, knee=kb, foot=foot, spread=0.5, toe=18 * max(0.0, -s) * (c < 0.2))
+        guard(p)
+        _STYLE.gait_arms(p, w, True, arm_amp)
+        ks.append(key(k * period / N, p, hips=(0.022 * np.sin(w), -bob * np.cos(2 * w - 0.6) - 0.07, 0.02),
+                      hips_rot=(lean * 0.35, yaw, 4 * np.cos(w))))
     return build_qclip(name, ks, BONES(sk), loop=True)
 
 
@@ -224,7 +249,7 @@ CLIPS = [('Idle', True, False, ()), ('Walk', True, False, (0.0, 0.5)), ('Run', T
 def build(sk, asset, style=None):
     global _STYLE, _SK
     _STYLE = style or Style(); _SK = sk
-    clips = [idle(sk), gait(sk, 'Walk', 1.05, 24, 55, 14, 4, 0.018), gait(sk, 'Run', 0.68, 38, 95, 30, 14, 0.035, run=True),
+    clips = [idle(sk), gait(sk, 'Walk', 1.05, 24, 55, 14, 4, 0.018), gait(sk, 'Run', 0.66, 46, 105, 44, 17, 0.045, run=True),
              attack(sk), block(sk), hit(sk), dodge(sk), death(sk)]
     for c in clips:
         if c.name not in ('Dodge', 'Death'): ground(sk, c)
