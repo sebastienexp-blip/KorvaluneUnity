@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-10-28 10:23 UTC
+# Rapport d'intégration Unity — 2026-10-28 11:27 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 257 modèle(s) ModelForge trouvé(s)
@@ -1325,9 +1325,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** BaseFemale
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -1371,9 +1371,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** BaseMale
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -1653,9 +1653,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** ElyraNoctis_F
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.934 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.838 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.408 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.669 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.904 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.468 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.480 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -1734,9 +1734,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** ElyraNoctis_M
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.934 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.838 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.408 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.669 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.904 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.468 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.480 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -1823,9 +1823,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** KaelDraven_F
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -1911,9 +1911,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** KaelDraven_M
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.961 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.151 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 1.184 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.352 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -1992,9 +1992,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** Morvanna_F
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.934 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.838 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.408 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.669 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.904 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.468 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.480 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -2078,9 +2078,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** Morvanna_M
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.934 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.838 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.408 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.669 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 0.904 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.468 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.480 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -2167,9 +2167,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** Tharion_F
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.943 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.585 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 1.07 s, boucle=False, humanoïde=True, déplacement max 1.013 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.364 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -2251,9 +2251,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** Tharion_M
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.943 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.585 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.409 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.670 m, événements 2
+- ✅ **Clip Attack** 1.07 s, boucle=False, humanoïde=True, déplacement max 1.013 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.364 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -2344,9 +2344,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** Varek_F
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.960 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.874 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.477 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.669 m, événements 2
+- ✅ **Clip Attack** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.893 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.402 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.550 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -2436,9 +2436,9 @@
   - doigts mappés : 30/30
 - ✅ **Contrôleur d'animation** Varek_M
 - ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 0.960 m, événements 0
-- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.531 m, événements 2
-- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.700 m, événements 2
-- ✅ **Clip Attack** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.874 m, événements 1
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.477 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.669 m, événements 2
+- ✅ **Clip Attack** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.893 m, événements 1
 - ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.402 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.550 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
@@ -2458,4 +2458,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_133 captures écrites dans ci-out/ (OpenGLCore) en 4.9 min._
+_133 captures écrites dans ci-out/ (OpenGLCore) en 5.9 min._
