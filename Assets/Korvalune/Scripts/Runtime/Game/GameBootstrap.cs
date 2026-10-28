@@ -94,7 +94,8 @@ namespace Korvalune.Game
                 hl.intensity = heroLight; hl.range = 11f; hl.shadows = LightShadows.None; hl.renderMode = LightRenderMode.ForcePixel;
             }
             rig.target = hero.transform; rig.Snap();
-            LootDrop.beamMat = config ? config.fxAdditive : null;
+            if (Application.isPlaying) { var occ = Cam.GetComponent<Occluders>(); if (!occ) occ = Cam.gameObject.AddComponent<Occluders>(); occ.target = hero.transform; occ.lookHeight = rig.lookHeight; }
+            LootDrop.beamMat = config ? config.fxAdditive : null; if (config && config.litMat) LootDrop.litBase = config.litMat;
             // personnage sauvegardé (choisi dans l'écran de sélection)
             var save = SaveSystem.Current;
             if (save != null)

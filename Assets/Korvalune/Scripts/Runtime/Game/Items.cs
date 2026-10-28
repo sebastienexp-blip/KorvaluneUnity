@@ -81,6 +81,21 @@ namespace Korvalune.Game
             { Slot.Anneau, new[] { "Anneau", "Chevalière" } },
         };
         static readonly string[] Prefix = { "Brisé", "Sinistre", "Ardent", "Glacial", "Funeste", "Céleste", "Sanglant", "Lunaire", "Infernal", "Ancien" };
+        static readonly HashSet<string> Fem = new HashSet<string> { "Épée longue", "Hache de guerre", "Masse d'armes", "Arbalète", "Faux", "Capuche", "Couronne", "Cuirasse", "Brigandine", "Robe", "Amulette", "Chevalière", "Mitaines", "Jambières", "Chausses", "Bottes", "Sandales" };
+        static readonly HashSet<string> Plur = new HashSet<string> { "Gantelets", "Gants de cuir", "Mitaines", "Jambières", "Cuissots", "Chausses", "Solerets", "Bottes", "Sandales" };
+        /// <summary>Accorde l'adjectif (en minuscules) avec le nom de base : « Brigandine ancienne », « Bottes brisées », « Solerets infernaux ».</summary>
+        public static string Accord(string adj, string noun)
+        {
+            adj = adj.ToLower(); bool f = Fem.Contains(noun), pl = Plur.Contains(noun);
+            if (f)
+            {
+                if (adj.EndsWith("ien")) adj += "ne";
+                else if (!adj.EndsWith("e")) adj += "e";
+            }
+            else if (pl && adj.EndsWith("al")) return adj.Substring(0, adj.Length - 2) + "aux";
+            if (pl && !adj.EndsWith("s") && !adj.EndsWith("x")) adj += "s";
+            return adj;
+        }
         static readonly string[] Suffix = { "de la Comète", "des Pics Sélénites", "du Néant", "de l'Éclipse", "des Cendres", "du Roi sans aube", "de Korvalune", "de l'Astral" };
         static readonly string[] Uniques = { "Larme d'Auralith", "Croc de Ghorvax", "Couronne du Roi sans aube", "Cœur de Maldrakor", "Aile de Seralyth" };
         public static IReadOnlyList<string> StatNames => Stats;
@@ -153,12 +168,12 @@ namespace Korvalune.Game
             {
                 Rarity.Commun => b,
                 Rarity.Magique => $"{b} {Suffix[r.Next(Suffix.Length)]}",
-                Rarity.Rare => $"{b} {Prefix[r.Next(Prefix.Length)].ToLower()}",
-                Rarity.Legendaire => pw != null ? pw.name : $"{b} {Prefix[r.Next(Prefix.Length)].ToLower()} {Suffix[r.Next(Suffix.Length)]}",
+                Rarity.Rare => $"{b} {Accord(Prefix[r.Next(Prefix.Length)], b)}",
+                Rarity.Legendaire => pw != null ? pw.name : $"{b} {Accord(Prefix[r.Next(Prefix.Length)], b)} {Suffix[r.Next(Suffix.Length)]}",
                 Rarity.Unique => Uniques[r.Next(Uniques.Length)],
                 Rarity.Mythique => Uniques[r.Next(Uniques.Length)] + " (mythique)",
-                Rarity.Ancestral => pw != null ? $"{pw.name} ancestral" : $"{b} ancestral {Suffix[r.Next(Suffix.Length)]}",
-                _ => $"{b} {Prefix[r.Next(Prefix.Length)].ToLower()} {Suffix[r.Next(Suffix.Length)]}",
+                Rarity.Ancestral => pw != null ? $"{pw.name} ancestral" : $"{b} {Accord("ancestral", b)} {Suffix[r.Next(Suffix.Length)]}",
+                _ => $"{b} {Accord(Prefix[r.Next(Prefix.Length)], b)} {Suffix[r.Next(Suffix.Length)]}",
             };
             return it;
         }

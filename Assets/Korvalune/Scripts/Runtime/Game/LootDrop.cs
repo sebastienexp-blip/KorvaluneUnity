@@ -80,7 +80,7 @@ namespace Korvalune.Game
             }
         }
 
-        static Material litBase;
+        public static Material litBase;   // matériau URP Lit fourni par la configuration (le matériau par défaut des primitives est rose sur Android)
         static void Part(Transform parent, string name, Vector3 pos, Vector3 size, Color col, float metal, float smooth, Color emission = default)
         {
             var g = GameObject.CreatePrimitive(PrimitiveType.Cube); g.name = name; Kill(g.GetComponent<Collider>());

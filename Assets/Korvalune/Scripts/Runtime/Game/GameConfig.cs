@@ -23,7 +23,7 @@ namespace Korvalune.Game
         public List<string> heroRes = new List<string>();
         public GameObject defaultHero => Res.Load<GameObject>(defaultHeroRes);
         public List<EnemyType> enemies = new List<EnemyType>();
-        public Material fxAdditive, fxAlpha, ringMat;
+        public Material fxAdditive, fxAlpha, ringMat, litMat;
         public VfxLibrary vfx;
         public UnityEngine.Rendering.RenderPipelineAsset highPipeline, mobilePipeline;
         public Font font;

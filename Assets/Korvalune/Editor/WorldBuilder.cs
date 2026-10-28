@@ -548,6 +548,9 @@ namespace Korvalune.EditorTools
             cfg.mobilePipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Mobile.asset");
             cfg.fxAdditive = FxMaterial("FX_Additif", true); cfg.fxAlpha = FxMaterial("FX_Poussiere", false);
             cfg.vfx = VfxBuilder.Build();
+            var litPath = Root + "/Rendering/Lit_Objets.mat"; var lit = AssetDatabase.LoadAssetAtPath<Material>(litPath);
+            if (!lit) { lit = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(lit, litPath); }
+            cfg.litMat = lit;
             EditorUtility.SetDirty(cfg);
             return cfg;
         }
