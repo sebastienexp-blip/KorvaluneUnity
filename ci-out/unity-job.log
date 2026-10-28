@@ -1,410 +1,413 @@
-# Journal du job d'intégration (run 40708489256)
+# Journal du job d'intégration (run 40709744531)
 ## Lignes importantes
-1160:2026-10-28T14:49:51.5135461Z [  2/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
-1681:2026-10-28T14:49:53.1331753Z Curl error 42: Callback aborted
-2127:2026-10-28T14:50:39.4551468Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-2129:2026-10-28T14:50:39.4552616Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-2342:2026-10-28T14:50:52.7236129Z ##[error]Process completed with exit code 1.
+1163:2026-10-28T14:57:27.1704621Z [  1/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+1685:2026-10-28T14:57:29.3423720Z Curl error 42: Callback aborted
+2688:2026-10-28T14:58:22.6852215Z [ 24/512    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+14465:2026-10-28T15:12:05.3153218Z Curl error 42: Callback aborted
+16821:2026-10-28T15:18:15.6470678Z Curl error 42: Callback aborted
+19970:2026-10-28T15:38:18.3297903Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+19972:2026-10-28T15:38:18.3299474Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+20134:2026-10-28T15:38:26.4740154Z hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-2026-10-28T14:49:51.5255069Z [133/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.UnityAdditionalFile.txt
-2026-10-28T14:49:51.5255828Z [134/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.UnityAdditionalFile.txt
-2026-10-28T14:49:51.5256680Z [135/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.rsp2
-2026-10-28T14:49:51.5257324Z [136/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.UnityAdditionalFile.txt
-2026-10-28T14:49:51.5258083Z [137/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll.mvfrm.rsp
-2026-10-28T14:49:51.5258851Z [138/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll.mvfrm.rsp
-2026-10-28T14:49:51.5259686Z [139/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll.mvfrm.rsp
-2026-10-28T14:49:51.5260635Z [140/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.dll.mvfrm
-2026-10-28T14:49:51.5261541Z [141/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestModule.dll_900B63630567508B.mvfrm
-2026-10-28T14:49:51.5262347Z [142/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.rsp
-2026-10-28T14:49:51.5263007Z [143/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.rsp
-2026-10-28T14:49:51.5263641Z [144/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.rsp
-2026-10-28T14:49:51.5264350Z [145/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll.mvfrm.rsp
-2026-10-28T14:49:51.5265007Z [146/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.rsp2
-2026-10-28T14:49:51.5265978Z [147/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.UnityAdditionalFile.txt
-2026-10-28T14:49:51.5266936Z [148/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll.mvfrm.rsp
-2026-10-28T14:49:51.5267402Z [149/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.rsp2
-2026-10-28T14:49:51.5267894Z [150/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.UnityAdditionalFile.txt
-2026-10-28T14:49:51.5268383Z [151/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.rsp2
-2026-10-28T14:49:51.5268904Z [152/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.UnityAdditionalFile.txt
-2026-10-28T14:49:51.5269463Z [153/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll.mvfrm.rsp
-2026-10-28T14:49:51.5270040Z [154/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.rsp
-2026-10-28T14:49:51.5270753Z [155/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.rsp
-2026-10-28T14:49:51.5271233Z [156/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.rsp
-2026-10-28T14:49:51.5271832Z [157/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestTextureModule.dll_35641A745CC0FAF4.mvfrm
-2026-10-28T14:49:51.5272490Z [158/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll.mvfrm
-2026-10-28T14:49:51.5273115Z [159/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.SysrootPackage.Editor.dll.mvfrm
-2026-10-28T14:49:51.5273742Z [160/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.dll.mvfrm
-2026-10-28T14:49:51.5274373Z [161/199    1s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.SysrootPackage.Editor.dll (+2 others)
-2026-10-28T14:49:51.5275045Z [162/199    1s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll (+2 others)
-2026-10-28T14:49:51.5275831Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.SysrootPackage.Editor.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5276653Z [163/199    1s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.dll (+2 others)
-2026-10-28T14:49:51.5277497Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5278483Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5279436Z [164/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.SysrootPackage.Editor.ref.dll_795E971823712576.mvfrm
-2026-10-28T14:49:51.5280515Z [165/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.AI.Navigation.Editor.ConversionSystem.ref.dll_0D6E4E7A57F11024.mvfrm
-2026-10-28T14:49:51.5281455Z [166/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Multiplayer.Center.Common.ref.dll_1579E59FCCBEB6B2.mvfrm
-2026-10-28T14:49:51.5282264Z [167/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Common.dll
-2026-10-28T14:49:51.5282908Z [168/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.ConversionSystem.dll
-2026-10-28T14:49:51.5283706Z [169/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.ConversionSystem.pdb
-2026-10-28T14:49:51.5284408Z [170/199    0s] CopyFiles Library/ScriptAssemblies/Unity.SysrootPackage.Editor.pdb
-2026-10-28T14:49:51.5284990Z [171/199    0s] CopyFiles Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll
-2026-10-28T14:49:51.5285804Z [172/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Common.pdb
-2026-10-28T14:49:51.5286795Z [173/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll.mvfrm
-2026-10-28T14:49:51.5287718Z [174/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll.mvfrm
-2026-10-28T14:49:51.5288521Z [175/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll (+2 others)
-2026-10-28T14:49:51.5289341Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5290148Z [176/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.pdb
-2026-10-28T14:49:51.5290898Z [177/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll
-2026-10-28T14:49:51.5291664Z [178/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Sysroot.Linux_x86_64.ref.dll_47C0B0C1257E42B5.mvfrm
-2026-10-28T14:49:51.5292595Z [179/199    2s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.dll (+2 others)
-2026-10-28T14:49:51.5293438Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5294482Z [180/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.dll
-2026-10-28T14:49:51.5295011Z [181/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.pdb
-2026-10-28T14:49:51.5295761Z [182/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll.mvfrm
-2026-10-28T14:49:51.5296579Z [183/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.AI.Navigation.ref.dll_DE872EE15FE1F97C.mvfrm
-2026-10-28T14:49:51.5297469Z [184/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll (+2 others)
-2026-10-28T14:49:51.5298442Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5299260Z [185/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.dll
-2026-10-28T14:49:51.5299943Z [186/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.pdb
-2026-10-28T14:49:51.5300807Z [187/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll.mvfrm
-2026-10-28T14:49:51.5301607Z [188/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll (+2 others)
-2026-10-28T14:49:51.5302484Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5303307Z [189/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.pdb
-2026-10-28T14:49:51.5303942Z [190/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.dll
-2026-10-28T14:49:51.5304632Z [191/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll (+2 others)
-2026-10-28T14:49:51.5305464Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5306140Z [192/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.pdb
-2026-10-28T14:49:51.5306562Z [193/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.dll
-2026-10-28T14:49:51.5307220Z [194/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.AI.Navigation.Editor.ref.dll_9C82A0E57CE4B9F5.mvfrm
-2026-10-28T14:49:51.5308029Z [195/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll.mvfrm
-2026-10-28T14:49:51.5308766Z [196/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll (+2 others)
-2026-10-28T14:49:51.5309308Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
-2026-10-28T14:49:51.5310009Z [197/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Updater.dll
-2026-10-28T14:49:51.5310610Z [198/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Updater.pdb
-2026-10-28T14:49:51.5310986Z *** Tundra build success (7.94 seconds), 198 items updated, 199 evaluated
-2026-10-28T14:49:51.5399049Z Total cache size 661976
-2026-10-28T14:49:51.5439817Z Total cache size after purge 661976, took 00:00:00.0195786
-2026-10-28T14:49:51.5447161Z AssetDatabase: script compilation time: 8.794262s
-2026-10-28T14:49:51.5576550Z Begin MonoManager ReloadAssembly
-2026-10-28T14:49:51.7836576Z - Loaded All Assemblies, in  0.225 seconds
-2026-10-28T14:49:51.8339370Z Start importing Assets using Guid(00000000000000001000000000000000) (DefaultImporter) -> (artifact id: '4b55c7cb15071bfc086d0e52a7664a41') in 0.014711373 seconds
-2026-10-28T14:49:51.8361222Z Start importing ProjectSettings/InputManager.asset using Guid(00000000000000002000000000000000) (LibraryAssetImporter) -> (artifact id: 'd7cbb2f293d488d47214d777b9ab9143') in 0.00118306 seconds
-2026-10-28T14:49:51.8363291Z Start importing ProjectSettings/TagManager.asset using Guid(00000000000000003000000000000000) (LibraryAssetImporter) -> (artifact id: 'e12af14f4aa32bc40c17248af2e3cce2') in 0.000822814 seconds
-2026-10-28T14:49:51.8379320Z Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '53cd9abebf724847b102d74e074a7005') in 0.002020921 seconds
-2026-10-28T14:49:51.8387109Z Start importing ProjectSettings/AudioManager.asset using Guid(00000000000000006000000000000000) (LibraryAssetImporter) -> (artifact id: '1f9b6fd92dcfbee817b95a134e3d28fc') in 0.000689458 seconds
-2026-10-28T14:49:51.8393840Z Start importing ProjectSettings/TimeManager.asset using Guid(00000000000000007000000000000000) (LibraryAssetImporter) -> (artifact id: '3e7b459e98cfb21a8ab539d867e021e1') in 0.000695609 seconds
-2026-10-28T14:49:51.8401650Z Start importing ProjectSettings/DynamicsManager.asset using Guid(00000000000000008000000000000000) (LibraryAssetImporter) -> (artifact id: '144119a1ab01c815a678c4d054cdf8e5') in 0.000708664 seconds
-2026-10-28T14:49:51.8415495Z Start importing ProjectSettings/QualitySettings.asset using Guid(00000000000000009000000000000000) (LibraryAssetImporter) -> (artifact id: '50d10dfdf9e7649bcfa4ef07fad090d4') in 0.000904145 seconds
-2026-10-28T14:49:51.8422291Z Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '02e711b73ebda4a0e7a32469dbba3ae8') in 0.000691421 seconds
-2026-10-28T14:49:51.8428735Z Start importing ProjectSettings/EditorSettings.asset using Guid(0000000000000000c000000000000000) (LibraryAssetImporter) -> (artifact id: '471e955cc34338ba6e9160a74550aa9b') in 0.000695664 seconds
-2026-10-28T14:49:51.8435141Z Start importing ProjectSettings/NavMeshAreas.asset using Guid(00000000000000004100000000000000) (LibraryAssetImporter) -> (artifact id: '98ab0a1852fd3ef0454a55ef8869d4c6') in 0.00069515 seconds
-2026-10-28T14:49:51.8441378Z Start importing ProjectSettings/Physics2DSettings.asset using Guid(00000000000000005100000000000000) (LibraryAssetImporter) -> (artifact id: '8032544aff07135c44b0aec745df5b87') in 0.000708567 seconds
-2026-10-28T14:49:51.8449281Z Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: 'b0333d69fa7e961821ffcb2378da820d') in 0.000776771 seconds
-2026-10-28T14:49:51.8457870Z Start importing ProjectSettings/ClusterInputManager.asset using Guid(00000000000000007100000000000000) (LibraryAssetImporter) -> (artifact id: '5a028a71a6163b7bc9a46219c48662ec') in 0.000720003 seconds
-2026-10-28T14:49:51.8466937Z Start importing ProjectSettings/UnityConnectSettings.asset using Guid(0000000000000000a100000000000000) (LibraryAssetImporter) -> (artifact id: '4978576e64e73b5a2e34ad1ebd36d3e4') in 0.00074096 seconds
-2026-10-28T14:49:51.8474363Z Start importing ProjectSettings/PresetManager.asset using Guid(0000000000000000b100000000000000) (LibraryAssetImporter) -> (artifact id: '669bd2cb5cdf99ef516d1350fa42393e') in 0.000750837 seconds
-2026-10-28T14:49:51.8481794Z Start importing ProjectSettings/VFXManager.asset using Guid(0000000000000000c100000000000000) (LibraryAssetImporter) -> (artifact id: 'c15523da67325d03c520fccf41939336') in 0.000713854 seconds
-2026-10-28T14:49:51.8491543Z Start importing ProjectSettings/VersionControlSettings.asset using Guid(0000000000000000d100000000000000) (LibraryAssetImporter) -> (artifact id: '6699f6a30141aac50ed115ec20e131c2') in 0.000776879 seconds
-2026-10-28T14:49:51.8499317Z Start importing ProjectSettings/MemorySettings.asset using Guid(0000000000000000f100000000000000) (LibraryAssetImporter) -> (artifact id: '19f032dc933bd79e61da5c81f7ddd1ac') in 0.000769722 seconds
-2026-10-28T14:49:51.8509050Z Start importing ProjectSettings/MultiplayerManager.asset using Guid(00000000000000000200000000000000) (LibraryAssetImporter) -> (artifact id: '2f864bba7a58beddb6fbf79980c9a838') in 0.000792096 seconds
-2026-10-28T14:49:51.8514745Z Start importing Library/BuildInstructions using Guid(00000000000000002300000000000000) (DefaultImporter) -> (artifact id: 'ade3aeda13ad9960ede0e143cb33502a') in 0.000504043 seconds
-2026-10-28T14:49:51.8520733Z Start importing Packages/com.unity.modules.imgui using Guid(c060426bfd6e82575228df6656368eaa) (DefaultImporter) -> (artifact id: '7d484ab5933192f91b6a2fb9f7498a1e') in 0.000503466 seconds
-2026-10-28T14:49:51.8527224Z Start importing Assets/Scenes using Guid(131a6b21c8605f84396be9f6751fb6e3) (DefaultImporter) -> (artifact id: '91527d591ccb2a4660704971243dc63d') in 0.000500564 seconds
-2026-10-28T14:49:51.8534208Z Start importing Packages/com.unity.sysroot using Guid(0513eb739d871a8969c8bc182c574140) (DefaultImporter) -> (artifact id: '174064be914462ca67def7c6b28ef65a') in 0.000507078 seconds
-2026-10-28T14:49:51.8540826Z Start importing Packages/com.unity.sysroot.linux-x86_64 using Guid(46b9c0cad0feb0477ff8dd4c486a9855) (DefaultImporter) -> (artifact id: '44cf6b72f441d9a80484501b342d2b6e') in 0.000485957 seconds
-2026-10-28T14:49:51.8547009Z Start importing Packages/com.unity.multiplayer.center using Guid(c6a6af5c77363b25a6878455c738e70e) (DefaultImporter) -> (artifact id: '1247f08500380f195e1d726471f57851') in 0.000499308 seconds
-2026-10-28T14:49:51.8565808Z Start importing Packages/com.unity.modules.uielements using Guid(2808ba6bccb2478ec9c7209d8bf1f3cc) (DefaultImporter) -> (artifact id: '49f971d306aab8cb20ddbc00ca94734a') in 0.000507952 seconds
-2026-10-28T14:49:51.8568109Z Start importing Packages/com.unity.modules.accessibility using Guid(783ee1c8fd4414848db1be97aacf44fb) (DefaultImporter) -> (artifact id: '8e348ba1cb91a7a56d611c91d2d841c4') in 0.000473366 seconds
-2026-10-28T14:49:51.8574265Z Start importing Packages/com.unity.modules.ui using Guid(39728903e57c60021f80449a8bbc0096) (DefaultImporter) -> (artifact id: '9ba448b29b75a8a1f5c4c31201266424') in 0.000499168 seconds
-2026-10-28T14:49:51.8578812Z Start importing Packages/com.unity.ai.navigation using Guid(fa896030ecfdc8bdb1e8661c8a32fcb8) (DefaultImporter) -> (artifact id: 'dc8453960773ade03796542eb7f80d66') in 0.00048432 seconds
-2026-10-28T14:49:51.8584519Z Start importing Packages/com.unity.modules.hierarchycore using Guid(6b81377a4453ba7362eb3322f9bcc6c6) (DefaultImporter) -> (artifact id: 'b5ba94375de312bec58cfc03230046fb') in 0.00049074 seconds
-2026-10-28T14:49:51.8589352Z Start importing Packages/com.unity.toolchain.linux-x86_64 using Guid(9bd9bcb62ec8c2335e8c5b8564f5c89e) (DefaultImporter) -> (artifact id: 'e78639e1b8c09ce5da583ac1f8c2112d') in 0.000504143 seconds
-2026-10-28T14:49:51.8594159Z Start importing Packages/com.unity.modules.jsonserialize using Guid(fc3a810351931f5e6183e16b9beb5563) (DefaultImporter) -> (artifact id: 'ae149b8f46567b37c6b77b16bb572fe8') in 0.000489943 seconds
-2026-10-28T14:49:51.8601307Z Start importing Packages/com.unity.modules.ai using Guid(fd871a8be47119612f7c254e96a822b7) (DefaultImporter) -> (artifact id: '619e67a2820f0fb43e606df1f0c95aa2') in 0.000464449 seconds
-2026-10-28T14:49:51.8609656Z Start importing Packages/com.unity.sysroot/Tests using Guid(21355b98f3d94d714ad8c543adb3c7ef) (DefaultImporter) -> (artifact id: '054e8ed07779d8f5227569c2d81c3b25') in 0.000521642 seconds
-2026-10-28T14:49:51.8615548Z Start importing Packages/com.unity.multiplayer.center/Editor using Guid(72aad6ae0dafb492cbf852432441bb38) (DefaultImporter) -> (artifact id: '1472e7f5e610b0cbc5fd254e2d90e8af') in 0.000506216 seconds
-2026-10-28T14:49:51.8621077Z Start importing Packages/com.unity.multiplayer.center/Common using Guid(f247964bd405431fbd31840f97bef608) (DefaultImporter) -> (artifact id: '80028f5919b4bee936c04608a509d2e3') in 0.000483475 seconds
-2026-10-28T14:49:51.8625983Z Start importing Packages/com.unity.ai.navigation/Editor using Guid(63b588f3892bb4b5eb73ad3d2791e05c) (DefaultImporter) -> (artifact id: '56542eb366809904ef22cfba0a6fd803') in 0.000492846 seconds
-2026-10-28T14:49:51.8633318Z Start importing Packages/com.unity.ai.navigation/Gizmos using Guid(93b9715f5a4bf471c8154f6cbab7e94d) (DefaultImporter) -> (artifact id: '9a1ea2e9334068cca4fb91a9c2309465') in 0.000456798 seconds
-2026-10-28T14:49:51.8639681Z Start importing Packages/com.unity.ai.navigation/Tests using Guid(a4ffdd6288cb842a8ac2b31823ceaab0) (DefaultImporter) -> (artifact id: '7c766eff0d351270b603bc59b4bdc5e3') in 0.000504629 seconds
-2026-10-28T14:49:51.8645463Z Start importing Packages/com.unity.sysroot/Editor using Guid(169765632ffb0f87cb8b3c23abe48007) (DefaultImporter) -> (artifact id: '2bcf5a40e96ba251d6e2564f1c6a5019') in 0.000504826 seconds
-2026-10-28T14:49:51.8652238Z Start importing Packages/com.unity.sysroot.linux-x86_64/Tests using Guid(27987f7a31ce040af97591e628278304) (DefaultImporter) -> (artifact id: '893a13eee328a7e4d90289e266905aa4') in 0.000475449 seconds
-2026-10-28T14:49:51.8659612Z Start importing Packages/com.unity.toolchain.linux-x86_64/Tests using Guid(5a0086b2cca8070de884733169bbf04e) (DefaultImporter) -> (artifact id: '9585ec7deb44b0754e02a80890270695') in 0.000525186 seconds
-2026-10-28T14:49:51.8666271Z Start importing Packages/com.unity.sysroot.linux-x86_64/Editor using Guid(9a994b3ee6d83415a9fd8831f7791f85) (DefaultImporter) -> (artifact id: 'cf6c60179e93fdd2ec449973fd1a8b38') in 0.000517416 seconds
-2026-10-28T14:49:51.8673385Z Start importing Packages/com.unity.multiplayer.center/Tests using Guid(baf75c9d3de4941df9ee5f3dd1d3bc34) (DefaultImporter) -> (artifact id: 'c292f37aeb22efaba797eb1a89034c56') in 0.00049145 seconds
-2026-10-28T14:49:51.8679928Z Start importing Packages/com.unity.toolchain.linux-x86_64/Editor using Guid(3bf5adcbe74ea0cf9b97900b9f6dfaac) (DefaultImporter) -> (artifact id: 'e2217ae5c102b6fb716c3e9ebf0c9a51') in 0.000486609 seconds
-2026-10-28T14:49:51.8686880Z Start importing Packages/com.unity.ai.navigation/EditorResources using Guid(bcb26a80e56f33046a81574f96664cfe) (DefaultImporter) -> (artifact id: '5a1cad08036fb88bee2b759db690ec3a') in 0.000531844 seconds
-2026-10-28T14:49:51.8693748Z Start importing Packages/com.unity.ai.navigation/Runtime using Guid(ce67aa87f613246dda63a54a59c6399e) (DefaultImporter) -> (artifact id: '9e38751fd2a295b42a1aa963f377ada5') in 0.000514343 seconds
-2026-10-28T14:49:51.8701468Z Start importing Packages/com.unity.multiplayer.center/Editor/Analytics using Guid(21f32d2f4add49b3b11fadb6889a2156) (DefaultImporter) -> (artifact id: '51aff480448f490e143cac19c8fd77f7') in 0.000453824 seconds
-2026-10-28T14:49:51.8706900Z Start importing Packages/com.unity.multiplayer.center/Editor/Features using Guid(22d3dbf8d488d49d2b1130d698010dee) (DefaultImporter) -> (artifact id: '97b7a3470b31512cc10a8dd26ae2abee') in 0.000466192 seconds
-2026-10-28T14:49:51.8713356Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem using Guid(d25d346918c1247368b4cb66a787b59e) (DefaultImporter) -> (artifact id: '8fe22541ee4ac1a9cb76ef1a05ebba54') in 0.000431465 seconds
-2026-10-28T14:49:51.8719392Z Start importing Packages/com.unity.sysroot.linux-x86_64/Tests/Editor using Guid(a4ba451dcf348469cb1fd6802655fd98) (DefaultImporter) -> (artifact id: 'f00b8449f9474a315e906e44e53d9c57') in 0.000483099 seconds
-2026-10-28T14:49:51.8725435Z Start importing Packages/com.unity.multiplayer.center/Tests/Editor using Guid(96c71b811fa50403690b154e216fe217) (DefaultImporter) -> (artifact id: 'f201ce797b3b9aaf0bd388d6daf5c8a9') in 0.000456555 seconds
-2026-10-28T14:49:51.8731657Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime using Guid(077676819252b4349a7677a483a0a8f4) (DefaultImporter) -> (artifact id: 'e8bad06de5cde9ef5960cb41e6af6758') in 0.000462464 seconds
-2026-10-28T14:49:51.8738297Z Start importing Packages/com.unity.multiplayer.center/Editor/OnBoarding using Guid(1726448925bf4bd1af6ca883bae8ff3f) (DefaultImporter) -> (artifact id: 'c547995c98e70de55ed7a0882b0b1d59') in 0.00046568 seconds
-2026-10-28T14:49:51.8744254Z Start importing Packages/com.unity.ai.navigation/Tests/Editor using Guid(276ab4071255d9f49931e6a8373248e1) (DefaultImporter) -> (artifact id: 'a23c4fe80deba16c509d4e02beb183e0') in 0.000486351 seconds
-2026-10-28T14:49:51.8751251Z Start importing Packages/com.unity.multiplayer.center/Editor/Recommendations using Guid(97646f506bf040e9bd4568124c8b425e) (DefaultImporter) -> (artifact id: '2b67414499aad658981bbbe944dda5b8') in 0.000529198 seconds
-2026-10-28T14:49:51.8759239Z Start importing Packages/com.unity.multiplayer.center/Editor/Questionnaire using Guid(a7f089ed51c2345ffb7ac0bc3562453f) (DefaultImporter) -> (artifact id: '91939e622deced05437de4135bda5ede') in 0.000557827 seconds
-2026-10-28T14:49:51.8767090Z Start importing Packages/com.unity.ai.navigation/Tests/VerifyEditorInPlaymode using Guid(48fe869bd7a418849ba6d20ca02072c7) (DefaultImporter) -> (artifact id: 'bcdc3d69dd8e912b25535d039f4cdfef') in 0.000576106 seconds
-2026-10-28T14:49:51.8774759Z Start importing Packages/com.unity.ai.navigation/Tests/PrebuiltAssets using Guid(09d22d38f275d7b48bc6a8082c1e4457) (DefaultImporter) -> (artifact id: '012968ab391b981ef7cb7e95c964214f') in 0.000474178 seconds
-2026-10-28T14:49:51.8781910Z Start importing Packages/com.unity.toolchain.linux-x86_64/Tests/Editor using Guid(a92e90f8d5f3b7bd48967a27d8fbdebe) (DefaultImporter) -> (artifact id: '1d2ff726bffae10ac439465f9348af55') in 0.000474503 seconds
-2026-10-28T14:49:51.8788039Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow using Guid(7a7dcde6448847648629a13d746ce966) (DefaultImporter) -> (artifact id: '25d35bc9e6545f61b784037e02201bc5') in 0.000462785 seconds
-2026-10-28T14:49:51.8795526Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay using Guid(aa309129cb54440488d6edd8358f5aec) (DefaultImporter) -> (artifact id: 'dc14845f51ac4d427dfe8b6b64d71932') in 0.000467658 seconds
-2026-10-28T14:49:51.8802414Z Start importing Packages/com.unity.ai.navigation/Editor/Updater using Guid(aaa4efef82a9346dba667d74ff3d5075) (DefaultImporter) -> (artifact id: '9a5110d6f215686fe9665b970337c6d7') in 0.000476672 seconds
-2026-10-28T14:49:51.8808918Z Start importing Packages/com.unity.sysroot/Tests/Editor using Guid(4cac27dd0398cfe66aa1f1eb45442a1a) (DefaultImporter) -> (artifact id: 'db7908cf7f80885aa72dec172125ef95') in 0.000457132 seconds
-2026-10-28T14:49:51.8816168Z Start importing Packages/com.unity.multiplayer.center/Tests/Runtime using Guid(8e4d240cf158245a9945c4df01d83bc1) (DefaultImporter) -> (artifact id: '9afa31a007ea527f1ed301c6b16e63c9') in 0.000481014 seconds
-2026-10-28T14:49:51.8823292Z Start importing Packages/com.unity.ai.navigation/Tests/Editor/Inspectors using Guid(8061144b555b4fbbb5226d6e18f4dd50) (DefaultImporter) -> (artifact id: 'bc57e0f35e9dda3d0be650d6c851be84') in 0.000459703 seconds
-2026-10-28T14:49:51.8828582Z Start importing Packages/com.unity.ai.navigation/Tests/Editor/Converter using Guid(585e4d2e85b344909fd03397aa977b50) (DefaultImporter) -> (artifact id: 'abe1e2683aa2e32392027ad0c59dfdff') in 0.000470535 seconds
-2026-10-28T14:49:51.8836300Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI using Guid(9bd34ec3fe8f4aed936c3a0cf2f32e56) (DefaultImporter) -> (artifact id: 'b73da0b57dd0696387d727e85cb54e01') in 0.000465882 seconds
-2026-10-28T14:49:51.8842152Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/OffMeshLinkTests using Guid(9c10f4966eb108848acf7461aaf6057e) (DefaultImporter) -> (artifact id: '81b55707962a68253e4065dd9caf05e1') in 0.0004598 seconds
-2026-10-28T14:49:51.8848598Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/OffMeshLinkTests/SceneSetup using Guid(028144d6018e97b4eabdb685c9fc01a0) (DefaultImporter) -> (artifact id: 'b10002eb36438d6ff18cf1ac6cb42d5c') in 0.000489072 seconds
-2026-10-28T14:49:51.8854714Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons using Guid(34a09eb4d6e8d44989194a25525c5147) (DefaultImporter) -> (artifact id: '6eef5c1301b509ae1757bc36a5ed6ea8') in 0.000475854 seconds
-2026-10-28T14:49:51.8860864Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/RecommendationView using Guid(eab7f42d361b483aaa760c5909002312) (DefaultImporter) -> (artifact id: '8eb859fe06dd083b30bd9c27d3ce7755') in 0.000465231 seconds
-2026-10-28T14:49:51.8872778Z Start importing Packages/com.unity.ai.navigation/Tests/VerifyEditorInPlaymode/Unity.AI.Navigation.Tests.EditorInPlaymode.asmdef using Guid(100055fbb0e2acd4a835038b0f7cd2f5) (AssemblyDefinitionImporter) -> (artifact id: 'bc800d037327f3aa3de25299032a48e7') in 0.000984158 seconds
-2026-10-28T14:49:51.8881186Z Start importing Packages/com.unity.toolchain.linux-x86_64/Tests/Editor/Unity.Toolchain.Linux-x86_64.EditorTests.asmdef using Guid(138e8122bb82938fe9a6eee7a4985427) (AssemblyDefinitionImporter) -> (artifact id: '7a7b3e46b3289357a9ed6aac425ed531') in 0.000653781 seconds
-2026-10-28T14:49:51.8888556Z Start importing Packages/com.unity.sysroot/Editor/Unity.SysrootPackage.Editor.asmdef using Guid(435a4e0ece4e23c4882730a295bbd8cd) (AssemblyDefinitionImporter) -> (artifact id: 'b36985a53ad91c94e488985541c0cafc') in 0.000653483 seconds
-2026-10-28T14:49:51.8895146Z Start importing Packages/com.unity.multiplayer.center/Common/Unity.Multiplayer.Center.Common.asmdef using Guid(84abd2ab34a74600a33a3bb9d72859fe) (AssemblyDefinitionImporter) -> (artifact id: '2e15fdfe053455410c46af8108d4b576') in 0.000644141 seconds
-2026-10-28T14:49:51.8902935Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/Unity.AI.Navigation.Tests.asmdef using Guid(455cd750f394b1c41b963b3335eae29c) (AssemblyDefinitionImporter) -> (artifact id: 'becc6752e4efb4a6d377a376faf9cff7') in 0.000637286 seconds
-2026-10-28T14:49:51.8912301Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/Unity.AI.Navigation.Editor.ConversionSystem.asmdef using Guid(c57630adab7a340ec94f10e4fcac12f1) (AssemblyDefinitionImporter) -> (artifact id: 'e598b58b76186828c99f16f776b7fbb5') in 0.000846983 seconds
-2026-10-28T14:49:51.8920572Z Start importing Packages/com.unity.ai.navigation/Editor/Updater/Unity.AI.Navigation.Updater.asmdef using Guid(1664e92176d434ccd902c1705fefe682) (AssemblyDefinitionImporter) -> (artifact id: '8c8fe093821397de6eabebbbee056d8c') in 0.000701475 seconds
-2026-10-28T14:49:51.8928335Z Start importing Packages/com.unity.multiplayer.center/Tests/Runtime/Unity.Multiplayer.Center.Tests.asmdef using Guid(2664430aff4254d79887d32c3fc1e221) (AssemblyDefinitionImporter) -> (artifact id: '10a8b6cec249c3f1431650b35fb0b23f') in 0.000734575 seconds
-2026-10-28T14:49:51.8937011Z Start importing Packages/com.unity.ai.navigation/Editor/Unity.AI.Navigation.Editor.asmdef using Guid(86c9d8e67265f41469be06142c397d17) (AssemblyDefinitionImporter) -> (artifact id: '546c987ea52dbb85d61b6633478d9319') in 0.000700243 seconds
-2026-10-28T14:49:51.8946785Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/OffMeshLinkTests/Unity.AI.Navigation.LegacyOffMeshLink.Tests.asmdef using Guid(68d7ff144262c9148888e665efa8692c) (AssemblyDefinitionImporter) -> (artifact id: 'd416964d2251ac6e914c20515dcb0f1d') in 0.000719947 seconds
-2026-10-28T14:49:51.8955788Z Start importing Packages/com.unity.multiplayer.center/Tests/Editor/Unity.Multiplayer.Center.Editor.Tests.asmdef using Guid(787ec048daec145b580d1134da5dd278) (AssemblyDefinitionImporter) -> (artifact id: '29dc17f91cb2a01d8b6be8c932a8280d') in 0.000719732 seconds
-2026-10-28T14:49:51.8964553Z Start importing Packages/com.unity.toolchain.linux-x86_64/Editor/Unity.Toolchain.Linux-x86_64.asmdef using Guid(f851af5d86c208af09cd265d08e3b3e2) (AssemblyDefinitionImporter) -> (artifact id: '5743b8e02569ca5b855321131136bc2d') in 0.000704685 seconds
-2026-10-28T14:49:51.8973422Z Start importing Packages/com.unity.ai.navigation/Tests/Editor/Unity.AI.Navigation.Editor.Tests.asmdef using Guid(794824b4a8f003f47a92875e8342f790) (AssemblyDefinitionImporter) -> (artifact id: 'f276d5f01ad4e3459993aefb76744551') in 0.000711604 seconds
-2026-10-28T14:49:51.8982430Z Start importing Packages/com.unity.sysroot.linux-x86_64/Tests/Editor/Unity.Sysroot.Linux-x86_64.EditorTests.asmdef using Guid(1ac444c25ae4642a2b37c1c9156d384f) (AssemblyDefinitionImporter) -> (artifact id: '6b38dc05b8e624468fb51ae076273d31') in 0.000689748 seconds
-2026-10-28T14:49:51.8992204Z Start importing Packages/com.unity.sysroot/Tests/Editor/Unity.Sysroot.EditorTests.asmdef using Guid(4b746f9393832b79384ac03cddf8eb94) (AssemblyDefinitionImporter) -> (artifact id: 'efef6c46ca41291844504e29698a7e33') in 0.000693957 seconds
-2026-10-28T14:49:51.9000281Z Start importing Packages/com.unity.sysroot.linux-x86_64/Editor/Unity.Sysroot.Linux-x86_64.asmdef using Guid(7bb4ea1d3f6d64e25ac0b0dd565b23aa) (AssemblyDefinitionImporter) -> (artifact id: '7292d3fc90152c959cc3cc2848ac714a') in 0.000683496 seconds
-2026-10-28T14:49:51.9009208Z Start importing Packages/com.unity.ai.navigation/Runtime/Unity.AI.Navigation.asmdef using Guid(8c4dd21966739024fbd72155091d199e) (AssemblyDefinitionImporter) -> (artifact id: 'cc5cca0622230da4c134ad5ba351c1cf') in 0.000721609 seconds
-2026-10-28T14:49:51.9018949Z Start importing Packages/com.unity.multiplayer.center/Editor/Unity.Multiplayer.Center.Editor.asmdef using Guid(be17709716f1648caa5de6d0c38103ed) (AssemblyDefinitionImporter) -> (artifact id: '6ce86c22cc7899b0214f30e55df0ec5c') in 0.000716324 seconds
-2026-10-28T14:49:51.9026369Z Start importing Packages/com.unity.modules.ui/package.ModuleCompilationTrigger using Guid(51fa60bb2bd1e5bc74e8cc95a7bfd5b7) (DefaultImporter) -> (artifact id: '237e32f9541121b786ca4b06eace0dfe') in 0.000487618 seconds
-2026-10-28T14:49:51.9032891Z Start importing Packages/com.unity.modules.hierarchycore/package.ModuleCompilationTrigger using Guid(d104359075a97392b803d3d5aebc77f7) (DefaultImporter) -> (artifact id: '5f087c93c58d9b1c35f89c539ed3a98d') in 0.000490763 seconds
-2026-10-28T14:49:51.9039975Z Start importing Packages/com.unity.modules.ai/package.ModuleCompilationTrigger using Guid(e2d09a26ce46dc617b54e49a534ace20) (DefaultImporter) -> (artifact id: 'a71f1fd08e4e9bf1ecd2d64209645034') in 0.000479747 seconds
-2026-10-28T14:49:51.9047261Z Start importing Packages/com.unity.modules.jsonserialize/package.ModuleCompilationTrigger using Guid(e6a135e3ea9cb46795d1b0e05ac3e1e5) (DefaultImporter) -> (artifact id: '8d26f1c211bce77f7cf17eccccd57b0d') in 0.000489317 seconds
-2026-10-28T14:49:51.9054692Z Start importing Packages/com.unity.modules.accessibility/package.ModuleCompilationTrigger using Guid(4745d06d5a7ca576dcf9e5e67b417652) (DefaultImporter) -> (artifact id: 'ae9e01646ac31a09b3de296582cd6de0') in 0.000545714 seconds
-2026-10-28T14:49:51.9062557Z Start importing Packages/com.unity.modules.uielements/package.ModuleCompilationTrigger using Guid(8a752aaaadd2410dd9a84e01c1bace9f) (DefaultImporter) -> (artifact id: 'ae37e7f0f1483578fc0d8d28fd17e0e2') in 0.000607368 seconds
-2026-10-28T14:49:51.9069488Z Start importing Packages/com.unity.modules.imgui/package.ModuleCompilationTrigger using Guid(be13c398521e3c1ad21fb9da30ab2ab6) (DefaultImporter) -> (artifact id: 'ea0574aa05344c7e80357502346d73fc') in 0.000468804 seconds
-2026-10-28T14:49:51.9076674Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-28T14:49:52.0119626Z Native extension for LinuxStandalone target not found
-2026-10-28T14:49:52.3421498Z Mono: successfully reloaded assembly
-2026-10-28T14:49:52.3588586Z - Finished resetting the current domain, in  0.451 seconds
-2026-10-28T14:49:52.3593720Z Domain Reload Profiling: 676ms
-2026-10-28T14:49:52.3594209Z 	BeginReloadAssembly (145ms)
-2026-10-28T14:49:52.3594624Z 		ExecutionOrderSort (0ms)
-2026-10-28T14:49:52.3595036Z 		DisableScriptedObjects (9ms)
-2026-10-28T14:49:52.3595601Z 		BackupInstance (0ms)
-2026-10-28T14:49:52.3595954Z 		ReleaseScriptingObjects (0ms)
-2026-10-28T14:49:52.3596352Z 		CreateAndSetChildDomain (45ms)
-2026-10-28T14:49:52.3596782Z 	RebuildCommonClasses (34ms)
-2026-10-28T14:49:52.3597192Z 	RebuildNativeTypeToScriptingClass (7ms)
-2026-10-28T14:49:52.3597616Z 	initialDomainReloadingComplete (22ms)
-2026-10-28T14:49:52.3598079Z 	LoadAllAssembliesAndSetupDomain (17ms)
-2026-10-28T14:49:52.3598763Z 		LoadAssemblies (65ms)
-2026-10-28T14:49:52.3599172Z 		RebuildTransferFunctionScriptingTraits (0ms)
-2026-10-28T14:49:52.3599568Z 		AnalyzeDomain (13ms)
-2026-10-28T14:49:52.3600002Z 			TypeCache.Refresh (9ms)
-2026-10-28T14:49:52.3600830Z 				TypeCache.ScanAssembly (3ms)
-2026-10-28T14:49:52.3601266Z 			BuildScriptInfoCaches (2ms)
-2026-10-28T14:49:52.3601892Z 			ResolveRequiredComponents (0ms)
-2026-10-28T14:49:52.3602264Z 	FinalizeReload (452ms)
-2026-10-28T14:49:52.3602615Z 		ReleaseScriptCaches (0ms)
-2026-10-28T14:49:52.3602991Z 		RebuildScriptCaches (0ms)
-2026-10-28T14:49:52.3603598Z 		SetupLoadedEditorAssemblies (331ms)
-2026-10-28T14:49:52.3604008Z 			LogAssemblyErrors (0ms)
-2026-10-28T14:49:52.3604383Z 			InitializePlatformSupportModulesInManaged (52ms)
-2026-10-28T14:49:52.3604919Z 			SetLoadedEditorAssemblies (4ms)
-2026-10-28T14:49:52.3605297Z 			BeforeProcessingInitializeOnLoad (105ms)
-2026-10-28T14:49:52.3605690Z 			ProcessInitializeOnLoadAttributes (142ms)
-2026-10-28T14:49:52.3606100Z 			ProcessInitializeOnLoadMethodAttributes (24ms)
-2026-10-28T14:49:52.3606736Z 			AfterProcessingInitializeOnLoad (3ms)
-2026-10-28T14:49:52.3607147Z 			EditorAssembliesLoaded (0ms)
-2026-10-28T14:49:52.3607664Z 		ExecutionOrderSort2 (0ms)
-2026-10-28T14:49:52.3608107Z 		AwakeInstancesAfterBackupRestoration (6ms)
-2026-10-28T14:49:52.4256653Z Start importing Library/BuildPlayer.prefs using Guid(00000000000000005000000000000000) (DefaultImporter) -> (artifact id: '083d37eb6b0e82b8f5c1ec86344d848d') in 0.005325453 seconds
-2026-10-28T14:49:52.4267829Z Start importing Assets/Scenes/SampleScene.unity using Guid(2cda990e2423bbf4892e6590ba056729) (DefaultImporter) -> (artifact id: '02327cc66a20cdc467be9bf65630cb1a') in 0.000638822 seconds
-2026-10-28T14:49:52.4281918Z Start importing Packages/com.unity.multiplayer.center/Editor/Questionnaire/Questionnaire.questionnaire using Guid(a659150180ae3489ba41c71780ba3779) (DefaultImporter) -> (artifact id: 'f015c12481ca2ebbe281edf6a5646fdb') in 0.000830259 seconds
-2026-10-28T14:49:52.4290591Z Start importing Packages/com.unity.multiplayer.center/Editor/Recommendations/RecommendationData_6000.0.recommendations using Guid(b66d076cdcfe3b14388de66307a0e7ff) (DefaultImporter) -> (artifact id: '1b3459ae4f98f07b813c3fa223d78525') in 0.001075202 seconds
-2026-10-28T14:49:52.4299084Z Start importing Packages/com.unity.ai.navigation/Tests/PrebuiltAssets/TestBundleWithAllLinks.prefab_ using Guid(c62c6d05e86bc124c9f6f5d49c93c158) (DefaultImporter) -> (artifact id: '21f4a55396d1cfd292f7b3ea579e8593') in 0.00068371 seconds
-2026-10-28T14:49:52.4306211Z Start importing Packages/com.unity.ai.navigation/Tests/PrebuiltAssets/Test_Links_Created_With_2_0_0.unity using Guid(5ad99e7d0c24c3845a39ca29f7c1c5e6) (DefaultImporter) -> (artifact id: '1b087aaedc6ede58ab89b478d2442f79') in 0.000597766 seconds
-2026-10-28T14:49:52.4353672Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@128.png using Guid(80899a9fbe3d3364eac2c5924c0a28cf) (TextureImporter) -> (artifact id: '964bdecda83139269d7de984acb3316c') in 0.004691354 seconds
-2026-10-28T14:49:52.4367940Z Start importing Packages/com.unity.ai.navigation/EditorResources/NavigationWindowIcon.png using Guid(b0172c3ab97e219478711e1fbe9630f2) (TextureImporter) -> (artifact id: '09994926588f00e3e7f31cfa1a07ed76') in 0.001292288 seconds
-2026-10-28T14:49:52.4398870Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@256.png using Guid(b05e7d8dc2bdbb14ab5b1da240ac65d5) (TextureImporter) -> (artifact id: '242c27ce589fd31da5a85a79b3a49579') in 0.002950538 seconds
-2026-10-28T14:49:52.4411722Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageInstalled@2x.png using Guid(318df756abab5463e9aa361360784865) (TextureImporter) -> (artifact id: '26bbafe216bf1ced645ac8f05cccc3cb') in 0.001205061 seconds
-2026-10-28T14:49:52.4425335Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On.png using Guid(c136efa5cc6d99a4d9e7bad0209aea25) (TextureImporter) -> (artifact id: '4d288b651dd63ab4ed6678450d6a7bad') in 0.001263471 seconds
-2026-10-28T14:49:52.4454412Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Loading.png using Guid(424a8de5def3b46dcb08edd00ad1c7bd) (TextureImporter) -> (artifact id: 'e88d4d355216a72f88b315d11c7d9f8b') in 0.001865145 seconds
-2026-10-28T14:49:52.4461108Z Start importing Packages/com.unity.ai.navigation/EditorResources/d_NavigationWindowIcon.png using Guid(425f55e9ef81a5e48b87c5d6b1bbf35c) (TextureImporter) -> (artifact id: '2aeb4ce123d71ce660a21c2d65ae99e2') in 0.001021777 seconds
-2026-10-28T14:49:52.4473675Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_Package.png using Guid(525a6cca8dd9a4d28875a8fe824710d9) (TextureImporter) -> (artifact id: 'd29594278abb14431ab5522a72284324') in 0.001355109 seconds
-2026-10-28T14:49:52.4533475Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshLink Icon.png using Guid(92f4afa3e25264f5b964937ccea49ff2) (TextureImporter) -> (artifact id: '47986880767c616cc29c15fce6af4983') in 0.005851769 seconds
-2026-10-28T14:49:52.4553556Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@2x.png using Guid(a206ff0ddc681e642a2e62fc57a7d51c) (TextureImporter) -> (artifact id: '73654f7638806b59111f400cc4da49ab') in 0.001751453 seconds
-2026-10-28T14:49:52.4575914Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CloudCode@2x.png using Guid(a23c0dd570fd44b57a03a8880002fcca) (TextureImporter) -> (artifact id: '456c95355a45abe4a6bb8f35c5e9af5a') in 0.002466049 seconds
-2026-10-28T14:49:52.4593635Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/ClientHosted.png using Guid(b2ce704e56cc84fb3b347499263c6244) (TextureImporter) -> (artifact id: '1b09bba3f64572b3527000f0145f764f') in 0.001552682 seconds
-2026-10-28T14:49:52.4615812Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DistributedAuthority@2x.png using Guid(0354877031b64465ea7e5cafea1a2653) (TextureImporter) -> (artifact id: '677bb664c7866a5fcec9bdacbe4217f5') in 0.002061814 seconds
-2026-10-28T14:49:52.4629602Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@2x.png using Guid(334589c596cc053418f700189f91111c) (TextureImporter) -> (artifact id: '47f92520bd96555fe1eff4feba0f15c3') in 0.001215222 seconds
-2026-10-28T14:49:52.4645013Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@16.png using Guid(731522d95656bec42a5fc0bdc672ebe9) (TextureImporter) -> (artifact id: '089789c60637ac1a73b1dd5bed28e7b4') in 0.001255346 seconds
-2026-10-28T14:49:52.4667898Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NGO@2x.png using Guid(83b28bcaaf34b4fd580114fb05d9f160) (TextureImporter) -> (artifact id: '916c85e4b25e4fb43dfb73ddac4d22f0') in 0.002260891 seconds
-2026-10-28T14:49:52.4683656Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@64.png using Guid(b3cd430fb0ffe164fa829262bb9e1d4b) (TextureImporter) -> (artifact id: 'dce22814395fd141463e17547c4b33c1') in 0.001218127 seconds
-2026-10-28T14:49:52.4697308Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay.png using Guid(e3f0b16456276c94aab8bd6664208dc3) (TextureImporter) -> (artifact id: '2967e8d6c9b4c34feacd66b6abeb3654') in 0.001310707 seconds
-2026-10-28T14:49:52.4712206Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageInstalled@2x.png using Guid(0423146d9f51c4563a0f2a8200b6cd38) (TextureImporter) -> (artifact id: 'fbec57b3f653c3bbcbf4ff250c6d4565') in 0.001389164 seconds
-2026-10-28T14:49:52.4739994Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@256.png using Guid(1497075210b6dcd4c8f31ecfc6c5c79c) (TextureImporter) -> (artifact id: '15a574aec6a4fbe4b6de4c0dfd16885d') in 0.002612904 seconds
-2026-10-28T14:49:52.4757482Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@128.png using Guid(44837f46c53a42246a6de7fa161e0d00) (TextureImporter) -> (artifact id: 'e27609b792470642fc1f19f6d1c52255') in 0.001570313 seconds
-2026-10-28T14:49:52.4783256Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@256.png using Guid(642f7453935154b44afc516c07b1d009) (TextureImporter) -> (artifact id: '3604dca0cca53308c51791b83ba918ae') in 0.002529014 seconds
-2026-10-28T14:49:52.4798059Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_Questionnaire.png using Guid(741761e72e6f24446bd8ba03ea3d0261) (TextureImporter) -> (artifact id: '448e267be0c914e94ab41fc73587cfee') in 0.001397829 seconds
-2026-10-28T14:49:52.4860794Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/EmptyViewIcon.png using Guid(84e4bbd00035e4671bf14e0380a89001) (TextureImporter) -> (artifact id: 'b7638aeb468c56d9e5a6352ee5886207') in 0.006005917 seconds
-2026-10-28T14:49:52.4876033Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageManager@2x.png using Guid(9431e8221045c4af189b2fa7174b9e9f) (TextureImporter) -> (artifact id: '9e9020a8a2a2af1722940474be650776') in 0.001395782 seconds
-2026-10-28T14:49:52.4921989Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshSurface Icon.png using Guid(e4f97225bcfb64760a1c81f460837f01) (TextureImporter) -> (artifact id: 'e79ffa7116f47e1b545af41a5a0ce180') in 0.004245576 seconds
-2026-10-28T14:49:52.4941895Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@64.png using Guid(151753cf3d5916d4fbf624668c268675) (TextureImporter) -> (artifact id: '7a6ecdb5355cffb2a6003eb671e55256') in 0.001270061 seconds
-2026-10-28T14:49:52.4966816Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NoNetcode@2x.png using Guid(b58a826ca804e4c67bab4283ad5a6102) (TextureImporter) -> (artifact id: 'e1d74f598241e8a73fdfc649a416d3a0') in 0.002373609 seconds
-2026-10-28T14:49:52.4998260Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@256.png using Guid(f5dd88efd8622424998bf5326c5421eb) (TextureImporter) -> (artifact id: '35ac908df9e9202c944933913a473924') in 0.002552395 seconds
-2026-10-28T14:49:52.5019597Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageInstalled.png using Guid(4616b2fa4acd1429e931835b80966c2a) (TextureImporter) -> (artifact id: '8af7918eeb10b9e2c9b1b44a3408d3a3') in 0.001487797 seconds
-2026-10-28T14:49:52.5032358Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@16.png using Guid(96c9a57d95a712d44978703ea9dd7f4e) (TextureImporter) -> (artifact id: '386e92554caf75e1bdd71d059df50425') in 0.001231258 seconds
-2026-10-28T14:49:52.5047765Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageManager@2x.png using Guid(a6fd0c627f5aa48fa81512221e70a11e) (TextureImporter) -> (artifact id: '5d35046e5870c033ff1d3faaf7e96a29') in 0.001391187 seconds
-2026-10-28T14:49:52.5098659Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshModifier Icon.png using Guid(b642c6bf23e624e23ad11b3e1d471932) (TextureImporter) -> (artifact id: '058adf1d3b4747dcbe2960fc203942e8') in 0.004456141 seconds
-2026-10-28T14:49:52.5120230Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DistributedAuthority.png using Guid(d63245ece6d8f476c8c7ca24da9937f6) (TextureImporter) -> (artifact id: 'b44ac27a1716b54742b80f5ea32e38a4') in 0.001517205 seconds
-2026-10-28T14:49:52.5134300Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageManager.png using Guid(679f9999c6f8f497e806a2d5d0511879) (TextureImporter) -> (artifact id: 'd0db9cd40724a15177ff117a729f5da2') in 0.001242455 seconds
-2026-10-28T14:49:52.5152817Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageInstalled.png using Guid(77be953cf28de42a4ad8532539fef3f5) (TextureImporter) -> (artifact id: '081e5adbde036422c1250884d4edacc4') in 0.001198956 seconds
-2026-10-28T14:49:52.5176523Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/ClientHosted@2x.png using Guid(c7a38e6eccbfc49778cb8b77f594a971) (TextureImporter) -> (artifact id: '82164b4f6b50175723b47cdabb5dbc80') in 0.002080554 seconds
-2026-10-28T14:49:52.5205768Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CustomNetcode@2x.png using Guid(d7711b0cc806d430b8a95f1e33ec3649) (TextureImporter) -> (artifact id: '83a9eeac864c4794a161c72995ad4634') in 0.002874578 seconds
-2026-10-28T14:49:52.5223644Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@32.png using Guid(f7a3e2b3beab29040bc1a68f0ad0045c) (TextureImporter) -> (artifact id: '67ba54d6fd703df2649fb276027748a9') in 0.001174074 seconds
-2026-10-28T14:49:52.5254539Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DedicatedServer@2x.png using Guid(38b78df4a34c94fa6a52c90239606ff1) (TextureImporter) -> (artifact id: '6baa3adafd5d928bd47df3a1e4059e37') in 0.002103074 seconds
-2026-10-28T14:49:52.5262887Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@32.png using Guid(b8a654e77ffbbcd4abdda7fdb70fbb9e) (TextureImporter) -> (artifact id: '45dd48360035a2f30781e100b2ad8dcd') in 0.001206236 seconds
-2026-10-28T14:49:52.5296338Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NGO.png using Guid(99da7b3894f364efdb5fa1443952a55d) (TextureImporter) -> (artifact id: 'ece1a78420f07a18d01aa8bf1b6c320f') in 0.003053077 seconds
-2026-10-28T14:49:52.5315238Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/N4E.png using Guid(e9669051ff70449b5923861e0e0b8838) (TextureImporter) -> (artifact id: 'a6b05c43da9a029205d559f2ec8bdf83') in 0.001815971 seconds
-2026-10-28T14:49:52.5328552Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@32.png using Guid(f9a2f623ba32a844da6de770f5ccf17f) (TextureImporter) -> (artifact id: 'd9915cebbfdd80fb0e0c845fe2569081') in 0.001105595 seconds
-2026-10-28T14:49:52.5508918Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/EmptyViewIcon@2x.png using Guid(2adffcc506285402aa795dee6f3166d0) (TextureImporter) -> (artifact id: 'c34a61d458b432a7a680b56cca136591') in 0.017928204 seconds
-2026-10-28T14:49:52.5522552Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay.png using Guid(6a986a181c9bc6043b057a3d15edbaad) (TextureImporter) -> (artifact id: '5f0ba7180bdc7d3217e56da69bdf7130') in 0.001267629 seconds
-2026-10-28T14:49:52.5540131Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_Loading.png using Guid(dab91f148d99946e7b3c3a87ecf4b973) (TextureImporter) -> (artifact id: 'a047ee303d6680a4009166ad53f24e30') in 0.001644001 seconds
-2026-10-28T14:49:52.5557969Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@128.png using Guid(1b6bf0e7b03fea94987a73d0cb14781b) (TextureImporter) -> (artifact id: 'e31a88d86a40b5308c6f93e97ad50000') in 0.001626005 seconds
-2026-10-28T14:49:52.5578216Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageManager.png using Guid(1b4c88814ec6241eb8e327515399c006) (TextureImporter) -> (artifact id: '40e2b773b80dc7302243fbc236781d33') in 0.0014573 seconds
-2026-10-28T14:49:52.5592485Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@128.png using Guid(5b2a8a1e265e99b4fb8d77061490f397) (TextureImporter) -> (artifact id: '437a9fee1f77b11e26a9eca96245d3e1') in 0.001880517 seconds
-2026-10-28T14:49:52.5606337Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@16.png using Guid(1c89fbe185cd30b4584ab3d5476807eb) (TextureImporter) -> (artifact id: '6285f34a737e5eba651c8f5cff4fddbb') in 0.001067387 seconds
-2026-10-28T14:49:52.5638563Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/N4E@2x.png using Guid(2cb589d4e01184d928bb698f06e77561) (TextureImporter) -> (artifact id: 'abac31dec0aeef30c574c668d7bae915') in 0.002871946 seconds
-2026-10-28T14:49:52.5653440Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On.png using Guid(5c5ac68c1bc4e104f9e987b9d1da4556) (TextureImporter) -> (artifact id: 'b9bd3cd26d566fd242c326f048d033f3') in 0.001197653 seconds
-2026-10-28T14:49:52.5700813Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshModifierVolume Icon.png using Guid(cc7b9475dbddf4f9088d327d6e10ab77) (TextureImporter) -> (artifact id: '88dc4f917ac169c753ca0367bd713487') in 0.004444416 seconds
-2026-10-28T14:49:52.5717940Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CustomNetcode.png using Guid(dce12af736e0a4a1ba35d6424f897dc9) (TextureImporter) -> (artifact id: '4453daebcc979751be637c2d07673ae3') in 0.001465265 seconds
-2026-10-28T14:49:52.5737985Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@64.png using Guid(fc46fceb4d1516544b7f503337211f65) (TextureImporter) -> (artifact id: '29dbf42a87ebc32e615f2d41d6944377') in 0.001879443 seconds
-2026-10-28T14:49:52.5753572Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@64.png using Guid(1dacc9e843ef1444fad71e40913ef05c) (TextureImporter) -> (artifact id: '9a0336d7199146eb9d337027a6eb4e1f') in 0.001309432 seconds
-2026-10-28T14:49:52.5771230Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NoNetcode.png using Guid(1daed49eec0f94f7ebb36dfef6159884) (TextureImporter) -> (artifact id: 'bd4a14320a5c0a50b43a3b424b770833') in 0.001464373 seconds
-2026-10-28T14:49:52.5785043Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@2x.png using Guid(7d5867654fa2bf448b06f384143ceca7) (TextureImporter) -> (artifact id: 'fdbb8425df659f11a734bd5ded471b22') in 0.001276206 seconds
-2026-10-28T14:49:52.5797490Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@16.png using Guid(8d8d1929f2279804e8a744d3da25e23b) (TextureImporter) -> (artifact id: '45352a606c0503ae1ee8b51cf3334168') in 0.001098518 seconds
-2026-10-28T14:49:52.5811044Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@2x.png using Guid(9d244ceb235342e4c8f308aa1f71be7e) (TextureImporter) -> (artifact id: '89a9dd4a2812d36208b10416bdc16ec4') in 0.001133394 seconds
-2026-10-28T14:49:52.5825063Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Package.png using Guid(9d9689eab72c8480c90679f4dcf18820) (TextureImporter) -> (artifact id: 'b091b6cbaf3c39d6e437566b7c3a3a2b') in 0.001164732 seconds
-2026-10-28T14:49:52.5843108Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CloudCode.png using Guid(ad1d29f4654194951a3c8bf507914d05) (TextureImporter) -> (artifact id: 'e743b244d69d21632a4c3f40e5918eb7') in 0.00171597 seconds
-2026-10-28T14:49:52.5859667Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Questionnaire.png using Guid(dd70cd654275d47db807e918055e004f) (TextureImporter) -> (artifact id: 'b7d35593123a52c5927fd6da6eaa9d72') in 0.001281217 seconds
-2026-10-28T14:49:52.5877051Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DedicatedServer.png using Guid(3fe892784421e47f5aa40c2784a6cb3e) (TextureImporter) -> (artifact id: '25d047273f7d8df802e9d7d4aa6b713e') in 0.001469857 seconds
-2026-10-28T14:49:52.5891385Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Check.png using Guid(4f78a544322c742b89e63fb68557b1d2) (TextureImporter) -> (artifact id: '5cc387dfe2bc87ec82ef2c0dfe95eed1') in 0.00115192 seconds
-2026-10-28T14:49:52.5906911Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@32.png using Guid(6f3c566cd9f63c9408d201ea50b51444) (TextureImporter) -> (artifact id: '5878d59a003f4d26282d91b4e37e0eae') in 0.001261879 seconds
-2026-10-28T14:49:52.5921983Z Start importing Packages/com.unity.ai.navigation/EditorResources/NavigationWindowIcon.asset using Guid(13a8a84f37ede4760a590fd13172bdd4) (NativeFormatImporter) -> (artifact id: 'cb7309e32185ef3988276790a75b3cb0') in 0.001111436 seconds
-2026-10-28T14:49:52.5933512Z Start importing Packages/com.unity.ai.navigation/EditorResources/d_NavigationWindowIcon.asset using Guid(df6a6289992d3406cb4cad0c522e4adf) (NativeFormatImporter) -> (artifact id: 'fc3269a0342f0683e78396e3ad4bad61') in 0.000943132 seconds
-2026-10-28T14:49:52.5945147Z Start importing Packages/com.unity.modules.jsonserialize/package.json using Guid(40bf3cec17fa0b49fe04443c8332d638) (PackageManifestImporter) -> (artifact id: '4bbe75e7d3a83ee7597a3bcba3a1e7c4') in 0.000929283 seconds
-2026-10-28T14:49:52.5957259Z Start importing Packages/com.unity.multiplayer.center/LICENSE.md using Guid(70554f6c9e4114e1084bb38f9ea400ce) (TextScriptImporter) -> (artifact id: 'c4bd63aaea861ad58925ef6690300eb1') in 0.000960987 seconds
-2026-10-28T14:49:52.5967685Z Start importing Packages/com.unity.sysroot.linux-x86_64/CHANGELOG.md using Guid(d079a46bd2b13441ebad731de9b00dbe) (TextScriptImporter) -> (artifact id: '57ce7193d96ac7cb884973f5dc96cc1b') in 0.000840601 seconds
-2026-10-28T14:49:52.5978214Z Start importing Packages/com.unity.modules.ai/package.json using Guid(f0f13f2ab3d6d13cfc6e4656824bfca8) (PackageManifestImporter) -> (artifact id: 'f55d3a21cd5f5d61fcb8b7e17ef38636') in 0.000817788 seconds
-2026-10-28T14:49:52.5988866Z Start importing Packages/com.unity.sysroot/README.md using Guid(51f3a1b7b38fe39689977681fe22df32) (TextScriptImporter) -> (artifact id: '741f6247cd2243e151c583a3bf0e1439') in 0.000820248 seconds
-2026-10-28T14:49:52.6007104Z Start importing Packages/com.unity.modules.imgui/package.json using Guid(42fe78c8fe682715a2cb531422e6ccb3) (PackageManifestImporter) -> (artifact id: '258497c2a57bcde162ae716914ae3ed9') in 0.000767063 seconds
-2026-10-28T14:49:52.6009923Z Start importing Packages/com.unity.sysroot.linux-x86_64/package.json using Guid(82b3e10190ae04847a3432984fd63265) (PackageManifestImporter) -> (artifact id: '4094a568cd5cd3cfeb4c917c630408bc') in 0.000969819 seconds
-2026-10-28T14:49:52.6023192Z Start importing Packages/com.unity.modules.accessibility/package.json using Guid(43674d438e19b89d7fe6af07234f3252) (PackageManifestImporter) -> (artifact id: 'ad5a70e9f56b60c0a8df45af38e584c0') in 0.000917664 seconds
-2026-10-28T14:49:52.6037437Z Start importing Packages/com.unity.multiplayer.center/README.md using Guid(c359bcaf4a0bc4040aac650bf14ec619) (TextScriptImporter) -> (artifact id: '1479d3316a4547e823ef71ef56c076f5') in 0.001008334 seconds
-2026-10-28T14:49:52.6051307Z Start importing Packages/com.unity.sysroot/package.json using Guid(0445a7983a983d97f848d19d5eeebf7b) (PackageManifestImporter) -> (artifact id: '7f1dd2edd35db95076b342361c26c918') in 0.00086493 seconds
-2026-10-28T14:49:52.6062242Z Start importing Packages/com.unity.toolchain.linux-x86_64/README.md using Guid(e476833ad0eb3d6afa792f32246c42d2) (TextScriptImporter) -> (artifact id: '21f55eb396a552c7f8bac32a390811cf') in 0.000873191 seconds
-2026-10-28T14:49:52.6072355Z Start importing Packages/com.unity.toolchain.linux-x86_64/LICENSE.md using Guid(25c7823ec1068a4d49626b816b321aab) (TextScriptImporter) -> (artifact id: '1bf07f43fff9386dc7e95e7eccf8ba7e') in 0.00084869 seconds
-2026-10-28T14:49:52.6082759Z Start importing Packages/com.unity.sysroot.linux-x86_64/README.md using Guid(169a1eb50937145adaa82ac869cadee2) (TextScriptImporter) -> (artifact id: 'b332939361d9146fe489ad078f14c787') in 0.000770421 seconds
-2026-10-28T14:49:52.6095023Z Start importing Packages/com.unity.sysroot/Third Party Notices.md using Guid(77480111a80ad46e7b0d10da3fd3a092) (TextScriptImporter) -> (artifact id: '33805c2bba0dba0746d6a85a888020d7') in 0.000731201 seconds
-2026-10-28T14:49:52.6105837Z Start importing Packages/com.unity.toolchain.linux-x86_64/package.json using Guid(b75d9a0470b1635b1a19f29fe9d743da) (PackageManifestImporter) -> (artifact id: '981fbf2bfd73b90175aa90fe3fedb2a6') in 0.001226806 seconds
-2026-10-28T14:49:52.6124057Z Start importing Packages/com.unity.sysroot/LICENSE.md using Guid(e76167c495d53ba6abcbb8df07973457) (TextScriptImporter) -> (artifact id: 'ebca5aabf661e3ccc2603fde66d31286') in 0.000943258 seconds
-2026-10-28T14:49:52.6133419Z Start importing Packages/com.unity.multiplayer.center/Third Party Notices.md using Guid(c8f6fa942856442b8bd72594d3ce7363) (TextScriptImporter) -> (artifact id: 'f117005acc7b64b33c08eea913553eaf') in 0.000841117 seconds
-2026-10-28T14:49:52.6143734Z Start importing Packages/com.unity.toolchain.linux-x86_64/ValidationConfig.json using Guid(19ec794be6c353ba2a3ca871b1793808) (TextScriptImporter) -> (artifact id: '0de4dea32159aaaeccb132b172fc06b9') in 0.000844235 seconds
-2026-10-28T14:49:52.6169887Z Start importing Packages/com.unity.sysroot/CHANGELOG.md using Guid(6903637d170abe311a972b9d76142805) (TextScriptImporter) -> (artifact id: '55e969f3ab6baf63ae71ad6e78823962') in 0.002453618 seconds
-2026-10-28T14:49:52.6186257Z Start importing Packages/com.unity.multiplayer.center/CHANGELOG.md using Guid(3bbd27b3dd7be4a74aeab8da6b0af5cc) (TextScriptImporter) -> (artifact id: 'b633de2c55fc0e0c2c63bfabd12d98df') in 0.001211395 seconds
-2026-10-28T14:49:52.6199064Z Start importing Packages/com.unity.modules.hierarchycore/package.json using Guid(9b1a5759726ef9d39a0ab82047b615f1) (PackageManifestImporter) -> (artifact id: 'f8312a43334a232c6dcc461c88a0f84c') in 0.001515259 seconds
-2026-10-28T14:49:52.6209310Z Start importing Packages/com.unity.toolchain.linux-x86_64/Third Party Notices.md using Guid(fb6d64d4cca2e56778082a1c7685fbac) (TextScriptImporter) -> (artifact id: '4143ea85c7b1e05d8d47eea64edaa883') in 0.000962858 seconds
-2026-10-28T14:49:52.6218230Z Start importing Packages/com.unity.ai.navigation/package.json using Guid(fbee67e09f48e4652bfa085460c895c7) (PackageManifestImporter) -> (artifact id: 'c0831351a23e6329037ed0fd459e8d8d') in 0.000824792 seconds
-2026-10-28T14:49:52.6228994Z Start importing Packages/com.unity.toolchain.linux-x86_64/CHANGELOG.md using Guid(ac31dd48a6c63fbdb8593e0542545f0d) (TextScriptImporter) -> (artifact id: '83e2fa1f565a5e1ab5a1df883c0aca94') in 0.000805186 seconds
-2026-10-28T14:49:52.6237359Z Start importing Packages/com.unity.ai.navigation/CHANGELOG.md using Guid(ccdfde25179bd45acb7145793b3b87f8) (TextScriptImporter) -> (artifact id: '463d9e54116d2d31af64809219d92b30') in 0.000771768 seconds
-2026-10-28T14:49:52.6257059Z Start importing Packages/com.unity.sysroot.linux-x86_64/LICENSE.md using Guid(6e81a17100c6f4c2a9256fd0e4e3915c) (TextScriptImporter) -> (artifact id: '547779d1c2685e2aee2ebc98bbabff85') in 0.001875757 seconds
-2026-10-28T14:49:52.6265338Z Start importing Packages/com.unity.modules.uielements/package.json using Guid(4f0f9b9f3ed97ad2b9ba8f1a8e4666c2) (PackageManifestImporter) -> (artifact id: 'ca9d50303d5bd8f93654306a000cf8a3') in 0.000791318 seconds
-2026-10-28T14:49:52.6274429Z Start importing Packages/com.unity.ai.navigation/README.md using Guid(6fc2b2cf518e540319637f5c5c573d3a) (TextScriptImporter) -> (artifact id: '47c7598b710f335f7016b41369f0f941') in 0.000774835 seconds
-2026-10-28T14:49:52.6283278Z Start importing Packages/com.unity.ai.navigation/LICENSE.md using Guid(af8f9a7f066204789819c6a616afe2c0) (TextScriptImporter) -> (artifact id: 'af9faaf49f00620cedd4938cd03ac155') in 0.000783726 seconds
-2026-10-28T14:49:52.6292130Z Start importing Packages/com.unity.modules.ui/package.json using Guid(bfd567a3d1631a761bca9e99fa53d86d) (PackageManifestImporter) -> (artifact id: '279189e7cd82f2da7fbbe656319204cf') in 0.000766713 seconds
-2026-10-28T14:49:52.6300279Z Start importing Packages/com.unity.multiplayer.center/package.json using Guid(df0857f6a11054383be91b1f8e1b5800) (PackageManifestImporter) -> (artifact id: '0db1fa71b39f36cc1f80be6b38d91a3a') in 0.000762412 seconds
-2026-10-28T14:49:52.6850546Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/light.uss using Guid(f1ac2efb1bcd4dfd95dc196ed3c11367) (ScriptedImporter) -> (artifact id: '53574dac69dd833ff6781c4de67e153d') in 0.054541864 seconds
-2026-10-28T14:49:52.6864905Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_widget.uss using Guid(63cb84b97408b4d25a6925daccffcd22) (ScriptedImporter) -> (artifact id: '9f2a56a83a810b427360d004488500bc') in 0.001547588 seconds
-2026-10-28T14:49:52.6913790Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/dark.uss using Guid(1984cd07fe96417f9e88f5771f6b4b32) (ScriptedImporter) -> (artifact id: 'b03a17b0975b9ec46fd1e2234bc8f251') in 0.004704864 seconds
-2026-10-28T14:49:52.7188906Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/MultiplayerCenterWindow.uss using Guid(bac00d6e07f0b4305bb395363c89d92b) (ScriptedImporter) -> (artifact id: '0f89668a6a1e6beb82a2233f487b2bc2') in 0.02737785 seconds
-2026-10-28T14:49:52.7204791Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_editor.uss using Guid(3eb99c80b411349188e1e5167887ac6c) (ScriptedImporter) -> (artifact id: '5cd23d48da9d8c72f3249bea3ea4bce8') in 0.00144171 seconds
-2026-10-28T14:49:52.7453975Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_widget_item.uxml using Guid(d6de7697d63d64fabbfb31425d93541e) (ScriptedImporter) -> (artifact id: 'a5cc9ad215e7a45b7a5bd190a24accbe') in 0.024711404 seconds
-2026-10-28T14:49:52.7515287Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_widget.uxml using Guid(aaa3e510761864dac9b71f85526490d6) (ScriptedImporter) -> (artifact id: '0888f50d539c1ee25721e299b08d8062') in 0.006004213 seconds
-2026-10-28T14:49:52.7606957Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_editor.uxml using Guid(cd1eb3c3c695c494d855ea678fe7395b) (ScriptedImporter) -> (artifact id: 'd51eb8fb5495202e5c0e138d84c633dd') in 0.008983745 seconds
-2026-10-28T14:49:52.7971068Z Loading style catalogs (6)
-2026-10-28T14:49:52.7972771Z 	StyleSheets/Extensions/base/common.uss
-2026-10-28T14:49:52.7973473Z 	UIPackageResources/StyleSheets/Default/Variables/Public/common.uss
-2026-10-28T14:49:52.7974029Z 	StyleSheets/Northstar/common.uss
-2026-10-28T14:49:52.7974481Z 	StyleSheets/Extensions/fonts/inter.uss
-2026-10-28T14:49:52.7974931Z 	StyleSheets/Extensions/base/dark.uss
-2026-10-28T14:49:52.7975517Z 	UIPackageResources/StyleSheets/Default/Northstar/Palette/dark.uss
-2026-10-28T14:49:52.9466148Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
-2026-10-28T14:49:52.9467228Z Preloading 0 native plugins for Editor in 0.00 ms.
-2026-10-28T14:49:52.9475349Z Asset Pipeline Refresh (id=d5f8637a2a96d54799e1bcd3462626a9): Total: 10.416 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
-2026-10-28T14:49:52.9477397Z 	Summary:
-2026-10-28T14:49:52.9477857Z 		Imports: total=212 (actual=212, local cache=0, cache server=0)
-2026-10-28T14:49:52.9478406Z 		Asset DB Process Time: managed=16 ms, native=1035 ms
-2026-10-28T14:49:52.9478916Z 		Asset DB Callback time: managed=175 ms, native=153 ms
-2026-10-28T14:49:52.9479541Z 		Scripting: domain reloads=1, domain reload time=230 ms, compile time=8797 ms, other=6 ms
-2026-10-28T14:49:52.9480193Z 		Project Asset Count: scripts=98, non-scripts=114
-2026-10-28T14:49:52.9480898Z 		Asset File Changes: new=350, changed=350, moved=0, deleted=0
-2026-10-28T14:49:52.9481396Z 		Scan Filter Count: 1
-2026-10-28T14:49:52.9481797Z 	InvokeCustomDependenciesCallbacks: 0.004ms
-2026-10-28T14:49:52.9482277Z 	InvokePackagesCallback: 147.571ms
-2026-10-28T14:49:52.9482704Z 	ApplyChangesToAssetFolders: 0.140ms
-2026-10-28T14:49:52.9483104Z 	Scan: 57.675ms
-2026-10-28T14:49:52.9483462Z 	OnSourceAssetsModified: 1.556ms
-2026-10-28T14:49:52.9484205Z 	CategorizeAssetsWithTransientArtifact: 0.746ms
-2026-10-28T14:49:52.9484760Z 	ProcessAssetsWithTransientArtifactChanges: 2.570ms
-2026-10-28T14:49:52.9485229Z 	CategorizeAssets: 1.180ms
-2026-10-28T14:49:52.9485703Z 	ImportOutOfDateAssets: 936.930ms (-8342.975ms without children)
-2026-10-28T14:49:52.9486330Z 		ImportManagerImport: 480.742ms (56.237ms without children)
-2026-10-28T14:49:52.9486826Z 			ImportInProcess: 423.797ms
-2026-10-28T14:49:52.9487233Z 			UpdateCategorizedAssets: 0.708ms
-2026-10-28T14:49:52.9487646Z 		CompileScripts: 8796.581ms
-2026-10-28T14:49:52.9488041Z 		ReloadNativeAssets: 0.001ms
-2026-10-28T14:49:52.9488436Z 		UnloadImportedAssets: 0.271ms
-2026-10-28T14:49:52.9488827Z 		ReloadImportedAssets: 0.042ms
-2026-10-28T14:49:52.9489318Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.027ms
-2026-10-28T14:49:52.9489824Z 		InitializingProgressBar: 0.010ms
-2026-10-28T14:49:52.9490461Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
-2026-10-28T14:49:52.9491092Z 		OnDemandSchedulerStart: 2.229ms
-2026-10-28T14:49:52.9491507Z 	PostProcessAllAssets: 179.338ms
-2026-10-28T14:49:52.9491920Z 	Hotreload: 1.426ms
-2026-10-28T14:49:52.9492337Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
-2026-10-28T14:49:52.9492821Z 	UnloadStreamsBegin: 1.816ms
-2026-10-28T14:49:52.9493211Z 	PersistCurrentRevisions: 0.181ms
-2026-10-28T14:49:52.9493606Z 	UnloadStreamsEnd: 0.009ms
-2026-10-28T14:49:52.9494007Z 	GenerateScriptTypeHashes: 0.433ms
-2026-10-28T14:49:52.9494411Z 	Untracked: 9085.058ms
-2026-10-28T14:49:52.9494672Z 
-2026-10-28T14:49:52.9494919Z Application.AssetDatabase Initial Refresh End
-2026-10-28T14:49:52.9643160Z Scanning for USB devices : 0.141ms
-2026-10-28T14:49:52.9678775Z Initializing Unity extensions:
-2026-10-28T14:49:53.0082746Z [Licensing::Client] Successfully resolved entitlement details
-2026-10-28T14:49:53.0153395Z UpdateMenuTitleForLanguage: 10
-2026-10-28T14:49:53.0157529Z [MODES] ModeService[none].Initialize
-2026-10-28T14:49:53.0161255Z [MODES] ModeService[none].LoadModes
-2026-10-28T14:49:53.0245535Z [MODES] Loading mode Default (0) for mode-current-id-BlankProject
-2026-10-28T14:49:53.0741826Z Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-2026-10-28T14:49:53.0822522Z Unloading 160 unused Assets / (0.6 MB). Loaded Objects now: 674.
-2026-10-28T14:49:53.0824219Z Memory consumption went from 78.5 MB to 77.8 MB.
-2026-10-28T14:49:53.0825474Z Total: 7.319214 ms (FindLiveObjects: 0.075983 ms CreateObjectMapping: 0.011728 ms MarkObjects: 6.600183 ms  DeleteObjects: 0.630028 ms)
-2026-10-28T14:49:53.0826124Z 
-2026-10-28T14:49:53.0996407Z Batchmode quit successfully invoked - shutting down!
-2026-10-28T14:49:53.1331753Z Curl error 42: Callback aborted
-2026-10-28T14:49:53.1583373Z [Physics::Module] Cleanup current backned.
-2026-10-28T14:49:53.1584327Z [Physics::Module] Id: 0xf2b8ea05
-2026-10-28T14:49:53.1585311Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
-2026-10-28T14:49:53.1586198Z [Licensing::IpcConnector] License Client channel disconnected successfully.
-2026-10-28T14:49:53.1680683Z AcceleratorClientConnectionCallback - disconnected - :0
-2026-10-28T14:49:53.1703268Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-10-28T14:49:53.1703911Z       Application is shutting down...
-2026-10-28T14:49:57.8059715Z Cleanup mono
-2026-10-28T14:49:57.8519458Z debugger-agent: Unable to listen on 38
-2026-10-28T14:49:57.8559198Z Exiting batchmode successfully now!
+2026-10-28T15:38:07.7035264Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7036195Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7036635Z 
+2026-10-28T15:38:07.7036928Z ## Rocher2.fbx (prop, rig None)
+2026-10-28T15:38:07.7037606Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
+2026-10-28T15:38:07.7038307Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7039009Z - ✅ **Budget de triangles** 800 triangles, 721 sommets (max 60000)
+2026-10-28T15:38:07.7040018Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
+2026-10-28T15:38:07.7041094Z - ✅ **Échelle (hauteur)** 1.484 m (attendu 1.409374–1.557729), boîte 3.57×1.48×3.09, pieds à y=-0.779
+2026-10-28T15:38:07.7042396Z - ✅ **Matériau W_Rock** shader Universal Render Pipeline/Lit, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7043306Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7043532Z 
+2026-10-28T15:38:07.7043703Z ## T_Troncon_0_0.fbx (prop, rig None)
+2026-10-28T15:38:07.7044512Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_0/T_Troncon_0_0.fbx
+2026-10-28T15:38:07.7045351Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7046066Z - ✅ **Budget de triangles** 22779 triangles, 17156 sommets (max 60000)
+2026-10-28T15:38:07.7047302Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_0.prefab
+2026-10-28T15:38:07.7048470Z - ✅ **Échelle (hauteur)** 9.882 m (attendu 8.893484–10.86981), boîte 51.60×9.88×51.58, pieds à y=-3.133
+2026-10-28T15:38:07.7049791Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7051242Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7052660Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7054070Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7055665Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7057381Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7058804Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7059704Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7059932Z 
+2026-10-28T15:38:07.7060098Z ## T_Troncon_0_1.fbx (prop, rig None)
+2026-10-28T15:38:07.7060897Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_1/T_Troncon_0_1.fbx
+2026-10-28T15:38:07.7061718Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7062420Z - ✅ **Budget de triangles** 16919 triangles, 12906 sommets (max 60000)
+2026-10-28T15:38:07.7063391Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_1.prefab
+2026-10-28T15:38:07.7064641Z - ✅ **Échelle (hauteur)** 11.108 m (attendu 9.997091–12.21867), boîte 44.14×11.11×51.66, pieds à y=-6.546
+2026-10-28T15:38:07.7065972Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7067612Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7069028Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7070436Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7071918Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7073401Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7074821Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7075966Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7076193Z 
+2026-10-28T15:38:07.7076556Z ## T_Troncon_0_2.fbx (prop, rig None)
+2026-10-28T15:38:07.7077580Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_2/T_Troncon_0_2.fbx
+2026-10-28T15:38:07.7078417Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7079131Z - ✅ **Budget de triangles** 29144 triangles, 21909 sommets (max 60000)
+2026-10-28T15:38:07.7080105Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_2.prefab
+2026-10-28T15:38:07.7081265Z - ✅ **Échelle (hauteur)** 12.344 m (attendu 11.10972–13.57855), boîte 51.25×12.34×51.54, pieds à y=-10.292
+2026-10-28T15:38:07.7082593Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7084033Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7085457Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7087304Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7089251Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7090769Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7092294Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7093736Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7094771Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7095009Z 
+2026-10-28T15:38:07.7095179Z ## T_Troncon_0_3.fbx (prop, rig None)
+2026-10-28T15:38:07.7095981Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_3/T_Troncon_0_3.fbx
+2026-10-28T15:38:07.7097064Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7097794Z - ✅ **Budget de triangles** 20654 triangles, 16189 sommets (max 60000)
+2026-10-28T15:38:07.7098774Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_3.prefab
+2026-10-28T15:38:07.7099951Z - ✅ **Échelle (hauteur)** 13.776 m (attendu 12.39875–15.15403), boîte 53.29×13.78×51.90, pieds à y=-15.585
+2026-10-28T15:38:07.7101288Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7102731Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7104165Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7105593Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7107475Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7109200Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7110673Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7112113Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7113009Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7113239Z 
+2026-10-28T15:38:07.7113400Z ## T_Troncon_0_4.fbx (prop, rig None)
+2026-10-28T15:38:07.7114215Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_4/T_Troncon_0_4.fbx
+2026-10-28T15:38:07.7115339Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7116321Z - ✅ **Budget de triangles** 7997 triangles, 5874 sommets (max 60000)
+2026-10-28T15:38:07.7117652Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_4.prefab
+2026-10-28T15:38:07.7119342Z - ✅ **Échelle (hauteur)** 7.752 m (attendu 6.976654–8.527021), boîte 38.04×7.75×25.31, pieds à y=-15.585
+2026-10-28T15:38:07.7120713Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7134280Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7135778Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7138072Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7139608Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7141116Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7142581Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7144048Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7144963Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7145206Z 
+2026-10-28T15:38:07.7145378Z ## T_Troncon_0_m1.fbx (prop, rig None)
+2026-10-28T15:38:07.7146225Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_m1/T_Troncon_0_m1.fbx
+2026-10-28T15:38:07.7147522Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7148267Z - ✅ **Budget de triangles** 492 triangles, 362 sommets (max 60000)
+2026-10-28T15:38:07.7149247Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_m1.prefab
+2026-10-28T15:38:07.7150439Z - ✅ **Échelle (hauteur)** 7.372 m (attendu 6.634953–8.109386), boîte 21.70×7.37×16.81, pieds à y=-0.518
+2026-10-28T15:38:07.7151799Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7153251Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7154666Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7155581Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7155811Z 
+2026-10-28T15:38:07.7155985Z ## T_Troncon_1_0.fbx (prop, rig None)
+2026-10-28T15:38:07.7157037Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_0/T_Troncon_1_0.fbx
+2026-10-28T15:38:07.7157888Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7158591Z - ✅ **Budget de triangles** 6105 triangles, 4532 sommets (max 60000)
+2026-10-28T15:38:07.7159573Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_0.prefab
+2026-10-28T15:38:07.7160754Z - ✅ **Échelle (hauteur)** 8.305 m (attendu 7.474657–9.135691), boîte 25.26×8.31×36.17, pieds à y=-2.999
+2026-10-28T15:38:07.7162074Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7163502Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7164979Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7166617Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7168239Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7169730Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7171461Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7172397Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7172631Z 
+2026-10-28T15:38:07.7172809Z ## T_Troncon_1_1.fbx (prop, rig None)
+2026-10-28T15:38:07.7173612Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_1/T_Troncon_1_1.fbx
+2026-10-28T15:38:07.7174438Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7175130Z - ✅ **Budget de triangles** 6461 triangles, 5284 sommets (max 60000)
+2026-10-28T15:38:07.7176082Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_1.prefab
+2026-10-28T15:38:07.7177490Z - ✅ **Échelle (hauteur)** 10.297 m (attendu 9.267158–11.32653), boîte 29.13×10.30×50.03, pieds à y=-5.632
+2026-10-28T15:38:07.7178813Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7180264Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7181661Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7183066Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7184468Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7185938Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7187738Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7188636Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7188867Z 
+2026-10-28T15:38:07.7189040Z ## T_Troncon_1_2.fbx (prop, rig None)
+2026-10-28T15:38:07.7189856Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_2/T_Troncon_1_2.fbx
+2026-10-28T15:38:07.7190674Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7191368Z - ✅ **Budget de triangles** 2290 triangles, 1664 sommets (max 60000)
+2026-10-28T15:38:07.7192328Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_2.prefab
+2026-10-28T15:38:07.7193469Z - ✅ **Échelle (hauteur)** 7.842 m (attendu 7.058225–8.626719), boîte 29.51×7.84×27.48, pieds à y=-5.884
+2026-10-28T15:38:07.7194774Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7196213Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7198234Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7199687Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7201155Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7202116Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7202343Z 
+2026-10-28T15:38:07.7202505Z ## T_Troncon_1_3.fbx (prop, rig None)
+2026-10-28T15:38:07.7203309Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_3/T_Troncon_1_3.fbx
+2026-10-28T15:38:07.7204113Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7204820Z - ✅ **Budget de triangles** 1674 triangles, 1454 sommets (max 60000)
+2026-10-28T15:38:07.7205910Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_3.prefab
+2026-10-28T15:38:07.7207286Z - ✅ **Échelle (hauteur)** 7.915 m (attendu 7.12352–8.706525), boîte 19.69×7.92×38.79, pieds à y=-15.271
+2026-10-28T15:38:07.7208847Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7210323Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7211721Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7213111Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7214510Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7215992Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7217652Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7218544Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7218775Z 
+2026-10-28T15:38:07.7218944Z ## T_Troncon_1_4.fbx (prop, rig None)
+2026-10-28T15:38:07.7219758Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_4/T_Troncon_1_4.fbx
+2026-10-28T15:38:07.7220575Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7221275Z - ✅ **Budget de triangles** 1825 triangles, 1351 sommets (max 60000)
+2026-10-28T15:38:07.7222270Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_4.prefab
+2026-10-28T15:38:07.7223455Z - ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.27, pieds à y=-15.588
+2026-10-28T15:38:07.7224904Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7226553Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7228011Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7229403Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7231038Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7232559Z - ✅ **Matériau C_Crystal** shader Universal Render Pipeline/Lit, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7233502Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7233739Z 
+2026-10-28T15:38:07.7233924Z ## T_Troncon_m1_0.fbx (prop, rig None)
+2026-10-28T15:38:07.7234914Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_0/T_Troncon_m1_0.fbx
+2026-10-28T15:38:07.7235746Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7236701Z - ✅ **Budget de triangles** 1674 triangles, 1371 sommets (max 60000)
+2026-10-28T15:38:07.7237890Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_0.prefab
+2026-10-28T15:38:07.7239069Z - ✅ **Échelle (hauteur)** 8.249 m (attendu 7.424075–9.073869), boîte 17.66×8.25×28.55, pieds à y=-0.857
+2026-10-28T15:38:07.7240367Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7241796Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7243188Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7244612Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7246070Z - ✅ **Matériau C_Mushroom** shader Universal Render Pipeline/Lit, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7247819Z - ✅ **Matériau D_Bone** shader Universal Render Pipeline/Lit, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7249231Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7250115Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7250341Z 
+2026-10-28T15:38:07.7250515Z ## T_Troncon_m1_2.fbx (prop, rig None)
+2026-10-28T15:38:07.7251332Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_2/T_Troncon_m1_2.fbx
+2026-10-28T15:38:07.7252164Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7252846Z - ✅ **Budget de triangles** 573 triangles, 453 sommets (max 60000)
+2026-10-28T15:38:07.7253949Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_2.prefab
+2026-10-28T15:38:07.7255105Z - ✅ **Échelle (hauteur)** 8.029 m (attendu 7.225704–8.831416), boîte 15.16×8.03×34.64, pieds à y=-8.063
+2026-10-28T15:38:07.7256644Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7258101Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7259493Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7260879Z - ✅ **Matériau C_Root** shader Universal Render Pipeline/Lit, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7261767Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7261989Z 
+2026-10-28T15:38:07.7262159Z ## T_Troncon_m1_3.fbx (prop, rig None)
+2026-10-28T15:38:07.7262977Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_3/T_Troncon_m1_3.fbx
+2026-10-28T15:38:07.7263876Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7264560Z - ✅ **Budget de triangles** 12 triangles, 27 sommets (max 60000)
+2026-10-28T15:38:07.7265512Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_3.prefab
+2026-10-28T15:38:07.7266865Z - ✅ **Échelle (hauteur)** 1.981 m (attendu 1.783069–2.179307), boîte 8.95×1.98×6.48, pieds à y=-3.652
+2026-10-28T15:38:07.7268148Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7269056Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7269271Z 
+2026-10-28T15:38:07.7269443Z ## T_Troncon_m1_m1.fbx (prop, rig None)
+2026-10-28T15:38:07.7270282Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_m1/T_Troncon_m1_m1.fbx
+2026-10-28T15:38:07.7271110Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7271951Z - ✅ **Budget de triangles** 289 triangles, 197 sommets (max 60000)
+2026-10-28T15:38:07.7272909Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_m1.prefab
+2026-10-28T15:38:07.7274057Z - ✅ **Échelle (hauteur)** 7.828 m (attendu 7.045424–8.611073), boîte 16.62×7.83×17.46, pieds à y=-0.524
+2026-10-28T15:38:07.7275542Z - ✅ **Matériau C_Floor** shader Universal Render Pipeline/Lit, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7277304Z - ✅ **Matériau C_Rock** shader Universal Render Pipeline/Lit, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7278711Z - ✅ **Matériau C_Top** shader Universal Render Pipeline/Lit, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7279602Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7279823Z 
+2026-10-28T15:38:07.7279989Z ## M_Banc.fbx (prop, rig None)
+2026-10-28T15:38:07.7280631Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banc/M_Banc.fbx
+2026-10-28T15:38:07.7281362Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7282036Z - ✅ **Budget de triangles** 36 triangles, 72 sommets (max 40000)
+2026-10-28T15:38:07.7282905Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banc.prefab
+2026-10-28T15:38:07.7283939Z - ✅ **Échelle (hauteur)** 0.500 m (attendu 0.475–0.525), boîte 1.80×0.50×0.45, pieds à y=0.000
+2026-10-28T15:38:07.7285190Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7286102Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7286531Z 
+2026-10-28T15:38:07.7286709Z ## M_Banniere.fbx (prop, rig None)
+2026-10-28T15:38:07.7287460Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banniere/M_Banniere.fbx
+2026-10-28T15:38:07.7288215Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7288893Z - ✅ **Budget de triangles** 60 triangles, 99 sommets (max 40000)
+2026-10-28T15:38:07.7289937Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banniere.prefab
+2026-10-28T15:38:07.7290981Z - ✅ **Échelle (hauteur)** 6.000 m (attendu 5.7–6.3), boîte 1.21×6.00×0.12, pieds à y=0.000
+2026-10-28T15:38:07.7292206Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7293702Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7295283Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7296493Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7296723Z 
+2026-10-28T15:38:07.7296892Z ## M_Caisses.fbx (prop, rig None)
+2026-10-28T15:38:07.7297765Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Caisses/M_Caisses.fbx
+2026-10-28T15:38:07.7298512Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7299204Z - ✅ **Budget de triangles** 324 triangles, 648 sommets (max 40000)
+2026-10-28T15:38:07.7300121Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Caisses.prefab
+2026-10-28T15:38:07.7301166Z - ✅ **Échelle (hauteur)** 1.620 m (attendu 1.539–1.701), boîte 2.06×1.62×1.16, pieds à y=-0.010
+2026-10-28T15:38:07.7302435Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7303886Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7304835Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7305058Z 
+2026-10-28T15:38:07.7305225Z ## M_Charrette.fbx (prop, rig None)
+2026-10-28T15:38:07.7305969Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Charrette/M_Charrette.fbx
+2026-10-28T15:38:07.7306949Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7307626Z - ✅ **Budget de triangles** 396 triangles, 660 sommets (max 40000)
+2026-10-28T15:38:07.7308678Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Charrette.prefab
+2026-10-28T15:38:07.7309753Z - ✅ **Échelle (hauteur)** 1.475 m (attendu 1.40125–1.54875), boîte 2.04×1.48×4.39, pieds à y=0.000
+2026-10-28T15:38:07.7311194Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7312627Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7314037Z - ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7314937Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7315156Z 
+2026-10-28T15:38:07.7315312Z ## M_Etal0.fbx (prop, rig None)
+2026-10-28T15:38:07.7315978Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal0/M_Etal0.fbx
+2026-10-28T15:38:07.7316906Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7317619Z - ✅ **Budget de triangles** 756 triangles, 1512 sommets (max 40000)
+2026-10-28T15:38:07.7318505Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal0.prefab
+2026-10-28T15:38:07.7319587Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 4.46×2.96×2.41, pieds à y=-0.010
+2026-10-28T15:38:07.7320881Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7322330Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7323826Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7325400Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7327113Z - ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7328762Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7330349Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7331330Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7331556Z 
+2026-10-28T15:38:07.7331715Z ## M_Etal1.fbx (prop, rig None)
+2026-10-28T15:38:07.7332380Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal1/M_Etal1.fbx
+2026-10-28T15:38:07.7333103Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7333792Z - ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
+2026-10-28T15:38:07.7334675Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal1.prefab
+2026-10-28T15:38:07.7336090Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+2026-10-28T15:38:07.7337642Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7339113Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7340648Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7342222Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7343777Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7345328Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7347027Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7348082Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7348307Z 
+2026-10-28T15:38:07.7348464Z ## M_Etal2.fbx (prop, rig None)
+2026-10-28T15:38:07.7349122Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal2/M_Etal2.fbx
+2026-10-28T15:38:07.7350009Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7350709Z - ✅ **Budget de triangles** 956 triangles, 1452 sommets (max 40000)
+2026-10-28T15:38:07.7351601Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal2.prefab
+2026-10-28T15:38:07.7352674Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+2026-10-28T15:38:07.7353963Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7355424Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7357173Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7358772Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7360286Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7361714Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7362625Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7362842Z 
+2026-10-28T15:38:07.7363001Z ## M_Etal3.fbx (prop, rig None)
+2026-10-28T15:38:07.7363675Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal3/M_Etal3.fbx
+2026-10-28T15:38:07.7364471Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7365342Z - ✅ **Budget de triangles** 866 triangles, 1407 sommets (max 40000)
+2026-10-28T15:38:07.7366237Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal3.prefab
+2026-10-28T15:38:07.7367519Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 5.28×2.96×2.41, pieds à y=-0.010
+2026-10-28T15:38:07.7368816Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7370260Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7371761Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7373323Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7374811Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7375734Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7375956Z 
+2026-10-28T15:38:07.7376124Z ## M_Foin.fbx (prop, rig None)
+2026-10-28T15:38:07.7376994Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Foin/M_Foin.fbx
+2026-10-28T15:38:07.7377704Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7378412Z - ✅ **Budget de triangles** 48 triangles, 96 sommets (max 40000)
+2026-10-28T15:38:07.7379289Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Foin.prefab
+2026-10-28T15:38:07.7380308Z - ✅ **Échelle (hauteur)** 1.500 m (attendu 1.425–1.575), boîte 1.64×1.50×1.12, pieds à y=0.000
+2026-10-28T15:38:07.7381544Z - ✅ **Matériau T_Hay** shader Universal Render Pipeline/Lit, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7382976Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7383917Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7384258Z 
+2026-10-28T15:38:07.7384419Z ## M_Fontaine.fbx (prop, rig None)
+2026-10-28T15:38:07.7385157Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Fontaine/M_Fontaine.fbx
+2026-10-28T15:38:07.7385907Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7386814Z - ✅ **Budget de triangles** 524 triangles, 701 sommets (max 40000)
+2026-10-28T15:38:07.7387956Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Fontaine.prefab
+2026-10-28T15:38:07.7389042Z - ✅ **Échelle (hauteur)** 4.300 m (attendu 4.085–4.515), boîte 7.18×4.30×7.18, pieds à y=0.000
+2026-10-28T15:38:07.7390320Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7391799Z - ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7392719Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7392958Z 
+2026-10-28T15:38:07.7393114Z ## M_Forge.fbx (prop, rig None)
+2026-10-28T15:38:07.7393798Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Forge/M_Forge.fbx
+2026-10-28T15:38:07.7394523Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7395227Z - ✅ **Budget de triangles** 1296 triangles, 2136 sommets (max 40000)
+2026-10-28T15:38:07.7396134Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Forge.prefab
+2026-10-28T15:38:07.7397414Z - ✅ **Échelle (hauteur)** 8.525 m (attendu 8.09875–8.95125), boîte 7.80×8.53×11.19, pieds à y=-0.400
+2026-10-28T15:38:07.7398707Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7400134Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7401546Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7403130Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7404579Z - ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7406014Z - ✅ **Matériau T_Ember** shader Universal Render Pipeline/Lit, base T_Ember_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7407666Z - ✅ **Matériau T_Water** shader Universal Render Pipeline/Lit, base T_Water_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7408593Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7408810Z 
+2026-10-28T15:38:07.7408977Z ## M_Lanterne.fbx (prop, rig None)
+2026-10-28T15:38:07.7409709Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Lanterne/M_Lanterne.fbx
+2026-10-28T15:38:07.7410462Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7411147Z - ✅ **Budget de triangles** 208 triangles, 309 sommets (max 40000)
+2026-10-28T15:38:07.7412057Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Lanterne.prefab
+2026-10-28T15:38:07.7413130Z - ✅ **Échelle (hauteur)** 3.430 m (attendu 3.2585–3.6015), boîte 1.07×3.43×0.44, pieds à y=0.000
+2026-10-28T15:38:07.7414392Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7415839Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7417517Z - ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7418439Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7418663Z 
+2026-10-28T15:38:07.7418831Z ## M_Maison0.fbx (prop, rig None)
+2026-10-28T15:38:07.7419540Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Maison0/M_Maison0.fbx
+2026-10-28T15:38:07.7420287Z - ✅ **Import sans erreur ni avertissement** 
+2026-10-28T15:38:07.7420997Z - ✅ **Budget de triangles** 5980 triangles, 11964 sommets (max 40000)
+2026-10-28T15:38:07.7422047Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Maison0.prefab
+2026-10-28T15:38:07.7423140Z - ✅ **Échelle (hauteur)** 17.877 m (attendu 16.98293–18.7706), boîte 10.32×17.88×9.52, pieds à y=-0.400
+2026-10-28T15:38:07.7424621Z - ✅ **Matériau W_Stone** shader Universal Render Pipeline/Lit, base W_Stone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7426071Z - ✅ **Matériau W_Wood** shader Universal Render Pipeline/Lit, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7427757Z - ✅ **Matériau T_Iron** shader Universal Render Pipeline/Lit, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7429193Z - ✅ **Matériau T_Glass** shader Universal Render Pipeline/Lit, base T_Glass_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7430637Z - ✅ **Matériau T_Timber** shader Universal Render Pipeline/Lit, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7432096Z - ✅ **Matériau W_Dark** shader Universal Render Pipeline/Lit, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7433560Z - ✅ **Matériau T_Plaster** shader Universal Render Pipeline/Lit, base T_Plaster_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7435043Z - ✅ **Matériau T_Plant** shader Universal Render Pipeline/Lit, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7437031Z - ✅ **Matériau T_ClothCream** shader Universal Render Pipeline/Lit, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7438615Z - ✅ **Matériau T_ClothRed** shader Universal Render Pipeline/Lit, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7440184Z - ✅ **Matériau T_ClothBlue** shader Universal Render Pipeline/Lit, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7441901Z - ✅ **Matériau T_ClothGreen** shader Universal Render Pipeline/Lit, base T_ClothGreen_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7443407Z - ✅ **Matériau T_Tile** shader Universal Render Pipeline/Lit, base T_Tile_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-10-28T15:38:07.7444310Z - ✅ **Collider** mesh
+2026-10-28T15:38:07.7444529Z 
+2026-10-28T15:38:07.7445773Z ## M_Maison1.Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '7ff3125294b5d94c78a8ef182170f5cc') in 0.001486434 seconds
+2026-10-28T15:38:07.7448466Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '759a01f56f0c30c090388fdd5320648c') in 0.001454194 seconds
+2026-10-28T15:38:07.7450105Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-10-28T15:38:07.7450842Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-10-28T15:38:07.7451949Z Asset Pipeline Refresh (id=504775b3ed4fb5ea297521d1582b4133): Total: 0.031 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-10-28T15:38:07.7548757Z Unloading 2158 unused Assets / (398.3 MB). Loaded Objects now: 6591.
+2026-10-28T15:38:07.7549486Z Memory consumption went from 1.82 GB to 1.43 GB.
+2026-10-28T15:38:07.7550541Z Total: 30.668929 ms (FindLiveObjects: 0.558262 ms CreateObjectMapping: 0.217877 ms MarkObjects: 24.181102 ms  DeleteObjects: 5.710737 ms)
+2026-10-28T15:38:07.7551380Z 
+2026-10-28T15:38:08.1439786Z [Physics::Module] Cleanup current backned.
+2026-10-28T15:38:08.1440820Z [Physics::Module] Id: 0xf2b8ea05
+2026-10-28T15:38:08.1441905Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-10-28T15:38:08.1443204Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-10-28T15:38:08.1481366Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-10-28T15:38:08.1570455Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-10-28T15:38:08.1571405Z       Application is shutting down...
