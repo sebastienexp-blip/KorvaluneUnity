@@ -1,0 +1,512 @@
+{
+  "model": "PNJ_Mystique.fbx",
+  "kind": "character",
+  "rig": "Human",
+  "prefab": "Assets/Korvalune/Resources/Prefabs/Characters/PNJ_Mystique.prefab",
+  "controller": "humanoid-combat",
+  "priority": 10,
+  "materials": [
+    {
+      "name": "NPMYST_Brow",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": true,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": true,
+      "cutoff": 0.3,
+      "baseMap": "Textures/NPMYST_Brow_BaseMap.png",
+      "normalMap": "Textures/NPMYST_Brow_Normal.png",
+      "maskMap": "Textures/NPMYST_Brow_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NPMYST_Brow_Occlusion.png"
+    },
+    {
+      "name": "NPMYST_Eye",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NPMYST_Eye_BaseMap.png",
+      "normalMap": "Textures/NPMYST_Eye_Normal.png",
+      "maskMap": "Textures/NPMYST_Eye_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NPMYST_Eye_Occlusion.png"
+    },
+    {
+      "name": "NPMYST_Hair",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": true,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": true,
+      "cutoff": 0.4,
+      "baseMap": "Textures/NPMYST_Hair_BaseMap.png",
+      "normalMap": "Textures/NPMYST_Hair_Normal.png",
+      "maskMap": "Textures/NPMYST_Hair_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NPMYST_Hair_Occlusion.png"
+    },
+    {
+      "name": "NPMYST_Lash",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": true,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": true,
+      "cutoff": 0.3,
+      "baseMap": "Textures/NPMYST_Lash_BaseMap.png",
+      "normalMap": "Textures/NPMYST_Lash_Normal.png",
+      "maskMap": "Textures/NPMYST_Lash_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NPMYST_Lash_Occlusion.png"
+    },
+    {
+      "name": "NPMYST_Skin",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NPMYST_Skin_BaseMap.png",
+      "normalMap": "Textures/NPMYST_Skin_Normal.png",
+      "maskMap": "Textures/NPMYST_Skin_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NPMYST_Skin_Occlusion.png"
+    },
+    {
+      "name": "NPMYST_Teeth",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NPMYST_Teeth_BaseMap.png",
+      "normalMap": "Textures/NPMYST_Teeth_Normal.png",
+      "maskMap": "Textures/NPMYST_Teeth_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NPMYST_Teeth_Occlusion.png"
+    },
+    {
+      "name": "NPMYST_Tongue",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NPMYST_Tongue_BaseMap.png",
+      "normalMap": "Textures/NPMYST_Tongue_Normal.png",
+      "maskMap": "Textures/NPMYST_Tongue_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NPMYST_Tongue_Occlusion.png"
+    },
+    {
+      "name": "NY_Crystal",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        1.4,
+        1.4,
+        1.4
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NY_Crystal_BaseMap.png",
+      "normalMap": "Textures/NY_Crystal_Normal.png",
+      "maskMap": "Textures/NY_Crystal_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NY_Crystal_Occlusion.png",
+      "emissionMap": "Textures/NY_Crystal_Emission.png"
+    },
+    {
+      "name": "NY_Dark",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NY_Dark_BaseMap.png",
+      "normalMap": "Textures/NY_Dark_Normal.png",
+      "maskMap": "Textures/NY_Dark_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NY_Dark_Occlusion.png"
+    },
+    {
+      "name": "NY_Gold",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 1.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NY_Gold_BaseMap.png",
+      "normalMap": "Textures/NY_Gold_Normal.png",
+      "maskMap": "Textures/NY_Gold_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NY_Gold_Occlusion.png"
+    },
+    {
+      "name": "NY_Violet",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/NY_Violet_BaseMap.png",
+      "normalMap": "Textures/NY_Violet_Normal.png",
+      "maskMap": "Textures/NY_Violet_MetallicSmoothness.png",
+      "occlusionMap": "Textures/NY_Violet_Occlusion.png"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Walk",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Run",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Attack",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.4
+      ]
+    },
+    {
+      "name": "Block",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Hit",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Dodge",
+      "loop": false,
+      "rootMotion": true,
+      "events": []
+    },
+    {
+      "name": "Death",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.55
+      ]
+    }
+  ],
+  "attachments": [],
+  "slots": [
+    {
+      "name": "Anatomie",
+      "hides": []
+    },
+    {
+      "name": "Cheveux",
+      "hides": []
+    },
+    {
+      "name": "HaillonsBas",
+      "hides": [
+        "Peau_Bassin",
+        "SousVetementBas",
+        "Anatomie"
+      ]
+    },
+    {
+      "name": "HaillonsHaut",
+      "hides": [
+        "Peau_Torse",
+        "SousVetementHaut"
+      ]
+    },
+    {
+      "name": "Peau_AvantBras",
+      "hides": []
+    },
+    {
+      "name": "Peau_Bassin",
+      "hides": []
+    },
+    {
+      "name": "Peau_Bras",
+      "hides": []
+    },
+    {
+      "name": "Peau_Cuisses",
+      "hides": []
+    },
+    {
+      "name": "Peau_Jambes",
+      "hides": []
+    },
+    {
+      "name": "Peau_Mains",
+      "hides": []
+    },
+    {
+      "name": "Peau_Pieds",
+      "hides": []
+    },
+    {
+      "name": "Peau_Tete",
+      "hides": []
+    },
+    {
+      "name": "Peau_Torse",
+      "hides": []
+    },
+    {
+      "name": "SousVetementBas",
+      "hides": [
+        "Anatomie"
+      ]
+    },
+    {
+      "name": "SousVetementHaut",
+      "hides": []
+    },
+    {
+      "name": "Tenue",
+      "hides": []
+    }
+  ],
+  "animModel": "PNJ_Mystique_Anims.fbx",
+  "collider": {
+    "type": "capsule",
+    "center": [
+      0,
+      0.93,
+      0
+    ],
+    "height": 1.86,
+    "radius": 0.33
+  },
+  "expect": {
+    "heightMin": 1.55,
+    "heightMax": 1.95,
+    "maxTriangles": 120000,
+    "sockets": [
+      "Socket_Weapon_R",
+      "Socket_Shield_L",
+      "Socket_Back"
+    ],
+    "facingBone": "LeftToes",
+    "behindBone": "LeftFoot",
+    "leftBone": "LeftHand"
+  }
+}
