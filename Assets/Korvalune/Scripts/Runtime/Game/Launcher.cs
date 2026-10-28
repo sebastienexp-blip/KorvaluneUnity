@@ -33,6 +33,8 @@ namespace Korvalune.Game
             font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             Build();
             StartCoroutine(UpdateContent());
+            // cinématique d'introduction au premier lancement (passable d'un toucher)
+            if (!IntroPlayer.Seen && !AutoTest.Enabled) IntroPlayer.Show(font);
         }
 
         // ------------------------------------------------------------------------------------------ interface
@@ -92,6 +94,11 @@ namespace Korvalune.Game
             playText = Label(pb.rectTransform, "T", "JOUER", 54, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(420, 130)); playText.color = UIStyle.Gold; playText.fontStyle = FontStyle.Bold;
             play = pb.gameObject.AddComponent<Button>(); play.targetGraphic = pb; play.onClick.AddListener(() => SceneManager.LoadScene(nextScene)); play.interactable = false;
             pb.color = new Color(0.6f, 0.55f, 0.5f);
+
+            // revoir la cinématique d'introduction
+            var ib = Img(root, "Introduction", UIStyle.Slot(), new Vector2(1, 0), new Vector2(-110, 215), new Vector2(380, 64)); ib.type = Image.Type.Sliced; ib.raycastTarget = true;
+            var it = Label(ib.rectTransform, "T", "Revoir l'introduction", 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 64)); it.color = UIStyle.Parch;
+            var ibb = ib.gameObject.AddComponent<Button>(); ibb.targetGraphic = ib; ibb.onClick.AddListener(() => { if (!IntroPlayer.Playing) IntroPlayer.Show(font); });
         }
 
         static string NotesText()
