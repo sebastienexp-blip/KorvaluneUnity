@@ -78,7 +78,7 @@ namespace Korvalune.Game
         }
 
         /// <summary>Objets portés et utilisables (les objets brisés ne donnent plus rien).</summary>
-        IEnumerable<ItemSave> Active() { foreach (var it in worn.Values) if (it != null && !it.Broken) yield return it; }
+        IEnumerable<ItemSave> Active() { foreach (var it in worn.Values) if (it != null && !it.Broken && Loot.CannotWear(it, ClassId, 999) == null) yield return it; }   // un objet d'une autre classe ne donne rien
 
         // ------------------------------------------------------------------ ensembles et pouvoirs légendaires
         bool HasConvergence() { foreach (var it in Active()) { var pw = Powers.Get(it.legendaryPower); if (pw != null && pw.setRing) return true; } return false; }

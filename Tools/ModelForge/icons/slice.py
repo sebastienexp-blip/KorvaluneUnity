@@ -15,6 +15,7 @@ SHEETS = [
     ['Grimoire', 'Orbe', 'Heaume', 'Capuche', 'Couronne', 'Bassinet', 'Cuirasse', 'Brigandine'],
     ['Robe', 'Haubert', 'Gantelets', 'Gants de cuir', 'Mitaines', 'Jambières', 'Cuissots', 'Chausses'],
     ['Solerets', 'Bottes', 'Sandales', 'Amulette', 'Talisman', 'Anneau', 'Chevalière', None],
+    ['Carquois', 'Arc long', 'Phylactère', 'Sceptre', "Fléau d'armes", 'Épée bâtarde', 'Dague rituelle', 'Arc de chasse'],
 ]
 
 

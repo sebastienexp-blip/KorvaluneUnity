@@ -52,12 +52,13 @@ namespace Korvalune.Game
         public static string MainStat(string c) => c switch { Powers.V => "Dextérité", Powers.E => "Intelligence", Powers.M => "Intelligence", _ => "Force" };
         static readonly Dictionary<string, string[]> WeaponBases = new Dictionary<string, string[]>
         {
-            { Powers.K, new[] { "Épée longue", "Hache de guerre" } }, { Powers.T, new[] { "Masse d'armes" } }, { Powers.V, new[] { "Arbalète" } },
-            { Powers.E, new[] { "Bâton" } }, { Powers.M, new[] { "Faux", "Bâton" } },
+            { Powers.K, new[] { "Épée longue", "Hache de guerre", "Épée bâtarde" } }, { Powers.T, new[] { "Masse d'armes", "Fléau d'armes" } },
+            { Powers.V, new[] { "Arbalète", "Arc long", "Arc de chasse" } }, { Powers.E, new[] { "Bâton", "Sceptre" } }, { Powers.M, new[] { "Faux", "Dague rituelle" } },
         };
         static readonly Dictionary<string, string[]> OffBases = new Dictionary<string, string[]>
         {
-            { Powers.K, new[] { "Écu" } }, { Powers.T, new[] { "Pavois" } }, { Powers.V, new[] { "Écu" } }, { Powers.E, new[] { "Orbe" } }, { Powers.M, new[] { "Grimoire" } },
+            // main gauche propre à chaque classe (comme dans Diablo) : le chasseur porte un carquois, pas un bouclier
+            { Powers.K, new[] { "Écu" } }, { Powers.T, new[] { "Pavois" } }, { Powers.V, new[] { "Carquois" } }, { Powers.E, new[] { "Orbe", "Grimoire" } }, { Powers.M, new[] { "Phylactère" } },
         };
         static string PickClass(System.Random r)
         {
@@ -81,7 +82,7 @@ namespace Korvalune.Game
             { Slot.Anneau, new[] { "Anneau", "Chevalière" } },
         };
         static readonly string[] Prefix = { "Brisé", "Sinistre", "Ardent", "Glacial", "Funeste", "Céleste", "Sanglant", "Lunaire", "Infernal", "Ancien" };
-        static readonly HashSet<string> Fem = new HashSet<string> { "Épée longue", "Hache de guerre", "Masse d'armes", "Arbalète", "Faux", "Capuche", "Couronne", "Cuirasse", "Brigandine", "Robe", "Amulette", "Chevalière", "Mitaines", "Jambières", "Chausses", "Bottes", "Sandales" };
+        static readonly HashSet<string> Fem = new HashSet<string> { "Épée longue", "Hache de guerre", "Masse d'armes", "Arbalète", "Faux", "Épée bâtarde", "Dague rituelle", "Capuche", "Couronne", "Cuirasse", "Brigandine", "Robe", "Amulette", "Chevalière", "Mitaines", "Jambières", "Chausses", "Bottes", "Sandales" };
         static readonly HashSet<string> Plur = new HashSet<string> { "Gantelets", "Gants de cuir", "Mitaines", "Jambières", "Cuissots", "Chausses", "Solerets", "Bottes", "Sandales" };
         /// <summary>Accorde l'adjectif (en minuscules) avec le nom de base : « Brigandine ancienne », « Bottes brisées », « Solerets infernaux ».</summary>
         public static string Accord(string adj, string noun)
@@ -183,6 +184,12 @@ namespace Korvalune.Game
         public static string CannotWear(ItemSave it, string cls, int level)
         {
             if (!string.IsNullOrEmpty(it.cls) && !string.IsNullOrEmpty(cls) && it.cls != cls) return $"Réservé : {ClassLabel(it.cls)}";
+            // anciens objets : une arme ou une main gauche étrangère à la classe (ex. un écu pour le chasseur) n'est plus portable
+            if (!string.IsNullOrEmpty(cls) && (it.slot == Slot.Arme || it.slot == Slot.MainGauche))
+            {
+                var allowed = it.slot == Slot.Arme ? WeaponBases : OffBases;
+                if (allowed.TryGetValue(cls, out var list) && Array.IndexOf(list, it.baseName) < 0) return $"{ClassLabel(cls)} : ne peut pas porter « {it.baseName} »";
+            }
             if (it.reqLevel > level) return $"Niveau {it.reqLevel} requis";
             return null;
         }

@@ -101,7 +101,7 @@ namespace Korvalune.Game
             {
                 // ciblage automatique : le héros court vers sa cible puis frappe
                 var to = Target.transform.position - transform.position; to.y = 0;
-                if (to.magnitude > attackRange * 0.85f && Time.time < approachUntil)
+                if ((to.magnitude > AttackReach * 0.85f || !Sight.Clear(transform.position, Target)) && Time.time < approachUntil)
                 {
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(to), turnSpeed * Time.deltaTime);
                     cc.Move(to.normalized * runSpeed * Time.deltaTime); Anim?.SetFloat(CharacterRig.SpeedId, runSpeed, 0.05f, Time.deltaTime); Speed = runSpeed;
@@ -189,7 +189,7 @@ namespace Korvalune.Game
         {
             if (Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= range) return Target;
             Health best = null; float bd = range;
-            foreach (var h in Health.Around(transform.position, range, Faction.Player)) { float d = Vector3.Distance(h.transform.position, transform.position); if (d < bd) { bd = d; best = h; } }
+            foreach (var h in Health.Around(transform.position, range, Faction.Player)) { float d = Vector3.Distance(h.transform.position, transform.position); if (d < bd && Sight.Clear(transform.position, h)) { bd = d; best = h; } }
             return best;
         }
 
@@ -231,18 +231,41 @@ namespace Korvalune.Game
             if (!Mathf.Approximately(x, p.x) || !Mathf.Approximately(z, p.z)) { bool was = cc.enabled; cc.enabled = false; transform.position = new Vector3(x, p.y, z); cc.enabled = was; }
         }
 
+        /// <summary>Attaque de base à distance : carreau d'arbalète (Chasseur des cendres), trait du Néant (Archimage).</summary>
+        public bool Ranged => Loot.PlayerClass == Powers.V || Loot.PlayerClass == Powers.E;
+        public float AttackReach => Ranged ? 13f : attackRange;
+
         public void Attack()
         {
             if (Health.Dead || Health.Stunned || Time.time < nextAttack || Busy) return;
-            // cible hors de portée : le héros va la chercher automatiquement (1,5 s au plus)
-            if (Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) > attackRange + 0.4f)
+            if (Ranged && (!Target || Target.Dead)) Target = AcquireTarget(AttackReach + 2f);
+            // cible hors de portée ou cachée derrière un mur : le héros va la chercher automatiquement (1,5 s au plus)
+            if (Target && !Target.Dead && (Vector3.Distance(Target.transform.position, transform.position) > AttackReach + 0.4f || !Sight.Clear(transform.position, Target)))
             { approach = true; approachUntil = Time.time + 1.5f; return; }
             nextAttack = Time.time + attackCooldown;
-            FaceNearest(attackRange + 2.5f);
+            FaceNearest(AttackReach + 2.5f);
             Anim?.SetTrigger(CharacterRig.AttackId);
-            Sound.Play(Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, 0.75f);
-            lockUntil = Time.time + 0.45f;
-            StartCoroutine(Hit(0.38f));
+            Sound.Play(Loot.PlayerClass == Powers.E ? "sfx_trait_neant" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, 0.75f);
+            lockUntil = Time.time + (Ranged ? 0.3f : 0.45f);
+            StartCoroutine(Ranged ? Shoot(0.22f) : Hit(0.38f));
+        }
+
+        IEnumerator Shoot(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            bool bolt = Loot.PlayerClass == Powers.V;
+            var start = transform.position + Vector3.up * 1.25f + transform.forward * 0.6f;
+            var dir = transform.forward;
+            if (Target && !Target.Dead) { var to = Target.transform.position + Vector3.up * 1.25f - start; to.y = 0; if (to.sqrMagnitude > 0.01f) dir = to.normalized; }
+            float dmg = attackDamage * damageMult;
+            Vfx.Projectile(start, dir, bolt ? Element.Physique : Element.Neant, bolt ? 30f : 22f, AttackReach + 3f, bolt ? 0.3f : 0.35f, (pt, h) =>
+            {
+                if (!h) return;
+                bool crit = Random.value < critChance;
+                h.TakeDamage(dmg * (crit ? 2f : 1f) * Random.Range(0.9f, 1.1f), Health, crit);
+                Sound.Play(Sound.WeaponOf(Loot.PlayerClass).hit, h.transform.position, 0.8f);
+                FX.Burst(h.transform.position + Vector3.up * 1.1f, crit ? new Color(1f, 0.85f, 0.3f) : bolt ? new Color(1f, 0.55f, 0.25f) : new Color(0.7f, 0.4f, 1f), crit ? 24 : 12);
+            }, Faction.Player, false, bolt);
         }
 
         IEnumerator Hit(float delay)
@@ -251,6 +274,7 @@ namespace Korvalune.Game
             bool any = false;
             foreach (var h in Health.Around(transform.position, attackRange, Faction.Player, transform.forward, attackCone))
             {
+                if (!Sight.Clear(transform.position, h)) continue;              // pas de coup à travers un mur
                 bool crit = Random.value < critChance;
                 h.TakeDamage(attackDamage * damageMult * (crit ? 2f : 1f) * Random.Range(0.9f, 1.1f), Health, crit);
                 if (!any) Sound.Play(Sound.WeaponOf(Loot.PlayerClass).hit, h.transform.position, 0.85f);

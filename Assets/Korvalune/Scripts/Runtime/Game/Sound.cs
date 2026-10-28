@@ -41,7 +41,8 @@ namespace Korvalune.Game
         /// <summary>Joue un effet. pos : son placé dans le monde (sinon interface, non spatialisé).</summary>
         public static void Play(string id, Vector3? pos = null, float volume = 1f, float pitchVariation = 0.07f, float minGap = 0.05f)
         {
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying || string.IsNullOrEmpty(id)) return;
+            if (id.IndexOf('+') > 0) { foreach (var part in id.Split('+')) Play(part, pos, volume * 0.85f, pitchVariation, minGap); return; }   // sons superposés
             var c = Clip(id); if (!c) return;
             float now = Time.unscaledTime;
             if (lastPlayed.TryGetValue(id, out var t) && now - t < minGap) return;         // pas dix fois le même son dans la même image
@@ -59,7 +60,19 @@ namespace Korvalune.Game
 
         // ------------------------------------------------------------------ correspondances du jeu
         /// <summary>Son lancé avec une compétence (selon son type et son élément).</summary>
-        public static string CastOf(SkillDef d) => d.kind switch
+        public static string CastOf(SkillDef d) => d.classId == "Varek" ? HunterCast(d) : Cast(d);
+
+        /// <summary>Chasseur des cendres : bruits d'arbalète (volée, averse de carreaux, tir chargé, carreau enflammé).</summary>
+        static string HunterCast(SkillDef d) => d.kind switch
+        {
+            SkillKind.Barrage => d.element == Element.Feu ? "sfx_carreau_feu" : "sfx_volee",
+            SkillKind.Rain => d.element == Element.Physique ? "sfx_pluie_fleches" : "sfx_pluie_fleches+" + ElementCast(d.element),
+            SkillKind.Projectile => d.element == Element.Feu ? "sfx_carreau_feu" : d.element == Element.Physique ? (d.mult >= 4f ? "sfx_tir_charge" : "sfx_arbalete_tir") : "sfx_arbalete_tir+" + ElementCast(d.element),
+            SkillKind.Chain => "sfx_arbalete_tir+sfx_foudre_chaine",
+            _ => Cast(d),
+        };
+
+        static string Cast(SkillDef d) => d.kind switch
         {
             SkillKind.Leap or SkillKind.Dash or SkillKind.Evade => "sfx_bond",
             SkillKind.Teleport => "sfx_teleport",

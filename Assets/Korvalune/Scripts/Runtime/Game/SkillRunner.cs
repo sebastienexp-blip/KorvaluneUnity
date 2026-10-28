@@ -124,8 +124,8 @@ namespace Korvalune.Game
         Vector3 TargetPoint(float range)
         {
             // ciblage automatique : la cible du héros si elle est à portée, sinon l'ennemi le plus proche
-            Health best = p.Target && !p.Target.Dead && Vector3.Distance(p.Target.transform.position, Pos) <= range ? p.Target : null; float bd = range;
-            if (!best) foreach (var h in Health.Around(Pos, range, Faction.Player)) { float dd = Vector3.Distance(h.transform.position, Pos); if (dd < bd) { bd = dd; best = h; } }
+            Health best = p.Target && !p.Target.Dead && Vector3.Distance(p.Target.transform.position, Pos) <= range && Sight.Clear(Pos, p.Target) ? p.Target : null; float bd = range;
+            if (!best) foreach (var h in Health.Around(Pos, range, Faction.Player)) { float dd = Vector3.Distance(h.transform.position, Pos); if (dd < bd && Sight.Clear(Pos, h)) { bd = dd; best = h; } }
             if (best) { var dir = best.transform.position - Pos; dir.y = 0; if (dir.sqrMagnitude > 0.01f) p.transform.rotation = Quaternion.LookRotation(dir); return best.transform.position; }
             // cible plus loin que la portée : on vise dans sa direction, au bout de la portée
             if (p.Target && !p.Target.Dead)
@@ -139,6 +139,8 @@ namespace Korvalune.Game
         void Hit(Health h, float dmg, SkillDef d)
         {
             if (!h || h.Dead) return;
+            // pas de dégâts à travers murs, rochers et arbres (pièges et tourelles frappent depuis leur position)
+            if (d.kind != SkillKind.Trap && d.kind != SkillKind.Totem && !Sight.Clear(Pos, h)) return;
             bool crit = Random.value < p.critChance;
             h.TakeDamage(dmg * (crit ? 2f : 1f) * (Time.time < curseUntil ? 1.25f : 1f), p.Health, crit);
             if (d.stun && d.duration > 0) h.Stun(d.duration);
@@ -253,11 +255,11 @@ namespace Korvalune.Game
                         var dir = Quaternion.Euler(0, ang, 0) * Fwd;
                         var start = Pos + Vector3.up * 1.2f + Fwd * 0.6f;
                         bool explode = d.radius > 1.4f && !d.pierce;
-                        Vfx.Projectile(start, dir, d.element, 18f, d.range, Mathf.Clamp(d.radius * 0.35f, 0.25f, 0.8f), (pt, h) =>
+                        Vfx.Projectile(start, dir, d.element, d.classId == "Varek" ? 26f : 18f, d.range, Mathf.Clamp(d.radius * 0.35f, 0.25f, 0.8f), (pt, h) =>
                         {
                             if (explode) { Vfx.Explosion(pt, d.element, d.radius); HitArea(pt, d.radius, dmg, d); Shake(0.06f); }
-                            else if (h) Hit(h, dmg, d);
-                        }, Faction.Player, d.pierce);
+                            else if (h) { Hit(h, dmg, d); if (d.classId == "Varek") Sound.Play("sfx_carreau_impact", pt, 0.6f, 0.1f, 0.05f); }
+                        }, Faction.Player, d.pierce, d.classId == "Varek");
                         if (d.kind == SkillKind.Barrage && n > 4) yield return new WaitForSeconds(0.04f);
                     }
                     break;
@@ -292,7 +294,7 @@ namespace Korvalune.Game
                     for (int k = 0; k < n; k++)
                     {
                         var o = Random.insideUnitCircle * d.radius; var pt = GameBootstrap.Ground(tp + new Vector3(o.x, 0, o.y));
-                        Vfx.Projectile(pt + new Vector3(-2, 14, -2), (pt - (pt + new Vector3(-2, 14, -2))).normalized, d.element, 40f, 14.2f, 0.35f, (x, h) => { Vfx.Explosion(pt, d.element, 1.6f); HitArea(pt, 1.8f, dmg, d); }, Faction.Player, true);
+                        Vfx.Projectile(pt + new Vector3(-2, 14, -2), (pt - (pt + new Vector3(-2, 14, -2))).normalized, d.element, 40f, 14.2f, 0.35f, (x, h) => { if (h) return; Vfx.Explosion(pt, d.element, 1.6f); HitArea(pt, 1.8f, dmg, d); }, Faction.Player, true, d.classId == "Varek");
                         yield return new WaitForSeconds(dt);
                     }
                     break;

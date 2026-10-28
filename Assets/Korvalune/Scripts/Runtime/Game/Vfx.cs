@@ -232,12 +232,29 @@ namespace Korvalune.Game
         }
 
         /// <summary>Projectile : cœur lumineux (flamme, âme, éclat de glace…), traînée, lumière portée ; appelle onHit à l'impact.</summary>
-        public static GameObject Projectile(Vector3 from, Vector3 dir, Element e, float speed, float range, float size, System.Action<Vector3, Health> onHit, Faction owner, bool pierce = false)
+        /// <summary>Carreau d'arbalète visible : fût de bois sombre, pointe d'acier, empennage coloré par l'élément.</summary>
+        static void Arrow(Transform parent, Palette p)
+        {
+            void Part(Vector3 pos, Vector3 size, Color c, float metal)
+            {
+                var g = GameObject.CreatePrimitive(PrimitiveType.Cube); Object.Destroy(g.GetComponent<Collider>());
+                g.transform.SetParent(parent, false); g.transform.localPosition = pos; g.transform.localScale = size;
+                var r = g.GetComponent<Renderer>(); r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                if (LootDrop.litBase) { var m = new Material(LootDrop.litBase); m.SetColor("_BaseColor", c); if (m.HasProperty("_Metallic")) m.SetFloat("_Metallic", metal); r.sharedMaterial = m; }
+            }
+            Part(new Vector3(0, 0, -0.1f), new Vector3(0.045f, 0.045f, 0.75f), new Color(0.24f, 0.16f, 0.09f), 0);      // fût
+            Part(new Vector3(0, 0, 0.33f), new Vector3(0.09f, 0.03f, 0.14f), new Color(0.62f, 0.62f, 0.66f), 0.9f);  // pointe
+            Part(new Vector3(0, 0, -0.42f), new Vector3(0.16f, 0.012f, 0.14f), p.core, 0);                          // empennage
+            Part(new Vector3(0, 0, -0.42f), new Vector3(0.012f, 0.16f, 0.14f), p.core, 0);
+        }
+
+        public static GameObject Projectile(Vector3 from, Vector3 dir, Element e, float speed, float range, float size, System.Action<Vector3, Health> onHit, Faction owner, bool pierce = false, bool arrow = false)
         {
             if (!Application.isPlaying) return null;
             var p = Of(e);
             var go = new GameObject("Projectile"); go.transform.position = from; go.transform.rotation = Quaternion.LookRotation(dir);
             var pr = go.AddComponent<ProjectileMover>(); pr.Init(dir, speed, range, size, owner, onHit, pierce);
+            if (arrow) { Arrow(go.transform, p); size *= 0.45f; }
             if (lib)
             {
                 var coreMat = e == Element.Feu || e == Element.Cendre ? lib.fire : e == Element.Glace ? lib.ice : e == Element.Physique ? lib.spark : lib.soul;
@@ -303,7 +320,9 @@ namespace Korvalune.Game
         public void Init(Vector3 d, float s, float r, float sz, Faction o, System.Action<Vector3, Health> cb, bool p) { dir = d.normalized; speed = s; range = r; size = sz; owner = o; onHit = cb; pierce = p; }
         void Update()
         {
-            float step = speed * Time.deltaTime; transform.position += dir * step; travelled += step;
+            float step = speed * Time.deltaTime; var from = transform.position; transform.position += dir * step; travelled += step;
+            // murs, rochers, arbres : le projectile s'y écrase (les créatures ne bloquent pas, elles sont touchées plus bas)
+            if (Sight.Obstacle(from, transform.position, out var wall)) { transform.position = wall; onHit?.Invoke(wall, null); Stop(); return; }
             foreach (var h in Health.Around(transform.position, 0.6f + size * 0.5f, owner))
             {
                 if (hit.Contains(h)) continue;
