@@ -215,8 +215,14 @@ namespace Korvalune.Game
         IEnumerator AutoPlay()
         {
             yield return new WaitForSecondsRealtime(4f);
-            AutoTest.Log("chargement de la scène « " + nextScene + " »");
-            var op = SceneManager.LoadSceneAsync(nextScene);
+            // l'émulateur (sans carte graphique) met plus de 10 min à afficher la sélection : on crée le héros de test ici
+            // et on entre directement dans la vallée
+            SaveSystem.Load();
+            if (SaveSystem.Account.characters.Count == 0) SaveSystem.Create("Testeur", "KaelDraven", false, new AppearanceSave());
+            SaveSystem.Current = SaveSystem.Account.characters[0]; GameBootstrap.chosenHero = null;
+            string scene = Application.CanStreamedLevelBeLoaded("Korvalune_Vallee") ? "Korvalune_Vallee" : nextScene;
+            AutoTest.Log("chargement de la scène « " + scene + " » avec " + SaveSystem.Current.name);
+            var op = SceneManager.LoadSceneAsync(scene);
             if (op == null) { AutoTest.Log("ÉCHEC : scène introuvable"); yield break; }
             float t = 0;
             while (!op.isDone) { t += Time.unscaledDeltaTime; if (t > 15f) { t = 0; AutoTest.Log($"chargement {op.progress:P0}"); } yield return null; }

@@ -42,22 +42,22 @@ namespace Korvalune.Game
         {
             var p = GetComponent<PlayerController>(); var cc = GetComponent<CharacterController>();
             var boot = FindFirstObjectByType<GameBootstrap>();
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSecondsRealtime(3f);
             Report(p, cc, "arrivée");
             // sortie de la ville par la porte sud, vers le vieux cimetière (premiers monstres, niveau 1)
             var goal = transform.position + Vector3.back * 36f;
             Log($"en ville : {(GameBootstrap.InSafeZone(transform.position) ? "oui" : "NON")}, niveau des monstres aux portes : {GameBootstrap.LevelAt(transform.position + Vector3.back * 40f)}");
             p.WalkTo(goal, null);
-            for (int i = 0; i < 5; i++) { yield return new WaitForSeconds(2f); Report(p, cc, $"marche {2 * (i + 1)} s"); }
+            for (int i = 0; i < 5; i++) { yield return new WaitForSecondsRealtime(2f); Report(p, cc, $"marche {2 * (i + 1)} s"); }
             p.walkTo = null;
             var hud = boot ? boot.Hud : null;
             if (hud)
             {
-                yield return new WaitForSeconds(4f); Log("panneau : arbre de compétences"); hud.TestShow("arbre");
-                yield return new WaitForSeconds(10f); Log("panneau : inventaire"); hud.TestShow("sac");
-                yield return new WaitForSeconds(10f); Log("panneau : menu"); hud.TestShow("menu");
-                yield return new WaitForSeconds(10f); Log("panneau : options"); hud.TestShow("options");
-                yield return new WaitForSeconds(10f); hud.TestShow("");
+                yield return new WaitForSecondsRealtime(4f); Log("panneau : arbre de compétences"); hud.TestShow("arbre");
+                yield return new WaitForSecondsRealtime(10f); Log("panneau : inventaire"); hud.TestShow("sac");
+                yield return new WaitForSecondsRealtime(10f); Log("panneau : menu"); hud.TestShow("menu");
+                yield return new WaitForSecondsRealtime(10f); Log("panneau : options"); hud.TestShow("options");
+                yield return new WaitForSecondsRealtime(10f); hud.TestShow("");
             }
             Report(p, cc, "fin");
             Log("TERMINÉ");
