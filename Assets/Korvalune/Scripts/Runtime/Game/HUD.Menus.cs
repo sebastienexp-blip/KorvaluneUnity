@@ -250,15 +250,40 @@ namespace Korvalune.Game
         public static bool ShowDamageNumbers = true;
         public bool Paused => pausePanel && pausePanel.activeSelf;
 
+        Text difficultyText;
+
+        /// <summary>Passe à la difficulté suivante débloquée ; les camps se repeuplent aussitôt avec elle.</summary>
+        void CycleDifficulty()
+        {
+            int lvl = player ? player.level : 1, next = Difficulty.Next(lvl);
+            if (next == Difficulty.Current)
+            {   // rien d'autre de débloqué : on indique le prochain palier
+                int d = Mathf.Min(Difficulty.Count - 1, Difficulty.Current + 1);
+                Notify(d > Difficulty.Current ? $"{Difficulty.Names[d]} : niveau {Difficulty.UnlockLevel[d]} requis" : "Difficulté maximale");
+                return;
+            }
+            Difficulty.Current = next; RefreshDifficulty();
+            FindFirstObjectByType<WorldPopulation>()?.Refresh();
+            Notify($"Difficulté : {Difficulty.Name}");
+        }
+
+        void RefreshDifficulty()
+        {
+            if (difficultyText) difficultyText.text = $"Difficulté : <color=#{ColorUtility.ToHtmlStringRGB(Difficulty.ColorOf(Difficulty.Current))}>{Difficulty.Name}</color>";
+            if (zoneText) zoneText.text = Difficulty.Current > 0 ? $"{zoneName}\n<size=20><color=#{ColorUtility.ToHtmlStringRGB(Difficulty.ColorOf(Difficulty.Current))}>{Difficulty.Name}</color></size>" : zoneName;
+        }
+
         void BuildMenu(RectTransform root)
         {
             RoundButton(root, "Menu", "menu", new Vector2(0.5f, 1), new Vector2(180, -24), 96, () => SetPause(!Paused), out _, out _);
             var shade = Img(root, "Voile", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(4000, 4000)); shade.sprite = null; shade.color = new Color(0, 0, 0, 0.62f); shade.raycastTarget = true;
             pauseShade = shade.gameObject;
 
-            var p = OrnatePanel(root, "Pause", new Vector2(760, 760), "Pause", zoneName); pausePanel = p.gameObject;
+            var p = OrnatePanel(root, "Pause", new Vector2(760, 880), "Pause", zoneName); pausePanel = p.gameObject;
             float y = -150;
             TextButton(p, "Reprendre", "Reprendre", new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(520, 92), () => SetPause(false), out _, 34); y -= 118;
+            TextButton(p, "Difficulte", "", new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(520, 92), CycleDifficulty, out difficultyText, 30); y -= 118;
+            RefreshDifficulty();
             TextButton(p, "Options", "Options", new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(520, 92), () => ShowOptions(true), out _, 34); y -= 118;
             TextButton(p, "Personnages", "Changer de personnage", new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(520, 92), BackToSelection, out _, 34); y -= 118;
             TextButton(p, "Quitter", "Quitter le jeu", new Vector2(0.5f, 1), new Vector2(0, y), new Vector2(520, 92), QuitGame, out _, 34);

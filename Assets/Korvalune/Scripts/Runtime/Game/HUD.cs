@@ -60,7 +60,7 @@ namespace Korvalune.Game
             var ringImg = Img(root, "Cadre", UIStyle.Ring(), new Vector2(1, 1), new Vector2(-22, -18), new Vector2(336, 336));
             arrow = Img(mm, "Joueur", UIStyle.Icon("leap", Color.white), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34)).rectTransform;
             arrow.GetComponent<Image>().sprite = Arrow();
-            zoneText = Label(root, "Zone", zoneName, 24, TextAnchor.MiddleCenter, new Vector2(1, 1), new Vector2(-40, -352), new Vector2(300, 32));
+            zoneText = Label(root, "Zone", zoneName, 24, TextAnchor.UpperCenter, new Vector2(1, 1), new Vector2(-40, -352), new Vector2(300, 32)); zoneText.verticalOverflow = VerticalWrapMode.Overflow;
             var qp = Panel(root, "Quête", new Vector2(1, 1), new Vector2(-30, -400), new Vector2(380, 150));
             Label(qp, "Titre", "Quête actuelle :", 24, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -16), new Vector2(340, 30)).color = UIStyle.Gold;
             questText = Label(qp, "Texte", "", 22, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -48), new Vector2(340, 90));

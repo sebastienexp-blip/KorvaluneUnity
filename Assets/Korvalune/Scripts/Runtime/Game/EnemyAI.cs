@@ -38,17 +38,17 @@ namespace Korvalune.Game
                 // butin : les ennemis forts lâchent plus d'objets, de meilleure rareté
                 var rng = new System.Random();
                 int lvl = Mathf.Max(1, hp.level > 0 ? Mathf.Min(hp.level, (p ? p.level : 1) + 3) : p ? p.level : 1); float elite = Mathf.Clamp01(type.xp / 300f);   // butin au niveau du monstre (portable sous peu)
-                int n = (rng.NextDouble() < 0.45 + 0.5 * elite ? 1 : 0) + (elite > 0.9f ? 2 : 0);
+                int n = (rng.NextDouble() < 0.45 + 0.5 * elite + 0.05 * Difficulty.Current ? 1 : 0) + (elite > 0.9f ? 2 : 0);
                 for (int i = 0; i < n; i++)
                 {
-                    var it = Loot.Roll(rng, lvl, elite * 3f);
+                    var it = Loot.Roll(rng, lvl, elite * 3f + Difficulty.Luck);
                     var off = Random.insideUnitCircle * 1.4f;
                     LootDrop.Spawn(it, GameBootstrap.Ground(transform.position + new Vector3(off.x, 0, off.y)));
                 }
                 // or (ramassé aussitôt), éclats d'ombre sur les élites, gemmes rares
                 if (p)
                 {
-                    long g = Economy.GoldDrop(rng, lvl, elite); p.AddGold(g);
+                    long g = (long)(Economy.GoldDrop(rng, lvl, elite) * Difficulty.Gold); p.AddGold(g);
                     FX.Burst(transform.position + Vector3.up * 0.6f, new Color(1f, 0.82f, 0.25f), 14, 2.5f, 0.1f, 0.6f, 0.8f);
                     if (elite > 0.3f) { int sh = 1 + rng.Next(1 + (int)(elite * 4)); p.wallet.shadow += sh; p.Notify?.Invoke($"+{sh} éclats d'ombre"); }
                     if (rng.NextDouble() < 0.025 + 0.2 * elite)

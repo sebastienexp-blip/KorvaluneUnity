@@ -192,6 +192,7 @@ namespace Korvalune.Game
             var cc = e.AddComponent<CharacterController>(); cc.height = height / e.transform.localScale.y; cc.radius = radius / e.transform.localScale.y; cc.center = new Vector3(0, cc.height / 2 + 0.02f, 0);
             int bl = Mathf.Max(1, t.level);
             float hpM = Mathf.Max(0.55f, HpAt(level) / HpAt(bl)), dmgM = Mathf.Max(0.6f, DmgAt(level) / DmgAt(bl)), xpM = Mathf.Max(0.5f, XpAt(level) / XpAt(bl));
+            hpM *= Difficulty.Hp; dmgM *= Difficulty.Damage; xpM *= Difficulty.Xp;             // difficulté choisie (Cauchemar, Enfer, Tourments)
             var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = Mathf.Round(t.hp * hpM); h.hp = h.maxHp; h.armor = t.armor * Mathf.Min(2f, dmgM); h.displayName = t.label; h.level = level;
             var ai = e.AddComponent<EnemyAI>(); ai.type = t; ai.damage = t.damage * dmgM; ai.xp = Mathf.Round(t.xp * xpM);
             return e;

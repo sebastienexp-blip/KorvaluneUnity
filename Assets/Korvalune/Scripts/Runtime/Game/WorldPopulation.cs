@@ -140,6 +140,17 @@ namespace Korvalune.Game
             }
         }
 
+        /// <summary>Range tous les camps actifs : ils réapparaîtront aussitôt avec la nouvelle difficulté.</summary>
+        public void Refresh()
+        {
+            foreach (var c in camps)
+            {
+                foreach (var h in c.alive) if (h && !h.Dead) Destroy(h.gameObject);
+                c.alive.Clear(); c.active = false; c.respawnAt = 0; c.everSpawned = false;
+            }
+            nextTick = 0;
+        }
+
         void SpawnCamp(Camp c)
         {
             var cfg = game.config; if (!cfg) return;
