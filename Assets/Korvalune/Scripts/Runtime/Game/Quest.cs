@@ -19,6 +19,8 @@ namespace Korvalune.Game
         public Transform player;
         public bool Finished => current >= steps.Count;
         public Objective Current => Finished ? null : steps[current];
+        /// <summary>Lieu de l'objectif en cours (pour la carte), s'il en a un.</summary>
+        public Vector3? CurrentPlace { get { var c = Current; return c != null && (c.enemyId == null || c.enemyId.Length == 0) && c.place != Vector3.zero ? c.place : (Vector3?)null; } }
 
         void OnEnable() { Health.AnyDied += OnDied; }
         void OnDisable() { Health.AnyDied -= OnDied; }

@@ -99,15 +99,7 @@ namespace Korvalune.EditorTools
             Ramparts(rng);
             CI.Step("ville : enceinte");
 
-            // place du marché : étals des petits marchands en cercle autour de la fontaine, caisses et tonneaux
-            for (int k = 0; k < 6; k++)
-            {
-                float a = (30 + 60 * k) * Mathf.Deg2Rad; var q = Plaza + new Vector2(Mathf.Sin(a), Mathf.Cos(a)) * 8.6f;
-                if (Mathf.Abs(Mathf.Sin(a)) < 0.3f) continue;                                      // laisse passer la rue principale (nord-sud)
-                Put("M_Etal" + (k % 4), G(q) - Vector3.up * 0.05f, FaceYaw(Plaza - q));
-                var side = new Vector2(Mathf.Cos(a), -Mathf.Sin(a));
-                Put(k % 2 == 0 ? "M_Caisses" : "M_Tonneaux", G(q + side * 3.0f + (q - Plaza).normalized * 1.0f), (float)rng.NextDouble() * 360);
-            }
+            // place du marché dégagée : plus d'étals décoratifs (seules les vraies échoppes ont un marchand), on y circule librement
             // place du marché : fontaine, bancs, lanternes, bannières
             Put("M_Fontaine", G(Plaza) - Vector3.up * 0.05f, 0); taken.Add(new Spot { p = Plaza, r = 4.5f });
             for (int k = 0; k < 4; k++)
@@ -168,19 +160,20 @@ namespace Korvalune.EditorTools
             for (int k = 0; k < 64; k++) { float a = k / 64f * Mathf.PI * 2; var p = new Vector2(Mathf.Sin(a), Mathf.Cos(a)); streetCands.Add((p * (RingR + 8.4f), -p)); }
             // 2e rang : maisons plus à l'écart, tournées vers le château
             for (int k = 0; k < 52; k++) { float a = k / 52f * Mathf.PI * 2 + 0.03f; var p = new Vector2(Mathf.Sin(a), Mathf.Cos(a)); streetCands.Add((p * (RingR + 21f), -p)); }
-            for (int k = 0; k < 60; k++) { float a = k / 60f * Mathf.PI * 2 + 0.05f; var p = new Vector2(Mathf.Sin(a), Mathf.Cos(a)); streetCands.Add((p * (WallR - 10f), -p)); }
+            // (plus de 3e rang collé aux remparts : la ville respire, chemin de ronde dégagé)
             foreach (var (p, face) in streetCands)
             {
-                if (!Free(p, 5.2f, 6.2f)) continue;
+                float gap = p.magnitude > RingR + 15f ? 8.5f : 5.2f;                       // 2e rang plus espacé : jardins entre les maisons
+                if (!Free(p, gap, 6.2f)) continue;
                 int v = rng.Next(8);
-                taken.Add(new Spot { p = p, r = 5.2f });
+                taken.Add(new Spot { p = p, r = gap });
                 var h = Put("M_Maison" + v, G(p) - Vector3.up * 0.1f, FaceYaw(face) + (float)(rng.NextDouble() * 6 - 3));
                 if (!h) continue;
                 houses++;
                 // accessoires devant la maison (sur le côté, hors de la rue)
-                if (rng.NextDouble() < 0.55)
+                if (rng.NextDouble() < 0.18)
                 {
-                    string[] props = { "M_Tonneaux", "M_Caisses", "M_Foin", "M_Banc", "M_Charrette" };
+                    string[] props = { "M_Tonneaux", "M_Banc", "M_Charrette" };
                     var side = rng.NextDouble() < 0.5 ? -1f : 1f;
                     var q3 = h.transform.TransformPoint(new Vector3(side * 4.6f, 0, -4.6f));
                     var q = new Vector2(q3.x, q3.z);

@@ -14,7 +14,24 @@ namespace Korvalune.Game
         public float lookHeight = 1.0f, radius = 1.1f, treeMargin = 1.6f, period = 0.2f;
 
         float next;
-        readonly Dictionary<Renderer, ShadowCastingMode> hidden = new Dictionary<Renderer, ShadowCastingMode>();
+        readonly Dictionary<Renderer, Material[]> hidden = new Dictionary<Renderer, Material[]>();
+        public static Material ghostTemplate;            // matériau URP Lit transparent (fourni par la configuration)
+        static readonly Dictionary<Material, Material> ghosts = new Dictionary<Material, Material>();
+        public const float GhostAlpha = 0.28f;
+
+        /// <summary>Version translucide d'un matériau (même texture et teinte, 28 % d'opacité) : on voit au travers sans que
+        /// l'objet disparaisse. Mise en cache : un seul clone par matériau d'origine.</summary>
+        public static Material Ghost(Material m)
+        {
+            if (!m || !ghostTemplate) return null;
+            if (ghosts.TryGetValue(m, out var g) && g) return g;
+            g = new Material(ghostTemplate) { name = m.name + " (translucide)" };
+            if (m.HasProperty("_BaseMap") && g.HasProperty("_BaseMap")) { g.SetTexture("_BaseMap", m.GetTexture("_BaseMap")); g.SetTextureScale("_BaseMap", m.GetTextureScale("_BaseMap")); g.SetTextureOffset("_BaseMap", m.GetTextureOffset("_BaseMap")); }
+            var c = m.HasProperty("_BaseColor") ? m.GetColor("_BaseColor") : Color.white; c.a = GhostAlpha; g.SetColor("_BaseColor", c);
+            return ghosts[m] = g;
+        }
+        static Material[] GhostsOf(Material[] src) { var r = new Material[src.Length]; for (int i = 0; i < src.Length; i++) r[i] = Ghost(src[i]) ?? src[i]; return r; }
+        static void MakeGhost(Renderer r) { if (ghostTemplate) r.sharedMaterials = GhostsOf(r.sharedMaterials); else r.shadowCastingMode = ShadowCastingMode.ShadowsOnly; }
         readonly HashSet<Renderer> seen = new HashSet<Renderer>();
         readonly RaycastHit[] hits = new RaycastHit[24];
 
@@ -81,14 +98,14 @@ namespace Korvalune.Game
                     var bb = r.bounds; bb.Expand(radius * 2f);
                     if (!bb.IntersectRay(ray, out var at) || at > dist) continue;
                     seen.Add(r);
-                    if (!hidden.ContainsKey(r)) { hidden[r] = r.shadowCastingMode; r.shadowCastingMode = ShadowCastingMode.ShadowsOnly; }
+                    if (!hidden.ContainsKey(r)) { hidden[r] = r.sharedMaterials; MakeGhost(r); }
                 }
             }
             if (hidden.Count > seen.Count)
             {
                 var back = new List<Renderer>();
                 foreach (var kv in hidden) if (!seen.Contains(kv.Key)) back.Add(kv.Key);
-                foreach (var r in back) { if (r) r.shadowCastingMode = hidden[r]; hidden.Remove(r); }
+                foreach (var r in back) { if (r) { if (ghostTemplate) r.sharedMaterials = hidden[r]; else r.shadowCastingMode = ShadowCastingMode.On; } hidden.Remove(r); }
             }
 
             if (terrain) UpdateTrees(cam, focus);
@@ -125,7 +142,7 @@ namespace Korvalune.Game
                 var t = original[i]; var pf = protos[t.prototypeIndex].prefab; if (!pf) continue;
                 var g = Instantiate(pf, treePos[i], Quaternion.Euler(0, t.rotation * Mathf.Rad2Deg, 0));
                 g.transform.localScale = new Vector3(t.widthScale, t.heightScale, t.widthScale);
-                foreach (var r in g.GetComponentsInChildren<Renderer>()) r.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                foreach (var r in g.GetComponentsInChildren<Renderer>()) { MakeGhost(r); r.shadowCastingMode = ShadowCastingMode.On; }
                 treeProxies[i] = g;
             }
             var keep = new List<TreeInstance>(original.Length);
@@ -136,7 +153,7 @@ namespace Korvalune.Game
 
         void Restore()
         {
-            foreach (var kv in hidden) if (kv.Key) kv.Key.shadowCastingMode = kv.Value;
+            foreach (var kv in hidden) if (kv.Key) { if (ghostTemplate) kv.Key.sharedMaterials = kv.Value; else kv.Key.shadowCastingMode = ShadowCastingMode.On; }
             hidden.Clear();
             if (terrain && treesDirty && original != null) { terrain.terrainData.SetTreeInstances(original, false); treesDirty = false; }
             foreach (var g in treeProxies.Values) if (g) Destroy(g);

@@ -192,6 +192,7 @@ namespace Korvalune.Game
                     case "gear": { float teeth = Mathf.Abs(Mathf.Repeat(a / (2 * Mathf.PI) * 8, 1) - 0.5f) < 0.22f ? 0.82f : 0.66f; m = r < teeth && r > 0.26f ? 1 : 0; } break;
                     case "close": { float p = (u + v) * 0.7071f, q = (u - v) * 0.7071f; m = (Mathf.Abs(p) < 0.1f || Mathf.Abs(q) < 0.1f) && r < 0.75f ? 1 : 0; } break;
                     case "lock": { m = (Mathf.Abs(u) < 0.45f && v < 0.05f && v > -0.6f) ? 1 : 0; float rr = Mathf.Sqrt(u * u + (v - 0.05f) * (v - 0.05f)); if (v >= 0.05f && rr < 0.38f && rr > 0.24f) m = 1; } break;
+                    case "map": { float fold = Mathf.Repeat((u + 0.75f) / 0.5f, 1f); float tilt = (Mathf.FloorToInt((u + 0.75f) / 0.5f) % 2 == 0 ? 1 : -1) * (fold - 0.5f) * 0.12f; m = (Mathf.Abs(u) < 0.75f && Mathf.Abs(v - tilt) < 0.52f) ? (Mathf.Abs(fold - 0.0f) < 0.04f ? 0.55f : 1f) : 0; if (Mathf.Abs(u + 0.15f) < 0.11f && Mathf.Abs(v - 0.05f) < 0.11f) m = 0.3f; break; }
                     case "book": { m = (Mathf.Abs(u) < 0.7f && Mathf.Abs(v) < 0.55f && Mathf.Abs(u) > 0.04f) ? 1 : 0; if (Mathf.Abs(u) > 0.15f && Mathf.Abs(u) < 0.6f && Mathf.Abs(Mathf.Repeat(v * 5, 1) - 0.5f) < 0.08f && Mathf.Abs(v) < 0.4f) m = 0.4f; } break;
                 }
                 var c = col * (0.8f + 0.4f * (1 - r)); c.a = m; px[y * S + x] = c;

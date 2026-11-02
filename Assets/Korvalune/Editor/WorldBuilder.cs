@@ -551,6 +551,16 @@ namespace Korvalune.EditorTools
             var litPath = Root + "/Rendering/Lit_Objets.mat"; var lit = AssetDatabase.LoadAssetAtPath<Material>(litPath);
             if (!lit) { lit = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(lit, litPath); }
             cfg.litMat = lit;
+            // matériau translucide (obstacles entre la caméra et le héros) : URP Lit en mode transparent
+            var ghPath = Root + "/Rendering/Lit_Translucide.mat"; var gh = AssetDatabase.LoadAssetAtPath<Material>(ghPath);
+            if (!gh) { gh = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(gh, ghPath); }
+            gh.SetFloat("_Surface", 1); gh.SetFloat("_Blend", 0); gh.SetFloat("_AlphaClip", 0); gh.SetFloat("_ZWrite", 0);
+            gh.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha); gh.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            if (gh.HasProperty("_SrcBlendAlpha")) { gh.SetFloat("_SrcBlendAlpha", (float)UnityEngine.Rendering.BlendMode.One); gh.SetFloat("_DstBlendAlpha", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha); }
+            gh.EnableKeyword("_SURFACE_TYPE_TRANSPARENT"); gh.DisableKeyword("_ALPHATEST_ON"); gh.SetOverrideTag("RenderType", "Transparent");
+            gh.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent; gh.SetShaderPassEnabled("ShadowCaster", false);
+            gh.SetColor("_BaseColor", new Color(1, 1, 1, 0.28f)); EditorUtility.SetDirty(gh);
+            cfg.ghostMat = gh;
             EditorUtility.SetDirty(cfg);
             return cfg;
         }

@@ -21,6 +21,7 @@ namespace Korvalune.Game
         readonly List<Camp> camps = new List<Camp>();
         GameBootstrap game; float nextTick;
         public int CampCount => camps.Count;
+        public bool noRespawn;                 // brèches : un camp nettoyé ne revient pas
 
         public void Init(GameBootstrap g, List<GameBootstrap.Camp> fixedCamps, bool generate)
         {
@@ -128,7 +129,7 @@ namespace Korvalune.Game
                 if (c.active)
                 {
                     c.alive.RemoveAll(h => !h || h.Dead);
-                    if (c.alive.Count == 0) { c.active = false; c.respawnAt = Time.time + Respawn; continue; }
+                    if (c.alive.Count == 0) { c.active = false; c.respawnAt = noRespawn ? float.MaxValue : Time.time + Respawn; continue; }
                     if (dist > DespawnDist)
                     {   // héros parti : le camp se range (il réapparaîtra intact à son retour)
                         foreach (var h in c.alive) if (h) Destroy(h.gameObject);
@@ -180,6 +181,13 @@ namespace Korvalune.Game
                 if (!e) continue;
                 if (i == champ) MakeChampion(e);
                 c.alive.Add(e.GetComponent<Health>());
+            }
+            // chapardeur aux trésors : rare, il rôde près d'un camp (plus fréquent dans les difficultés élevées)
+            if (Random.value < 0.05f + 0.01f * Difficulty.Current)
+            {
+                var o = Random.insideUnitCircle.normalized * (c.radius + 6f);
+                var th = TreasureThief.Make(game, GameBootstrap.Ground(c.center + new Vector3(o.x, 0, o.y)), Mathf.Max(1, c.level));
+                if (th) c.alive.Add(th.GetComponent<Health>());
             }
             c.active = c.alive.Count > 0; c.everSpawned = true;
         }

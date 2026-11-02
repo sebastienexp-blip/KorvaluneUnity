@@ -50,6 +50,7 @@ namespace Korvalune.Game
         public static int LevelAt(Vector3 p)
         {
             if (!Instance) return 1;
+            if (Rift.Active) { int pl = SaveSystem.Current != null ? SaveSystem.Current.level : 1; return Mathf.Clamp(pl + Rift.Tier / 5, 1, 80); }   // brèche : au niveau du héros
             if (Instance.zoneLevel > 0) return Instance.zoneLevel;
             var d = p - Instance.safeCenter; d.y = 0;
             float beyond = Mathf.Max(0, d.magnitude - Instance.safeRadius - 8f);
@@ -95,7 +96,7 @@ namespace Korvalune.Game
             }
             rig.target = hero.transform; rig.Snap();
             if (Application.isPlaying) { var occ = Cam.GetComponent<Occluders>(); if (!occ) occ = Cam.gameObject.AddComponent<Occluders>(); occ.target = hero.transform; occ.lookHeight = rig.lookHeight; }
-            LootDrop.beamMat = config ? config.fxAdditive : null; if (config && config.litMat) LootDrop.litBase = config.litMat;
+            LootDrop.beamMat = config ? config.fxAdditive : null; if (config && config.litMat) LootDrop.litBase = config.litMat; if (config && config.ghostMat) Occluders.ghostTemplate = config.ghostMat;
             // personnage sauvegardé (choisi dans l'écran de sélection)
             var save = SaveSystem.Current;
             if (save != null)
@@ -127,6 +128,7 @@ namespace Korvalune.Game
             h.modifyIncoming = dmgIn => Time.time < Runner.shieldUntil ? dmgIn * (1f - Runner.shieldPower) : dmgIn;
 
             // ---- interface
+            Rift.Prepare(this);                                                    // brèche : camps mêlés et quête propre
             var ui = new GameObject("Interface"); Hud = ui.AddComponent<HUD>(); Hud.player = Player; Hud.runner = Runner; Hud.worldCam = Cam;
             var q = ui.AddComponent<Quest>(); q.player = hero.transform; q.title = questTitle; Hud.zoneName = zoneName;
             if (questSteps.Count > 0) foreach (var o in questSteps) q.steps.Add(new Quest.Objective { text = o.text, enemyId = o.enemyId, count = o.count, place = o.place, radius = o.radius });
@@ -144,6 +146,13 @@ namespace Korvalune.Game
 
             // ---- ennemis : camps vivants (apparition à l'approche, réapparition après nettoyage) ; la ville reste sûre
             if (Application.isPlaying) { var pop = gameObject.AddComponent<WorldPopulation>(); pop.Init(this, camps, populate); }
+            if (Application.isPlaying)
+            {
+                RiftDirector.Begin(this);
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Korvalune_Vallee")
+                    RiftKeeper.Place(this, Ground(playerSpawn + new Vector3(-7f, 0, -3f)), 90f);       // Oracle des Brèches, près de l'arrivée en ville
+                if (!Rift.Active && !AutoTest.Enabled) TownLife.Populate(this);                       // villageois, chiens, oiseaux
+            }
             else foreach (var camp in camps) SpawnCamp(camp);
             if (Application.isPlaying)
             {
@@ -195,7 +204,8 @@ namespace Korvalune.Game
             var cc = e.AddComponent<CharacterController>(); cc.height = height / e.transform.localScale.y; cc.radius = radius / e.transform.localScale.y; cc.center = new Vector3(0, cc.height / 2 + 0.02f, 0);
             int bl = Mathf.Max(1, t.level);
             float hpM = Mathf.Max(0.55f, HpAt(level) / HpAt(bl)), dmgM = Mathf.Max(0.6f, DmgAt(level) / DmgAt(bl)), xpM = Mathf.Max(0.5f, XpAt(level) / XpAt(bl));
-            hpM *= Difficulty.Hp; dmgM *= Difficulty.Damage; xpM *= Difficulty.Xp;             // difficulté choisie (Éprouvant, Funeste, Abîmes)
+            hpM *= Difficulty.Hp; dmgM *= Difficulty.Damage; xpM *= Difficulty.Xp;
+            if (Rift.Active) { hpM *= Rift.HpMult; dmgM *= Rift.DmgMult; xpM *= Rift.XpMult; }             // difficulté choisie (Éprouvant, Funeste, Abîmes)
             var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = Mathf.Round(t.hp * hpM); h.hp = h.maxHp; h.armor = t.armor * Mathf.Min(2f, dmgM); h.displayName = t.label; h.level = level;
             var ai = e.AddComponent<EnemyAI>(); ai.type = t; ai.damage = t.damage * dmgM; ai.xp = Mathf.Round(t.xp * xpM);
             return e;

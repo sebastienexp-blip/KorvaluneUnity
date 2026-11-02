@@ -57,6 +57,7 @@ namespace Korvalune.Game
             var mm = new GameObject("MiniCarte", typeof(RectTransform), typeof(Image), typeof(Mask)).GetComponent<RectTransform>();
             Place(mm, root, new Vector2(1, 1), new Vector2(-40, -36), new Vector2(300, 300)); mm.GetComponent<Image>().sprite = UIStyle.Disc(); mm.GetComponent<Mask>().showMaskGraphic = false;
             mapRect = mm;
+            var mapTap = mm.gameObject.AddComponent<Button>(); mm.GetComponent<Image>().raycastTarget = true; mapTap.onClick.AddListener(() => WorldMap.Toggle(font));   // toucher la mini-carte ouvre la carte
             mapRT = new RenderTexture(512, 512, 16) { name = "MiniCarte" };
             var raw = new GameObject("Carte", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>(); Place((RectTransform)raw.transform, mm, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(300, 300)); raw.texture = mapRT;
             var ringImg = Img(root, "Cadre", UIStyle.Ring(), new Vector2(1, 1), new Vector2(-22, -18), new Vector2(336, 336)); mapFrame = ringImg.gameObject;
@@ -94,6 +95,7 @@ namespace Korvalune.Game
             RoundButton(root, "Inventaire", "bag", new Vector2(0.5f, 1), new Vector2(-60, -24), 96, ToggleBag, out _, out _);
             if (player && player.GetComponent<Equipment>()) BuildBag(root);
             RoundButton(root, "Arbre", "book", new Vector2(0.5f, 1), new Vector2(60, -24), 96, ToggleTree, out _, out _);
+            RoundButton(root, "Carte", "map", new Vector2(0.5f, 1), new Vector2(300, -24), 96, () => WorldMap.Toggle(font), out _, out _);
             if (runner) BuildTree(root);
             // bourse (sous le portrait) et potions de soin (au-dessus du joystick, à droite)
             var purse = Img(root, "Or", UIStyle.Icon("coin", new Color(1f, 0.82f, 0.3f)), new Vector2(0, 1), new Vector2(40, -212), new Vector2(40, 40));

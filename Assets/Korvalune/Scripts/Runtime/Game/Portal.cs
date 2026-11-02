@@ -12,6 +12,7 @@ namespace Korvalune.Game
     {
         public string targetScene;
         public Vector3 arrival;
+        public bool useSceneSpawn;                // arrivée au point de départ de la scène (retour de brèche : en ville)
         public string label = "Entrer";
         public string displayName = "";
         public Transform highlightRoot;           // structure qui s'illumine (escalier, arche…) ; à défaut, ce seul objet
@@ -96,7 +97,7 @@ namespace Korvalune.Game
             FX.Burst(transform.position + Vector3.up, glowColor, 40, 4f, 0.15f, 0.8f, -0.4f);
             FindFirstObjectByType<GameBootstrap>()?.Persist();
             Sound.UI("sfx_portail", 1f);
-            GameBootstrap.nextSpawn = arrival;
+            GameBootstrap.nextSpawn = useSceneSpawn ? (Vector3?)null : arrival;
             SceneManager.LoadScene(targetScene);
         }
     }
