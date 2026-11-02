@@ -150,12 +150,14 @@ namespace Korvalune.Game
                     list.Add(Buy()); list.Add(Sell());
                     list.Add(new Tab
                     {
-                        name = "Potions", list = () => new List<Entry> { new Entry { label = "Potion de soin", sub = Economy.PotionPrice(player.level) + " or", color = new Color(1f, 0.3f, 0.25f), tag = "potion" } },
+                        name = "Potions", list = () => new List<Entry> { new Entry { label = "Potion de soin", sub = Economy.PotionPrice(player.level) + " or", color = new Color(1f, 0.3f, 0.25f), icon = ItemIcons.Get("Potion de soin"), tag = "potion" } },
                         detail = e => $"<b>Potion de soin</b>\nRend 45 % de la vie maximale. Recharge : 15 s.\nVous en portez {W.potions} / {Economy.MaxPotions}.\n\n<color=#e8c27a>{Economy.PotionPrice(player.level)} or l'unité</color>",
                         acts = e => new List<Act>
                         {
                             new Act { label = "Acheter une potion", can = () => W.potions < Economy.MaxPotions, run = () => { if (Pay(Economy.PotionPrice(player.level))) W.potions++; } },
                             new Act { label = "Remplir la ceinture", can = () => W.potions < Economy.MaxPotions, run = () => { while (W.potions < Economy.MaxPotions && Pay(Economy.PotionPrice(player.level))) W.potions++; } },
+                            new Act { label = $"Potion de mana ({Economy.ManaPotionPrice(player.level)} or)", can = () => W.manaPotions < Economy.MaxPotions, run = () => { if (Pay(Economy.ManaPotionPrice(player.level))) W.manaPotions++; } },
+                            new Act { label = "Remplir les potions de mana", can = () => W.manaPotions < Economy.MaxPotions, run = () => { while (W.manaPotions < Economy.MaxPotions && Pay(Economy.ManaPotionPrice(player.level))) W.manaPotions++; } },
                         }
                     });
                     break;
@@ -232,7 +234,14 @@ namespace Korvalune.Game
                     });
                     list.Add(new Tab
                     {
-                        name = "Gemmes", list = () => W.gems.OrderBy(g => g.kind).ThenBy(g => g.tier).Select(g => new Entry { label = g.kind, sub = $"T{g.tier} ×{g.count}", color = Economy.GemColor[Array.IndexOf(Economy.GemKinds, g.kind)], tag = g }).ToList(),
+                        // boutique : gemmes et runes ébréchées et taillées (rang I et II)
+                        name = "Acheter", list = () => Economy.GemKinds.SelectMany(k => new[] { 1, 2 }.Select(t => new Entry { label = Economy.GemName(k, t), sub = Economy.GemPrice(k, t) + " or", color = Economy.GemColor[Array.IndexOf(Economy.GemKinds, k)], icon = ItemIcons.Get(k), tag = new GemStack { kind = k, tier = t, count = 1 } })).ToList(),
+                        detail = e => { var g = (GemStack)e.tag; int k2 = Array.IndexOf(Economy.GemKinds, g.kind); return $"<b>{Economy.GemName(g.kind, g.tier)}</b>\n{(Economy.IsRune(g.kind) ? "Rune gravée" : "Pierre précieuse")} à sertir dans une châsse.\nSertie : +{Economy.GemValue(g.kind, g.tier)}{(Loot.IsPercent(Economy.GemStat[k2]) ? " %" : "")} {Economy.GemStat[k2]}\n\n<color=#e8c27a>Prix : {Economy.GemPrice(g.kind, g.tier)} or</color>"; },
+                        acts = e => { var g = (GemStack)e.tag; return new List<Act> { new Act { label = $"Acheter ({Economy.GemPrice(g.kind, g.tier)} or)", can = () => W.gold >= Economy.GemPrice(g.kind, g.tier), run = () => { if (Pay(Economy.GemPrice(g.kind, g.tier))) { Economy.AddGem(W, g.kind, g.tier); Notify("Acheté : " + Economy.GemName(g.kind, g.tier)); Sound.UI("sfx_achat"); } } } }; }
+                    });
+                    list.Add(new Tab
+                    {
+                        name = "Gemmes", list = () => W.gems.OrderBy(g => g.kind).ThenBy(g => g.tier).Select(g => new Entry { label = g.kind, sub = $"T{g.tier} ×{g.count}", color = Economy.GemColor[Array.IndexOf(Economy.GemKinds, g.kind)], icon = ItemIcons.Get(g.kind), tag = g }).ToList(),
                         detail = e => { var g = (GemStack)e.tag; int k2 = Array.IndexOf(Economy.GemKinds, g.kind); return $"<b>{Economy.GemName(g.kind, g.tier)}</b> ×{g.count}\nSertie : +{Economy.GemValue(g.kind, g.tier)}{(Loot.IsPercent(Economy.GemStat[k2]) ? " %" : "")} {Economy.GemStat[k2]}\n\nFusion : 3 gemmes → 1 de taille supérieure ({Economy.FuseCost(g.tier)} or)"; },
                         acts = e => { var g = (GemStack)e.tag; return new List<Act> { new Act { label = "Fusionner 3 gemmes", can = () => g.count >= 3 && g.tier < 5, run = () => { if (!Economy.Fuse(W, g.kind, g.tier)) Notify("Impossible : 3 gemmes et de l'or sont nécessaires"); else { Notify("Fusion réussie"); sel = null; } } } }; }
                     });
@@ -269,7 +278,7 @@ namespace Korvalune.Game
                     list.Add(new Tab
                     {
                         name = "Breuvages",
-                        list = () => new[] { new Entry { label = "Potion de soin", sub = Economy.PotionPrice(player.level) + " or", color = new Color(1f, 0.3f, 0.25f), tag = "potion" } }
+                        list = () => new[] { new Entry { label = "Potion de soin", sub = Economy.PotionPrice(player.level) + " or", color = new Color(1f, 0.3f, 0.25f), icon = ItemIcons.Get("Potion de soin"), tag = "potion" } }
                             .Concat(Economy.Elixirs.Select(x => new Entry { label = x.name, sub = x.price + " or", color = x.id == "force" ? new Color(1f, 0.45f, 0.2f) : x.id == "vie" ? new Color(0.4f, 1f, 0.45f) : new Color(0.6f, 0.7f, 1f), tag = x.id })).ToList(),
                         detail = e =>
                         {
@@ -418,7 +427,7 @@ namespace Korvalune.Game
         void RefreshShop()
         {
             if (!shopPanel || !shopPanel.activeSelf || tabs.Count == 0) return;
-            shopPurse.text = $"<color=#ffd95a>{W.gold:N0} or</color>    Ferraille {W.scrap}    Essence {W.essence}    Éclats d'étoile {W.starShard}    <color=#c7a0ff>Éclats d'ombre {W.shadow}</color>    <color=#ff7a6a>Potions {W.potions}</color>    Sac {player.inventory.Count}/{Equipment.BagSize}";
+            shopPurse.text = $"<color=#ffd95a>{W.gold:N0} or</color>    Ferraille {W.scrap}    Essence {W.essence}    Éclats d'étoile {W.starShard}    <color=#c7a0ff>Éclats d'ombre {W.shadow}</color>    <color=#ff7a6a>Potions {W.potions}</color>  <color=#7aa8ff>Mana {W.manaPotions}</color>    Sac {player.inventory.Count}/{Equipment.BagSize}";
             for (int i = 0; i < shopTabs.Count; i++)
             {
                 bool on = i < tabs.Count; shopTabs[i].bg.gameObject.SetActive(on); if (!on) continue;

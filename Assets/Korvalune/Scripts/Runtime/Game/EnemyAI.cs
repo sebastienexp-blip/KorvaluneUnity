@@ -54,11 +54,14 @@ namespace Korvalune.Game
                     long g = (long)(Economy.GoldDrop(rng, lvl, elite) * Difficulty.Gold); var go2 = Random.insideUnitCircle * 0.9f; LootDrop.SpawnGold(g, LootDrop.Near(transform.position, new Vector3(go2.x, 0, go2.y)));
                     FX.Burst(transform.position + Vector3.up * 0.6f, new Color(1f, 0.82f, 0.25f), 14, 2.5f, 0.1f, 0.6f, 0.8f);
                     if (elite > 0.3f) { int sh = 1 + rng.Next(1 + (int)(elite * 4)); p.wallet.shadow += sh; p.Notify?.Invoke($"+{sh} éclats d'ombre"); }
-                    if (rng.NextDouble() < 0.025 + 0.2 * elite)
+                    if (rng.NextDouble() < 0.05 + 0.25 * elite)
                     {
                         var kind = Economy.GemKinds[rng.Next(Economy.GemKinds.Length)]; int tier = 1 + (lvl >= 25 && rng.NextDouble() < 0.3 ? 1 : 0);
-                        Economy.AddGem(p.wallet, kind, tier); p.Notify?.Invoke("Gemme trouvée : " + Economy.GemName(kind, tier));
+                        var o = Random.insideUnitCircle * 1.1f; GroundPickup.SpawnGem(kind, tier, LootDrop.Near(transform.position, new Vector3(o.x, 0, o.y)));
                     }
+                    // fioles de soin et de mana, au sol (plus fréquentes sur les élites)
+                    if (rng.NextDouble() < 0.04 + 0.12 * elite) { var o = Random.insideUnitCircle * 1.1f; GroundPickup.SpawnPotion(false, LootDrop.Near(transform.position, new Vector3(o.x, 0, o.y))); }
+                    if (rng.NextDouble() < 0.03 + 0.10 * elite) { var o = Random.insideUnitCircle * 1.1f; GroundPickup.SpawnPotion(true, LootDrop.Near(transform.position, new Vector3(o.x, 0, o.y))); }
                 }
                 Destroy(gameObject, 8f);
             };

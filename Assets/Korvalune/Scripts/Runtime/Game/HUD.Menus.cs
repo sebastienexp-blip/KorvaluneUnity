@@ -133,9 +133,16 @@ namespace Korvalune.Game
 
             // ---- fiche de la compétence choisie
             var side = Img(panel, "Fiche", UIStyle.Slot(), new Vector2(1, 1), new Vector2(-46, -108), new Vector2(460, TreeH + 40)); side.type = Image.Type.Sliced;
-            treeDetail = Label(side.rectTransform, "Texte", "", 24, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -20), new Vector2(412, TreeH - 110));
+            treeDetail = Label(side.rectTransform, "Texte", "", 24, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -20), new Vector2(412, TreeH - 160));
             FitText(treeDetail, 14);
             treeLearn = TextButton(side.rectTransform, "Apprendre", "Apprendre", new Vector2(0.5f, 0), new Vector2(0, 24), new Vector2(400, 76), LearnSelected, out treeLearnText, 30);
+            // voies de spécialisation (choix de build) : deux boutons au-dessus de « Apprendre »
+            for (int v = 1; v <= 2; v++)
+            {
+                int vv = v;
+                var vb = TextButton(side.rectTransform, "Voie" + v, "", new Vector2(0.5f, 0), new Vector2(v == 1 ? -103 : 103, 112), new Vector2(200, 70), () => PickVariant(vv), out var vt, 22);
+                treeVariant[v - 1] = (vb, vt);
+            }
 
             // ---- compétences équipées (barre du bas)
             Label(panel, "Équipées", "Compétences équipées", 26, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(-230, 168), new Vector2(560, 34)).color = UIStyle.Gold;
@@ -152,6 +159,15 @@ namespace Korvalune.Game
             }
             treeSel = runner.loadout[0];
             treePanel.SetActive(false);
+        }
+
+        readonly (Image bg, Text t)[] treeVariant = new (Image, Text)[2];
+        void PickVariant(int v)
+        {
+            if (treeSel < 0 || runner == null) return;
+            if (runner.ranks[treeSel] < SkillVariants.MinRank) { Notify($"Spécialisation : rang {SkillVariants.MinRank} requis"); return; }
+            runner.variants[treeSel] = runner.variants[treeSel] == v ? 0 : v;
+            Sound.UI("sfx_equiper", 0.7f); RefreshTree(); FindFirstObjectByType<GameBootstrap>()?.Persist();
         }
 
         void ToggleTree()
@@ -236,6 +252,16 @@ namespace Korvalune.Game
                 txt += "\n<color=#ff9a3c><b>Transformée par votre équipement :</b></color>";
                 if (eqp) foreach (var (pw, s) in eqp.ActivePowers()) if (pw.Matches(sd)) txt += $"\n<color=#ff9a3c>◆ {pw.name}</color>";
                 if (echo > 0) txt += $"\n<color=#ffd27a>Écho spectral : {echo * 100:0} %</color>";
+            }
+            // voies de spécialisation
+            var (va, vb2) = SkillVariants.For(sd); int ch = runner.variants != null && treeSel < runner.variants.Length ? runner.variants[treeSel] : 0;
+            txt += $"\n<b>Spécialisation</b> <color=#a08c6c>(rang {SkillVariants.MinRank} requis, une seule voie)</color>\n";
+            txt += $"{(ch == 1 ? "<color=#ffd27a>◆" : "<color=#c8b89a>◇")} {va.name}</color> : {va.desc}\n{(ch == 2 ? "<color=#ffd27a>◆" : "<color=#c8b89a>◇")} {vb2.name}</color> : {vb2.desc}\n";
+            for (int v = 0; v < 2; v++)
+            {
+                var (bgv, tv) = treeVariant[v]; if (!bgv) continue;
+                bool okv = rk >= SkillVariants.MinRank; bgv.gameObject.SetActive(true);
+                tv.text = (v == 0 ? va.name : vb2.name); bgv.color = ch == v + 1 ? new Color(1f, 0.82f, 0.45f) : okv ? Color.white : new Color(0.45f, 0.42f, 0.4f);
             }
             treeDetail.text = txt;
             bool canLearn = runner.Unlocked(treeSel) && runner.BranchOpen(treeSel) && rk < sd.MaxRank;

@@ -102,9 +102,13 @@ namespace Korvalune.Game
             goldText = Label(root, "Montant", "", 28, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(88, -212), new Vector2(300, 40)); goldText.color = new Color(1f, 0.86f, 0.45f);
             goldText.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
             var pb = RoundButton(root, "Potion", "potion", new Vector2(0, 0), new Vector2(390, 40), 112, () => { if (player && !player.DrinkPotion()) Notify(player.wallet.potions <= 0 ? "Plus de potions" : "Potion en recharge"); }, out potionCd, out _);
-            pb.transform.Find("Masque/Icône").GetComponent<Image>().color = new Color(1f, 0.35f, 0.3f);
+            if (!UIStyle.IsPainted("potion")) pb.transform.Find("Masque/Icône").GetComponent<Image>().color = new Color(1f, 0.35f, 0.3f);
             potionCount = Label(pb.rectTransform, "Nombre", "", 28, TextAnchor.LowerRight, new Vector2(0.5f, 0.5f), new Vector2(-6, 4), new Vector2(100, 100));
             potionCount.gameObject.AddComponent<Outline>().effectColor = Color.black;
+            // potion de mana, à droite de la potion de soin
+            var mb = RoundButton(root, "PotionMana", "mana", new Vector2(0, 0), new Vector2(520, 40), 112, () => { if (player && !player.DrinkManaPotion()) Notify(player.wallet.manaPotions <= 0 ? "Plus de potions de mana" : "Potion de mana en recharge"); }, out manaCd, out _);
+            manaCount = Label(mb.rectTransform, "Nombre", "", 28, TextAnchor.LowerRight, new Vector2(0.5f, 0.5f), new Vector2(-6, 4), new Vector2(100, 100));
+            manaCount.gameObject.AddComponent<Outline>().effectColor = Color.black;
             if (player) BuildShop(root);
             BuildMenu(root);
 
@@ -128,7 +132,7 @@ namespace Korvalune.Game
         }
 
         void OnDestroy() { Health.AnyDamaged -= OnDamaged; Merchant.Opened -= OpenShop; }
-        Text goldText, potionCount; Image potionCd;
+        Text goldText, potionCount, manaCount; Image potionCd, manaCd;
 
         Sprite arrowSprite;
         Sprite Arrow()
@@ -158,6 +162,7 @@ namespace Korvalune.Game
             xpFill.fillAmount = player.xp / player.xpNext; levelText.text = "Nv " + player.level;
             if (goldText) goldText.text = player.wallet.gold.ToString("N0");
             if (potionCount) { potionCount.text = player.wallet.potions.ToString(); potionCd.fillAmount = player.PotionCooldown / 15f; }
+            if (manaCount) { manaCount.text = player.wallet.manaPotions.ToString(); manaCd.fillAmount = player.ManaPotionCooldown / 12f; }
             if (runner) RefreshSkills(h);
             else foreach (var (cd, t, i) in skillButtons)
             {
@@ -562,7 +567,7 @@ namespace Korvalune.Game
             cooldown = Img(bg.rectTransform, "Recharge", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size * 0.8f, size * 0.8f));
             cooldown.type = Image.Type.Filled; cooldown.fillMethod = Image.FillMethod.Radial360; cooldown.fillOrigin = 2; cooldown.fillClockwise = false; cooldown.fillAmount = 0; cooldown.color = new Color(0, 0, 0, 0.6f);
             cdText = Label(bg.rectTransform, "Temps", "", Mathf.RoundToInt(size * 0.3f), TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
-            var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => { if (name != "Attaque" && !name.StartsWith("Compétence") && name != "Potion") Sound.UI("sfx_ui_clic", 0.5f); onClick(); });
+            var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => { if (name != "Attaque" && !name.StartsWith("Compétence") && name != "Potion" && name != "PotionMana") Sound.UI("sfx_ui_clic", 0.5f); onClick(); });
             var cb = b.colors; cb.pressedColor = new Color(1f, 0.85f, 0.6f); b.colors = cb;
             return bg;
         }

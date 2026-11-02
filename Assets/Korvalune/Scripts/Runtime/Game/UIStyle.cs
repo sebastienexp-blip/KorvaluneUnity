@@ -174,10 +174,14 @@ namespace Korvalune.Game
         }
 
         /// <summary>Icônes dessinées (sur fond transparent) : attaque, tourbillon, bond, cri, piétinement, sac, livre.</summary>
+        public static bool IsPainted(string id) => Resources.Load<Texture2D>("UI/Icones/" + id) != null;
         public static Sprite Icon(string id, Color col)
         {
             string cacheKey = id + ColorUtility.ToHtmlStringRGB(col);
             if (icons.TryGetValue(cacheKey, out var s) && s) return s;
+            // icône peinte (Resources/UI/Icones/<id>.png) : prioritaire, dans ses couleurs d'origine
+            var painted = Resources.Load<Texture2D>("UI/Icones/" + id);
+            if (painted) return icons[cacheKey] = Keep(Sprite.Create(painted, new Rect(0, 0, painted.width, painted.height), new Vector2(0.5f, 0.5f), 100));
             int S = 128; var t = Tex(S, S); var px = new Color[S * S];
             for (int y = 0; y < S; y++) for (int x = 0; x < S; x++)
             {

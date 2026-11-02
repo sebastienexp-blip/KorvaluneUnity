@@ -317,9 +317,43 @@ namespace Korvalune.EditorTools
                 t.AddCondition(AnimatorConditionMode.If, 0, "Dead");
                 var up = d.AddTransition(loco); up.hasExitTime = false; up.duration = 0.3f; up.AddCondition(AnimatorConditionMode.IfNot, 0, "Dead");
             }
+            // couche « haut du corps » (masque : bras, buste, tête) : attaques et compétences jouées en marchant, les jambes
+            // gardent la locomotion de la couche de base. Poids réglé par le jeu (0 au repos, 1 pendant le geste).
+            if (C("Attack"))
+            {
+                var mask = UpperBodyMask();
+                ctrl.AddLayer("HautDuCorps");
+                var layers = ctrl.layers; var up = layers[layers.Length - 1];
+                up.avatarMask = mask; up.defaultWeight = 0f; up.blendingMode = AnimatorLayerBlendingMode.Override;
+                ctrl.layers = layers;
+                var usm = ctrl.layers[ctrl.layers.Length - 1].stateMachine;
+                var rest = usm.AddState("Repos"); rest.motion = C("Idle") ?? C("Attack"); usm.defaultState = rest;
+                foreach (var kv in clips.Where(k => k.Key == "Attack" || k.Key.StartsWith("Sk_")))
+                {
+                    var st = usm.AddState(kv.Key); st.motion = kv.Value;
+                    var back = st.AddTransition(rest); back.hasExitTime = true; back.exitTime = 0.95f; back.duration = 0.1f;
+                }
+            }
             EditorUtility.SetDirty(ctrl);
             AssetDatabase.SaveAssets();
             return ctrl;
+        }
+
+        static AvatarMask UpperBodyMask()
+        {
+            const string path = Root + "/Rendering/Masque_HautDuCorps.mask";
+            var m = AssetDatabase.LoadAssetAtPath<AvatarMask>(path);
+            if (m) return m;
+            m = new AvatarMask();
+            for (int i = 0; i < (int)AvatarMaskBodyPart.LastBodyPart; i++)
+            {
+                var part = (AvatarMaskBodyPart)i;
+                bool on = part == AvatarMaskBodyPart.Body || part == AvatarMaskBodyPart.Head || part == AvatarMaskBodyPart.LeftArm || part == AvatarMaskBodyPart.RightArm
+                          || part == AvatarMaskBodyPart.LeftFingers || part == AvatarMaskBodyPart.RightFingers || part == AvatarMaskBodyPart.LeftHandIK || part == AvatarMaskBodyPart.RightHandIK;
+                m.SetHumanoidBodyPartActive(part, on);
+            }
+            AssetDatabase.CreateAsset(m, path);
+            return m;
         }
 
         static void BuildPrefab(Entry e, AnimatorController ctrl)

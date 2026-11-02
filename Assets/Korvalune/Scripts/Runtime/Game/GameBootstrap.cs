@@ -117,6 +117,7 @@ namespace Korvalune.Game
             if (save != null)
             {
                 if (save.skillRanks != null && save.skillRanks.Count == Runner.book.Count) Runner.ranks = save.skillRanks.ToArray();
+                if (save.skillVariants != null && save.skillVariants.Count == Runner.book.Count) Runner.variants = save.skillVariants.ToArray();
                 if (save.loadout != null && save.loadout.Count == Runner.loadout.Length) Runner.loadout = save.loadout.ToArray();
             }
             // équipement : caractéristiques de base (niveau) + objets portés
@@ -237,7 +238,7 @@ namespace Korvalune.Game
         {
             var s = SaveSystem.Current; if (s == null || !Player) return;
             s.level = Player.level; s.xp = Player.xp; s.skillPoints = Player.skillPoints;
-            if (Runner) { s.skillRanks = new List<int>(Runner.ranks); s.loadout = new List<int>(Runner.loadout); }
+            if (Runner) { s.skillRanks = new List<int>(Runner.ranks); s.loadout = new List<int>(Runner.loadout); if (Runner.variants != null) s.skillVariants = new List<int>(Runner.variants); }
             var eqp = Player.GetComponent<Equipment>(); if (eqp) s.equipped = eqp.ToSave();
             s.wallet = Player.wallet; s.gold = Player.wallet.gold;
             s.inventory = new List<ItemSave>(Player.inventory); s.playSeconds += 30f; s.lastPlayed = System.DateTime.UtcNow.ToString("o");

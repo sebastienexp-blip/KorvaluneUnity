@@ -22,6 +22,7 @@ namespace Korvalune.Game
         public int level = 1; public float xp; public int skillPoints = 1; public long gold;
         public int difficulty;          // 0 Normal … 6 Abîme IV
         public List<int> skillRanks = new List<int>();
+        public List<int> skillVariants = new List<int>();
         public List<int> loadout = new List<int>();
         public List<ItemSave> inventory = new List<ItemSave>();
         public List<ItemSave> equipped = new List<ItemSave>();

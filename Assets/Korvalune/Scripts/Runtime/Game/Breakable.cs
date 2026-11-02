@@ -40,7 +40,9 @@ namespace Korvalune.Game
             float roll = Random.value;
             if (roll < 0.35f) LootDrop.SpawnGold((long)(Economy.GoldDrop(rng, lvl, 0) * 0.6f) + 2, LootDrop.Near(p, Random.insideUnitSphere));
             else if (roll < 0.40f) LootDrop.Spawn(Loot.Roll(rng, lvl, 0.5f), LootDrop.Near(p, Random.insideUnitSphere));
-            else if (roll < 0.44f && hero && hero.wallet.potions < Economy.MaxPotions) { hero.wallet.potions++; hero.Notify?.Invoke("+1 potion"); }
+            else if (roll < 0.44f) GroundPickup.SpawnPotion(false, LootDrop.Near(p, Random.insideUnitSphere));
+            else if (roll < 0.48f) GroundPickup.SpawnPotion(true, LootDrop.Near(p, Random.insideUnitSphere));
+            else if (roll < 0.50f) GroundPickup.SpawnGem(Economy.GemKinds[Random.Range(0, Economy.GemKinds.Length)], 1, LootDrop.Near(p, Random.insideUnitSphere));
             Destroy(gameObject);
         }
     }

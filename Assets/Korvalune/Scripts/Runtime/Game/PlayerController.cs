@@ -39,6 +39,15 @@ namespace Korvalune.Game
             FX.Burst(transform.position + Vector3.up, new Color(1f, 0.25f, 0.2f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
             return true;
         }
+        float manaReady;
+        public float ManaPotionCooldown => Mathf.Max(0, manaReady - Time.time);
+        public bool DrinkManaPotion()
+        {
+            if (wallet.manaPotions <= 0 || Time.time < manaReady || Health.Dead) return false;
+            wallet.manaPotions--; manaReady = Time.time + 12f; Health.mana = Mathf.Min(Health.maxMana, Health.mana + Health.maxMana * 0.6f); Sound.UI("sfx_potion", 0.9f);
+            FX.Burst(transform.position + Vector3.up, new Color(0.25f, 0.45f, 1f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
+            return true;
+        }
         public void AddGold(long g) { wallet.gold += g; GoldGained?.Invoke(g); if (g > 0) Sound.Play("sfx_or", transform.position, 0.55f, 0.06f, 0.25f); }
         public System.Action<long> GoldGained;
 
@@ -81,7 +90,7 @@ namespace Korvalune.Game
             // en attaquant ou en lançant une compétence, on peut continuer à se déplacer (moins vite au corps à corps)
             // et le héros reste tourné vers sa cible : tir et sorts partent vers le monstre visé, pas vers le joystick
             bool aiming = Busy && AimAt && !AimAt.Dead;
-            if (Busy) mag *= Ranged ? 0.6f : 0.35f;
+            if (Busy) mag *= Ranged ? 0.85f : 0.65f;        // on garde l'élan en frappant (le haut du corps joue le geste)
             float spd = mag < 0.6f ? walkSpeed * mag / 0.6f : Mathf.Lerp(walkSpeed, runSpeed, (mag - 0.6f) / 0.4f);
             if (aiming)
             {
@@ -107,6 +116,7 @@ namespace Korvalune.Game
             if (Swimming) SwimStrokes(spd); else Footsteps(spd);
             Anim?.SetFloat(CharacterRig.SpeedId, spd, 0.1f, Time.deltaTime);
             UpdateTarget(inp);
+            UpdateUpperLayer();
             if (approach && Target && !Target.Dead && mag < 0.05f && !Health.Stunned)
             {
                 // ciblage automatique : le héros court vers sa cible puis frappe
@@ -246,8 +256,40 @@ namespace Korvalune.Game
         /// <summary>Attaque de base à distance : carreau d'arbalète (Chasseur des cendres), trait du Néant (Archimage).</summary>
         /// <summary>À distance seulement avec une arme équipée (arbalète, arc, bâton, sceptre) ; à mains nues, on frappe aux poings.</summary>
         public bool Ranged => (Loot.PlayerClass == Powers.V || Loot.PlayerClass == Powers.E) && Armed;
+        public bool Bow { get { var e = GetComponent<Equipment>(); var w = e ? e.In(Slot.Arme) : null; return w != null && w.baseName != null && w.baseName.StartsWith("Arc"); } }
+        bool HasClip(string n) => Anim && ClipLength(n) > 0 && Anim.HasState(0, Animator.StringToHash(n));
         public bool Armed { get { var e = GetComponent<Equipment>(); return e && e.In(Slot.Arme) != null; } }
         public float AttackReach => Ranged ? 13f : attackRange;
+
+        // ---------------------------------------------------------------- gestes (attaques, compétences) fluides en mouvement
+        float upperUntil; int upperLayer = -2; readonly System.Collections.Generic.Dictionary<string, float> clipLen = new System.Collections.Generic.Dictionary<string, float>();
+        float ClipLength(string n)
+        {
+            if (clipLen.TryGetValue(n, out var l)) return l;
+            l = 0.8f; if (Anim && Anim.runtimeAnimatorController) foreach (var c in Anim.runtimeAnimatorController.animationClips) if (c && c.name == n) { l = c.length; break; }
+            return clipLen[n] = l;
+        }
+        /// <summary>Joue un geste (« Attack », « Sk_… ») : à l'arrêt, sur tout le corps ; en mouvement, sur le haut du corps
+        /// seulement — les jambes continuent de marcher ou de courir, sans à-coup.</summary>
+        public void Gesture(string state)
+        {
+            if (!Anim) return;
+            if (upperLayer == -2) upperLayer = Anim.GetLayerIndex("HautDuCorps");
+            bool moving = Speed > 0.4f || Moving;
+            if (moving && upperLayer > 0)
+            {
+                Anim.CrossFadeInFixedTime(state, 0.06f, upperLayer, 0f);
+                upperUntil = Time.time + ClipLength(state) * 0.92f;
+                return;
+            }
+            if (state == "Attack") Anim.SetTrigger(CharacterRig.AttackId); else Anim.CrossFadeInFixedTime(state, 0.08f, 0, 0f);
+        }
+        void UpdateUpperLayer()
+        {
+            if (!Anim || upperLayer <= 0) return;
+            float w = Anim.GetLayerWeight(upperLayer), target = Time.time < upperUntil ? 1f : 0f;
+            if (!Mathf.Approximately(w, target)) Anim.SetLayerWeight(upperLayer, Mathf.MoveTowards(w, target, Time.deltaTime * (target > w ? 14f : 5f)));
+        }
 
         /// <summary>Monstre vers lequel le héros reste tourné pendant une attaque ou une compétence (même en se déplaçant).</summary>
         public Health AimAt { get; set; }
@@ -270,7 +312,7 @@ namespace Korvalune.Game
             nextAttack = Time.time + attackCooldown;
             FaceNearest(AttackReach + 2.5f);
             AimAt = Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= AttackReach + 2.5f ? Target : null;
-            Anim?.SetTrigger(CharacterRig.AttackId);
+            Gesture(!Armed ? (HasClip("Sk_Poing") ? "Sk_Poing" : "Attack") : Bow && HasClip("Sk_TirArc") ? "Sk_TirArc" : "Attack");
             Sound.Play(!Armed ? "sfx_epee_whoosh" : Loot.PlayerClass == Powers.E ? "sfx_trait_neant" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, !Armed ? 0.45f : 0.75f);
             lockUntil = Time.time + (Ranged ? 0.3f : 0.45f);
             StartCoroutine(Ranged ? Shoot(0.22f) : Hit(0.38f));

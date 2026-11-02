@@ -11,7 +11,8 @@ namespace Korvalune.Game
     {
         public string classId = "KaelDraven";
         public List<SkillDef> book;
-        public int[] ranks;            // rang de chaque compétence du livre (0 = non apprise)
+        public int[] ranks;
+        public int[] variants;         // voie de spécialisation choisie par compétence (0 aucune, 1, 2)            // rang de chaque compétence du livre (0 = non apprise)
         public int[] loadout = { 0, 1, 2, 3, 4 };
         float[] readyAt;
         PlayerController p;
@@ -23,6 +24,7 @@ namespace Korvalune.Game
             classId = cls; config = cfg; p = GetComponent<PlayerController>();
             book = SkillBook.For(cls);
             if (ranks == null || ranks.Length != book.Count) { ranks = new int[book.Count]; ranks[0] = 1; }
+            if (variants == null || variants.Length != book.Count) variants = new int[book.Count];
             readyAt = new float[book.Count];
         }
 
@@ -47,6 +49,7 @@ namespace Korvalune.Game
             if (slot < 0 || slot >= loadout.Length) return false;
             int i = loadout[slot]; var eqp = GetComponent<Equipment>();
             float echo = 0; var d = eqp ? eqp.Modify(book[i], out echo) : book[i];   // pouvoirs légendaires et ensembles
+            if (variants != null && i < variants.Length && ranks[i] >= SkillVariants.MinRank) d = SkillVariants.Apply(d, variants[i]);   // voie de spécialisation
             if (p.Health.Dead || p.Health.Stunned) return false;
             if (ranks[i] <= 0) { p.Notify?.Invoke($"« {d.name} » n'est pas encore apprise"); return false; }
             if (Time.time < readyAt[i]) return false;
@@ -144,6 +147,7 @@ namespace Korvalune.Game
             bool crit = Random.value < p.critChance;
             h.TakeDamage(dmg * (crit ? 2f : 1f) * (Time.time < curseUntil ? 1.25f : 1f), p.Health, crit);
             if (d.stun && d.duration > 0) h.Stun(d.duration);
+            if (d.heal && d.kind != SkillKind.Heal && d.kind != SkillKind.Nova) p.Health.Heal(dmg * 0.04f);   // voie « vampirique »
             Vfx.Burst(h.transform.position + Vector3.up * 1.1f, d.element, 10, 4f);
         }
 
@@ -160,10 +164,10 @@ namespace Korvalune.Game
             if (d.ghost) return fallback;
             if (HasState(d.anim))
             {
-                p.Anim.CrossFadeInFixedTime(d.anim, 0.08f, 0, 0f);
+                p.Gesture(d.anim);                                   // haut du corps seulement si le héros se déplace
                 return SkillAnims.Impact.TryGetValue(d.anim, out var t) ? t : fallback;
             }
-            p.Anim?.SetTrigger(CharacterRig.AttackId);
+            p.Gesture("Attack");
             return fallback;
         }
 

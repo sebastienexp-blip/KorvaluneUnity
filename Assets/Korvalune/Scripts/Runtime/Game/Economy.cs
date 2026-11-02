@@ -12,6 +12,7 @@ namespace Korvalune.Game
         public long gold;
         public int scrap, essence, starShard, shadow;
         public int potions = 3;
+        public int manaPotions = 2;                                         // potions de mana
         public int riftKeys, riftBest;                                     // Sceaux de brèche, meilleur niveau de Grande Brèche
         public List<GemStack> gems = new List<GemStack>();
         public List<RelicPower> relics = new List<RelicPower>();         // pouvoirs extraits (collection)
@@ -87,17 +88,23 @@ namespace Korvalune.Game
         }
 
         // ---------------------------------------------------------------------------------------------- joaillier
-        public static readonly string[] GemKinds = { "Rubis", "Saphir", "Émeraude", "Topaze", "Améthyste" };
-        public static readonly string[] GemStat = { "Dégâts", "Armure", "Chances de coup critique", "Vie", "Régénération de mana" };
+        // gemmes (5) puis runes (5) : même système de châsses, de fusion et de butin
+        public static readonly string[] GemKinds = { "Rubis", "Saphir", "Émeraude", "Topaze", "Améthyste", "Rune d'Ardeur", "Rune de Sagesse", "Rune de Puissance", "Rune de Vivacité", "Rune d'Esprit" };
+        public static readonly string[] GemStat = { "Dégâts", "Armure", "Chances de coup critique", "Vie", "Régénération de mana", "Vitesse d'attaque", "Réduction des temps de recharge", "Force", "Dextérité", "Intelligence" };
+        public static bool IsRune(string kind) => kind != null && kind.StartsWith("Rune");
+        static readonly string[] RuneTier = { "", "I", "II", "III", "IV", "V" };
         public static readonly string[] GemTier = { "", "ébréché", "taillé", "parfait", "royal", "céleste" };
-        public static readonly Color[] GemColor = { new Color(1f, 0.15f, 0.15f), new Color(0.2f, 0.45f, 1f), new Color(0.2f, 1f, 0.4f), new Color(1f, 0.8f, 0.2f), new Color(0.75f, 0.35f, 1f) };
+        public static readonly Color[] GemColor = { new Color(1f, 0.15f, 0.15f), new Color(0.2f, 0.45f, 1f), new Color(0.2f, 1f, 0.4f), new Color(1f, 0.8f, 0.2f), new Color(0.75f, 0.35f, 1f),
+            new Color(1f, 0.55f, 0.2f), new Color(0.3f, 0.9f, 1f), new Color(1f, 0.3f, 0.25f), new Color(0.45f, 1f, 0.45f), new Color(0.75f, 0.5f, 1f) };
         public static float GemValue(string kind, int tier)
         {
             int k = Array.IndexOf(GemKinds, kind);
-            float b = k == 2 ? 0.8f : k == 4 ? 2f : 6f;
+            float b = k == 2 ? 0.8f : k == 4 ? 2f : k == 5 ? 1.5f : k == 6 ? 1.2f : k >= 7 ? 5f : 6f;
             return Mathf.Round(b * Mathf.Pow(2.1f, tier - 1) * 10) / 10;
         }
-        public static string GemName(string kind, int tier) => $"{kind} {GemTier[Mathf.Clamp(tier, 1, 5)]}";
+        public static string GemName(string kind, int tier) => IsRune(kind) ? $"{kind} {RuneTier[Mathf.Clamp(tier, 1, 5)]}" : $"{kind} {GemTier[Mathf.Clamp(tier, 1, 5)]}";
+        public static long GemPrice(string kind, int tier) => (IsRune(kind) ? 160L : 120L) * tier * tier;
+        public static long ManaPotionPrice(int level) => 18 + level * 3;
 
         public static int Sockets(ItemSave it) => it.rarity switch { Rarity.Commun => 0, Rarity.Magique => 1, Rarity.Rare => 1, Rarity.Legendaire => 2, _ => 3 };
         public static void AddGem(Wallet w, string kind, int tier, int n = 1)
