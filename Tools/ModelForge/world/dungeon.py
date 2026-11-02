@@ -1,6 +1,6 @@
 """Kit de la Crypte de Korvalune (premier donjon, sous le vieux cimetière) : dalles de sol, murs de pierre à assises
 irrégulières, arche, pilier, sarcophage, brasero, applique de torche, escalier. Pièces modulaires sur une grille de 4 m,
-assemblées dans Unity par Korvalune.EditorTools.DungeonBuilder. Murs bas (3,2 m) : la caméra plonge comme dans Diablo."""
+assemblées dans Unity par Korvalune.EditorTools.DungeonBuilder. Murs bas (3,2 m) : la caméra plonge de haut."""
 import numpy as np
 from forge.rig import Asset
 from forge.geo import Mesh, Loft, spline, curve, concat, unit

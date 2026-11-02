@@ -1,4 +1,4 @@
-"""Les Terriers de l'Astral : donjon-parcours naturel à la Diablo (grottes et terriers creusés sous la forêt), et non une
+"""Les Terriers de l'Astral : donjon-parcours naturel (grottes et terriers creusés sous la forêt), et non une
 suite de salles carrées. Un tracé sinueux relie l'entrée au repaire du gardien en passant par des cavernes, des goulets
 étroits, des corniches et des descentes ; des terriers secondaires en cul-de-sac cachent des trésors.
 
