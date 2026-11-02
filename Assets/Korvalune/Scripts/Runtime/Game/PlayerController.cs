@@ -244,7 +244,9 @@ namespace Korvalune.Game
         }
 
         /// <summary>Attaque de base à distance : carreau d'arbalète (Chasseur des cendres), trait du Néant (Archimage).</summary>
-        public bool Ranged => Loot.PlayerClass == Powers.V || Loot.PlayerClass == Powers.E;
+        /// <summary>À distance seulement avec une arme équipée (arbalète, arc, bâton, sceptre) ; à mains nues, on frappe aux poings.</summary>
+        public bool Ranged => (Loot.PlayerClass == Powers.V || Loot.PlayerClass == Powers.E) && Armed;
+        public bool Armed { get { var e = GetComponent<Equipment>(); return e && e.In(Slot.Arme) != null; } }
         public float AttackReach => Ranged ? 13f : attackRange;
 
         /// <summary>Monstre vers lequel le héros reste tourné pendant une attaque ou une compétence (même en se déplaçant).</summary>
@@ -269,7 +271,7 @@ namespace Korvalune.Game
             FaceNearest(AttackReach + 2.5f);
             AimAt = Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= AttackReach + 2.5f ? Target : null;
             Anim?.SetTrigger(CharacterRig.AttackId);
-            Sound.Play(Loot.PlayerClass == Powers.E ? "sfx_trait_neant" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, 0.75f);
+            Sound.Play(!Armed ? "sfx_epee_whoosh" : Loot.PlayerClass == Powers.E ? "sfx_trait_neant" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, !Armed ? 0.45f : 0.75f);
             lockUntil = Time.time + (Ranged ? 0.3f : 0.45f);
             StartCoroutine(Ranged ? Shoot(0.22f) : Hit(0.38f));
         }
@@ -302,7 +304,7 @@ namespace Korvalune.Game
                 if (!Sight.Clear(transform.position, h)) continue;              // pas de coup à travers un mur
                 bool crit = Random.value < critChance;
                 h.TakeDamage(attackDamage * damageMult * (crit ? 2f : 1f) * Random.Range(0.9f, 1.1f), Health, crit);
-                if (!any) Sound.Play(Sound.WeaponOf(Loot.PlayerClass).hit, h.transform.position, 0.85f);
+                if (!any) Sound.Play(Armed ? Sound.WeaponOf(Loot.PlayerClass).hit : "sfx_ennemi_touche", h.transform.position, 0.85f);
                 FX.Burst(h.transform.position + Vector3.up * 1.1f, crit ? new Color(1f, 0.85f, 0.3f) : new Color(1f, 0.55f, 0.25f), crit ? 30 : 16);
                 any = true;
             }

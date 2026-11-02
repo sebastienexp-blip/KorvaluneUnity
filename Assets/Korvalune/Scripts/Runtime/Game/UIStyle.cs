@@ -19,6 +19,15 @@ namespace Korvalune.Game
         static Texture2D Tex(int w, int h) => new Texture2D(w, h, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp, filterMode = FilterMode.Bilinear, hideFlags = HideFlags.DontUnloadUnusedAsset };
         static Sprite Keep(Sprite s) { if (s) s.hideFlags = HideFlags.DontUnloadUnusedAsset; return s; }
 
+        /// <summary>Habillage peint (Resources/UI/Kit/*.png) : s'il existe, il remplace le dessin procédural. border = marge
+        /// de découpe en 9 parties, en fraction de la taille de l'image.</summary>
+        static Sprite Painted(string name, float border)
+        {
+            var t = Resources.Load<Texture2D>("UI/Kit/" + name); if (!t) return null;
+            float b = Mathf.Round(Mathf.Min(t.width, t.height) * border);
+            return Keep(Sprite.Create(t, new Rect(0, 0, t.width, t.height), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(b, b, b, b)));
+        }
+
         /// <summary>Panneau : fond cuivre dégradé et patiné, double liseré or, coins arrondis.</summary>
         public static Sprite Panel()
         {
@@ -47,6 +56,7 @@ namespace Korvalune.Game
         public static Sprite Ornate()
         {
             if (ornate) return ornate;
+            if ((ornate = Painted("Panneau", 0.22f))) return ornate;
             int S = 192, B = 56; var t = Tex(S, S); var px = new Color[S * S];
             var leatherA = new Color(0.16f, 0.09f, 0.055f); var leatherB = new Color(0.27f, 0.155f, 0.09f);
             for (int y = 0; y < S; y++) for (int x = 0; x < S; x++)
@@ -101,6 +111,7 @@ namespace Korvalune.Game
         public static Sprite Slot()
         {
             if (slot) return slot;
+            if ((slot = Painted("Case", 0.24f))) return slot;
             int S = 64, B = 12; var t = Tex(S, S); var px = new Color[S * S];
             for (int y = 0; y < S; y++) for (int x = 0; x < S; x++)
             {
@@ -129,7 +140,7 @@ namespace Korvalune.Game
         }
 
         /// <summary>Bouton rond bombé : cuivre sombre, reflet, anneau d'or.</summary>
-        public static Sprite Button() => Round(ref button, 256, (u, v, r) =>
+        public static Sprite Button() => button ? button : (button = Painted("Bouton", 0f)) ? button : Round(ref button, 256, (u, v, r) =>
         {
             if (r > 0.86f) return Color.Lerp(Gold, GoldDark, (r - 0.86f) / 0.14f + 0.2f * v);
             if (r > 0.80f) return CopperDark * 0.5f + new Color(0, 0, 0, 0.5f);
