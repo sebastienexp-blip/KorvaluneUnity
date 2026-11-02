@@ -33,6 +33,7 @@ namespace Korvalune.Game
         public static int Minimap { get => Get("carte", 0); set => Set("carte", value); }                  // affichée / masquée
         public static int FpsCounter { get => Get("compteur", 1); set => Set("compteur", value); }         // affiché / masqué
         public static int NameSize { get => Get("taille_noms", 1); set => Set("taille_noms", value); }     // petite / normale / grande
+        public static int Gore { get => Get("gore", 0); set => Set("gore", value); }                      // complet / sang seulement / désactivé
         public static int QuestPanel { get => Get("quete", 0); set => Set("quete", value); }               // affichée / masquée
 
         public static float AmbienceVolume => Muted == 1 ? 0 : Ambience / 4f;
@@ -143,6 +144,7 @@ namespace Korvalune.Game
             Row(j, ref y, "Ramassage auto", new[] { "Aucun", "Communs", "Magiques", "Rares" }, () => Settings.AutoLoot, k => Settings.AutoLoot = k);
             Row(j, ref y, "Distance caméra", new[] { "Proche", "Normale", "Lointaine" }, () => PlayerPrefs.GetInt("korvalune.zoom", 1), k => { PlayerPrefs.SetInt("korvalune.zoom", k); Changed(); });
             Row(j, ref y, "Secousses d'écran", new[] { "Activées", "Désactivées" }, () => Settings.Shake, k => Settings.Shake = k);
+            Row(j, ref y, "Gore (sang, démembrement)", new[] { "Complet", "Sang seul", "Désactivé" }, () => Settings.Gore, k => Settings.Gore = k);
             Row(j, ref y, "Vibrations", new[] { "Activées", "Désactivées" }, () => Settings.Vibration, k => { Settings.Vibration = k; if (k == 0) Vibrate(); });
 
             y = 0; var u = (RectTransform)pages[3].page.transform;
