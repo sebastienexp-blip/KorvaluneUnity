@@ -123,6 +123,7 @@ namespace Korvalune.Game
             var eq = hero.AddComponent<Equipment>(); eq.Init();
             if (save != null) eq.FromSave(save.equipped);
             hero.AddComponent<HeroOutfit>().Init();
+            if (Application.isPlaying) hero.AddComponent<WeaponVisual>();               // arme et main gauche visibles selon l'objet porté
             StripChildColliders(hero);     // haillons au départ, la tenue apparaît à mesure qu'on s'équipe
             h.hp = h.maxHp;
             h.modifyIncoming = dmgIn => Time.time < Runner.shieldUntil ? dmgIn * (1f - Runner.shieldPower) : dmgIn;
