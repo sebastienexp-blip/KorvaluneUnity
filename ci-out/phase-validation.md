@@ -1,8 +1,32 @@
-# Rapport d'intégration Unity — 2026-11-02 16:41 UTC
+# Rapport d'intégration Unity — 2026-11-02 17:40 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
-- 264 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 264 déjà à jour (inchangés)
+- 276 modèle(s) ModelForge trouvé(s)
+- 0 modèle(s) intégré(s), 276 déjà à jour (inchangés)
+
+## ArcDeChasse.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/ArcDeChasse/ArcDeChasse.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1940 triangles, 1149 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/ArcDeChasse.prefab
+- ✅ **Échelle (hauteur)** 1.166 m (attendu 1.108077–1.224717), boîte 0.05×1.17×0.10, pieds à y=-0.583
+- ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Dark** shader Universal Render Pipeline/Lit, base VR_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## ArcLong.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/ArcLong/ArcLong.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1940 triangles, 1149 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/ArcLong.prefab
+- ✅ **Échelle (hauteur)** 1.566 m (attendu 1.48773–1.644334), boîte 0.05×1.57×0.12, pieds à y=-0.783
+- ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Dark** shader Universal Render Pipeline/Lit, base VR_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
 
 ## AshCrossbow.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/AshCrossbow/AshCrossbow.fbx
@@ -14,6 +38,18 @@
 - ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Metal** shader Universal Render Pipeline/Lit, base VR_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Dark** shader Universal Render Pipeline/Lit, base VR_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## Carquois.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/Carquois/Carquois.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2548 triangles, 1829 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/Carquois.prefab
+- ✅ **Échelle (hauteur)** 0.896 m (attendu 0.8513412–0.9409561), boîte 0.14×0.90×0.16, pieds à y=-0.654
+- ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau VR_Dark** shader Universal Render Pipeline/Lit, base VR_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** box
 
@@ -53,6 +89,75 @@
 - ✅ **Matériau CK_Leather** shader Universal Render Pipeline/Lit, base CK_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** box
 
+## DagueRituelle.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/DagueRituelle/DagueRituelle.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1266 triangles, 766 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/DagueRituelle.prefab
+- ✅ **Échelle (hauteur)** 0.437 m (attendu 0.4148413–0.4585088), boîte 0.11×0.44×0.04, pieds à y=-0.105
+- ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Dark** shader Universal Render Pipeline/Lit, base VR_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## EpeeBatarde.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/EpeeBatarde/EpeeBatarde.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 11062 triangles, 6085 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/EpeeBatarde.prefab
+- ✅ **Échelle (hauteur)** 1.487 m (attendu 1.413051–1.561794), boîte 0.25×1.49×0.04, pieds à y=-0.269
+- ✅ **Matériau WP_Blade** shader Universal Render Pipeline/Lit, base WP_Blade_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Steel** shader Universal Render Pipeline/Lit, base KN_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## Faux.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/Faux/Faux.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2136 triangles, 1257 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/Faux.prefab
+- ✅ **Échelle (hauteur)** 2.085 m (attendu 1.980463–2.188933), boîte 0.79×2.08×0.18, pieds à y=-0.623
+- ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau WP_Blade** shader Universal Render Pipeline/Lit, base WP_Blade_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## FleauDArmes.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/FleauDArmes/FleauDArmes.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 3128 triangles, 2044 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/FleauDArmes.prefab
+- ✅ **Échelle (hauteur)** 0.960 m (attendu 0.912285–1.008315), boîte 0.25×0.96×0.25, pieds à y=-0.214
+- ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Steel** shader Universal Render Pipeline/Lit, base KN_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## Grimoire.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/Grimoire/Grimoire.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 96 triangles, 96 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/Grimoire.prefab
+- ✅ **Échelle (hauteur)** 0.235 m (attendu 0.22325–0.24675), boîte 0.18×0.24×0.07, pieds à y=0.002
+- ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Dark** shader Universal Render Pipeline/Lit, base VR_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## HacheDeGuerre.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/HacheDeGuerre/HacheDeGuerre.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 2242 triangles, 1384 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/HacheDeGuerre.prefab
+- ✅ **Échelle (hauteur)** 1.114 m (attendu 1.058728–1.170172), boîte 0.36×1.11×0.05, pieds à y=-0.364
+- ✅ **Matériau WP_Wood** shader Universal Render Pipeline/Lit, base WP_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Steel** shader Universal Render Pipeline/Lit, base KN_Steel_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau WP_Blade** shader Universal Render Pipeline/Lit, base WP_Blade_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
 ## HeaterShield.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/HeaterShield/HeaterShield.fbx
 - ✅ **Import sans erreur ni avertissement** 
@@ -88,6 +193,28 @@
 - ✅ **Matériau KN_Leather** shader Universal Render Pipeline/Lit, base KN_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** box
 
+## Orbe.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/Orbe/Orbe.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1872 triangles, 1134 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/Orbe.prefab
+- ✅ **Échelle (hauteur)** 0.208 m (attendu 0.1972466–0.2180094), boîte 0.19×0.21×0.19, pieds à y=-0.017
+- ✅ **Matériau EL_Crystal** shader Universal Render Pipeline/Lit, base EL_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## Phylactere.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/Phylactere/Phylactere.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 892 triangles, 597 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/Phylactere.prefab
+- ✅ **Échelle (hauteur)** 0.259 m (attendu 0.2462261–0.2721447), boîte 0.13×0.26×0.11, pieds à y=0.013
+- ✅ **Matériau EL_Crystal** shader Universal Render Pipeline/Lit, base EL_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau KN_Brass** shader Universal Render Pipeline/Lit, base KN_Brass_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Bronze** shader Universal Render Pipeline/Lit, base VR_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Metal** shader Universal Render Pipeline/Lit, base VR_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
 ## RustedShield.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/RustedShield/RustedShield.fbx
 - ✅ **Import sans erreur ni avertissement** 
@@ -110,6 +237,17 @@
 - ✅ **Matériau SK_Rust** shader Universal Render Pipeline/Lit, base SK_Rust_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau SK_Bronze** shader Universal Render Pipeline/Lit, base SK_Bronze_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau SK_Leather** shader Universal Render Pipeline/Lit, base SK_Leather_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## Sceptre.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/Sceptre/Sceptre.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 1584 triangles, 998 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/Sceptre.prefab
+- ✅ **Échelle (hauteur)** 0.994 m (attendu 0.9446325–1.044068), boîte 0.13×0.99×0.13, pieds à y=-0.259
+- ✅ **Matériau VR_Dark** shader Universal Render Pipeline/Lit, base VR_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau VR_Gold** shader Universal Render Pipeline/Lit, base VR_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau EL_Crystal** shader Universal Render Pipeline/Lit, base EL_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** box
 
 ## SoulStaff.fbx (prop, rig None)
@@ -2736,4 +2874,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_140 captures écrites dans ci-out/ (OpenGLCore) en 5.0 min._
+_152 captures écrites dans ci-out/ (OpenGLCore) en 2.8 min._
