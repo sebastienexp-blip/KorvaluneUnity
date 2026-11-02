@@ -164,7 +164,7 @@ namespace Korvalune.Game
             if (Time.unscaledTime >= nextCheck) { nextCheck = Time.unscaledTime + 0.5f; Choose(); }
             // fondu enchaîné (2 s)
             fade = Mathf.Min(1f, fade + Time.unscaledDeltaTime / 2f);
-            float mv = Sound.Music;
+            float mv = Sound.Music * (IntroPlayer.Playing ? 0f : 1f);          // silence pendant la cinématique
             var on = aActive ? a : b; var off = aActive ? b : a;
             on.volume = mv * fade; off.volume = mv * (1 - fade); if (off.volume <= 0.001f && off.isPlaying) off.Stop();
             amb.volume = Mathf.MoveTowards(amb.volume, string.IsNullOrEmpty(currentAmb) ? 0 : 0.55f * Settings.AmbienceVolume, Time.unscaledDeltaTime * 0.5f);
@@ -185,6 +185,11 @@ namespace Korvalune.Game
                 bool town = p && Vector3.Distance(new Vector3(p.transform.position.x, 0, p.transform.position.z), TownCenter) < 70f;
                 track = town ? "mus_ville" : "mus_vallee"; ambience = town ? "amb_ville" : "amb_vallee";
             }
+            else if (scene.Contains("Eclipse"))
+            {
+                bool town = p && GameBootstrap.InSafeZone(p.transform.position);
+                track = town ? "mus_ville" : "mus_vallee"; ambience = town ? "amb_ville" : "amb_vallee";
+            }
             else track = "mus_menu";
             if (fighting) track = boss ? "mus_boss" : "mus_combat";
             SetTrack(track); SetAmbience(ambience);
@@ -193,7 +198,10 @@ namespace Korvalune.Game
         public void SetTrack(string id)
         {
             if (id == current) return;
-            var clip = Sound.Clip(id); if (!clip) return;
+            var clip = Sound.Clip(id);
+            // pistes de repli : la ville et la création reprennent le thème principal, le boss la musique de combat
+            if (!clip) clip = Sound.Clip(id == "mus_boss" ? "mus_combat" : id == "mus_ville" ? "mus_menu" : id == "mus_eclipse" ? "mus_vallee" : "mus_menu");
+            if (!clip) return;
             current = id; aActive = !aActive; var on = aActive ? a : b;
             on.clip = clip; on.time = 0; on.volume = 0; on.Play(); fade = 0;
         }
