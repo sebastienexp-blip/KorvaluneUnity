@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-10-28 18:25 UTC
+# Rapport d'intégration Unity — 2026-11-02 16:40 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 264 modèle(s) ModelForge trouvé(s)
-- 15 modèle(s) intégré(s), 249 déjà à jour (inchangés)
+- 0 modèle(s) intégré(s), 264 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-10-28 18:26 UTC
+# Rapport d'intégration Unity — 2026-11-02 16:41 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 264 modèle(s) ModelForge trouvé(s)
@@ -2742,11 +2742,11 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_140 captures écrites dans ci-out/ (OpenGLCore) en 3.9 min._
+_140 captures écrites dans ci-out/ (OpenGLCore) en 5.0 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-10-28 18:31 UTC
+# Rapport d'intégration Unity — 2026-11-02 16:47 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 264 modèle(s) ModelForge trouvé(s)
@@ -2758,7 +2758,7 @@ _140 captures écrites dans ci-out/ (OpenGLCore) en 3.9 min._
 - ✅ **Château** 
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
-- ✅ **Ville : échoppes des marchands** Armurier, Mystique, Forgeron, Joaillier, Coffre, Marchand, Reliquaire Céleste, Marchande de curiosités, Alchimiste
+- ✅ **Ville : échoppes des marchands** Alchimiste, Marchand, Reliquaire Céleste, Joaillier, Armurier, Forgeron, Coffre, Marchande de curiosités, Mystique
 - ✅ **Ville : maisons** 65 maisons
 - ✅ **Ville : rue principale praticable jusqu'au château** dégagée
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
@@ -2778,7 +2778,7 @@ _140 captures écrites dans ci-out/ (OpenGLCore) en 3.9 min._
 - ✅ **Scène de sélection** Assets/Korvalune/Scenes/Korvalune_Selection.unity
 - ✅ **Classes proposées** 5 classes
 - ✅ **Ordre des scènes** Korvalune_Selection, Korvalune_Vallee, Showcase
-- ✅ **Écran de sélection (style Diablo 3)** ci-out/Selection_*.png, 3 héros d'essai, 5 emplacements
+- ✅ **Écran de sélection** ci-out/Selection_*.png, 3 héros d'essai, 5 emplacements
 
 ## Crypte de Korvalune (premier donjon)
 - ✅ **Scène de la crypte** Assets/Korvalune/Scenes/Korvalune_Crypte.unity
