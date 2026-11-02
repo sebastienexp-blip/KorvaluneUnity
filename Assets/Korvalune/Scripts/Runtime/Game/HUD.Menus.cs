@@ -395,8 +395,8 @@ namespace Korvalune.Game
         void ApplyUiScale()
         {
             var sc = Canvas ? Canvas.GetComponent<CanvasScaler>() : null; if (!sc) return;
-            int k = PlayerPrefs.GetInt("korvalune.ui", 1);
-            sc.referenceResolution = k == 0 ? new Vector2(2200, 1238) : k == 2 ? new Vector2(1680, 945) : new Vector2(1920, 1080);
+            int k = PlayerPrefs.GetInt("korvalune.ui", 2);          // par défaut « Grande » : lisible sur téléphone
+            sc.referenceResolution = k == 0 ? new Vector2(2100, 1181) : k == 1 ? new Vector2(1880, 1058) : k == 3 ? new Vector2(1480, 833) : new Vector2(1660, 934);
         }
 
         void ApplyCameraZoom()

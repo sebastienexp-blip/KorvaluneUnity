@@ -146,7 +146,7 @@ namespace Korvalune.Game
             Row(j, ref y, "Vibrations", new[] { "Activées", "Désactivées" }, () => Settings.Vibration, k => { Settings.Vibration = k; if (k == 0) Vibrate(); });
 
             y = 0; var u = (RectTransform)pages[3].page.transform;
-            Row(u, ref y, "Taille de l'interface", new[] { "Petite", "Normale", "Grande" }, () => PlayerPrefs.GetInt("korvalune.ui", 1), k => { PlayerPrefs.SetInt("korvalune.ui", k); Changed(); });
+            Row(u, ref y, "Taille de l'interface", new[] { "Petite", "Normale", "Grande", "Très grande" }, () => PlayerPrefs.GetInt("korvalune.ui", 2), k => { PlayerPrefs.SetInt("korvalune.ui", k); Changed(); });
             Row(u, ref y, "Noms des monstres", new[] { "Tous", "Cible seule", "Masqués" }, () => Settings.EnemyNames, k => Settings.EnemyNames = k);
             Row(u, ref y, "Taille des noms", new[] { "Petite", "Normale", "Grande" }, () => Settings.NameSize, k => Settings.NameSize = k);
             Row(u, ref y, "Chiffres de dégâts", new[] { "Affichés", "Masqués" }, () => PlayerPrefs.GetInt("korvalune.degats", 0), k => { PlayerPrefs.SetInt("korvalune.degats", k); HUD.ShowDamageNumbers = k == 0; Changed(); });

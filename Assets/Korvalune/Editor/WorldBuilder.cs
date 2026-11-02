@@ -214,12 +214,12 @@ namespace Korvalune.EditorTools
             game.camps.Add(new GameBootstrap.Camp { enemyId = "chevalier", center = Ground(new Vector2(150, 10)), count = 2, radius = 5 });
             game.camps.Add(new GameBootstrap.Camp { enemyId = "demon", center = Ground(new Vector2(-30, -240)), count = 1, radius = 2 });
             // entrée de la crypte (escalier qui descend, portail) au bord du cimetière
-            var stairs = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Resources/Prefabs/World/Crypte/D_Escalier.prefab");
-            GameObject st = null;
-            if (stairs) { st = (GameObject)PrefabUtility.InstantiatePrefab(stairs); st.name = "Entrée de la crypte"; st.transform.position = CryptEntrance + Vector3.down * 2.9f; st.transform.rotation = Quaternion.Euler(0, 180, 0); }
+            // mausolée de pierre posé sur le sol (plus d'escalier enfoui qui traversait le relief) : porte sombre et lueur violette
+            var st = DungeonGate("Entrée de la crypte", CryptEntrance, 180f, new Color(0.7f, 0.45f, 1f));
             var door = new GameObject("Descendre dans la crypte").AddComponent<Portal>();
-            door.displayName = "Crypte de Korvalune"; if (st) door.highlightRoot = st.transform;
-            door.transform.position = CryptEntrance; door.targetScene = "Korvalune_Crypte"; door.label = "Descendre";
+            door.displayName = "Crypte de Korvalune"; door.highlightRoot = st.transform; door.glowColor = new Color(0.7f, 0.45f, 1f);
+            door.transform.position = st.transform.TransformPoint(new Vector3(0, 0.1f, -2.9f));
+            door.targetScene = "Korvalune_Crypte"; door.label = "Descendre";
             door.arrival = new Vector3(-4f + 3 * 4f, 0.05f, (5 - 9) * 4f);     // pied de l'escalier de la crypte (case E, un pas à côté)
             cam.transform.position = game.playerSpawn + new Vector3(0, 8, -9); cam.transform.LookAt(game.playerSpawn);
 
@@ -519,6 +519,45 @@ namespace Korvalune.EditorTools
                 rail.GetComponent<Renderer>().sharedMaterial = StoneMaterial();
             }
             foreach (var t in b.GetComponentsInChildren<Transform>()) t.gameObject.isStatic = true;
+        }
+
+        /// <summary>Entrée de donjon : petit mausolée (socle, murs, fronton, toit à deux pans), porte sombre et voûtée, deux
+        /// braseros ; tout est posé au sol (pas de trou dans le relief). La façade regarde vers « yaw ».</summary>
+        public static GameObject DungeonGate(string name, Vector3 at, float yaw, Color glow)
+        {
+            var root = new GameObject(name); root.transform.position = at; root.transform.rotation = Quaternion.Euler(0, yaw, 0);
+            var stone = StoneMaterial();
+            var dark = new Material(Shader.Find("Universal Render Pipeline/Unlit")); dark.SetColor("_BaseColor", new Color(0.015f, 0.01f, 0.02f));
+            var dp = Root + "/Rendering/Porte_Sombre.mat"; if (!AssetDatabase.LoadAssetAtPath<Material>(dp)) AssetDatabase.CreateAsset(dark, dp); dark = AssetDatabase.LoadAssetAtPath<Material>(dp);
+            GameObject B(string n, Vector3 p, Vector3 sc, Vector3 rot, Material m, bool col = true)
+            {
+                var g = GameObject.CreatePrimitive(PrimitiveType.Cube); g.name = n; g.transform.SetParent(root.transform, false);
+                g.transform.localPosition = p; g.transform.localScale = sc; g.transform.localRotation = Quaternion.Euler(rot); g.GetComponent<Renderer>().sharedMaterial = m; g.isStatic = true;
+                if (!col) Object.DestroyImmediate(g.GetComponent<Collider>()); return g;
+            }
+            B("Socle", new Vector3(0, -0.4f, 0.6f), new Vector3(7.2f, 1.2f, 6.6f), Vector3.zero, stone);
+            B("Marche", new Vector3(0, -0.15f, -3.1f), new Vector3(3.6f, 0.5f, 1.2f), Vector3.zero, stone);
+            B("Mur arrière", new Vector3(0, 2.1f, 3.4f), new Vector3(6.4f, 4.2f, 0.7f), Vector3.zero, stone);
+            B("Mur gauche", new Vector3(-3.0f, 2.1f, 0.6f), new Vector3(0.7f, 4.2f, 6.2f), Vector3.zero, stone);
+            B("Mur droit", new Vector3(3.0f, 2.1f, 0.6f), new Vector3(0.7f, 4.2f, 6.2f), Vector3.zero, stone);
+            B("Façade gauche", new Vector3(-2.05f, 2.1f, -2.2f), new Vector3(2.0f, 4.2f, 0.8f), Vector3.zero, stone);
+            B("Façade droite", new Vector3(2.05f, 2.1f, -2.2f), new Vector3(2.0f, 4.2f, 0.8f), Vector3.zero, stone);
+            B("Linteau", new Vector3(0, 3.7f, -2.2f), new Vector3(2.4f, 1.0f, 0.8f), Vector3.zero, stone);
+            B("Fronton", new Vector3(0, 4.55f, -2.25f), new Vector3(4.6f, 0.7f, 0.9f), Vector3.zero, stone);
+            B("Toit gauche", new Vector3(-1.75f, 5.0f, 0.6f), new Vector3(4.2f, 0.5f, 6.8f), new Vector3(0, 0, 28), stone);
+            B("Toit droit", new Vector3(1.75f, 5.0f, 0.6f), new Vector3(4.2f, 0.5f, 6.8f), new Vector3(0, 0, -28), stone);
+            B("Porte", new Vector3(0, 1.6f, -2.0f), new Vector3(2.1f, 3.2f, 0.1f), Vector3.zero, dark, false);
+            B("Seuil sombre", new Vector3(0, 0.22f, 0.4f), new Vector3(5.2f, 0.02f, 4.6f), Vector3.zero, dark, false);
+            foreach (var x in new[] { -2.9f, 2.9f })
+            {
+                B("Brasero", new Vector3(x, 0.7f, -3.4f), new Vector3(0.5f, 1.4f, 0.5f), Vector3.zero, stone);
+                var l = new GameObject("Flamme").AddComponent<Light>(); l.transform.SetParent(root.transform, false); l.transform.localPosition = new Vector3(x, 1.8f, -3.4f);
+                l.type = LightType.Point; l.color = new Color(1f, 0.6f, 0.25f); l.intensity = 2.2f; l.range = 7f; l.shadows = LightShadows.None; l.gameObject.AddComponent<Flicker>();
+            }
+            var g2 = new GameObject("Lueur de la porte").AddComponent<Light>(); g2.transform.SetParent(root.transform, false); g2.transform.localPosition = new Vector3(0, 1.4f, -1.4f);
+            g2.type = LightType.Point; g2.color = glow; g2.intensity = 2.5f; g2.range = 5f; g2.shadows = LightShadows.None;
+            root.transform.position = Ground(at) + Vector3.up * 0.15f;
+            return root;
         }
 
         // ------------------------------------------------------------------------------------------ configuration de jeu

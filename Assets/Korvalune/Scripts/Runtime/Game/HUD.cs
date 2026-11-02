@@ -64,8 +64,8 @@ namespace Korvalune.Game
             arrow = Img(mm, "Joueur", UIStyle.Icon("leap", Color.white), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34)).rectTransform;
             arrow.GetComponent<Image>().sprite = Arrow();
             zoneText = Label(root, "Zone", zoneName, 24, TextAnchor.UpperCenter, new Vector2(1, 1), new Vector2(-40, -352), new Vector2(300, 32)); zoneText.verticalOverflow = VerticalWrapMode.Overflow;
-            var qp = Panel(root, "Quête", new Vector2(1, 1), new Vector2(-30, -400), new Vector2(380, 150)); questPanel = qp.gameObject;
-            fpsText = Label(root, "Images", "", 20, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(40, -250), new Vector2(200, 30)); fpsText.color = new Color(0.8f, 0.9f, 0.7f);
+            var qp = Panel(root, "Quête", new Vector2(0, 1), new Vector2(30, -250), new Vector2(420, 150)); questPanel = qp.gameObject;   // à gauche, sous le portrait : plus de chevauchement avec les compétences
+            fpsText = Label(root, "Images", "", 20, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(230, -205), new Vector2(200, 30)); fpsText.color = new Color(0.8f, 0.9f, 0.7f);
             Label(qp, "Titre", "Quête actuelle :", 24, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -16), new Vector2(340, 30)).color = UIStyle.Gold;
             questText = Label(qp, "Texte", "", 22, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -48), new Vector2(340, 90));
 

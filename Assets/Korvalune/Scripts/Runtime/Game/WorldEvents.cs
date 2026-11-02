@@ -173,8 +173,8 @@ namespace Korvalune.Game
         {
             var canvas = game.Hud.Canvas; if (!canvas) return;
             var box = new GameObject("Événement", typeof(RectTransform), typeof(Image)).GetComponent<Image>(); box.rectTransform.SetParent(canvas.transform, false);
-            box.rectTransform.anchorMin = box.rectTransform.anchorMax = new Vector2(1, 1); box.rectTransform.pivot = new Vector2(1, 1);
-            box.rectTransform.anchoredPosition = new Vector2(-30, -570); box.rectTransform.sizeDelta = new Vector2(380, 92);
+            box.rectTransform.anchorMin = box.rectTransform.anchorMax = new Vector2(0, 1); box.rectTransform.pivot = new Vector2(0, 1);
+            box.rectTransform.anchoredPosition = new Vector2(30, -410); box.rectTransform.sizeDelta = new Vector2(380, 92);
             box.sprite = UIStyle.Panel(); box.type = Image.Type.Sliced; box.color = new Color(1f, 0.85f, 0.55f, 0.95f); box.raycastTarget = false;
             banner = new GameObject("T", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); banner.rectTransform.SetParent(box.rectTransform, false);
             banner.rectTransform.anchorMin = Vector2.zero; banner.rectTransform.anchorMax = Vector2.one; banner.rectTransform.offsetMin = new Vector2(18, 8); banner.rectTransform.offsetMax = new Vector2(-18, -8);
