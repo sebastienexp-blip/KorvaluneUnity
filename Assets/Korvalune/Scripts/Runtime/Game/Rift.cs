@@ -15,8 +15,9 @@ namespace Korvalune.Game
         public static bool Active;
         public static int Tier;                          // 0 = brèche astrale ; ≥ 1 = Grande Brèche de ce niveau
         public const float TimeLimit = 15 * 60f;
-        static readonly string[] Scenes = { "Korvalune_Crypte", "Korvalune_Terriers" };
-        public static bool IsRiftScene(string s) => System.Array.IndexOf(Scenes, s) >= 0;
+        static readonly string[] Scenes = { "Korvalune_Breche" };                               // niveau généré à chaque entrée (RiftLevel)
+        static readonly string[] Legacy = { "Korvalune_Crypte", "Korvalune_Terriers" };
+        public static bool IsRiftScene(string s) => System.Array.IndexOf(Scenes, s) >= 0 || System.Array.IndexOf(Legacy, s) >= 0;
         public static float HpMult => Tier <= 0 ? 1.4f : 1.4f * Mathf.Pow(1.17f, Tier);
         public static float DmgMult => Tier <= 0 ? 1.15f : 1.15f * Mathf.Pow(1.08f, Tier);
         public static float XpMult => 1.5f + 0.15f * Tier;
@@ -29,7 +30,7 @@ namespace Korvalune.Game
             Active = true; Tier = Mathf.Max(0, tier);
             GameBootstrap.nextSpawn = null;
             var scene = Scenes[Random.Range(0, Scenes.Length)];
-            if (!Application.CanStreamedLevelBeLoaded(scene)) scene = Scenes[0];
+            if (!Application.CanStreamedLevelBeLoaded(scene)) scene = Legacy[Random.Range(0, Legacy.Length)];
             SceneManager.LoadScene(scene);
         }
 
@@ -39,7 +40,9 @@ namespace Korvalune.Game
             if (Active && !IsRiftScene(SceneManager.GetActiveScene().name)) Active = false;     // retour en ville : brèche refermée
             if (!Active || !game.config) return;
             var pool = new List<string>();
-            foreach (var e in game.config.enemies) if (e.prefab) pool.Add(e.id);
+            bool themed = game.GetComponent<RiftLevel>() && RiftLevel.ThemeEnemies.Count > 0;            // niveau généré : ennemis du décor
+            foreach (var e in game.config.enemies) if (e.prefab && (!themed || RiftLevel.ThemeEnemies.Contains(e.id))) pool.Add(e.id);
+            if (pool.Count == 0) foreach (var e in game.config.enemies) if (e.prefab) pool.Add(e.id);
             var rng = new System.Random();
             var list = new List<GameBootstrap.Camp>();
             foreach (var c in game.camps)
@@ -52,7 +55,7 @@ namespace Korvalune.Game
             game.camps.Clear(); game.camps.AddRange(list);
             game.questSteps.Clear();
             game.questSteps.Add(new Quest.Objective { text = "Remplir la jauge de la brèche", enemyId = "__breche__", count = 1 });
-            game.questTitle = Title; game.zoneName = Title;
+            game.questTitle = Title; game.zoneName = themed ? RiftLevel.ThemeName : Title;
         }
     }
 
@@ -69,8 +72,12 @@ namespace Korvalune.Game
             int total = 0; foreach (var c in g.camps) total += c.count;
             d.required = Mathf.Max(20, total * 0.6f);
             // ambiance de brèche : lumière violacée, brume
-            RenderSettings.ambientSkyColor *= new Color(0.85f, 0.7f, 1.1f); RenderSettings.ambientEquatorColor *= new Color(0.85f, 0.7f, 1.1f);
-            RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Exponential; RenderSettings.fogDensity = 0.018f; RenderSettings.fogColor = new Color(0.16f, 0.1f, 0.22f);
+            if (!g.GetComponent<RiftLevel>())
+            {   // anciennes scènes : teinte violacée et brume légère (linéaire : seul le lointain s'estompe)
+                RenderSettings.ambientSkyColor *= new Color(0.95f, 0.85f, 1.1f); RenderSettings.ambientEquatorColor *= new Color(0.95f, 0.85f, 1.1f);
+                RenderSettings.fog = true; RenderSettings.fogMode = FogMode.Linear; RenderSettings.fogStartDistance = 28f; RenderSettings.fogEndDistance = 80f; RenderSettings.fogColor = new Color(0.16f, 0.1f, 0.22f);
+            }
+            Settings.Rebase(); Settings.Apply();
             Health.AnyDied += d.OnDied;
             var pop = g.GetComponent<WorldPopulation>(); if (pop) pop.noRespawn = true;
             d.BuildUi();
@@ -190,11 +197,18 @@ namespace Korvalune.Game
             var root = new GameObject("Oracle des Brèches"); root.transform.position = pos; root.transform.rotation = Quaternion.Euler(0, yaw, 0);
             var pf = Resources.Load<GameObject>("Prefabs/Characters/PNJ_Mystique");
             if (pf) { var npc = Object.Instantiate(pf, root.transform); npc.transform.localPosition = Vector3.zero; npc.transform.localRotation = Quaternion.identity; foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) Object.Destroy(c); }
-            // pierre de brèche : obélisque fendu d'où sort une lueur violette
-            var stone = GameObject.CreatePrimitive(PrimitiveType.Cube); stone.name = "Pierre de brèche"; stone.transform.SetParent(root.transform, false);
-            stone.transform.localPosition = new Vector3(1.6f, 1.4f, 0.4f); stone.transform.localScale = new Vector3(0.7f, 2.8f, 0.7f); stone.transform.localRotation = Quaternion.Euler(0, 20, 4);
-            if (LootDrop.litBase) { var m = new Material(LootDrop.litBase); m.SetColor("_BaseColor", new Color(0.22f, 0.2f, 0.26f)); m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", new Color(0.5f, 0.2f, 0.9f) * 0.8f); stone.GetComponent<Renderer>().sharedMaterial = m; }
-            var l = new GameObject("Lueur").AddComponent<Light>(); l.transform.SetParent(stone.transform, false); l.type = LightType.Point; l.color = new Color(0.7f, 0.4f, 1f); l.intensity = 2.5f; l.range = 6f; l.shadows = LightShadows.None;
+            // pierre de brèche : socle de roche sombre, amas de cristaux violets qui flotte et tourne au-dessus
+            var lit = game && game.config && game.config.litMat ? game.config.litMat : LootDrop.litBase;
+            var stand = new GameObject("Pierre de brèche").transform; stand.SetParent(root.transform, false); stand.localPosition = new Vector3(1.8f, 0, 0.4f);
+            var rock = Resources.Load<GameObject>("Prefabs/World/Rocher1");
+            if (rock)
+            {
+                var rk = Object.Instantiate(rock, stand); rk.transform.localPosition = Vector3.down * 0.15f; rk.transform.localScale = Vector3.one * 0.45f;
+                foreach (var r in rk.GetComponentsInChildren<Renderer>()) { var ms = r.sharedMaterials; for (int i = 0; i < ms.Length; i++) if (ms[i]) { ms[i] = new Material(ms[i]); ms[i].SetColor("_BaseColor", ms[i].GetColor("_BaseColor") * new Color(0.55f, 0.5f, 0.65f)); } r.sharedMaterials = ms; }
+            }
+            var crys = RiftLevel.CrystalCluster(stand, new Vector3(0, 1.1f, 0), 1.5f, new Color(0.72f, 0.40f, 1f), lit, 7);
+            var fl = crys.gameObject.AddComponent<Floater>(); fl.bob = 0.25f; fl.period = 4f; fl.spin = 18f;
+            var l = new GameObject("Lueur").AddComponent<Light>(); l.transform.SetParent(stand, false); l.transform.localPosition = Vector3.up * 1.8f; l.type = LightType.Point; l.color = new Color(0.7f, 0.4f, 1f); l.intensity = 2.5f; l.range = 7f; l.shadows = LightShadows.None;
             var tag = new GameObject("Nom").AddComponent<TextMesh>(); tag.transform.SetParent(root.transform, false); tag.transform.localPosition = Vector3.up * 2.5f;
             tag.text = "Oracle des Brèches"; tag.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); tag.GetComponent<MeshRenderer>().sharedMaterial = tag.font.material;
             tag.fontSize = 56; tag.characterSize = 0.045f; tag.anchor = TextAnchor.LowerCenter; tag.color = new Color(0.8f, 0.6f, 1f); tag.fontStyle = FontStyle.Bold;

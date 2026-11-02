@@ -90,6 +90,7 @@ namespace Korvalune.EditorTools
                 Progress("DungeonCheck"); DungeonCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("CaveCheck"); CaveCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("EclipseCheck"); EclipseCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress("BrecheCheck"); BrecheCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("Lanceur"); LauncherBuilder.Build(); Check("Écran de lancement", File.Exists(LauncherBuilder.ScenePath), LauncherBuilder.ScenePath);
                 File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
                 Progress("CharacterCreatorCheck"); CharacterCreatorCheck();
@@ -334,6 +335,18 @@ namespace Korvalune.EditorTools
             int chests = UnityEngine.Object.FindObjectsByType<Korvalune.Game.TreasureChest>(FindObjectsSortMode.None).Length;
             Check("Parcours construit", UnityEngine.Object.FindObjectsByType<MeshCollider>(FindObjectsSortMode.None).Length >= 5, $"{lights} lumières, {chests} coffres, {game.camps.Count} groupes d'ennemis");
             CaveBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
+        }
+
+        static void BrecheCheck()
+        {
+            Line("\n## Brèches (niveaux générés)");
+            try
+            {
+                var game = BrecheBuilder.Build();
+                Check("Scène des brèches", File.Exists(BrecheBuilder.ScenePath), BrecheBuilder.ScenePath);
+                BrecheBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
+            }
+            catch (Exception ex) { Check("Brèches", false, ex.Message); }
         }
 
         static void EclipseCheck()

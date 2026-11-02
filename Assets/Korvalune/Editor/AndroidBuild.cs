@@ -29,7 +29,8 @@ namespace Korvalune.EditorTools
                 if (!File.Exists(SelectionBuilder.ScenePath)) SelectionBuilder.Build();
                 if (!File.Exists(DungeonBuilder.ScenePath)) DungeonBuilder.Build();
                 if (!File.Exists(EclipseBuilder.ScenePath)) EclipseBuilder.Build();
-                var scenes = new[] { LauncherBuilder.ScenePath, SelectionBuilder.ScenePath, CatalogBuilder.ScenePath, WorldBuilder.ScenePath, DungeonBuilder.ScenePath, CaveBuilder.ScenePath, EclipseBuilder.ScenePath }.Where(File.Exists).ToArray();
+                if (!File.Exists(BrecheBuilder.ScenePath)) BrecheBuilder.Build();
+                var scenes = new[] { LauncherBuilder.ScenePath, SelectionBuilder.ScenePath, CatalogBuilder.ScenePath, WorldBuilder.ScenePath, DungeonBuilder.ScenePath, CaveBuilder.ScenePath, EclipseBuilder.ScenePath, BrecheBuilder.ScenePath }.Where(File.Exists).ToArray();
                 rep.AppendLine("- Scènes : " + string.Join(", ", scenes.Select(Path.GetFileNameWithoutExtension)));
                 if (scenes.Length < 3) throw new Exception("scène manquante");
                 EditorBuildSettings.scenes = scenes.Select(s => new EditorBuildSettingsScene(s, true)).ToArray();

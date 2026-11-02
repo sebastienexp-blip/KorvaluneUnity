@@ -63,7 +63,8 @@ namespace Korvalune.EditorTools
             pipe.shadowDistance = 35f; pipe.shadowCascadeCount = 1;
             SetPrivate(pipe, "m_SoftShadowsSupported", false);
             SetPrivate(pipe, "m_MainLightShadowmapResolution", 1024);
-            SetPrivate(pipe, "m_AdditionalLightsRenderingMode", 0);
+            SetPrivate(pipe, "m_AdditionalLightsRenderingMode", 1);          // lumières secondaires par pixel : torches, halo du héros, cristaux (sinon les grottes sont noires sur téléphone)
+            SetPrivate(pipe, "m_AdditionalLightsPerObjectLimit", 4);
             EditorUtility.SetDirty(pipe);
             return pipe;
         }
@@ -90,7 +91,7 @@ namespace Korvalune.EditorTools
         static void SetPrivate(object o, string field, object value)
         {
             var f = o.GetType().GetField(field, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (f != null) f.SetValue(o, value); else Debug.LogWarning("[Korvalune] Champ URP absent : " + field);
+            if (f != null) f.SetValue(o, f.FieldType.IsEnum ? System.Enum.ToObject(f.FieldType, value) : value); else Debug.LogWarning("[Korvalune] Champ URP absent : " + field);
         }
     }
 }

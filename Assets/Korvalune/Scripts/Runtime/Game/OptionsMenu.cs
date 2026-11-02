@@ -65,13 +65,29 @@ namespace Korvalune.Game
             if (ambScene != scene) { ambScene = scene; ambSky = RenderSettings.ambientSkyColor; ambEq = RenderSettings.ambientEquatorColor; ambGround = RenderSettings.ambientGroundColor; ambInt = RenderSettings.ambientIntensity; sunBase.Clear(); }
             float k = Brightness == 0 ? 0.8f : Brightness == 2 ? 1.25f : Brightness == 3 ? 1.5f : 1f;
             RenderSettings.ambientSkyColor = ambSky * k; RenderSettings.ambientEquatorColor = ambEq * k; RenderSettings.ambientGroundColor = ambGround * k; RenderSettings.ambientIntensity = ambInt * k;
+            AmbientProbe();
+            bool underground = !Terrain.activeTerrain;
             foreach (var l in Object.FindObjectsByType<Light>(FindObjectsSortMode.None))
             {
-                if (l.type != LightType.Directional) continue;
+                if (l.type != LightType.Directional) { l.shadows = LightShadows.None; continue; }   // seules les lumières du ciel projettent des ombres
                 if (!sunBase.ContainsKey(l)) sunBase[l] = l.intensity;
                 l.intensity = sunBase[l] * Mathf.Lerp(1f, k, 0.6f);
-                l.shadows = Shadows == 0 ? LightShadows.Soft : LightShadows.None;
+                l.shadows = Shadows == 0 && !underground ? LightShadows.Soft : LightShadows.None;   // sous terre, la voûte plongerait tout le sol dans l'ombre
             }
+        }
+
+        /// <summary>Lumière d'ambiance recalculée à l'exécution. Les scènes sont générées sans éclairage précalculé : sur
+        /// téléphone, la sonde d'ambiance resterait noire (zones d'ombre et grottes totalement noires). On la reconstruit à
+        /// partir des trois couleurs ciel / horizon / sol.</summary>
+        static void AmbientProbe()
+        {
+            Color sky = RenderSettings.ambientSkyColor, eq = RenderSettings.ambientEquatorColor, gr = RenderSettings.ambientGroundColor;
+            if (RenderSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Flat) sky = eq = gr = RenderSettings.ambientLight;
+            var sh = new UnityEngine.Rendering.SphericalHarmonicsL2();
+            sh.AddAmbientLight(eq * 0.9f);
+            sh.AddDirectionalLight(Vector3.up, (sky - eq) * 0.9f + eq * 0.05f, 1f);
+            sh.AddDirectionalLight(Vector3.down, (gr - eq) * 0.5f + gr * 0.4f, 1f);
+            RenderSettings.ambientProbe = sh;
         }
     }
 
