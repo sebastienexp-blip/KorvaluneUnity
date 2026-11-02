@@ -47,9 +47,22 @@ namespace Korvalune.EditorTools
                 PlayerSettings.allowedAutorotateToLandscapeLeft = true; PlayerSettings.allowedAutorotateToLandscapeRight = true;
                 PlayerSettings.Android.forceInternetPermission = false;
                 var run = Environment.GetEnvironmentVariable("GITHUB_RUN_NUMBER");
+                if (string.IsNullOrEmpty(run) && File.Exists("ci-build-number.txt")) run = File.ReadAllText("ci-build-number.txt").Trim();   // le conteneur Unity ne reçoit pas les variables GitHub
                 int build = int.TryParse(run, out var n) ? n : 1;
                 PlayerSettings.bundleVersion = "0.1." + build; PlayerSettings.Android.bundleVersionCode = build;
                 EditorUserBuildSettings.buildAppBundle = false;
+                // signature fixe (même clé à chaque version) : Android accepte la mise à jour par-dessus l'ancienne version,
+                // sans désinstaller — les personnages et réglages sont conservés
+                var ks = Path.GetFullPath(".github/keystore/korvalune.keystore"); var ksPass = ".github/keystore/pass.txt";
+                if (File.Exists(ks) && File.Exists(ksPass))
+                {
+                    var pw = File.ReadAllText(ksPass).Trim();
+                    PlayerSettings.Android.useCustomKeystore = true; PlayerSettings.Android.keystoreName = ks; PlayerSettings.Android.keystorePass = pw;
+                    PlayerSettings.Android.keyaliasName = "korvalune"; PlayerSettings.Android.keyaliasPass = pw;
+                    rep.AppendLine("- Signature : clé Korvalune (mises à jour sans désinstaller)");
+                }
+                else rep.AppendLine("- Signature : clé de débogage (⚠ chaque version demande de désinstaller)");
+                PlayerSettings.Android.forceInternetPermission = true;          // vérification et téléchargement des mises à jour
                 // icône de l'application (rendue depuis le jeu) et nom affiché
                 PlayerSettings.productName = "Korvalune";
                 var icon = AssetDatabase.LoadAssetAtPath<Texture2D>(LauncherBuilder.ArtDir + "/Icone.png");

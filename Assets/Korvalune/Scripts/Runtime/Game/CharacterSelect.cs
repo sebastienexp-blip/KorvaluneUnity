@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Korvalune.Game
 {
-    /// <summary>Écran de sélection des personnages, à la manière de Diablo 3 : le héros choisi se tient au centre d'une
+    /// <summary>Écran de sélection des personnages : le héros choisi se tient au centre d'une
     /// crypte éclairée de braseros ; à gauche les 5 emplacements du compte (nom, niveau, classe) ; « Jouer » et
     /// « Supprimer » en bas. Création : bandeau des 5 classes, homme / femme, apparence détaillée (créateur), nom.</summary>
     public class CharacterSelect : MonoBehaviour

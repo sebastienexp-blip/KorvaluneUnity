@@ -681,7 +681,7 @@ namespace Korvalune.EditorTools
                 // 5. galerie des ennemis vus en jeu
                 hud.enabled = false;
                 cam.transform.position = Ground(new Vector2(45, 104)) + new Vector3(0, 5, 0); cam.transform.LookAt(Ground(new Vector2(45, 120)) + Vector3.up); Shot("5_loups_lisiere");
-                // 6. butin : un objet de chaque rareté au sol (faisceaux et auras comme dans Diablo 4)
+                // 6. butin : un objet de chaque rareté au sol (faisceaux et auras)
                 var rng = new System.Random(7); var p0 = game.Player.transform.position;
                 for (int k = 0; k < 7; k++)
                 {

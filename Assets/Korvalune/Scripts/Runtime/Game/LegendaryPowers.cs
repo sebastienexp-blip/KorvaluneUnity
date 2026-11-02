@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Korvalune.Game
 {
-    /// <summary>Pouvoir légendaire (comme dans Diablo 3/4) : il transforme une compétence précise, un élément ou un type de
+    /// <summary>Pouvoir légendaire : il transforme une compétence précise, un élément ou un type de
     /// compétence — dégâts, rayon (donc la taille des effets), nombre de projectiles, durée, recharge, changement d'élément
     /// (couleur et effets de l'élément), perforation, étourdissement et « écho » (la compétence se déclenche une seconde fois).
     /// Les pouvoirs portés se CUMULENT (multiplicativement) : c'est ce qui permet les builds spectaculaires.</summary>

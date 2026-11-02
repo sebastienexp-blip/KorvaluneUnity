@@ -323,6 +323,7 @@ namespace Korvalune.Game
         {
             // bouton « retour » d'Android / Échap : ferme le panneau ouvert, sinon ouvre ou ferme la pause
             if (!Input.GetKeyDown(KeyCode.Escape)) return;
+            if (OptionsMenu.Current) return;                       // la fenêtre d'options gère elle-même le retour
             if (optionsPanel && optionsPanel.activeSelf) ShowOptions(false);
             else if (Paused) SetPause(false);
             else if ((treePanel && treePanel.activeSelf) || (bagPanel && bagPanel.activeSelf) || (shopPanel && shopPanel.activeSelf)) { CloseAllPanels(); FindFirstObjectByType<GameBootstrap>()?.Persist(); }
@@ -370,9 +371,11 @@ namespace Korvalune.Game
         {
             // fenêtre d'options complète (onglets Graphismes, Son, Jeu, Interface) ; la pause réapparaît à la fermeture
             optionsPanel.SetActive(false);
-            if (!on) { pausePanel.SetActive(Paused); return; }
+            // la pause reste active (jeu figé) pendant les options ; on y revient à la fermeture — avant, « Paused » se lisait sur le
+            // panneau masqué : le jeu restait figé sans menu, comme planté
+            if (!on) { pausePanel.SetActive(true); return; }
             pausePanel.SetActive(false);
-            OptionsMenu.Open(font, () => { if (pausePanel) pausePanel.SetActive(Paused); ApplySettings(); });
+            OptionsMenu.Open(font, () => { if (pausePanel) { pausePanel.SetActive(true); pauseShade.SetActive(true); } Time.timeScale = 0f; ApplySettings(); });
         }
 
         void BackToSelection()

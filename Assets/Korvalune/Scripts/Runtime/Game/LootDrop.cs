@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace Korvalune.Game
 {
-    /// <summary>Objet au sol, mis en valeur comme dans Diablo 4 : faisceau de lumière vertical à la couleur de la rareté
-    /// (de plus en plus haut et intense : magique → ancestral), halo au sol, lumière ponctuelle, étincelles qui montent
-    /// (légendaire et au-delà), tourbillon (mythique, ancestral), nom affiché. Ramassé automatiquement au contact.</summary>
+    /// <summary>Objet au sol, mis en valeur : faisceau de lumière vertical à la couleur de la rareté
+    /// (de plus en plus haut et intense : magique → astral), halo au sol, lumière ponctuelle, étincelles qui montent
+    /// (légendaire et au-delà), tourbillon (mythique, astral), nom affiché. Ramassé automatiquement au contact.</summary>
     public class LootDrop : MonoBehaviour
     {
         public ItemSave item;
-        public long gold;                 // tas d'or : ramassé en marchant dessus (comme dans Diablo)
+        public long gold;                 // tas d'or : ramassé en marchant dessus
         public float pickupRadius = 1.6f;
         Light glow; Transform beam; float born;
         public static System.Action<ItemSave> Picked;

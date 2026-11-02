@@ -9,7 +9,7 @@ using UnityEngine.Rendering.Universal;
 
 namespace Korvalune.EditorTools
 {
-    /// <summary>Scène de sélection des personnages (style Diablo 3) : crypte gothique — dallage, piliers, arches, autel
+    /// <summary>Scène de sélection des personnages : crypte gothique — dallage, piliers, arches, autel
     /// circulaire où se tient le héros, braseros à flammes et lumières vacillantes, brume rasante et braises.</summary>
     public static class SelectionBuilder
     {
@@ -139,9 +139,9 @@ namespace Korvalune.EditorTools
                 void Idle() { foreach (var a in Object.FindObjectsByType<Animator>(FindObjectsSortMode.None)) { var c = a.runtimeAnimatorController ? a.runtimeAnimatorController.animationClips.FirstOrDefault(x => x.name == "Idle") : null; if (c) c.SampleAnimation(a.gameObject, 0.4f); } }
                 sel.Init(); sel.Select(1); Idle(); Shot("1_liste");
                 sel.StartCreate(true); sel.PickClass(3); Idle(); Shot("2_creation");
-                check("Écran de sélection (style Diablo 3)", true, "ci-out/Selection_*.png, 3 héros d'essai, 5 emplacements");
+                check("Écran de sélection", true, "ci-out/Selection_*.png, 3 héros d'essai, 5 emplacements");
             }
-            catch (System.Exception ex) { check("Écran de sélection (style Diablo 3)", false, ex.Message); }
+            catch (System.Exception ex) { check("Écran de sélection", false, ex.Message); }
             SaveSystem.AccountId = "local";
         }
     }

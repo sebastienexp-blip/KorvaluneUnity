@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Korvalune.Game
 {
-    /// <summary>Raretés (comme dans Diablo 4) : chacune a sa couleur, son aura au sol et son faisceau.</summary>
+    /// <summary>Raretés : chacune a sa couleur, son aura au sol et son faisceau.</summary>
     public enum Rarity { Commun, Magique, Rare, Legendaire, Unique, Mythique, Ancestral }
     public enum Slot { Arme, MainGauche, Casque, Torse, Gants, Jambes, Bottes, Amulette, Anneau }
 
@@ -31,9 +31,9 @@ namespace Korvalune.Game
             new Color(0.85f, 0.85f, 0.85f), new Color(0.35f, 0.55f, 1.0f), new Color(1.0f, 0.90f, 0.25f), new Color(1.0f, 0.50f, 0.08f),
             new Color(0.88f, 0.72f, 0.40f), new Color(0.78f, 0.35f, 1.0f), new Color(1.0f, 0.12f, 0.10f)
         };
-        public static readonly string[] Labels = { "Commun", "Magique", "Rare", "Légendaire", "Unique", "Mythique", "Ancestral" };
+        public static readonly string[] Labels = { "Commun", "Magique", "Rare", "Légendaire", "Unique", "Mythique", "Astral" };
         public static Color ColorOf(Rarity r) => Colors[(int)r];
-        /// <summary>Couleur d'affichage : vert pour les pièces d'ensemble (comme dans Diablo 3), sinon celle de la rareté.</summary>
+        /// <summary>Couleur d'affichage : vert pour les pièces d'ensemble, sinon celle de la rareté.</summary>
         public static Color DisplayColor(ItemSave it) => !string.IsNullOrEmpty(it.set) ? Powers.SetColor : ColorOf(it.rarity);
 
         // ------------------------------------------------------------------ classes
@@ -48,7 +48,7 @@ namespace Korvalune.Game
             Powers.K => "Chevalier déchu", Powers.E => "Archimage du Néant", Powers.V => "Chasseur des cendres",
             Powers.M => "Nécromancienne", Powers.T => "Gardien solaire", _ => "toutes les classes"
         };
-        /// <summary>Caractéristique principale de la classe (comme dans Diablo 3) : elle augmente fortement les dégâts.</summary>
+        /// <summary>Caractéristique principale de la classe : elle augmente fortement les dégâts.</summary>
         public static string MainStat(string c) => c switch { Powers.V => "Dextérité", Powers.E => "Intelligence", Powers.M => "Intelligence", _ => "Force" };
         static readonly Dictionary<string, string[]> WeaponBases = new Dictionary<string, string[]>
         {
@@ -57,7 +57,7 @@ namespace Korvalune.Game
         };
         static readonly Dictionary<string, string[]> OffBases = new Dictionary<string, string[]>
         {
-            // main gauche propre à chaque classe (comme dans Diablo) : le chasseur porte un carquois, pas un bouclier
+            // main gauche propre à chaque classe : le chasseur porte un carquois, pas un bouclier
             { Powers.K, new[] { "Écu" } }, { Powers.T, new[] { "Pavois" } }, { Powers.V, new[] { "Carquois" } }, { Powers.E, new[] { "Orbe", "Grimoire" } }, { Powers.M, new[] { "Phylactère" } },
         };
         static string PickClass(System.Random r)
@@ -102,10 +102,10 @@ namespace Korvalune.Game
         public static IReadOnlyList<string> StatNames => Stats;
         static readonly string[] Stats = { "Dégâts", "Armure", "Vie", "Force", "Dextérité", "Intelligence", "Chances de coup critique", "Vitesse d'attaque", "Régénération de mana", "Réduction des temps de recharge" };
 
-        /// <summary>Tire la rareté : les élites et boss améliorent les chances ; mythique et ancestral restent très rares.</summary>
+        /// <summary>Tire la rareté : les élites et boss améliorent les chances ; mythique et astral restent très rares.</summary>
         public static Rarity RollRarity(System.Random r, int level, float luck)
         {
-            // raretés façon Diablo : un légendaire reste un événement (~1 objet sur 90 au départ, davantage avec la chance)
+            // raretés : un légendaire reste un événement (~1 objet sur 90 au départ, davantage avec la chance)
             double x = r.NextDouble() / (1 + 0.5 * luck);
             if (level >= 30 && x < 0.0004) return Rarity.Ancestral;
             if (level >= 20 && x < 0.0012) return Rarity.Mythique;
@@ -174,7 +174,7 @@ namespace Korvalune.Game
                 Rarity.Legendaire => pw != null ? pw.name : $"{b} {Accord(Prefix[r.Next(Prefix.Length)], b)} {Suffix[r.Next(Suffix.Length)]}",
                 Rarity.Unique => Uniques[r.Next(Uniques.Length)],
                 Rarity.Mythique => Uniques[r.Next(Uniques.Length)] + " (mythique)",
-                Rarity.Ancestral => pw != null ? $"{pw.name} ancestral" : $"{b} {Accord("ancestral", b)} {Suffix[r.Next(Suffix.Length)]}",
+                Rarity.Ancestral => pw != null ? $"{pw.name} astral" : $"{b} {Accord("astral", b)} {Suffix[r.Next(Suffix.Length)]}",
                 _ => $"{b} {Accord(Prefix[r.Next(Prefix.Length)], b)} {Suffix[r.Next(Suffix.Length)]}",
             };
             return it;

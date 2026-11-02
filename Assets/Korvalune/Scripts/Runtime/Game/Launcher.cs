@@ -104,6 +104,7 @@ namespace Korvalune.Game
             MenuButton(root, "Crédits", 365, ShowCredits);
             MenuButton(root, "Quitter", 440, () => Application.Quit());
             Settings.Apply();
+            if (!AutoTest.Enabled) Updater.Attach(root, font);           // mise à jour depuis le jeu (personnages conservés)
         }
 
         void MenuButton(RectTransform root, string label, float y, System.Action click)

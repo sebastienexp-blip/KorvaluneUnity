@@ -468,7 +468,7 @@ namespace Korvalune.Game
         }
 
         readonly Dictionary<LootDrop, Text> lootLabels = new Dictionary<LootDrop, Text>();
-        /// <summary>Noms des objets au sol, à la couleur de leur rareté (comme dans Diablo 4).</summary>
+        /// <summary>Noms des objets au sol, à la couleur de leur rareté.</summary>
         void UpdateLootLabels()
         {
             foreach (var d in LootDrop.All)

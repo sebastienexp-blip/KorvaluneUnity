@@ -60,6 +60,9 @@ jobs:
           else echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi
           { echo "UNITY_LICENSE<<ULF_EOF"; echo "$LIC"; echo "ULF_EOF"; } >> "$GITHUB_ENV"
 
+      - name: Numéro de version
+        run: echo "${GITHUB_RUN_NUMBER}" > ci-build-number.txt
+
       - name: Unity — construction de l'APK
         id: unity
         uses: game-ci/unity-builder@v4
@@ -183,6 +186,7 @@ jobs:
           if grep -q "RÉSULTAT : OK" ci-out/android/test.md 2>/dev/null; then
             V=$(grep -oE "version [0-9.]+" ci-out/android/build.md | head -1 | cut -d' ' -f2)
             gh release delete apk-derniere -y --cleanup-tag 2>/dev/null || true
-            gh release create apk-derniere dl/build/Android/Korvalune.apk ci-out/android/*.png \
+            echo "${GITHUB_RUN_NUMBER}" > version.txt
+            gh release create apk-derniere dl/build/Android/Korvalune.apk version.txt ci-out/android/*.png \
               --title "Korvalune ${V} — APK testé" --notes-file ci-out/android/test.md --latest
           fi
