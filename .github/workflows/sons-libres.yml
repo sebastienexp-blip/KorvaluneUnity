@@ -42,6 +42,14 @@ jobs:
           get ambiances/donjon.ogg "https://opengameart.org/sites/default/files/dungeon_ambient_1_0.ogg"
           get ambiances/foret.mp3 "https://opengameart.org/sites/default/files/Forest_Ambience.mp3"
           get ambiances/feu.wav "https://opengameart.org/sites/default/files/fire.wav"
+          # musiques : North Fantasy Music (CC-BY 4.0, à créditer), cynicmusic (CC0)
+          mkdir -p musique
+          get musique_ambience.zip "https://opengameart.org/sites/default/files/fantasyambience.zip"
+          get musique_tambours.zip "https://opengameart.org/sites/default/files/fantasyambience_drumloops.zip"
+          get musique/battleThemeA.mp3 "https://opengameart.org/sites/default/files/battleThemeA.mp3"
+          get musique/TownTheme.mp3 "https://opengameart.org/sites/default/files/TownTheme.mp3"
+          get musique/the_field_of_dreams.mp3 "https://opengameart.org/sites/default/files/the_field_of_dreams.mp3"
+          get musique/Mysterious.ogg "https://opengameart.org/sites/default/files/Mysterious.ogg"
           for z in *.zip; do mkdir -p "${z%.zip}"; unzip -q -o "$z" -d "${z%.zip}" || true; done
           for z in *.7z; do mkdir -p "${z%.7z}"; 7z x -y -o"${z%.7z}" "$z" > /dev/null || true; done
           rm -f *.zip *.7z
