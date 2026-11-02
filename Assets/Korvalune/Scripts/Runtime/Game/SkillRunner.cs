@@ -148,7 +148,7 @@ namespace Korvalune.Game
         }
 
         void HitArea(Vector3 c, float r, float dmg, SkillDef d, Vector3? fwd = null, float cone = 360)
-        { foreach (var h in Health.Around(c, r, Faction.Player, fwd, cone)) Hit(h, dmg, d); }
+        { Breakable.HitArea(c, r, fwd, cone); foreach (var h in Health.Around(c, r, Faction.Player, fwd, cone)) Hit(h, dmg, d); }
 
         void Shake(float a) { var c = FindFirstObjectByType<CameraRig>(); if (c) c.Shake(a); }
 

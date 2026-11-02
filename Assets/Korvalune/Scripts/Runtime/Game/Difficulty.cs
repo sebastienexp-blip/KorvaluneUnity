@@ -8,7 +8,7 @@ namespace Korvalune.Game
     public static class Difficulty
     {
         public static readonly string[] Names = { "Normal", "Éprouvant", "Funeste", "Abîme I", "Abîme II", "Abîme III", "Abîme IV" };
-        public static readonly int[] UnlockLevel = { 1, 20, 40, 60, 80, 100, 120 };
+        public static readonly int[] UnlockLevel = { 1, 1, 1, 1, 1, 1, 1 };     // toutes accessibles dès le départ
         static readonly float[] hp = { 1f, 1.6f, 2.5f, 4f, 6f, 9f, 13f };
         static readonly float[] dmg = { 1f, 1.3f, 1.7f, 2.2f, 2.8f, 3.5f, 4.3f };
         static readonly float[] xp = { 1f, 1.5f, 2.2f, 3f, 4f, 5.5f, 7f };

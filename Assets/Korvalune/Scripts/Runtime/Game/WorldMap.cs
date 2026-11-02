@@ -93,6 +93,7 @@ namespace Korvalune.Game
             var q = FindFirstObjectByType<Quest>();
             var place = q ? q.CurrentPlace : null; if (place.HasValue) Pin(null, place.Value, new Color(0.4f, 1f, 0.5f), 30, "Objectif");
             foreach (var h in Health.All) if (h && !h.Dead && h.faction == Faction.Enemy) Pin(h.transform, Vector3.zero, new Color(1f, 0.3f, 0.25f), 12, null);
+            var ev = WorldEvents.Current ? WorldEvents.Current.Spot : null; if (ev.HasValue) Pin(null, ev.Value + Vector3.up * 0.01f, new Color(1f, 0.8f, 0.3f), 34, "Événement");
             heroPin = Img(markers, UIStyle.Disc(), new Color(1f, 0.9f, 0.4f)).rectTransform; heroPin.sizeDelta = new Vector2(30, 30);
             var ring = Img(heroPin, UIStyle.Ring(), Color.white).rectTransform; ring.sizeDelta = new Vector2(44, 44);
         }

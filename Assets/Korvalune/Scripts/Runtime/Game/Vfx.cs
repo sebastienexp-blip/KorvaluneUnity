@@ -322,7 +322,8 @@ namespace Korvalune.Game
         {
             float step = speed * Time.deltaTime; var from = transform.position; transform.position += dir * step; travelled += step;
             // murs, rochers, arbres : le projectile s'y écrase (les créatures ne bloquent pas, elles sont touchées plus bas)
-            if (Sight.Obstacle(from, transform.position, out var wall)) { transform.position = wall; onHit?.Invoke(wall, null); Stop(); return; }
+            if (owner == Faction.Player) Breakable.HitArea(transform.position, 0.3f + size * 0.5f);              // le tir brise tonneaux et caisses
+            if (Sight.Obstacle(from, transform.position, out var wall)) { if (owner == Faction.Player) Breakable.HitArea(wall, 0.9f); transform.position = wall; onHit?.Invoke(wall, null); Stop(); return; }
             foreach (var h in Health.Around(transform.position, 0.6f + size * 0.5f, owner))
             {
                 if (hit.Contains(h)) continue;

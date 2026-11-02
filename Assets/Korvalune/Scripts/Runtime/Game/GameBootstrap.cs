@@ -144,11 +144,26 @@ namespace Korvalune.Game
             Player.joystick = Hud.Joystick;
             Hud.Notify(zoneName);
 
+            // ---- clarté : halo doux autour du héros (on voit où l'on marche, même la nuit) ; donjons nettement éclaircis
+            if (Application.isPlaying)
+            {
+                bool underground = !Terrain.activeTerrain;
+                var halo = new GameObject("Halo du héros").AddComponent<Light>(); halo.transform.SetParent(hero.transform, false); halo.transform.localPosition = new Vector3(0, 3.2f, 0);
+                halo.type = LightType.Point; halo.color = new Color(1f, 0.9f, 0.75f); halo.range = underground ? 14f : 10f; halo.intensity = underground ? 2.2f : 1.1f; halo.shadows = LightShadows.None;
+                if (underground)
+                {
+                    float k = 1.8f;
+                    RenderSettings.ambientSkyColor *= k; RenderSettings.ambientEquatorColor *= k; RenderSettings.ambientGroundColor *= k; RenderSettings.ambientLight *= k;
+                }
+                Settings.Rebase(); Settings.Apply();
+            }
+
             // ---- ennemis : camps vivants (apparition à l'approche, réapparition après nettoyage) ; la ville reste sûre
             if (Application.isPlaying) { var pop = gameObject.AddComponent<WorldPopulation>(); pop.Init(this, camps, populate); }
             if (Application.isPlaying)
             {
                 RiftDirector.Begin(this);
+                WorldEvents.Begin(this);                                                        // événements du monde ouvert
                 if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Korvalune_Vallee")
                     RiftKeeper.Place(this, Ground(playerSpawn + new Vector3(-7f, 0, -3f)), 90f);       // Oracle des Brèches, près de l'arrivée en ville
                 if (!Rift.Active && !AutoTest.Enabled) TownLife.Populate(this);                       // villageois, chiens, oiseaux

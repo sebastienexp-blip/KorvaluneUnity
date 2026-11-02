@@ -59,7 +59,14 @@ namespace Korvalune.Game
             return true;
         }
 
-        public void Discard(ItemSave it) { p.inventory.Remove(it); Changed?.Invoke(); }
+        /// <summary>Jeter : l'objet quitte le sac et tombe au sol devant le héros (on peut le ramasser à nouveau).</summary>
+        public void Discard(ItemSave it)
+        {
+            if (it == null || !p.inventory.Remove(it)) return;
+            var d = LootDrop.Spawn(it, LootDrop.Near(p.transform.position, p.transform.forward * 1.4f + Random.insideUnitSphere * 0.3f));
+            if (d) d.dropped = true;
+            Changed?.Invoke();
+        }
 
         public ItemSave In(Slot s) => worn.TryGetValue(s, out var it) ? it : null;
 
@@ -69,7 +76,7 @@ namespace Korvalune.Game
             float v = 0;
             foreach (var it in Active())
             {
-                foreach (var a in it.affixes) if (a.stat == stat) v += a.value;
+                foreach (var a in it.affixes) if (a.stat == stat) v += a.value * it.Quality;
                 foreach (var g in Economy.GemAffixes(it)) if (g.stat == stat) v += g.value;          // gemmes serties
             }
             if (p) foreach (var a in Economy.ActiveRelicAffixes(p.wallet)) if (a.stat == stat) v += a.value;   // pouvoirs du Reliquaire
@@ -184,9 +191,10 @@ namespace Korvalune.Game
                 Loot.PlayerLevel = p.level;
                 foreach (var it in Active())
                 {
-                    if (it.slot == Slot.Arme) dmg += it.power * 0.6f;
-                    else if (it.slot == Slot.Amulette || it.slot == Slot.Anneau) dmg += it.power * 0.15f;
-                    else armor += it.power * 0.12f;
+                    float pw = it.power * it.Quality;                                   // qualité +1 à +10
+                    if (it.slot == Slot.Arme) dmg += pw * 0.6f;
+                    else if (it.slot == Slot.Amulette || it.slot == Slot.Anneau) dmg += pw * 0.15f;
+                    else armor += pw * 0.12f;
                 }
                 // caractéristique principale de la classe : +0,8 dégât par point ; les deux autres comptent à peine
                 string main = Loot.MainStat(ClassId);

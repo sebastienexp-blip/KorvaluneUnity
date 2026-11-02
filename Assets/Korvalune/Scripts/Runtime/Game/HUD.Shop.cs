@@ -162,6 +162,32 @@ namespace Korvalune.Game
                 case MerchantKind.Forgeron:
                     list.Add(new Tab
                     {
+                        // qualité +1 à +10 : chaque palier renforce la puissance et toutes les propriétés de l'objet
+                        name = "Améliorer",
+                        list = () => BagAndWorn().Where(x => x.item.upgrade < ItemSave.MaxUpgrade).Select(x => { x.sub = $"+{x.item.upgrade} → +{x.item.upgrade + 1}"; return x; }).ToList(),
+                        detail = e =>
+                        {
+                            if (e == null || e.item == null) return "<b>Amélioration</b>\nLe forgeron renforce une arme ou une armure : qualité +1 à +10. Chaque palier augmente de 6 % la puissance et toutes les propriétés (et +10 % de plus aux paliers +5 et +10).";
+                            var c = Loot.UpgradeCost(e.item);
+                            var next = new ItemSave { upgrade = e.item.upgrade + 1 };
+                            return Loot.Tooltip(e.item) + (e.worn ? "\n<color=#9fd7ff>(porté)</color>" : "") +
+                                   $"\n\n<b>Vers +{e.item.upgrade + 1}</b> : statistiques +{Mathf.RoundToInt((next.Quality - 1) * 100)} %\n<color=#e8c27a>Coût : {Cost(c.gold, c.scrap, c.essence, c.shard)}</color>";
+                        },
+                        acts = e => new List<Act>
+                        {
+                            new Act { label = e != null && e.item != null ? $"Améliorer en +{e.item.upgrade + 1}" : "Améliorer", can = () => e != null && e.item != null && e.item.upgrade < ItemSave.MaxUpgrade,
+                                run = () =>
+                                {
+                                    var c = Loot.UpgradeCost(e.item);
+                                    if (!Pay(c.gold, c.scrap, c.essence, c.shard)) return;
+                                    e.item.upgrade++; if (e.worn) Eq.Recompute();
+                                    Sound.UI("sfx_forge", 0.9f); Notify($"<color=#ffd24a>{e.item.DisplayName}</color>");
+                                }
+                            }
+                        }
+                    });
+                    list.Add(new Tab
+                    {
                         name = "Fabriquer", list = () => SlotEntries(s => ""),
                         detail = e =>
                         {

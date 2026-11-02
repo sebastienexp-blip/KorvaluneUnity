@@ -41,6 +41,9 @@ namespace Korvalune.Game
         static readonly Dictionary<Light, float> sunBase = new Dictionary<Light, float>();
         static string ambScene; static Color ambSky, ambEq, ambGround; static float ambInt;
 
+        /// <summary>Oublie l'éclairage d'origine mémorisé (la scène vient de le régler elle-même).</summary>
+        public static void Rebase() { ambScene = null; }
+
         /// <summary>Applique tout ce qui touche la scène : images/s, ombres, post-traitement, luminosité, distance de vue, son.</summary>
         public static void Apply()
         {

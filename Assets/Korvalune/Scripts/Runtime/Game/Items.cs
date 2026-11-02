@@ -21,6 +21,11 @@ namespace Korvalune.Game
         public string cls = "";                              // classe à laquelle l'objet est réservé (vide = toutes)
         public string legendaryPower = "";                   // pouvoir légendaire (Powers)
         public string set = "";                              // ensemble auquel appartient la pièce
+        public int upgrade;                                  // qualité +0 à +10 (amélioration chez le forgeron)
+        public const int MaxUpgrade = 10;
+        /// <summary>Multiplicateur de qualité : +6 % par niveau, et un palier de +10 % aux qualités +5 et +10.</summary>
+        public float Quality => 1f + 0.06f * upgrade + (upgrade >= 5 ? 0.1f : 0) + (upgrade >= 10 ? 0.1f : 0);
+        public string DisplayName => upgrade > 0 ? $"{name} +{upgrade}" : name;
         public bool Broken => maxDurability > 0 && durability <= 0;
     }
 
@@ -194,17 +199,27 @@ namespace Korvalune.Game
             return null;
         }
 
+        public static string QualityStars(int u) { var sb = new System.Text.StringBuilder(); for (int i = 1; i <= ItemSave.MaxUpgrade; i++) sb.Append(i <= u ? "◆" : "◇"); return sb.ToString(); }
+        /// <summary>Coût d'amélioration vers la qualité suivante : or, ferraille, essence (et éclats d'étoile au-delà de +5).</summary>
+        public static (long gold, int scrap, int essence, int shard) UpgradeCost(ItemSave it)
+        {
+            int n = it.upgrade + 1; float r = 1 + (int)it.rarity * 0.5f;
+            return ((long)(Mathf.Pow(n, 1.6f) * (40 + it.ilvl * 6) * r), 3 * n, n >= 3 ? n - 2 : 0, n >= 6 ? n - 5 : 0);
+        }
+
         public static string Tooltip(ItemSave it)
         {
             var setDef = Powers.Set(it.set);
             var c = ColorUtility.ToHtmlStringRGB(setDef != null ? Powers.SetColor : ColorOf(it.rarity));
-            var s = $"<color=#{c}><b>{it.name}</b></color>\n<color=#{c}>{(setDef != null ? "Objet d'ensemble" : LabelOf(it.rarity))} — {it.baseName}</color>\nPuissance {it.power} · niveau d'objet {it.ilvl}";
+            var q = it.Quality;
+            var s = $"<color=#{c}><b>{it.DisplayName}</b></color>\n<color=#{c}>{(setDef != null ? "Objet d'ensemble" : LabelOf(it.rarity))} — {it.baseName}</color>\nPuissance <b>{Mathf.Round(it.power * q)}</b> · niveau d'objet {it.ilvl}";
+            s += $"\n<color=#e8c070>Qualité {QualityStars(it.upgrade)}  (+{it.upgrade} / {ItemSave.MaxUpgrade}){(it.upgrade > 0 ? $" : statistiques +{Mathf.RoundToInt((q - 1) * 100)} %" : "")}</color>";
             if (!string.IsNullOrEmpty(it.cls)) s += $"\n<color=#{(string.IsNullOrEmpty(PlayerClass) || it.cls == PlayerClass ? "c8b89a" : "ff6060")}>Réservé : {ClassLabel(it.cls)}</color>";
             if (it.reqLevel > 0) s += $"\n<color=#{(it.reqLevel > PlayerLevel ? "ff6060" : "c8b89a")}>Niveau requis : {it.reqLevel}</color>";
             string main = string.IsNullOrEmpty(PlayerClass) ? "" : MainStat(PlayerClass);
             foreach (var a in it.affixes)
             {
-                var line = $"+{a.value}{(IsPercent(a.stat) ? " %" : "")} {a.stat}";
+                var line = $"+{Mathf.Round(a.value * q * 10) / 10}{(IsPercent(a.stat) ? " %" : "")} {a.stat}";
                 s += IsMain(a.stat) ? (a.stat == main ? $"\n<b>{line}</b>" : $"\n<color=#8a7a66>{line}</color>") : "\n" + line;
             }
             var pw = Powers.Get(it.legendaryPower);

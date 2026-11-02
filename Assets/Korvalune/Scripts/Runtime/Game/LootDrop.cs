@@ -8,7 +8,8 @@ namespace Korvalune.Game
     public class LootDrop : MonoBehaviour
     {
         public ItemSave item;
-        public long gold;                 // tas d'or : ramassé en marchant dessus
+        public long gold;
+        public bool dropped;              // jeté par le héros : jamais ramassé automatiquement                 // tas d'or : ramassé en marchant dessus
         public float pickupRadius = 1.6f;
         Light glow; Transform beam; float born;
         public static System.Action<ItemSave> Picked;
@@ -169,7 +170,7 @@ namespace Korvalune.Game
             if (glow) glow.intensity = (0.8f + 0.5f * (int)item.rarity) * (0.85f + 0.15f * Mathf.Sin(t * 3));
             if (beam) beam.localRotation = Quaternion.Euler(0, t * 40, 0);
             // objets : on touche leur nom pour les ramasser ; ramassage automatique optionnel des raretés modestes
-            if (Settings.AutoLoot > 0 && (int)item.rarity < Settings.AutoLoot && t > 0.6f)
+            if (!dropped && Settings.AutoLoot > 0 && (int)item.rarity < Settings.AutoLoot && t > 0.6f)
             {
                 var hero = FindFirstObjectByType<PlayerController>();
                 if (hero && (hero.transform.position - transform.position).sqrMagnitude < pickupRadius * pickupRadius && hero.inventory.Count < Equipment.BagSize) TryPick(hero);

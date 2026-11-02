@@ -296,6 +296,7 @@ namespace Korvalune.Game
         {
             yield return new WaitForSeconds(delay);
             bool any = false;
+            Breakable.HitArea(transform.position, attackRange, transform.forward, attackCone);   // tonneaux, caisses…
             foreach (var h in Health.Around(transform.position, attackRange, Faction.Player, transform.forward, attackCone))
             {
                 if (!Sight.Clear(transform.position, h)) continue;              // pas de coup à travers un mur

@@ -47,6 +47,15 @@ namespace Korvalune.Game
         void Advance()
         {
             if (!Current.Complete) return;
+            // chaque objectif rapporte de l'expérience (et un peu d'or), la fin de quête bien davantage
+            var hero = player ? player.GetComponent<PlayerController>() : null;
+            if (hero)
+            {
+                bool last = current == steps.Count - 1;
+                float xp = (60f + 18f * hero.level) * (last ? 4f : 1f);
+                hero.GainXp(Mathf.Round(xp)); long gold = (long)((20 + 6 * hero.level) * (last ? 5 : 1)); hero.AddGold(gold);
+                Notify?.Invoke($"<color=#ffd24a>+{Mathf.Round(xp)} XP, +{gold} or</color>");
+            }
             Notify?.Invoke("Objectif accompli : " + Current.text);
             Sound.UI("sfx_quete", 0.9f);
             current++;

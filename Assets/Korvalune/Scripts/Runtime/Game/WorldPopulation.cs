@@ -48,7 +48,7 @@ namespace Korvalune.Game
             var o = t.transform.position; var s = t.terrainData.size;
             var rng = new System.Random(20261028);
             float water = game.waterLevel;
-            int wanted = 72, tries = 0;
+            int wanted = 130, tries = 0;      // monde bien peuplé
             while (camps.Count < wanted && tries++ < 6000)
             {
                 var p = new Vector3(o.x + 18 + (float)rng.NextDouble() * (s.x - 36), 0, o.z + 18 + (float)rng.NextDouble() * (s.z - 36));
@@ -61,7 +61,7 @@ namespace Korvalune.Game
                     slope = Mathf.Max(slope, Mathf.Abs(GameBootstrap.Ground(p + dd * 5f).y - p.y));
                 if (slope > 3.2f) continue;                                           // terrain praticable
                 bool near = false; foreach (var q in game.noCamps) if ((q - p).sqrMagnitude < 30f * 30f) { near = true; break; }
-                foreach (var c in camps) if ((c.center - p).sqrMagnitude < 34f * 34f) { near = true; break; }
+                foreach (var c in camps) if ((c.center - p).sqrMagnitude < 24f * 24f) { near = true; break; }
                 if (near) continue;
                 var camp = new Camp { center = p, radius = 5f + (float)rng.NextDouble() * 3f, level = GameBootstrap.LevelAt(p) };
                 Compose(camp, cfg, rng);
@@ -94,7 +94,7 @@ namespace Korvalune.Game
                 if (escort != null) { camp.ids.Add(escort.id); camp.ids.Add(escort.id); }
                 return;
             }
-            int n = main.id == "sorcier" ? 1 + rng.Next(2) : 2 + rng.Next(3);
+            int n = main.id == "sorcier" ? 1 + rng.Next(2) : 3 + rng.Next(4);
             for (int i = 0; i < n; i++) camp.ids.Add(main.id);
             if (main.id == "sorcier") { var guard = pool.Find(x => x.t.id == "squelette").t; if (guard != null) { camp.ids.Add("squelette"); camp.ids.Add("squelette"); } }
         }
@@ -102,8 +102,8 @@ namespace Korvalune.Game
         /// <summary>Restes de campement autour du camp (tonneaux, caisses, charrette, foin, bannière) : la vallée paraît habitée.</summary>
         void Props(Camp camp, System.Random rng)
         {
-            string[] kit = { "M_Tonneaux", "M_Caisses", "M_Foin", "M_Charrette", "M_Banniere" };
-            int n = 1 + rng.Next(3);
+            string[] kit = { "M_Tonneaux", "M_Caisses", "M_Tonneaux", "M_Caisses", "M_Foin", "M_Charrette", "M_Banniere" };
+            int n = 2 + rng.Next(3);
             for (int i = 0; i < n; i++)
             {
                 var pf = Resources.Load<GameObject>("Prefabs/World/Ville/" + kit[rng.Next(kit.Length)]);
@@ -111,6 +111,7 @@ namespace Korvalune.Game
                 float a = (float)rng.NextDouble() * Mathf.PI * 2;
                 var p = GameBootstrap.Ground(camp.center + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * (camp.radius + 2.5f));
                 var go = Instantiate(pf, p - Vector3.up * 0.05f, Quaternion.Euler(0, (float)rng.NextDouble() * 360, 0), transform);
+                if (pf.name == "M_Tonneaux" || pf.name == "M_Caisses" || pf.name == "M_Charrette") Breakable.Make(go, pf.name == "M_Charrette" ? 1.6f : 0.9f);   // destructibles
                 go.SetActive(false); camp.props.Add(go);
             }
         }
