@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-11-02 17:40 UTC
+# Rapport d'intégration Unity — 2026-11-02 19:22 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 276 modèle(s) ModelForge trouvé(s)
@@ -2086,6 +2086,8 @@
 - ✅ **Clip Sk_Channel** 1.60 s, boucle=False, humanoïde=True, déplacement max 0.584 m, événements 0
 - ✅ **Clip Sk_Flick** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.567 m, événements 0
 - ✅ **Clip Sk_Summon** 1.40 s, boucle=False, humanoïde=True, déplacement max 1.021 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## ElyraNoctis_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
@@ -2167,6 +2169,8 @@
 - ✅ **Clip Sk_Channel** 1.60 s, boucle=False, humanoïde=True, déplacement max 0.584 m, événements 0
 - ✅ **Clip Sk_Flick** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.567 m, événements 0
 - ✅ **Clip Sk_Summon** 1.40 s, boucle=False, humanoïde=True, déplacement max 1.021 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## KaelDraven_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
@@ -2256,6 +2260,8 @@
 - ✅ **Clip Sk_Combo** 1.13 s, boucle=False, humanoïde=True, déplacement max 0.829 m, événements 0
 - ✅ **Clip Sk_Charge** 0.73 s, boucle=False, humanoïde=True, déplacement max 0.968 m, événements 0
 - ✅ **Clip Sk_GroundStab** 1.27 s, boucle=False, humanoïde=True, déplacement max 0.927 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.101 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## KaelDraven_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
@@ -2344,6 +2350,8 @@
 - ✅ **Clip Sk_Combo** 1.13 s, boucle=False, humanoïde=True, déplacement max 0.829 m, événements 0
 - ✅ **Clip Sk_Charge** 0.73 s, boucle=False, humanoïde=True, déplacement max 0.968 m, événements 0
 - ✅ **Clip Sk_GroundStab** 1.27 s, boucle=False, humanoïde=True, déplacement max 0.927 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.101 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## Morvanna_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
@@ -2429,6 +2437,8 @@
 - ✅ **Clip Sk_BoneSpear** 0.80 s, boucle=False, humanoïde=True, déplacement max 0.977 m, événements 0
 - ✅ **Clip Sk_Embrace** 1.30 s, boucle=False, humanoïde=True, déplacement max 0.927 m, événements 0
 - ✅ **Clip Sk_Sacrifice** 1.50 s, boucle=False, humanoïde=True, déplacement max 1.010 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## Morvanna_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
@@ -2515,6 +2525,8 @@
 - ✅ **Clip Sk_BoneSpear** 0.80 s, boucle=False, humanoïde=True, déplacement max 0.977 m, événements 0
 - ✅ **Clip Sk_Embrace** 1.30 s, boucle=False, humanoïde=True, déplacement max 0.927 m, événements 0
 - ✅ **Clip Sk_Sacrifice** 1.50 s, boucle=False, humanoïde=True, déplacement max 1.010 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## Tharion_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
@@ -2600,6 +2612,8 @@
 - ✅ **Clip Sk_Raise** 1.27 s, boucle=False, humanoïde=True, déplacement max 1.246 m, événements 0
 - ✅ **Clip Sk_Uppercut** 0.90 s, boucle=False, humanoïde=True, déplacement max 1.461 m, événements 0
 - ✅ **Clip Sk_Charge** 0.73 s, boucle=False, humanoïde=True, déplacement max 0.934 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.072 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## Tharion_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
@@ -2684,6 +2698,8 @@
 - ✅ **Clip Sk_Raise** 1.27 s, boucle=False, humanoïde=True, déplacement max 1.246 m, événements 0
 - ✅ **Clip Sk_Uppercut** 0.90 s, boucle=False, humanoïde=True, déplacement max 1.461 m, événements 0
 - ✅ **Clip Sk_Charge** 0.73 s, boucle=False, humanoïde=True, déplacement max 0.934 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.072 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## Varek_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
@@ -2777,6 +2793,8 @@
 - ✅ **Clip Sk_Sweep** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.712 m, événements 0
 - ✅ **Clip Sk_Whistle** 1.10 s, boucle=False, humanoïde=True, déplacement max 0.615 m, événements 0
 - ✅ **Clip Sk_Dash** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.626 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## Varek_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
@@ -2869,9 +2887,11 @@
 - ✅ **Clip Sk_Sweep** 0.90 s, boucle=False, humanoïde=True, déplacement max 0.712 m, événements 0
 - ✅ **Clip Sk_Whistle** 1.10 s, boucle=False, humanoïde=True, déplacement max 0.615 m, événements 0
 - ✅ **Clip Sk_Dash** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.626 m, événements 0
+- ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
+- ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
 
 ## Pièces du créateur de personnage (140 modèles : cheveux, sourcils, cils)
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_152 captures écrites dans ci-out/ (OpenGLCore) en 2.8 min._
+_152 captures écrites dans ci-out/ (OpenGLCore) en 4.2 min._
