@@ -85,7 +85,7 @@ namespace Korvalune.Game
         }
 
         struct Part { public Transform bone; public bool head; }
-        static readonly string[] Cuttable = { "Head", "UpperArm", "LowerArm", "UpperLeg", "LowerLeg", "Femur", "Tibia", "Tail2" };
+        static readonly string[] Cuttable = { "Head", "UpperArm", "LowerArm", "UpperLeg", "LowerLeg", "Thigh", "Femur", "Tibia", "Tail2" };
         static List<Part> Parts(Transform root)
         {
             var l = new List<Part>();
@@ -103,30 +103,25 @@ namespace Korvalune.Game
             return l;
         }
 
-        /// <summary>Détache le segment (l'os et tout ce qui en dépend : tête + mâchoire, bras + main…) : les morceaux de maillage
-        /// sont copiés dans un débris physique, les originaux masqués, le moignon saigne.</summary>
+        /// <summary>Détache le segment (l'os et tout ce qui en dépend : tête + mâchoire, bras + main…). Les maillages déformés
+        /// par le squelette sont découpés à la volée : les triangles portés par ces os passent dans un débris (pose figée à
+        /// l'instant du coup) et disparaissent du corps ; les objets rigides accrochés aux os suivent le débris. Le moignon saigne.</summary>
         static void Sever(Health h, Transform bone, Vector3 dir, Color c, Fluid f)
         {
-            var names = new HashSet<string>(); foreach (var t in bone.GetComponentsInChildren<Transform>()) names.Add(t.name);
-            var chunk = new GameObject("Débris " + bone.name); chunk.transform.position = bone.position; chunk.transform.rotation = bone.rotation;
+            var sub = new HashSet<Transform>(bone.GetComponentsInChildren<Transform>());
+            var chunk = new GameObject("Débris " + bone.name); chunk.transform.SetPositionAndRotation(bone.position, bone.rotation);
             int n = 0;
             foreach (var r in h.GetComponentsInChildren<Renderer>())
             {
                 if (!r.enabled || r is ParticleSystemRenderer) continue;
-                // morceau « <Os>_<Modèle>_Mesh » : l'os propriétaire est le nom sans les deux derniers segments
-                var rn = r.name; bool mine;
-                if (rn.EndsWith("_Mesh")) { var core = rn.Substring(0, rn.Length - 5); int us = core.LastIndexOf('_'); mine = us > 0 && names.Contains(core.Substring(0, us)); }
-                else mine = r.transform.IsChildOf(bone);
-                if (!mine) continue;
-                Mesh mesh = null;
-                if (r is SkinnedMeshRenderer smr) { mesh = new Mesh(); smr.BakeMesh(mesh, true); }
-                else { var mf = r.GetComponent<MeshFilter>(); if (mf) mesh = mf.sharedMesh; }
-                if (!mesh) continue;
-                var piece = new GameObject(rn); piece.transform.SetParent(chunk.transform, true);
+                if (r is SkinnedMeshRenderer smr) { if (Split(smr, sub, chunk.transform)) n++; continue; }
+                if (!sub.Contains(r.transform) && !r.transform.IsChildOf(bone)) continue;
+                var mf = r.GetComponent<MeshFilter>(); if (!mf || !mf.sharedMesh) continue;
+                var piece = new GameObject(r.name); piece.transform.SetParent(chunk.transform, false);
                 piece.transform.SetPositionAndRotation(r.transform.position, r.transform.rotation);
-                if (!(r is SkinnedMeshRenderer)) piece.transform.localScale = Div(r.transform.lossyScale, chunk.transform.lossyScale);
-                piece.AddComponent<MeshFilter>().sharedMesh = mesh;
-                var pr = piece.AddComponent<MeshRenderer>(); pr.sharedMaterials = r.sharedMaterials; pr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                piece.transform.localScale = Div(r.transform.lossyScale, chunk.transform.lossyScale);
+                piece.AddComponent<MeshFilter>().sharedMesh = mf.sharedMesh;
+                var pr = piece.AddComponent<MeshRenderer>(); pr.sharedMaterials = r.sharedMaterials;
                 r.enabled = false; n++;
             }
             if (n == 0) { Object.Destroy(chunk); return; }
@@ -134,6 +129,46 @@ namespace Korvalune.Game
             fly.vel = dir * Random.Range(3f, 5.5f) + Vector3.up * Random.Range(4f, 6.5f) + Random.insideUnitSphere;
             fly.spin = Random.insideUnitSphere * 720f; fly.color = c; fly.bloody = f != Fluid.Bone;
             if (f != Fluid.Bone) Fountain(bone, c);
+        }
+
+        /// <summary>Découpe d'un maillage skinné : sommet attribué à son os dominant. Retourne vrai si un morceau est parti.</summary>
+        static bool Split(SkinnedMeshRenderer smr, HashSet<Transform> sub, Transform chunk)
+        {
+            var src = smr.sharedMesh; if (!src || !src.isReadable) return false;
+            var bones = smr.bones; if (bones == null || bones.Length == 0) return false;
+            var cut = new bool[bones.Length]; bool any = false;
+            for (int i = 0; i < bones.Length; i++) if (bones[i] && sub.Contains(bones[i])) { cut[i] = true; any = true; }
+            if (!any) return false;
+            var bw = src.boneWeights; if (bw.Length != src.vertexCount) return false;
+            var off = new bool[bw.Length]; int count = 0;
+            for (int v = 0; v < bw.Length; v++) if (bw[v].boneIndex0 < cut.Length && cut[bw[v].boneIndex0]) { off[v] = true; count++; }
+            if (count == 0) return false;
+            // morceau : pose actuelle figée, uniquement les triangles entièrement portés par les os tranchés
+            var baked = new Mesh(); smr.BakeMesh(baked, true);
+            var keepBody = new List<int>[src.subMeshCount]; var piece = new List<int>[src.subMeshCount]; bool gotPiece = false;
+            for (int s = 0; s < src.subMeshCount; s++)
+            {
+                var t = src.GetTriangles(s); keepBody[s] = new List<int>(t.Length); piece[s] = new List<int>();
+                for (int i = 0; i + 2 < t.Length; i += 3)
+                {
+                    int o = (off[t[i]] ? 1 : 0) + (off[t[i + 1]] ? 1 : 0) + (off[t[i + 2]] ? 1 : 0);
+                    if (o >= 2) { piece[s].Add(t[i]); piece[s].Add(t[i + 1]); piece[s].Add(t[i + 2]); gotPiece = true; }
+                    else { keepBody[s].Add(t[i]); keepBody[s].Add(t[i + 1]); keepBody[s].Add(t[i + 2]); }
+                }
+            }
+            if (!gotPiece) { Object.Destroy(baked); return false; }
+            baked.subMeshCount = src.subMeshCount;
+            for (int s = 0; s < src.subMeshCount; s++) baked.SetTriangles(piece[s], s, false);
+            baked.RecalculateBounds();
+            var go = new GameObject(smr.name); go.transform.SetParent(chunk, true); go.transform.SetPositionAndRotation(smr.transform.position, smr.transform.rotation);
+            go.AddComponent<MeshFilter>().sharedMesh = baked; var mr = go.AddComponent<MeshRenderer>(); mr.sharedMaterials = smr.sharedMaterials;
+            go.AddComponent<GoreMeshes>().meshes.Add(baked);
+            // corps : copie du maillage sans ces triangles (le moignon reste ouvert, caché par le jet de sang)
+            var body = Object.Instantiate(src); body.name = src.name + " (tranché)";
+            for (int s = 0; s < src.subMeshCount; s++) body.SetTriangles(keepBody[s], s, false);
+            smr.sharedMesh = body;
+            var jan = smr.GetComponent<GoreMeshes>(); if (!jan) jan = smr.gameObject.AddComponent<GoreMeshes>(); jan.meshes.Add(body);
+            return true;
         }
 
         static Vector3 Div(Vector3 a, Vector3 b) => new Vector3(a.x / Mathf.Max(1e-4f, b.x), a.y / Mathf.Max(1e-4f, b.y), a.z / Mathf.Max(1e-4f, b.z));
@@ -258,6 +293,13 @@ namespace Korvalune.Game
             if (age > 14f) transform.position += Vector3.down * dt * 0.15f;
             if (age > 17f) Destroy(gameObject);
         }
+    }
+
+    /// <summary>Libère les maillages créés par la découpe quand le corps ou le débris disparaît.</summary>
+    public class GoreMeshes : MonoBehaviour
+    {
+        public readonly List<Mesh> meshes = new List<Mesh>();
+        void OnDestroy() { foreach (var m in meshes) if (m) Destroy(m); }
     }
 
     /// <summary>Flaque qui s'efface doucement en fin de vie.</summary>

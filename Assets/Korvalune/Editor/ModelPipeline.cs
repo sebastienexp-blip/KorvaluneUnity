@@ -194,7 +194,7 @@ namespace Korvalune.EditorTools
             mi.importCameras = false; mi.importLights = false;
             mi.importBlendShapes = true; mi.importBlendShapeNormals = ModelImporterNormals.None;   // curseurs de morphologie (sans normales : moitié moins lourd, invisible sur des déformations douces)
             mi.importVisibility = false;
-            mi.isReadable = false;
+            mi.isReadable = e.modelPath.Contains("/Enemies/");          // ennemis lisibles : le gore découpe leur maillage par os (démembrement)
             mi.meshCompression = ModelImporterMeshCompression.Off;
             mi.importNormals = ModelImporterNormals.Import;
             mi.importTangents = ModelImporterTangents.CalculateMikk;
