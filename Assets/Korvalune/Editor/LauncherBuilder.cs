@@ -43,12 +43,18 @@ namespace Korvalune.EditorTools
                 var town = WorldBuilder.Ground(TownBuilder.Plaza);
                 cam.fieldOfView = 38;
                 cam.transform.position = WorldBuilder.Ground(new Vector2(-70, -150)) + Vector3.up * 34; cam.transform.LookAt(new Vector3(6, 16, -18));
-                Save(cam, 1920, 1080, ArtDir + "/Lanceur_Fond.png");
+                // illustration peinte fournie (Lanceur_Peint.png) : prioritaire sur le rendu de la vallée
+                if (File.Exists(ArtDir + "/Lanceur_Peint.png")) File.Copy(ArtDir + "/Lanceur_Peint.png", ArtDir + "/Lanceur_Fond.png", true);
+                else Save(cam, 1920, 1080, ArtDir + "/Lanceur_Fond.png");
                 cam.fieldOfView = 30;
                 cam.transform.position = WorldBuilder.Ground(new Vector2(-10, -78)) + Vector3.up * 6; cam.transform.LookAt(new Vector3(0, 22, 0));
-                var icon = Grab(cam, 512, 512);
-                Frame(icon);
-                File.WriteAllBytes(ArtDir + "/Icone.png", icon.EncodeToPNG()); File.WriteAllBytes("ci-out/Icone.png", icon.EncodeToPNG()); Object.DestroyImmediate(icon);
+                if (File.Exists(ArtDir + "/Icone_Peinte.png")) { File.Copy(ArtDir + "/Icone_Peinte.png", ArtDir + "/Icone.png", true); File.Copy(ArtDir + "/Icone.png", "ci-out/Icone.png", true); }
+                else
+                {
+                    var icon = Grab(cam, 512, 512);
+                    Frame(icon);
+                    File.WriteAllBytes(ArtDir + "/Icone.png", icon.EncodeToPNG()); File.WriteAllBytes("ci-out/Icone.png", icon.EncodeToPNG()); Object.DestroyImmediate(icon);
+                }
                 File.Copy(ArtDir + "/Lanceur_Fond.png", "ci-out/Lanceur_Fond.png", true);
                 AssetDatabase.ImportAsset(ArtDir + "/Lanceur_Fond.png"); AssetDatabase.ImportAsset(ArtDir + "/Icone.png");
                 foreach (var p in new[] { ArtDir + "/Lanceur_Fond.png", ArtDir + "/Icone.png" })
