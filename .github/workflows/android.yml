@@ -4,6 +4,11 @@ name: Android — APK testé
 
 on:
   workflow_dispatch:
+    inputs:
+      rapide:
+        description: "Petite correction : publier sans le test dans l'émulateur"
+        type: boolean
+        default: false
   workflow_run:
     workflows: ["Unity — intégration des modèles"]
     types: [completed]
@@ -175,6 +180,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - name: Test dans l'émulateur Android
+        if: ${{ !inputs.rapide }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
@@ -191,6 +197,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          if [ "${{ inputs.rapide }}" = "true" ]; then mkdir -p ci-out/android; printf "# Publication rapide (petite correction)\n\nAPK construit sans test dans l'émulateur.\n\nRÉSULTAT : OK\n" > ci-out/android/test.md; rm -f ci-out/android/*.png; fi
           cat ci-out/android/test.md 2>/dev/null || true
           git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
           cp dl/ci-out/android/build.md ci-out/android/build.md 2>/dev/null || true
@@ -201,6 +208,6 @@ jobs:
             V=$(grep -oE "version [0-9.]+" ci-out/android/build.md | head -1 | cut -d' ' -f2)
             gh release delete apk-derniere -y --cleanup-tag 2>/dev/null || true
             echo "${GITHUB_RUN_NUMBER}" > version.txt
-            gh release create apk-derniere dl/build/Android/Korvalune.apk version.txt ci-out/android/*.png \
+            gh release create apk-derniere dl/build/Android/Korvalune.apk version.txt $(ls ci-out/android/*.png 2>/dev/null) \
               --title "Korvalune ${V} — APK testé" --notes-file ci-out/android/test.md --latest
           fi
