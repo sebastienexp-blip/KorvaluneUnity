@@ -59,7 +59,7 @@ namespace Korvalune
         {
             if (string.IsNullOrEmpty(path)) return null;
             if (cache.TryGetValue(path, out var o) && o) return o as T;
-            var r = Resources.Load<T>(path); if (r) cache[path] = r; return r;
+            var r = Content.Load<T>(path); if (r) cache[path] = r; return r;     // paquet téléchargé, sinon Resources
         }
         /// <summary>« Assets/Korvalune/Resources/Prefabs/X/Y.prefab » → « Prefabs/X/Y ».</summary>
         public static string PathOf(string assetPath)

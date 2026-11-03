@@ -63,7 +63,7 @@ namespace Korvalune.Game
         }
 
         // ========================================================================================== arbre de compétences
-        GameObject treePanel; Text treePoints, treeDetail, treeLearnText; Image treeLearn; int treeSel = -1;
+        GameObject treePanel; Text treePoints, treeDetail, treeLearnText; RectTransform treeDetailBox; Image treeLearn; int treeSel = -1;
         readonly Dictionary<int, (Image node, Image glow, Image icon, Image lockIcon, Text rank, Text name)> treeNodes = new Dictionary<int, (Image, Image, Image, Image, Text, Text)>();
         readonly List<(int child, Image line)> treeLines = new List<(int, Image)>();
         readonly List<(Image bg, Image icon, Text num)> treeSlots = new List<(Image, Image, Text)>();
@@ -122,7 +122,7 @@ namespace Korvalune.Game
                 var lk = Img(node.rectTransform, "Verrou", UIStyle.Icon("lock", new Color(0.75f, 0.68f, 0.6f)), new Vector2(1, 0), new Vector2(6, -6), new Vector2(34, 34));
                 var rank = Label(node.rectTransform, "Rang", "", 20, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0, -6), new Vector2(70, 26));
                 rank.gameObject.AddComponent<Outline>().effectColor = Color.black;
-                var name = Label(content, "Nom_" + i, d.name, 18, TextAnchor.UpperCenter, new Vector2(0, 1), p + new Vector2(-ColW / 2f + 8, -NodeSize / 2f - 6), new Vector2(ColW - 16, 44));
+                var name = Label(content, "Nom_" + i, d.name, 21, TextAnchor.UpperCenter, new Vector2(0, 1), p + new Vector2(-ColW / 2f + 8, -NodeSize / 2f - 6), new Vector2(ColW - 16, 44));
                 name.rectTransform.pivot = new Vector2(0, 1);
                 var b = node.gameObject.AddComponent<Button>(); b.targetGraphic = node;
                 b.onClick.AddListener(() => { treeSel = k; Sound.UI("sfx_ui_clic", 0.45f); RefreshTree(); });
@@ -133,8 +133,7 @@ namespace Korvalune.Game
 
             // ---- fiche de la compétence choisie
             var side = Img(panel, "Fiche", UIStyle.Slot(), new Vector2(1, 1), new Vector2(-46, -108), new Vector2(460, TreeH + 40)); side.type = Image.Type.Sliced;
-            treeDetail = Label(side.rectTransform, "Texte", "", 24, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(24, -20), new Vector2(412, TreeH - 160));
-            FitText(treeDetail, 14);
+            treeDetailBox = Scroll(side.rectTransform, new Vector2(24, -20), new Vector2(412, TreeH - 160), out treeDetail, 24);
             treeLearn = TextButton(side.rectTransform, "Apprendre", "Apprendre", new Vector2(0.5f, 0), new Vector2(0, 24), new Vector2(400, 76), LearnSelected, out treeLearnText, 30);
             // voies de spécialisation (choix de build) : deux boutons au-dessus de « Apprendre »
             for (int v = 1; v <= 2; v++)
@@ -263,7 +262,7 @@ namespace Korvalune.Game
                 bool okv = rk >= SkillVariants.MinRank; bgv.gameObject.SetActive(true);
                 tv.text = (v == 0 ? va.name : vb2.name); bgv.color = ch == v + 1 ? new Color(1f, 0.82f, 0.45f) : okv ? Color.white : new Color(0.45f, 0.42f, 0.4f);
             }
-            treeDetail.text = txt;
+            treeDetail.text = txt; if (treeDetailBox) FitScroll(treeDetailBox, treeDetail, TreeH - 160);
             bool canLearn = runner.Unlocked(treeSel) && runner.BranchOpen(treeSel) && rk < sd.MaxRank;
             treeLearn.gameObject.SetActive(true);
             treeLearnText.text = rk >= sd.MaxRank ? "Rang maximum" : rk == 0 ? "Apprendre (1 point)" : "Améliorer (1 point)";

@@ -112,6 +112,20 @@ jobs:
       - name: Résultat
         run: test -f build/Android/Korvalune.apk
 
+      - name: Publier le contenu téléchargeable
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # paquets de contenu de cette version : release « contenu-N » (le jeu ne télécharge que les paquets modifiés)
+          [ -f build/Contenu/catalogue.json ] || { echo "APK tout-en-un : pas de paquets"; exit 0; }
+          B=$(cat ci-build-number.txt); T=contenu-$B
+          gh release delete -R ${{ github.repository }} $T -y --cleanup-tag 2>/dev/null || true
+          cd build/Contenu
+          files=$(ls | grep -v '\.manifest$' | grep -vx 'Contenu')
+          gh release create -R ${{ github.repository }} $T $files --title "Contenu 0.1.$B" --notes "Paquets de contenu de Korvalune 0.1.$B" --prerelease --target main
+          # ménage : on garde les 3 dernières publications de contenu
+          gh release list -R ${{ github.repository }} --limit 200 --json tagName --jq '.[].tagName' | grep '^contenu-' | sort -t- -k2 -n -r | tail -n +4 | while read t; do gh release delete -R ${{ github.repository }} "$t" -y --cleanup-tag || true; done
+
   journal:
     needs: build
     if: always()

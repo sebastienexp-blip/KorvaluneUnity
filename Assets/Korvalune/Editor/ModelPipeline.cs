@@ -339,6 +339,7 @@ namespace Korvalune.EditorTools
                 foreach (var kv in clips.Where(k => k.Key == "Attack" || (k.Key.StartsWith("Sk_") && k.Key != "Sk_Monte")))
                 {
                     var st = usm.AddState(kv.Key); st.motion = kv.Value;
+                    if (kv.Key == "Sk_ArcGarde") continue;                 // tenue de l'arc : en boucle, le jeu en sort lui-même
                     var back = st.AddTransition(rest); back.hasExitTime = true; back.exitTime = 0.95f; back.duration = 0.1f;
                 }
             }

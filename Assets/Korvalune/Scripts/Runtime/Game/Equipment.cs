@@ -221,7 +221,8 @@ namespace Korvalune.Game
         public string Summary() =>
             $"Dégâts <b>{p.attackDamage:0}</b>   Vie <b>{h.maxHp:0}</b>   Armure <b>{h.armor:0}</b>\n" +
             $"Critique <b>{p.critChance * 100:0.#} %</b>   Attaque <b>{1f / p.attackCooldown:0.00}/s</b>   Recharge <b>−{cooldownReduction * 100:0} %</b>\n" +
-            $"{Loot.MainStat(ClassId)} <b>{Sum(Loot.MainStat(ClassId)):0}</b>" + SetsSummary();
+            $"Mana <b>{h.maxMana:0}</b> (+{h.manaRegen:0.#}/s)   Régén. vie <b>{h.hpRegen:0.#}/s</b>   Vitesse <b>{p.runSpeed:0.#} m/s</b>{(Rider.Current && Rider.Current.Riding ? " <color=#9fd7ff>(en selle)</color>" : "")}\n" +
+            $"Dégâts par seconde ≈ <b>{p.attackDamage * (1 + p.critChance) / Mathf.Max(0.05f, p.attackCooldown):0}</b>   {Loot.MainStat(ClassId)} <b>{Sum(Loot.MainStat(ClassId)):0}</b>" + SetsSummary();
 
         string SetsSummary()
         {

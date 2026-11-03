@@ -76,8 +76,17 @@ namespace Korvalune.EditorTools
                 EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Gradle;
                 AssetDatabase.SaveAssets();
 
+                // contenu téléchargeable : modèles, textures et scènes en paquets ; l'APK ne garde que le lanceur
+                string manifest = null;
+                try
+                {
+                    manifest = BuildContent(scenes, build, rep);
+                    if (manifest != null) { scenes = new[] { LauncherBuilder.ScenePath }; EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(LauncherBuilder.ScenePath, true) }; }
+                }
+                catch (Exception ex) { manifest = null; rep.AppendLine("- ⚠ Paquets de contenu non construits (APK tout-en-un) : " + ex.Message.Split('\n')[0]); }
+
                 Directory.CreateDirectory(Path.GetDirectoryName(Out));
-                var r = BuildPipeline.BuildPlayer(new BuildPlayerOptions { scenes = scenes, locationPathName = Out, target = BuildTarget.Android, targetGroup = BuildTargetGroup.Android, options = BuildOptions.None });
+                var r = BuildPipeline.BuildPlayer(new BuildPlayerOptions { scenes = scenes, locationPathName = Out, target = BuildTarget.Android, targetGroup = BuildTargetGroup.Android, options = BuildOptions.None, assetBundleManifestPath = manifest });
                 var s = r.summary;
                 rep.AppendLine($"- Résultat : **{s.result}** en {s.totalTime.TotalMinutes:0.0} min, {s.totalErrors} erreur(s), {s.totalWarnings} avertissement(s)");
                 if (File.Exists(Out)) rep.AppendLine($"- APK : {new FileInfo(Out).Length / 1048576.0:0.0} Mo, version {PlayerSettings.bundleVersion}");
@@ -101,6 +110,56 @@ namespace Korvalune.EditorTools
             File.WriteAllText("ci-out/android/build.md", rep.ToString());
             Debug.Log(rep.ToString());
             EditorApplication.Exit(code);
+        }
+
+        const string ContentOut = "build/Contenu";
+
+        /// <summary>Paquets de contenu (AssetBundles LZ4) : un par modèle de héros, de monstre, de monture, d'arme…, un par
+        /// dossier de préfabriqués, un pour les scènes. Catalogue « catalogue.json » (nom, adresse, taille, empreinte) publié
+        /// avec les paquets dans la release « contenu-N ». Renvoie le manifeste (le compilateur garde le code qu'ils utilisent).</summary>
+        static string BuildContent(string[] scenes, int build, StringBuilder rep)
+        {
+            string root = ModelPipeline.Root, prefabs = root + "/Resources/Prefabs", dst = root + "/Contenu";
+            if (AssetDatabase.IsValidFolder(prefabs))
+            {
+                if (!AssetDatabase.IsValidFolder(dst)) AssetDatabase.CreateFolder(root, "Contenu");
+                var err = AssetDatabase.MoveAsset(prefabs, dst + "/Prefabs");             // hors de Resources : plus dans l'APK
+                if (!string.IsNullOrEmpty(err)) throw new Exception("déplacement des préfabriqués : " + err);
+                AssetDatabase.Refresh();
+            }
+            var builds = new System.Collections.Generic.List<AssetBundleBuild>();
+            string[] skip = { ".meta", ".cs", ".forgehash", ".md", ".py", ".txt" };
+            string N(string f) => f.Replace('\\', '/');
+            string[] Files(string folder, bool deep) => Directory.Exists(folder)
+                ? Directory.GetFiles(folder, "*", deep ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Select(N).Where(f => !skip.Any(f.EndsWith)).ToArray() : new string[0];
+            string Name(string s2) => new string(s2.ToLowerInvariant().Select(c => char.IsLetterOrDigit(c) ? c : '_').ToArray());
+            void Add(string name, string[] files) { if (files.Length > 0) builds.Add(new AssetBundleBuild { assetBundleName = Name(name), assetNames = files }); }
+            void Split(string folder, string prefix)
+            {
+                Add(prefix, Files(folder, false));
+                foreach (var d in Directory.Exists(folder) ? Directory.GetDirectories(folder) : new string[0]) Add(prefix + "_" + Path.GetFileName(d), Files(d, true));
+            }
+            foreach (var top in Directory.GetDirectories(root + "/Art")) Split(N(top), "art_" + Path.GetFileName(top));
+            Split(dst + "/Prefabs", "prefabs");
+            var sc = scenes.Where(x => x != LauncherBuilder.ScenePath).ToArray();
+            if (sc.Length == 0) throw new Exception("aucune scène");
+            builds.Add(new AssetBundleBuild { assetBundleName = "scenes", assetNames = sc });
+            if (Directory.Exists(ContentOut)) Directory.Delete(ContentOut, true);
+            Directory.CreateDirectory(ContentOut);
+            var man = BuildPipeline.BuildAssetBundles(ContentOut, builds.ToArray(), BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
+            if (man == null) throw new Exception("échec de la construction des paquets");
+            var baseUrl = $"https://github.com/sebastienexp-blip/KorvaluneUnity/releases/download/contenu-{build}/";
+            var cat = new Korvalune.Game.Launcher.Catalog { version = "0.1." + build };
+            long total = 0;
+            foreach (var b in man.GetAllAssetBundles().OrderBy(x => x))
+            {
+                var f = Path.Combine(ContentOut, b); long size = new FileInfo(f).Length; total += size;
+                cat.packs.Add(new Korvalune.Game.Launcher.Pack { name = b, url = baseUrl + b, size = size, hash = man.GetAssetBundleHash(b).ToString() });
+            }
+            File.WriteAllText(Path.Combine(ContentOut, "catalogue.json"), JsonUtility.ToJson(cat, true));
+            rep.AppendLine($"- Contenu téléchargeable : {cat.packs.Count} paquets, {total / 1048576.0:0} Mo (release contenu-{build})");
+            foreach (var p in cat.packs.OrderByDescending(x => x.size).Take(12)) rep.AppendLine($"    - {p.name} : {p.size / 1048576.0:0.0} Mo");
+            return Path.Combine(ContentOut, "Contenu.manifest");
         }
     }
 }

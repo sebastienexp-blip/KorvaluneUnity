@@ -114,6 +114,8 @@ namespace Korvalune.Game
             {
                 if (!player) return; var r = player.GetComponent<Rider>(); if (!r) r = player.gameObject.AddComponent<Rider>(); r.Toggle();
             }, out _, out _);
+            // portail de ville (violet)
+            RoundButton(root, "PortailVille", "portail", new Vector2(0, 0), new Vector2(780, 40), 112, TownPortal.Cast, out _, out _);
             if (player) BuildShop(root);
             BuildMenu(root);
 
@@ -259,6 +261,7 @@ namespace Korvalune.Game
             if (!bagPanel) { Notify("Inventaire indisponible"); return; }
             if (treePanel) treePanel.SetActive(false);
             bagPanel.SetActive(!bagPanel.activeSelf); selected = null; if (bagPanel.activeSelf) RefreshBag();
+            PortraitActive(bagPanel.activeSelf);
             Sound.UI(bagPanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
 
@@ -287,75 +290,6 @@ namespace Korvalune.Game
             c.glow.color = it.rarity >= Rarity.Legendaire ? new Color(col.r, col.g, col.b, 0.55f) : new Color(0, 0, 0, 0);   // aura comme au sol
             if (spr) { c.label.alignment = TextAnchor.LowerRight; c.label.text = $"<size=17><color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.power}</b></color></size>"; }
             else { c.label.alignment = TextAnchor.MiddleCenter; c.label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.baseName}</b></color>\n<size=15>{SlotName[it.slot]} · {it.power}</size>"; }
-        }
-
-        /// <summary>Panneau d'inventaire : équipement porté (9 emplacements) à gauche, sac de 40 objets à droite, caractéristiques et
-        /// fiche de l'objet choisi (couleur de rareté comme au sol, comparaison avec l'objet porté) ; équiper, retirer, jeter.</summary>
-        void BuildBag(RectTransform root)
-        {
-            var eq = player.GetComponent<Equipment>();
-            var panel = OrnatePanel(root, "Inventaire", new Vector2(1680, 960), "Équipement et inventaire"); bagPanel = panel.gameObject;
-            RoundButton(panel, "Fermer", "close", new Vector2(1, 1), new Vector2(-30, -26), 84, ToggleBag, out _, out _);
-            // équipement : disposition autour d'une silhouette
-            var doll = Img(panel, "Silhouette", UIStyle.Bar(), new Vector2(0, 1), new Vector2(70, -110), new Vector2(560, 620)); doll.type = Image.Type.Sliced; doll.color = new Color(0, 0, 0, 0.35f);
-            var pos = new Dictionary<Slot, Vector2>
-            {
-                { Slot.Casque, new Vector2(220, -20) }, { Slot.Amulette, new Vector2(370, -40) }, { Slot.Torse, new Vector2(220, -170) },
-                { Slot.Gants, new Vector2(60, -190) }, { Slot.Anneau, new Vector2(380, -190) }, { Slot.Arme, new Vector2(60, -340) },
-                { Slot.MainGauche, new Vector2(380, -340) }, { Slot.Jambes, new Vector2(220, -320) }, { Slot.Bottes, new Vector2(220, -470) },
-            };
-            foreach (var kv in pos)
-            {
-                var slot = kv.Key;
-                slotCells[slot] = Cell(doll.rectTransform, "Porté_" + slot, new Vector2(0, 1), kv.Value, 120, () => { selected = eq.In(slot); selectedWorn = true; RefreshBag(); });
-            }
-            bagStats = Label(panel, "Caractéristiques", "", 24, TextAnchor.UpperLeft, new Vector2(0, 0), new Vector2(70, 58), new Vector2(560, 150));
-            FitText(bagStats, 14);
-            // sac : 8 × 5
-            for (int i = 0; i < Equipment.BagSize; i++)
-            {
-                int k = i;
-                var c = Cell(panel, "Sac_" + i, new Vector2(0, 1), new Vector2(670 + (i % 8) * 116, -110 - (i / 8) * 116), 106, () =>
-                { selected = k < player.inventory.Count ? player.inventory[k] : null; selectedWorn = false; RefreshBag(); });
-                bagCells.Add(c);
-            }
-            // fiche de l'objet
-            var tip = Img(panel, "Fiche", UIStyle.Bar(), new Vector2(0, 0), new Vector2(670, 58), new Vector2(940, 200)); tip.type = Image.Type.Sliced; tip.color = new Color(0.06f, 0.045f, 0.035f, 0.95f);
-            bagTip = Label(tip.rectTransform, "Texte", "", 22, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(18, -10), new Vector2(640, 185));
-            FitText(bagTip, 13);   // fiches longues (ensembles, pouvoirs) : le texte se resserre au lieu de déborder
-            Button Btn(string name, Vector2 p, System.Action a, out Text t)
-            {
-                var im = Img(tip.rectTransform, name, UIStyle.Slot(), new Vector2(1, 1), p, new Vector2(220, 70)); im.raycastTarget = true; im.type = Image.Type.Sliced;
-                t = Label(im.rectTransform, "T", name, 26, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(220, 70)); t.color = UIStyle.Gold;
-                var b = im.gameObject.AddComponent<Button>(); b.targetGraphic = im; b.onClick.AddListener(() => a()); return b;
-            }
-            bEquip = Btn("Équiper", new Vector2(-20, -20), () =>
-            {
-                if (selected == null) return;
-                if (selectedWorn) eq.Unequip(selected.slot); else eq.Equip(selected);
-                selected = null; RefreshBag();
-            }, out bEquipText);
-            bDrop = Btn("Jeter", new Vector2(-20, -105), () => { if (selected != null && !selectedWorn) { eq.Discard(selected); selected = null; RefreshBag(); } }, out _);
-            bagPanel.SetActive(false);
-        }
-
-        void RefreshBag()
-        {
-            var eq = player ? player.GetComponent<Equipment>() : null; if (!eq) return;
-            foreach (var kv in slotCells) Paint(kv.Value, eq.In(kv.Key), SlotName[kv.Key]);
-            for (int i = 0; i < bagCells.Count; i++) Paint(bagCells[i], i < player.inventory.Count ? player.inventory[i] : null, "");
-            bagStats.text = eq.Summary() + $"\n<size=20>Sac : {player.inventory.Count} / {Equipment.BagSize}</size>";
-            if (selected == null) { bagTip.text = "<color=#a08c6c>Touchez un objet pour voir sa fiche.</color>"; bEquip.gameObject.SetActive(false); bDrop.gameObject.SetActive(false); return; }
-            var txt = Loot.Tooltip(selected);
-            var cur = eq.In(selected.slot);
-            if (!selectedWorn && cur != null)
-            {
-                float d = selected.power - cur.power;
-                txt += $"\n<color=#{(d >= 0 ? "7CFC7C" : "FF7070")}>{(d >= 0 ? "▲ +" : "▼ ")}{d:0} puissance par rapport à « {cur.name} »</color>";
-            }
-            bagTip.text = txt;
-            bEquip.gameObject.SetActive(true); bEquipText.text = selectedWorn ? "Retirer" : "Équiper";
-            bDrop.gameObject.SetActive(!selectedWorn);
         }
 
         public void Notify(string msg) { if (!notifyText) return; notifyText.text = msg; notifyText.color = UIStyle.Parch; notifyUntil = Time.time + 2.5f; }

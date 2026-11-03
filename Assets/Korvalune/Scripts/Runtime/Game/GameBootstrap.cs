@@ -171,6 +171,7 @@ namespace Korvalune.Game
                 {
                     RiftKeeper.Place(this, Ground(playerSpawn + new Vector3(-7f, 0, -3f)), 90f);       // Oracle des Brèches, près de l'arrivée en ville
                     Stable.Place(this, Ground(playerSpawn + new Vector3(9f, 0, -4f)), -90f);            // écurie : achat des montures
+                    TownPortal.PlaceReturn(this);                                                         // portail de ville : retour au combat
                 }
                 if (!Rift.Active && !AutoTest.Enabled) TownLife.Populate(this);                       // villageois, chiens, oiseaux
             }
@@ -253,6 +254,15 @@ namespace Korvalune.Game
         public void RespawnPlayer()
         {
             if (!Player) return;
+            if (Rift.Active && Application.isPlaying)
+            {   // brèche : on revient au point de départ de la brèche, sans retour en ville
+                int pen = RiftDirector.Penalty();
+                var c2 = Player.GetComponent<CharacterController>(); c2.enabled = false;
+                Player.transform.position = Ground(playerSpawn); c2.enabled = true;
+                Player.Health.Revive(); Cam.GetComponent<CameraRig>()?.Snap();
+                Hud?.Notify(pen > 0 ? $"<color=#ff7a6a>Pénalité de mort : −{pen} s</color>" : "Retour au point d'entrée de la brèche");
+                return;
+            }
             if (safeRadius <= 0 && Application.isPlaying && Application.CanStreamedLevelBeLoaded("Korvalune_Vallee"))
             {
                 Player.Health.Revive(); Persist(); nextSpawn = null;

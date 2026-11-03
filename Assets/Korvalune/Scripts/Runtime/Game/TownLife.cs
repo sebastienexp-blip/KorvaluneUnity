@@ -20,7 +20,7 @@ namespace Korvalune.Game
             var people = new List<Walker>();
             for (int i = 0; i < villagers; i++)
             {
-                var pf = Resources.Load<GameObject>("Prefabs/Characters/" + Folk[i % Folk.Length]); if (!pf) continue;
+                var pf = Res.Load<GameObject>("Prefabs/Characters/" + Folk[i % Folk.Length]); if (!pf) continue;
                 var at = Spot(center, r, rng); if (!at.HasValue) continue;
                 var go = Instantiate(pf, at.Value, Quaternion.Euler(0, rng.Next(360), 0), root.transform); go.name = Names[i % Names.Length];
                 foreach (var c in go.GetComponentsInChildren<Collider>()) Destroy(c);

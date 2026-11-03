@@ -106,7 +106,7 @@ namespace Korvalune.Game
             int n = 2 + rng.Next(3);
             for (int i = 0; i < n; i++)
             {
-                var pf = Resources.Load<GameObject>("Prefabs/World/Ville/" + kit[rng.Next(kit.Length)]);
+                var pf = Res.Load<GameObject>("Prefabs/World/Ville/" + kit[rng.Next(kit.Length)]);
                 if (!pf) continue;
                 float a = (float)rng.NextDouble() * Mathf.PI * 2;
                 var p = GameBootstrap.Ground(camp.center + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * (camp.radius + 2.5f));

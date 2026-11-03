@@ -23,8 +23,20 @@ namespace Korvalune.Game
         public static float XpMult => 1.5f + 0.15f * Tier;
         public static string Title => Tier <= 0 ? "Brèche astrale" : $"Grande Brèche — niveau {Tier}";
 
+        public static Vector3? ReturnPoint;                 // devant la statue des Brèches (arrivée au retour)
+        public static int Deaths;
+
+        /// <summary>Retour en ville, devant la statue des Brèches.</summary>
+        public static void ReturnToTown()
+        {
+            var game = Object.FindFirstObjectByType<GameBootstrap>(); if (game) game.Persist();
+            GameBootstrap.nextSpawn = ReturnPoint; Active = false;
+            SceneManager.LoadScene(TownPortal.Town);
+        }
+
         public static void Enter(int tier)
         {
+            Deaths = 0;
             var game = Object.FindFirstObjectByType<GameBootstrap>();
             if (game) game.Persist();
             Active = true; Tier = Mathf.Max(0, tier);
@@ -148,19 +160,39 @@ namespace Korvalune.Game
             back.transform.position = LootDrop.Near(pos, new Vector3(3, 0, 0));
             back.targetScene = "Korvalune_Vallee"; back.label = "Revenir"; back.displayName = "Vallée de Korvalune"; back.glowColor = new Color(0.75f, 0.45f, 1f);
             back.arrival = game.playerSpawn;          // remplacé par le point d'arrivée de la vallée (voir Portal)
-            back.useSceneSpawn = true;
+            back.useSceneSpawn = true; back.gate = true; back.onEnter = Rift.ReturnToTown;
             if (save != null) game.Persist();
+            returnAt = Time.time + 15f;                        // le temps de ramasser le butin, puis retour automatique
+        }
+
+        float returnAt = -1;
+        /// <summary>Mort dans une brèche : on revient au départ de la brèche, sans retour en ville. En Grande Brèche, chaque
+        /// mort coûte du temps (5 s, puis 10 s, 15 s… jusqu'à 30 s par mort).</summary>
+        public static int Penalty()
+        {
+            Rift.Deaths++;
+            var d = FindFirstObjectByType<RiftDirector>(); if (!d || Rift.Tier <= 0 || d.done) return 0;
+            int sec = Mathf.Min(30, 5 * Rift.Deaths);
+            d.startedAt -= sec;
+            return sec;
         }
 
         void Update()
         {
+            if (done && returnAt > 0)
+            {
+                float r = returnAt - Time.time;
+                if (r <= 0) { returnAt = -1; Rift.ReturnToTown(); return; }
+                if (bar) bar.text = $"Brèche refermée — retour en ville dans {Mathf.CeilToInt(r)} s";
+                return;
+            }
             if (!ui) return;
             float left = Rift.TimeLimit - (Time.time - startedAt);
             if (Rift.Tier > 0 && !done && !timedOut && left <= 0) { timedOut = true; game.Hud.Notify("<color=#ff6060>Temps écoulé</color>"); }
             fill.fillAmount = guardianUp ? (guardian && !guardian.Dead ? guardian.hp / guardian.maxHp : 0) : progress / required;
             fill.color = guardianUp ? new Color(0.85f, 0.2f, 0.25f) : new Color(0.7f, 0.4f, 1f);
             bar.text = done ? "Brèche refermée" : guardianUp ? "Gardien de la brèche" : $"{Rift.Title} — {Mathf.FloorToInt(100 * progress / required)} %";
-            if (timer) timer.text = Rift.Tier <= 0 ? "" : timedOut ? "00:00" : $"{Mathf.FloorToInt(Mathf.Max(0, left) / 60):00}:{Mathf.FloorToInt(Mathf.Max(0, left) % 60):00}";
+            if (timer) timer.text = Rift.Tier <= 0 ? (Rift.Deaths > 0 ? $"☠ {Rift.Deaths}" : "") : timedOut ? "00:00" : $"{Mathf.FloorToInt(Mathf.Max(0, left) / 60):00}:{Mathf.FloorToInt(Mathf.Max(0, left) % 60):00}";
             if (timer) timer.color = left < 60 && !done ? new Color(1f, 0.4f, 0.35f) : Color.white;
         }
 
@@ -192,27 +224,64 @@ namespace Korvalune.Game
     {
         Transform hero; bool shown; GameObject panel; int pick = 1;
 
+        Transform gateAt; Portal gate;
+
+        /// <summary>Statue des Brèches (une seule, sur la place de la ville principale) : socle de pierre à degrés, mystique
+        /// de pierre veinée de violet qui tend les bras, cristal flottant au-dessus d'elle. On s'en approche pour choisir une
+        /// brèche ; un portail violet s'ouvre alors devant la statue.</summary>
         public static void Place(GameBootstrap game, Vector3 pos, float yaw)
         {
-            var root = new GameObject("Oracle des Brèches"); root.transform.position = pos; root.transform.rotation = Quaternion.Euler(0, yaw, 0);
-            var pf = Resources.Load<GameObject>("Prefabs/Characters/PNJ_Mystique");
-            if (pf) { var npc = Object.Instantiate(pf, root.transform); npc.transform.localPosition = Vector3.zero; npc.transform.localRotation = Quaternion.identity; foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) Object.Destroy(c); }
-            // pierre de brèche : socle de roche sombre, amas de cristaux violets qui flotte et tourne au-dessus
+            var root = new GameObject("Statue des Brèches"); root.transform.position = pos; root.transform.rotation = Quaternion.Euler(0, yaw, 0);
             var lit = game && game.config && game.config.litMat ? game.config.litMat : LootDrop.litBase;
-            var stand = new GameObject("Pierre de brèche").transform; stand.SetParent(root.transform, false); stand.localPosition = new Vector3(1.8f, 0, 0.4f);
-            var rock = Resources.Load<GameObject>("Prefabs/World/Rocher1");
-            if (rock)
+            Material Stone(Color c, Color glow)
             {
-                var rk = Object.Instantiate(rock, stand); rk.transform.localPosition = Vector3.down * 0.15f; rk.transform.localScale = Vector3.one * 0.45f;
-                foreach (var r in rk.GetComponentsInChildren<Renderer>()) { var ms = r.sharedMaterials; for (int i = 0; i < ms.Length; i++) if (ms[i]) { ms[i] = new Material(ms[i]); ms[i].SetColor("_BaseColor", ms[i].GetColor("_BaseColor") * new Color(0.55f, 0.5f, 0.65f)); } r.sharedMaterials = ms; }
+                var m = lit ? new Material(lit) : new Material(Shader.Find("Universal Render Pipeline/Lit"));
+                m.SetColor("_BaseColor", c); if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", 0.25f);
+                if (glow.maxColorComponent > 0) { m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", glow); }
+                return m;
             }
-            var crys = RiftLevel.CrystalCluster(stand, new Vector3(0, 1.1f, 0), 1.5f, new Color(0.72f, 0.40f, 1f), lit, 7);
-            var fl = crys.gameObject.AddComponent<Floater>(); fl.bob = 0.25f; fl.period = 4f; fl.spin = 18f;
-            var l = new GameObject("Lueur").AddComponent<Light>(); l.transform.SetParent(stand, false); l.transform.localPosition = Vector3.up * 1.8f; l.type = LightType.Point; l.color = new Color(0.7f, 0.4f, 1f); l.intensity = 2.5f; l.range = 7f; l.shadows = LightShadows.None;
-            var tag = new GameObject("Nom").AddComponent<TextMesh>(); tag.transform.SetParent(root.transform, false); tag.transform.localPosition = Vector3.up * 2.5f;
-            tag.text = "Oracle des Brèches"; tag.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); tag.GetComponent<MeshRenderer>().sharedMaterial = tag.font.material;
-            tag.fontSize = 56; tag.characterSize = 0.045f; tag.anchor = TextAnchor.LowerCenter; tag.color = new Color(0.8f, 0.6f, 1f); tag.fontStyle = FontStyle.Bold;
-            root.AddComponent<RiftKeeper>();
+            var stone = Stone(new Color(0.46f, 0.44f, 0.50f), Color.black); var dark = Stone(new Color(0.30f, 0.28f, 0.34f), Color.black);
+            var statueMat = Stone(new Color(0.52f, 0.50f, 0.56f), new Color(0.12f, 0.04f, 0.22f));
+            GameObject Cyl(string n, Vector3 lp, Vector3 sc, Material m)
+            {
+                var g = GameObject.CreatePrimitive(PrimitiveType.Cylinder); g.name = n; g.transform.SetParent(root.transform, false); g.transform.localPosition = lp; g.transform.localScale = sc;
+                g.GetComponent<Renderer>().sharedMaterial = m; return g;
+            }
+            Cyl("Degré", new Vector3(0, 0.15f, 0), new Vector3(3.6f, 0.15f, 3.6f), dark);
+            Cyl("Degré", new Vector3(0, 0.45f, 0), new Vector3(2.8f, 0.15f, 2.8f), stone);
+            Cyl("Socle", new Vector3(0, 1.05f, 0), new Vector3(1.6f, 0.45f, 1.6f), stone);
+            Cyl("Corniche", new Vector3(0, 1.55f, 0), new Vector3(1.9f, 0.06f, 1.9f), dark);
+            // la mystique de pierre
+            var pf = Res.Load<GameObject>("Prefabs/Characters/PNJ_Mystique");
+            if (pf)
+            {
+                var st = Object.Instantiate(pf, root.transform); st.name = "Statue"; st.transform.localPosition = new Vector3(0, 1.6f, 0); st.transform.localRotation = Quaternion.identity; st.transform.localScale = Vector3.one * 1.35f;
+                foreach (var c in st.GetComponentsInChildren<Collider>()) Object.Destroy(c);
+                foreach (var r in st.GetComponentsInChildren<Renderer>()) { var ms = r.sharedMaterials; for (int i = 0; i < ms.Length; i++) ms[i] = statueMat; r.sharedMaterials = ms; }
+                st.AddComponent<StatuePose>();
+            }
+            // cristal au-dessus des mains, runes au sol là où s'ouvre le portail
+            var crys = RiftLevel.CrystalCluster(root.transform, new Vector3(0, 4.7f, 0), 1.0f, new Color(0.72f, 0.40f, 1f), lit, 7);
+            var fl = crys.gameObject.AddComponent<Floater>(); fl.bob = 0.25f; fl.period = 4f; fl.spin = 22f;
+            var l = new GameObject("Lueur").AddComponent<Light>(); l.transform.SetParent(root.transform, false); l.transform.localPosition = new Vector3(0, 4.6f, 0.6f); l.type = LightType.Point; l.color = new Color(0.7f, 0.4f, 1f); l.intensity = 3f; l.range = 10f; l.shadows = LightShadows.None;
+            var col = root.AddComponent<CapsuleCollider>(); col.center = new Vector3(0, 1.2f, 0); col.radius = 1.6f; col.height = 2.4f;
+            var tag = new GameObject("Nom").AddComponent<TextMesh>(); tag.transform.SetParent(root.transform, false); tag.transform.localPosition = Vector3.up * 5.8f;
+            tag.text = "Statue des Brèches"; tag.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); tag.GetComponent<MeshRenderer>().sharedMaterial = tag.font.material;
+            tag.fontSize = 56; tag.characterSize = 0.05f; tag.anchor = TextAnchor.LowerCenter; tag.color = new Color(0.8f, 0.6f, 1f); tag.fontStyle = FontStyle.Bold;
+            var k = root.AddComponent<RiftKeeper>();
+            k.gateAt = new GameObject("Seuil").transform; k.gateAt.SetParent(root.transform, false); k.gateAt.localPosition = new Vector3(0, 0, 4.2f);
+            Rift.ReturnPoint = GameBootstrap.Ground(k.gateAt.position + root.transform.forward * 2.5f);
+        }
+
+        /// <summary>Ouvre le portail violet devant la statue (un seul à la fois).</summary>
+        void OpenGate(int tier)
+        {
+            if (gate) Destroy(gate.gameObject);
+            gate = new GameObject("Portail de brèche").AddComponent<Portal>(); gate.transform.position = GameBootstrap.Ground(gateAt.position);
+            gate.gate = true; gate.glowColor = TownPortal.Violet; gate.displayName = tier <= 0 ? "Brèche astrale" : $"Grande Brèche {tier}"; gate.label = gate.displayName; gate.targetScene = "Korvalune_Breche";
+            gate.onEnter = () => Rift.Enter(tier);
+            Vfx.Shock(gate.transform.position, TownPortal.Violet, 4f); Sound.Play("sfx_portail", gate.transform.position, 1f);
+            FindFirstObjectByType<GameBootstrap>()?.Hud?.Notify("<color=#c58cff>Un portail s'ouvre devant la statue</color>");
         }
 
         void Update()
@@ -220,8 +289,8 @@ namespace Korvalune.Game
             if (!hero) { var p = FindFirstObjectByType<PlayerController>(); if (!p) return; hero = p.transform; }
             var cam = Camera.main; var tag = transform.Find("Nom"); if (tag && cam) tag.rotation = Quaternion.LookRotation(tag.position - cam.transform.position);
             float d = Vector3.Distance(hero.position, transform.position);
-            if (d < 3.2f && !shown && !panel) { shown = true; Open(); }
-            if (d > 5f) shown = false;
+            if (d < 4.4f && !shown && !panel) { shown = true; Open(); }
+            if (d > 6.5f) shown = false;
         }
 
         void Open()
@@ -238,9 +307,9 @@ namespace Korvalune.Game
             Button B(RectTransform parent, string s, Vector2 pos, Vector2 size, System.Action a) { var im = I(parent, UIStyle.Slot(), pos, size, new Color(0.7f, 0.55f, 0.85f)); im.raycastTarget = true; L(im.rectTransform, s, Vector2.zero, size, 30, Color.white); var b = im.gameObject.AddComponent<Button>(); b.targetGraphic = im; b.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.6f); a(); }); return b; }
             var shade = I(root, null, Vector2.zero, new Vector2(4000, 4000), new Color(0, 0, 0, 0.6f)); shade.raycastTarget = true;
             var p = I(root, UIStyle.Ornate(), Vector2.zero, new Vector2(1100, 760), Color.white).rectTransform;
-            L(p, "Oracle des Brèches", new Vector2(0, 310), new Vector2(900, 70), 44, UIStyle.Gold).fontStyle = FontStyle.Bold;
-            L(p, "« Les failles s'ouvrent sur des terres que la lune a oubliées. Remplis la jauge, abats le Gardien. »", new Vector2(0, 240), new Vector2(940, 70), 24, UIStyle.Parch);
-            B(p, "Ouvrir une Brèche astrale", new Vector2(0, 140), new Vector2(620, 84), () => { Close(); Rift.Enter(0); });
+            L(p, "Statue des Brèches", new Vector2(0, 310), new Vector2(900, 70), 44, UIStyle.Gold).fontStyle = FontStyle.Bold;
+            L(p, "« Les failles s'ouvrent sur des terres que la lune a oubliées. Remplis la jauge, abats le Gardien. »\nBrèche astrale : mourir ne fait pas quitter la brèche.  Grande Brèche : chaque mort coûte du temps.", new Vector2(0, 230), new Vector2(980, 90), 23, UIStyle.Parch);
+            B(p, "Ouvrir une Brèche astrale", new Vector2(0, 140), new Vector2(620, 84), () => { Close(); OpenGate(0); });
             L(p, $"Sceaux de brèche : {w.riftKeys}    —    meilleur niveau : {w.riftBest}", new Vector2(0, 50), new Vector2(940, 50), 26, UIStyle.Parch);
             var lvl = L(p, "", new Vector2(0, -40), new Vector2(500, 70), 40, Color.white);
             System.Action refresh = () => lvl.text = $"Grande Brèche : niveau {pick}";
@@ -250,12 +319,24 @@ namespace Korvalune.Game
             B(p, "Ouvrir la Grande Brèche (1 sceau)", new Vector2(0, -140), new Vector2(620, 84), () =>
             {
                 if (w.riftKeys <= 0) { L(p, "Il te faut un Sceau de brèche (Gardien d'une brèche astrale)", new Vector2(0, -210), new Vector2(940, 40), 22, new Color(1f, 0.5f, 0.45f)); return; }
-                w.riftKeys--; Close(); Rift.Enter(pick);
+                w.riftKeys--; Close(); OpenGate(pick);
             });
             B(p, "Plus tard", new Vector2(0, -290), new Vector2(300, 74), Close);
             Sound.UI("sfx_ui_ouvrir", 0.7f);
         }
 
         void Close() { if (panel) Destroy(panel); panel = null; }
+    }
+
+    /// <summary>Statue : la pose de repos est jouée une image puis figée (la pierre ne bouge plus).</summary>
+    public class StatuePose : MonoBehaviour
+    {
+        int frames;
+        void LateUpdate()
+        {
+            if (++frames < 3) return;
+            foreach (var a in GetComponentsInChildren<Animator>()) a.enabled = false;
+            enabled = false;
+        }
     }
 }

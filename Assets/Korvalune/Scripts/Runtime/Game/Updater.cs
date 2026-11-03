@@ -25,11 +25,11 @@ namespace Korvalune.Game
         {
             var go = new GameObject("Mise à jour", typeof(RectTransform), typeof(Image));
             var rt = (RectTransform)go.transform; rt.SetParent(root, false);
-            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1); rt.pivot = new Vector2(0.5f, 1); rt.anchoredPosition = new Vector2(0, -30); rt.sizeDelta = new Vector2(900, 80);
+            rt.anchorMin = rt.anchorMax = new Vector2(0, 0); rt.pivot = new Vector2(0, 0); rt.anchoredPosition = new Vector2(96, 192); rt.sizeDelta = new Vector2(1000, 54);   // en bas à gauche, au-dessus de l'état du contenu
             var u = go.AddComponent<Updater>(); u.bg = go.GetComponent<Image>(); u.bg.sprite = UIStyle.Slot(); u.bg.type = Image.Type.Sliced; u.bg.color = new Color(0.9f, 0.7f, 0.35f);
             var t = new GameObject("T", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); t.rectTransform.SetParent(rt, false);
             t.rectTransform.anchorMin = Vector2.zero; t.rectTransform.anchorMax = Vector2.one; t.rectTransform.offsetMin = t.rectTransform.offsetMax = Vector2.zero;
-            t.font = font; t.fontSize = 30; t.alignment = TextAnchor.MiddleCenter; t.color = Color.white; t.raycastTarget = false;
+            t.font = font; t.fontSize = 26; t.alignment = TextAnchor.MiddleCenter; t.color = Color.white; t.raycastTarget = false;
             t.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
             u.label = t;
             var b = go.AddComponent<Button>(); b.targetGraphic = u.bg; b.onClick.AddListener(u.Click);
@@ -44,16 +44,17 @@ namespace Korvalune.Game
             {
                 r.timeout = 8;
                 yield return r.SendWebRequest();
-                if (r.result != UnityWebRequest.Result.Success || !int.TryParse(r.downloadHandler.text.Trim(), out remote)) { gameObject.SetActive(false); yield break; }
+                if (r.result != UnityWebRequest.Result.Success || !int.TryParse(r.downloadHandler.text.Trim(), out remote))
+                { label.text = $"<size=20><color=#a08c6c>Version 0.1.{InstalledBuild} — vérification des mises à jour impossible (hors ligne)</color></size>"; yield break; }
             }
-            if (remote <= InstalledBuild) { gameObject.SetActive(false); yield break; }
+            if (remote <= InstalledBuild) { label.text = $"<size=20><color=#8fd08f>Version 0.1.{InstalledBuild} — à jour</color></size>"; yield break; }
             bg.enabled = true;
             label.text = $"Mise à jour disponible (version 0.1.{remote}) — toucher pour télécharger";
         }
 
         void Click()
         {
-            if (busy) return;
+            if (busy || remote <= InstalledBuild) return;              // déjà à jour : rien à télécharger
             if (Application.platform != RuntimePlatform.Android) { Application.OpenURL(Page); return; }
             try
             {

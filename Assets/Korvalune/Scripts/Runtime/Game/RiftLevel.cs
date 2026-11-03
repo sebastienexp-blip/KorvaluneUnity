@@ -154,7 +154,7 @@ namespace Korvalune.Game
 
         GameObject Put(string path, Vector3 pos, float yaw, float scale = 1f, Color? tint = null)
         {
-            var pf = Resources.Load<GameObject>("Prefabs/World/" + path); if (!pf) return null;
+            var pf = Res.Load<GameObject>("Prefabs/World/" + path); if (!pf) return null;
             var go = Instantiate(pf, root); go.transform.position = pos; go.transform.rotation = Quaternion.Euler(0, yaw, 0); go.transform.localScale *= scale;
             var c = tint ?? th.tint;
             foreach (var r in go.GetComponentsInChildren<Renderer>())
@@ -342,6 +342,21 @@ namespace Korvalune.Game
                     else if (th.ice) Crystal(p, 1.2f + R() * 1.6f, false);
                     else { var b = Put("Ville/M_Caisses", p, rng.Next(360), 0.9f, new Color(0.7f, 0.7f, 0.65f)); if (b) Breakable.Make(b, 1.0f); }
                 }
+                // sol habité : cailloux, ossements, bosses de neige ou souches, répartis dans la salle
+                int clutter = 6 + rng.Next(6);
+                for (int k = 0; k < clutter; k++)
+                {
+                    var q = Surface(Cell(r.xMin + rng.Next(r.width), r.yMin + rng.Next(r.height)) + new Vector3(R() * 3 - 1.5f, 0, R() * 3 - 1.5f));
+                    int kind = rng.Next(3);
+                    if (kind == 0) { var st = Put("Rocher" + rng.Next(3), q + Vector3.down * 0.05f, rng.Next(360), 0.12f + R() * 0.18f, rockTint); if (st) foreach (var cc in st.GetComponentsInChildren<Collider>()) Kill(cc); }
+                    else if (kind == 1 && !th.ice) { var b = Put("Crypte/D_Os" + rng.Next(2), q, rng.Next(360), 0.9f, new Color(0.8f, 0.78f, 0.7f)); if (b) foreach (var cc in b.GetComponentsInChildren<Collider>()) Kill(cc); }
+                    else
+                    {
+                        var mound = GameObject.CreatePrimitive(PrimitiveType.Sphere); mound.name = th.ice ? "Congère" : "Souche"; Kill(mound.GetComponent<Collider>()); mound.transform.SetParent(root);
+                        mound.transform.position = q + Vector3.down * 0.15f; mound.transform.localScale = th.ice ? new Vector3(1.6f + R(), 0.35f, 1.2f + R()) : new Vector3(0.45f, 0.5f + R() * 0.4f, 0.45f);
+                        mound.GetComponent<Renderer>().sharedMaterial = th.ice ? Mat(new Color(0.85f, 0.9f, 0.96f), 0.4f) : Mat(new Color(0.35f, 0.33f, 0.30f), 0.1f);
+                    }
+                }
                 // feux de camp / lueurs des salles
                 var c = Surface(Cell((int)r.center.x, (int)r.center.y));
                 if (th.ice) Crystal(c + new Vector3(T * 0.7f, 0, 0), 2.6f, false);
@@ -385,7 +400,7 @@ namespace Korvalune.Game
                     for (int k = 0; k < 4; k++) { n += amp * (Tile(u, v, f, o + k * 5.3f) - 0.5f); amp *= 0.5f; f *= 2f; }
                     float s = 1f + n * contrast * 2.2f;
                     if (!cracks) { float patch = Tile(u, v, 2f, o + 120f); s *= Mathf.Lerp(0.78f, 1.12f, patch); }   // taches plus sombres / plus claires
-                    if (cracks) { float w = Tile(u, v, 3f, o + 40f); s *= 0.82f + 0.18f * Mathf.Sin((v * 9f + w * 2.5f) * Mathf.PI * 2f); s *= Mathf.Lerp(0.8f, 1.05f, Tile(u, v, 16f, o + 80f)); }   // strates de roche
+                    if (cracks) { float w = Tile(u, v, 4f, o + 40f); float fr = Mathf.Abs(Tile(u, v, 5f, o + 60f) - 0.5f); s *= Mathf.Lerp(0.62f, 1f, Mathf.Clamp01(fr * 9f)); s *= 0.92f + 0.16f * w; s *= Mathf.Lerp(0.85f, 1.05f, Tile(u, v, 18f, o + 80f)); }   // roche : fissures fines et blocs, sans bandes
                     px[y * S + x] = new Color(c.r * s, c.g * s, c.b * s, 1);
                 }
             var t = new Texture2D(S, S, TextureFormat.RGBA32, true) { wrapMode = TextureWrapMode.Repeat, name = "Sol de brèche" }; t.SetPixels(px); t.Apply(true, true);

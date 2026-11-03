@@ -18,6 +18,8 @@ namespace Korvalune.Game
         public Transform highlightRoot;           // structure qui s'illumine (escalier, arche…) ; à défaut, ce seul objet
         public float radius = 1.8f, revealDistance = 14f;
         public Color glowColor = new Color(1f, 0.78f, 0.35f);
+        public bool gate;                         // portail magique ovale (portail de ville, portail de brèche)
+        public System.Action onEnter;             // action à la place du chargement simple (portail de ville, brèche)
         bool used, armed;
         readonly List<Material> mats = new List<Material>();
         Light lamp; Transform nameTag; TextMesh nameText; Transform shaft; float heat;
@@ -26,6 +28,7 @@ namespace Korvalune.Game
         {
             if (!Application.isPlaying) return;
             Vfx.Runes(transform.position, Element.Neant, radius, 99999f);
+            if (gate) PortalGate.Build(transform, glowColor);
             lamp = new GameObject("Lueur").AddComponent<Light>(); lamp.transform.SetParent(transform, false); lamp.transform.localPosition = Vector3.up * 1.6f;
             lamp.type = LightType.Point; lamp.color = glowColor; lamp.range = 9; lamp.intensity = 1.2f; lamp.shadows = LightShadows.None;
             // matériaux de la structure : copies avec émission (illumination au survol)
@@ -97,6 +100,7 @@ namespace Korvalune.Game
             FX.Burst(transform.position + Vector3.up, glowColor, 40, 4f, 0.15f, 0.8f, -0.4f);
             FindFirstObjectByType<GameBootstrap>()?.Persist();
             Sound.UI("sfx_portail", 1f);
+            if (onEnter != null) { onEnter(); return; }
             GameBootstrap.nextSpawn = useSceneSpawn ? (Vector3?)null : arrival;
             SceneManager.LoadScene(targetScene);
         }

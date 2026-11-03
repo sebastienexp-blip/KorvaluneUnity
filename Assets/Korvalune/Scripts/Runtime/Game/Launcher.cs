@@ -19,6 +19,11 @@ namespace Korvalune.Game
         public string nextScene = "Korvalune_Selection";
         [Tooltip("Adresse du catalogue de contenu (JSON). Vide : tout le contenu est inclus dans l'APK.")]
         public string contentUrl = "";
+        /// <summary>Catalogue de contenu propre à cette version du jeu (paquets construits avec le même code).</summary>
+        public static string ContentCatalog
+        {
+            get { var v = Application.version.Split('.'); return $"https://github.com/sebastienexp-blip/KorvaluneUnity/releases/download/contenu-{v[v.Length - 1]}/catalogue.json"; }
+        }
 
         RawImage bg; RectTransform bgRt; Image bar, barBack; Text status, notes, version; Button play; Text playText;
         readonly List<(RectTransform rt, Image im, float speed, float phase)> embers = new List<(RectTransform, Image, float, float)>();
@@ -72,14 +77,14 @@ namespace Korvalune.Game
             sub.color = new Color(0.86f, 0.80f, 0.70f); sub.fontStyle = FontStyle.Italic; sub.gameObject.AddComponent<Outline>().effectColor = Color.black;
 
             // notes de version (panneau défilant à droite)
-            var np = Img(root, "Notes", UIStyle.Panel(), new Vector2(1, 1), new Vector2(-60, -60), new Vector2(720, 700)); np.type = Image.Type.Sliced; np.color = new Color(1, 1, 1, 0.9f);
+            var np = Img(root, "Notes", UIStyle.Panel(), new Vector2(1, 1), new Vector2(-60, -50), new Vector2(760, 820)); np.type = Image.Type.Sliced; np.color = new Color(1, 1, 1, 0.9f);
             var nt = Label(np.rectTransform, "Titre", "Notes de version", 38, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(40, -26), new Vector2(640, 52)); nt.color = UIStyle.Gold;
             var view = new GameObject("Vue", typeof(RectTransform), typeof(RectMask2D), typeof(Image)).GetComponent<RectTransform>();
-            view.SetParent(np.rectTransform, false); view.anchorMin = view.anchorMax = new Vector2(0, 1); view.pivot = new Vector2(0, 1); view.anchoredPosition = new Vector2(36, -90); view.sizeDelta = new Vector2(650, 580);
+            view.SetParent(np.rectTransform, false); view.anchorMin = view.anchorMax = new Vector2(0, 1); view.pivot = new Vector2(0, 1); view.anchoredPosition = new Vector2(36, -90); view.sizeDelta = new Vector2(690, 700);
             view.GetComponent<Image>().color = new Color(0, 0, 0, 0.01f);
             notesContent = new GameObject("Contenu", typeof(RectTransform)).GetComponent<RectTransform>(); notesContent.SetParent(view, false);
-            notesContent.anchorMin = notesContent.anchorMax = new Vector2(0, 1); notesContent.pivot = new Vector2(0, 1); notesContent.sizeDelta = new Vector2(630, 2400);
-            notes = Label(notesContent, "Texte", NotesText(), 25, TextAnchor.UpperLeft, new Vector2(0, 1), Vector2.zero, new Vector2(630, 2400));
+            notesContent.anchorMin = notesContent.anchorMax = new Vector2(0, 1); notesContent.pivot = new Vector2(0, 1); notesContent.sizeDelta = new Vector2(670, 3000);
+            notes = Label(notesContent, "Texte", NotesText(), 25, TextAnchor.UpperLeft, new Vector2(0, 1), Vector2.zero, new Vector2(670, 3000));
             notes.lineSpacing = 1.1f;
             var sr = view.gameObject.AddComponent<ScrollRect>(); sr.content = notesContent; sr.horizontal = false; sr.movementType = ScrollRect.MovementType.Clamped;
 
@@ -90,27 +95,27 @@ namespace Korvalune.Game
             bar = Img(barBack.rectTransform, "Remplissage", UIStyle.Bar(), new Vector2(0, 0.5f), new Vector2(4, 0), new Vector2(1092, 22)); bar.type = Image.Type.Filled; bar.fillMethod = Image.FillMethod.Horizontal; bar.color = new Color(0.95f, 0.70f, 0.30f); bar.fillAmount = 0;
             version = Label(root, "Version", "Version " + Application.version, 24, TextAnchor.LowerLeft, new Vector2(0, 0), new Vector2(100, 40), new Vector2(600, 34)); version.color = new Color(0.7f, 0.65f, 0.58f);
 
-            var pb = Img(root, "Jouer", UIStyle.Button(), new Vector2(1, 0), new Vector2(-90, 70), new Vector2(420, 130)); pb.raycastTarget = true; pb.type = Image.Type.Simple;
-            playText = Label(pb.rectTransform, "T", "JOUER", 54, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(420, 130)); playText.color = UIStyle.Gold; playText.fontStyle = FontStyle.Bold;
+            var pb = Img(root, "Jouer", UIStyle.Button(), new Vector2(0, 1), new Vector2(96, -318), new Vector2(400, 112));          // colonne de gauche, sous le titre pb.raycastTarget = true; pb.type = Image.Type.Simple;
+            playText = Label(pb.rectTransform, "T", "JOUER", 52, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(400, 112)); playText.color = UIStyle.Gold; playText.fontStyle = FontStyle.Bold;
             play = pb.gameObject.AddComponent<Button>(); play.targetGraphic = pb; play.onClick.AddListener(() => SceneManager.LoadScene(nextScene)); play.interactable = false;
             pb.color = new Color(0.6f, 0.55f, 0.5f);
 
             // revoir la cinématique d'introduction
-            var ib = Img(root, "Introduction", UIStyle.Slot(), new Vector2(1, 0), new Vector2(-110, 215), new Vector2(380, 64)); ib.type = Image.Type.Sliced; ib.raycastTarget = true;
-            var it = Label(ib.rectTransform, "T", "Revoir l'introduction", 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 64)); it.color = UIStyle.Parch;
+            var ib = Img(root, "Introduction", UIStyle.Slot(), new Vector2(0, 1), new Vector2(106, -588), new Vector2(380, 58)); ib.type = Image.Type.Sliced; ib.raycastTarget = true;
+            var it = Label(ib.rectTransform, "T", "Revoir l'introduction", 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 58)); it.color = UIStyle.Parch;
             var ibb = ib.gameObject.AddComponent<Button>(); ibb.targetGraphic = ib; ibb.onClick.AddListener(() => { if (!IntroPlayer.Playing) IntroPlayer.Show(font); });
-            // menu principal : options, crédits, quitter (au-dessus de « Revoir l'introduction »)
-            MenuButton(root, "Options", 290, () => OptionsMenu.Open(font));
-            MenuButton(root, "Crédits", 365, ShowCredits);
-            MenuButton(root, "Quitter", 440, () => Application.Quit());
+            // menu principal : une seule colonne à gauche (Jouer, Options, Crédits, Introduction, Quitter) ; les notes à droite
+            MenuButton(root, "Options", 448, () => OptionsMenu.Open(font));
+            MenuButton(root, "Crédits", 518, ShowCredits);
+            MenuButton(root, "Quitter", 658, () => Application.Quit());
             Settings.Apply();
             if (!AutoTest.Enabled) Updater.Attach(root, font);           // mise à jour depuis le jeu (personnages conservés)
         }
 
         void MenuButton(RectTransform root, string label, float y, System.Action click)
         {
-            var b = Img(root, label, UIStyle.Slot(), new Vector2(1, 0), new Vector2(-110, y), new Vector2(380, 64)); b.type = Image.Type.Sliced; b.raycastTarget = true;
-            var t = Label(b.rectTransform, "T", label, 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 64)); t.color = UIStyle.Parch;
+            var b = Img(root, label, UIStyle.Slot(), new Vector2(0, 1), new Vector2(106, -y), new Vector2(380, 58)); b.type = Image.Type.Sliced; b.raycastTarget = true;
+            var t = Label(b.rectTransform, "T", label, 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 58)); t.color = UIStyle.Parch;
             var bb = b.gameObject.AddComponent<Button>(); bb.targetGraphic = b; bb.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.6f); click(); });
         }
 
@@ -188,7 +193,9 @@ namespace Korvalune.Game
         IEnumerator UpdateContent()
         {
             yield return null;
-            if (string.IsNullOrEmpty(contentUrl))
+            if (string.IsNullOrEmpty(contentUrl)) contentUrl = ContentCatalog;
+            // version tout-en-un (éditeur, ancien APK) : les scènes sont déjà dans le jeu, rien à télécharger
+            if (Application.isEditor || Application.CanStreamedLevelBeLoaded("Korvalune_Vallee"))
             {
                 bar.fillAmount = 1; status.text = "Contenu à jour — tout est inclus dans cette version"; Ready(); yield break;
             }
@@ -200,8 +207,11 @@ namespace Korvalune.Game
                 yield return req.SendWebRequest();
                 if (req.result != UnityWebRequest.Result.Success)
                 {
-                    status.text = File.Exists(Path.Combine(dir, "catalogue.json")) ? "Hors ligne — contenu déjà téléchargé utilisé" : "Connexion impossible : le contenu sera téléchargé au prochain lancement";
-                    bar.fillAmount = File.Exists(Path.Combine(dir, "catalogue.json")) ? 1 : 0; Ready(); yield break;
+                    var local = Path.Combine(dir, "catalogue.json");
+                    if (File.Exists(local) && MountFrom(JsonUtility.FromJson<Catalog>(File.ReadAllText(local))))
+                    { status.text = "Hors ligne — contenu déjà téléchargé utilisé"; bar.fillAmount = 1; Ready(); }
+                    else { status.text = "Connexion requise pour télécharger le contenu du jeu — relancez une fois connecté"; bar.fillAmount = 0; }
+                    yield break;
                 }
                 cat = JsonUtility.FromJson<Catalog>(req.downloadHandler.text);
                 File.WriteAllText(Path.Combine(dir, "catalogue.json"), req.downloadHandler.text);
@@ -226,7 +236,7 @@ namespace Korvalune.Game
                     {
                         long now = done + have + (long)req.downloadedBytes;
                         bar.fillAmount = total > 0 ? (float)now / total : 1;
-                        status.text = $"Téléchargement du jeu : {Mo(now)} / {Mo(total)}  ({i + 1}/{todo.Count} — {p.name})";
+                        status.text = $"Téléchargement du contenu : {Mo(now)} / {Mo(total)}  ({i + 1}/{todo.Count} — {p.name})";
                         yield return null;
                     }
                     if (req.result != UnityWebRequest.Result.Success) { status.text = "Téléchargement interrompu — il reprendra au prochain lancement"; Ready(); yield break; }
@@ -234,7 +244,17 @@ namespace Korvalune.Game
                 if (File.Exists(f)) File.Delete(f);
                 File.Move(part, f); File.WriteAllText(f + ".hash", p.hash); done += p.size;
             }
-            bar.fillAmount = 1; status.text = $"Contenu à jour (version {cat.version})"; Ready();
+            bar.fillAmount = 1;
+            if (MountFrom(cat)) { status.text = $"Contenu à jour (version {cat.version})"; Ready(); }
+            else status.text = "Contenu incomplet — relancez le jeu pour terminer le téléchargement";
+        }
+
+        /// <summary>Ouvre les paquets du catalogue (déjà téléchargés).</summary>
+        static bool MountFrom(Catalog cat)
+        {
+            if (cat == null || cat.packs == null || cat.packs.Count == 0) return false;
+            var names = new List<string>(); foreach (var p in cat.packs) names.Add(p.name);
+            return Content.Mount(names);
         }
 
         static string Mo(long b) => $"{b / 1048576.0:0.0} Mo";

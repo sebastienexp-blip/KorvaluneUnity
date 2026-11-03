@@ -17,7 +17,7 @@ namespace Korvalune.Game
         class Act { public string label; public Func<bool> can; public Action run; }
         class Tab { public string name; public Func<List<Entry>> list; public Func<Entry, string> detail; public Func<Entry, List<Act>> acts; public bool multi; }
 
-        GameObject shopPanel; Text shopTitle, shopPurse, shopDetail; Merchant shopOwner;
+        GameObject shopPanel; Text shopTitle, shopPurse, shopDetail; RectTransform shopDetailBox; Merchant shopOwner;
         readonly List<(Image frame, Image glow, Text label)> shopCells = new List<(Image, Image, Text)>();
         readonly List<(Image bg, Text t)> shopTabs = new List<(Image, Text)>();
         readonly List<(Image bg, Text t, Button b)> shopActs = new List<(Image, Text, Button)>();
@@ -52,8 +52,7 @@ namespace Korvalune.Game
                 shopCells.Add(c);
             }
             var side = Img(panel, "Fiche", UIStyle.Bar(), new Vector2(0, 1), new Vector2(1020, -196), new Vector2(630, 720)); side.type = Image.Type.Sliced; side.color = new Color(0.06f, 0.045f, 0.035f, 0.95f);
-            shopDetail = Label(side.rectTransform, "Texte", "", 23, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(22, -16), new Vector2(586, 300));
-            FitText(shopDetail, 13);
+            shopDetailBox = Scroll(side.rectTransform, new Vector2(22, -16), new Vector2(586, 300), out shopDetail, 24);     // fiche lisible : texte fixe, défilant
             for (int i = 0; i < 5; i++)
             {
                 int k = i;
@@ -493,6 +492,7 @@ namespace Korvalune.Game
                 currentActs = tab.multi ? tab.acts(null) : new List<Act>();
             }
             else { shopDetail.text = tab.detail(sel); currentActs = tab.acts(sel); }
+            if (shopDetailBox) FitScroll(shopDetailBox, shopDetail, 300);
             for (int i = 0; i < shopActs.Count; i++)
             {
                 bool on = i < currentActs.Count; shopActs[i].bg.gameObject.SetActive(on); if (!on) continue;

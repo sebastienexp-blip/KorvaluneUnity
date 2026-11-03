@@ -49,7 +49,7 @@ namespace Korvalune.Game
                 var it = eq ? eq.In(slot) : null; if (it == null || !Map.TryGetValue(it.baseName ?? "", out var m)) continue;
                 if (it.baseName == "Bâton" && Loot.PlayerClass == Powers.M) m.model = "SoulStaff";                 // bâton d'os de la nécromancienne
                 if (!sockets.TryGetValue(m.socket, out var s)) continue;
-                var pf = Resources.Load<GameObject>("Prefabs/Weapons/" + m.model); if (!pf) continue;
+                var pf = Res.Load<GameObject>("Prefabs/Weapons/" + m.model); if (!pf) continue;
                 var g = Instantiate(pf, s, false); g.name = m.model; g.transform.localPosition = Vector3.zero; g.transform.localRotation = Quaternion.identity;
                 foreach (var c in g.GetComponentsInChildren<Collider>()) Destroy(c);
                 spawned.Add(g); used.Add(m.socket);
