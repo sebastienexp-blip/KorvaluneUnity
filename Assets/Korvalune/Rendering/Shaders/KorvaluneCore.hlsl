@@ -52,6 +52,18 @@ half3 KorvRim(InputData d)
     return fres * _KorvRimStrength * (_KorvRimColor.rgb + mainLight.color * 0.3h);
 }
 
+// peau : la lumière diffuse sous la surface. Bande rougeâtre adoucie au terminateur (là où la lumière bascule dans
+// l'ombre) et transparence des parties fines à contre-jour (oreilles, nez, doigts).
+half3 KorvSkin(InputData d, SurfaceData s)
+{
+    Light L = GetMainLight(d.shadowCoord);
+    half ndl = dot(d.normalWS, L.direction);
+    half wrap = saturate((ndl + 0.55h) / 1.55h) - saturate(ndl);
+    half back = pow(saturate(dot(d.viewDirectionWS, -L.direction)), 4.0h) * 0.22h;
+    half sh = 0.45h + 0.55h * L.shadowAttenuation;
+    return s.albedo * half3(0.95h, 0.32h, 0.20h) * (wrap * 0.55h + back) * L.color * L.distanceAttenuation * sh;
+}
+
 void KorvaluneFragment(Varyings input, out half4 outColor : SV_Target0)
 {
     UNITY_SETUP_INSTANCE_ID(input);
@@ -70,6 +82,9 @@ void KorvaluneFragment(Varyings input, out half4 outColor : SV_Target0)
     half4 color = UniversalFragmentPBR(inputData, surfaceData);
 #if defined(KORV_RIM)
     color.rgb += KorvRim(inputData) * color.a;
+#endif
+#if defined(_KORV_SKIN)
+    color.rgb += KorvSkin(inputData, surfaceData);
 #endif
     color.rgb = MixFog(color.rgb, inputData.fogCoord);
     color.a = OutputAlpha(color.a, IsSurfaceTypeTransparent(_Surface));

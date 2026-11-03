@@ -190,6 +190,8 @@ namespace Korvalune.EditorTools
                 mat.SetFloat("_DetailAlbedoMapScale", 1f); mat.SetFloat("_DetailNormalMapScale", 0.45f);
             }
             Keyword(mat, "_DETAIL_MULX2", detail);
+            // peau : diffusion sous la surface (shader des personnages)
+            Keyword(mat, "_KORV_SKIN", mat.shader.name == "Korvalune/PBR Personnage" && (fm.name.EndsWith("_Skin") || fm.name.EndsWith("_Body")));
             mat.SetFloat("_Cull", fm.doubleSided ? 0f : 2f);
             mat.SetFloat("_AlphaClip", fm.alphaClip ? 1f : 0f);
             mat.SetFloat("_Cutoff", fm.cutoff);
