@@ -124,7 +124,7 @@ def void_cloth(W=1024, H=2048, seed=851):
     return t
 
 
-def tentacle_flesh(S=1024, seed=861, tone=(0.36, 0.16, 0.20), belly=(0.62, 0.44, 0.40)):
+def tentacle_flesh(S=1024, seed=861, tone=(0.36, 0.16, 0.20), belly=(0.62, 0.44, 0.40), cups=True):
     """Chair de pieuvre : dessus pourpre marbré de taches sombres, dessous rosé, peau luisante plissée, ventouses
     (anneaux clairs à creux sombre) en deux rangées le long de V (bas de la texture = dessous)."""
     from forge.texgen import cavity_ao
@@ -136,7 +136,7 @@ def tentacle_flesh(S=1024, seed=861, tone=(0.36, 0.16, 0.20), belly=(0.62, 0.44,
     base = base * (1 - under[..., None]) + np.array(belly)[None, None] * under[..., None] * (0.85 + 0.25 * g[..., None])
     # ventouses : deux rangées dans la bande du dessous
     cup = np.zeros((S, S))
-    for cx in (0.44, 0.56):
+    for cx in ((0.44, 0.56) if cups else ()):
         for k in range(28):
             cy = (k + 0.5 + 0.5 * (cx > 0.5)) / 28
             d = np.sqrt(((xx - cx) * 1.0) ** 2 + ((yy - cy) * 1.0) ** 2)
