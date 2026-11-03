@@ -66,6 +66,11 @@ namespace Korvalune.Game
             float k = Brightness == 0 ? 0.8f : Brightness == 2 ? 1.25f : Brightness == 3 ? 1.5f : 1f;
             RenderSettings.ambientSkyColor = ambSky * k; RenderSettings.ambientEquatorColor = ambEq * k; RenderSettings.ambientGroundColor = ambGround * k; RenderSettings.ambientIntensity = ambInt * k;
             AmbientProbe();
+            // lumière de contour des personnages (shader Korvalune/PBR Personnage) : plus marquée sous terre pour détacher les silhouettes
+            bool under = !Terrain.activeTerrain;
+            Shader.SetGlobalColor("_KorvRimColor", under ? new Color(0.62f, 0.58f, 0.82f) : new Color(0.55f, 0.6f, 0.75f));
+            Shader.SetGlobalFloat("_KorvRimStrength", under ? 0.45f : 0.32f);
+            Shader.SetGlobalFloat("_KorvRimPower", 3.5f);
             bool underground = !Terrain.activeTerrain;
             foreach (var l in Object.FindObjectsByType<Light>(FindObjectsSortMode.None))
             {

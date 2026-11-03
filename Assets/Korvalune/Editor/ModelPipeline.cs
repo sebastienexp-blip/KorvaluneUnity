@@ -133,6 +133,14 @@ namespace Korvalune.EditorTools
             if (!AssetDatabase.IsValidFolder(dir)) AssetDatabase.CreateFolder(e.dir, "Materials");
             var path = dir + "/" + fm.name + ".mat";
             var shader = Shader.Find("Universal Render Pipeline/Lit");
+            // personnages, monstres, montures et armes : shader PBR maison (Lit d'URP + lumière de contour), s'il compile
+            var d = e.dir.Replace('\\', '/');
+            if (d.Contains("/Heroes") || d.Contains("/Enemies") || d.Contains("/Mounts") || d.Contains("/Characters") || d.Contains("/Weapons"))
+            {
+                var korv = Shader.Find("Korvalune/PBR Personnage");
+                if (korv != null && !ShaderUtil.ShaderHasError(korv)) shader = korv;
+                else Debug.LogWarning("[Modèles] shader Korvalune/PBR Personnage indisponible, URP Lit utilisé pour " + fm.name);
+            }
             var mat = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (mat == null) { mat = new Material(shader) { name = fm.name }; AssetDatabase.CreateAsset(mat, path); }
             else if (mat.shader != shader) mat.shader = shader;
