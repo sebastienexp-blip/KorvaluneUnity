@@ -160,7 +160,15 @@ namespace Korvalune.EditorTools
             EclipseBuilder.ValleyEntrance();
             SegmentBuilder.ValleyEntrances();               // portails vers la Forêt (nord), le Désert (sud) et les Pics (ouest)
             CaveBuilder.ValleyEntrance();
-            BridgeObject();
+            // abords des routes : objets cassables (hors de la ville, du fleuve et de la côte)
+            PropKit.Ensure();
+            var clutter = new GameObject("Abords des routes").transform; var crng = new System.Random(4242);
+            foreach (var road in Roads)
+                PropKit.AlongPath(road, Ground, q => q.magnitude > TownBuilder.WallR + 14f && RiverDist(q) > 16f && q.x < 225f && Mathf.Abs(q.x) < 300 && Mathf.Abs(q.y) < 300, clutter, crng, null, 26f);
+            // ponts de bois à chaque croisement d'une route et du fleuve
+            int nb = 0;
+            foreach (var (cp, cd) in BridgeBuilder.Crossings(Roads, River))
+                BridgeBuilder.Build(nb == 0 ? "Pont" : $"Pont {nb}", Ground(cp - cd * 19f), Ground(cp + cd * 19f), 5.6f, Base - 3.5f, null, 11 + nb++);
             var rng = new System.Random(7);
             // cimetière (camp des squelettes) : pierres tombales et rochers
             var grave = Grave;                                    // entre l'enceinte de la ville et le fleuve
@@ -247,6 +255,9 @@ namespace Korvalune.EditorTools
             door.arrival = new Vector3(-4f + 3 * 4f, 0.05f, (5 - 9) * 4f);     // pied de l'escalier de la crypte (case E, un pas à côté)
             cam.transform.position = game.playerSpawn + new Vector3(0, 8, -9); cam.transform.LookAt(game.playerSpawn);
 
+            // bords : murs invisibles 22 m avant le bord (on ne voit pas le bout du terrain) ; roche à l'ouest, sable au sud,
+            // herbe au nord, la mer à l'est
+            SegmentBuilder.Enclose(Size / 2, 22f, -8f, 30f, new[] { SegmentBuilder.BeltMaterial("Vallee_N", "Herbe", new Color(0.8f, 0.85f, 0.7f)), SegmentBuilder.BeltMaterial("Vallee_S", "Sable", Color.white), null, SegmentBuilder.BeltMaterial("Vallee_O", "Roche", Color.white) });
             MapShots.Save("Korvalune_Vallee");                                   // photo de la région pour la grande carte
             EditorSceneManager.SaveScene(scene, ScenePath);
             CI.Step("vallée : sauvegarde de la scène");
@@ -426,7 +437,7 @@ namespace Korvalune.EditorTools
 
         /// <summary>Touffe d'herbe en 3D : une douzaine de brins effilés et courbés qui rayonnent du centre, teinte du pied
         /// (sombre) à la pointe (claire) par un dégradé, normales tournées vers le ciel (éclairage doux, sans face noire).</summary>
-        static GameObject GrassClumpPrefab()
+        public static GameObject GrassClumpPrefab()
         {
             string dir = WorldArt + "/Terrain", path = dir + "/Touffe.prefab";
             var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path); if (existing) return existing;
@@ -724,7 +735,7 @@ namespace Korvalune.EditorTools
         }
 
         /// <summary>Matériau de bâtiment (shader du monde) d'après un jeu de textures du château : pierre de taille, ardoises.</summary>
-        static Material GateMaterial(string name, string texBase, float tiling)
+        public static Material GateMaterial(string name, string texBase, float tiling)
         {
             var path = Root + "/Rendering/" + name + ".mat";
             var m = AssetDatabase.LoadAssetAtPath<Material>(path);

@@ -234,6 +234,118 @@ def rock(S=1024, seed=2105):
     return col, h, np.clip(0.12 + 0.12 * g, 0, 1)
 
 
+def sand(S=1024, seed=2106):
+    """Sable du désert : rides de vent (ondulations parallèles déformées, creux plus sombres et crêtes claires),
+    grain fin, quelques graviers et fragments de coquilles ; mat (aucune brillance)."""
+    r = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
+    warp = fbm(S, S, r, base=S / 3, octaves=4) * 0.9 + fbm(S, S, r, base=S / 10, octaves=3) * 0.25
+    # 22 rides par tuile (entier : raccord), légère obliquité entière aussi
+    ph = 2 * np.pi * (22 * yy + 3 * xx) + 2.0 * warp
+    rip = np.sin(ph); rip = np.sign(rip) * np.abs(rip) ** 0.7                         # crêtes un peu vives
+    rip_h = (rip + 1) * 0.5
+    amp = 0.55 + 0.45 * n01(fbm(S, S, r, base=S / 4, octaves=3))                     # rides plus ou moins marquées
+    g = n01(fbm(S, S, r, base=S / 6, octaves=5)); grain = r.random((S, S)); grain = gaussian_filter(grain, 0.6, mode='wrap')
+    base = np.array([0.80, 0.63, 0.40])[None, None]
+    col = base * (0.86 + 0.18 * g[..., None]) * (0.86 + 0.22 * (rip_h * amp)[..., None]) * (0.93 + 0.14 * n01(grain)[..., None])
+    col = col * np.array([1.0, 0.985, 0.96])[None, None] ** (1 - rip_h[..., None])       # creux légèrement plus froids
+    L = Layer(S, col, 0.35 * rip_h * amp + 0.05 * g + 0.03 * n01(grain))
+    L.smooth = np.full((S, S), 0.05)
+    _pebbles(L, r, 900, 0.8, 1.8, (0.62, 0.50, 0.34), 0.3)
+    _pebbles(L, r, 120, 1.5, 3.5, (0.52, 0.42, 0.30), 0.25)
+    _pebbles(L, r, 60, 1.0, 2.2, (0.90, 0.86, 0.78), 0.1)                            # éclats de coquilles blanchies
+    h = gaussian_filter(L.h, 0.7, mode='wrap')
+    return L.col, h, np.clip(L.smooth, 0, 0.1)
+
+
+def snow(S=1024, seed=2107):
+    """Neige tassée : congères douces, traces de vent, croûte légèrement brillante, cristaux scintillants épars,
+    quelques cailloux et brins secs qui percent."""
+    r = np.random.default_rng(seed)
+    g = n01(fbm(S, S, r, base=S / 5, octaves=5)); fine = n01(fbm(S, S, r, base=S / 90, octaves=3))
+    wind = n01(fbm(S, S, r, base=S / 40, octaves=3, aniso=(4.0, 1.0)))
+    col = np.array([0.86, 0.89, 0.94])[None, None] * (0.88 + 0.12 * g[..., None]) * (0.95 + 0.06 * fine[..., None])
+    col = col * (1 - 0.06 * (1 - g)[..., None] * np.array([1.0, 0.7, 0.3])[None, None])        # creux bleutés
+    L = Layer(S, col, 0.5 * g + 0.12 * wind + 0.04 * fine)
+    L.smooth = 0.25 + 0.2 * wind
+    _pebbles(L, r, 140, 1.5, 3.5, (0.36, 0.35, 0.34), 0.25)
+    _blades(L, r, 600, 10, 1, lambda x, y, s: np.array([0.55, 0.48, 0.30])[None] * (0.7 + 0.4 * s[:, None]), base_h=0.5, lean=0.5, clump=(40, 5))
+    sp = r.random((S, S)) > 0.9985; L.smooth[sp] = 0.95; L.col[sp] = np.array([1.0, 1.0, 1.0])        # cristaux
+    return L.col, gaussian_filter(L.h, 0.8, mode='wrap'), np.clip(L.smooth, 0, 1)
+
+
+def ash(S=1024, seed=2108):
+    """Cendre volcanique : poussière gris anthracite, scories noires poreuses, éclats d'obsidienne brillants,
+    croûtes de soufre jaunâtres par endroits."""
+    r = np.random.default_rng(seed)
+    g = n01(fbm(S, S, r, base=S / 6, octaves=5)); fine = n01(fbm(S, S, r, base=S / 120, octaves=3))
+    sulf = np.clip((n01(fbm(S, S, r, base=S / 9, octaves=4)) - 0.72) * 3.5, 0, 1)
+    col = np.array([0.20, 0.19, 0.18])[None, None] * (0.75 + 0.4 * g[..., None]) * (0.85 + 0.25 * fine[..., None])
+    col = col * (1 - sulf[..., None]) + np.array([0.52, 0.46, 0.22])[None, None] * sulf[..., None] * (0.7 + 0.3 * g[..., None])
+    L = Layer(S, col, 0.3 * g + 0.08 * fine)
+    L.smooth = np.full((S, S), 0.08)
+    _pebbles(L, r, 2200, 1.0, 3.0, (0.09, 0.085, 0.08), 0.35)                          # scories
+    _pebbles(L, r, 260, 3.0, 7.0, (0.13, 0.12, 0.11), 0.3)
+    n0 = len(L.smooth)
+    _pebbles(L, r, 300, 0.8, 2.0, (0.05, 0.05, 0.06), 0.1)                             # obsidienne
+    return L.col, gaussian_filter(L.h, 0.6, mode='wrap'), np.clip(L.smooth + (L.col.sum(-1) < 0.2) * 0.4, 0, 1)
+
+
+def mud(S=1024, seed=2109):
+    """Vase du marais : boue noire-brune très humide, flaques luisantes, mousse vert-olive, roseaux couchés,
+    feuilles pourrissantes."""
+    r = np.random.default_rng(seed)
+    g = n01(fbm(S, S, r, base=S / 6, octaves=5)); fine = n01(fbm(S, S, r, base=S / 100, octaves=3))
+    wet = np.clip((n01(fbm(S, S, r, base=S / 7, octaves=4)) - 0.55) * 3, 0, 1)
+    moss = np.clip((n01(fbm(S, S, r, base=S / 10, octaves=5)) - 0.6) * 3, 0, 1) * (1 - wet)
+    col = np.array([0.17, 0.14, 0.10])[None, None] * (0.75 + 0.4 * g[..., None]) * (0.85 + 0.25 * fine[..., None]) * (1 - 0.4 * wet[..., None])
+    col = col * (1 - moss[..., None]) + np.array([0.20, 0.24, 0.10])[None, None] * (0.7 + 0.4 * fine[..., None]) * moss[..., None]
+    L = Layer(S, col, 0.3 * g + 0.15 * moss - 0.25 * wet + 0.05 * fine)
+    L.smooth = 0.15 + 0.75 * wet
+    _blades(L, r, 2200, 22, 1, lambda x, y, s: np.array([0.30, 0.30, 0.14])[None] * (0.6 + 0.5 * s[:, None]), base_h=0.3, lean=0.9, clump=(90, 10))
+    _pebbles(L, r, 400, 2.0, 5.0, (0.24, 0.17, 0.08), 0.35)                            # feuilles
+    return L.col, gaussian_filter(L.h, 0.7, mode='wrap'), np.clip(L.smooth, 0, 1)
+
+
+def redrock(S=1024, seed=2110):
+    """Grès rouge des canyons : strates horizontales très marquées alternant rouge brique, ocre et crème, plaques
+    fracturées et sable rouge dans les creux."""
+    col, h, sm = rock(S, seed)
+    r = np.random.default_rng(seed + 1)
+    yy = np.mgrid[0:S, 0:S][0] / S
+    band = (np.sin((yy * 14 + 0.5 * fbm(S, S, r, base=S / 4, octaves=3)) * np.pi * 2) * 0.5 + 0.5)
+    lum = col.mean(-1, keepdims=True) / 0.42
+    tone = np.array([0.58, 0.27, 0.16])[None, None] * (1 - band[..., None]) + np.array([0.74, 0.50, 0.32])[None, None] * band[..., None]
+    return np.clip(tone * lum, 0, 1), h + 0.25 * band, sm * 0.8
+
+
+def voidground(S=1024, seed=2111):
+    """Sol de l'Abîme : ardoise noire violacée fracturée, veines de néant violettes (lumineuses dans la couleur),
+    éclats de cristal."""
+    col, h, sm = rock(S, seed)
+    r = np.random.default_rng(seed + 1)
+    lum = col.mean(-1, keepdims=True) / 0.42
+    base = np.array([0.15, 0.12, 0.19])[None, None] * lum
+    crack = np.clip((0.55 - lum[..., 0]) * 5, 0, 1)                                  # fissures de la roche
+    pulse = n01(fbm(S, S, r, base=S / 6, octaves=3))
+    glow = gaussian_filter(crack, 1.2, mode='wrap') * np.clip((pulse - 0.35) * 2.5, 0, 1)
+    col = base * (1 - glow[..., None]) + np.array([0.62, 0.28, 0.95])[None, None] * glow[..., None]
+    return np.clip(col, 0, 1), h - 0.4 * glow, np.clip(sm + 0.3 * glow, 0, 1)
+
+
+def lava(S=512, seed=2112):
+    """Lave (pour la nappe de lave, émissive) : croûte noire en plaques, fissures incandescentes jaune-orange."""
+    r = np.random.default_rng(seed)
+    gy, gx = np.mgrid[0:6, 0:6]; pts = (np.stack([gy.ravel(), gx.ravel()], 1) + 0.5 + r.uniform(-0.4, 0.4, (36, 2))) * S / 6
+    d1, d2, cid = _voronoi(S, r, 36, pts % S)
+    e = (d2 - d1) / 2.0 + 6.0 * (n01(fbm(S, S, r, base=S / 20, octaves=4)) - 0.5)
+    hot = np.clip(1 - e / 9.0, 0, 1) ** 1.5
+    g = n01(fbm(S, S, r, base=S / 8, octaves=5))
+    crust = np.array([0.06, 0.04, 0.035])[None, None] * (0.7 + 0.6 * g[..., None])
+    glow = np.array([1.0, 0.42, 0.06])[None, None] * hot[..., None] + np.array([1.0, 0.85, 0.35])[None, None] * (hot ** 4)[..., None]
+    return np.clip(crust * (1 - hot[..., None]) + glow, 0, 1)
+
+
 def save(folder, prefix, col, h, smooth, strength=0.9):
     os.makedirs(folder, exist_ok=True)
     u8 = lambda a: (np.clip(a, 0, 1) * 255 + 0.5).astype(np.uint8)
@@ -252,5 +364,6 @@ if __name__ == '__main__':
     import sys
     out = sys.argv[1] if len(sys.argv) > 1 else 'out/terrain_hd'
     S = int(sys.argv[2]) if len(sys.argv) > 2 else 1024
-    for name, fn in (('Herbe', grass), ('SousBois', forest_floor), ('Chemin', dirt), ('Pave', cobbles), ('Roche', rock)):
+    for name, fn in (('Herbe', grass), ('SousBois', forest_floor), ('Chemin', dirt), ('Pave', cobbles), ('Roche', rock), ('Sable', sand), ('Neige', snow), ('Cendre', ash), ('Boue', mud), ('GresRouge', redrock), ('Neant', voidground)):
         col, h, sm = fn(S); save(out, name, col, h, sm); print('couche', name, flush=True)
+    Image.fromarray((np.clip(lava(512), 0, 1) * 255 + 0.5).astype(np.uint8)).save(os.path.join(out, 'Lave_BaseMap.png'), optimize=True)

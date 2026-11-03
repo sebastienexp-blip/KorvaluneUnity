@@ -14,11 +14,17 @@ namespace Korvalune.Game
         /// <summary>Toutes les régions du monde (ajouter ici chaque nouvelle région : elle apparaît dans tous les téléporteurs).</summary>
         public static readonly Region[] Regions =
         {
-            new Region { scene = "Korvalune_Vallee",   name = "Vallée de Korvalune",  level = 1,  desc = "La ville, le château, le vieux cimetière" },
-            new Region { scene = "Korvalune_Foret",    name = "Forêt de l'Astral",    level = 8,  desc = "Les grands bois au nord de la vallée" },
-            new Region { scene = "Korvalune_Eclipse",  name = "Cité de l'Éclipse",    level = 14, desc = "Le Refuge Lunaire, au bord du golfe" },
-            new Region { scene = "Korvalune_Desert",   name = "Désert des Étoiles",   level = 18, desc = "Dunes et ruines du temple des étoiles, au sud" },
-            new Region { scene = "Korvalune_Pics",     name = "Pics Sélénites",       level = 26, desc = "Les cols de montagne, à l'ouest" },
+            new Region { scene = "Korvalune_Vallee",   name = "Vallée de Korvalune",   level = 1,   desc = "La ville, le château, le vieux cimetière" },
+            new Region { scene = "Korvalune_Foret",    name = "Forêt de l'Astral",     level = 8,   desc = "Bois profonds et menhirs astraux" },
+            new Region { scene = "Korvalune_Eclipse",  name = "Cité de l'Éclipse",     level = 14,  desc = "Le Refuge Lunaire, au bord du golfe" },
+            new Region { scene = "Korvalune_Desert",   name = "Désert des Étoiles",    level = 25,  desc = "Dunes et temple des étoiles" },
+            new Region { scene = "Korvalune_Pics",     name = "Pics Sélénites",        level = 45,  desc = "Cols de montagne et tours de guet" },
+            new Region { scene = "Korvalune_Cote",     name = "Côte des Naufrages",    level = 65,  desc = "Falaises, épaves et Mer des Tempêtes" },
+            new Region { scene = "Korvalune_Marais",   name = "Marais de Brumenoire",  level = 85,  desc = "Vase, mares et feux follets" },
+            new Region { scene = "Korvalune_Toundra",  name = "Toundra de Givrecœur",  level = 105, desc = "Neige éternelle et lacs gelés" },
+            new Region { scene = "Korvalune_Volcan",   name = "Terres de Cendrefer",   level = 125, desc = "Cendre, lave et forges oubliées" },
+            new Region { scene = "Korvalune_Canyon",   name = "Canyon Écarlate",       level = 150, desc = "Gorges et pitons de grès rouge" },
+            new Region { scene = "Korvalune_Abime",    name = "Abîme du Néant",        level = 175, desc = "Le bord du monde, jusqu'au niveau 200" },
         };
 
         public static Region Here { get { var s = SceneManager.GetActiveScene().name; foreach (var r in Regions) if (r.scene == s) return r; return null; } }
@@ -63,7 +69,7 @@ namespace Korvalune.Game
             foreach (var r in Regions)
             {
                 if (r.scene == Here.scene) continue;
-                var p = FreeSpot(spawn, 7f, 26f, 1.5f, taken, 5f); if (p == null) continue;
+                var p = FreeSpot(spawn, 7f, 44f, 1.5f, taken, 4.5f); if (p == null) continue;
                 taken.Add(p.Value);
                 var target = r;
                 var g = new GameObject("Portail : " + r.name).AddComponent<Portal>(); g.transform.position = p.Value;
@@ -80,6 +86,18 @@ namespace Korvalune.Game
             }
         }
 
+        /// <summary>Pierre taillée texturée (celle des maisons et de la fontaine de la ville), teintée, répétée « tiling » fois ;
+        /// null si le décor de la ville n'est pas chargé.</summary>
+        public static Material TexturedStone(Color tint, float tiling, string source = "Prefabs/World/Ville/M_Fontaine")
+        {
+            var pf = Res.Load<GameObject>(source); if (!pf) return null;
+            var r = pf.GetComponentInChildren<Renderer>(); if (!r || !r.sharedMaterial) return null;
+            var m = new Material(r.sharedMaterial);
+            if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", m.GetColor("_BaseColor") * tint);
+            if (m.HasProperty("_BaseMap")) m.SetTextureScale("_BaseMap", Vector2.one * tiling);
+            return m;
+        }
+
         static void Build(GameBootstrap game, Vector3 pos)
         {
             var root = new GameObject("Pierre de voyage"); root.transform.position = pos;
@@ -91,7 +109,7 @@ namespace Korvalune.Game
                 if (glow.maxColorComponent > 0) { m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", glow); }
                 return m;
             }
-            var stone = M(new Color(0.48f, 0.47f, 0.50f), Color.black); var rune = M(new Color(0.2f, 0.5f, 0.9f), new Color(0.35f, 0.9f, 2.2f));
+            var stone = TexturedStone(new Color(0.92f, 0.9f, 0.95f), 2f) ?? M(new Color(0.48f, 0.47f, 0.50f), Color.black); var rune = M(new Color(0.2f, 0.5f, 0.9f), new Color(0.35f, 0.9f, 2.2f));
             void Part(PrimitiveType t, Vector3 lp, Vector3 sc, Vector3 rot, Material m, bool keepCol = false)
             {
                 var g = GameObject.CreatePrimitive(t); g.transform.SetParent(root.transform, false); g.transform.localPosition = lp; g.transform.localScale = sc; g.transform.localRotation = Quaternion.Euler(rot);
@@ -136,24 +154,26 @@ namespace Korvalune.Game
             Image I(RectTransform parent, Sprite s, Vector2 pos, Vector2 size, Color c) { var im = new GameObject("I", typeof(RectTransform), typeof(Image)).GetComponent<Image>(); im.rectTransform.SetParent(parent, false); im.rectTransform.anchoredPosition = pos; im.rectTransform.sizeDelta = size; im.sprite = s; im.type = Image.Type.Sliced; im.color = c; return im; }
             Text L(RectTransform parent, string s, Vector2 pos, Vector2 size, int fs, Color c, TextAnchor a = TextAnchor.MiddleCenter) { var t = new GameObject("T", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); t.rectTransform.SetParent(parent, false); t.rectTransform.anchoredPosition = pos; t.rectTransform.sizeDelta = size; t.font = font; t.fontSize = fs; t.alignment = a; t.color = c; t.text = s; t.raycastTarget = false; t.supportRichText = true; t.gameObject.AddComponent<Outline>().effectColor = Color.black; return t; }
             var shade = I(root, null, Vector2.zero, new Vector2(4000, 4000), new Color(0, 0, 0, 0.6f)); shade.raycastTarget = true;
-            float h = 240 + Regions.Length * 102;
-            var p = I(root, UIStyle.Ornate(), Vector2.zero, new Vector2(1100, h), Color.white).rectTransform;
-            I(p, null, Vector2.zero, new Vector2(1030, h - 70), new Color(0.30f, 0.235f, 0.17f, 0.96f));
+            int rows = (Regions.Length + 1) / 2;                                   // deux colonnes
+            float h = 250 + rows * 112, W = 1700;
+            var p = I(root, UIStyle.Ornate(), Vector2.zero, new Vector2(W, h), Color.white).rectTransform;
+            I(p, null, Vector2.zero, new Vector2(W - 70, h - 70), new Color(0.30f, 0.235f, 0.17f, 0.96f));
             L(p, "Pierre de voyage", new Vector2(0, h / 2 - 70), new Vector2(900, 70), 44, UIStyle.Gold).fontStyle = FontStyle.Bold;
-            float y = h / 2 - 150; var here = Here;
-            foreach (var r in Regions)
+            var here = Here;
+            for (int k = 0; k < Regions.Length; k++)
             {
+                var r = Regions[k]; int col = k / rows, line = k % rows;
+                float x = col == 0 ? -400 : 400, y = h / 2 - 160 - line * 112;
                 bool open = lvl >= r.level, cur = here != null && here.scene == r.scene;
-                var row = I(p, UIStyle.Slot(), new Vector2(0, y), new Vector2(960, 94), cur ? new Color(0.55f, 0.75f, 1f) : open ? new Color(0.95f, 0.82f, 0.62f) : new Color(0.5f, 0.46f, 0.42f));
-                L(row.rectTransform, $"<b>{r.name}</b>", new Vector2(-150, 16), new Vector2(620, 44), 32, open ? Color.white : new Color(0.75f, 0.72f, 0.68f), TextAnchor.MiddleLeft);
-                L(row.rectTransform, r.desc, new Vector2(-150, -22), new Vector2(620, 34), 22, UIStyle.Parch, TextAnchor.MiddleLeft);
-                L(row.rectTransform, cur ? "<color=#9fd7ff>Vous êtes ici</color>" : open ? $"Niveau {r.level}+  —  <color=#ffd95a>Voyager</color>" : $"<color=#ff8a7a>Niveau {r.level} requis</color>", new Vector2(300, 0), new Vector2(320, 44), 26, Color.white);
+                var row = I(p, UIStyle.Slot(), new Vector2(x, y), new Vector2(780, 100), cur ? new Color(0.55f, 0.75f, 1f) : open ? new Color(0.95f, 0.82f, 0.62f) : new Color(0.5f, 0.46f, 0.42f));
+                L(row.rectTransform, $"<b>{r.name}</b>", new Vector2(-120, 18), new Vector2(500, 44), 30, open ? Color.white : new Color(0.75f, 0.72f, 0.68f), TextAnchor.MiddleLeft);
+                L(row.rectTransform, r.desc, new Vector2(-120, -22), new Vector2(500, 34), 21, UIStyle.Parch, TextAnchor.MiddleLeft);
+                L(row.rectTransform, cur ? "<color=#9fd7ff>Vous êtes ici</color>" : open ? $"Niv. {r.level}+\n<color=#ffd95a>Voyager</color>" : $"<color=#ff8a7a>Niveau {r.level}\nrequis</color>", new Vector2(270, 0), new Vector2(220, 90), 25, Color.white);
                 if (open && !cur)
                 {
                     row.raycastTarget = true; var b = row.gameObject.AddComponent<Button>(); b.targetGraphic = row; var target = r;
                     b.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.6f); Travel(target); });
                 }
-                y -= 102;
             }
             var close = I(p, UIStyle.Slot(), new Vector2(0, -h / 2 + 70), new Vector2(300, 74), new Color(0.8f, 0.7f, 0.6f)); close.raycastTarget = true;
             L(close.rectTransform, "Fermer", Vector2.zero, new Vector2(300, 74), 30, UIStyle.Gold);

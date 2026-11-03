@@ -31,6 +31,7 @@ namespace Korvalune.Game
         public int levelOffset = 0;
         [Tooltip("Hauteur de la surface de l'eau (nage) ; très bas = pas d'eau")]
         public float waterLevel = -10000f;
+        [Tooltip("Nappe dangereuse (lave, néant) : pas de camp en dessous, elle brûle le héros (ZoneLook)")] public float hazardLevel = -10000f;
         [Tooltip("Peupler la zone de camps de monstres générés (vallée)")]
         public bool populate = false;
         [Tooltip("Lieux (hameaux) où aucun camp de monstres n'est généré")]
@@ -52,13 +53,13 @@ namespace Korvalune.Game
         public static int LevelAt(Vector3 p)
         {
             if (!Instance) return 1;
-            if (Rift.Active) { int pl = SaveSystem.Current != null ? SaveSystem.Current.level : 1; return Mathf.Clamp(pl + Rift.Tier / 5, 1, 80); }   // brèche : au niveau du héros
+            if (Rift.Active) { int pl = SaveSystem.Current != null ? SaveSystem.Current.level : 1; return Mathf.Clamp(pl + Rift.Tier / 5, 1, PlayerController.MaxLevel); }   // brèche : au niveau du héros
             if (Instance.zoneLevel > 0) return Instance.zoneLevel;
             var d = p - Instance.safeCenter; d.y = 0;
             float beyond = Mathf.Max(0, d.magnitude - Instance.safeRadius - 8f);
             int l = 1 + Instance.levelOffset + Mathf.FloorToInt(beyond / Mathf.Max(1f, Instance.metersPerLevel));
-            if (p.x < -140f) l += 3;
-            return Mathf.Clamp(l, 1, 80);
+            if (p.x < -140f && Instance.levelOffset == 0) l += 3;                 // montagnes de l'ouest de la vallée
+            return Mathf.Clamp(l, 1, PlayerController.MaxLevel);
         }
         public List<Quest.Objective> questSteps = new List<Quest.Objective>();
         public PlayerController Player { get; private set; }

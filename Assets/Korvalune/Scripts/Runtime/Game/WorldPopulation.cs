@@ -55,7 +55,7 @@ namespace Korvalune.Game
                 var flat = p - game.safeCenter; flat.y = 0;
                 if (flat.magnitude < game.safeRadius + 24f) continue;                 // ni en ville ni à ses portes
                 p = GameBootstrap.Ground(p);
-                if (p.y < water + 0.8f || p.y > water + 62f) continue;                // pas dans l'eau ni sur les crêtes
+                if (p.y < water + 0.8f || p.y > Mathf.Max(water, 0f) + 62f || p.y < game.hazardLevel + 1.2f) continue;   // ni dans l'eau, la lave ou le néant, ni sur les crêtes
                 float slope = 0;
                 foreach (var dd in new[] { Vector3.right, Vector3.forward, Vector3.left, Vector3.back })
                     slope = Mathf.Max(slope, Mathf.Abs(GameBootstrap.Ground(p + dd * 5f).y - p.y));
