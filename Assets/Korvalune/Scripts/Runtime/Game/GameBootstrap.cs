@@ -36,6 +36,8 @@ namespace Korvalune.Game
         [Tooltip("Lieux (hameaux) où aucun camp de monstres n'est généré")]
         public List<Vector3> noCamps = new List<Vector3>();
         public static GameBootstrap Instance { get; private set; }
+        /// <summary>Vie de tous les monstres (gardiens et champions compris) : −20 % pour des combats plus nerveux.</summary>
+        public const float EnemyHpScale = 0.8f;
         public static float WaterLevel => Instance ? Instance.waterLevel : -10000f;
 
         /// <summary>Le point est-il dans la zone sûre (la ville) ?</summary>
@@ -227,7 +229,7 @@ namespace Korvalune.Game
             var cc = e.AddComponent<CharacterController>(); cc.height = height / e.transform.localScale.y; cc.radius = radius / e.transform.localScale.y; cc.center = new Vector3(0, cc.height / 2 + 0.02f, 0);
             int bl = Mathf.Max(1, t.level);
             float hpM = Mathf.Max(0.55f, HpAt(level) / HpAt(bl)), dmgM = Mathf.Max(0.6f, DmgAt(level) / DmgAt(bl)), xpM = Mathf.Max(0.5f, XpAt(level) / XpAt(bl));
-            hpM *= Difficulty.Hp; dmgM *= Difficulty.Damage; xpM *= Difficulty.Xp;
+            hpM *= Difficulty.Hp * EnemyHpScale; dmgM *= Difficulty.Damage; xpM *= Difficulty.Xp;
             if (Rift.Active) { hpM *= Rift.HpMult; dmgM *= Rift.DmgMult; xpM *= Rift.XpMult; }             // difficulté choisie (Éprouvant, Funeste, Abîmes)
             var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = Mathf.Round(t.hp * hpM); h.hp = h.maxHp; h.armor = t.armor * Mathf.Min(2f, dmgM); h.displayName = t.label; h.level = level;
             var ai = e.AddComponent<EnemyAI>(); ai.type = t; ai.damage = t.damage * dmgM; ai.xp = Mathf.Round(t.xp * xpM);

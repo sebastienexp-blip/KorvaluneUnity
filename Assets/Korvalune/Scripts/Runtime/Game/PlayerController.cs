@@ -255,7 +255,10 @@ namespace Korvalune.Game
 
         /// <summary>Attaque de base à distance : carreau d'arbalète (Chasseur des cendres), trait du Néant (Archimage).</summary>
         /// <summary>À distance seulement avec une arme équipée (arbalète, arc, bâton, sceptre) ; à mains nues, on frappe aux poings.</summary>
-        public bool Ranged => (Loot.PlayerClass == Powers.V || Loot.PlayerClass == Powers.E) && Armed;
+        /// <summary>Classes magiques (Archimage du Néant, Nécromancienne) : l'attaque de base est un trait de magie lancé de
+        /// la main, avec ou sans arme (plus de « claques » au corps à corps).</summary>
+        public static bool Magic => Loot.PlayerClass == Powers.E || Loot.PlayerClass == Powers.M;
+        public bool Ranged => (Loot.PlayerClass == Powers.V && Armed) || Magic;
         public bool Bow { get { var e = GetComponent<Equipment>(); var w = e ? e.In(Slot.Arme) : null; return w != null && w.baseName != null && w.baseName.StartsWith("Arc"); } }
         bool HasClip(string n) => Anim && ClipLength(n) > 0 && Anim.HasState(0, Animator.StringToHash(n));
         public bool Armed { get { var e = GetComponent<Equipment>(); return e && e.In(Slot.Arme) != null; } }
@@ -323,8 +326,9 @@ namespace Korvalune.Game
             nextAttack = Time.time + attackCooldown;
             FaceNearest(AttackReach + 2.5f);
             AimAt = Target && !Target.Dead && Vector3.Distance(Target.transform.position, transform.position) <= AttackReach + 2.5f ? Target : null;
-            Gesture(!Armed ? (HasClip("Sk_Poing") ? "Sk_Poing" : "Attack") : Bow && HasClip("Sk_TirArc") ? "Sk_TirArc" : "Attack");
-            Sound.Play(!Armed ? "sfx_epee_whoosh" : Loot.PlayerClass == Powers.E ? "sfx_trait_neant" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, !Armed ? 0.45f : 0.75f);
+            if (Magic) Gesture(HasClip("Sk_Flick") ? "Sk_Flick" : HasClip("Sk_CastFwd") ? "Sk_CastFwd" : "Attack");     // geste de lancer, pas de coup
+            else Gesture(!Armed ? (HasClip("Sk_Poing") ? "Sk_Poing" : "Attack") : Bow && HasClip("Sk_TirArc") ? "Sk_TirArc" : "Attack");
+            Sound.Play(Magic ? "sfx_trait_neant" : !Armed ? "sfx_epee_whoosh" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, !Armed && !Magic ? 0.45f : 0.75f);
             lockUntil = Time.time + (Ranged ? 0.3f : 0.45f);
             StartCoroutine(Ranged ? Shoot(0.22f) : Hit(0.38f));
         }
@@ -333,17 +337,20 @@ namespace Korvalune.Game
         {
             yield return new WaitForSeconds(delay);
             bool bolt = Loot.PlayerClass == Powers.V;
+            // trait magique : Néant (violet) pour l'Archimage, Ombre (vert spectral) pour la Nécromancienne
+            var el = bolt ? Element.Physique : Loot.PlayerClass == Powers.M ? Element.Ombre : Element.Neant;
+            var glow = Vfx.Of(el).outer; glow.a = 1;
             var start = transform.position + Vector3.up * 1.25f + transform.forward * 0.6f;
             var dir = transform.forward;
             if (Target && !Target.Dead) { var to = Target.transform.position + Vector3.up * 1.25f - start; to.y = 0; if (to.sqrMagnitude > 0.01f) dir = to.normalized; }
             float dmg = attackDamage * damageMult;
-            Vfx.Projectile(start, dir, bolt ? Element.Physique : Element.Neant, bolt ? 30f : 22f, AttackReach + 3f, bolt ? 0.3f : 0.35f, (pt, h) =>
+            Vfx.Projectile(start, dir, el, bolt ? 30f : 22f, AttackReach + 3f, bolt ? 0.3f : 0.35f, (pt, h) =>
             {
                 if (!h) return;
                 bool crit = Random.value < critChance;
                 h.TakeDamage(dmg * (crit ? 2f : 1f) * Random.Range(0.9f, 1.1f), Health, crit);
-                Sound.Play(Sound.WeaponOf(Loot.PlayerClass).hit, h.transform.position, 0.8f);
-                FX.Burst(h.transform.position + Vector3.up * 1.1f, crit ? new Color(1f, 0.85f, 0.3f) : bolt ? new Color(1f, 0.55f, 0.25f) : new Color(0.7f, 0.4f, 1f), crit ? 24 : 12);
+                Sound.Play(Magic ? "sfx_ennemi_touche" : Sound.WeaponOf(Loot.PlayerClass).hit, h.transform.position, 0.8f);
+                FX.Burst(h.transform.position + Vector3.up * 1.1f, crit ? new Color(1f, 0.85f, 0.3f) : bolt ? new Color(1f, 0.55f, 0.25f) : glow, crit ? 24 : 12);
             }, Faction.Player, false, bolt);
         }
 
