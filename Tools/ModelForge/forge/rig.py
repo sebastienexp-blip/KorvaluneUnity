@@ -118,6 +118,11 @@ class Asset:
         self.slot = {}           # nom de pièce → emplacement d'équipement (maillage séparé dans le FBX)
 
     def add(self, name, mesh, mat, slot=None):
+        # poids à quatre influences partout (les pièces sculptées sur un ou deux os n'en ont pas quatre)
+        J = getattr(mesh, 'J', None)
+        if J is not None and J.ndim == 2 and J.shape[1] < 4:
+            k = 4 - J.shape[1]
+            mesh.J = np.c_[J, np.repeat(J[:, :1], k, 1)]; mesh.W = np.c_[mesh.W, np.zeros((len(mesh.W), k))]
         self.parts.append((name, mesh, mat))
         if slot: self.slot[name] = slot
         return mesh

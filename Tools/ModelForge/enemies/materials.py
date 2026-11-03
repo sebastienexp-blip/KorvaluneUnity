@@ -122,3 +122,56 @@ def void_cloth(W=1024, H=2048, seed=851):
     thread = np.clip((lum - 0.12) * 6, 0, 1)
     t.emit = np.clip(np.array([0.55, 0.20, 1.0])[None, None] * thread[..., None] * 0.9, 0, 1)
     return t
+
+
+def tentacle_flesh(S=1024, seed=861, tone=(0.36, 0.16, 0.20), belly=(0.62, 0.44, 0.40)):
+    """Chair de pieuvre : dessus pourpre marbré de taches sombres, dessous rosé, peau luisante plissée, ventouses
+    (anneaux clairs à creux sombre) en deux rangées le long de V (bas de la texture = dessous)."""
+    from forge.texgen import cavity_ao
+    r = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
+    g = n01(fbm(S, S, r, base=S / 10, octaves=5)); spots = np.clip((n01(fbm(S, S, r, base=S / 30, octaves=3)) - 0.62) * 4, 0, 1)
+    under = np.clip(1 - np.abs(xx - 0.5) * 3.2, 0, 1)                              # bande du dessous (u ≈ 0,5)
+    base = np.array(tone)[None, None] * (0.75 + 0.45 * g[..., None]) * (1 - 0.45 * spots[..., None])
+    base = base * (1 - under[..., None]) + np.array(belly)[None, None] * under[..., None] * (0.85 + 0.25 * g[..., None])
+    # ventouses : deux rangées dans la bande du dessous
+    cup = np.zeros((S, S))
+    for cx in (0.44, 0.56):
+        for k in range(28):
+            cy = (k + 0.5 + 0.5 * (cx > 0.5)) / 28
+            d = np.sqrt(((xx - cx) * 1.0) ** 2 + ((yy - cy) * 1.0) ** 2)
+            cup = np.maximum(cup, np.clip(1 - np.abs(d - 0.011) / 0.004, 0, 1) - np.clip(1 - d / 0.007, 0, 1) * 0.0)
+            cup = np.where(d < 0.007, -1.0, cup)
+    base = base + np.array([0.20, 0.14, 0.12])[None, None] * np.clip(cup, 0, 1)[..., None] - np.array([0.25, 0.18, 0.16])[None, None] * np.clip(-cup, 0, 1)[..., None]
+    wr = np.clip(1 - np.abs(fbm(S, S, r, base=S / 40, octaves=3)) * 10, 0, 1) ** 2
+    hgt = 0.5 * g + 1.2 * cup - 0.4 * wr
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.8), np.zeros((S, S)), np.clip(0.55 + 0.3 * g, 0, 1), np.clip(cavity_ao(hgt, 4, 0.1), 0, 1))
+
+
+def crab_shell(S=1024, seed=871, tone=(0.55, 0.16, 0.08), dark=(0.16, 0.05, 0.04)):
+    """Carapace de crabe : rouge-orangé passant au brun sombre, granulations, petits tubercules clairs, taches de
+    vase, liserés foncés, vernis humide."""
+    from forge.texgen import cavity_ao
+    r = np.random.default_rng(seed)
+    g = n01(fbm(S, S, r, base=S / 6, octaves=5)); fine = n01(fbm(S, S, r, base=S / 80, octaves=3))
+    tub = np.clip(n01(gaussian_filter(r.random((S, S)), 2.0, mode='wrap')) * 3 - 2.3, 0, 1)
+    mud = np.clip((n01(fbm(S, S, r, base=S / 9, octaves=4)) - 0.62) * 3, 0, 1)
+    base = np.array(dark)[None, None] * (1 - g[..., None]) + np.array(tone)[None, None] * g[..., None]
+    base = base * (0.85 + 0.25 * fine[..., None]) + np.array([0.45, 0.35, 0.25])[None, None] * tub[..., None] * 0.6
+    base = base * (1 - mud[..., None] * 0.6) + np.array([0.12, 0.11, 0.07])[None, None] * mud[..., None] * 0.6
+    hgt = 0.6 * g + 0.4 * fine + 1.4 * tub
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.9), np.zeros((S, S)), np.clip(0.55 + 0.2 * fine - 0.3 * mud, 0, 1), np.clip(cavity_ao(hgt, 4, 0.1), 0, 1))
+
+
+def frost_fur_skin(S=2048, seed=881):
+    """Peau tannée du wendigo : gris cendré, tendue sur les os, crevasses noires, givre dans les creux, taches de sang séché."""
+    from forge.texgen import cavity_ao
+    r = np.random.default_rng(seed)
+    g = n01(fbm(S, S, r, base=S / 8, octaves=6)); cr = np.clip(1 - np.abs(fbm(S, S, r, base=S / 12, octaves=4)) * 12, 0, 1) ** 2
+    blood = np.clip((n01(fbm(S, S, r, base=S / 10, octaves=4)) - 0.72) * 3, 0, 1)
+    base = np.array([0.55, 0.55, 0.56])[None, None] * (0.7 + 0.4 * g[..., None]) * (1 - 0.6 * cr[..., None])
+    base = base * (1 - blood[..., None] * 0.7) + np.array([0.22, 0.05, 0.04])[None, None] * blood[..., None] * 0.7
+    frost = cr * 0.6
+    base = base + np.array([0.25, 0.3, 0.35])[None, None] * frost[..., None]
+    hgt = 0.7 * g - 1.2 * cr
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.8), np.zeros((S, S)), np.clip(0.25 + 0.3 * frost, 0, 1), np.clip(cavity_ao(hgt, 5, 0.1), 0, 1))
