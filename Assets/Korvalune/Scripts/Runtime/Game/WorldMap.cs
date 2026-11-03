@@ -48,7 +48,7 @@ namespace Korvalune.Game
             Lbl(side, zone, new Vector2(0, -20), 34, UIStyle.Gold).fontStyle = FontStyle.Bold;
             float y = -100;
             foreach (var (c, s) in new[] { (new Color(1f, 0.9f, 0.4f), "Toi"), (new Color(0.55f, 0.85f, 1f), "Ville (zone sûre)"), (new Color(0.75f, 0.45f, 1f), "Portail / donjon"),
-                                          (new Color(1f, 0.75f, 0.3f), "Marchand"), (new Color(0.8f, 0.55f, 1f), "Oracle des Brèches"), (new Color(0.4f, 1f, 0.5f), "Objectif de quête"), (new Color(1f, 0.3f, 0.25f), "Monstres") })
+                                          (new Color(1f, 0.75f, 0.3f), "Marchand"), (new Color(0.8f, 0.55f, 1f), "Oracle des Brèches"), (new Color(0.45f, 0.78f, 1f), "Pierre de voyage"), (new Color(0.4f, 1f, 0.5f), "Objectif de quête"), (new Color(1f, 0.3f, 0.25f), "Monstres") })
             { var d = Img(side, UIStyle.Disc(), c); d.rectTransform.anchorMin = d.rectTransform.anchorMax = new Vector2(0, 1); d.rectTransform.anchoredPosition = new Vector2(30, y); d.rectTransform.sizeDelta = new Vector2(26, 26); Lbl(side, s, new Vector2(60, y), 24, UIStyle.Parch, TextAnchor.MiddleLeft); y -= 46; }
             // régions : la zone actuelle (vue en direct) et les autres régions extérieures (photographiées à la construction)
             var here = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
@@ -118,6 +118,7 @@ namespace Korvalune.Game
             if (g && g.safeRadius > 0) Pin(null, g.safeCenter + Vector3.up * 0.01f, new Color(0.55f, 0.85f, 1f), 40, "Ville");
             foreach (var x in FindObjectsByType<Portal>(FindObjectsSortMode.None)) Pin(x.transform, Vector3.zero, new Color(0.75f, 0.45f, 1f), 30, x.displayName);
             foreach (var x in FindObjectsByType<Merchant>(FindObjectsSortMode.None)) Pin(x.transform, Vector3.zero, new Color(1f, 0.75f, 0.3f), 18, null);
+            foreach (var x in FindObjectsByType<Waypoint>(FindObjectsSortMode.None)) Pin(x.transform, Vector3.zero, new Color(0.45f, 0.78f, 1f), 30, "Pierre de voyage");
             foreach (var x in FindObjectsByType<RiftKeeper>(FindObjectsSortMode.None)) Pin(x.transform, Vector3.zero, new Color(0.8f, 0.55f, 1f), 28, "Oracle des Brèches");
             var q = FindFirstObjectByType<Quest>();
             var place = q ? q.CurrentPlace : null; if (place.HasValue) Pin(null, place.Value, new Color(0.4f, 1f, 0.5f), 30, "Objectif");
