@@ -460,11 +460,11 @@ namespace Korvalune.Game
                     if (kind == 0)
                     {
                         float crack = Mathf.Clamp01(1f - (e - 0.6f) / 1.8f);
-                        float snow = Mathf.Clamp01((Tile(u, v, 3f, o + 21f) - 0.52f) * 4f);
-                        float depth = 0.82f + 0.25f * cell + n * 0.5f;
+                        float snow = Mathf.Clamp01((Tile(u, v, 3f, o + 21f) - 0.58f) * 4f);
+                        float depth = 0.70f + 0.25f * cell + n * 0.5f;
                         col = new Color(c.r * depth * 0.92f, c.g * depth, c.b * depth * 1.08f);
                         col = Color.Lerp(col, new Color(0.93f, 0.96f, 1f), crack * 0.75f);          // fissures blanchies par le givre
-                        col = Color.Lerp(col, new Color(0.95f, 0.97f, 1f) * (0.9f + 0.1f * fine), snow * 0.85f);
+                        col = Color.Lerp(col, new Color(0.86f, 0.90f, 0.95f) * (0.88f + 0.12f * fine), snow * 0.55f);   // congères discrètes (le sol était tout blanc)
                     }
                     else if (kind == 1)
                     {
