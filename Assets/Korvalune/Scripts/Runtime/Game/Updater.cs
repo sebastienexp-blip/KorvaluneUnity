@@ -25,11 +25,11 @@ namespace Korvalune.Game
         {
             var go = new GameObject("Mise à jour", typeof(RectTransform), typeof(Image));
             var rt = (RectTransform)go.transform; rt.SetParent(root, false);
-            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1); rt.pivot = new Vector2(0.5f, 1); rt.anchoredPosition = new Vector2(0, -30); rt.sizeDelta = new Vector2(900, 80);
+            rt.anchorMin = rt.anchorMax = new Vector2(0, 0); rt.pivot = new Vector2(0, 0); rt.anchoredPosition = new Vector2(96, 192); rt.sizeDelta = new Vector2(1000, 54);   // en bas à gauche, au-dessus de l'état du contenu
             var u = go.AddComponent<Updater>(); u.bg = go.GetComponent<Image>(); u.bg.sprite = UIStyle.Slot(); u.bg.type = Image.Type.Sliced; u.bg.color = new Color(0.9f, 0.7f, 0.35f);
             var t = new GameObject("T", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); t.rectTransform.SetParent(rt, false);
             t.rectTransform.anchorMin = Vector2.zero; t.rectTransform.anchorMax = Vector2.one; t.rectTransform.offsetMin = t.rectTransform.offsetMax = Vector2.zero;
-            t.font = font; t.fontSize = 30; t.alignment = TextAnchor.MiddleCenter; t.color = Color.white; t.raycastTarget = false;
+            t.font = font; t.fontSize = 26; t.alignment = TextAnchor.MiddleCenter; t.color = Color.white; t.raycastTarget = false;
             t.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
             u.label = t;
             var b = go.AddComponent<Button>(); b.targetGraphic = u.bg; b.onClick.AddListener(u.Click);

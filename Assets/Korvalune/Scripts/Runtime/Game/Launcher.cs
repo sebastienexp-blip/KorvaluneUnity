@@ -72,14 +72,14 @@ namespace Korvalune.Game
             sub.color = new Color(0.86f, 0.80f, 0.70f); sub.fontStyle = FontStyle.Italic; sub.gameObject.AddComponent<Outline>().effectColor = Color.black;
 
             // notes de version (panneau défilant à droite)
-            var np = Img(root, "Notes", UIStyle.Panel(), new Vector2(1, 1), new Vector2(-60, -60), new Vector2(720, 700)); np.type = Image.Type.Sliced; np.color = new Color(1, 1, 1, 0.9f);
+            var np = Img(root, "Notes", UIStyle.Panel(), new Vector2(1, 1), new Vector2(-60, -50), new Vector2(760, 820)); np.type = Image.Type.Sliced; np.color = new Color(1, 1, 1, 0.9f);
             var nt = Label(np.rectTransform, "Titre", "Notes de version", 38, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(40, -26), new Vector2(640, 52)); nt.color = UIStyle.Gold;
             var view = new GameObject("Vue", typeof(RectTransform), typeof(RectMask2D), typeof(Image)).GetComponent<RectTransform>();
-            view.SetParent(np.rectTransform, false); view.anchorMin = view.anchorMax = new Vector2(0, 1); view.pivot = new Vector2(0, 1); view.anchoredPosition = new Vector2(36, -90); view.sizeDelta = new Vector2(650, 580);
+            view.SetParent(np.rectTransform, false); view.anchorMin = view.anchorMax = new Vector2(0, 1); view.pivot = new Vector2(0, 1); view.anchoredPosition = new Vector2(36, -90); view.sizeDelta = new Vector2(690, 700);
             view.GetComponent<Image>().color = new Color(0, 0, 0, 0.01f);
             notesContent = new GameObject("Contenu", typeof(RectTransform)).GetComponent<RectTransform>(); notesContent.SetParent(view, false);
-            notesContent.anchorMin = notesContent.anchorMax = new Vector2(0, 1); notesContent.pivot = new Vector2(0, 1); notesContent.sizeDelta = new Vector2(630, 2400);
-            notes = Label(notesContent, "Texte", NotesText(), 25, TextAnchor.UpperLeft, new Vector2(0, 1), Vector2.zero, new Vector2(630, 2400));
+            notesContent.anchorMin = notesContent.anchorMax = new Vector2(0, 1); notesContent.pivot = new Vector2(0, 1); notesContent.sizeDelta = new Vector2(670, 3000);
+            notes = Label(notesContent, "Texte", NotesText(), 25, TextAnchor.UpperLeft, new Vector2(0, 1), Vector2.zero, new Vector2(670, 3000));
             notes.lineSpacing = 1.1f;
             var sr = view.gameObject.AddComponent<ScrollRect>(); sr.content = notesContent; sr.horizontal = false; sr.movementType = ScrollRect.MovementType.Clamped;
 
@@ -90,27 +90,27 @@ namespace Korvalune.Game
             bar = Img(barBack.rectTransform, "Remplissage", UIStyle.Bar(), new Vector2(0, 0.5f), new Vector2(4, 0), new Vector2(1092, 22)); bar.type = Image.Type.Filled; bar.fillMethod = Image.FillMethod.Horizontal; bar.color = new Color(0.95f, 0.70f, 0.30f); bar.fillAmount = 0;
             version = Label(root, "Version", "Version " + Application.version, 24, TextAnchor.LowerLeft, new Vector2(0, 0), new Vector2(100, 40), new Vector2(600, 34)); version.color = new Color(0.7f, 0.65f, 0.58f);
 
-            var pb = Img(root, "Jouer", UIStyle.Button(), new Vector2(1, 0), new Vector2(-90, 70), new Vector2(420, 130)); pb.raycastTarget = true; pb.type = Image.Type.Simple;
-            playText = Label(pb.rectTransform, "T", "JOUER", 54, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(420, 130)); playText.color = UIStyle.Gold; playText.fontStyle = FontStyle.Bold;
+            var pb = Img(root, "Jouer", UIStyle.Button(), new Vector2(0, 1), new Vector2(96, -318), new Vector2(400, 112));          // colonne de gauche, sous le titre pb.raycastTarget = true; pb.type = Image.Type.Simple;
+            playText = Label(pb.rectTransform, "T", "JOUER", 52, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(400, 112)); playText.color = UIStyle.Gold; playText.fontStyle = FontStyle.Bold;
             play = pb.gameObject.AddComponent<Button>(); play.targetGraphic = pb; play.onClick.AddListener(() => SceneManager.LoadScene(nextScene)); play.interactable = false;
             pb.color = new Color(0.6f, 0.55f, 0.5f);
 
             // revoir la cinématique d'introduction
-            var ib = Img(root, "Introduction", UIStyle.Slot(), new Vector2(1, 0), new Vector2(-110, 215), new Vector2(380, 64)); ib.type = Image.Type.Sliced; ib.raycastTarget = true;
-            var it = Label(ib.rectTransform, "T", "Revoir l'introduction", 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 64)); it.color = UIStyle.Parch;
+            var ib = Img(root, "Introduction", UIStyle.Slot(), new Vector2(0, 1), new Vector2(106, -588), new Vector2(380, 58)); ib.type = Image.Type.Sliced; ib.raycastTarget = true;
+            var it = Label(ib.rectTransform, "T", "Revoir l'introduction", 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 58)); it.color = UIStyle.Parch;
             var ibb = ib.gameObject.AddComponent<Button>(); ibb.targetGraphic = ib; ibb.onClick.AddListener(() => { if (!IntroPlayer.Playing) IntroPlayer.Show(font); });
-            // menu principal : options, crédits, quitter (au-dessus de « Revoir l'introduction »)
-            MenuButton(root, "Options", 290, () => OptionsMenu.Open(font));
-            MenuButton(root, "Crédits", 365, ShowCredits);
-            MenuButton(root, "Quitter", 440, () => Application.Quit());
+            // menu principal : une seule colonne à gauche (Jouer, Options, Crédits, Introduction, Quitter) ; les notes à droite
+            MenuButton(root, "Options", 448, () => OptionsMenu.Open(font));
+            MenuButton(root, "Crédits", 518, ShowCredits);
+            MenuButton(root, "Quitter", 658, () => Application.Quit());
             Settings.Apply();
             if (!AutoTest.Enabled) Updater.Attach(root, font);           // mise à jour depuis le jeu (personnages conservés)
         }
 
         void MenuButton(RectTransform root, string label, float y, System.Action click)
         {
-            var b = Img(root, label, UIStyle.Slot(), new Vector2(1, 0), new Vector2(-110, y), new Vector2(380, 64)); b.type = Image.Type.Sliced; b.raycastTarget = true;
-            var t = Label(b.rectTransform, "T", label, 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 64)); t.color = UIStyle.Parch;
+            var b = Img(root, label, UIStyle.Slot(), new Vector2(0, 1), new Vector2(106, -y), new Vector2(380, 58)); b.type = Image.Type.Sliced; b.raycastTarget = true;
+            var t = Label(b.rectTransform, "T", label, 28, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(380, 58)); t.color = UIStyle.Parch;
             var bb = b.gameObject.AddComponent<Button>(); bb.targetGraphic = b; bb.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.6f); click(); });
         }
 
