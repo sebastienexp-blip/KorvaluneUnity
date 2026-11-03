@@ -767,6 +767,7 @@ namespace Korvalune.EditorTools
             E("demon", "Démon brute", "DemonBrute", 650, 34, 3.4f, 3.2f, 2.4f, 18, 300, armor: 6, hitDelay: 0.6f, level: 12);
             cfg.highPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP.asset");
             cfg.mobilePipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Mobile.asset");
+            cfg.ultraPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Ultra.asset");
             cfg.fxAdditive = FxMaterial("FX_Additif", true); cfg.fxAlpha = FxMaterial("FX_Poussiere", false);
             cfg.vfx = VfxBuilder.Build();
             var litPath = Root + "/Rendering/Lit_Objets.mat"; var lit = AssetDatabase.LoadAssetAtPath<Material>(litPath);

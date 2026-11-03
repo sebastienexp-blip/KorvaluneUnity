@@ -26,7 +26,7 @@ namespace Korvalune.Game
         public Material fxAdditive, fxAlpha, ringMat, litMat, ghostMat;
         [Tooltip("Base des matériaux de décor créés en jeu (brèches) : shader Korvalune/PBR Monde avec couche de détail")] public Material worldMat;
         public VfxLibrary vfx;
-        public UnityEngine.Rendering.RenderPipelineAsset highPipeline, mobilePipeline;
+        public UnityEngine.Rendering.RenderPipelineAsset highPipeline, mobilePipeline, ultraPipeline;
         public Font font;
         public EnemyType Enemy(string id) => enemies.Find(e => e.id == id);
     }

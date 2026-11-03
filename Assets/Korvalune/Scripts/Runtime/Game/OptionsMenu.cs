@@ -162,8 +162,8 @@ namespace Korvalune.Game
             string[] pct = { "Muet", "25 %", "50 %", "75 %", "100 %" };
 
             float y = 0; var g = (RectTransform)pages[0].page.transform;
-            Row(g, ref y, "Qualité", new[] { "Haute", "Mobile" }, () => GraphicsQuality.Current == GraphicsQuality.Tier.Haute ? 0 : 1,
-                k => { if (cfg) GraphicsQuality.Apply(cfg, k == 0 ? GraphicsQuality.Tier.Haute : GraphicsQuality.Tier.Mobile, true); else PlayerPrefs.SetInt("korvalune.qualite", k == 0 ? 1 : 0); Settings.Apply(); });
+            Row(g, ref y, "Qualité", new[] { "Ultra", "Haute", "Mobile" }, () => GraphicsQuality.Current == GraphicsQuality.Tier.Ultra ? 0 : GraphicsQuality.Current == GraphicsQuality.Tier.Haute ? 1 : 2,
+                k => { if (cfg) GraphicsQuality.Apply(cfg, (k == 0 ? GraphicsQuality.Tier.Ultra : k == 1 ? GraphicsQuality.Tier.Haute : GraphicsQuality.Tier.Mobile), true); else PlayerPrefs.SetInt("korvalune.qualite", (int)(k == 0 ? GraphicsQuality.Tier.Ultra : k == 1 ? GraphicsQuality.Tier.Haute : GraphicsQuality.Tier.Mobile)); Settings.Apply(); });
             Row(g, ref y, "Images par seconde", new[] { "30", "60" }, () => Settings.Fps, k => Settings.Fps = k);
             Row(g, ref y, "Ombres", new[] { "Activées", "Désactivées" }, () => Settings.Shadows, k => Settings.Shadows = k);
             Row(g, ref y, "Effets de lumière", new[] { "Complets", "Réduits", "Aucun" }, () => Settings.PostFx, k => Settings.PostFx = k);
