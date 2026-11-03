@@ -116,6 +116,32 @@ namespace Korvalune.Game
     /// d'écurie (commerce des montures).</summary>
     public static class Stable
     {
+        /// <summary>Cherche autour de l'arrivée en ville un emplacement libre pour l'enclos (11 × 9 m) : aucun bâtiment, échoppe,
+        /// statue ni décor dans l'emprise, sol à peu près plat ; l'ouverture de l'enclos est tournée vers l'arrivée.</summary>
+        public static (Vector3 pos, float yaw) FindSpot(Vector3 spawn)
+        {
+            var hits = new Collider[16];
+            for (float r = 11f; r <= 40f; r += 3f)
+                for (int k = 0; k < 16; k++)
+                {
+                    float a = k * Mathf.PI * 2f / 16f + r * 0.13f;
+                    var p = GameBootstrap.Ground(spawn + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * r);
+                    var toSpawn = spawn - p; toSpawn.y = 0;
+                    float yaw = Quaternion.LookRotation(toSpawn).eulerAngles.y + 90f;     // le côté ouvert (−x local) regarde l'arrivée
+                    var rot = Quaternion.Euler(0, yaw, 0);
+                    // sol plat : quatre coins à moins de 0,8 m de différence
+                    float h0 = p.y, dh = 0;
+                    foreach (var c in new[] { new Vector3(-5.5f, 0, -3.8f), new Vector3(4.5f, 0, -3.8f), new Vector3(-5.5f, 0, 3.8f), new Vector3(4.5f, 0, 3.8f) })
+                        dh = Mathf.Max(dh, Mathf.Abs(GameBootstrap.Ground(p + rot * c).y - h0));
+                    if (dh > 0.8f || p.y < GameBootstrap.WaterLevel + 0.4f) continue;
+                    int n = Physics.OverlapBoxNonAlloc(p + rot * new Vector3(-0.5f, 1.9f, 0), new Vector3(5.6f, 1.6f, 4.2f), hits, rot, ~0, QueryTriggerInteraction.Collide);
+                    bool free = true;
+                    for (int i = 0; i < n; i++) if (!(hits[i] is TerrainCollider)) { free = false; break; }
+                    if (free) return (p, yaw);
+                }
+            return (GameBootstrap.Ground(spawn + new Vector3(9f, 0, -4f)), -90f);
+        }
+
         public static void Place(GameBootstrap game, Vector3 pos, float yaw)
         {
             var root = new GameObject("Écurie").transform; root.position = pos; root.rotation = Quaternion.Euler(0, yaw, 0);

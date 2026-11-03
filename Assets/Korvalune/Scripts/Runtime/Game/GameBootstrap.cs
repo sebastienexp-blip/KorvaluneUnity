@@ -170,7 +170,8 @@ namespace Korvalune.Game
                 if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Korvalune_Vallee")
                 {
                     RiftKeeper.Place(this, Ground(playerSpawn + new Vector3(-7f, 0, -3f)), 90f);       // Oracle des Brèches, près de l'arrivée en ville
-                    Stable.Place(this, Ground(playerSpawn + new Vector3(9f, 0, -4f)), -90f);            // écurie : achat des montures
+                    var st = Stable.FindSpot(playerSpawn);                                               // écurie : un terrain libre (pas sur une échoppe)
+                    Stable.Place(this, st.pos, st.yaw);
                     TownPortal.PlaceReturn(this);                                                         // portail de ville : retour au combat
                 }
                 if (!Rift.Active && !AutoTest.Enabled) TownLife.Populate(this);                       // villageois, chiens, oiseaux
