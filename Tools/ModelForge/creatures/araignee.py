@@ -21,6 +21,17 @@ ATT_Z = (0.36, 0.27, 0.18, 0.09)
 LEN = (1.10, 1.0, 0.98, 1.08)
 
 
+def _hairs(S, r, n, length, ang=np.pi / 2, spread=0.5):
+    """Soies : courts traits sombres à pointe claire, orientés (le long des pattes), tracés un par un. Masques (soie, pointe)."""
+    m = np.zeros((S, S)); tip = np.zeros((S, S))
+    x0 = r.uniform(0, S, n); y0 = r.uniform(0, S, n); a = ang + r.normal(0, spread, n); L = length * r.uniform(0.5, 1.3, n)
+    for t in np.linspace(0, 1, max(4, int(length))):
+        xs = np.mod(np.round(x0 + np.cos(a) * L * t).astype(int), S); ys = np.mod(np.round(y0 + np.sin(a) * L * t).astype(int), S)
+        np.maximum.at(m, (ys, xs), 1 - 0.3 * t)
+        if t > 0.7: np.maximum.at(tip, (ys, xs), 1.0)
+    return gaussian_filter(m, 0.5, mode='wrap'), gaussian_filter(tip, 0.5, mode='wrap')
+
+
 def chitin(S=1024, seed=901, tone=(0.36, 0.15, 0.09), dark=(0.08, 0.04, 0.03), rings=True):
     """Chitine brun-rouge : marbrures, micro-écailles, bandes sombres (anneaux des articles), vernis brillant."""
     r = np.random.default_rng(seed)
@@ -30,8 +41,12 @@ def chitin(S=1024, seed=901, tone=(0.36, 0.15, 0.09), dark=(0.08, 0.04, 0.03), r
     t = np.clip(mott * 0.7 + 0.3 * (1 - band) * rings, 0, 1)
     base = np.array(dark)[None, None] * (1 - t[..., None]) + np.array(tone)[None, None] * t[..., None]
     base = base * (1 - 0.35 * n01(scales)[..., None])
-    hgt = 1.2 * mott - 0.8 * n01(scales)
-    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.5), np.zeros((S, S)), np.clip(0.55 + 0.2 * mott - 0.2 * n01(scales), 0, 1), cavity_ao(hgt, 4, 0.1))
+    # soies : couche de poils sombres à pointe dorée qui casse l'aspect « plastique »
+    hm, ht = _hairs(S, r, int(S * S / 90), S / 70)
+    base = base * (1 - 0.55 * np.clip(hm, 0, 1)[..., None]) + np.array([0.42, 0.30, 0.16])[None, None] * 0.5 * np.clip(ht, 0, 1)[..., None]
+    hgt = 1.2 * mott - 0.8 * n01(scales) + 0.6 * hm
+    smooth = np.clip(0.55 + 0.2 * mott - 0.2 * n01(scales), 0, 1) * (1 - 0.6 * np.clip(hm, 0, 1))
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.6), np.zeros((S, S)), smooth, cavity_ao(hgt, 4, 0.1))
 
 
 def carapace(S=2048, seed=902):
@@ -48,8 +63,13 @@ def carapace(S=2048, seed=902):
     base = base * (1 - 0.7 * edge[..., None]) + np.array([0.55, 0.22, 0.05])[None, None] * rim[..., None]
     spots = np.clip(n01(fbm(S, S, r, base=S / 30, octaves=2)) - 0.82, 0, 1) * 6
     emit = np.clip(np.array([1.0, 0.45, 0.08])[None, None] * (0.6 * rim + spots)[..., None] * 0.7, 0, 1)
-    hgt = 1.5 * dome - 1.5 * edge + 0.4 * mott
-    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.8), np.zeros((S, S)), np.clip(0.55 + 0.25 * dome, 0, 1), cavity_ao(hgt, 5, 0.12), emit)
+    # chevrons plus clairs sur le dos (motif de tarentule) et soies éparses
+    chev = np.clip(1 - np.abs(((yy * 6 + np.abs(xx - 0.5) * 3) % 1) - 0.5) * 8, 0, 1) * np.clip(1 - np.abs(xx - 0.5) * 3.2, 0, 1)
+    base = base * (1 - 0.0 * chev[..., None]) + np.array([0.20, 0.12, 0.07])[None, None] * 0.6 * chev[..., None]
+    hm, ht = _hairs(S, r, int(S * S / 160), S / 90, ang=np.pi / 2, spread=0.8)
+    base = base * (1 - 0.45 * np.clip(hm, 0, 1)[..., None]) + np.array([0.38, 0.28, 0.16])[None, None] * 0.45 * np.clip(ht, 0, 1)[..., None]
+    hgt = 1.5 * dome - 1.5 * edge + 0.4 * mott + 0.5 * hm
+    return TexSet(np.clip(base, 0, 1), height_to_normal(hgt, 0.8), np.zeros((S, S)), np.clip(0.55 + 0.25 * dome, 0, 1) * (1 - 0.5 * np.clip(hm, 0, 1)), cavity_ao(hgt, 5, 0.12), emit)
 
 
 RECIPES = {
