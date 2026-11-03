@@ -33,7 +33,8 @@ namespace Korvalune.Game
             t.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
             u.label = t;
             var b = go.AddComponent<Button>(); b.targetGraphic = u.bg; b.onClick.AddListener(u.Click);
-            go.SetActive(false);
+            // (pas de SetActive(false) ici : une coroutine ne démarre pas sur un objet inactif — la vérification ne se
+            // faisait jamais et le bandeau de mise à jour n'apparaissait pas)
             u.StartCoroutine(u.Check());
         }
 
