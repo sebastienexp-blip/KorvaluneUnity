@@ -45,9 +45,12 @@ namespace Korvalune.Game
                 terrain.shadowCastingMode = low ? ShadowCastingMode.Off : ShadowCastingMode.TwoSided;
             }
             RenderSettings.fogEndDistance = low ? 300 : 520;
+            // eau : profondeur et écume des berges (texture de profondeur de la caméra) en qualité haute seulement
+            if (low) Shader.DisableKeyword("KORV_WATER_DEPTH"); else Shader.EnableKeyword("KORV_WATER_DEPTH");
             var cam = Camera.main;
             if (cam)
             {
+                var cd = cam.GetComponent<UniversalAdditionalCameraData>(); if (cd) cd.requiresDepthOption = low ? CameraOverrideOption.UsePipelineSettings : CameraOverrideOption.On;
                 cam.farClipPlane = low ? 360 : 900;
                 var data = cam.GetComponent<UniversalAdditionalCameraData>();
                 if (data)

@@ -579,9 +579,21 @@ namespace Korvalune.EditorTools
         {
             var path = Root + "/Rendering/Eau.mat";
             var m = AssetDatabase.LoadAssetAtPath<Material>(path);
-            if (!m) { m = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(m, path); }
-            m.SetColor("_BaseColor", new Color(0.12f, 0.28f, 0.34f, 0.78f)); m.SetFloat("_Smoothness", 0.93f); m.SetFloat("_Metallic", 0.1f);
             var nrm = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Terrain/Eau_Normal.png");
+            // shader d'eau maison (vagues animées, Fresnel, reflet du soleil, profondeur et écume) ; repli URP Lit
+            var eau = Shader.Find("Korvalune/Eau");
+            if (eau != null && !ShaderUtil.ShaderHasError(eau))
+            {
+                if (!m) { m = new Material(eau); AssetDatabase.CreateAsset(m, path); } else if (m.shader != eau) m.shader = eau;
+                if (nrm) m.SetTexture("_BumpMap", nrm);
+                m.SetColor("_ShallowColor", new Color(0.22f, 0.40f, 0.38f, 0.5f)); m.SetColor("_DeepColor", new Color(0.04f, 0.12f, 0.15f, 0.93f));
+                m.SetFloat("_Tiling", 0.11f); m.SetFloat("_Speed", 0.025f); m.SetFloat("_BumpScale", 0.6f); m.SetFloat("_Smoothness", 0.92f);
+                m.renderQueue = (int)RenderQueue.Transparent;
+                EditorUtility.SetDirty(m);
+                return m;
+            }
+            if (!m || m.shader.name != "Universal Render Pipeline/Lit") { if (!m) { m = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(m, path); } else m.shader = Shader.Find("Universal Render Pipeline/Lit"); }
+            m.SetColor("_BaseColor", new Color(0.12f, 0.28f, 0.34f, 0.78f)); m.SetFloat("_Smoothness", 0.93f); m.SetFloat("_Metallic", 0.1f);
             if (nrm) { m.SetTexture("_BumpMap", nrm); m.EnableKeyword("_NORMALMAP"); m.SetTextureScale("_BumpMap", new Vector2(40, 40)); }
             m.SetFloat("_Surface", 1); m.SetFloat("_Blend", 0); m.SetFloat("_ZWrite", 0); m.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha); m.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha);
             m.EnableKeyword("_SURFACE_TYPE_TRANSPARENT"); m.renderQueue = (int)RenderQueue.Transparent; m.SetOverrideTag("RenderType", "Transparent");
