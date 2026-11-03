@@ -178,6 +178,7 @@ namespace Korvalune.Game
                     Stable.Place(this, st.pos, st.yaw);
                     TownPortal.PlaceReturn(this);                                                         // portail de ville : retour au combat
                 }
+                Waypoint.PlaceTownPortals(this);                                                         // en ville : un portail par région
                 if (!Rift.Active && !AutoTest.Enabled) TownLife.Populate(this);                       // villageois, chiens, oiseaux
             }
             else foreach (var camp in camps) SpawnCamp(camp);

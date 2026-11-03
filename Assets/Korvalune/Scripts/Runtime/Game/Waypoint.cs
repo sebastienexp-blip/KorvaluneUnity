@@ -25,26 +25,59 @@ namespace Korvalune.Game
 
         Transform hero; bool shown; GameObject panel;
 
+        /// <summary>Sol libre (sans bâtiment, étal, arbre…) le plus proche autour de « center », entre rMin et rMax, à
+        /// distance « gap » des points déjà pris.</summary>
+        static Vector3? FreeSpot(Vector3 center, float rMin, float rMax, float half, System.Collections.Generic.List<Vector3> taken, float gap)
+        {
+            var hits = new Collider[8];
+            for (float r = rMin; r <= rMax; r += 2f)
+                for (int k = 0; k < 16; k++)
+                {
+                    float a = k * Mathf.PI / 8f + r * 0.37f;
+                    var p = GameBootstrap.Ground(center + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * r);
+                    bool ok = true; foreach (var t in taken) if ((t - p).sqrMagnitude < gap * gap) { ok = false; break; }
+                    if (!ok) continue;
+                    int n = Physics.OverlapBoxNonAlloc(p + Vector3.up * 1.6f, new Vector3(half, 1.4f, half), hits, Quaternion.identity, ~0, QueryTriggerInteraction.Collide);
+                    for (int i = 0; i < n; i++) if (!(hits[i] is TerrainCollider) && !hits[i].GetComponentInParent<PlayerController>()) { ok = false; break; }
+                    if (ok) return p;
+                }
+            return null;
+        }
+
         /// <summary>Pose la pierre de voyage de la région actuelle, sur un sol libre près de l'arrivée.</summary>
         public static void Place(GameBootstrap game)
         {
             if (Here == null || Rift.Active) return;
-            var spawn = game.playerSpawn; Vector3 pos = GameBootstrap.Ground(spawn + new Vector3(5f, 0, 4f));
-            var hits = new Collider[8];
-            for (float r = 4f; r <= 16f; r += 2f)
-            {
-                bool found = false;
-                for (int k = 0; k < 12 && !found; k++)
-                {
-                    float a = k * Mathf.PI / 6f + r;
-                    var p = GameBootstrap.Ground(spawn + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * r);
-                    int n = Physics.OverlapBoxNonAlloc(p + Vector3.up * 1.6f, new Vector3(1.6f, 1.4f, 1.6f), hits, Quaternion.identity, ~0, QueryTriggerInteraction.Collide);
-                    bool free = true; for (int i = 0; i < n; i++) if (!(hits[i] is TerrainCollider) && !hits[i].GetComponentInParent<PlayerController>()) { free = false; break; }
-                    if (free) { pos = p; found = true; }
-                }
-                if (found) break;
-            }
+            var spawn = game.playerSpawn; var taken = new System.Collections.Generic.List<Vector3> { spawn };
+            var pos = FreeSpot(spawn, 4f, 16f, 1.6f, taken, 3f) ?? GameBootstrap.Ground(spawn + new Vector3(5f, 0, 4f));
             Build(game, pos);
+        }
+
+        /// <summary>En ville (vallée) : un portail magique par région extérieure, sur des emplacements libres autour de
+        /// l'arrivée (à appeler après la pierre de voyage et l'écurie, dont les colliders sont évités).</summary>
+        public static void PlaceTownPortals(GameBootstrap game)
+        {
+            if (Here == null || Rift.Active || Here.scene != "Korvalune_Vallee") return;
+            var spawn = game.playerSpawn; var taken = new System.Collections.Generic.List<Vector3> { spawn };
+            foreach (var w in FindObjectsByType<Waypoint>(FindObjectsSortMode.None)) taken.Add(w.transform.position);
+            foreach (var r in Regions)
+            {
+                if (r.scene == Here.scene) continue;
+                var p = FreeSpot(spawn, 7f, 26f, 1.5f, taken, 5f); if (p == null) continue;
+                taken.Add(p.Value);
+                var target = r;
+                var g = new GameObject("Portail : " + r.name).AddComponent<Portal>(); g.transform.position = p.Value;
+                g.gate = true; g.glowColor = new Color(0.45f, 0.75f, 1f); g.label = r.name; g.targetScene = r.scene;
+                int lvl = game.Player ? game.Player.level : 1;
+                g.displayName = lvl >= r.level ? r.name : $"{r.name}\n<size=40>Niveau {r.level} requis</size>";
+                g.canEnter = () =>
+                {
+                    if ((game.Player ? game.Player.level : 1) >= target.level) return true;
+                    game.Hud?.Notify($"{target.name} : niveau {target.level} requis");
+                    return false;
+                };
+                g.onEnter = () => { GameBootstrap.nextSpawn = null; SceneManager.LoadScene(target.scene); };
+            }
         }
 
         static void Build(GameBootstrap game, Vector3 pos)
