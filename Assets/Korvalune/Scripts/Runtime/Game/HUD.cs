@@ -477,6 +477,33 @@ namespace Korvalune.Game
             var dead = new List<Health>();
             foreach (var kv in plates) if (kv.Key == null) { if (kv.Value.root) Destroy(kv.Value.root.gameObject); dead.Add(kv.Key); }
             foreach (var d in dead) plates.Remove(d);
+            Declutter();
+        }
+
+        /// <summary>Plaques groupées : celles qui se recouvrent s'empilent vers le haut (lisibles même dans une mêlée).</summary>
+        readonly List<RectTransform> placedPlates = new List<RectTransform>();
+        void Declutter()
+        {
+            placedPlates.Clear();
+            var act = new List<RectTransform>();
+            foreach (var kv in plates) if (kv.Value.root && kv.Value.root.gameObject.activeSelf) act.Add(kv.Value.root);
+            act.Sort((a, b) => a.anchoredPosition.y.CompareTo(b.anchoredPosition.y));
+            const float w = 230f, hgt = 42f;
+            foreach (var r in act)
+            {
+                var p = r.anchoredPosition;
+                for (int guard = 0; guard < 12; guard++)
+                {
+                    bool moved = false;
+                    foreach (var o in placedPlates)
+                    {
+                        var q = o.anchoredPosition;
+                        if (Mathf.Abs(p.x - q.x) < w && Mathf.Abs(p.y - q.y) < hgt) { p.y = q.y + hgt; moved = true; }
+                    }
+                    if (!moved) break;
+                }
+                r.anchoredPosition = p; placedPlates.Add(r);
+            }
         }
 
         readonly Dictionary<LootDrop, Text> lootLabels = new Dictionary<LootDrop, Text>();

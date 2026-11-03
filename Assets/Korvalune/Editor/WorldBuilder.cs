@@ -151,6 +151,7 @@ namespace Korvalune.EditorTools
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
             TownBuilder.Build();
             Hamlets();
+            Roadside();
             EclipseBuilder.ValleyEntrance();
             CaveBuilder.ValleyEntrance();
             BridgeObject();
@@ -277,6 +278,92 @@ namespace Korvalune.EditorTools
                 }
             }
             foreach (var t in root.GetComponentsInChildren<Transform>()) t.gameObject.isStatic = true;
+        }
+
+        /// <summary>Bords de route vivants : bornes, panneaux indicateurs aux carrefours, charrettes, tonneaux et caisses
+        /// destructibles, lanternes près de la ville ; rien dans le lit des routes (le passage reste dégagé).</summary>
+        static readonly (Vector2 at, string[] labels)[] Signposts =
+        {
+            (new Vector2(6, -72), new[] { "Château ↑", "Désert du Sud ↓", "Pont de l'Ouest ←" }),
+            (new Vector2(8, -152), new[] { "Désert du Sud ↓", "Marais du Sud-Est →", "Château ↑" }),
+            (new Vector2(38, -36), new[] { "Côte de l'Est →", "Château ←" }),
+            (new Vector2(26, 40), new[] { "Forêt du Nord ↑", "Château ↓" }),
+        };
+        static void Roadside()
+        {
+            var rng = new System.Random(17);
+            var root = new GameObject("Bords de route").transform;
+            string[] props = { "M_Tonneaux", "M_Caisses", "M_Tonneaux", "M_Caisses", "M_Charrette", "M_Foin" };
+            foreach (var road in Roads)
+            {
+                float acc = 0, next = 14f;
+                for (int i = 0; i < road.Length - 1; i++)
+                {
+                    var a = road[i]; var b = road[i + 1]; var ab = b - a; float L = ab.magnitude; var dir = ab / L; var side = new Vector2(-dir.y, dir.x);
+                    while (next <= acc + L)
+                    {
+                        var c = a + dir * (next - acc); next += 18f + (float)rng.NextDouble() * 16f;
+                        if (c.magnitude < TownBuilder.WallR + 6 || NearHamlet(c, 18) || RiverDist(c) < 12) continue;
+                        float sd = rng.Next(2) == 0 ? 1 : -1; var p = c + side * sd * (5.2f + (float)rng.NextDouble() * 1.5f);
+                        if (RoadDist(p) < 4.2f) continue;
+                        float yaw = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg + (float)rng.NextDouble() * 40 - 20;
+                        GameObject g;
+                        if (c.magnitude < 140 && rng.Next(3) == 0) g = Ville("M_Lanterne", Ground(p) - Vector3.up * 0.05f, yaw);
+                        else if (rng.Next(4) == 0) g = Milestone(Ground(p), yaw);
+                        else g = Ville(props[rng.Next(props.Length)], Ground(p) - Vector3.up * 0.05f, yaw);
+                        if (!g) continue;
+                        g.transform.SetParent(root, true);
+                        if (g.name.Contains("Tonneaux") || g.name.Contains("Caisses")) Breakable.Make(g, 1.0f);
+                    }
+                    acc += L;
+                }
+            }
+            foreach (var (at, labels) in Signposts) Signpost(Ground(at), labels).transform.SetParent(root, true);
+            foreach (var t in root.GetComponentsInChildren<Transform>()) if (!t.GetComponent<Breakable>()) t.gameObject.isStatic = true;
+        }
+
+        static Material RoadMat(Color c)
+        {
+            var m = new Material(Config().litMat ? Config().litMat : AssetDatabase.GetBuiltinExtraResource<Material>("Default-Material.mat"));
+            m.SetColor("_BaseColor", c); if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", 0.1f);
+            var path = $"{DataDir}/Route_{ColorUtility.ToHtmlStringRGB(c)}.mat";
+            var old = AssetDatabase.LoadAssetAtPath<Material>(path); if (old) return old;
+            AssetDatabase.CreateAsset(m, path); return m;
+        }
+
+        static GameObject Milestone(Vector3 p, float yaw)
+        {
+            var g = GameObject.CreatePrimitive(PrimitiveType.Cube); g.name = "Borne"; g.transform.position = p + Vector3.up * 0.35f;
+            g.transform.rotation = Quaternion.Euler(0, yaw, 0); g.transform.localScale = new Vector3(0.35f, 0.9f, 0.25f);
+            g.GetComponent<Renderer>().sharedMaterial = RoadMat(new Color(0.55f, 0.53f, 0.48f));
+            var cap = GameObject.CreatePrimitive(PrimitiveType.Cylinder); Object.DestroyImmediate(cap.GetComponent<Collider>()); cap.name = "Sommet"; cap.transform.SetParent(g.transform, false);
+            cap.transform.localPosition = new Vector3(0, 0.5f, 0); cap.transform.localRotation = Quaternion.Euler(90, 0, 0); cap.transform.localScale = new Vector3(1f, 0.5f, 1f);
+            cap.GetComponent<Renderer>().sharedMaterial = g.GetComponent<Renderer>().sharedMaterial;
+            return g;
+        }
+
+        static GameObject Signpost(Vector3 p, string[] labels)
+        {
+            var root = new GameObject("Panneau indicateur"); root.transform.position = p;
+            var wood = RoadMat(new Color(0.40f, 0.27f, 0.15f));
+            var post = GameObject.CreatePrimitive(PrimitiveType.Cube); post.name = "Poteau"; post.transform.SetParent(root.transform, false);
+            post.transform.localPosition = new Vector3(0, 1.4f, 0); post.transform.localScale = new Vector3(0.16f, 2.8f, 0.16f); post.GetComponent<Renderer>().sharedMaterial = wood;
+            var font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            for (int i = 0; i < labels.Length; i++)
+            {
+                float yaw = labels[i].Contains("→") ? 90 : labels[i].Contains("←") ? -90 : labels[i].Contains("↓") ? 180 : 0;
+                var arm = new GameObject("Planche").transform; arm.SetParent(root.transform, false); arm.localPosition = new Vector3(0, 2.45f - i * 0.38f, 0); arm.localRotation = Quaternion.Euler(0, yaw + 20 * i, 0);
+                var board = GameObject.CreatePrimitive(PrimitiveType.Cube); Object.DestroyImmediate(board.GetComponent<Collider>()); board.transform.SetParent(arm, false);
+                board.transform.localPosition = new Vector3(0, 0, 0.75f); board.transform.localScale = new Vector3(0.06f, 0.30f, 1.4f); board.GetComponent<Renderer>().sharedMaterial = wood;
+                foreach (var sx in new[] { 1, -1 })
+                {
+                    var t = new GameObject("Texte").AddComponent<TextMesh>(); t.transform.SetParent(arm, false);
+                    t.transform.localPosition = new Vector3(0.035f * sx, 0, 0.75f); t.transform.localRotation = Quaternion.Euler(0, sx > 0 ? -90 : 90, 0);
+                    t.text = labels[i].Replace(" ↑", "").Replace(" ↓", "").Replace(" ←", "").Replace(" →", ""); t.font = font; t.GetComponent<MeshRenderer>().sharedMaterial = font.material;
+                    t.fontSize = 48; t.characterSize = 0.035f; t.anchor = TextAnchor.MiddleCenter; t.color = new Color(0.95f, 0.88f, 0.70f); t.fontStyle = FontStyle.Bold;
+                }
+            }
+            return root;
         }
 
         /// <summary>Herbes hautes peintes sur le terrain (prairies, lisières), absentes des routes, de la ville, du désert et des crêtes.</summary>
@@ -450,7 +537,7 @@ namespace Korvalune.EditorTools
             var inst = new List<TreeInstance>();
             var rng = new System.Random(3);
             int tries = 0;
-            while (inst.Count < 4200 && tries++ < 60000)
+            while (inst.Count < 3300 && tries++ < 60000)
             {
                 float x = (float)rng.NextDouble() * Size - Size / 2, z = (float)rng.NextDouble() * Size - Size / 2;
                 var p = new Vector2(x, z);
@@ -459,6 +546,8 @@ namespace Korvalune.EditorTools
                 if (h > 85 || h < WaterLevel + 0.8f) continue;
                 float dens = 0.03f + 0.95f * Smooth(95, 160, z) + 0.4f * Smooth(-130, -190, x) * Smooth(70, 40, h) - 0.9f * Smooth(-160, -200, z);
                 dens *= 0.5f + Mathf.PerlinNoise(x * 0.02f, z * 0.02f);
+                dens *= Smooth(0.38f, 0.52f, Mathf.PerlinNoise(x * 0.011f + 40f, z * 0.011f + 40f));          // clairières : de grands espaces dégagés dans les bois
+                if (RoadDist(p) < 16) dens *= 0.35f;                                                               // lisières dégagées le long des routes
                 if (rng.NextDouble() > dens) continue;
                 bool pine = h > 30 || z > 170 || rng.NextDouble() < 0.3;
                 int idx = pine ? 3 + rng.Next(3) : rng.Next(3);
