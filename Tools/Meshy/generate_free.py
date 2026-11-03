@@ -18,6 +18,13 @@ def log(out, *a):
     with open(os.path.join(out, 'journal.txt'), 'a') as f: f.write(s + '\n')
 
 
+def client(space):
+    from gradio_client import Client
+    if not TOKEN: return Client(space, verbose=False)
+    try: return Client(space, token=TOKEN, verbose=False)            # gradio_client récent
+    except TypeError: return Client(space, hf_token=TOKEN, verbose=False)
+
+
 def first_file(res):
     """Premier chemin de fichier .glb trouvé dans un résultat gradio (tuples, dicts, chaînes)."""
     stack = [res]
@@ -34,7 +41,7 @@ def trellis(img, out):
     for space in ('trellis-community/TRELLIS', 'JeffreyXiang/TRELLIS'):
         try:
             log(out, f'  TRELLIS : {space}')
-            c = Client(space, hf_token=TOKEN, verbose=False)
+            c = client(space)
             try: log(out, '  API :', str(c.view_api(return_format='str', print_info=False))[:1500])
             except Exception: pass
             try: c.predict(api_name='/start_session')
@@ -58,7 +65,7 @@ def hunyuan(img, out):
     for space in ('tencent/Hunyuan3D-2.1', 'tencent/Hunyuan3D-2'):
         try:
             log(out, f'  Hunyuan3D : {space}')
-            c = Client(space, hf_token=TOKEN, verbose=False)
+            c = client(space)
             api = c.view_api(return_format='dict', print_info=False)
             names = list((api or {}).get('named_endpoints', {}).keys()); log(out, '  points d\'entrée :', names)
             ep = next((n for n in names if 'generation_all' in n), None) or next((n for n in names if 'gen' in n), None)
