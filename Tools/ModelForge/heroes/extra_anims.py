@@ -43,8 +43,17 @@ def ride(sk, st):
     return s.clip('Sk_Monte')
 
 
-CLIPS = [('Sk_Poing', False, False, (0.12, 0.44)), ('Sk_TirArc', False, False, (0.58,)), ('Sk_Monte', True, False, ())]
+def bow_hold(sk, st):
+    """Arc en main (haut du corps, en boucle) : l'arc tenu bas dans la main gauche, la droite libre près du carquois."""
+    s = Seq(st, sk)
+    for i, t in enumerate((0.0, 1.0, 2.0)):
+        b = 1.5 * np.sin(i * np.pi)
+        s.k(t, sp=(2 + b, -6, 0), head=(-1, 6, 0), L=dict(down=70, fwd=22, twist=25, elbow=22), R=dict(down=78, fwd=6, twist=-15, elbow=24 + b * 2), fist=(0.45, 1.0))
+    return s.clip('Sk_ArcGarde')
+
+
+CLIPS = [('Sk_Poing', False, False, (0.12, 0.44)), ('Sk_TirArc', False, False, (0.58,)), ('Sk_Monte', True, False, ()), ('Sk_ArcGarde', True, False, ())]
 
 
 def build(sk, style):
-    return [punch(sk, style), bow_shot(sk, style), ride(sk, style)]
+    return [punch(sk, style), bow_shot(sk, style), ride(sk, style), bow_hold(sk, style)]

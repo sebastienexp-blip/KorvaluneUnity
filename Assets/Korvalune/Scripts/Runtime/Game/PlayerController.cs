@@ -279,16 +279,27 @@ namespace Korvalune.Game
             if (moving && upperLayer > 0)
             {
                 Anim.CrossFadeInFixedTime(state, 0.06f, upperLayer, 0f);
-                upperUntil = Time.time + ClipLength(state) * 0.92f;
+                upperUntil = Time.time + ClipLength(state) * 0.92f; bowHeld = false;
                 return;
             }
             if (state == "Attack") Anim.SetTrigger(CharacterRig.AttackId); else Anim.CrossFadeInFixedTime(state, 0.08f, 0, 0f);
         }
+        bool bowHeld; int hasBowHold = -1;
         void UpdateUpperLayer()
         {
-            if (!Anim || upperLayer <= 0) return;
-            float w = Anim.GetLayerWeight(upperLayer), target = Time.time < upperUntil ? 1f : 0f;
-            if (!Mathf.Approximately(w, target)) Anim.SetLayerWeight(upperLayer, Mathf.MoveTowards(w, target, Time.deltaTime * (target > w ? 14f : 5f)));
+            if (!Anim) return;
+            if (upperLayer == -2) upperLayer = Anim.GetLayerIndex("HautDuCorps");
+            if (upperLayer <= 0) return;
+            bool gesture = Time.time < upperUntil;
+            // arc en main : posture du haut du corps tenue au repos et en marchant (l'arc reste dans la main gauche)
+            if (hasBowHold < 0) hasBowHold = Anim.HasState(upperLayer, Animator.StringToHash("Sk_ArcGarde")) ? 1 : 0;
+            var rider = Rider.Current;
+            bool hold = hasBowHold == 1 && Bow && !Busy && !gesture && !(rider && rider.Riding) && !Swimming;
+            if (hold && !bowHeld) { Anim.CrossFadeInFixedTime("Sk_ArcGarde", 0.15f, upperLayer, 0f); bowHeld = true; }
+            if (!hold && bowHeld && !gesture) bowHeld = false;
+            float w = Anim.GetLayerWeight(upperLayer), target = gesture || hold ? 1f : 0f;
+            float rate = target > w ? 14f : (Busy ? 20f : 5f);
+            if (!Mathf.Approximately(w, target)) Anim.SetLayerWeight(upperLayer, Mathf.MoveTowards(w, target, Time.deltaTime * rate));
         }
 
         /// <summary>Monstre vers lequel le héros reste tourné pendant une attaque ou une compétence (même en se déplaçant).</summary>

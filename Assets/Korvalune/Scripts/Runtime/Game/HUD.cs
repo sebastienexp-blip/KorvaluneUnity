@@ -114,6 +114,8 @@ namespace Korvalune.Game
             {
                 if (!player) return; var r = player.GetComponent<Rider>(); if (!r) r = player.gameObject.AddComponent<Rider>(); r.Toggle();
             }, out _, out _);
+            // portail de ville (violet)
+            RoundButton(root, "PortailVille", "portail", new Vector2(0, 0), new Vector2(780, 40), 112, TownPortal.Cast, out _, out _);
             if (player) BuildShop(root);
             BuildMenu(root);
 
