@@ -70,9 +70,10 @@ namespace Korvalune.EditorTools
                 H[j, i] = (Height(x, z) - Sea + 2f) / MaxH;
             }
             td.SetHeights(0, 0, H);
+            var tdPath = Root + "/Data/Eclipse_Terrain.asset"; AssetDatabase.DeleteAsset(tdPath); AssetDatabase.CreateAsset(td, tdPath);   // avant la peinture (sous-assets enregistrés)
             td.terrainLayers = WorldBuilder.Layers();
             Paint(td);
-            var tdPath = Root + "/Data/Eclipse_Terrain.asset"; AssetDatabase.DeleteAsset(tdPath); AssetDatabase.CreateAsset(td, tdPath);
+            EditorUtility.SetDirty(td); AssetDatabase.SaveAssets();
             var tgo = Terrain.CreateTerrainGameObject(td); tgo.name = "Terrain";
             tgo.transform.position = new Vector3(-Size / 2, Sea - 2f, -Size / 2);
             var terrain = tgo.GetComponent<Terrain>(); terrain.heightmapPixelError = 5; terrain.basemapDistance = 160; terrain.drawInstanced = true;

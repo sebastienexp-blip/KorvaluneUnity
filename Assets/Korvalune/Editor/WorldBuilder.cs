@@ -123,10 +123,14 @@ namespace Korvalune.EditorTools
             }
             td.SetHeights(0, 0, H);
             CI.Step("vallée : peinture du terrain");
-            td.terrainLayers = Layers();
-            Paint(td);
+            // l'asset est créé AVANT la peinture : les textures de mélange (alphamaps) sont des sous-assets ; peintes avant,
+            // elles n'étaient pas enregistrées et, au rechargement, tout le terrain retombait sur la première couche (herbe
+            // partout : plus de chemins, de pavés en ville, de sable ni de roche)
             var tdPath = DataDir + "/Vallee_Terrain.asset";
             AssetDatabase.DeleteAsset(tdPath); AssetDatabase.CreateAsset(td, tdPath);
+            td.terrainLayers = Layers();
+            Paint(td);
+            EditorUtility.SetDirty(td); AssetDatabase.SaveAssets();
             var tgo = Terrain.CreateTerrainGameObject(td); tgo.name = "Terrain";
             tgo.transform.position = new Vector3(-Size / 2, -8f, -Size / 2);
             var terrain = tgo.GetComponent<Terrain>();
