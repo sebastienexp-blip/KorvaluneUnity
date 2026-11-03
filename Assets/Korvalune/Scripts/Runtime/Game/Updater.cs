@@ -44,16 +44,17 @@ namespace Korvalune.Game
             {
                 r.timeout = 8;
                 yield return r.SendWebRequest();
-                if (r.result != UnityWebRequest.Result.Success || !int.TryParse(r.downloadHandler.text.Trim(), out remote)) { gameObject.SetActive(false); yield break; }
+                if (r.result != UnityWebRequest.Result.Success || !int.TryParse(r.downloadHandler.text.Trim(), out remote))
+                { label.text = $"<size=20><color=#a08c6c>Version 0.1.{InstalledBuild} — vérification des mises à jour impossible (hors ligne)</color></size>"; yield break; }
             }
-            if (remote <= InstalledBuild) { gameObject.SetActive(false); yield break; }
+            if (remote <= InstalledBuild) { label.text = $"<size=20><color=#8fd08f>Version 0.1.{InstalledBuild} — à jour</color></size>"; yield break; }
             bg.enabled = true;
             label.text = $"Mise à jour disponible (version 0.1.{remote}) — toucher pour télécharger";
         }
 
         void Click()
         {
-            if (busy) return;
+            if (busy || remote <= InstalledBuild) return;              // déjà à jour : rien à télécharger
             if (Application.platform != RuntimePlatform.Android) { Application.OpenURL(Page); return; }
             try
             {
