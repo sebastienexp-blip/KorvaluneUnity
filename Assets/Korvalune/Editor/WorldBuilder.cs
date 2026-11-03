@@ -202,13 +202,14 @@ namespace Korvalune.EditorTools
             // ---- lumière, ciel, brume
             var sun = new GameObject("Soleil").AddComponent<Light>();
             sun.type = LightType.Directional; sun.intensity = 1.6f; sun.color = new Color(1f, 0.93f, 0.80f); sun.shadows = LightShadows.Soft;
+            sun.shadowStrength = 0.78f;                                           // ombres franches mais lisibles (pas de zones noires)
             sun.transform.rotation = Quaternion.Euler(38, -40, 0);
             var sky = new Material(Shader.Find("Skybox/Procedural"));
             sky.SetFloat("_SunSize", 0.04f); sky.SetFloat("_AtmosphereThickness", 1.0f); sky.SetColor("_SkyTint", new Color(0.52f, 0.62f, 0.80f)); sky.SetColor("_GroundColor", new Color(0.35f, 0.38f, 0.32f)); sky.SetFloat("_Exposure", 1.15f);
             var skyPath = Root + "/Rendering/Ciel.mat"; AssetDatabase.DeleteAsset(skyPath); AssetDatabase.CreateAsset(sky, skyPath);
             RenderSettings.skybox = sky; RenderSettings.sun = sun;
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(0.55f, 0.62f, 0.75f); RenderSettings.ambientEquatorColor = new Color(0.42f, 0.44f, 0.38f); RenderSettings.ambientGroundColor = new Color(0.18f, 0.17f, 0.13f);
+            RenderSettings.ambientSkyColor = new Color(0.62f, 0.70f, 0.84f); RenderSettings.ambientEquatorColor = new Color(0.50f, 0.52f, 0.46f); RenderSettings.ambientGroundColor = new Color(0.24f, 0.22f, 0.17f);   // lumière du ciel plus généreuse dans les ombres
             RenderSettings.fog = false; RenderSettings.fogMode = FogMode.Linear;   // pas de brouillard (demande de Sébastien)
             RenderSettings.fogStartDistance = 170; RenderSettings.fogEndDistance = 820; RenderSettings.fogColor = new Color(0.70f, 0.76f, 0.84f);
 
