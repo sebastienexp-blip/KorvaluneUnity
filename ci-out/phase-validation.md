@@ -1,8 +1,8 @@
-# Rapport d'intégration Unity — 2026-11-02 19:22 UTC
+# Rapport d'intégration Unity — 2026-11-03 07:33 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
-- 276 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 276 déjà à jour (inchangés)
+- 280 modèle(s) ModelForge trouvé(s)
+- 0 modèle(s) intégré(s), 280 déjà à jour (inchangés)
 
 ## ArcDeChasse.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/ArcDeChasse/ArcDeChasse.fbx
@@ -2088,6 +2088,7 @@
 - ✅ **Clip Sk_Summon** 1.40 s, boucle=False, humanoïde=True, déplacement max 1.021 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## ElyraNoctis_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
@@ -2171,6 +2172,7 @@
 - ✅ **Clip Sk_Summon** 1.40 s, boucle=False, humanoïde=True, déplacement max 1.021 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## KaelDraven_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
@@ -2262,6 +2264,7 @@
 - ✅ **Clip Sk_GroundStab** 1.27 s, boucle=False, humanoïde=True, déplacement max 0.927 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.101 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## KaelDraven_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
@@ -2352,6 +2355,7 @@
 - ✅ **Clip Sk_GroundStab** 1.27 s, boucle=False, humanoïde=True, déplacement max 0.927 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.101 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## Morvanna_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
@@ -2439,6 +2443,7 @@
 - ✅ **Clip Sk_Sacrifice** 1.50 s, boucle=False, humanoïde=True, déplacement max 1.010 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## Morvanna_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
@@ -2527,6 +2532,7 @@
 - ✅ **Clip Sk_Sacrifice** 1.50 s, boucle=False, humanoïde=True, déplacement max 1.010 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## Tharion_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
@@ -2614,6 +2620,7 @@
 - ✅ **Clip Sk_Charge** 0.73 s, boucle=False, humanoïde=True, déplacement max 0.934 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.072 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## Tharion_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
@@ -2700,6 +2707,7 @@
 - ✅ **Clip Sk_Charge** 0.73 s, boucle=False, humanoïde=True, déplacement max 0.934 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 1.072 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## Varek_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
@@ -2795,6 +2803,7 @@
 - ✅ **Clip Sk_Dash** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.626 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
 
 ## Varek_M.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
@@ -2889,9 +2898,129 @@
 - ✅ **Clip Sk_Dash** 0.67 s, boucle=False, humanoïde=True, déplacement max 0.626 m, événements 0
 - ✅ **Clip Sk_Poing** 0.87 s, boucle=False, humanoïde=True, déplacement max 0.978 m, événements 2
 - ✅ **Clip Sk_TirArc** 1.07 s, boucle=False, humanoïde=True, déplacement max 0.756 m, événements 1
+- ✅ **Clip Sk_Monte** 1.00 s, boucle=True, humanoïde=True, déplacement max 0.399 m, événements 0
+
+## ChevalDeGuerre.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Mounts/ChevalDeGuerre/ChevalDeGuerre.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 127588 triangles, 107921 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Mounts/ChevalDeGuerre.prefab
+- ✅ **Échelle (hauteur)** 2.244 m (attendu 0.8–3.6), boîte 0.84×2.24×2.77, pieds à y=-0.052
+- ✅ **Orientation gauche/droite** UpperArm_L.x = -0.165
+- ✅ **Orientation avant (+Z)** Head.z=1.040 > Hips.z=-0.550
+- ✅ **Point d'attache Socket_Saddle** 
+- ✅ **Matériau CH_Robe** shader Universal Render Pipeline/Lit, base CH_Robe_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Noir** shader Universal Render Pipeline/Lit, base CH_Noir_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Nez** shader Universal Render Pipeline/Lit, base CH_Nez_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Oeil** shader Universal Render Pipeline/Lit, base CH_Oeil_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Sabot** shader Universal Render Pipeline/Lit, base CH_Sabot_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Crins** shader Universal Render Pipeline/Lit, base CH_Crins_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Tapis** shader Universal Render Pipeline/Lit, base CH_Tapis_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Cuir** shader Universal Render Pipeline/Lit, base CH_Cuir_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_CuirN** shader Universal Render Pipeline/Lit, base CH_CuirN_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Metal** shader Universal Render Pipeline/Lit, base CH_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Laiton** shader Universal Render Pipeline/Lit, base CH_Laiton_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** ChevalDeGuerre
+- ✅ **Clip Idle** 4.80 s, boucle=True, humanoïde=False, déplacement max 0.089 m, événements 0
+- ✅ **Clip Walk** 1.27 s, boucle=True, humanoïde=False, déplacement max 0.321 m, événements 2
+- ✅ **Clip Run** 0.63 s, boucle=True, humanoïde=False, déplacement max 0.660 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=False, déplacement max 0.779 m, événements 1
+- ✅ **Clip Howl** 1.60 s, boucle=False, humanoïde=False, déplacement max 1.840 m, événements 0
+- ✅ **Clip Hit** 0.60 s, boucle=False, humanoïde=False, déplacement max 0.175 m, événements 0
+- ✅ **Clip Death** 1.30 s, boucle=False, humanoïde=False, déplacement max 0.843 m, événements 0
+
+## GriffonRoyal.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Mounts/GriffonRoyal/GriffonRoyal.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 136191 triangles, 108610 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Mounts/GriffonRoyal.prefab
+- ✅ **Échelle (hauteur)** 1.197 m (attendu 0.8–3.6), boîte 0.75×1.20×3.26, pieds à y=-0.001
+- ✅ **Orientation gauche/droite** UpperArm_L.x = -0.170
+- ✅ **Orientation avant (+Z)** Head.z=0.820 > Hips.z=-0.620
+- ✅ **Point d'attache Socket_Saddle** 
+- ✅ **Matériau FE_Lion** shader Universal Render Pipeline/Lit, base FE_Lion_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Blanc** shader Universal Render Pipeline/Lit, base FE_Blanc_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Oeil** shader Universal Render Pipeline/Lit, base FE_Oeil_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Bec** shader Universal Render Pipeline/Lit, base FE_Bec_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Plume** shader Universal Render Pipeline/Lit, base FE_Plume_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Griffe** shader Universal Render Pipeline/Lit, base FE_Griffe_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Remige** shader Universal Render Pipeline/Lit, base FE_Remige_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Tapis** shader Universal Render Pipeline/Lit, base CH_Tapis_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Cuir** shader Universal Render Pipeline/Lit, base CH_Cuir_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_CuirN** shader Universal Render Pipeline/Lit, base CH_CuirN_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Metal** shader Universal Render Pipeline/Lit, base CH_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** GriffonRoyal
+- ✅ **Clip Idle** 3.00 s, boucle=True, humanoïde=False, déplacement max 0.348 m, événements 0
+- ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=False, déplacement max 0.381 m, événements 2
+- ✅ **Clip Run** 0.50 s, boucle=True, humanoïde=False, déplacement max 0.619 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=False, déplacement max 1.357 m, événements 1
+- ✅ **Clip Howl** 2.80 s, boucle=False, humanoïde=False, déplacement max 0.545 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.205 m, événements 0
+- ✅ **Clip Death** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.621 m, événements 0
+
+## PanthereDOmbre.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Mounts/PanthereDOmbre/PanthereDOmbre.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 77770 triangles, 41334 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Mounts/PanthereDOmbre.prefab
+- ✅ **Échelle (hauteur)** 1.256 m (attendu 0.8–3.6), boîte 0.57×1.26×3.07, pieds à y=-0.001
+- ✅ **Orientation gauche/droite** UpperArm_L.x = -0.170
+- ✅ **Orientation avant (+Z)** Head.z=0.820 > Hips.z=-0.620
+- ✅ **Point d'attache Socket_Saddle** 
+- ✅ **Matériau FE_Panthere** shader Universal Render Pipeline/Lit, base FE_Panthere_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_OeilV** shader Universal Render Pipeline/Lit, base FE_OeilV_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_TruffeN** shader Universal Render Pipeline/Lit, base FE_TruffeN_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Griffe** shader Universal Render Pipeline/Lit, base FE_Griffe_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Tapis** shader Universal Render Pipeline/Lit, base CH_Tapis_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Cuir** shader Universal Render Pipeline/Lit, base CH_Cuir_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_CuirN** shader Universal Render Pipeline/Lit, base CH_CuirN_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Metal** shader Universal Render Pipeline/Lit, base CH_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** PanthereDOmbre
+- ✅ **Clip Idle** 3.00 s, boucle=True, humanoïde=False, déplacement max 0.348 m, événements 0
+- ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=False, déplacement max 0.381 m, événements 2
+- ✅ **Clip Run** 0.50 s, boucle=True, humanoïde=False, déplacement max 0.619 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=False, déplacement max 1.357 m, événements 1
+- ✅ **Clip Howl** 2.80 s, boucle=False, humanoïde=False, déplacement max 0.545 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.147 m, événements 0
+- ✅ **Clip Death** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.621 m, événements 0
+
+## TigreDesCendres.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Mounts/TigreDesCendres/TigreDesCendres.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 79613 triangles, 42288 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Mounts/TigreDesCendres.prefab
+- ✅ **Échelle (hauteur)** 1.256 m (attendu 0.8–3.6), boîte 0.59×1.26×3.07, pieds à y=-0.001
+- ✅ **Orientation gauche/droite** UpperArm_L.x = -0.170
+- ✅ **Orientation avant (+Z)** Head.z=0.820 > Hips.z=-0.620
+- ✅ **Point d'attache Socket_Saddle** 
+- ✅ **Matériau FE_Tigre** shader Universal Render Pipeline/Lit, base FE_Tigre_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Blanc** shader Universal Render Pipeline/Lit, base FE_Blanc_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Oeil** shader Universal Render Pipeline/Lit, base FE_Oeil_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Truffe** shader Universal Render Pipeline/Lit, base FE_Truffe_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau FE_Griffe** shader Universal Render Pipeline/Lit, base FE_Griffe_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Tapis** shader Universal Render Pipeline/Lit, base CH_Tapis_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Cuir** shader Universal Render Pipeline/Lit, base CH_Cuir_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_CuirN** shader Universal Render Pipeline/Lit, base CH_CuirN_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau CH_Metal** shader Universal Render Pipeline/Lit, base CH_Metal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** TigreDesCendres
+- ✅ **Clip Idle** 3.00 s, boucle=True, humanoïde=False, déplacement max 0.348 m, événements 0
+- ✅ **Clip Walk** 1.00 s, boucle=True, humanoïde=False, déplacement max 0.381 m, événements 2
+- ✅ **Clip Run** 0.50 s, boucle=True, humanoïde=False, déplacement max 0.619 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=False, déplacement max 1.357 m, événements 1
+- ✅ **Clip Howl** 2.80 s, boucle=False, humanoïde=False, déplacement max 0.545 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.147 m, événements 0
+- ✅ **Clip Death** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.621 m, événements 0
 
 ## Pièces du créateur de personnage (140 modèles : cheveux, sourcils, cils)
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_152 captures écrites dans ci-out/ (OpenGLCore) en 4.2 min._
+_156 captures écrites dans ci-out/ (OpenGLCore) en 5.4 min._
