@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-11-03 16:55 UTC
+# Rapport d'intégration Unity — 2026-11-03 17:52 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
 - 0 modèle(s) intégré(s), 280 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-11-03 16:56 UTC
+# Rapport d'intégration Unity — 2026-11-03 17:53 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
@@ -3031,11 +3031,11 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_156 captures écrites dans ci-out/ (OpenGLCore) en 5.4 min._
+_156 captures écrites dans ci-out/ (OpenGLCore) en 4.2 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-11-03 17:03 UTC
+# Rapport d'intégration Unity — 2026-11-03 17:58 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
@@ -3047,7 +3047,7 @@ _156 captures écrites dans ci-out/ (OpenGLCore) en 5.4 min._
 - ✅ **Château** 
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
-- ✅ **Ville : échoppes des marchands** Marchande de curiosités, Armurier, Marchand, Joaillier, Coffre, Reliquaire Céleste, Forgeron, Mystique, Alchimiste
+- ✅ **Ville : échoppes des marchands** Alchimiste, Forgeron, Marchande de curiosités, Marchand, Reliquaire Céleste, Joaillier, Coffre, Mystique, Armurier
 - ✅ **Ville : maisons** 41 maisons
 - ✅ **Ville : rue principale praticable jusqu'au château** dégagée
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
@@ -3087,6 +3087,14 @@ _156 captures écrites dans ci-out/ (OpenGLCore) en 5.4 min._
 - ✅ **Scène de la Cité de l'Éclipse** Assets/Korvalune/Scenes/Korvalune_Eclipse.unity
 - ✅ **Cité peuplée** 4 marchands, 1 portail(s), 3 groupes fixes, niveau +13
 - ✅ **Cité : chemin libre jusqu'au sanctuaire** arrivée → porte ouest → place → pont → cristal
+
+## Régions de la carte (segments reliés par portails)
+- ✅ **Scène : Forêt de l'Astral** Assets/Korvalune/Scenes/Korvalune_Foret.unity, 4 camps, portail de retour : 1
+- ✅ **Région : Forêt de l'Astral** ci-out/Region_Foret_*.png, 4 camps, niveau +7
+- ✅ **Scène : Désert des Étoiles** Assets/Korvalune/Scenes/Korvalune_Desert.unity, 4 camps, portail de retour : 1
+- ✅ **Région : Désert des Étoiles** ci-out/Region_Desert_*.png, 4 camps, niveau +17
+- ✅ **Scène : Pics Sélénites** Assets/Korvalune/Scenes/Korvalune_Pics.unity, 4 camps, portail de retour : 1
+- ✅ **Région : Pics Sélénites** ci-out/Region_Pics_*.png, 4 camps, niveau +25
 
 ## Brèches (niveaux générés)
 - ✅ **Scène des brèches** Assets/Korvalune/Scenes/Korvalune_Breche.unity
