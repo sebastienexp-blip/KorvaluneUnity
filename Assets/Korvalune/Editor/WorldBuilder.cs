@@ -246,6 +246,7 @@ namespace Korvalune.EditorTools
             door.arrival = new Vector3(-4f + 3 * 4f, 0.05f, (5 - 9) * 4f);     // pied de l'escalier de la crypte (case E, un pas à côté)
             cam.transform.position = game.playerSpawn + new Vector3(0, 8, -9); cam.transform.LookAt(game.playerSpawn);
 
+            MapShots.Save("Korvalune_Vallee");                                   // photo de la région pour la grande carte
             EditorSceneManager.SaveScene(scene, ScenePath);
             CI.Step("vallée : sauvegarde de la scène");
             var list = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();

@@ -31,7 +31,7 @@ namespace Korvalune.Game
 
             // ---- équipement : portrait 3D au centre, emplacements autour
             invEquip = Img(panel, "Equipement", UIStyle.Bar(), new Vector2(0, 1), new Vector2(50, -176), new Vector2(780, 760)).rectTransform;
-            invEquip.GetComponent<Image>().type = Image.Type.Sliced; invEquip.GetComponent<Image>().color = new Color(0, 0, 0, 0.35f);
+            invEquip.GetComponent<Image>().type = Image.Type.Sliced; invEquip.GetComponent<Image>().color = new Color(0.62f, 0.50f, 0.38f, 0.75f);
             portrait = new GameObject("Portrait", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
             Place(portrait.rectTransform, invEquip, new Vector2(0.5f, 1), new Vector2(0, -10), new Vector2(400, 600)); portrait.raycastTarget = false;
             var left = new[] { Slot.Casque, Slot.Torse, Slot.Gants, Slot.Jambes, Slot.Bottes };
@@ -42,7 +42,7 @@ namespace Korvalune.Game
 
             // ---- caractéristiques détaillées (défilantes)
             invStats = Img(panel, "Caracteristiques", UIStyle.Bar(), new Vector2(0, 1), new Vector2(50, -176), new Vector2(780, 760)).rectTransform;
-            invStats.GetComponent<Image>().type = Image.Type.Sliced; invStats.GetComponent<Image>().color = new Color(0.04f, 0.03f, 0.025f, 0.85f);
+            invStats.GetComponent<Image>().type = Image.Type.Sliced; invStats.GetComponent<Image>().color = new Color(0.36f, 0.28f, 0.20f, 0.9f);
             statsContent = Scroll(invStats, new Vector2(24, -18), new Vector2(732, 724), out statsText, 26);
 
             // ---- sac
@@ -136,10 +136,10 @@ namespace Korvalune.Game
                 portraitCam = new GameObject("Caméra de portrait").AddComponent<Camera>(); portraitCam.transform.SetParent(player.transform, false);
                 portraitCam.transform.localPosition = new Vector3(0, 1.25f, 2.7f); portraitCam.transform.localRotation = Quaternion.LookRotation(new Vector3(0, -0.2f, -2.7f));
                 portraitCam.fieldOfView = 34; portraitCam.nearClipPlane = 0.3f; portraitCam.farClipPlane = 40; portraitCam.targetTexture = portraitRT;
-                portraitCam.clearFlags = CameraClearFlags.SolidColor; portraitCam.backgroundColor = new Color(0.07f, 0.055f, 0.045f, 1);
+                portraitCam.clearFlags = CameraClearFlags.SolidColor; portraitCam.backgroundColor = new Color(0.30f, 0.25f, 0.20f, 1);
                 portraitCam.cullingMask = 1 << PortraitLayer;              // seulement le héros : pas le décor derrière lui
                 var key = new GameObject("Éclairage du portrait").AddComponent<Light>(); key.transform.SetParent(portraitCam.transform, false); key.transform.localPosition = new Vector3(0.8f, 0.6f, 0);
-                key.type = LightType.Point; key.range = 6; key.intensity = 1.6f; key.color = new Color(1f, 0.92f, 0.8f); key.shadows = LightShadows.None;
+                key.type = LightType.Point; key.range = 6; key.intensity = 2.6f; key.color = new Color(1f, 0.92f, 0.8f); key.shadows = LightShadows.None;
                 portrait.texture = portraitRT;
             }
             if (on) IsolateHero();

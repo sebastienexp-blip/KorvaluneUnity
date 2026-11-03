@@ -11,10 +11,13 @@ namespace Korvalune.Game
     public partial class HUD
     {
         // ========================================================================================== habillage commun
+        static readonly Color PanelFill = new Color(0.30f, 0.235f, 0.17f, 0.96f), ZoneFill = new Color(0.40f, 0.32f, 0.23f, 0.85f);
         RectTransform OrnatePanel(RectTransform parent, string name, Vector2 size, string title, string subtitle = null)
         {
             var im = Img(parent, name, UIStyle.Ornate(), new Vector2(0.5f, 0.5f), Vector2.zero, size); im.type = Image.Type.Sliced; im.raycastTarget = true;
             var p = im.rectTransform;
+            // fond intérieur brun clair (les panneaux étaient presque noirs) : sous tout le contenu du panneau
+            var fill = Img(p, "Fond clair", null, new Vector2(0.5f, 0.5f), Vector2.zero, size - new Vector2(70, 70)); fill.color = PanelFill; fill.raycastTarget = false;
             var ban = Img(p, "Bandeau", UIStyle.Banner(), new Vector2(0.5f, 1), new Vector2(0, 26), new Vector2(Mathf.Min(760, size.x - 200), 78)); ban.type = Image.Type.Sliced;
             var t = Label(ban.rectTransform, "Titre", title, 38, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0, 2), new Vector2(ban.rectTransform.sizeDelta.x - 80, 70));
             t.color = UIStyle.Gold; t.fontStyle = FontStyle.Bold; t.gameObject.AddComponent<Shadow>().effectColor = new Color(0, 0, 0, 0.8f);
@@ -80,7 +83,8 @@ namespace Korvalune.Game
 
             // ---- vue défilante de l'arbre
             var view = Img(panel, "Vue", UIStyle.Slot(), new Vector2(0, 1), new Vector2(46, -108), new Vector2(1180, TreeH + 40)); view.type = Image.Type.Sliced; view.raycastTarget = true;
-            view.color = new Color(0.75f, 0.7f, 0.65f, 1f);
+            view.color = new Color(1f, 0.95f, 0.88f, 1f);
+            var vfill = Img(view.rectTransform, "Fond", null, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1180 - 24, TreeH + 40 - 24)); vfill.color = ZoneFill; vfill.raycastTarget = false;
             view.gameObject.AddComponent<RectMask2D>();
             var content = new GameObject("Contenu", typeof(RectTransform)).GetComponent<RectTransform>();
             content.SetParent(view.rectTransform, false); content.anchorMin = content.anchorMax = new Vector2(0, 1); content.pivot = new Vector2(0, 1);
@@ -134,6 +138,7 @@ namespace Korvalune.Game
 
             // ---- fiche de la compétence choisie
             var side = Img(panel, "Fiche", UIStyle.Slot(), new Vector2(1, 1), new Vector2(-46, -108), new Vector2(460, TreeH + 40)); side.type = Image.Type.Sliced;
+            var sfill = Img(side.rectTransform, "Fond", null, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(460 - 24, TreeH + 40 - 24)); sfill.color = ZoneFill; sfill.raycastTarget = false;
             treeDetailBox = Scroll(side.rectTransform, new Vector2(24, -20), new Vector2(412, TreeH - 200), out treeDetail, 24);   // s'arrête au-dessus des boutons de spécialisation
             treeLearn = TextButton(side.rectTransform, "Apprendre", "Apprendre", new Vector2(0.5f, 0), new Vector2(0, 24), new Vector2(400, 76), LearnSelected, out treeLearnText, 30);
             // voies de spécialisation (choix de build) : deux boutons au-dessus de « Apprendre »
@@ -211,8 +216,8 @@ namespace Korvalune.Game
                 int i = kv.Key; var (node, glow, icon, lk, rank, name) = kv.Value; var d = runner.book[i];
                 bool open = runner.Unlocked(i) && runner.BranchOpen(i); int r = runner.ranks[i];
                 var col = Vfx.Of(d.element).outer; col.a = 1;
-                node.color = r > 0 ? Color.white : open ? new Color(0.78f, 0.72f, 0.66f) : new Color(0.38f, 0.34f, 0.32f);
-                icon.color = r > 0 ? Color.white : open ? new Color(0.8f, 0.8f, 0.8f, 0.9f) : new Color(0.35f, 0.35f, 0.35f, 0.8f);
+                node.color = r > 0 ? Color.white : open ? new Color(0.9f, 0.85f, 0.78f) : new Color(0.7f, 0.64f, 0.58f);
+                icon.color = r > 0 ? Color.white : open ? new Color(0.92f, 0.92f, 0.92f, 1f) : new Color(0.62f, 0.62f, 0.62f, 1f);   // verrouillée : grisée mais lisible
                 lk.enabled = !open && r == 0;
                 bool sel = i == treeSel, equipped = System.Array.IndexOf(runner.loadout, i) >= 0;
                 glow.color = sel ? new Color(1f, 0.85f, 0.45f, 0.9f) : r > 0 ? new Color(col.r, col.g, col.b, 0.45f) : new Color(0, 0, 0, 0);

@@ -50,6 +50,14 @@ namespace Korvalune.Game
             foreach (var (c, s) in new[] { (new Color(1f, 0.9f, 0.4f), "Toi"), (new Color(0.55f, 0.85f, 1f), "Ville (zone sûre)"), (new Color(0.75f, 0.45f, 1f), "Portail / donjon"),
                                           (new Color(1f, 0.75f, 0.3f), "Marchand"), (new Color(0.8f, 0.55f, 1f), "Oracle des Brèches"), (new Color(0.4f, 1f, 0.5f), "Objectif de quête"), (new Color(1f, 0.3f, 0.25f), "Monstres") })
             { var d = Img(side, UIStyle.Disc(), c); d.rectTransform.anchorMin = d.rectTransform.anchorMax = new Vector2(0, 1); d.rectTransform.anchoredPosition = new Vector2(30, y); d.rectTransform.sizeDelta = new Vector2(26, 26); Lbl(side, s, new Vector2(60, y), 24, UIStyle.Parch, TextAnchor.MiddleLeft); y -= 46; }
+            // régions : la zone actuelle (vue en direct) et les autres régions extérieures (photographiées à la construction)
+            var here = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            float by = 360;
+            foreach (var (scene, label) in Regions)
+            {
+                if (scene != here && !Resources.Load<Texture2D>("UI/Cartes/" + scene)) continue;
+                string sc = scene; Btn(side, label, new Vector2(130, by), () => ShowRegion(sc), 240); by += 90;
+            }
             Btn(side, "+", new Vector2(70, 160), () => SetZoom(zoom * 1.5f));
             Btn(side, "−", new Vector2(190, 160), () => SetZoom(zoom / 1.5f));
             Btn(side, "Me centrer", new Vector2(130, 70), () => { if (hero) center = UvOf(hero.position); Clamp(); }, 240);
@@ -77,7 +85,26 @@ namespace Korvalune.Game
             cam.transform.position = new Vector3(worldMin.x + side / 2, worldMin.y + 400, worldMin.z + side / 2); cam.transform.rotation = Quaternion.Euler(90, 0, 0);
             cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = new Color(0.08f, 0.1f, 0.12f); cam.cullingMask = ~(1 << 5);
             cam.targetTexture = rt; cam.Render(); cam.targetTexture = null; Destroy(go);
-            view.texture = rt;
+            view.texture = rt; liveTex = rt;
+        }
+
+        static readonly (string scene, string label)[] Regions = { ("Korvalune_Vallee", "Vallée"), ("Korvalune_Eclipse", "Cité de l'Éclipse") };
+        Texture liveTex; readonly List<GameObject> regionLabels = new List<GameObject>();
+
+        /// <summary>Affiche une région : la zone actuelle avec ses repères, ou la photo d'une autre région (sans repères).</summary>
+        void ShowRegion(string scene)
+        {
+            bool here = scene == UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            foreach (var g in regionLabels) if (g) Destroy(g); regionLabels.Clear();
+            if (here) { view.texture = liveTex; markers.gameObject.SetActive(true); if (hero) center = UvOf(hero.position); SetZoom(2f); return; }
+            var tex = Resources.Load<Texture2D>("UI/Cartes/" + scene); if (!tex) return;
+            if (!liveTex) liveTex = view.texture;
+            view.texture = tex; markers.gameObject.SetActive(false); center = new Vector2(0.5f, 0.5f); zoom = 1f; SetZoom(1f);
+            var name = new GameObject("Région", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); name.rectTransform.SetParent(frame, false);
+            name.rectTransform.anchorMin = name.rectTransform.anchorMax = new Vector2(0.5f, 1); name.rectTransform.anchoredPosition = new Vector2(0, -40); name.rectTransform.sizeDelta = new Vector2(900, 60);
+            name.font = font; name.fontSize = 40; name.alignment = TextAnchor.MiddleCenter; name.color = UIStyle.Gold; name.fontStyle = FontStyle.Bold; name.raycastTarget = false;
+            foreach (var (sc, label) in Regions) if (sc == scene) name.text = label == "Vallée" ? "Vallée de Korvalune" : label;
+            name.gameObject.AddComponent<Outline>().effectColor = Color.black; regionLabels.Add(name.gameObject);
         }
 
         Vector2 UvOf(Vector3 w) => new Vector2((w.x - worldMin.x) / worldSize.x, (w.z - worldMin.z) / worldSize.z);

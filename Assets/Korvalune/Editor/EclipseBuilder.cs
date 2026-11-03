@@ -94,14 +94,14 @@ namespace Korvalune.EditorTools
             CityPieces(env, rng);
             var shrine = Shrine(env);
 
-            // ---- lumière d'éclipse
-            var sun = new GameObject("Lune").AddComponent<Light>(); sun.type = LightType.Directional; sun.intensity = 1.15f; sun.color = new Color(0.72f, 0.78f, 1f); sun.shadows = LightShadows.Soft;
-            sun.transform.rotation = Quaternion.Euler(34, -120, 0);
+            // ---- lumière de plein jour (demande de Sébastien : pas de nuit dans le jeu, on doit bien voir la cité)
+            var sun = new GameObject("Soleil").AddComponent<Light>(); sun.type = LightType.Directional; sun.intensity = 1.6f; sun.color = new Color(1f, 0.94f, 0.82f); sun.shadows = LightShadows.Soft;
+            sun.shadowStrength = 0.78f; sun.transform.rotation = Quaternion.Euler(42, -120, 0);
             var sky = new Material(Shader.Find("Skybox/Procedural"));
-            sky.SetFloat("_SunSize", 0.09f); sky.SetFloat("_AtmosphereThickness", 0.55f); sky.SetColor("_SkyTint", new Color(0.42f, 0.30f, 0.62f)); sky.SetColor("_GroundColor", new Color(0.16f, 0.14f, 0.22f)); sky.SetFloat("_Exposure", 0.75f);
+            sky.SetFloat("_SunSize", 0.04f); sky.SetFloat("_AtmosphereThickness", 1.0f); sky.SetColor("_SkyTint", new Color(0.52f, 0.60f, 0.82f)); sky.SetColor("_GroundColor", new Color(0.35f, 0.38f, 0.40f)); sky.SetFloat("_Exposure", 1.15f);
             var skyPath = Root + "/Rendering/Ciel_Eclipse.mat"; AssetDatabase.DeleteAsset(skyPath); AssetDatabase.CreateAsset(sky, skyPath);
             RenderSettings.skybox = sky; RenderSettings.sun = sun; RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(0.46f, 0.42f, 0.66f); RenderSettings.ambientEquatorColor = new Color(0.32f, 0.30f, 0.40f); RenderSettings.ambientGroundColor = new Color(0.12f, 0.11f, 0.14f);
+            RenderSettings.ambientSkyColor = new Color(0.62f, 0.68f, 0.86f); RenderSettings.ambientEquatorColor = new Color(0.50f, 0.50f, 0.50f); RenderSettings.ambientGroundColor = new Color(0.24f, 0.22f, 0.20f);
             RenderSettings.fog = false;
 
             // ---- caméra et jeu
@@ -109,7 +109,7 @@ namespace Korvalune.EditorTools
             cam.clearFlags = CameraClearFlags.Skybox; cam.farClipPlane = 700; cam.nearClipPlane = 0.3f; cam.gameObject.AddComponent<CameraRig>();
             var camData = cam.GetComponent<UniversalAdditionalCameraData>(); if (!camData) camData = cam.gameObject.AddComponent<UniversalAdditionalCameraData>();
             camData.renderPostProcessing = true; camData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-            WorldBuilder.PostProcess("Eclipse", 0.35f);
+            WorldBuilder.PostProcess("Eclipse", 0.15f);
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = WorldBuilder.Config();
             game.zoneName = "Cité de l'Éclipse"; game.questTitle = "Le Refuge Lunaire";
@@ -133,6 +133,7 @@ namespace Korvalune.EditorTools
             back.glowColor = new Color(0.65f, 0.75f, 1f);
             cam.transform.position = game.playerSpawn + new Vector3(0, 10, -10); cam.transform.LookAt(game.playerSpawn);
 
+            MapShots.Save("Korvalune_Eclipse");                                   // photo de la région pour la grande carte
             EditorSceneManager.SaveScene(scene, ScenePath);
             var list = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();
             list.Add(new EditorBuildSettingsScene(ScenePath, true));
