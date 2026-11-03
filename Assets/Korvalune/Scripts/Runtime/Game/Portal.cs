@@ -20,6 +20,7 @@ namespace Korvalune.Game
         public Color glowColor = new Color(1f, 0.78f, 0.35f);
         public bool gate;                         // portail magique ovale (portail de ville, portail de brèche)
         public System.Action onEnter;             // action à la place du chargement simple (portail de ville, brèche)
+        public System.Func<bool> canEnter;        // refus (niveau trop bas…) : le portail reste utilisable plus tard
         bool used, armed;
         readonly List<Material> mats = new List<Material>();
         Light lamp; Transform nameTag; TextMesh nameText; Transform shaft; float heat;
@@ -96,6 +97,7 @@ namespace Korvalune.Game
         void Enter()
         {
             if (used) return;
+            if (canEnter != null && !canEnter()) { armed = false; return; }
             used = true;
             FX.Burst(transform.position + Vector3.up, glowColor, 40, 4f, 0.15f, 0.8f, -0.4f);
             FindFirstObjectByType<GameBootstrap>()?.Persist();

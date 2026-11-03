@@ -52,11 +52,18 @@ namespace Korvalune.Game
             { var d = Img(side, UIStyle.Disc(), c); d.rectTransform.anchorMin = d.rectTransform.anchorMax = new Vector2(0, 1); d.rectTransform.anchoredPosition = new Vector2(30, y); d.rectTransform.sizeDelta = new Vector2(26, 26); Lbl(side, s, new Vector2(60, y), 24, UIStyle.Parch, TextAnchor.MiddleLeft); y -= 46; }
             // régions : la zone actuelle (vue en direct) et les autres régions extérieures (photographiées à la construction)
             var here = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-            float by = 250;
-            foreach (var (scene, label) in Regions)
+            // sélecteur de région (‹ nom ›) : une seule ligne, quel que soit le nombre de régions (la légende reste lisible)
+            var avail = new List<Waypoint.Region>();
+            foreach (var r in Waypoint.Regions) if (r.scene == here || Resources.Load<Texture2D>("UI/Cartes/" + r.scene)) avail.Add(r);
+            if (avail.Count > 0)
             {
-                if (scene != here && !Resources.Load<Texture2D>("UI/Cartes/" + scene)) continue;
-                string sc = scene; Btn(side, label, new Vector2(130, by), () => ShowRegion(sc), 240); by += 80;
+                int idx = Mathf.Max(0, avail.FindIndex(r => r.scene == here));
+                Btn(side, avail[idx].name, new Vector2(130, 330), () => ShowRegion(avail[idx].scene), 240);
+                var lab = side.GetChild(side.childCount - 1).GetComponentInChildren<Text>();
+                lab.rectTransform.sizeDelta = new Vector2(220, 70); lab.resizeTextForBestFit = true; lab.resizeTextMinSize = 16; lab.resizeTextMaxSize = 30; lab.horizontalOverflow = HorizontalWrapMode.Wrap;
+                System.Action<int> step = k => { idx = (idx + k + avail.Count) % avail.Count; lab.text = avail[idx].name; ShowRegion(avail[idx].scene); };
+                Btn(side, "‹", new Vector2(70, 250), () => step(-1));
+                Btn(side, "›", new Vector2(190, 250), () => step(1));
             }
             Btn(side, "+", new Vector2(70, 160), () => SetZoom(zoom * 1.5f));
             Btn(side, "−", new Vector2(190, 160), () => SetZoom(zoom / 1.5f));
@@ -90,7 +97,6 @@ namespace Korvalune.Game
             view.texture = rt; liveTex = rt;
         }
 
-        static readonly (string scene, string label)[] Regions = { ("Korvalune_Vallee", "Vallée"), ("Korvalune_Foret", "Forêt Astrale"), ("Korvalune_Pics", "Pics Sélénites"), ("Korvalune_Desert", "Désert"), ("Korvalune_Eclipse", "Éclipse") };
         Texture liveTex; readonly List<GameObject> regionLabels = new List<GameObject>();
 
         /// <summary>Affiche une région : la zone actuelle avec ses repères, ou la photo d'une autre région (sans repères).</summary>
@@ -105,7 +111,7 @@ namespace Korvalune.Game
             var name = new GameObject("Région", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); name.rectTransform.SetParent(frame, false);
             name.rectTransform.anchorMin = name.rectTransform.anchorMax = new Vector2(0.5f, 1); name.rectTransform.anchoredPosition = new Vector2(0, -40); name.rectTransform.sizeDelta = new Vector2(900, 60);
             name.font = font; name.fontSize = 40; name.alignment = TextAnchor.MiddleCenter; name.color = UIStyle.Gold; name.fontStyle = FontStyle.Bold; name.raycastTarget = false;
-            foreach (var (sc, label) in Regions) if (sc == scene) name.text = label == "Vallée" ? "Vallée de Korvalune" : label;
+            foreach (var r in Waypoint.Regions) if (r.scene == scene) name.text = r.name;
             name.gameObject.AddComponent<Outline>().effectColor = Color.black; regionLabels.Add(name.gameObject);
         }
 

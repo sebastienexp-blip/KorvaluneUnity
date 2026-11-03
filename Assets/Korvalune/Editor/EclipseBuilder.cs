@@ -133,6 +133,7 @@ namespace Korvalune.EditorTools
             back.glowColor = new Color(0.65f, 0.75f, 1f);
             cam.transform.position = game.playerSpawn + new Vector3(0, 10, -10); cam.transform.LookAt(game.playerSpawn);
 
+            SegmentBuilder.Enclose(Size / 2, 18f, Sea - 2f, 30f, new[] { SegmentBuilder.BeltMaterial("Eclipse", "Roche", Color.white), SegmentBuilder.BeltMaterial("Eclipse", "Roche", Color.white), null, SegmentBuilder.BeltMaterial("Eclipse", "Roche", Color.white) });
             MapShots.Save("Korvalune_Eclipse");                                   // photo de la région pour la grande carte
             EditorSceneManager.SaveScene(scene, ScenePath);
             var list = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();

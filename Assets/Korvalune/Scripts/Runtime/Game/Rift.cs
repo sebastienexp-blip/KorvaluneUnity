@@ -240,7 +240,8 @@ namespace Korvalune.Game
                 if (glow.maxColorComponent > 0) { m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", glow); }
                 return m;
             }
-            var stone = Stone(new Color(0.46f, 0.44f, 0.50f), Color.black); var dark = Stone(new Color(0.30f, 0.28f, 0.34f), Color.black);
+            var stone = Waypoint.TexturedStone(new Color(0.9f, 0.88f, 0.96f), 2f) ?? Stone(new Color(0.46f, 0.44f, 0.50f), Color.black);
+            var dark = Waypoint.TexturedStone(new Color(0.62f, 0.6f, 0.68f), 3f) ?? Stone(new Color(0.30f, 0.28f, 0.34f), Color.black);
             var statueMat = Stone(new Color(0.52f, 0.50f, 0.56f), new Color(0.12f, 0.04f, 0.22f));
             GameObject Cyl(string n, Vector3 lp, Vector3 sc, Material m)
             {
