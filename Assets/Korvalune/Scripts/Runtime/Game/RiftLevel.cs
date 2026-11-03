@@ -178,6 +178,22 @@ namespace Korvalune.Game
             return m;
         }
 
+        /// <summary>Cercle de runes lumineux posé au sol (deux couches qui tournent en sens contraires).</summary>
+        public static void RuneCircle(Transform parent, Vector3 pos, float size, Color c)
+        {
+            if (!FX.additive) return;
+            var holder = new GameObject("Cercle de runes").transform; holder.SetParent(parent, true); holder.position = pos;
+            foreach (var (tex, k, spin) in new[] { (RuneCircleArt.Outer, 1f, 6f), (RuneCircleArt.Inner, 0.62f, -10f) })
+            {
+                var q = GameObject.CreatePrimitive(PrimitiveType.Quad); q.name = tex.name; Kill(q.GetComponent<Collider>());
+                q.transform.SetParent(holder, false); q.transform.localRotation = Quaternion.Euler(90, 0, 0); q.transform.localScale = Vector3.one * size * k;
+                var m = new Material(FX.additive); m.mainTexture = tex; if (m.HasProperty("_BaseMap")) m.SetTexture("_BaseMap", tex);
+                m.SetColor("_BaseColor", new Color(c.r, c.g, c.b, 0.9f));
+                var r = q.GetComponent<Renderer>(); r.sharedMaterial = m; r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; r.receiveShadows = false;
+                var sp = q.AddComponent<Floater>(); sp.spin = spin; sp.bob = 0f;
+            }
+        }
+
         Light Glow(Vector3 pos, Color c, float intensity, float range, bool flicker)
         {
             var l = new GameObject("Lueur").AddComponent<Light>(); l.transform.SetParent(root); l.transform.position = pos;
@@ -536,11 +552,71 @@ namespace Korvalune.Game
                     game.camps.Add(new GameBootstrap.Camp { enemyId = th.enemies[rng.Next(th.enemies.Length)], center = c, count = 2 + rng.Next(3), radius = Mathf.Min(r.width, r.height) * T * 0.3f });
                 }
             }
-            // cercle de runes au point de départ
-            var ring = GameObject.CreatePrimitive(PrimitiveType.Cylinder); ring.name = "Cercle d'arrivée"; Kill(ring.GetComponent<Collider>()); ring.transform.SetParent(root);
-            ring.transform.position = game.playerSpawn + Vector3.up * 0.02f; ring.transform.localScale = new Vector3(3.2f, 0.01f, 3.2f);
-            ring.GetComponent<Renderer>().sharedMaterial = Mat(th.crystal * 0.3f, 0.6f, th.crystal * 0.55f);
+            // cercle de runes lumineux au point de départ (dessiné, transparent, qui tourne lentement)
+            RuneCircle(root, game.playerSpawn + Vector3.up * 0.04f, 4.2f, th.crystal);
             Glow(game.playerSpawn + Vector3.up * 2f, th.crystal, 1.6f, 9f, false);
+        }
+    }
+
+    /// <summary>Cercle de runes : anneaux concentriques, runes tracées entre deux anneaux, étoile intérieure. Texture créée
+    /// une fois, posée à plat (rendu additif), deux couches qui tournent en sens contraires.</summary>
+    public static class RuneCircleArt
+    {
+        static Texture2D outer, inner;
+        public static Texture2D Outer => outer ? outer : outer = Make(true);
+        public static Texture2D Inner => inner ? inner : inner = Make(false);
+
+        static Texture2D Make(bool rings)
+        {
+            const int S = 512; var a = new float[S * S]; var rnd = new System.Random(rings ? 11 : 12);
+            void Dot(float x, float y, float w)
+            {
+                int x0 = Mathf.FloorToInt(x - w - 1), x1 = Mathf.CeilToInt(x + w + 1), y0 = Mathf.FloorToInt(y - w - 1), y1 = Mathf.CeilToInt(y + w + 1);
+                for (int yy = Mathf.Max(0, y0); yy <= Mathf.Min(S - 1, y1); yy++)
+                    for (int xx = Mathf.Max(0, x0); xx <= Mathf.Min(S - 1, x1); xx++)
+                    {
+                        float d = Mathf.Sqrt((xx - x) * (xx - x) + (yy - y) * (yy - y)); float v = Mathf.Clamp01(w + 0.5f - d);
+                        int k = yy * S + xx; if (v > a[k]) a[k] = v;
+                    }
+            }
+            void Seg(Vector2 p, Vector2 q, float w) { int n = Mathf.CeilToInt((q - p).magnitude) + 1; for (int i = 0; i <= n; i++) { var r = Vector2.Lerp(p, q, i / (float)n); Dot(r.x, r.y, w); } }
+            void Circle(float r, float w) { int n = Mathf.CeilToInt(r * 6.3f); for (int i = 0; i < n; i++) { float t = i * Mathf.PI * 2 / n; Dot(S / 2f + Mathf.Cos(t) * r, S / 2f + Mathf.Sin(t) * r, w); } }
+            var c = new Vector2(S / 2f, S / 2f);
+            if (rings)
+            {
+                Circle(248, 2.2f); Circle(236, 1.2f); Circle(186, 2.0f); Circle(176, 1.0f);
+                // runes entre les anneaux : petits glyphes de 3 à 5 traits
+                int nr = 18;
+                for (int i = 0; i < nr; i++)
+                {
+                    float t = i * Mathf.PI * 2 / nr; var dir = new Vector2(Mathf.Cos(t), Mathf.Sin(t)); var tan = new Vector2(-dir.y, dir.x);
+                    var o = c + dir * 211f; int strokes = 3 + rnd.Next(3);
+                    var pts = new[] { -1, 0, 1 };
+                    for (int k = 0; k < strokes; k++)
+                    {
+                        var p = o + tan * pts[rnd.Next(3)] * 9f + dir * pts[rnd.Next(3)] * 12f;
+                        var q = o + tan * pts[rnd.Next(3)] * 9f + dir * pts[rnd.Next(3)] * 12f;
+                        if ((p - q).sqrMagnitude < 1) q = p + dir * 12f;
+                        Seg(p, q, 1.6f);
+                    }
+                }
+            }
+            else
+            {
+                Circle(150, 1.6f); Circle(70, 1.4f);
+                // étoile à sept branches inscrite
+                for (int i = 0; i < 7; i++)
+                {
+                    float t0 = i * Mathf.PI * 2 / 7f - Mathf.PI / 2, t1 = (i + 3) * Mathf.PI * 2 / 7f - Mathf.PI / 2;
+                    Seg(c + new Vector2(Mathf.Cos(t0), Mathf.Sin(t0)) * 150f, c + new Vector2(Mathf.Cos(t1), Mathf.Sin(t1)) * 150f, 1.5f);
+                }
+                for (int i = 0; i < 7; i++) { float t = i * Mathf.PI * 2 / 7f - Mathf.PI / 2; Circle(0, 0); Dot(c.x + Mathf.Cos(t) * 150f, c.y + Mathf.Sin(t) * 150f, 6f); }
+            }
+            var tex = new Texture2D(S, S, TextureFormat.RGBA32, true) { wrapMode = TextureWrapMode.Clamp, name = rings ? "Cercle de runes" : "Étoile de runes" };
+            var px = new Color32[S * S];
+            for (int i = 0; i < px.Length; i++) { byte v = (byte)(Mathf.Clamp01(a[i]) * 255); px[i] = new Color32(255, 255, 255, v); }
+            tex.SetPixels32(px); tex.Apply(true, true);
+            return tex;
         }
     }
 
