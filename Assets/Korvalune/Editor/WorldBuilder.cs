@@ -375,7 +375,7 @@ namespace Korvalune.EditorTools
             {
                 prototypeTexture = tex, renderMode = DetailRenderMode.GrassBillboard, usePrototypeMesh = false,
                 minWidth = 0.7f, maxWidth = 1.3f, minHeight = 0.45f, maxHeight = 0.95f, noiseSpread = 0.4f,
-                healthyColor = new Color(0.58f, 0.70f, 0.34f), dryColor = new Color(0.74f, 0.68f, 0.40f)
+                healthyColor = new Color(0.95f, 1.0f, 0.88f), dryColor = new Color(1.0f, 0.9f, 0.7f)
             };
             td.detailPrototypes = new[] { proto };
             int R = td.detailResolution; var map = new int[R, R];
