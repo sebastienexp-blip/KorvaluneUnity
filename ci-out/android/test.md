@@ -25,18 +25,10 @@
     [Korvalune][test] chargement 90 %
     [Korvalune][test] chargement 90 %
     [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
 - Erreurs Unity dans le journal : 2
-    11-03 09:46:24.311  5930  5994 E Unity   : SharedTextureData source data is NULL.
-    11-03 09:46:24.314  5930  5994 E Unity   : SharedTextureData source data is NULL.
+    11-03 10:42:15.231  6218  6283 E Unity   : SharedTextureData source data is NULL.
+    11-03 10:42:15.233  6218  6283 E Unity   : SharedTextureData source data is NULL.
 
 **RÉSULTAT : OK**
