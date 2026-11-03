@@ -1,0 +1,44 @@
+# Génère GRATUITEMENT les nouvelles créatures (image → 3D texturé) avec les modèles ouverts TRELLIS / Hunyuan3D-2
+# hébergés sur Hugging Face, à partir des concepts Tools/Meshy/concepts/*.png. Résultats dans Tools/Meshy/out/.
+# Secret facultatif : HF_TOKEN (compte Hugging Face gratuit → plus de temps de calcul).
+name: Créatures — génération gratuite
+
+on:
+  workflow_dispatch:
+    inputs:
+      creatures:
+        description: "Créatures (vide = toutes) : abbe wendigo tisseuse salamandre basilic voyant"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: creatures-gratuit
+  cancel-in-progress: false
+
+jobs:
+  generer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dépendances
+        run: pip install --quiet gradio_client
+      - name: Générer
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python3 Tools/Meshy/generate_free.py ${{ github.event.inputs.creatures }}
+      - name: Enregistrer
+        if: always()
+        run: |
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add Tools/Meshy/out || true
+          git commit -m "Créatures : modèles générés (gratuit) [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done
