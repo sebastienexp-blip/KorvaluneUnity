@@ -70,7 +70,7 @@ namespace Korvalune.Game
             bool known = Array.IndexOf(Classes, PlayerClass) >= 0;
             return known && r.NextDouble() < 0.85 ? PlayerClass : Classes[r.Next(Classes.Length)];
         }
-        static bool IsMain(string s) => s == "Force" || s == "Dextérité" || s == "Intelligence";
+        public static bool IsMain(string s) => s == "Force" || s == "Dextérité" || s == "Intelligence";
         public static float MaxDurabilityOf(Slot s) => s == Slot.Amulette || s == Slot.Anneau ? 0 : s == Slot.Arme || s == Slot.MainGauche ? 80 : 60;
         public static string LabelOf(Rarity r) => Labels[(int)r];
 
