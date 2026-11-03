@@ -204,6 +204,28 @@ class Level:
         return 0 <= j < wd.shape[0] and 0 <= i < wd.shape[1] and wd[j, i] >= min_wall
 
 
+
+def mushroom_tex(S=512, seed=77):
+    """Chapeaux des champignons luminescents : chair sombre bleu-vert marbrée de violet, seules les taches rondes et les
+    fines veines brillent (au lieu d'un chapeau uniformément lumineux)."""
+    from forge.texgen import TexSet, fbm, n01, height_to_normal, cavity_ao
+    r = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:S, 0:S] / S
+    g = n01(fbm(S, S, r, base=S / 6, octaves=5)); fine = n01(fbm(S, S, r, base=S / 80, octaves=3))
+    spots = np.zeros((S, S))
+    for _ in range(140):
+        cx, cy = r.uniform(0, 1, 2); rad = r.uniform(0.008, 0.03)
+        d = np.sqrt(((xx - cx + 0.5) % 1 - 0.5) ** 2 + ((yy - cy + 0.5) % 1 - 0.5) ** 2)
+        spots = np.maximum(spots, np.clip(1 - d / rad, 0, 1) ** 0.6)
+    veins = np.clip(1 - np.abs(n01(fbm(S, S, r, base=S / 10, octaves=4)) - 0.5) * 40, 0, 1) * 0.6
+    base = np.array([0.10, 0.22, 0.24])[None, None] * (0.6 + 0.6 * g[..., None]) * (0.85 + 0.25 * fine[..., None])
+    base = base * (1 - 0.4 * np.clip((n01(fbm(S, S, r, base=S / 4, octaves=3)) - 0.6) * 3, 0, 1))[..., None] + np.array([0.36, 0.18, 0.42])[None, None] * 0.25 * np.clip((g - 0.6) * 3, 0, 1)[..., None]
+    glow = np.clip(spots + veins, 0, 1)
+    col = base * (1 - glow[..., None]) + np.array([0.55, 1.0, 0.85])[None, None] * glow[..., None]
+    emit = np.array([0.35, 1.0, 0.80])[None, None] * (glow[..., None] * 0.9 + 0.08 * g[..., None])
+    h = 0.6 * g + 0.4 * spots + 0.2 * fine
+    return TexSet(np.clip(col, 0, 1), height_to_normal(h, 0.7), np.zeros((S, S)), np.clip(0.45 + 0.2 * spots, 0, 1), cavity_ao(h, 3, 0.1), np.clip(emit, 0, 1))
+
 # ------------------------------------------------------------------------------------------- décor
 def stalagmite(c, h, r):
     m = cone(c, r, h, segs=7, flare=0.25)
@@ -397,7 +419,7 @@ RECIPES = {
     ROCK: (lambda S: cave_rock(S), 1024, 512, dict(metallic=0.0, smoothness=1.0)),
     TOPROCK: (lambda S: cave_rock(S, seed=4011), 512, 256, dict(metallic=0.0, smoothness=1.0)),
     FLOOR: (lambda S: cave_floor(S), 1024, 512, dict(metallic=0.0, smoothness=1.0)),
-    MUSH: (lambda S: glow_tex((0.25, 0.95, 0.75)), 128, 64, dict(metallic=0.0, smoothness=1.0, emission=(1.6, 1.6, 1.6), emission_preview=(0.25, 0.9, 0.7))),
+    MUSH: (lambda S: mushroom_tex(S), 512, 256, dict(metallic=0.0, smoothness=1.0, emission=(1.6, 1.6, 1.6), emission_preview=(0.25, 0.9, 0.7))),
     CRYST: (lambda S: glow_tex((0.5, 0.7, 1.0), seed=4005), 128, 64, dict(metallic=0.0, smoothness=1.0, emission=(1.8, 1.8, 1.8), emission_preview=(0.45, 0.65, 1.0))),
     ROOT: (lambda S: WM.bark(S, tone=(0.24, 0.17, 0.11)), 512, 256, dict(metallic=0.0, smoothness=1.0)),
     WEB: (lambda S: web_tex(S), 256, 128, dict(metallic=0.0, smoothness=1.0, cutoff=0.3)),
