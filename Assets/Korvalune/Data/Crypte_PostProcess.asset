@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5420827949637894019
+--- !u!114 &-1946272461936409718
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,26 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
-  m_Name: ColorAdjustments
+  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
+  m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
   active: 1
-  postExposure:
+  shadows:
     m_OverrideState: 1
-    m_Value: 0.6
-  contrast:
+    m_Value: {x: 0.95, y: 0.97, z: 1.05, w: 0}
+  midtones:
     m_OverrideState: 1
-    m_Value: 12
-  colorFilter:
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  highlights:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.97, b: 0.92, a: 1}
-  hueShift:
+    m_Value: {x: 1.04, y: 1, z: 0.95, w: 0}
+  shadowsStart:
     m_OverrideState: 1
     m_Value: 0
-  saturation:
+  shadowsEnd:
     m_OverrideState: 1
-    m_Value: 8
---- !u!114 &-533336179049902104
+    m_Value: 0.3
+  highlightsStart:
+    m_OverrideState: 1
+    m_Value: 0.55
+  highlightsEnd:
+    m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &-1116563270003894464
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,25 +43,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
-  m_Name: Vignette
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
   m_EditorClassIdentifier: 
   active: 1
-  color:
+  mode:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
-  center:
+    m_Value: 2
+  neutralHDRRangeReductionMode:
     m_OverrideState: 1
-    m_Value: {x: 0.5, y: 0.5}
-  intensity:
+    m_Value: 2
+  acesPreset:
     m_OverrideState: 1
-    m_Value: 0.28
-  smoothness:
-    m_OverrideState: 1
-    m_Value: 0.45
-  rounded:
+    m_Value: 3
+  hueShiftAmount:
     m_OverrideState: 1
     m_Value: 0
+  detectPaperWhite:
+    m_OverrideState: 1
+    m_Value: 0
+  paperWhite:
+    m_OverrideState: 1
+    m_Value: 300
+  detectBrightnessLimits:
+    m_OverrideState: 1
+    m_Value: 1
+  minNits:
+    m_OverrideState: 1
+    m_Value: 0.005
+  maxNits:
+    m_OverrideState: 1
+    m_Value: 1000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,12 +87,12 @@ MonoBehaviour:
   m_Name: Crypte_PostProcess
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 1645758367691905312}
-  - {fileID: 3584674664090217630}
-  - {fileID: -5420827949637894019}
-  - {fileID: -533336179049902104}
-  - {fileID: 2025223006099954040}
---- !u!114 &1645758367691905312
+  - {fileID: 3789650066168927184}
+  - {fileID: -1116563270003894464}
+  - {fileID: 5631374754122453862}
+  - {fileID: 7236951215413933450}
+  - {fileID: -1946272461936409718}
+--- !u!114 &3789650066168927184
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +139,7 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &2025223006099954040
+--- !u!114 &5631374754122453862
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,32 +148,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
-  m_Name: ShadowsMidtonesHighlights
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
   active: 1
-  shadows:
+  postExposure:
     m_OverrideState: 1
-    m_Value: {x: 0.95, y: 0.97, z: 1.05, w: 0}
-  midtones:
+    m_Value: 0.6
+  contrast:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
-  highlights:
+    m_Value: 12
+  colorFilter:
     m_OverrideState: 1
-    m_Value: {x: 1.04, y: 1, z: 0.95, w: 0}
-  shadowsStart:
+    m_Value: {r: 1, g: 0.97, b: 0.92, a: 1}
+  hueShift:
     m_OverrideState: 1
     m_Value: 0
-  shadowsEnd:
+  saturation:
     m_OverrideState: 1
-    m_Value: 0.3
-  highlightsStart:
-    m_OverrideState: 1
-    m_Value: 0.55
-  highlightsEnd:
-    m_OverrideState: 1
-    m_Value: 1
---- !u!114 &3584674664090217630
+    m_Value: 8
+--- !u!114 &7236951215413933450
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,34 +176,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
-  m_Name: Tonemapping
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
   m_EditorClassIdentifier: 
   active: 1
-  mode:
+  color:
     m_OverrideState: 1
-    m_Value: 2
-  neutralHDRRangeReductionMode:
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  center:
     m_OverrideState: 1
-    m_Value: 2
-  acesPreset:
+    m_Value: {x: 0.5, y: 0.5}
+  intensity:
     m_OverrideState: 1
-    m_Value: 3
-  hueShiftAmount:
+    m_Value: 0.28
+  smoothness:
+    m_OverrideState: 1
+    m_Value: 0.45
+  rounded:
     m_OverrideState: 1
     m_Value: 0
-  detectPaperWhite:
-    m_OverrideState: 1
-    m_Value: 0
-  paperWhite:
-    m_OverrideState: 1
-    m_Value: 300
-  detectBrightnessLimits:
-    m_OverrideState: 1
-    m_Value: 1
-  minNits:
-    m_OverrideState: 1
-    m_Value: 0.005
-  maxNits:
-    m_OverrideState: 1
-    m_Value: 1000
