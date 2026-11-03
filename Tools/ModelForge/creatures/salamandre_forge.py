@@ -72,15 +72,16 @@ def Pt(n, side=1): p = np.array(J[n], float); p[0] *= side; return p
 def body(sk):
     s = SC.Sculpt(k=0.035)
     s.ell('Chest', (0, 0.58, 0.36), (0.30, 0.19, 0.32))
-    s.ell('Spine2', (0, 0.59, 0.05), (0.33, 0.20, 0.38))
+    s.ell('Spine2', (0, 0.57, 0.05), (0.34, 0.18, 0.40))
     s.ell('Spine1', (0, 0.57, -0.27), (0.29, 0.18, 0.30))
     s.ell('Hips', (0, 0.54, -0.58), (0.26, 0.17, 0.26))
     s.cone('Neck1', (0, 0.58, 0.55), (0, 0.60, 0.82), 0.22, 0.19)
     # tête large et plate, museau arrondi, mâchoire massive, bourrelets au-dessus des yeux
     s.ell('Head', (0, 0.63, 0.95), (0.21, 0.10, 0.20))
-    s.ell('Head', (0, 0.61, 1.13), (0.17, 0.075, 0.13))
+    s.ell('Head', (0, 0.60, 1.16), (0.16, 0.07, 0.20))
+    s.ell('Head', (0, 0.585, 1.32), (0.12, 0.055, 0.10))
     for sx in (1, -1): s.ell('Head', (0.11 * sx, 0.70, 0.96), (0.055, 0.04, 0.06), k=0.015)
-    s.ell('Jaw', (0, 0.52, 1.02), (0.19, 0.06, 0.20))
+    s.ell('Jaw', (0, 0.52, 1.10), (0.18, 0.055, 0.28))
     for side, sx in (('L', 1), ('R', -1)):
         # pattes courtes, épaisses, écartées (posture de salamandre)
         s.cone(f'UpperArm_{side}', Pt('Scapula', sx), Pt('UpperArm', sx), 0.15, 0.12)
@@ -122,33 +123,37 @@ def build(bank, female=False):
     from forge.humanparts import submesh
     a.add('corps', submesh(m, ~belly), 'SF_Peau'); a.add('ventre', submesh(m, belly), 'SF_Ventre')
     tree = cKDTree(m.V)
-    # plaques d'obsidienne martelée : rangées sur l'échine, les flancs, le cou et la queue, rivets aux coins
+    # plaques d'obsidienne martelée : elles couvrent dos, flancs, cou, haut des pattes et queue en se chevauchant
+    # (semis régulier sur la surface, une plaque bombée orientée selon la peau, rivets aux coins)
+    from creatures import common as CC
     plates, rivets = [], []
-    zs = np.arange(0.82, -2.10, -0.17)
-    for z in zs:
-        width = 0.30 if z > -0.80 else 0.30 * max(0.25, 1 - (-0.80 - z) / 1.5)
-        for x in np.linspace(-width, width, 5 if z > -0.8 else 3):
-            p = top_point(tree, m.V, x, z)
-            if p is None: continue
-            n = N[tree.query(p)[1]]
-            if n[1] < 0.15: continue
-            sz = 0.085 if z > -0.8 else 0.06
-            pl = SC.Sculpt(k=0.004).ell('Spine2', (0, 0, 0), (sz * 1.1, sz * 1.0, 0.05)).mesh(res=0.008, smooth=1)
-            pl.V[:, 2] = np.clip(pl.V[:, 2], -0.010, 0.018); pl.V[:, 0] = np.clip(pl.V[:, 0], -sz, sz); pl.V[:, 1] = np.clip(pl.V[:, 1], -sz * 0.9, sz * 0.9)
-            R = SC.rot_from(unit(n), up=(0, 0, 1))
-            pl.V = pl.V @ R.T + p + n * 0.004
-            SC.box_uv(pl, 0.2)
-            b = nearest_bone(z); rigid(pl, sk[b]); plates.append(pl)
-            for cx, cy in ((-0.7, -0.7), (0.7, -0.7), (-0.7, 0.7), (0.7, 0.7)):
-                q = p + n * 0.024 + R @ np.array([cx * sz, cy * sz * 0.9, 0])
-                rv = _blob(q, (0.009, 0.009, 0.009), n=8); rigid(rv, sk[b]); rivets.append(rv)
+    P, Nn = CC.sample_surface(m, 2600, rng, weight=lambda C: ((C[:, 1] > 0.28) & ~((C[:, 2] > 0.88) & (C[:, 1] < 0.62))) * 1.0)
+    keep = []
+    for idx in np.argsort(-P[:, 1]):
+        p = P[idx]
+        if Nn[idx][1] < -0.25: continue
+        if any(np.sum((p - q) ** 2) < 0.095 ** 2 for q in keep[-400:]): continue
+        keep.append(p)
+        n = Nn[idx]; z = p[2]
+        sz = 0.075 if z > -0.8 else max(0.035, 0.075 * (1 + (z + 0.8) / 2.2))
+        if np.abs(p[0]) > 0.30 and p[1] < 0.45: sz *= 0.75                       # pattes : plaques plus petites
+        pl = SC.Sculpt(k=0.004).ell('Spine2', (0, 0, 0), (sz * 1.15, sz * 1.05, 0.05)).mesh(res=0.008, smooth=1)
+        pl.V[:, 2] = np.clip(pl.V[:, 2], -0.012, 0.020); pl.V[:, 0] = np.clip(pl.V[:, 0], -sz, sz); pl.V[:, 1] = np.clip(pl.V[:, 1], -sz * 0.9, sz * 0.9)
+        R = SC.rot_from(unit(n), up=(0, 0, 1) if abs(n[2]) < 0.9 else (0, 1, 0))
+        pl.V = pl.V @ R.T + p + n * 0.006
+        SC.box_uv(pl, 0.2)
+        from forge.humanparts import weights_from
+        pl = weights_from(m, pl); plates.append(pl)
+        for cx, cy in ((-0.72, -0.72), (0.72, -0.72), (-0.72, 0.72), (0.72, 0.72)):
+            q = p + n * 0.028 + R @ np.array([cx * sz, cy * sz * 0.9, 0])
+            rv = weights_from(m, _blob(q, (0.008, 0.008, 0.008), n=6)); rivets.append(rv)
     a.add('plaques', concat(plates), 'SF_Plaque'); a.add('rivets', concat(rivets), 'SF_Fer')
     # cheminées de fer le long de l'échine, inclinées vers l'arrière, gueule incandescente
     chim, fire = [], []
-    for k, z in enumerate((0.42, 0.22, 0.02, -0.18, -0.38, -0.58)):
+    for k, z in enumerate((0.48, 0.34, 0.20, 0.06, -0.08, -0.22, -0.36, -0.50, -0.64)):
         p = top_point(tree, m.V, 0.0, z)
         if p is None: continue
-        h = 0.20 + 0.14 * np.sin(k * 1.3 + 0.6) + 0.08; r0 = 0.045 + 0.01 * (k % 2)
+        h = 0.22 + 0.16 * np.sin(np.pi * k / 8) + 0.06 * np.sin(k * 2.3); r0 = 0.040 + 0.008 * (k % 2)
         top = p + np.array([0.02 * (-1) ** k, h, -0.05])
         tube = Loft(spline([p - (0, 0.03, 0), (p + top) / 2, top], 8), curve([(0, r0 * 1.15), (1, r0)], 8), curve([(0, r0 * 1.15), (1, r0)], 8), p=2.2, segs=14).mesh(0.1)
         rim = Loft(np.array([[top[0] + (r0 + 0.012) * np.cos(u), top[1], top[2] + (r0 + 0.012) * np.sin(u)] for u in np.linspace(0, 2 * np.pi, 20)]), 0.012, 0.008, p=4, segs=6, ref=(0, 1, 0)).mesh(0.05)
@@ -156,10 +161,12 @@ def build(bank, female=False):
         b = nearest_bone(z)
         for mm in (tube, rim, band): rigid(mm, sk[b]); chim.append(mm)
         f = _blob(top - (0, 0.012, 0), (r0 * 0.85, 0.012, r0 * 0.85), n=12); rigid(f, sk[b]); fire.append(f)
+        fl = Loft(spline([top, top + (0.01, 0.07, -0.02), top + (0.0, 0.16, -0.05)], 8), curve([(0, r0 * 0.8), (.4, r0 * 0.7), (1, 0.002)], 8), curve([(0, r0 * 0.8), (.4, r0 * 0.6), (1, 0.002)], 8), p=2, segs=10, cap1=1).mesh(0.05)
+        rigid(fl, sk[b]); fire.append(fl)                                          # flamme qui sort de la cheminée
     a.add('cheminees', concat(chim), 'SF_Fer'); a.add('braises', concat(fire), 'SF_Feu')
     # yeux de braise, gueule incandescente, griffes d'obsidienne
     eyes = concat([_blob(np.array((0.13 * sx, 0.69, 1.02)), (0.022, 0.016, 0.020), n=12) for sx in (1, -1)]); rigid(eyes, sk['Head']); a.add('yeux', eyes, 'SF_Oeil')
-    mouth = SC.Sculpt(k=0.01).ell('Head', (0, 0.56, 1.06), (0.16, 0.012, 0.17)).mesh(res=0.008, smooth=2); rigid(mouth, sk['Head']); a.add('gueule', mouth, 'SF_Feu')
+    mouth = SC.Sculpt(k=0.01).ell('Head', (0, 0.555, 1.15), (0.15, 0.012, 0.26)).mesh(res=0.008, smooth=2); rigid(mouth, sk['Head']); a.add('gueule', mouth, 'SF_Feu')
     claws = []
     for side, sx in (('L', 1), ('R', -1)):
         for paw in ('FrontPaw', 'BackPaw'):

@@ -22,9 +22,9 @@ RECIPES = {
     'WG_Bone':   (lambda S: EM.tinted(KM.bone(S, seed=1801, tone=(0.70, 0.68, 0.60)), (1, 1, 1)), 1024, 512, dict(metallic=0.0, smoothness=0.7)),
     'WG_Antler': (lambda S: KM.bone(S, seed=1802, tone=(0.62, 0.60, 0.55)), 1024, 256, dict(metallic=0.0, smoothness=0.6)),
     'WG_Hollow': (lambda S: KM.void(S), 64, 64, dict(metallic=0.0, smoothness=1.0)),
-    'WG_Eye':    (lambda S: EM.glow(S, (0.45, 0.85, 1.0)), 64, 64, dict(metallic=0.0, smoothness=1.0, emission=(4.5, 4.5, 4.5), emission_preview=(2.8, 2.8, 2.8))),
+    'WG_Lueur':    (lambda S: EM.glow(S, (0.45, 0.85, 1.0)), 64, 64, dict(metallic=0.0, smoothness=1.0, emission=(4.5, 4.5, 4.5), emission_preview=(2.8, 2.8, 2.8))),
     'WG_Ice':    (lambda S: KM.crystal(S, seed=1803, color=(0.70, 0.90, 1.0), glow=0.35), 512, 256, dict(metallic=0.0, smoothness=1.0, emission=(0.6, 0.6, 0.6), emission_preview=(0.4, 0.4, 0.4))),
-    'WG_Fur':    (lambda S: CC.fur_texture(S, seed=1804, root=(0.30, 0.30, 0.31), tip=(0.82, 0.83, 0.84), density=1.3), 512, 256, dict(metallic=0.0, smoothness=1.0, cutoff=0.45)),
+    'WG_Fur':    (lambda S: CC.fur_texture(S, seed=1804, root=(0.10, 0.09, 0.085), tip=(0.50, 0.49, 0.47), density=1.4), 512, 256, dict(metallic=0.0, smoothness=1.0, cutoff=0.45)),
     'WG_Claw':   (lambda S: KM.bone(S, seed=1805, tone=(0.05, 0.045, 0.045)), 256, 128, dict(metallic=0.0, smoothness=1.0)),
     'WG_Hide':   (lambda W, H_: KM.cloak(W, H_, seed=1806, color=(0.40, 0.39, 0.37), thread_color=(0.50, 0.48, 0.45), mud_amt=1.2), (1024, 2048), (256, 512), dict(metallic=0.0, smoothness=1.0)),
     'WG_Leather': (lambda S: KM.leather(S, seed=1807, tone=(0.12, 0.10, 0.09)), 512, 256, dict(metallic=0.0, smoothness=1.0)),
@@ -62,22 +62,31 @@ def deer_skull(sk, rng):
 
 
 def antlers(sk, rng):
-    """Bois de cerf immenses : merrain qui part du crâne vers le haut, l'extérieur puis l'arrière, six andouillers
-    recourbés vers le haut, surface striée ; glaçons pendus aux branches."""
+    """Bois de cerf immenses en couronne : merrain qui monte en s'écartant puis se recourbe vers l'intérieur, huit
+    andouillers dont certains fourchus, surface striée ; glaçons pendus aux branches."""
     beams, ice = [], []
+    def branch(c, d, L, r0, depth):
+        q = np.linspace(0, 1, 10)
+        bend = unit(np.cross(d, (0, 0, 1)) + 1e-3) * 0.15
+        pts = [c + d * L * t + bend * L * t * t + np.array([0, 0.06 * L * t * t, 0]) for t in q]
+        beams.append(Loft(spline(pts, 10), curve([(0, r0), (1, r0 * 0.18 + 0.002)], 10), curve([(0, r0 * 0.9), (1, r0 * 0.16 + 0.002)], 10), p=2.2, segs=8, cap1=1).mesh(0.05))
+        if depth > 0 and L > 0.12:
+            tip = pts[6]; dd = unit(d + rng.normal(0, 0.45, 3) + (0, 0.5, 0))
+            branch(tip, dd, L * 0.5, r0 * 0.45, depth - 1)
+        if rng.uniform() < 0.6:
+            p = pts[int(rng.integers(2, 7))]
+            ice.append(Loft(spline([p, p - (0, rng.uniform(0.05, 0.13), 0)], 4), curve([(0, r0 * 0.5), (1, .001)], 4), curve([(0, r0 * 0.5), (1, .001)], 4), p=1.2, segs=6, cap1=1).mesh(0.03))
     for sx in (1, -1):
-        b0 = np.array([0.050 * sx, 1.72, 0.03])
-        q = np.linspace(0, 1, 36)
-        main = np.c_[b0[0] + sx * (0.42 * np.sin(q * 1.3) + 0.06 * q), b0[1] + 0.66 * q - 0.10 * q ** 2, b0[2] - 0.20 * q ** 1.4 + 0.08 * np.sin(q * 3)]
-        r = 0.032 * (1 - 0.6 * q) + 0.005
-        lo = Loft(spline(main, 36), r, r * 0.9, p=2.2, segs=10, cap0=1, cap1=1); beams.append(lo.mesh(0.1))
-        for j, (t, L, ang) in enumerate(((0.10, 0.22, 0.6), (0.26, 0.30, 0.2), (0.42, 0.34, -0.2), (0.58, 0.30, 0.3), (0.72, 0.26, -0.1), (0.86, 0.20, 0.2))):
-            i = int(t * 35); c = lo.path[i]
-            d = unit(np.array([sx * 0.25 + ang * sx * 0.3, 1.0, 0.45 if j % 2 == 0 else -0.25]))
-            tp = [c, c + d * L * 0.5 + (0, 0, 0.02), c + d * L + (0, 0.03, 0.04)]
-            beams.append(Loft(spline(tp, 10), curve([(0, r[i] * 0.9), (1, 0.004)], 10), curve([(0, r[i] * 0.85), (1, 0.004)], 10), p=2.2, segs=8, cap1=1).mesh(0.05))
-            if rng.uniform() < 0.7:                                   # glaçon sous la base de l'andouiller
-                ice.append(Loft(spline([c, c - (0, rng.uniform(0.05, 0.12), 0)], 4), curve([(0, .010), (1, .001)], 4), curve([(0, .010), (1, .001)], 4), p=1.2, segs=6, cap1=1).mesh(0.03))
+        b0 = np.array([0.050 * sx, 1.72, 0.02])
+        q = np.linspace(0, 1, 40)
+        main = np.c_[b0[0] + sx * (0.46 * np.sin(q * 2.0) * (1 - 0.30 * q) + 0.05 * q), b0[1] + 0.62 * q, b0[2] - 0.10 * np.sin(q * 2.0)]
+        r = 0.028 * (1 - 0.6 * q) + 0.005
+        lo = Loft(spline(main, 40), r, r * 0.9, p=2.2, segs=10, cap0=1, cap1=1); beams.append(lo.mesh(0.1))
+        for j, t in enumerate((0.10, 0.22, 0.34, 0.46, 0.58, 0.70, 0.82, 0.93)):
+            i = int(t * 39); c = lo.path[i]
+            out = sx * (0.6 if j % 2 == 0 else -0.25)
+            d = unit(np.array([out, 1.0, 0.55 if j % 3 == 0 else -0.35]))
+            branch(c, d, 0.22 + 0.20 * np.sin(np.pi * t), r[i] * 0.8, 1 if j in (2, 4, 6) else 0)
     bm = concat(beams); rigid(bm, sk['Head']); im = concat(ice); rigid(im, sk['Head'])
     return bm, im
 
@@ -106,7 +115,7 @@ def build(bank, female=False):
     sk = H.build(); a = Asset(NAME, sk); sw = H.swap_table(sk); rng = np.random.default_rng(1800)
     body, marks = MOD.base(sk, a, bank, 'WG', female=False, look=dict(
         extra=[('universal-male-young-minmuscle-minweight', 1.0), ('stomach-pregnant-decr', 1.0)], hair=None, brows=None, lashes=None,
-        skin='middleage_caucasian_male', skin_tint=(0.6, 0.6, 0.62), skin_kw=dict(pale=0.4, dirt=1.5, pubic=0.0)))
+        skin='middleage_caucasian_male', skin_tint=(0.38, 0.37, 0.36), skin_kw=dict(pale=0.4, dirt=1.5, pubic=0.0)))
     bank.recipes['WG_Skin'] = (lambda S: EM.frost_fur_skin(S, seed=1808), 2048, 1024, dict(metallic=0.0, smoothness=1.0))
     a.parts = [p for p in a.parts if p[0] not in HEAD_PARTS]
     # torse creusé entre les côtes
@@ -117,11 +126,11 @@ def build(bank, female=False):
     sp, ca, ice = ribcage(body, sk)
     a.add('cotes', sp, 'WG_Bone'); a.add('cartilages', ca, 'WG_Bone'); a.add('stalactites', ice, 'WG_Ice')
     skull, holes, eyes, teeth = deer_skull(sk, rng)
-    a.add('crane', skull, 'WG_Bone'); a.add('crane_creux', holes, 'WG_Hollow'); a.add('yeux_givre', eyes, 'WG_Eye'); a.add('dents', teeth, 'WG_Bone')
+    a.add('crane', skull, 'WG_Bone'); a.add('crane_creux', holes, 'WG_Hollow'); a.add('yeux_givre', eyes, 'WG_Lueur'); a.add('dents', teeth, 'WG_Bone')
     bm, im = antlers(sk, rng)
     a.add('bois', bm, 'WG_Antler'); a.add('glacons', im, 'WG_Ice')
     for k, c in enumerate(GO.claws(sk)):
-        c.V = c.V + (c.V - c.V.mean(0)) * 0.6                                    # griffes 60 % plus longues
+        c.V = c.V + (c.V - c.V.mean(0)) * 1.6                                    # griffes démesurées
         a.add(f'griffe{k}', c, 'WG_Claw'); a.add(f'griffe{k}_R', mirror(c, sw), 'WG_Claw')
     toes = []
     for sx, side in ((1, 'Left'), (-1, 'Right')):
@@ -136,18 +145,21 @@ def build(bank, female=False):
     sm = cc(skin)
     def wfur(C):
         y, x, z = C[:, 1], np.abs(C[:, 0]), C[:, 2]
-        neck = ((y > 1.42) & (y < 1.62) & (x < 0.28)) * 3.0
-        back = ((z < -0.02) & (y > 1.0) & (y < 1.45) & (x < 0.22)) * 1.4
-        upper = ((x > 0.22) & (x < 0.42) & (y > 1.30)) * 1.2                      # haut des bras
-        hips = ((y > 0.70) & (y < 1.02)) * 1.2
-        legs = ((y > 0.15) & (y < 0.70)) * 0.9                                     # jambes velues jusqu'aux chevilles
-        return neck + back + upper + hips + legs
-    flow = lambda P, N: unit(np.c_[np.sign(P[:, 0]) * 0.25, np.full(len(P), -1.0), -0.15 + 0 * P[:, 0]])
-    fur = CC.fur_cards(sm, 6500, rng, flow, lambda P, N: np.where(P[:, 1] > 1.40, 0.15, np.where(np.abs(P[:, 0]) > 0.22, 0.07, 0.10)), width=0.045, lift=0.3, weight=wfur, curl=0.3, jitter=0.25)
+        chest_bare = (z > 0.03) & (y > 1.08) & (y < 1.46) & (x < 0.16)               # la cage thoracique reste à nu
+        w = np.ones(len(C)) * 1.0
+        w += ((y > 1.42) & (y < 1.62) & (x < 0.30)) * 2.5                            # crinière du cou et des épaules
+        w += ((x > 0.18) & (y > 1.30)) * 0.6                                          # bras
+        w *= ~chest_bare
+        return w
+    def flow(P, N):
+        arm = (np.abs(P[:, 0]) > 0.20) & (P[:, 1] > 1.30)                     # bras (pose en T) : le poil suit le bras vers la main
+        d = np.c_[np.sign(P[:, 0]) * 0.25, np.full(len(P), -1.0), np.full(len(P), -0.15)]
+        d[arm] = np.c_[np.sign(P[arm, 0]) * 1.0, np.full(arm.sum(), -0.35), np.full(arm.sum(), -0.1)]
+        return unit(d)
+    flen = lambda P, N: np.where((P[:, 1] > 1.40) & (np.abs(P[:, 0]) < 0.25), 0.13, np.where(np.abs(P[:, 0]) > 0.22, 0.06, 0.08))
+    fur = concat([CC.fur_cards(sm, 7000, rng, flow, flen, width=0.035, lift=0.18, weight=wfur, curl=0.25, jitter=0.3),
+                  CC.fur_cards(sm, 5000, rng, flow, lambda P, N: flen(P, N) * 0.6, width=0.028, lift=0.08, weight=wfur, curl=0.15, jitter=0.35)])
     a.add('fourrure', fur, 'WG_Fur')
-    # pagne de peau en lambeaux
-    tmp = Asset('t', sk); GO.rags(body, sk, tmp)
-    for n, m, mat in tmp.parts: a.add(n, m, 'WG_Hide' if 'Cloth' in mat else 'WG_Leather')
     MOD.assign(a, [])
     anims.build(sk, a)
     return a, {}, anims.CLIPS
