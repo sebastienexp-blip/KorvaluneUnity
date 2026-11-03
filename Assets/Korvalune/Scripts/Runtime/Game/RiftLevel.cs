@@ -333,7 +333,7 @@ namespace Korvalune.Game
             var go = new GameObject("Sol du canyon"); go.transform.SetParent(root, false);
             go.AddComponent<MeshFilter>().sharedMesh = mesh;
             var mr = go.AddComponent<MeshRenderer>();
-            mr.sharedMaterials = new[] { Mat(Color.white, th.ice ? 0.30f : 0.12f, default, GroundTex(th.ground, th.ice ? 0.22f : 0.40f, 11)), Mat(Color.white, th.ice ? 0.45f : 0.18f, default, GroundTex(th.rock, 0.30f, 12, true)) };
+            mr.sharedMaterials = new[] { Mat(Color.white, th.ice ? 0.45f : 0.12f, default, th.ice ? CellTex(th.ground, 11, 0) : CellTex(th.ground, 11, 1)), Mat(Color.white, th.ice ? 0.4f : 0.18f, default, CellTex(th.rock, 12, 2)) };
             mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             go.AddComponent<MeshCollider>().sharedMesh = mesh; Physics.SyncTransforms();
             // décor : rochers sur les pentes, arbres morts ou gelés sur les crêtes, quelques blocs dans les salles
@@ -423,6 +423,68 @@ namespace Korvalune.Game
                     px[y * S + x] = new Color(c.r * s, c.g * s, c.b * s, 1);
                 }
             var t = new Texture2D(S, S, TextureFormat.RGBA32, true) { wrapMode = TextureWrapMode.Repeat, name = "Sol de brèche" }; t.SetPixels(px); t.Apply(true, true);
+            return t;
+        }
+
+        /// <summary>Texture de sol ou de paroi par cellules (512 px, raccordable) :
+        /// 0 = glace (plaques bleutées, fissures claires, congères de neige) ;
+        /// 1 = terre battue (mottes, gravier, cailloux plus clairs) ;
+        /// 2 = paroi rocheuse (plaques fracturées, fissures sombres, arêtes éclairées, strates à peine marquées).</summary>
+        Texture2D CellTex(Color c, int seed, int kind)
+        {
+            const int S = 512; var px = new Color[S * S]; float o = seed * 13.7f; var r = new System.Random(seed * 31 + kind);
+            int G = kind == 1 ? 22 : kind == 0 ? 7 : 6;                 // cellules par côté
+            var pts = new Vector2[G * G];
+            for (int j = 0; j < G; j++) for (int i = 0; i < G; i++) pts[j * G + i] = new Vector2((i + 0.15f + 0.7f * (float)r.NextDouble()) / G, (j + 0.15f + 0.7f * (float)r.NextDouble()) / G);
+            for (int y = 0; y < S; y++)
+                for (int x = 0; x < S; x++)
+                {
+                    float u = x / (float)S, v = y / (float)S;
+                    // déformation légère des contours (taillés, pas géométriques)
+                    float wu = u + (Tile(u, v, 6f, o + 3f) - 0.5f) * 0.03f, wv = v + (Tile(u, v, 6f, o + 9f) - 0.5f) * 0.03f;
+                    int ci = Mathf.FloorToInt(wu * G), cj = Mathf.FloorToInt(wv * G);
+                    float d1 = 9, d2 = 9; int id = 0;
+                    for (int dj = -1; dj <= 1; dj++)
+                        for (int di = -1; di <= 1; di++)
+                        {
+                            int gi = ((ci + di) % G + G) % G, gj = ((cj + dj) % G + G) % G;
+                            var p = pts[gj * G + gi]; float px0 = p.x + Mathf.Floor((float)(ci + di) / G), py0 = p.y + Mathf.Floor((float)(cj + dj) / G);
+                            float dx = wu - px0, dy = wv - py0; float d = Mathf.Sqrt(dx * dx + dy * dy);
+                            if (d < d1) { d2 = d1; d1 = d; id = gj * G + gi; } else if (d < d2) d2 = d;
+                        }
+                    float e = (d2 - d1) * 0.5f * S;                        // distance au joint, en pixels
+                    float cell = (id * 0.618034f) % 1f;
+                    float n = 0, amp = 0.5f, f = 4f; for (int k = 0; k < 4; k++) { n += amp * (Tile(u, v, f, o + k * 5.3f) - 0.5f); amp *= 0.5f; f *= 2f; }
+                    float fine = Tile(u, v, 48f, o + 70f);
+                    Color col;
+                    if (kind == 0)
+                    {
+                        float crack = Mathf.Clamp01(1f - (e - 0.6f) / 1.8f);
+                        float snow = Mathf.Clamp01((Tile(u, v, 3f, o + 21f) - 0.52f) * 4f);
+                        float depth = 0.82f + 0.25f * cell + n * 0.5f;
+                        col = new Color(c.r * depth * 0.92f, c.g * depth, c.b * depth * 1.08f);
+                        col = Color.Lerp(col, new Color(0.93f, 0.96f, 1f), crack * 0.75f);          // fissures blanchies par le givre
+                        col = Color.Lerp(col, new Color(0.95f, 0.97f, 1f) * (0.9f + 0.1f * fine), snow * 0.85f);
+                    }
+                    else if (kind == 1)
+                    {
+                        float pebble = Mathf.Clamp01((e - 2.5f) / 4f) * (cell > 0.72f ? 1f : 0f);
+                        float joint = Mathf.Clamp01(1f - (e - 0.8f) / 2.2f);
+                        float s2 = (0.8f + 0.35f * Tile(u, v, 5f, o + 33f)) * (1f + n * 0.8f) * (0.9f + 0.18f * fine);
+                        col = new Color(c.r * s2, c.g * s2, c.b * s2);
+                        col = Color.Lerp(col, new Color(c.r * 1.35f + 0.05f, c.g * 1.32f + 0.05f, c.b * 1.3f + 0.05f) * (0.85f + 0.3f * cell), pebble);
+                        col *= 1f - 0.35f * joint;
+                    }
+                    else
+                    {
+                        float crack = Mathf.Clamp01(1f - (e - 0.8f) / 2.2f), rim = Mathf.Clamp01(1f - Mathf.Abs(e - 4f) / 2.5f);
+                        float strata = 0.94f + 0.06f * Mathf.Sin((v * 14f + n * 2f) * Mathf.PI * 2f);
+                        float s2 = (0.78f + 0.3f * cell) * (1f + n * 0.9f) * strata * (0.9f + 0.16f * fine);
+                        col = new Color(c.r * s2, c.g * s2, c.b * s2) * (1f - 0.62f * crack) * (1f + 0.12f * rim);
+                    }
+                    col.a = 1; px[y * S + x] = col;
+                }
+            var t = new Texture2D(S, S, TextureFormat.RGBA32, true) { wrapMode = TextureWrapMode.Repeat, name = kind == 2 ? "Paroi de brèche" : "Sol de brèche" }; t.SetPixels(px); t.Apply(true, true);
             return t;
         }
 

@@ -673,11 +673,12 @@ namespace Korvalune.EditorTools
             if (!stone) { stone = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(stone, path); }
             var monde = Shader.Find("Korvalune/PBR Monde");
             if (monde != null && !ShaderUtil.ShaderHasError(monde) && stone.shader != monde) stone.shader = monde;   // mousse sur le dessus, variation
-            var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Terrain/Roche_BaseMap.png");
-            if (tex) stone.SetTexture("_BaseMap", tex);
-            var rn = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Terrain/Roche_Normal.png");
+            // granit des rochers (grain fin, lichens) : la texture de dalles du terrain faisait de grandes plaques sur les murs
+            var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Rocher0/Textures/W_Rock_BaseMap.png");
+            if (tex) { stone.SetTexture("_BaseMap", tex); stone.SetTextureScale("_BaseMap", new Vector2(0.5f, 0.5f)); }
+            var rn = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Rocher0/Textures/W_Rock_Normal.png");
             if (rn) { stone.SetTexture("_BumpMap", rn); stone.EnableKeyword("_NORMALMAP"); }
-            var ro = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Terrain/Roche_Occlusion.png");
+            var ro = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Rocher0/Textures/W_Rock_Occlusion.png");
             if (ro) { stone.SetTexture("_OcclusionMap", ro); stone.EnableKeyword("_OCCLUSIONMAP"); }
             EditorUtility.SetDirty(stone);
             stone.SetColor("_BaseColor", new Color(0.75f, 0.74f, 0.72f)); stone.SetFloat("_Smoothness", 0.15f);
