@@ -17,7 +17,7 @@
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
 - Erreurs Unity dans le journal : 2
-    11-03 12:09:05.608  6385  6405 E Unity   : Scene 'Korvalune_Selection' couldn't be loaded because it has not been added to the active build profile or shared scene list or the AssetBundle has not been loaded.
-    11-03 12:09:05.608  6385  6405 E Unity   : To add a scene to the active build profile or shared scene list use the menu File->Build Profiles
+    11-03 13:37:30.488  6196  6218 E Unity   : Scene 'Korvalune_Selection' couldn't be loaded because it has not been added to the active build profile or shared scene list or the AssetBundle has not been loaded.
+    11-03 13:37:30.488  6196  6218 E Unity   : To add a scene to the active build profile or shared scene list use the menu File->Build Profiles
 
 **RÉSULTAT : OK**

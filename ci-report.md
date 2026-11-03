@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-11-03 12:28 UTC
+# Rapport d'intégration Unity — 2026-11-03 13:22 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
 - 140 modèle(s) intégré(s), 140 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-11-03 12:52 UTC
+# Rapport d'intégration Unity — 2026-11-03 13:47 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
@@ -3035,7 +3035,7 @@ _156 captures écrites dans ci-out/ (OpenGLCore) en 5.5 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-11-03 12:59 UTC
+# Rapport d'intégration Unity — 2026-11-03 13:54 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
@@ -3047,7 +3047,7 @@ _156 captures écrites dans ci-out/ (OpenGLCore) en 5.5 min._
 - ✅ **Château** 
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon
-- ✅ **Ville : échoppes des marchands** Marchande de curiosités, Mystique, Marchand, Alchimiste, Joaillier, Armurier, Coffre, Forgeron, Reliquaire Céleste
+- ✅ **Ville : échoppes des marchands** Mystique, Alchimiste, Reliquaire Céleste, Forgeron, Coffre, Marchand, Armurier, Marchande de curiosités, Joaillier
 - ✅ **Ville : maisons** 41 maisons
 - ✅ **Ville : rue principale praticable jusqu'au château** dégagée
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
@@ -3090,11 +3090,11 @@ _156 captures écrites dans ci-out/ (OpenGLCore) en 5.5 min._
 
 ## Brèches (niveaux générés)
 - ✅ **Scène des brèches** Assets/Korvalune/Scenes/Korvalune_Breche.unity
-- ✅ **Brèche : Crypte engloutie** 773 éléments de décor, 13 groupes d'ennemis
-- ✅ **Brèche : Fournaise des damnés** 729 éléments de décor, 10 groupes d'ennemis
-- ✅ **Brèche : Nécropole astrale** 1246 éléments de décor, 17 groupes d'ennemis
-- ✅ **Brèche : Bois pétrifié** 595 éléments de décor, 15 groupes d'ennemis
-- ✅ **Brèche : Glacier des âmes** 1235 éléments de décor, 14 groupes d'ennemis
+- ✅ **Brèche : Crypte engloutie** 774 éléments de décor, 13 groupes d'ennemis
+- ✅ **Brèche : Fournaise des damnés** 730 éléments de décor, 10 groupes d'ennemis
+- ✅ **Brèche : Nécropole astrale** 1247 éléments de décor, 17 groupes d'ennemis
+- ✅ **Brèche : Bois pétrifié** 596 éléments de décor, 15 groupes d'ennemis
+- ✅ **Brèche : Glacier des âmes** 1236 éléments de décor, 14 groupes d'ennemis
 - ✅ **Écran de lancement** Assets/Korvalune/Scenes/Korvalune_Lanceur.unity
 
 ## Créateur de personnage
