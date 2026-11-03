@@ -433,7 +433,7 @@ namespace Korvalune.Game
         Texture2D CellTex(Color c, int seed, int kind)
         {
             const int S = 512; var px = new Color[S * S]; float o = seed * 13.7f; var r = new System.Random(seed * 31 + kind);
-            int G = kind == 1 ? 22 : kind == 0 ? 7 : 6;                 // cellules par côté
+            int G = kind == 1 ? 13 : kind == 0 ? 7 : 6;                 // cellules par côté
             var pts = new Vector2[G * G];
             for (int j = 0; j < G; j++) for (int i = 0; i < G; i++) pts[j * G + i] = new Vector2((i + 0.15f + 0.7f * (float)r.NextDouble()) / G, (j + 0.15f + 0.7f * (float)r.NextDouble()) / G);
             for (int y = 0; y < S; y++)
@@ -468,7 +468,7 @@ namespace Korvalune.Game
                     }
                     else if (kind == 1)
                     {
-                        float pebble = Mathf.Clamp01((e - 2.5f) / 4f) * (cell > 0.72f ? 1f : 0f);
+                        float pebble = Mathf.Clamp01((e - 6f) / 5f) * (cell > 0.84f ? 1f : 0f) * Mathf.Clamp01((Tile(u, v, 7f, o + 51f) - 0.35f) * 4f);   // cailloux épars, pas en grille
                         float joint = Mathf.Clamp01(1f - (e - 0.8f) / 2.2f);
                         float s2 = (0.8f + 0.35f * Tile(u, v, 5f, o + 33f)) * (1f + n * 0.8f) * (0.9f + 0.18f * fine);
                         col = new Color(c.r * s2, c.g * s2, c.b * s2);
