@@ -89,27 +89,54 @@ def sand(S=1024, seed=1005):
     return _tex(col, 0.8 * rip + 0.3 * grain, 0.25 + 0.1 * grain, 0.5)
 
 
-def stone_blocks(S=1024, seed=1006, rows=8, tone=(0.62, 0.58, 0.52)):
-    """Pierre de taille du château : assises de blocs irréguliers (joints décalés), arêtes épaufrées, salissures
-    verticales, mousse au pied. UV : 1 répétition = 2 m."""
+def stone_blocks(S=1024, seed=1006, rows=5, tone=(0.62, 0.58, 0.52)):
+    """Pierre de taille : assises de hauteurs inégales, blocs de longueurs variées (joints décalés), faces bombées
+    avec arêtes biseautées et épaufrures, joints de mortier creux où pousse la mousse, coulures de salissure, teinte
+    propre à chaque bloc. Raccordable. UV : 1 répétition = 2 m (assises d'environ 40 cm)."""
     r = np.random.default_rng(seed)
     yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
-    row = np.floor(yy * rows); fy = yy * rows - row
-    off = (row % 2) * 0.5 + r.uniform(0, 0.2, rows)[row.astype(int)]
-    cols = 4
-    u = xx * cols + off; fx = u - np.floor(u)
-    jit = n01(fbm(S, S, r, base=S / 30, octaves=3)) * 0.06
-    edge = np.minimum(np.minimum(fx, 1 - fx) * (S / cols), np.minimum(fy, 1 - fy) * (S / rows))
-    mortar = np.clip(1 - (edge - 2.5 - jit * 40) / 3.0, 0, 1)
-    bid = (np.floor(u) * 7.3 + row * 3.1) % 1.0
-    tint = 0.85 + 0.25 * np.sin(bid * 40)[..., None] * 0.5
-    g = n01(fbm(S, S, r, base=S / 12, octaves=5))
-    chips = np.clip((n01(fbm(S, S, r, base=S / 60, octaves=2)) - 0.75) * 4, 0, 1) * np.clip(1 - edge / 12, 0, 1)
-    streak = np.clip(n01(fbm(S, S, r, base=S / 6, octaves=4, aniso=(1.0, 0.08))) - 0.5, 0, 1) * 1.5
-    col = np.array(tone)[None, None] * tint * (0.75 + 0.35 * g[..., None]) * (1 - 0.35 * streak[..., None])
-    col = col * (1 - 0.55 * mortar[..., None]) * (1 - 0.3 * chips[..., None])
-    hgt = 2.5 * (1 - mortar) + 0.6 * g - 1.5 * chips
-    return _tex(col, hgt, 0.18 + 0.1 * g, 1.0, 6, 0.15)
+    hts = r.uniform(0.75, 1.25, rows); hts /= hts.sum(); ys = np.concatenate([[0], np.cumsum(hts)])
+    edge = np.zeros((S, S)); bid = np.zeros((S, S)); fyv = np.zeros((S, S)); side = np.zeros((S, S))
+    for k in range(rows):
+        m = (yy >= ys[k]) & (yy < ys[k + 1]) if k < rows - 1 else (yy >= ys[k])
+        w = r.uniform(0.6, 1.4, 64); w = w / w.sum() * 0.26 * 64      # largeur moyenne ≈ 0,5 m
+        b = np.concatenate([[0], np.cumsum(w)]); n = np.searchsorted(b, 1.0) ; b = b[:n + 1]; b = b / b[-1]   # bouclage exact
+        off = r.uniform(0, 1)
+        pos = (xx[m] + off) % 1.0
+        i = np.clip(np.searchsorted(b, pos, side='right'), 1, len(b) - 1)
+        dx = np.minimum(pos - b[i - 1], b[i] - pos) * S
+        fy = (yy[m] - ys[k]) / hts[k]
+        dy = np.minimum(fy, 1 - fy) * hts[k] * S
+        kk = 6.0; edge[m] = -kk * np.log(np.exp(-dx / kk) + np.exp(-dy / kk))   # coins arrondis
+        sx = np.where(pos - b[i - 1] < b[i] - pos, -1.0, 1.0); sy = np.where(fy < 0.5, -1.0, 1.0)
+        side[m] = np.where(dx < dy, sx * 0.0 + sx, sy * 0.0 + 2 * sy)   # ±1 : bord gauche/droit, ±2 : bas/haut
+        bid[m] = ((i * 7.31 + k * 3.17) * 0.61803) % 1.0; fyv[m] = fy
+    warp = n01(fbm(S, S, r, base=S / 40, octaves=3)); wob = fbm(S, S, r, base=S / 18, octaves=4)
+    edge = edge + 4.5 * wob                                            # contours de blocs irréguliers (taille à la main)
+    mw = 3.0 + 3.0 * warp                                              # joint irrégulier
+    mortar = np.clip(1 - (edge - mw) / 2.0, 0, 1)
+    bevel = np.clip((edge - mw) / (S * 0.018), 0, 1); bevel = bevel * bevel * (3 - 2 * bevel)
+    g = n01(fbm(S, S, r, base=S / 14, octaves=6)); fine = n01(fbm(S, S, r, base=S / 120, octaves=3))
+    spots = np.clip((n01(fbm(S, S, r, base=S / 70, octaves=3)) - 0.6) * 3, 0, 1)            # grain de la roche (taches)
+    chips = np.clip((n01(fbm(S, S, r, base=S / 50, octaves=3)) - 0.68) * 4, 0, 1) * np.clip(1 - (edge - mw) / (S * 0.03), 0, 1)
+    face = 0.55 * bevel + 0.25 * g + 0.12 * fine - 0.5 * chips
+    tint = (0.78 + 0.32 * bid)[..., None] * np.array([1.0, 0.98 + 0.04 * 0, 0.96])[None, None]
+    warm = (np.sin(bid * 37.0) * 0.5 + 0.5)[..., None]
+    stone = np.array(tone)[None, None] * tint * (1 + 0.06 * (warm - 0.5) * np.array([1, 0, -1])[None, None])
+    stone = stone * (0.72 + 0.32 * g[..., None]) * (0.9 + 0.15 * fine[..., None]) * (1 - 0.25 * chips[..., None])
+    streak = np.clip(n01(fbm(S, S, r, base=S / 5, octaves=4, aniso=(1.0, 0.25))) - 0.55, 0, 1) * 1.4
+    stone = stone * (1 - 0.18 * streak[..., None]) * (1 - 0.18 * spots[..., None])
+    # relief cuit dans la couleur : arêtes hautes et gauches éclairées, basses et droites dans l'ombre
+    rim = (1 - bevel) * (1 - mortar)
+    light = np.where(side == 2, 0.10, 0) + np.where(side == -1, 0.05, 0) - np.where(side == -2, 0.16, 0) - np.where(side == 1, 0.08, 0)
+    stone = stone * (1 + light * rim)[..., None]
+    mortar_col = np.array([0.30, 0.28, 0.25])[None, None] * (0.8 + 0.3 * fine[..., None])
+    moss = np.clip((n01(fbm(S, S, r, base=S / 8, octaves=4)) - 0.5) * 3, 0, 1)
+    mortar_col = mortar_col * (1 - 0.7 * moss[..., None]) + np.array([0.18, 0.24, 0.09])[None, None] * 0.7 * moss[..., None]
+    col = stone * (1 - mortar[..., None]) + mortar_col * mortar[..., None]
+    col = col * (0.82 + 0.18 * bevel[..., None])                        # arêtes un peu plus sombres (occlusion)
+    hgt = 2.6 * (1 - mortar) * (0.45 + 0.55 * bevel) + 0.5 * face
+    return _tex(col, hgt, 0.16 + 0.12 * g * (1 - mortar), 1.1, 6, 0.18)
 
 
 def slate_roof(S=1024, seed=1007, tone=(0.22, 0.25, 0.32)):
