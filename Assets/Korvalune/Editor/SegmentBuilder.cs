@@ -79,6 +79,12 @@ namespace Korvalune.EditorTools
             _ => new[] { d.entry, new Vector2(-20, -90), new Vector2(15, -20), new Vector2(-10, 60), new Vector2(20, 140) },
         };
 
+        /// <summary>Chef de la bande du hameau : le monstre le plus lourd de la région.</summary>
+        static string Chief(Def d) => d.kind switch
+        {
+            Kind.Foret => "chevalier", _ => "demon",            // (les nouveaux monstres prendront le relais une fois modélisés)
+        };
+
         /// <summary>Hameau en ruine au bout du chemin principal (un peu en retrait de son extrémité).</summary>
         static Vector2 HamletAt(Def d)
         {
@@ -300,7 +306,7 @@ namespace Korvalune.EditorTools
             var hc = HamletAt(d);
             game.camps.Add(new GameBootstrap.Camp { enemyId = d.enemies[0], center = Ground(d, hc + new Vector2(-6, 4)), count = 6, radius = 8 });
             game.camps.Add(new GameBootstrap.Camp { enemyId = d.enemies[1], center = Ground(d, hc + new Vector2(7, -3)), count = 4, radius = 6 });
-            game.camps.Add(new GameBootstrap.Camp { enemyId = d.level >= 25 ? "demon" : "chevalier", center = Ground(d, hc), count = 1, radius = 2 });
+            game.camps.Add(new GameBootstrap.Camp { enemyId = Chief(d), center = Ground(d, hc), count = 1, radius = 2 });
             game.questSteps.Add(new Quest.Objective { text = $"Explorer : {d.name}", place = Ground(d, path[2]), radius = 14f });
             game.questSteps.Add(new Quest.Objective { text = "Vaincre les créatures de la région", enemyId = d.enemies[0], count = 8 });
             game.questSteps.Add(new Quest.Objective { text = "Libérer le hameau en ruine au bout du chemin", place = Ground(d, hc), radius = 14f });

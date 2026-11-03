@@ -232,6 +232,7 @@ namespace Korvalune.EditorTools
             camData.renderPostProcessing = true; camData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
             PostProcess("Vallee", 0.45f);
             Ambience(cam.transform);
+            CI.Step("vallée : configuration du jeu");
             var game = new GameObject("Jeu").AddComponent<GameBootstrap>();
             game.config = Config();
             game.playerSpawn = Ground(new Vector2(0, -68));            // en ville, rue principale au sud de la place du marché
@@ -248,6 +249,7 @@ namespace Korvalune.EditorTools
             game.camps.Add(new GameBootstrap.Camp { enemyId = "demon", center = Ground(new Vector2(-30, -240)), count = 1, radius = 2 });
             // entrée de la crypte (escalier qui descend, portail) au bord du cimetière
             // mausolée de pierre posé sur le sol (plus d'escalier enfoui qui traversait le relief) : porte sombre et lueur violette
+            CI.Step("vallée : entrée de la crypte");
             var st = DungeonGate("Entrée de la crypte", CryptEntrance, 180f, new Color(0.7f, 0.45f, 1f));
             var door = new GameObject("Descendre dans la crypte").AddComponent<Portal>();
             door.displayName = "Crypte de Korvalune"; door.highlightRoot = st.transform; door.glowColor = new Color(0.7f, 0.45f, 1f);
@@ -258,7 +260,9 @@ namespace Korvalune.EditorTools
 
             // bords : murs invisibles 22 m avant le bord (on ne voit pas le bout du terrain) ; roche à l'ouest, sable au sud,
             // herbe au nord, la mer à l'est
+            CI.Step("vallée : bords de la carte");
             SegmentBuilder.Enclose(Size / 2, 22f, -8f, 30f, new[] { SegmentBuilder.BeltMaterial("Vallee_N", "Herbe", new Color(0.8f, 0.85f, 0.7f)), SegmentBuilder.BeltMaterial("Vallee_S", "Sable", Color.white), null, SegmentBuilder.BeltMaterial("Vallee_O", "Roche", Color.white) });
+            CI.Step("vallée : photo pour la grande carte");
             MapShots.Save("Korvalune_Vallee");                                   // photo de la région pour la grande carte
             EditorSceneManager.SaveScene(scene, ScenePath);
             CI.Step("vallée : sauvegarde de la scène");

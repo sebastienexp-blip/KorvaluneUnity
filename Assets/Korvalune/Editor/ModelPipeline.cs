@@ -179,15 +179,20 @@ namespace Korvalune.EditorTools
             mat.globalIlluminationFlags = emissive ? MaterialGlobalIlluminationFlags.RealtimeEmissive : MaterialGlobalIlluminationFlags.EmissiveIsBlack;
 
             // couche de détail (multicouche) : grain de couleur et micro-relief répétés finement par-dessus les textures
-            var dAlb = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Albedo.png");
-            var dNrm = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Normal.png");
-            bool detail = dAlb && dNrm && !emissive && !(fm.alphaClip && !e.dir.Contains("/World/")) && mat.HasProperty("_DetailAlbedoMap");
+            // personnages et ennemis : une couche par matière (peau, métal, tissu, cuir, os, pierre, chitine), y compris sur
+            // les matériaux lumineux (peau de lave, acier maudit) ; décor : la couche générique du monde
+            bool living = e.dir.Contains("/Enemies/") || e.dir.Contains("/Characters/") || e.dir.Contains("/Mounts/") || e.dir.Contains("/Weapons/");
+            string kind = living ? DetailKind(fm.name) : null;
+            var dAlb = AssetDatabase.LoadAssetAtPath<Texture2D>(kind != null ? $"{Root}/Art/Characters/Detail/Detail_{kind}_Albedo.png" : Root + "/Art/World/Detail/Detail_Albedo.png");
+            var dNrm = AssetDatabase.LoadAssetAtPath<Texture2D>(kind != null ? $"{Root}/Art/Characters/Detail/Detail_{kind}_Normal.png" : Root + "/Art/World/Detail/Detail_Normal.png");
+            bool detail = dAlb && dNrm && (!emissive || kind != null) && !(fm.alphaClip && !e.dir.Contains("/World/")) && mat.HasProperty("_DetailAlbedoMap");
             if (detail)
             {
-                var dt = new Vector2(Mathf.Max(1, tiling.x) * 7f, Mathf.Max(1, tiling.y) * 7f);
+                float rep = kind == null ? 7f : kind == "Peau" ? 10f : kind == "Tissu" ? 6f : 8f;
+                var dt = new Vector2(Mathf.Max(1, tiling.x) * rep, Mathf.Max(1, tiling.y) * rep);
                 mat.SetTexture("_DetailAlbedoMap", dAlb); mat.SetTextureScale("_DetailAlbedoMap", dt);
                 mat.SetTexture("_DetailNormalMap", dNrm); mat.SetTextureScale("_DetailNormalMap", dt);
-                mat.SetFloat("_DetailAlbedoMapScale", 1f); mat.SetFloat("_DetailNormalMapScale", 0.45f);
+                mat.SetFloat("_DetailAlbedoMapScale", kind == "Peau" ? 0.7f : 1f); mat.SetFloat("_DetailNormalMapScale", kind == "Metal" ? 0.35f : 0.5f);
             }
             Keyword(mat, "_DETAIL_MULX2", detail);
             // peau : diffusion sous la surface (shader des personnages)
@@ -200,6 +205,22 @@ namespace Korvalune.EditorTools
             mat.doubleSidedGI = fm.doubleSided;
             EditorUtility.SetDirty(mat);
             return mat;
+        }
+
+        /// <summary>Couche de détail d'un matériau de personnage d'après son nom (préfixe_Matière) ; null = générique.</summary>
+        static string DetailKind(string n)
+        {
+            string l = n.ToLowerInvariant();
+            bool Has(params string[] k) { foreach (var x in k) if (l.Contains(x)) return true; return false; }
+            if (Has("eye", "oeil", "glow", "crystal", "cristal", "glace", "ambre", "hair", "cheveu", "brow", "lash", "cil", "poil", "plume", "remige", "tongue", "langue")) return null;
+            if (Has("skin", "body", "peau")) return "Peau";
+            if (Has("steel", "metal", "iron", "fer", "rust", "blade", "mail", "gold", "brass", "bronze", "trim", "laiton", "obsid")) return "Metal";
+            if (Has("leather", "cuir", "strap")) return "Cuir";
+            if (Has("bone", "horn", "claw", "tooth", "corne", "griffe", "_os", "balane", "dent", "cartilage")) return "Os";
+            if (Has("stone", "rock", "slab", "pierre")) return "Pierre";
+            if (Has("chitin", "carapace", "chitine")) return "Chitine";
+            if (Has("cloth", "cloak", "robe", "sleeve", "gambeson", "rags", "under", "fur", "toile", "tapis", "corde", "rope", "algue", "mousse")) return "Tissu";
+            return null;
         }
 
         static bool SetTex(Material mat, string prop, string path, Vector2 tiling)

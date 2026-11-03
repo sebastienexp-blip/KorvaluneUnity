@@ -71,6 +71,8 @@ namespace Korvalune.Game
             }
         }
 
+        static bool Brute(string id) => id == "demon" || id == "colosse" || id == "golem";
+
         /// <summary>Choisit les monstres d'un camp selon son niveau : bêtes et squelettes près de la ville, araignées, sorciers
         /// et chevaliers plus loin, démons (rares, escortés) dans les terres les plus dangereuses.</summary>
         static void Compose(Camp camp, GameConfig cfg, System.Random rng)
@@ -81,22 +83,29 @@ namespace Korvalune.Game
             {
                 if (!e.prefab || e.level > L + 1) continue;
                 float w = 1f / (1f + Mathf.Abs(L - e.level) * 0.35f);
-                if (e.id == "demon") w *= 0.35f;
+                if (Brute(e.id)) w *= 0.35f;
                 pool.Add((e, w)); total += w;
             }
             if (pool.Count == 0) return;
             double r = rng.NextDouble() * total; var main = pool[0].t;
             foreach (var (t, w) in pool) { r -= w; if (r <= 0) { main = t; break; } }
-            if (main.id == "demon")
+            if (Brute(main.id))
             {
-                camp.ids.Add("demon");
-                var escort = pool.Find(x => x.t.id != "demon").t;
+                camp.ids.Add(main.id);
+                GameConfig.EnemyType escort = null; float best = 1e9f;                      // escorte : le monstre ordinaire le plus proche de ce niveau
+                foreach (var (t, _) in pool) if (!Brute(t.id) && Mathf.Abs(t.level - L) < best) { best = Mathf.Abs(t.level - L); escort = t; }
                 if (escort != null) { camp.ids.Add(escort.id); camp.ids.Add(escort.id); }
                 return;
             }
-            int n = main.id == "sorcier" ? 1 + rng.Next(2) : 3 + rng.Next(4);
+            bool caster = main.id == "sorcier" || main.id == "spectre";
+            int n = caster ? 1 + rng.Next(2) : 3 + rng.Next(4);
             for (int i = 0; i < n; i++) camp.ids.Add(main.id);
-            if (main.id == "sorcier") { var guard = pool.Find(x => x.t.id == "squelette").t; if (guard != null) { camp.ids.Add("squelette"); camp.ids.Add("squelette"); } }
+            if (caster)
+            {   // gardes du lanceur de sorts : le combattant ordinaire le plus proche de ce niveau
+                GameConfig.EnemyType guard = null; float best = 1e9f;
+                foreach (var (t, _) in pool) if (!Brute(t.id) && t.id != "sorcier" && t.id != "spectre" && Mathf.Abs(t.level - L) < best) { best = Mathf.Abs(t.level - L); guard = t; }
+                if (guard != null) { camp.ids.Add(guard.id); camp.ids.Add(guard.id); }
+            }
         }
 
         /// <summary>Restes de campement autour du camp (tonneaux, caisses, charrette, foin, bannière) : la vallée paraît habitée.</summary>

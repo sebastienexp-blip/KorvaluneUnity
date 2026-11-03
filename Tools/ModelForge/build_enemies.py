@@ -17,6 +17,17 @@ ENEMIES = {
     'demon':     ('enemies.demon_brute', 'Human', (2.60, 3.10), (1.40, 2.80, 0.60), None),
     'loup':      ('creatures.loup', 'Generic', (1.30, 1.65), (0.70, 1.40, 0.45), dict(facingBone='Head', behindBone='Hips', leftBone='Ear_L')),
     'araignee':  ('creatures.araignee', 'Generic', (0.95, 1.40), (0.55, 1.10, 0.90), dict(facingBone='Thorax', behindBone='Abdomen', leftBone='Leg0_Coxa_L')),
+    # créatures des régions lointaines (d'après la planche de concepts validée)
+    'abbe':      ('enemies.abbe_noye', 'Human', (1.80, 2.40), (1.00, 2.00, 0.36), None),
+    'wendigo':   ('enemies.wendigo', 'Human', (2.40, 3.60), (1.30, 2.60, 0.45), None),
+    'salamandre': ('creatures.salamandre_forge', 'Generic', (0.70, 1.40), (0.60, 1.20, 0.70), dict(facingBone='Head', behindBone='Hips', leftBone='Ear_L')),
+    # brouillons refusés (non exportés)
+    'noye':      ('enemies.noye', 'Human', (1.70, 2.05), (0.93, 1.86, 0.33), None),
+    'goule':     ('enemies.goule', 'Human', (1.70, 2.10), (0.93, 1.86, 0.33), None),
+    'colosse':   ('enemies.colosse_givre', 'Human', (2.60, 3.20), (1.40, 2.80, 0.60), None),
+    'golem':     ('enemies.golem_ecarlate', 'Human', (2.60, 3.30), (1.45, 2.90, 0.65), None),
+    'fauve':     ('creatures.fauve_magma', 'Generic', (0.95, 1.70), (0.75, 1.40, 0.50), dict(facingBone='Head', behindBone='Hips', leftBone='Ear_L')),
+    'spectre':   ('enemies.spectre_neant', 'Human', (1.70, 2.15), (0.95, 1.90, 0.34), None),
 }
 CREATURE_CLIPS = [('Idle', True, False, ()), ('Walk', True, False, (0.0, 0.5)), ('Run', True, False, (0.0, 0.5)), ('Attack', False, False, (0.55,)),
                   ('Howl', False, False, ()), ('Hit', False, False, ()), ('Death', False, False, ())]
