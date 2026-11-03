@@ -311,7 +311,7 @@ namespace Korvalune.Game
                 var slot = kv.Key;
                 slotCells[slot] = Cell(doll.rectTransform, "Porté_" + slot, new Vector2(0, 1), kv.Value, 120, () => { selected = eq.In(slot); selectedWorn = true; RefreshBag(); });
             }
-            bagStats = Label(panel, "Caractéristiques", "", 24, TextAnchor.UpperLeft, new Vector2(0, 0), new Vector2(70, 58), new Vector2(560, 150));
+            bagStats = Label(panel, "Caractéristiques", "", 20, TextAnchor.UpperLeft, new Vector2(0, 0), new Vector2(70, 58), new Vector2(560, 150));
             FitText(bagStats, 14);
             // sac : 8 × 5
             for (int i = 0; i < Equipment.BagSize; i++)
