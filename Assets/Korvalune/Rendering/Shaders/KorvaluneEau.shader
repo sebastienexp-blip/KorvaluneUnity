@@ -94,11 +94,17 @@ Shader "Korvalune/Eau"
                 float2 suv = i.screenPos.xy / i.screenPos.w;
                 float sceneZ = LinearEyeDepth(SampleSceneDepth(suv), _ZBufferParams);
                 float waterZ = LinearEyeDepth(i.positionCS.z, _ZBufferParams);
-                float d = max(sceneZ - waterZ, 0.0);
-                depthK = saturate(d / max(_DepthDistance, 0.01));
-                half edge = saturate(1.0 - d / max(_FoamDistance, 0.01));
-                half fn = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, uv * 4.0 + float2(t * 2.0, -t)).r;
-                foam = edge * smoothstep(0.35h, 0.65h, fn + edge * 0.5h);
+                // l'eau n'est dessinée que là où elle est devant la scène : une profondeur de scène plus proche que l'eau veut
+                // dire que la texture de profondeur n'est pas disponible (certains téléphones) -> pas d'écume ni de profondeur,
+                // sinon toute la rivière devenait de l'écume blanche
+                if (sceneZ > waterZ - 0.02)
+                {
+                    float d = max(sceneZ - waterZ, 0.0);
+                    depthK = saturate(d / max(_DepthDistance, 0.01));
+                    half edge = saturate(1.0 - d / max(_FoamDistance, 0.01));
+                    half fn = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, uv * 4.0 + float2(t * 2.0, -t)).r;
+                    foam = edge * smoothstep(0.35h, 0.65h, fn + edge * 0.5h) * 0.8h;
+                }
             #endif
 
                 half3 body = lerp(_ShallowColor.rgb, _DeepColor.rgb, depthK);

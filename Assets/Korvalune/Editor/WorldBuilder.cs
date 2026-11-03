@@ -721,6 +721,21 @@ namespace Korvalune.EditorTools
             return m;
         }
 
+        /// <summary>Matériau de bâtiment (shader du monde) d'après un jeu de textures du château : pierre de taille, ardoises.</summary>
+        static Material GateMaterial(string name, string texBase, float tiling)
+        {
+            var path = Root + "/Rendering/" + name + ".mat";
+            var m = AssetDatabase.LoadAssetAtPath<Material>(path);
+            var sh = Shader.Find("Korvalune/PBR Monde"); if (sh == null || ShaderUtil.ShaderHasError(sh)) sh = Shader.Find("Universal Render Pipeline/Lit");
+            if (!m) { m = new Material(sh); AssetDatabase.CreateAsset(m, path); } else if (m.shader != sh) m.shader = sh;
+            var b = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/" + texBase + "_BaseMap.png"); if (!b) return null;
+            m.SetTexture("_BaseMap", b); m.SetTextureScale("_BaseMap", new Vector2(tiling, tiling)); m.SetColor("_BaseColor", Color.white);
+            var nm = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/" + texBase + "_Normal.png"); if (nm) { m.SetTexture("_BumpMap", nm); m.EnableKeyword("_NORMALMAP"); }
+            var oc = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/" + texBase + "_Occlusion.png"); if (oc) { m.SetTexture("_OcclusionMap", oc); m.EnableKeyword("_OCCLUSIONMAP"); }
+            m.SetFloat("_Smoothness", 0.2f); EditorUtility.SetDirty(m);
+            return m;
+        }
+
         static Material stone;
         public static Material StoneMaterial()
         {
@@ -766,7 +781,8 @@ namespace Korvalune.EditorTools
         public static GameObject DungeonGate(string name, Vector3 at, float yaw, Color glow)
         {
             var root = new GameObject(name); root.transform.position = at; root.transform.rotation = Quaternion.Euler(0, yaw, 0);
-            var stone = StoneMaterial();
+            var stone = GateMaterial("Porte_Pierre", "ChateauKorvalune/Textures/W_Stone", 2.5f); var roofMat = GateMaterial("Porte_Toit", "ChateauKorvalune/Textures/W_Roof", 2.5f);
+            if (!stone) stone = StoneMaterial(); if (!roofMat) roofMat = stone;
             var dark = new Material(Shader.Find("Universal Render Pipeline/Unlit")); dark.SetColor("_BaseColor", new Color(0.015f, 0.01f, 0.02f));
             var dp = Root + "/Rendering/Porte_Sombre.mat"; if (!AssetDatabase.LoadAssetAtPath<Material>(dp)) AssetDatabase.CreateAsset(dark, dp); dark = AssetDatabase.LoadAssetAtPath<Material>(dp);
             GameObject B(string n, Vector3 p, Vector3 sc, Vector3 rot, Material m, bool col = true)
@@ -784,8 +800,8 @@ namespace Korvalune.EditorTools
             B("Façade droite", new Vector3(2.05f, 2.1f, -2.2f), new Vector3(2.0f, 4.2f, 0.8f), Vector3.zero, stone);
             B("Linteau", new Vector3(0, 3.7f, -2.2f), new Vector3(2.4f, 1.0f, 0.8f), Vector3.zero, stone);
             B("Fronton", new Vector3(0, 4.55f, -2.25f), new Vector3(4.6f, 0.7f, 0.9f), Vector3.zero, stone);
-            B("Toit gauche", new Vector3(-1.75f, 5.0f, 0.6f), new Vector3(4.2f, 0.5f, 6.8f), new Vector3(0, 0, 28), stone);
-            B("Toit droit", new Vector3(1.75f, 5.0f, 0.6f), new Vector3(4.2f, 0.5f, 6.8f), new Vector3(0, 0, -28), stone);
+            B("Toit gauche", new Vector3(-1.75f, 5.0f, 0.6f), new Vector3(4.2f, 0.5f, 6.8f), new Vector3(0, 0, 28), roofMat);
+            B("Toit droit", new Vector3(1.75f, 5.0f, 0.6f), new Vector3(4.2f, 0.5f, 6.8f), new Vector3(0, 0, -28), roofMat);
             B("Porte", new Vector3(0, 1.6f, -2.0f), new Vector3(2.1f, 3.2f, 0.1f), Vector3.zero, dark, false);
             B("Seuil sombre", new Vector3(0, 0.22f, 0.4f), new Vector3(5.2f, 0.02f, 4.6f), Vector3.zero, dark, false);
             foreach (var x in new[] { -2.9f, 2.9f })
