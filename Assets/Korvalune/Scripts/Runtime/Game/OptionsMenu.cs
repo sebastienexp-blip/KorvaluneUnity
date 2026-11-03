@@ -71,6 +71,14 @@ namespace Korvalune.Game
             Shader.SetGlobalColor("_KorvRimColor", under ? new Color(0.62f, 0.58f, 0.82f) : new Color(0.55f, 0.6f, 0.75f));
             Shader.SetGlobalFloat("_KorvRimStrength", under ? 0.45f : 0.32f);
             Shader.SetGlobalFloat("_KorvRimPower", 3.5f);
+            // décor (shader Korvalune/PBR Monde) : mousse sur le dessus des pierres en surface, poussière sous terre ;
+            // les brèches imposent leur propre dépôt (cendre, givre…) via SetWorldLayer
+            if (worldLayerScene != scene)
+            {
+                Shader.SetGlobalColor("_KorvTopColor", under ? new Color(0.30f, 0.27f, 0.23f, 0.05f) : new Color(0.22f, 0.27f, 0.12f, 0.06f));
+                Shader.SetGlobalFloat("_KorvTopStrength", under ? 0.35f : 0.6f);
+            }
+            Shader.SetGlobalFloat("_KorvMacroStrength", 0.22f);
             bool underground = !Terrain.activeTerrain;
             foreach (var l in Object.FindObjectsByType<Light>(FindObjectsSortMode.None))
             {
@@ -84,6 +92,15 @@ namespace Korvalune.Game
         /// <summary>Lumière d'ambiance recalculée à l'exécution. Les scènes sont générées sans éclairage précalculé : sur
         /// téléphone, la sonde d'ambiance resterait noire (zones d'ombre et grottes totalement noires). On la reconstruit à
         /// partir des trois couleurs ciel / horizon / sol.</summary>
+        static string worldLayerScene;   // la scène qui a imposé son dépôt (valable pour elle seule)
+        /// <summary>Dépôt sur le dessus du décor imposé par un lieu (brèche) ; null rend la main aux réglages par défaut.</summary>
+        public static void SetWorldLayer(Color? top, float strength = 0.5f)
+        {
+            worldLayerScene = top.HasValue ? UnityEngine.SceneManagement.SceneManager.GetActiveScene().name : null;
+            if (!top.HasValue) return;
+            Shader.SetGlobalColor("_KorvTopColor", top.Value); Shader.SetGlobalFloat("_KorvTopStrength", strength);
+        }
+
         static void AmbientProbe()
         {
             Color sky = RenderSettings.ambientSkyColor, eq = RenderSettings.ambientEquatorColor, gr = RenderSettings.ambientGroundColor;

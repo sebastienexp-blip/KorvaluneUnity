@@ -141,6 +141,13 @@ namespace Korvalune.EditorTools
                 if (korv != null && !ShaderUtil.ShaderHasError(korv)) shader = korv;
                 else Debug.LogWarning("[Modèles] shader Korvalune/PBR Personnage indisponible, URP Lit utilisé pour " + fm.name);
             }
+            else if (!fm.alphaClip)
+            {
+                // décor (bâtiments, rochers, ruines, objets) : shader PBR maison du monde ; feuillages découpés : URP Lit
+                var monde = Shader.Find("Korvalune/PBR Monde");
+                if (monde != null && !ShaderUtil.ShaderHasError(monde)) shader = monde;
+                else Debug.LogWarning("[Modèles] shader Korvalune/PBR Monde indisponible, URP Lit utilisé pour " + fm.name);
+            }
             var mat = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (mat == null) { mat = new Material(shader) { name = fm.name }; AssetDatabase.CreateAsset(mat, path); }
             else if (mat.shader != shader) mat.shader = shader;

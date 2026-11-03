@@ -95,21 +95,8 @@ Shader "Korvalune/PBR Personnage"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitForwardPass.hlsl"
 
-            // contour lumineux : réglé globalement par le jeu (0 = désactivé)
-            half4 _KorvRimColor;
-            half _KorvRimStrength;
-            half _KorvRimPower;
-
-            void KorvaluneFragment(Varyings input, out half4 outColor : SV_Target0)
-            {
-                LitPassFragment(input, outColor);
-                float3 n = normalize(input.normalWS);
-                float3 v = GetWorldSpaceNormalizeViewDir(input.positionWS);
-                half fres = pow(saturate(1.0h - saturate(dot(n, v))), max(_KorvRimPower, 1.0h));
-                Light mainLight = GetMainLight();
-                half3 rim = fres * _KorvRimStrength * (_KorvRimColor.rgb + mainLight.color * 0.3h);
-                outColor.rgb += rim * outColor.a;
-            }
+            #define KORV_RIM
+            #include "KorvaluneCore.hlsl"
             ENDHLSL
         }
 

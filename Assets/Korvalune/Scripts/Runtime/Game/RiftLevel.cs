@@ -483,6 +483,15 @@ namespace Korvalune.Game
             foreach (var l in FindObjectsByType<Light>(FindObjectsSortMode.None)) if (l.type == LightType.Directional && l.transform.parent == null) Kill(l.gameObject);
             var sun = new GameObject("Lumière de la brèche").AddComponent<Light>(); sun.transform.SetParent(root); sun.type = LightType.Directional;
             sun.color = th.light; sun.intensity = th.crypt ? 0.85f : 1.05f; sun.shadows = LightShadows.None; sun.transform.rotation = Quaternion.Euler(58, 20 + rng.Next(140), 0);
+            // dépôt sur le dessus du décor (shader Korvalune/PBR Monde) selon le thème
+            switch (th.motes)
+            {
+                case "neige": Settings.SetWorldLayer(new Color(0.86f, 0.9f, 0.95f, 0.35f), 0.75f); break;
+                case "braises": Settings.SetWorldLayer(new Color(0.16f, 0.14f, 0.13f, 0.04f), 0.6f); break;
+                case "etoiles": Settings.SetWorldLayer(new Color(0.36f, 0.3f, 0.45f, 0.2f), 0.45f); break;
+                case "spores": Settings.SetWorldLayer(new Color(0.2f, 0.26f, 0.12f, 0.06f), 0.6f); break;
+                default: Settings.SetWorldLayer(new Color(0.3f, 0.27f, 0.23f, 0.05f), 0.4f); break;
+            }
             // particules d'ambiance qui suivent la caméra
             if (FX.alpha || FX.additive)
             {
