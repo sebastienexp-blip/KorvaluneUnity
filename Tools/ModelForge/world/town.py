@@ -477,15 +477,28 @@ def _t(base, hgt, smooth, strength=0.8, emit=None):
 
 
 def plaster(S=1024, seed=3001):
-    """Enduit à la chaux ocre clair : taloché, salissures en coulures, éclats laissant voir le torchis."""
+    """Enduit à la chaux : vagues de taloche, teinte ocre irrégulière, fissures fines, coulures sous les rebords,
+    remontées d'humidité et salissure au pied, éclats d'enduit tombés laissant voir les moellons du mur."""
     r = np.random.default_rng(seed)
-    g = n01(fbm(S, S, r, base=S / 8, octaves=5)); fine = n01(fbm(S, S, r, base=S / 90, octaves=3))
-    streak = np.clip(n01(fbm(S, S, r, base=S / 5, octaves=4, aniso=(1.0, 0.07))) - 0.55, 0, 1) * 1.6
-    chip = np.clip((n01(fbm(S, S, r, base=S / 25, octaves=3)) - 0.8) * 5, 0, 1)
-    col = np.array([0.80, 0.74, 0.60])[None, None] * (0.85 + 0.2 * g[..., None]) * (0.95 + 0.08 * fine[..., None])
-    col = col * (1 - 0.3 * streak[..., None])
-    col = col * (1 - chip[..., None]) + np.array([0.45, 0.36, 0.25]) * chip[..., None]
-    return _t(col, 0.6 * g + 0.3 * fine - 1.0 * chip, 0.12, 0.6)
+    yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
+    g = n01(fbm(S, S, r, base=S / 8, octaves=5)); fine = n01(fbm(S, S, r, base=S / 110, octaves=3))
+    trowel = n01(fbm(S, S, r, base=S / 14, octaves=3, aniso=(0.35, 1.0)))
+    streak = np.clip(n01(fbm(S, S, r, base=S / 5, octaves=4, aniso=(1.0, 0.1))) - 0.55, 0, 1) * 1.5
+    damp = np.clip((yy - 0.62) * 2.4 + 0.35 * (g - 0.5), 0, 1)                 # bas du mur
+    crack = np.clip(1 - np.abs(n01(fbm(S, S, r, base=S / 9, octaves=5)) - 0.5) * 70, 0, 1) * np.clip((n01(fbm(S, S, r, base=S / 4, octaves=3)) - 0.55) * 4, 0, 1)
+    hn = n01(fbm(S, S, r, base=S / 6, octaves=5)); holes = np.clip((hn - 0.76) * 12, 0, 1); rim = np.clip((hn - 0.70) * 12, 0, 1) - holes
+    rim = np.zeros((S, S))
+    # moellons sous l'enduit
+    from world.terrain_hd import _voronoi
+    d1, d2, cid = _voronoi(S, r, 160); e = (d2 - d1) / 2.0
+    stone = np.array([0.46, 0.42, 0.36])[None, None] * (0.7 + 0.35 * ((cid * 0.618) % 1.0)[..., None]) * (0.8 + 0.3 * fine[..., None])
+    stone = stone * (1 - 0.35 * np.clip(1 - (e - 1.5) / 3, 0, 1)[..., None])
+    col = np.array([0.80, 0.73, 0.58])[None, None] * (0.86 + 0.16 * g[..., None]) * (0.95 + 0.07 * fine[..., None]) * (0.94 + 0.08 * trowel[..., None])
+    col = col * (1 - 0.22 * streak[..., None]) * (1 - 0.35 * damp[..., None] * (0.6 + 0.4 * fine[..., None]))
+    col = col * (1 - 0.55 * crack[..., None]) * (1 - 0.12 * np.clip(rim, 0, 1)[..., None])
+    col = col * (1 - holes[..., None]) + stone * holes[..., None]
+    h = 0.4 * trowel + 0.2 * fine - 0.5 * crack - 1.2 * holes + 0.3 * holes * np.clip((e - 1.5) / 6, 0, 1)
+    return _t(col, h, 0.10 + 0.08 * damp, 0.7)
 
 
 def timber(S=512, seed=3002):
@@ -498,19 +511,30 @@ def timber(S=512, seed=3002):
 
 
 def roof_tiles(S=1024, seed=3003):
-    """Tuiles plates de terre cuite (rangs décalés), mousses et lichens, teintes brun-rouge variées."""
+    """Tuiles canal de terre cuite : rangs qui se recouvrent, chaque tuile bombée (ombre dans le creux), légèrement
+    décalée, teintes de cuisson variées (rouge, orangé, brun brûlé), tuiles cassées remplacées, mousse et lichens."""
     r = np.random.default_rng(seed)
     yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
-    rows = 12; row = np.floor(yy * rows); fy = yy * rows - row
-    u = xx * 9 + (row % 2) * 0.5; fx = u - np.floor(u)
-    tile = np.clip(1 - np.abs(fx - 0.5) * 2.2, 0, 1) ** 0.3 * np.clip(fy * 3, 0, 1)
-    bid = (np.floor(u) * 5.31 + row * 2.7) % 1.0
-    g = n01(fbm(S, S, r, base=S / 20, octaves=4))
-    base = np.array([0.50, 0.24, 0.14])[None, None] * (0.75 + 0.35 * np.sin(bid * 25)[..., None] * 0.5 + 0.2) * (0.85 + 0.25 * g[..., None])
-    base = base * (0.55 + 0.45 * tile[..., None])
-    moss = np.clip((n01(fbm(S, S, r, base=S / 8, octaves=4)) - 0.7) * 3.5, 0, 1)
-    base = base * (1 - 0.6 * moss[..., None]) + np.array([0.28, 0.32, 0.14]) * 0.6 * moss[..., None]
-    return _t(base, 2.0 * tile + 0.3 * g, 0.25 + 0.15 * tile, 1.0)
+    rows = 10; row = np.floor(yy * rows).astype(int); fy = yy * rows - row
+    cols = 8
+    jit = r.uniform(-0.06, 0.06, (rows, cols + 1))
+    u = xx * cols + (row % 2) * 0.5; ci = np.floor(u).astype(int); fx = u - ci
+    fx = (fx + jit[row, ci % (cols + 1)]) % 1.0
+    curv = np.sin(fx * np.pi)                                             # bombé de la tuile
+    over = np.clip((fy - 0.82) / 0.18, 0, 1)                              # ombre du rang qui recouvre
+    tid = ((ci % cols) * 0.618 + row * 0.371) % 1.0
+    g = n01(fbm(S, S, r, base=S / 18, octaves=5)); fine = n01(fbm(S, S, r, base=S / 140, octaves=3))
+    fire = np.stack([0.48 - 0.08 * tid, 0.24 + 0.04 * np.sin(tid * 30), 0.16 + 0.02 * tid], -1)
+    burnt = (((ci * 7 + row * 3) % 13) == 0)[..., None]
+    fire = np.where(burnt, fire * 0.55, fire)
+    base = fire * (0.62 + 0.45 * curv[..., None]) * (0.85 + 0.2 * g[..., None]) * (0.92 + 0.12 * fine[..., None])
+    base = base * (1 - 0.55 * over[..., None]) * (1 - 0.35 * np.clip(1 - fy * 6, 0, 1)[..., None])
+    moss = np.clip((n01(fbm(S, S, r, base=S / 8, octaves=4)) - 0.62) * 3.5, 0, 1) * (1 - curv * 0.5)
+    lich = np.clip((n01(fbm(S, S, r, base=S / 12, octaves=4)) - 0.8) * 4, 0, 1)
+    base = base * (1 - 0.6 * moss[..., None]) + np.array([0.24, 0.29, 0.11]) * 0.6 * moss[..., None]
+    base = base * (1 - 0.5 * lich[..., None]) + np.array([0.70, 0.68, 0.50]) * 0.5 * lich[..., None]
+    h = 1.6 * curv * (1 - over) + 0.8 * fy + 0.2 * g
+    return _t(base, h, 0.22 + 0.15 * curv, 1.0)
 
 
 def cobbles(S=1024, seed=3004):
