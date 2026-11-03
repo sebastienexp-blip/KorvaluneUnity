@@ -283,14 +283,16 @@ namespace Korvalune.Game
 
         void LavaCrack(Vector3 p)
         {
-            var m = Mat(new Color(0.2f, 0.05f, 0.02f), 0.2f, new Color(2.4f, 0.7f, 0.12f));
-            for (int k = 0; k < 4; k++)
+            // réseau de failles incandescentes dessiné (branches qui se ramifient, lueur autour), posé à plat
+            if (FX.additive)
             {
-                var q = GameObject.CreatePrimitive(PrimitiveType.Cube); q.name = "Faille de lave"; Kill(q.GetComponent<Collider>()); q.transform.SetParent(root);
-                q.transform.position = p + new Vector3(R() * 2 - 1, 0, R() * 2 - 1) * 1.6f; q.transform.rotation = Quaternion.Euler(0, rng.Next(180), 0);
-                q.transform.localScale = new Vector3(0.18f + R() * 0.2f, 0.04f, 1.2f + R() * 2.2f); q.GetComponent<Renderer>().sharedMaterial = m;
+                var q = GameObject.CreatePrimitive(PrimitiveType.Quad); q.name = "Failles de lave"; Kill(q.GetComponent<Collider>()); q.transform.SetParent(root);
+                q.transform.position = p + Vector3.up * 0.02f; q.transform.rotation = Quaternion.Euler(90, rng.Next(360), 0); q.transform.localScale = Vector3.one * (4.5f + R() * 2.5f);
+                var m = new Material(FX.additive); var tex = LavaArt.Cracks; m.mainTexture = tex; if (m.HasProperty("_BaseMap")) m.SetTexture("_BaseMap", tex);
+                m.SetColor("_BaseColor", new Color(1.6f, 1.2f, 1.0f, 1f));
+                var r = q.GetComponent<Renderer>(); r.sharedMaterial = m; r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             }
-            Glow(p + Vector3.up * 0.6f, new Color(1f, 0.45f, 0.1f), 1.8f, 6f, true);
+            Glow(p + Vector3.up * 0.6f, new Color(1f, 0.45f, 0.1f), 2.2f, 7f, true);
         }
 
         void Puddle(Vector3 p)
@@ -679,6 +681,50 @@ namespace Korvalune.Game
             for (int i = 0; i < px.Length; i++) { byte v = (byte)(Mathf.Clamp01(a[i]) * 255); px[i] = new Color32(255, 255, 255, v); }
             tex.SetPixels32(px); tex.Apply(true, true);
             return tex;
+        }
+    }
+
+    /// <summary>Texture de failles de lave : quelques branches qui partent du centre et se ramifient, cœur blanc-jaune et
+    /// lueur orangée qui s'estompe (rendu additif, fond transparent).</summary>
+    public static class LavaArt
+    {
+        static Texture2D cracks;
+        public static Texture2D Cracks => cracks ? cracks : cracks = Make();
+        static Texture2D Make()
+        {
+            const int S = 256; var a = new float[S * S]; var rnd = new System.Random(5);
+            void Dot(float x, float y, float w, float v)
+            {
+                int r = Mathf.CeilToInt(w * 3);
+                for (int yy = Mathf.Max(0, (int)y - r); yy <= Mathf.Min(S - 1, (int)y + r); yy++)
+                    for (int xx = Mathf.Max(0, (int)x - r); xx <= Mathf.Min(S - 1, (int)x + r); xx++)
+                    {
+                        float d = Mathf.Sqrt((xx - x) * (xx - x) + (yy - y) * (yy - y));
+                        float g = Mathf.Max(Mathf.Clamp01(w + 0.5f - d), 0.35f * Mathf.Exp(-d * d / (w * w * 4f))) * v;
+                        int k = yy * S + xx; if (g > a[k]) a[k] = g;
+                    }
+            }
+            void Branch(Vector2 p, float ang, float len, float w, int depth)
+            {
+                int n = Mathf.CeilToInt(len / 1.5f);
+                for (int i = 0; i < n; i++)
+                {
+                    ang += ((float)rnd.NextDouble() - 0.5f) * 0.5f; p += new Vector2(Mathf.Cos(ang), Mathf.Sin(ang)) * 1.5f;
+                    float f = 1f - i / (float)n; Dot(p.x, p.y, w * (0.4f + 0.6f * f), 0.6f + 0.4f * f);
+                    if (depth < 3 && rnd.NextDouble() < 0.035) Branch(p, ang + (rnd.NextDouble() < 0.5 ? -1 : 1) * (0.5f + (float)rnd.NextDouble() * 0.6f), len * 0.45f, w * 0.65f, depth + 1);
+                    if (p.x < 6 || p.y < 6 || p.x > S - 6 || p.y > S - 6) break;
+                }
+            }
+            var c = new Vector2(S / 2f, S / 2f);
+            for (int b = 0; b < 5; b++) Branch(c, b * Mathf.PI * 2 / 5 + (float)rnd.NextDouble() * 0.6f, 70 + (float)rnd.NextDouble() * 40, 2.4f, 0);
+            var tex = new Texture2D(S, S, TextureFormat.RGBA32, true) { wrapMode = TextureWrapMode.Clamp, name = "Failles de lave" };
+            var px = new Color32[S * S];
+            for (int i = 0; i < px.Length; i++)
+            {
+                float v = Mathf.Clamp01(a[i]); var col = Color.Lerp(new Color(1f, 0.35f, 0.05f), new Color(1f, 0.95f, 0.6f), Mathf.Clamp01((v - 0.7f) * 3f));
+                px[i] = new Color32((byte)(col.r * 255), (byte)(col.g * 255), (byte)(col.b * 255), (byte)(v * 255));
+            }
+            tex.SetPixels32(px); tex.Apply(true, true); return tex;
         }
     }
 
