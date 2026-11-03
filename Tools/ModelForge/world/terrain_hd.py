@@ -89,8 +89,8 @@ def grass(S=1024, seed=2101):
     """Prairie de la vallée : terre sombre, mousse rase, trois générations de brins (anciens jaunis, verts, jeunes
     clairs) groupés en touffes, trèfles, cailloux épars, zones sèches."""
     r = np.random.default_rng(seed)
-    g = n01(fbm(S, S, r, base=S / 6, octaves=5))
-    dry = np.clip((n01(fbm(S, S, r, base=S / 3, octaves=4)) - 0.55) * 3.0, 0, 1)
+    g = n01(fbm(S, S, r, base=S / 14, octaves=4))
+    dry = np.clip((n01(fbm(S, S, r, base=S / 10, octaves=4)) - 0.62) * 2.0, 0, 1) * 0.6   # petites touches seulement : les grandes taches se répétaient en damier
     soil = np.array([0.20, 0.15, 0.09])[None, None] * (0.7 + 0.5 * n01(fbm(S, S, r, base=S / 30, octaves=4)))[..., None]
     moss = np.array([0.17, 0.22, 0.08])[None, None] * (0.75 + 0.4 * g[..., None])
     mm = np.clip(n01(fbm(S, S, r, base=S / 12, octaves=4)) * 1.6 - 0.3, 0, 1)[..., None]
