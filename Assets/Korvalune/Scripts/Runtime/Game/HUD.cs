@@ -280,7 +280,8 @@ namespace Korvalune.Game
             var icon = c.frame.transform.Find("Icone")?.GetComponent<Image>();
             if (it == null)
             {
-                c.frame.color = new Color(0.12f, 0.09f, 0.07f, 0.9f); c.glow.color = new Color(0, 0, 0, 0); c.label.alignment = TextAnchor.MiddleCenter; c.label.text = $"<color=#6b5a48>{empty}</color>";
+                // case vide : cadre bien visible et nom de l'emplacement lisible (l'ancien brun sur brun ne se voyait presque pas)
+                c.frame.color = new Color(0.24f, 0.19f, 0.14f, 0.95f); c.glow.color = new Color(0, 0, 0, 0); c.label.alignment = TextAnchor.MiddleCenter; c.label.text = $"<size=21><color=#b8a07c>{empty}</color></size>";
                 if (icon) icon.enabled = false; return;
             }
             var spr = ItemIcons.Get(it.baseName);
