@@ -95,9 +95,10 @@ namespace Korvalune.Game
             bar = Img(barBack.rectTransform, "Remplissage", UIStyle.Bar(), new Vector2(0, 0.5f), new Vector2(4, 0), new Vector2(1092, 22)); bar.type = Image.Type.Filled; bar.fillMethod = Image.FillMethod.Horizontal; bar.color = new Color(0.95f, 0.70f, 0.30f); bar.fillAmount = 0;
             version = Label(root, "Version", "Version " + Application.version, 24, TextAnchor.LowerLeft, new Vector2(0, 0), new Vector2(100, 40), new Vector2(600, 34)); version.color = new Color(0.7f, 0.65f, 0.58f);
 
-            var pb = Img(root, "Jouer", UIStyle.Button(), new Vector2(0, 1), new Vector2(96, -318), new Vector2(400, 112));          // colonne de gauche, sous le titre pb.raycastTarget = true; pb.type = Image.Type.Simple;
+            var pb = Img(root, "Jouer", UIStyle.Button(), new Vector2(0, 1), new Vector2(96, -318), new Vector2(400, 112));          // colonne de gauche, sous le titre
+            pb.raycastTarget = true; pb.type = Image.Type.Simple;
             playText = Label(pb.rectTransform, "T", "JOUER", 52, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(400, 112)); playText.color = UIStyle.Gold; playText.fontStyle = FontStyle.Bold;
-            play = pb.gameObject.AddComponent<Button>(); play.targetGraphic = pb; play.onClick.AddListener(() => SceneManager.LoadScene(nextScene)); play.interactable = false;
+            play = pb.gameObject.AddComponent<Button>(); play.targetGraphic = pb; play.onClick.AddListener(PlayClicked); play.interactable = false;
             pb.color = new Color(0.6f, 0.55f, 0.5f);
 
             // revoir la cinématique d'introduction
@@ -110,6 +111,24 @@ namespace Korvalune.Game
             MenuButton(root, "Quitter", 658, () => Application.Quit());
             Settings.Apply();
             if (!AutoTest.Enabled) Updater.Attach(root, font);           // mise à jour depuis le jeu (personnages conservés)
+        }
+
+        bool starting;
+        /// <summary>« Jouer » : chargement asynchrone de la sélection, avec l'avancement et un message clair en cas d'échec.</summary>
+        void PlayClicked()
+        {
+            if (starting) return;
+            Sound.UI("sfx_ui_clic", 0.6f);
+            if (!Application.CanStreamedLevelBeLoaded(nextScene)) { status.text = "Contenu du jeu introuvable — relancez le jeu pour le télécharger"; return; }
+            starting = true; StartCoroutine(StartGame());
+        }
+
+        IEnumerator StartGame()
+        {
+            play.interactable = false; status.text = "Chargement…";
+            var op = SceneManager.LoadSceneAsync(nextScene);
+            if (op == null) { status.text = "Impossible d'ouvrir le jeu — relancez l'application"; starting = false; play.interactable = true; yield break; }
+            while (!op.isDone) { bar.fillAmount = Mathf.Clamp01(op.progress / 0.9f); status.text = $"Chargement… {Mathf.RoundToInt(Mathf.Clamp01(op.progress / 0.9f) * 100)} %"; yield return null; }
         }
 
         void MenuButton(RectTransform root, string label, float y, System.Action click)
