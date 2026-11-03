@@ -38,7 +38,7 @@ namespace Korvalune.Game
             }
             var go = new GameObject("Nom"); go.transform.SetParent(transform, false); go.transform.localPosition = Vector3.up * 2.45f; tagT = go.transform;
             nameTag = go.AddComponent<TextMesh>(); nameTag.text = string.IsNullOrEmpty(displayName) ? title : $"{displayName}\n<size=40>{title}</size>";
-            nameTag.richText = true; nameTag.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); nameTag.GetComponent<MeshRenderer>().sharedMaterial = nameTag.font.material;
+            nameTag.richText = true; nameTag.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); nameTag.GetComponent<MeshRenderer>().sharedMaterial = nameTag.font.material; nameTag.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             nameTag.fontSize = 56; nameTag.characterSize = 0.045f; nameTag.anchor = TextAnchor.LowerCenter; nameTag.alignment = TextAlignment.Center; nameTag.fontStyle = FontStyle.Bold;
             halo = new GameObject("Halo").AddComponent<Light>(); halo.transform.SetParent(transform, false); halo.transform.localPosition = new Vector3(0, 2.2f, -0.8f);
             halo.type = LightType.Point; halo.range = 4f; halo.intensity = 0; halo.color = new Color(1f, 0.85f, 0.55f); halo.shadows = LightShadows.None;

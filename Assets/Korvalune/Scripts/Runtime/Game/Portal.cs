@@ -51,7 +51,7 @@ namespace Korvalune.Game
             // nom flottant
             var tag = new GameObject("Nom"); tag.transform.SetParent(transform, false); tag.transform.localPosition = Vector3.up * 3.4f; nameTag = tag.transform;
             nameText = tag.AddComponent<TextMesh>(); nameText.text = string.IsNullOrEmpty(displayName) ? label : displayName;
-            nameText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); nameText.GetComponent<MeshRenderer>().sharedMaterial = nameText.font.material;
+            nameText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); nameText.GetComponent<MeshRenderer>().sharedMaterial = nameText.font.material; nameText.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             nameText.fontSize = 64; nameText.characterSize = 0.06f; nameText.anchor = TextAnchor.MiddleCenter; nameText.alignment = TextAlignment.Center; nameText.fontStyle = FontStyle.Bold;
             // zone touchable (structure entière)
             var col = gameObject.AddComponent<SphereCollider>(); col.isTrigger = true; col.radius = Mathf.Max(radius * 1.6f, 2.6f); col.center = Vector3.up * 1f;

@@ -268,6 +268,9 @@ namespace Korvalune.Game
             var tag = new GameObject("Nom").AddComponent<TextMesh>(); tag.transform.SetParent(root.transform, false); tag.transform.localPosition = Vector3.up * 5.8f;
             tag.text = "Statue des Brèches"; tag.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); tag.GetComponent<MeshRenderer>().sharedMaterial = tag.font.material;
             tag.fontSize = 56; tag.characterSize = 0.05f; tag.anchor = TextAnchor.LowerCenter; tag.color = new Color(0.8f, 0.6f, 1f); tag.fontStyle = FontStyle.Bold;
+            // le nom fait toujours face à la caméra et ne projette pas d'ombre (sinon, vu d'en haut : des plaques grises)
+            var tr = tag.GetComponent<MeshRenderer>(); tr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; tr.receiveShadows = false;
+            tag.gameObject.AddComponent<FaceCamera>();
             var k = root.AddComponent<RiftKeeper>();
             k.gateAt = new GameObject("Seuil").transform; k.gateAt.SetParent(root.transform, false); k.gateAt.localPosition = new Vector3(0, 0, 4.2f);
             Rift.ReturnPoint = GameBootstrap.Ground(k.gateAt.position + root.transform.forward * 2.5f);
@@ -338,5 +341,11 @@ namespace Korvalune.Game
             foreach (var a in GetComponentsInChildren<Animator>()) a.enabled = false;
             enabled = false;
         }
+    }
+
+    /// <summary>Tourne l'objet (nom flottant) vers la caméra à chaque image.</summary>
+    public class FaceCamera : MonoBehaviour
+    {
+        void LateUpdate() { var c = Camera.main; if (c) transform.rotation = Quaternion.LookRotation(transform.position - c.transform.position); }
     }
 }
