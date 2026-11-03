@@ -1,0 +1,45 @@
+# Génère les nouvelles créatures avec Meshy (image → 3D texturé, squelette des bipèdes) à partir des concepts
+# Tools/Meshy/concepts/*.png, puis enregistre les modèles dans Tools/Meshy/out/ (sans relancer la vérification Unity).
+# La clé d'API est le secret MESHY_API_KEY du dépôt.
+name: Créatures — Meshy
+
+on:
+  workflow_dispatch:
+    inputs:
+      creatures:
+        description: "Créatures à générer (vide = toutes) : abbe wendigo tisseuse salamandre basilic voyant"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meshy
+  cancel-in-progress: false
+
+jobs:
+  generer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Vérifier la clé
+        env:
+          MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
+        run: |
+          if [ -z "$MESHY_API_KEY" ]; then echo "❌ Secret MESHY_API_KEY absent"; exit 1; fi
+          echo "Clé présente"
+      - name: Générer
+        env:
+          MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
+        run: python3 Tools/Meshy/generate.py ${{ github.event.inputs.creatures }}
+      - name: Enregistrer
+        if: always()
+        run: |
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add Tools/Meshy/out || true
+          git commit -m "Créatures Meshy : modèles générés [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done
