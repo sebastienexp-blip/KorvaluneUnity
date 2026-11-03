@@ -187,7 +187,7 @@ namespace Korvalune.EditorTools
                 foreach (var r in own)
                     foreach (var mat in r.sharedMaterials)
                     {
-                        bool ok = mat != null && expected.Contains(mat.name) && mat.shader.name == "Universal Render Pipeline/Lit" && mat.GetTexture("_BaseMap") != null;
+                        bool ok = mat != null && expected.Contains(mat.name) && (mat.shader.name == "Universal Render Pipeline/Lit" || mat.shader.name.StartsWith("Korvalune/PBR")) && mat.GetTexture("_BaseMap") != null;
                         Check($"Matériau {(mat ? mat.name : "(vide)")}", ok, mat ? $"shader {mat.shader.name}, base {(mat.GetTexture("_BaseMap") ? mat.GetTexture("_BaseMap").name : "—")}, normale {(mat.IsKeywordEnabled("_NORMALMAP") ? "oui" : "non")}, métal/lissé {(mat.IsKeywordEnabled("_METALLICSPECGLOSSMAP") ? "oui" : "non")}, AO {(mat.IsKeywordEnabled("_OCCLUSIONMAP") ? "oui" : "non")}" : "");
                     }
 
