@@ -1,7 +1,7 @@
 # Test de l'APK dans un émulateur Android (API 30, x86_64)
 
 - Android 11
-- APK : 848.7 Mo
+- APK : 88.0 Mo
 - ✅ Installation
 - ✅ Jeu en cours d'exécution à 20 s (capture ecran_20s.png)
 - ✅ Jeu en cours d'exécution à 45 s (capture ecran_45s.png)
@@ -14,8 +14,29 @@
     [Korvalune][test] lanceur prêt : on joue
     [Korvalune][test] chargement de la scène « Korvalune_Vallee » avec Testeur
     [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
-- Erreurs Unity dans le journal : 0
+- Erreurs Unity dans le journal : 2
+    11-03 09:46:24.311  5930  5994 E Unity   : SharedTextureData source data is NULL.
+    11-03 09:46:24.314  5930  5994 E Unity   : SharedTextureData source data is NULL.
 
 **RÉSULTAT : OK**
