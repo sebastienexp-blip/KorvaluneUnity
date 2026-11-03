@@ -68,7 +68,7 @@ namespace Korvalune.Game
         readonly List<(int child, Image line)> treeLines = new List<(int, Image)>();
         readonly List<(Image bg, Image icon, Text num)> treeSlots = new List<(Image, Image, Text)>();
 
-        const float ColW = 214, NodeSize = 96, TreeH = 600;
+        const float ColW = 214, NodeSize = 80, TreeH = 600;   // nœud + nom tiennent dans l'écart entre deux lignes (110)
 
         void BuildTree(RectTransform root)
         {
@@ -120,10 +120,11 @@ namespace Korvalune.Game
                 var icon = Img(nodeMask.rectTransform, "Icône", null, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(NodeSize * 0.6f, NodeSize * 0.6f));
                 SetSkillIcon(icon, d, 0.7f, NodeSize * 0.6f, NodeSize * 0.84f);
                 var lk = Img(node.rectTransform, "Verrou", UIStyle.Icon("lock", new Color(0.75f, 0.68f, 0.6f)), new Vector2(1, 0), new Vector2(6, -6), new Vector2(34, 34));
-                var rank = Label(node.rectTransform, "Rang", "", 20, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0, -6), new Vector2(70, 26));
+                var rank = Label(node.rectTransform, "Rang", "", 19, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0, 2), new Vector2(70, 24));
                 rank.gameObject.AddComponent<Outline>().effectColor = Color.black;
-                var name = Label(content, "Nom_" + i, d.name, 21, TextAnchor.UpperCenter, new Vector2(0, 1), p + new Vector2(-ColW / 2f + 8, -NodeSize / 2f - 6), new Vector2(ColW - 16, 44));
-                name.rectTransform.pivot = new Vector2(0, 1);
+                var name = Label(content, "Nom_" + i, d.name, 20, TextAnchor.UpperCenter, new Vector2(0, 1), p + new Vector2(-ColW / 2f + 6, -NodeSize / 2f - 2), new Vector2(ColW - 12, 26));
+                name.rectTransform.pivot = new Vector2(0, 1); name.horizontalOverflow = HorizontalWrapMode.Overflow; FitText(name, 15);
+                name.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.85f);
                 var b = node.gameObject.AddComponent<Button>(); b.targetGraphic = node;
                 b.onClick.AddListener(() => { treeSel = k; Sound.UI("sfx_ui_clic", 0.45f); RefreshTree(); });
                 treeNodes[i] = (node, glow, icon, lk, rank, name);
@@ -133,7 +134,7 @@ namespace Korvalune.Game
 
             // ---- fiche de la compétence choisie
             var side = Img(panel, "Fiche", UIStyle.Slot(), new Vector2(1, 1), new Vector2(-46, -108), new Vector2(460, TreeH + 40)); side.type = Image.Type.Sliced;
-            treeDetailBox = Scroll(side.rectTransform, new Vector2(24, -20), new Vector2(412, TreeH - 160), out treeDetail, 24);
+            treeDetailBox = Scroll(side.rectTransform, new Vector2(24, -20), new Vector2(412, TreeH - 200), out treeDetail, 24);   // s'arrête au-dessus des boutons de spécialisation
             treeLearn = TextButton(side.rectTransform, "Apprendre", "Apprendre", new Vector2(0.5f, 0), new Vector2(0, 24), new Vector2(400, 76), LearnSelected, out treeLearnText, 30);
             // voies de spécialisation (choix de build) : deux boutons au-dessus de « Apprendre »
             for (int v = 1; v <= 2; v++)
@@ -173,7 +174,7 @@ namespace Korvalune.Game
         {
             if (!treePanel) { Notify("Arbre de compétences indisponible"); return; }
             if (bagPanel) bagPanel.SetActive(false);
-            treePanel.SetActive(!treePanel.activeSelf); if (treePanel.activeSelf) RefreshTree();
+            treePanel.SetActive(!treePanel.activeSelf); if (treePanel.activeSelf) { Front(treePanel); RefreshTree(); }
             Sound.UI(treePanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
 
@@ -387,6 +388,7 @@ namespace Korvalune.Game
             if (on) CloseAllPanels();
             if (on != pausePanel.activeSelf) Sound.UI(on ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
             pausePanel.SetActive(on); pauseShade.SetActive(on);
+            if (on) { pauseShade.transform.SetAsLastSibling(); pausePanel.transform.SetAsLastSibling(); }
             if (!on && optionsPanel) optionsPanel.SetActive(false);
             Time.timeScale = on ? 0f : 1f;
             if (on) FindFirstObjectByType<GameBootstrap>()?.Persist();

@@ -136,12 +136,25 @@ namespace Korvalune.Game
                 portraitCam = new GameObject("Caméra de portrait").AddComponent<Camera>(); portraitCam.transform.SetParent(player.transform, false);
                 portraitCam.transform.localPosition = new Vector3(0, 1.25f, 2.7f); portraitCam.transform.localRotation = Quaternion.LookRotation(new Vector3(0, -0.2f, -2.7f));
                 portraitCam.fieldOfView = 34; portraitCam.nearClipPlane = 0.3f; portraitCam.farClipPlane = 40; portraitCam.targetTexture = portraitRT;
-                portraitCam.clearFlags = CameraClearFlags.SolidColor; portraitCam.backgroundColor = new Color(0.08f, 0.06f, 0.05f, 1);
+                portraitCam.clearFlags = CameraClearFlags.SolidColor; portraitCam.backgroundColor = new Color(0.07f, 0.055f, 0.045f, 1);
+                portraitCam.cullingMask = 1 << PortraitLayer;              // seulement le héros : pas le décor derrière lui
                 var key = new GameObject("Éclairage du portrait").AddComponent<Light>(); key.transform.SetParent(portraitCam.transform, false); key.transform.localPosition = new Vector3(0.8f, 0.6f, 0);
                 key.type = LightType.Point; key.range = 6; key.intensity = 1.6f; key.color = new Color(1f, 0.92f, 0.8f); key.shadows = LightShadows.None;
                 portrait.texture = portraitRT;
             }
+            if (on) IsolateHero();
             if (portraitCam) portraitCam.gameObject.SetActive(on);
+        }
+
+        const int PortraitLayer = 30;
+        /// <summary>Le héros (corps, armes, armure) passe sur un calque à lui, que la caméra principale voit toujours et que la
+        /// caméra du portrait est seule à voir : le portrait se détache sur un fond uni, comme une fiche de personnage.</summary>
+        void IsolateHero()
+        {
+            if (!player) return;
+            foreach (var r in player.GetComponentsInChildren<Renderer>(true))
+                if (!(r is ParticleSystemRenderer) && !r.GetComponent<Collider>() && r.gameObject != player.gameObject) r.gameObject.layer = PortraitLayer;   // jamais un objet physique
+            var main = Camera.main; if (main) main.cullingMask |= 1 << PortraitLayer;
         }
 
         static string Hex(Color c) => ColorUtility.ToHtmlStringRGB(c);
@@ -263,6 +276,7 @@ namespace Korvalune.Game
             var worn = new List<ItemSave>(); foreach (Slot s in System.Enum.GetValues(typeof(Slot))) { var it = eq.In(s); if (it != null) worn.Add(it); }
             float avg = worn.Count > 0 ? worn.Average(x => x.power * x.Quality) : 0;
             heroTitle.text = $"<size=34><b>{player.name.Replace("(Clone)", "")}</b></size>\n{Loot.ClassLabel(Loot.PlayerClass)} · niveau {player.level} · <color=#f0d090>◆ {avg:0}</color>";
+            if (portraitCam && portraitCam.gameObject.activeSelf) IsolateHero();   // l'équipement vient peut-être de changer
             if (invStats && invStats.gameObject.activeSelf) { statsText.text = StatsSheet(eq); FitScroll(statsContent, statsText, 724); }
             // fiches
             if (selected == null) { if (cardLayer.gameObject.activeSelf) cardLayer.gameObject.SetActive(false); return; }

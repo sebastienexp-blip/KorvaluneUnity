@@ -260,7 +260,7 @@ namespace Korvalune.Game
         {
             if (!bagPanel) { Notify("Inventaire indisponible"); return; }
             if (treePanel) treePanel.SetActive(false);
-            bagPanel.SetActive(!bagPanel.activeSelf); selected = null; if (bagPanel.activeSelf) RefreshBag();
+            bagPanel.SetActive(!bagPanel.activeSelf); selected = null; if (bagPanel.activeSelf) { Front(bagPanel); RefreshBag(); }
             PortraitActive(bagPanel.activeSelf);
             Sound.UI(bagPanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
@@ -292,6 +292,20 @@ namespace Korvalune.Game
             else { c.label.alignment = TextAnchor.MiddleCenter; c.label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(col)}><b>{it.baseName}</b></color>\n<size=15>{SlotName[it.slot]} · {it.power}</size>"; }
         }
 
+        /// <summary>Un panneau plein écran passe au premier plan (au-dessus des boutons, de la ceinture, de la jauge de brèche
+        /// et des noms flottants) et se réduit si l'écran est trop bas pour lui (téléphones très allongés).</summary>
+        void Front(GameObject panel)
+        {
+            if (!panel) return;
+            var rt = (RectTransform)panel.transform; rt.SetAsLastSibling();
+            var area = root.rect.size; var sz = rt.sizeDelta;
+            float k = Mathf.Min(1f, (area.y - 12f) / Mathf.Max(1f, sz.y), (area.x - 12f) / Mathf.Max(1f, sz.x));
+            rt.localScale = new Vector3(k, k, 1f);
+        }
+
+        /// <summary>Un panneau plein écran est ouvert : on masque les noms et barres flottants du monde.</summary>
+        bool ModalOpen => (bagPanel && bagPanel.activeSelf) || (treePanel && treePanel.activeSelf) || (shopPanel && shopPanel.activeSelf) || (pausePanel && pausePanel.activeSelf);
+
         public void Notify(string msg) { if (!notifyText) return; notifyText.text = msg; notifyText.color = UIStyle.Parch; notifyUntil = Time.time + 2.5f; }
 
         void Revive()
@@ -317,7 +331,7 @@ namespace Korvalune.Game
                 float age = Time.time - born;
                 if (age > 1.0f || !rt) { if (rt) Destroy(rt.gameObject); popups.RemoveAt(i); continue; }
                 Screen2Canvas(w + Vector3.up * age * 1.2f, rt);
-                var c = t.color; c.a = 1 - age; t.color = c;
+                var c = t.color; c.a = ModalOpen ? 0 : 1 - age; t.color = c;
             }
         }
 
@@ -377,7 +391,7 @@ namespace Korvalune.Game
                 if (h.faction != Faction.Enemy) continue;
                 var ai = h.GetComponent<EnemyAI>(); if (ai && ai.side != Faction.Enemy) continue;     // pas les invocations du héros
                 float d2 = player ? (h.transform.position - player.transform.position).sqrMagnitude : 1e9f;
-                bool show = !h.Dead && d2 < 30 * 30 && (Settings.EnemyNames == 0 || (Settings.EnemyNames == 1 && h == tgt));
+                bool show = !h.Dead && d2 < 30 * 30 && (Settings.EnemyNames == 0 || (Settings.EnemyNames == 1 && h == tgt)) && !ModalOpen;
                 if (!plates.TryGetValue(h, out var pl))
                 {
                     if (!show) continue;
@@ -464,7 +478,8 @@ namespace Korvalune.Game
                     }
                     lootLabels[d] = t;
                 }
-                Screen2Canvas(d.transform.position + Vector3.up * (d.gold > 0 ? 0.5f : 0.9f), t.rectTransform);
+                bool vis = !ModalOpen; if (t.gameObject.activeSelf != vis) t.gameObject.SetActive(vis);
+                if (vis) Screen2Canvas(d.transform.position + Vector3.up * (d.gold > 0 ? 0.5f : 0.9f), t.rectTransform);
             }
             var gone = new List<LootDrop>();
             foreach (var kv in lootLabels) if (!kv.Key) { if (kv.Value) Destroy(kv.Value.gameObject); gone.Add(kv.Key); }

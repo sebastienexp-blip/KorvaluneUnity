@@ -73,7 +73,7 @@ namespace Korvalune.Game
             if (stockLevel != player.level) { stocks.Clear(); stockLevel = player.level; }
             tabs = TabsFor(m.kind);
             shopTitle.text = m.title + (string.IsNullOrEmpty(m.displayName) ? "" : " — " + m.displayName);
-            shopPanel.SetActive(true); RefreshShop(); Sound.UI("sfx_ui_ouvrir", 0.7f);
+            shopPanel.SetActive(true); Front(shopPanel); RefreshShop(); Sound.UI("sfx_ui_ouvrir", 0.7f);
         }
 
         public void CloseShop() { if (shopPanel) shopPanel.SetActive(false); FindFirstObjectByType<GameBootstrap>()?.Persist(); }
