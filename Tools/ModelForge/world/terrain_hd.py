@@ -161,6 +161,79 @@ def dirt(S=1024, seed=2103):
     return L.col, h, np.clip(L.smooth, 0, 1)
 
 
+def _voronoi(S, r, n, jitter_pts=None):
+    """Cellules de Voronoï raccordables : distance au plus proche (d1), au second (d2), identifiant de cellule."""
+    from scipy.spatial import cKDTree
+    pts = r.uniform(0, S, (n, 2)) if jitter_pts is None else jitter_pts
+    tiles = np.concatenate([pts + np.array([dx, dy]) * S for dx in (-1, 0, 1) for dy in (-1, 0, 1)])
+    ids = np.tile(np.arange(len(pts)), 9)
+    yy, xx = np.mgrid[0:S, 0:S]
+    d, i = cKDTree(tiles).query(np.stack([yy.ravel(), xx.ravel()], 1).astype(float), k=2)
+    return d[:, 0].reshape(S, S), d[:, 1].reshape(S, S), ids[i[:, 0]].reshape(S, S)
+
+
+def cobbles(S=1024, seed=2104):
+    """Pavés de la place : pierres bombées de tailles variées posées en rangées irrégulières, polies au sommet par
+    le passage, joints de terre et de mousse, quelques pavés fendus ou plus sombres."""
+    r = np.random.default_rng(seed)
+    # semis en rangées décalées (pose à la main) + jitter
+    rows = 15; pts = []
+    for k in range(rows):
+        y = (k + 0.5) / rows * S; x = r.uniform(0, S / 14)
+        while x < S:
+            w = r.uniform(0.75, 1.3) * S / 15
+            pts.append((y + r.normal(0, S / rows * 0.12), x + w / 2)); x += w
+    pts = np.array(pts) % S
+    d1, d2, cid = _voronoi(S, r, len(pts), pts)
+    e = (d2 - d1) / 2.0                                       # distance au joint
+    g = n01(fbm(S, S, r, base=S / 10, octaves=5)); fine = n01(fbm(S, S, r, base=S / 140, octaves=3))
+    wob = (n01(fbm(S, S, r, base=S / 25, octaves=3)) - 0.5) * 2
+    e = e + 2.5 * wob
+    gap = 3.5
+    dome = np.clip((e - gap) / (S * 0.022), 0, 1); dome = np.sqrt(dome)
+    joint = np.clip(1 - (e - gap) / 1.5, 0, 1)
+    rid = (cid * 0.61803398875) % 1.0
+    tone = np.array([0.45, 0.42, 0.38])[None, None] * (0.8 + 0.28 * rid[..., None])
+    tone = tone * (1 + 0.04 * (np.sin(rid * 50)[..., None]) * np.array([1, 0.2, -0.8])[None, None])
+    dark = (((cid * 0.37) % 1.0) > 0.88)[..., None]
+    tone = np.where(dark, tone * 0.62, tone)
+    polish = dome ** 3
+    stone = tone * (0.75 + 0.25 * g[..., None]) * (0.9 + 0.15 * fine[..., None]) * (0.78 + 0.3 * dome[..., None])
+    stone = stone * (1 + 0.12 * polish[..., None])
+    moss = np.clip((n01(fbm(S, S, r, base=S / 7, octaves=4)) - 0.5) * 2.5, 0, 1)
+    jc = np.array([0.20, 0.16, 0.11])[None, None] * (0.8 + 0.3 * fine[..., None])
+    jc = jc * (1 - moss[..., None] * 0.8) + np.array([0.15, 0.21, 0.07])[None, None] * moss[..., None] * 0.8
+    col = stone * (1 - joint[..., None]) + jc * joint[..., None]
+    h = 1.0 * dome * (1 - joint) + 0.15 * g + 0.05 * fine
+    smooth = 0.14 + 0.35 * polish * (1 - joint)
+    return col, h, smooth
+
+
+def rock(S=1024, seed=2105):
+    """Roche des falaises : grandes plaques fracturées (Voronoï), faces planes inclinées, fissures nettes,
+    strates à peine marquées, lichens jaunes et gris clairs, salissures sous les fissures."""
+    r = np.random.default_rng(seed)
+    gy, gx = np.mgrid[0:9, 0:9]; pts = (np.stack([gy.ravel(), gx.ravel()], 1) + 0.5 + r.uniform(-0.38, 0.38, (81, 2))) * S / 9   # semis régulier jitté : pas de graines jumelles
+    d1, d2, cid = _voronoi(S, r, 81, pts % S)
+    e = (d2 - d1) / 2.0 + 3.0 * (n01(fbm(S, S, r, base=S / 30, octaves=4)) - 0.5)
+    rid = (cid * 0.61803398875) % 1.0
+    # chaque plaque : un plan incliné propre (relief à facettes)
+    ang = rid * 2 * np.pi; yy, xx = np.mgrid[0:S, 0:S] / S
+    plane = (np.cos(ang) * xx + np.sin(ang) * yy) % 1.0 * 0.35
+    g = n01(fbm(S, S, r, base=S / 12, octaves=6)); fine = n01(fbm(S, S, r, base=S / 160, octaves=3))
+    crack = np.clip(1 - (e - 0.8) / 1.6, 0, 1)
+    sub = np.zeros((S, S))        # fines fissures secondaires
+    strata = (np.sin((yy * 9 + 0.6 * fbm(S, S, r, base=S / 3, octaves=3)) * np.pi * 2) * 0.5 + 0.5) * 0.08
+    base = np.array([0.43, 0.41, 0.38])[None, None] * (0.75 + 0.3 * rid[..., None]) * (0.75 + 0.3 * g[..., None]) * (0.9 + 0.15 * fine[..., None])
+    base = base * (1 - strata[..., None])
+    lich = np.clip((n01(fbm(S, S, r, base=S / 16, octaves=4)) - 0.68) * 4, 0, 1) * (1 - crack)
+    lc = np.where(((cid * 0.29) % 1.0 > 0.5)[..., None], np.array([0.60, 0.58, 0.40]), np.array([0.62, 0.62, 0.58]))
+    col = base * (1 - 0.6 * lich[..., None]) + lc * 0.6 * lich[..., None]
+    col = col * (1 - 0.6 * crack[..., None]) * (1 - 0.25 * sub[..., None])
+    h = 1.2 * (1 - crack) + plane + 0.35 * g - 0.4 * sub
+    return col, h, np.clip(0.12 + 0.12 * g, 0, 1)
+
+
 def save(folder, prefix, col, h, smooth, strength=0.9):
     os.makedirs(folder, exist_ok=True)
     u8 = lambda a: (np.clip(a, 0, 1) * 255 + 0.5).astype(np.uint8)
@@ -179,5 +252,5 @@ if __name__ == '__main__':
     import sys
     out = sys.argv[1] if len(sys.argv) > 1 else 'out/terrain_hd'
     S = int(sys.argv[2]) if len(sys.argv) > 2 else 1024
-    for name, fn in (('Herbe', grass), ('SousBois', forest_floor), ('Chemin', dirt)):
+    for name, fn in (('Herbe', grass), ('SousBois', forest_floor), ('Chemin', dirt), ('Pave', cobbles), ('Roche', rock)):
         col, h, sm = fn(S); save(out, name, col, h, sm); print('couche', name, flush=True)

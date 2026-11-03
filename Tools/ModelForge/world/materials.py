@@ -111,8 +111,8 @@ def stone_blocks(S=1024, seed=1006, rows=5, tone=(0.62, 0.58, 0.52)):
         sx = np.where(pos - b[i - 1] < b[i] - pos, -1.0, 1.0); sy = np.where(fy < 0.5, -1.0, 1.0)
         side[m] = np.where(dx < dy, sx * 0.0 + sx, sy * 0.0 + 2 * sy)   # ±1 : bord gauche/droit, ±2 : bas/haut
         bid[m] = ((i * 7.31 + k * 3.17) * 0.61803) % 1.0; fyv[m] = fy
-    warp = n01(fbm(S, S, r, base=S / 40, octaves=3)); wob = fbm(S, S, r, base=S / 18, octaves=4)
-    edge = edge + 4.5 * wob                                            # contours de blocs irréguliers (taille à la main)
+    warp = n01(fbm(S, S, r, base=S / 40, octaves=3)); wob = (n01(fbm(S, S, r, base=S / 18, octaves=4)) - 0.5) * 2
+    edge = edge + 9.0 * wob                                            # contours de blocs irréguliers (taille à la main)
     mw = 3.0 + 3.0 * warp                                              # joint irrégulier
     mortar = np.clip(1 - (edge - mw) / 2.0, 0, 1)
     bevel = np.clip((edge - mw) / (S * 0.018), 0, 1); bevel = bevel * bevel * (3 - 2 * bevel)
@@ -139,19 +139,64 @@ def stone_blocks(S=1024, seed=1006, rows=5, tone=(0.62, 0.58, 0.52)):
     return _tex(col, hgt, 0.16 + 0.12 * g * (1 - mortar), 1.1, 6, 0.18)
 
 
-def slate_roof(S=1024, seed=1007, tone=(0.22, 0.25, 0.32)):
-    """Ardoises bleu-gris en écailles (rangées décalées), lichens et usure. UV : 1 répétition = 2 m."""
+def slate_roof(S=1024, seed=1007, tone=(0.25, 0.26, 0.30)):
+    """Ardoises posées à la main : rangées qui se recouvrent, ardoises de largeurs inégales au bas ébréché, légèrement
+    de travers, ombre portée sous chaque rang, teintes bleu-gris à violacées, lichens et coulures. 1 répétition = 2 m."""
     r = np.random.default_rng(seed)
     yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
-    rows = 14; row = np.floor(yy * rows); fy = yy * rows - row
-    u = xx * 10 + (row % 2) * 0.5; fx = u - np.floor(u)
-    scale = np.clip(1 - ((fx - 0.5) ** 2 * 3 + (1 - fy) ** 2 * 0.8), 0, 1)
-    g = n01(fbm(S, S, r, base=S / 20, octaves=4))
-    bid = (np.floor(u) * 5.7 + row * 2.3) % 1.0
-    col = np.array(tone)[None, None] * (0.7 + 0.4 * scale[..., None]) * (0.85 + 0.3 * np.sin(bid * 30)[..., None] * 0.5) * (0.85 + 0.25 * g[..., None])
-    lich = np.clip((n01(fbm(S, S, r, base=S / 10, octaves=3)) - 0.72) * 4, 0, 1)
-    col = col * (1 - 0.5 * lich[..., None]) + np.array([0.45, 0.48, 0.30])[None, None] * 0.5 * lich[..., None]
-    return _tex(col, 2.0 * scale + 0.4 * g, 0.35 + 0.2 * scale, 1.0)
+    rows = 12; row = np.floor(yy * rows).astype(int); fy = yy * rows - row          # fy : 0 en haut du rang, 1 au bas
+    col = np.zeros((S, S, 3)); hgt = np.zeros((S, S)); sid = np.zeros((S, S))
+    g = n01(fbm(S, S, r, base=S / 20, octaves=5)); fine = n01(fbm(S, S, r, base=S / 150, octaves=3))
+    chip = n01(fbm(S, S, r, base=S / 60, octaves=3))
+    for k in range(rows):
+        m = row == k
+        w = r.uniform(0.6, 1.4, 40); w = w / w.sum() * 0.1 * 40; b = np.concatenate([[0], np.cumsum(w)]); n = np.searchsorted(b, 1.0); b = b[:n + 1] / b[n]
+        off = r.uniform(0, 1); pos = (xx[m] + off) % 1.0
+        i = np.clip(np.searchsorted(b, pos, side='right'), 1, len(b) - 1)
+        fx = (pos - b[i - 1]) / (b[i] - b[i - 1])
+        ids = (i * 13 + k * 7) % 997
+        tilt = ((ids * 0.618) % 1.0 - 0.5) * 0.12
+        bottom = 0.93 + tilt * (fx - 0.5) - 0.06 * (chip[m] > 0.72) * (np.abs(fx - 0.5) > 0.3)   # bas ébréché
+        gapx = np.minimum(fx, 1 - fx) * (b[i] - b[i - 1]) * S
+        inside = (fy[m] < bottom) & (gapx > 1.2)
+        sid[m] = (ids * 0.618) % 1.0
+        hgt[m] = np.where(inside, 0.4 + 0.6 * fy[m], 0.0)                # chaque ardoise remonte sous la suivante
+        shade = np.where(inside, 1.0, 0.35) * (0.62 + 0.38 * np.clip(fy[m] * 1.4, 0, 1))   # ombre du rang du dessus
+        t = np.array(tone)[None] * (0.8 + 0.35 * sid[m][:, None]) * (1 + 0.1 * (np.sin(sid[m] * 40)[:, None]) * np.array([[-0.5, 0, 1]]))
+        col[m] = t * shade[:, None]
+    col = col * (0.82 + 0.25 * g[..., None]) * (0.9 + 0.15 * fine[..., None])
+    lich = np.clip((n01(fbm(S, S, r, base=S / 10, octaves=4)) - 0.68) * 4, 0, 1) * (hgt > 0)
+    col = col * (1 - 0.6 * lich[..., None]) + np.array([0.50, 0.52, 0.32])[None, None] * 0.6 * lich[..., None]
+    streak = np.clip(n01(fbm(S, S, r, base=S / 5, octaves=4, aniso=(1.0, 0.2))) - 0.55, 0, 1) * 1.2
+    col = col * (1 - 0.25 * streak[..., None])
+    return _tex(col, 2.0 * hgt + 0.3 * g, 0.30 + 0.25 * (hgt > 0) * g, 1.2, 4, 0.2)
+
+
+def planks(S=512, seed=1011, tone=(0.30, 0.20, 0.12)):
+    """Bois de charpente : planches ou poutres de largeurs variées, veinage étiré avec nœuds, fentes, bords usés,
+    teinte propre à chaque planche, crasse dans les jointures. 1 répétition = 1 m."""
+    r = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
+    w = r.uniform(0.7, 1.3, 20); w = w / w.sum() * 0.2 * 20; b = np.concatenate([[0], np.cumsum(w)]); n = np.searchsorted(b, 1.0); b = b[:n + 1] / b[n]
+    i = np.clip(np.searchsorted(b, xx, side='right'), 1, len(b) - 1)
+    fx = (xx - b[i - 1]) / (b[i] - b[i - 1]); pid = (i * 0.618) % 1.0
+    seam = np.clip(1 - np.minimum(fx, 1 - fx) * (b[i] - b[i - 1]) * S / 1.8, 0, 1)
+    # veinage : anneaux étirés le long de la planche (y), déformés par des nœuds
+    warp = fbm(S, S, r, base=S / 6, octaves=4, aniso=(1.0, 0.15))
+    knots = np.zeros((S, S))
+    for _ in range(9):
+        cy, cx = r.uniform(0, 1, 2); rad = r.uniform(0.012, 0.03)
+        d = np.sqrt(((yy - cy + 0.5) % 1 - 0.5) ** 2 + (((xx - cx + 0.5) % 1 - 0.5) * 2.2) ** 2)
+        knots += np.exp(-(d / rad) ** 2)
+        warp += 0.6 * np.exp(-(d / (rad * 4)) ** 2) * np.sin(np.arctan2(yy - cy, xx - cx) * 2)
+    rings = np.sin((fx * 6 + pid * 20 + 0.35 * warp) * np.pi * 2) * 0.5 + 0.5
+    fibers = n01(fbm(S, S, r, base=S / 200, octaves=3, aniso=(1.0, 0.03)))
+    crack = np.clip((n01(fbm(S, S, r, base=S / 30, octaves=3, aniso=(1.0, 0.05))) - 0.88) * 8, 0, 1)
+    t = np.array(tone)[None, None] * (0.75 + 0.45 * pid[..., None])
+    col = t * (0.78 + 0.22 * rings[..., None]) * (0.85 + 0.25 * fibers[..., None])
+    col = col * (1 - 0.55 * np.clip(knots, 0, 1)[..., None]) * (1 - 0.6 * crack[..., None]) * (1 - 0.7 * seam[..., None])
+    hgt = 1.0 - seam - 0.8 * crack + 0.15 * rings + 0.2 * fibers - 0.3 * np.clip(knots, 0, 1)
+    return _tex(col, hgt, 0.22 + 0.1 * rings, 0.9, 3, 0.15)
 
 
 def bark(S=512, seed=1008, tone=(0.30, 0.22, 0.15)):
