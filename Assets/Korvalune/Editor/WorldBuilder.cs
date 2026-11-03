@@ -25,9 +25,9 @@ namespace Korvalune.EditorTools
         const float Size = 640f, MaxH = 140f, Base = 12f;
         static readonly Vector2 Gate = new Vector2(0, -36);
         /// <summary>Entrée de la crypte, au bord du vieux cimetière.</summary>
-        public static Vector3 CryptEntrance => Ground(new Vector2(-28, -100));
-        /// <summary>Vieux cimetière (camp des squelettes), hors les murs entre l'enceinte de la ville et le fleuve.</summary>
-        public static readonly Vector2 Grave = new Vector2(-18, -99);
+        public static Vector3 CryptEntrance => Ground(Grave + new Vector2(-11, -1));
+        /// <summary>Vieux cimetière (camp des squelettes), à l'écart, au nord-est de la ville, au bout d'un chemin de terre qui part de la route de l'est.</summary>
+        public static readonly Vector2 Grave = new Vector2(122, 74);
 
         // ------------------------------------------------------------------------------------------ relief
         static float Smooth(float a, float b, float x) { float t = Mathf.Clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); }
@@ -51,6 +51,7 @@ namespace Korvalune.EditorTools
             new[] { new Vector2(-5, -70), new Vector2(-50, -45), new Vector2(-95, -30), new Vector2(-150, -20), new Vector2(-210, 10) },              // pont de l'ouest → pics
             new[] { new Vector2(30, -40), new Vector2(80, -20), new Vector2(140, 10), new Vector2(210, 30), new Vector2(270, 40) },                    // route de l'est (côte)
             new[] { new Vector2(20, 35), new Vector2(30, 80), new Vector2(40, 120), new Vector2(35, 180), new Vector2(20, 260) },                     // vers la forêt
+            new[] { new Vector2(140, 10), new Vector2(136, 36), new Vector2(124, 58), new Vector2(118, 66) },                                          // chemin du vieux cimetière
         };
         public static readonly Vector2 Bridge = new Vector2(-95, -28);
 
@@ -171,7 +172,7 @@ namespace Korvalune.EditorTools
                 BridgeBuilder.Build(nb == 0 ? "Pont" : $"Pont {nb}", Ground(cp - cd * 19f), Ground(cp + cd * 19f), 5.6f, Base - 3.5f, null, 11 + nb++);
             var rng = new System.Random(7);
             // cimetière (camp des squelettes) : pierres tombales et rochers
-            var grave = Grave;                                    // entre l'enceinte de la ville et le fleuve
+            var grave = Grave;                                    // à l'écart, au bout du chemin du nord-est
             var tombs = new List<Vector2>();
             for (int k = 0; k < 18; k++)
             {
@@ -322,6 +323,7 @@ namespace Korvalune.EditorTools
             (new Vector2(6, -72), new[] { "Château ↑", "Désert du Sud ↓", "Pont de l'Ouest ←" }),
             (new Vector2(8, -152), new[] { "Désert du Sud ↓", "Marais du Sud-Est →", "Château ↑" }),
             (new Vector2(38, -36), new[] { "Côte de l'Est →", "Château ←" }),
+            (new Vector2(146, 4), new[] { "Vieux cimetière ↑", "Château ←", "Côte de l'Est →" }),
             (new Vector2(26, 40), new[] { "Forêt du Nord ↑", "Château ↓" }),
         };
         static void Roadside()
@@ -638,7 +640,7 @@ namespace Korvalune.EditorTools
             {
                 float x = (float)rng.NextDouble() * Size - Size / 2, z = (float)rng.NextDouble() * Size - Size / 2;
                 var p = new Vector2(x, z);
-                if (p.magnitude < TownBuilder.WallR + 10 || RoadDist(p) < 7 || RiverDist(p) < 15 || x > 235 || NearHamlet(p, 22)) continue;
+                if (p.magnitude < TownBuilder.WallR + 10 || RoadDist(p) < 7 || RiverDist(p) < 15 || x > 235 || NearHamlet(p, 22) || (p - Grave).magnitude < 28f) continue;
                 float h = Height(x, z);
                 if (h > 85 || h < WaterLevel + 0.8f) continue;
                 float dens = 0.03f + 0.95f * Smooth(95, 160, z) + 0.4f * Smooth(-130, -190, x) * Smooth(70, 40, h) - 0.9f * Smooth(-160, -200, z);
@@ -672,8 +674,11 @@ namespace Korvalune.EditorTools
             {
                 if (!m) { m = new Material(eau); AssetDatabase.CreateAsset(m, path); } else if (m.shader != eau) m.shader = eau;
                 if (nrm) m.SetTexture("_BumpMap", nrm);
-                m.SetColor("_ShallowColor", new Color(0.22f, 0.40f, 0.38f, 0.5f)); m.SetColor("_DeepColor", new Color(0.04f, 0.12f, 0.15f, 0.93f));
-                m.SetFloat("_Tiling", 0.11f); m.SetFloat("_Speed", 0.025f); m.SetFloat("_BumpScale", 0.6f); m.SetFloat("_Smoothness", 0.92f);
+                // eau claire au bord (on voit le fond), vert-bleu profond au large ; écume : fin liseré cassé
+                m.SetColor("_ShallowColor", new Color(0.20f, 0.34f, 0.32f, 0.35f)); m.SetColor("_DeepColor", new Color(0.03f, 0.10f, 0.14f, 0.95f));
+                m.SetColor("_FoamColor", new Color(0.78f, 0.84f, 0.82f, 1f));
+                m.SetFloat("_Tiling", 0.13f); m.SetFloat("_Speed", 0.03f); m.SetFloat("_BumpScale", 0.75f); m.SetFloat("_Smoothness", 0.93f);
+                m.SetFloat("_DepthDistance", 3.2f); m.SetFloat("_FoamDistance", 0.18f);
                 m.renderQueue = (int)RenderQueue.Transparent;
                 EditorUtility.SetDirty(m);
                 return m;

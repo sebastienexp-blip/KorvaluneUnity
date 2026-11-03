@@ -16,7 +16,7 @@ Shader "Korvalune/Eau"
         _Speed("Vitesse", Float) = 0.03
         _Smoothness("Lissé", Range(0, 1)) = 0.92
         _DepthDistance("Profondeur pleine (m)", Float) = 2.5
-        _FoamDistance("Largeur d'écume (m)", Float) = 0.45
+        _FoamDistance("Hauteur d'eau de l'écume (m)", Float) = 0.18
     }
 
     SubShader
@@ -89,21 +89,26 @@ Shader "Korvalune/Eau"
                 float3 V = GetWorldSpaceNormalizeViewDir(i.positionWS);
                 half fres = 0.04h + 0.96h * pow(1.0h - saturate(dot(N, V)), 5.0h);
 
-                half depthK = 0.6h, foam = 0.0h;
+                half depthK = 0.6h, foam = 0.0h, shoreA = 1.0h;
             #if defined(KORV_WATER_DEPTH)
+                // profondeur VERTICALE réelle (position du fond reconstruite), pas la distance le long du regard : vue de haut,
+                // une berge en pente douce donnait une large bande blanche ; ici l'écume reste un fin liseré cassé
                 float2 suv = i.screenPos.xy / i.screenPos.w;
-                float sceneZ = LinearEyeDepth(SampleSceneDepth(suv), _ZBufferParams);
-                float waterZ = LinearEyeDepth(i.positionCS.z, _ZBufferParams);
-                // l'eau n'est dessinée que là où elle est devant la scène : une profondeur de scène plus proche que l'eau veut
-                // dire que la texture de profondeur n'est pas disponible (certains téléphones) -> pas d'écume ni de profondeur,
-                // sinon toute la rivière devenait de l'écume blanche
-                if (sceneZ > waterZ - 0.02)
+                float raw = SampleSceneDepth(suv);
+            #if !UNITY_REVERSED_Z
+                raw = lerp(UNITY_NEAR_CLIP_VALUE, 1, raw);                      // OpenGL : profondeur [-1, 1]
+            #endif
+                float3 bed = ComputeWorldSpacePosition(suv, raw, UNITY_MATRIX_I_VP);
+                float d = i.positionWS.y - bed.y;
+                if (d > -0.05 && d < 500.0)                                     // texture de profondeur valide (sinon : couleur moyenne)
                 {
-                    float d = max(sceneZ - waterZ, 0.0);
+                    d = max(d, 0.0);
                     depthK = saturate(d / max(_DepthDistance, 0.01));
+                    shoreA = saturate(d / 0.35);                                   // au bord, l'eau devient transparente : on voit le fond
                     half edge = saturate(1.0 - d / max(_FoamDistance, 0.01));
-                    half fn = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, uv * 4.0 + float2(t * 2.0, -t)).r;
-                    foam = edge * smoothstep(0.35h, 0.65h, fn + edge * 0.5h) * 0.8h;
+                    half fn = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, uv * 3.0 + float2(t * 1.5, -t)).r;
+                    half fn2 = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, uv * 7.0 - float2(t, t * 0.7)).g;
+                    foam = edge * edge * smoothstep(0.55h, 0.85h, fn * 0.6h + fn2 * 0.4h + edge * 0.25h) * 0.5h;
                 }
             #endif
 
@@ -118,7 +123,7 @@ Shader "Korvalune/Eau"
                 half3 col = lerp(lit, refl, fres) + spec * L.color;
                 col = lerp(col, _FoamColor.rgb * (amb + L.color * 0.6h * shadow), foam);
                 half alpha = lerp(_ShallowColor.a, _DeepColor.a, depthK);
-                alpha = max(alpha, fres * 0.9h); alpha = max(alpha, foam); alpha = saturate(alpha + spec);
+                alpha = max(alpha, fres * 0.8h); alpha = max(alpha, foam); alpha = saturate(alpha + spec) * shoreA;
                 col = MixFog(col, i.fog);
                 return half4(col, alpha);
             }
