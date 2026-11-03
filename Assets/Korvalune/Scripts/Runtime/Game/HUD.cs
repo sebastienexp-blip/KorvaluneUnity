@@ -109,6 +109,11 @@ namespace Korvalune.Game
             var mb = RoundButton(root, "PotionMana", "mana", new Vector2(0, 0), new Vector2(520, 40), 112, () => { if (player && !player.DrinkManaPotion()) Notify(player.wallet.manaPotions <= 0 ? "Plus de potions de mana" : "Potion de mana en recharge"); }, out manaCd, out _);
             manaCount = Label(mb.rectTransform, "Nombre", "", 28, TextAnchor.LowerRight, new Vector2(0.5f, 0.5f), new Vector2(-6, 4), new Vector2(100, 100));
             manaCount.gameObject.AddComponent<Outline>().effectColor = Color.black;
+            // monture : appeler / renvoyer
+            RoundButton(root, "Monture", "monture", new Vector2(0, 0), new Vector2(650, 40), 112, () =>
+            {
+                if (!player) return; var r = player.GetComponent<Rider>(); if (!r) r = player.gameObject.AddComponent<Rider>(); r.Toggle();
+            }, out _, out _);
             if (player) BuildShop(root);
             BuildMenu(root);
 

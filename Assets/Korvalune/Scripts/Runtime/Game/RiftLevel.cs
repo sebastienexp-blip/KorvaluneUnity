@@ -41,7 +41,7 @@ namespace Korvalune.Game
             new Theme { name = "Bois pétrifié", ground = new Color(0.36f, 0.36f, 0.31f), rock = new Color(0.42f, 0.41f, 0.38f), tint = new Color(0.70f, 0.72f, 0.66f), torch = new Color(0.65f, 1f, 0.45f),
                         fog = new Color(0.20f, 0.24f, 0.17f), bg = new Color(0.12f, 0.14f, 0.10f), light = new Color(0.85f, 0.92f, 0.75f), sky = new Color(0.62f, 0.66f, 0.58f), eq = new Color(0.45f, 0.46f, 0.40f),
                         gnd = new Color(0.20f, 0.20f, 0.16f), crystal = new Color(0.55f, 1f, 0.35f), enemies = new[] { "loup", "araignee", "squelette" }, motes = "spores" },
-            new Theme { name = "Glacier des âmes", ice = true, ground = new Color(0.78f, 0.84f, 0.90f), rock = new Color(0.52f, 0.62f, 0.72f), tint = new Color(0.80f, 0.90f, 1.0f), torch = new Color(0.45f, 0.85f, 1f),
+            new Theme { name = "Glacier des âmes", ice = true, ground = new Color(0.60f, 0.66f, 0.74f), rock = new Color(0.42f, 0.50f, 0.60f), tint = new Color(0.80f, 0.90f, 1.0f), torch = new Color(0.45f, 0.85f, 1f),
                         fog = new Color(0.55f, 0.64f, 0.74f), bg = new Color(0.40f, 0.48f, 0.58f), light = new Color(0.90f, 0.95f, 1f), sky = new Color(0.66f, 0.72f, 0.80f), eq = new Color(0.50f, 0.56f, 0.62f),
                         gnd = new Color(0.40f, 0.44f, 0.50f), crystal = new Color(0.45f, 0.85f, 1f), enemies = new[] { "squelette", "loup", "chevalier", "sorcier" }, motes = "neige" },
         };
@@ -314,7 +314,7 @@ namespace Korvalune.Game
             var go = new GameObject("Sol du canyon"); go.transform.SetParent(root, false);
             go.AddComponent<MeshFilter>().sharedMesh = mesh;
             var mr = go.AddComponent<MeshRenderer>();
-            mr.sharedMaterials = new[] { Mat(Color.white, th.ice ? 0.55f : 0.15f, default, GroundTex(th.ground, th.ice ? 0.10f : 0.22f, 11)), Mat(Color.white, th.ice ? 0.7f : 0.2f, default, GroundTex(th.rock, 0.35f, 12, true)) };
+            mr.sharedMaterials = new[] { Mat(Color.white, th.ice ? 0.30f : 0.12f, default, GroundTex(th.ground, th.ice ? 0.22f : 0.40f, 11)), Mat(Color.white, th.ice ? 0.45f : 0.18f, default, GroundTex(th.rock, 0.30f, 12, true)) };
             mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             go.AddComponent<MeshCollider>().sharedMesh = mesh; Physics.SyncTransforms();
             // décor : rochers sur les pentes, arbres morts ou gelés sur les crêtes, quelques blocs dans les salles
@@ -384,7 +384,8 @@ namespace Korvalune.Game
                     float u = x / (float)S, v = y / (float)S, n = 0, amp = 0.5f, f = 4f;
                     for (int k = 0; k < 4; k++) { n += amp * (Tile(u, v, f, o + k * 5.3f) - 0.5f); amp *= 0.5f; f *= 2f; }
                     float s = 1f + n * contrast * 2.2f;
-                    if (cracks) { float r = Mathf.Abs(Tile(u, v, 6f, o + 40f) - 0.5f); s *= Mathf.Lerp(0.55f, 1f, Mathf.Clamp01(r * 14f)); }
+                    if (!cracks) { float patch = Tile(u, v, 2f, o + 120f); s *= Mathf.Lerp(0.78f, 1.12f, patch); }   // taches plus sombres / plus claires
+                    if (cracks) { float w = Tile(u, v, 3f, o + 40f); s *= 0.82f + 0.18f * Mathf.Sin((v * 9f + w * 2.5f) * Mathf.PI * 2f); s *= Mathf.Lerp(0.8f, 1.05f, Tile(u, v, 16f, o + 80f)); }   // strates de roche
                     px[y * S + x] = new Color(c.r * s, c.g * s, c.b * s, 1);
                 }
             var t = new Texture2D(S, S, TextureFormat.RGBA32, true) { wrapMode = TextureWrapMode.Repeat, name = "Sol de brèche" }; t.SetPixels(px); t.Apply(true, true);
@@ -439,7 +440,7 @@ namespace Korvalune.Game
         void Crystal(Vector3 p, float height, bool floating)
         {
             CrystalMesh();
-            var m = Mat(th.crystal * 0.6f, 0.95f, th.crystal * 1.6f);
+            var m = Mat(th.crystal * 0.6f, 0.95f, th.crystal * (th.ice ? 0.7f : 1.4f));
             var cl = new GameObject("Cristaux").transform; cl.SetParent(root); cl.position = p;
             int n = 3 + rng.Next(4);
             for (int i = 0; i < n; i++)
@@ -511,7 +512,7 @@ namespace Korvalune.Game
             // cercle de runes au point de départ
             var ring = GameObject.CreatePrimitive(PrimitiveType.Cylinder); ring.name = "Cercle d'arrivée"; Kill(ring.GetComponent<Collider>()); ring.transform.SetParent(root);
             ring.transform.position = game.playerSpawn + Vector3.up * 0.02f; ring.transform.localScale = new Vector3(3.2f, 0.01f, 3.2f);
-            ring.GetComponent<Renderer>().sharedMaterial = Mat(th.crystal * 0.3f, 0.6f, th.crystal * 1.4f);
+            ring.GetComponent<Renderer>().sharedMaterial = Mat(th.crystal * 0.3f, 0.6f, th.crystal * 0.55f);
             Glow(game.playerSpawn + Vector3.up * 2f, th.crystal, 1.6f, 9f, false);
         }
     }

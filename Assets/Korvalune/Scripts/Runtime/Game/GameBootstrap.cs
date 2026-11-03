@@ -88,6 +88,7 @@ namespace Korvalune.Game
             var h = hero.AddComponent<Health>(); h.faction = Faction.Player; h.maxHp = 220; h.maxMana = 100; h.manaRegen = 6; h.hpRegen = 1.5f; h.armor = 2; h.displayName = hero.name;
             h.hp = h.maxHp; h.mana = h.maxMana;
             Player = hero.AddComponent<PlayerController>(); Player.cam = Cam.transform; Player.Init();
+            if (Application.isPlaying) hero.AddComponent<Rider>();                         // montures
             if (heroLight > 0f)
             {   // halo du héros : lumière chaude au-dessus de lui (sans ombre portée, peu coûteuse sur mobile)
                 var hl = new GameObject("Halo du héros").AddComponent<Light>(); hl.transform.SetParent(hero.transform, false);
@@ -167,7 +168,10 @@ namespace Korvalune.Game
                 RiftDirector.Begin(this);
                 WorldEvents.Begin(this);                                                        // événements du monde ouvert
                 if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Korvalune_Vallee")
+                {
                     RiftKeeper.Place(this, Ground(playerSpawn + new Vector3(-7f, 0, -3f)), 90f);       // Oracle des Brèches, près de l'arrivée en ville
+                    Stable.Place(this, Ground(playerSpawn + new Vector3(9f, 0, -4f)), -90f);            // écurie : achat des montures
+                }
                 if (!Rift.Active && !AutoTest.Enabled) TownLife.Populate(this);                       // villageois, chiens, oiseaux
             }
             else foreach (var camp in camps) SpawnCamp(camp);

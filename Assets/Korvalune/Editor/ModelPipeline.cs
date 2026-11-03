@@ -276,6 +276,7 @@ namespace Korvalune.EditorTools
             ctrl.AddParameter("Hit", AnimatorControllerParameterType.Trigger);
             ctrl.AddParameter("Dodge", AnimatorControllerParameterType.Trigger);
             ctrl.AddParameter("Dead", AnimatorControllerParameterType.Bool);
+            ctrl.AddParameter("Monte", AnimatorControllerParameterType.Bool);          // en selle (posture de monte en boucle)
             var sm = ctrl.layers[0].stateMachine;
 
             // locomotion : arbre de mélange 1D sur la vitesse (m/s)
@@ -306,6 +307,13 @@ namespace Korvalune.EditorTools
             foreach (var kv in clips.Where(k => k.Key.StartsWith("Sk_")).OrderBy(k => k.Key))
             {
                 var s = sm.AddState(kv.Key); s.motion = kv.Value;
+                if (kv.Key == "Sk_Monte")
+                {   // monte : posture tenue tant que « Monte » est vrai, reprise automatique après un coup ou une attaque
+                    var on = sm.AddAnyStateTransition(s); on.hasExitTime = false; on.duration = 0.2f; on.canTransitionToSelf = false;
+                    on.AddCondition(AnimatorConditionMode.If, 0, "Monte"); on.AddCondition(AnimatorConditionMode.IfNot, 0, "Dead");
+                    var off = s.AddTransition(loco); off.hasExitTime = false; off.duration = 0.25f; off.AddCondition(AnimatorConditionMode.IfNot, 0, "Monte");
+                    continue;
+                }
                 var back = s.AddTransition(loco); back.hasExitTime = true; back.exitTime = 0.92f; back.duration = 0.15f;
             }
             OneShot("Hit", "Hit", 0.05f, true);
@@ -328,7 +336,7 @@ namespace Korvalune.EditorTools
                 ctrl.layers = layers;
                 var usm = ctrl.layers[ctrl.layers.Length - 1].stateMachine;
                 var rest = usm.AddState("Repos"); rest.motion = C("Idle") ?? C("Attack"); usm.defaultState = rest;
-                foreach (var kv in clips.Where(k => k.Key == "Attack" || k.Key.StartsWith("Sk_")))
+                foreach (var kv in clips.Where(k => k.Key == "Attack" || (k.Key.StartsWith("Sk_") && k.Key != "Sk_Monte")))
                 {
                     var st = usm.AddState(kv.Key); st.motion = kv.Value;
                     var back = st.AddTransition(rest); back.hasExitTime = true; back.exitTime = 0.95f; back.duration = 0.1f;

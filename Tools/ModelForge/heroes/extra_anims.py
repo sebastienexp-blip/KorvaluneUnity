@@ -3,6 +3,7 @@
   Sk_TirArc — tir à l'arc : bras gauche tendu vers la cible (l'arc est tenu à gauche), main droite qui encoche,
               bande la corde jusqu'à la joue, lâcher et léger recul.
 Les poses partent de la garde du héros et y reviennent (fondu propre vers la locomotion)."""
+import numpy as np
 from heroes.skill_anims import Seq
 
 GUARD_UP = dict(R=dict(down=80, fwd=34, twist=-35, elbow=128), L=dict(down=80, fwd=40, twist=35, elbow=124), fist=(1.0, 1.0))
@@ -32,8 +33,18 @@ def bow_shot(sk, st):
     return s.clip('Sk_TirArc')
 
 
-CLIPS = [('Sk_Poing', False, False, (0.12, 0.44)), ('Sk_TirArc', False, False, (0.58,))]
+def ride(sk, st):
+    """En selle : assis, buste droit légèrement penché, mains basses aux rênes, petit balancement au rythme de la monture."""
+    s = Seq(st, sk)
+    reins = dict(down=55, fwd=48, twist=0, elbow=75)
+    for i, t in enumerate((0.0, 0.25, 0.5, 0.75, 1.0)):
+        b = 3 * np.sin(i * np.pi / 2)
+        s.k(t, sp=(6 + b, 0, 0), head=(-4 - b * 0.5, 0, 0), R=reins, L=reins, fist=(1.0, 1.0), legs='ride')
+    return s.clip('Sk_Monte')
+
+
+CLIPS = [('Sk_Poing', False, False, (0.12, 0.44)), ('Sk_TirArc', False, False, (0.58,)), ('Sk_Monte', True, False, ())]
 
 
 def build(sk, style):
-    return [punch(sk, style), bow_shot(sk, style)]
+    return [punch(sk, style), bow_shot(sk, style), ride(sk, style)]

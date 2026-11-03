@@ -361,6 +361,37 @@ namespace Korvalune.Game
                         }
                     });
                     break;
+                case MerchantKind.Ecurie:
+                    list.Add(new Tab
+                    {
+                        name = "Montures",
+                        list = () => Mounts.All.Select(d => new Entry
+                        {
+                            label = d.name, icon = ItemIcons.Get(d.name), tag = d, color = d.color,
+                            sub = W.mount == d.id && Mounts.Owned(W, d.id) ? "En selle" : Mounts.Owned(W, d.id) ? "Possédée" : player.level < d.level ? $"Niv. {d.level}" : $"{d.price:N0} or"
+                        }).ToList(),
+                        detail = e =>
+                        {
+                            var d = (Mounts.Def)e.tag;
+                            string state = Mounts.Owned(W, d.id) ? (W.mount == d.id ? "<color=#8fe08f>Monture choisie</color>" : "<color=#9fd7ff>Dans votre écurie</color>")
+                                : player.level < d.level ? $"<color=#ff8a7a>Niveau {d.level} requis</color>" : $"<color=#e8c27a>Prix : {d.price:N0} or</color>";
+                            return $"<b>{d.name}</b>\n{d.desc}\n\nVitesse en selle : <b>+{Mathf.RoundToInt((d.speed - 1) * 100)} %</b>\nNiveau requis : {d.level}\n\n{state}" +
+                                   "\n\n<color=#a08c6c>Appelez votre monture avec le bouton « Monture ». Attaquer ou lancer une compétence vous fait descendre. Pas de monture dans les donjons ni les brèches.</color>";
+                        },
+                        acts = e =>
+                        {
+                            var d = (Mounts.Def)e.tag; var l = new List<Act>();
+                            if (!Mounts.Owned(W, d.id))
+                                l.Add(new Act { label = $"Acheter ({d.price:N0} or)", can = () => player.level >= d.level && W.gold >= d.price, run = () =>
+                                {
+                                    if (!Pay(d.price)) return; if (W.mounts == null) W.mounts = new List<string>();
+                                    W.mounts.Add(d.id); W.mount = d.id; Notify($"Nouvelle monture : {d.name}"); Sound.UI("sfx_achat");
+                                } });
+                            else if (W.mount != d.id) l.Add(new Act { label = "Choisir cette monture", can = () => true, run = () => { W.mount = d.id; Rider.Current?.Dismount(true); Notify($"Monture choisie : {d.name}"); } });
+                            return l;
+                        }
+                    });
+                    break;
             }
             return list;
         }

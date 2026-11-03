@@ -13,6 +13,7 @@ namespace Korvalune.Game
         public int scrap, essence, starShard, shadow;
         public int potions = 3;
         public int manaPotions = 2;                                         // potions de mana
+        public List<string> mounts = new List<string>(); public string mount = "";   // montures possédées, monture choisie
         public int riftKeys, riftBest;                                     // Sceaux de brèche, meilleur niveau de Grande Brèche
         public List<GemStack> gems = new List<GemStack>();
         public List<RelicPower> relics = new List<RelicPower>();         // pouvoirs extraits (collection)

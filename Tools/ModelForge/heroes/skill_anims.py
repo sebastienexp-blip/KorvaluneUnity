@@ -19,6 +19,7 @@ STANCE = {   # (cuisse G, genou G, écart G, rotation G), (cuisse D, genou D, é
     'tuck':   ((70, 100, 6, 0), (55, 110, -6, 0), -0.10),       # en l'air, jambes repliées
     'kickR':  ((-6, 18, 6, -10), (88, 12, -4, 0), -0.06),
     'back':   ((-20, 30, 6, -6), (10, 40, -6, 10), -0.10),      # recul : poids sur l'arrière
+    'ride':   ((70, 84, 0, 44), (70, 84, 0, -44), -0.40),      # en selle : cuisses écartées autour du flanc, genoux pliés
 }
 
 
