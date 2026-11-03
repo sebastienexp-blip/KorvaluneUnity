@@ -1,318 +1,337 @@
-# Journal de la construction Android (run 41599302763)
+# Journal de la construction Android (run 41605179576)
 ## Lignes importantes
-1834:2026-11-03T07:55:13.9748298Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
-2043:2026-11-03T07:56:59.3848504Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2166:2026-11-03T07:58:02.6604820Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-23720:2026-11-03T08:43:26.1556993Z  0.2 kb	 0.0% Packages/com.unity.rendering.light-transport/Runtime/UnifiedRayTracing/UnifiedRayTracingException.cs
-24687:2026-11-03T08:43:26.5128631Z Build Finished, Result: Success.
-24700:2026-11-03T08:43:28.4297022Z # Construction de l'APK Android
-24702:2026-11-03T08:43:28.4305036Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche
-24706:2026-11-03T08:43:28.4307948Z - APK : 848.7 Mo, version 0.1.67
-24840:2026-11-03T08:43:45.0839062Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-24841:2026-11-03T08:43:45.0839929Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-24893:2026-11-03T08:43:45.5467913Z # Construction de l'APK Android
-24895:2026-11-03T08:43:45.5469985Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche
-24899:2026-11-03T08:43:45.5473581Z - APK : 848.7 Mo, version 0.1.67
+1832:2026-11-03T09:15:31.6695215Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+2086:2026-11-03T09:20:05.1821738Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2209:2026-11-03T09:21:09.5858504Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+3918:2026-11-03T09:24:52.9192749Z Assets/Korvalune/Scripts/Runtime/CharacterCatalog.cs(62,21): error CS0103: The name 'Content' does not exist in the current context
+3919:2026-11-03T09:24:52.9193898Z Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs(174,21): error CS0103: The name 'TownPortal' does not exist in the current context
+3920:2026-11-03T09:24:52.9195020Z Assets/Korvalune/Scripts/Runtime/Game/Rift.cs(34,36): error CS0103: The name 'TownPortal' does not exist in the current context
+3921:2026-11-03T09:24:52.9196079Z Assets/Korvalune/Scripts/Runtime/Game/Portal.cs(31,23): error CS0103: The name 'PortalGate' does not exist in the current context
+3922:2026-11-03T09:24:52.9197154Z Assets/Korvalune/Scripts/Runtime/Game/Rift.cs(281,48): error CS0103: The name 'TownPortal' does not exist in the current context
+3923:2026-11-03T09:24:52.9198211Z Assets/Korvalune/Scripts/Runtime/Game/Rift.cs(283,48): error CS0103: The name 'TownPortal' does not exist in the current context
+3924:2026-11-03T09:24:52.9199269Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(136,29): error CS0103: The name 'Scroll' does not exist in the current context
+3925:2026-11-03T09:24:52.9200352Z Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs(257,20): error CS0103: The name 'Content' does not exist in the current context
+3926:2026-11-03T09:24:52.9201434Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs(265,55): error CS0103: The name 'FitScroll' does not exist in the current context
+3927:2026-11-03T09:24:52.9202652Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(55,29): error CS0103: The name 'Scroll' does not exist in the current context
+3929:2026-11-03T09:24:52.9204952Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(455,120): error CS0103: The name 'RefreshBag' does not exist in the current context
+3930:2026-11-03T09:24:52.9206054Z Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs(495,32): error CS0103: The name 'FitScroll' does not exist in the current context
+3931:2026-11-03T09:24:52.9207105Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(96,61): error CS0103: The name 'BuildBag' does not exist in the current context
+3932:2026-11-03T09:24:52.9208148Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(118,104): error CS0103: The name 'TownPortal' does not exist in the current context
+3933:2026-11-03T09:24:52.9209185Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(248,79): error CS0103: The name 'RefreshBag' does not exist in the current context
+3934:2026-11-03T09:24:52.9210224Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(263,97): error CS0103: The name 'RefreshBag' does not exist in the current context
+3935:2026-11-03T09:24:52.9211284Z Assets/Korvalune/Scripts/Runtime/Game/HUD.cs(264,13): error CS0103: The name 'PortraitActive' does not exist in the current context
+18195:2026-11-03T09:32:17.8148772Z Build Finished, Result: Success.
+29103:2026-11-03T09:38:03.0200354Z  0.2 kb	 0.0% Packages/com.unity.rendering.light-transport/Runtime/UnifiedRayTracing/UnifiedRayTracingException.cs
+30066:2026-11-03T09:38:03.9262175Z Build Finished, Result: Success.
+30079:2026-11-03T09:38:12.9453540Z # Construction de l'APK Android
+30081:2026-11-03T09:38:12.9458410Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche
+30098:2026-11-03T09:38:12.9464084Z - APK : 88.0 Mo, version 0.1.71
+30232:2026-11-03T09:38:25.7717089Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+30233:2026-11-03T09:38:25.7717663Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+30285:2026-11-03T09:38:26.0298216Z # Construction de l'APK Android
+30287:2026-11-03T09:38:26.0299649Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche
+30304:2026-11-03T09:38:26.0306733Z - APK : 88.0 Mo, version 0.1.71
+30593:2026-11-03T09:39:35.5333677Z [36;1m[ -f build/Contenu/catalogue.json ] || { echo "APK tout-en-un : pas de paquets"; exit 0; }[0m
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-11-03T08:43:26.1781688Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_InputField.cs
-2026-11-03T08:43:26.1781850Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_FontAsset.cs
-2026-11-03T08:43:26.1782034Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_CoroutineTween.cs
-2026-11-03T08:43:26.1782192Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Character.cs
-2026-11-03T08:43:26.1782532Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.universal/Shaders/Shaders.cs
-2026-11-03T08:43:26.1782737Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4x4.gen.cs
-2026-11-03T08:43:26.1782933Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4x3.gen.cs
-2026-11-03T08:43:26.1783128Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4x2.gen.cs
-2026-11-03T08:43:26.1783323Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint4.gen.cs
-2026-11-03T08:43:26.1783551Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3x4.gen.cs
-2026-11-03T08:43:26.1783737Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3x3.gen.cs
-2026-11-03T08:43:26.1784042Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3x2.gen.cs
-2026-11-03T08:43:26.1784236Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint3.gen.cs
-2026-11-03T08:43:26.1784432Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2x4.gen.cs
-2026-11-03T08:43:26.1784619Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2x3.gen.cs
-2026-11-03T08:43:26.1784811Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2x2.gen.cs
-2026-11-03T08:43:26.1784997Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2.gen.cs
-2026-11-03T08:43:26.1785406Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x4.gen.cs
-2026-11-03T08:43:26.1785607Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x3.gen.cs
-2026-11-03T08:43:26.1785790Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x2.gen.cs
-2026-11-03T08:43:26.1785981Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x4.gen.cs
-2026-11-03T08:43:26.1786169Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x3.gen.cs
-2026-11-03T08:43:26.1786358Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x2.gen.cs
-2026-11-03T08:43:26.1786618Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x4.gen.cs
-2026-11-03T08:43:26.1786923Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x3.gen.cs
-2026-11-03T08:43:26.1787118Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x2.gen.cs
-2026-11-03T08:43:26.1787312Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half4.gen.cs
-2026-11-03T08:43:26.1787497Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half3.gen.cs
-2026-11-03T08:43:26.1787758Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half2.gen.cs
-2026-11-03T08:43:26.1787966Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x4.gen.cs
-2026-11-03T08:43:26.1788164Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x3.gen.cs
-2026-11-03T08:43:26.1788484Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x2.gen.cs
-2026-11-03T08:43:26.1788688Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4.gen.cs
-2026-11-03T08:43:26.1788955Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x4.gen.cs
-2026-11-03T08:43:26.1789144Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x3.gen.cs
-2026-11-03T08:43:26.1789337Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x2.gen.cs
-2026-11-03T08:43:26.1789532Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3.gen.cs
-2026-11-03T08:43:26.1789724Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x4.gen.cs
-2026-11-03T08:43:26.1789921Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x3.gen.cs
-2026-11-03T08:43:26.1790226Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x2.gen.cs
-2026-11-03T08:43:26.1790422Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2.gen.cs
-2026-11-03T08:43:26.1790618Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double4.gen.cs
-2026-11-03T08:43:26.1791045Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double3.gen.cs
-2026-11-03T08:43:26.1791247Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double2.gen.cs
-2026-11-03T08:43:26.1791449Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x4.gen.cs
-2026-11-03T08:43:26.1791760Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x3.gen.cs
-2026-11-03T08:43:26.1791958Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x2.gen.cs
-2026-11-03T08:43:26.1792154Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4.gen.cs
-2026-11-03T08:43:26.1792343Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x4.gen.cs
-2026-11-03T08:43:26.1792533Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x3.gen.cs
-2026-11-03T08:43:26.1792723Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x2.gen.cs
-2026-11-03T08:43:26.1792917Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3.gen.cs
-2026-11-03T08:43:26.1793112Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x4.gen.cs
-2026-11-03T08:43:26.1793296Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x3.gen.cs
-2026-11-03T08:43:26.1793484Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x2.gen.cs
-2026-11-03T08:43:26.1793878Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2.gen.cs
-2026-11-03T08:43:26.1794109Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/psrdnoise2D.cs
-2026-11-03T08:43:26.1794326Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise3Dgrad.cs
-2026-11-03T08:43:26.1794536Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular3D.cs
-2026-11-03T08:43:26.1794746Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular2x2.cs
-2026-11-03T08:43:26.1794952Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular2D.cs
-2026-11-03T08:43:26.1795219Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/xxHash3.AVX2.cs
-2026-11-03T08:43:26.1795432Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_rdma.cs
-2026-11-03T08:43:26.1795770Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_dotprod.cs
-2026-11-03T08:43:26.1795993Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_crypto.cs
-2026-11-03T08:43:26.1796164Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/WorldEvents.cs
-2026-11-03T08:43:26.1796397Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs
-2026-11-03T08:43:26.1796564Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/VfxLibrary.cs
-2026-11-03T08:43:26.1796719Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs
-2026-11-03T08:43:26.1796970Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillBook.cs
-2026-11-03T08:43:26.1797141Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillAnims.cs
-2026-11-03T08:43:26.1797296Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SaveSystem.cs
-2026-11-03T08:43:26.1797512Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/RiftLevel.cs
-2026-11-03T08:43:26.1797672Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/OptionsMenu.cs
-2026-11-03T08:43:26.1797820Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Occluders.cs
-2026-11-03T08:43:26.1798003Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/LegendaryPowers.cs
-2026-11-03T08:43:26.1798233Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/ItemIcons.cs
-2026-11-03T08:43:26.1798428Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/IntroPlayer.cs
-2026-11-03T08:43:26.1798582Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/HeroOutfit.cs
-2026-11-03T08:43:26.1798748Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/GroundPickup.cs
-2026-11-03T08:43:26.1798900Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/GameConfig.cs
-2026-11-03T08:43:26.1799049Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Equipment.cs
-2026-11-03T08:43:26.1799199Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Difficulty.cs
-2026-11-03T08:43:26.1799349Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/CameraRig.cs
-2026-11-03T08:43:26.1799508Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Breakable.cs
-2026-11-03T08:43:26.1799825Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Utility/VertexHelper.cs
-2026-11-03T08:43:26.1800017Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ToggleGroup.cs
-2026-11-03T08:43:26.1800196Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/SpriteState.cs
-2026-11-03T08:43:26.1800374Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Selectable.cs
-2026-11-03T08:43:26.1800550Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Scrollbar.cs
-2026-11-03T08:43:26.1800960Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ScrollRect.cs
-2026-11-03T08:43:26.1801151Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/RectMask2D.cs
-2026-11-03T08:43:26.1801332Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Navigation.cs
-2026-11-03T08:43:26.1801541Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/LayoutGroup.cs
-2026-11-03T08:43:26.1801746Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/CanvasScaler.cs
-2026-11-03T08:43:26.1802009Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/InputField.cs
-2026-11-03T08:43:26.1802282Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/IMaskable.cs
-2026-11-03T08:43:26.1802474Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ColorBlock.cs
-2026-11-03T08:43:26.1802653Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/random.cs
-2026-11-03T08:43:26.1802853Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/matrix.gen.cs
-2026-11-03T08:43:26.1803032Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/matrix.cs
-2026-11-03T08:43:26.1803233Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise4D.cs
-2026-11-03T08:43:26.1803601Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise3D.cs
-2026-11-03T08:43:26.1803813Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise2D.cs
-2026-11-03T08:43:26.1804016Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/common.cs
-2026-11-03T08:43:26.1804204Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/xxHash3.cs
-2026-11-03T08:43:26.1804381Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Unicode.cs
-2026-11-03T08:43:26.1804712Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Memory.cs
-2026-11-03T08:43:26.1804988Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Jobs/IJobFilter.cs
-2026-11-03T08:43:26.1805181Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/BitField.cs
-2026-11-03T08:43:26.1805347Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/NoAliasAttribute.cs
-2026-11-03T08:43:26.1805510Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/FunctionPointer.cs
-2026-11-03T08:43:26.1805750Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Editor/BurstLoader.cs
-2026-11-03T08:43:26.1805947Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Constant.cs
-2026-11-03T08:43:26.1806137Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Aliasing.cs
-2026-11-03T08:43:26.1806305Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstString.Float.cs
-2026-11-03T08:43:26.1806526Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstCompiler.cs
-2026-11-03T08:43:26.1806733Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Items.cs
-2026-11-03T08:43:26.1806891Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CreatorNames.cs
-2026-11-03T08:43:26.1807039Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CharacterRig.cs
-2026-11-03T08:43:26.1807242Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Culling/IClipRegion.cs
-2026-11-03T08:43:26.1807400Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TextMeshPro.cs
-2026-11-03T08:43:26.1807556Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_TextInfo.cs
-2026-11-03T08:43:26.1807707Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_SubMesh.cs
-2026-11-03T08:43:26.1807852Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Style.cs
-2026-11-03T08:43:26.1808000Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Sprite.cs
-2026-11-03T08:43:26.1808153Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Settings.cs
-2026-11-03T08:43:26.1808303Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_MeshInfo.cs
-2026-11-03T08:43:26.1808567Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_LineInfo.cs
-2026-11-03T08:43:26.1808723Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Dropdown.cs
-2026-11-03T08:43:26.1808864Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Asset.cs
-2026-11-03T08:43:26.1809013Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/FastAction.cs
-2026-11-03T08:43:26.1809201Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4.gen.cs
-2026-11-03T08:43:26.1809388Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3.gen.cs
-2026-11-03T08:43:26.1809563Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2.gen.cs
-2026-11-03T08:43:26.1809775Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Common.cs
-2026-11-03T08:43:26.1810062Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_ctor.cs
-2026-11-03T08:43:26.1810260Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64.cs
-2026-11-03T08:43:26.1810412Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/WorldMap.cs
-2026-11-03T08:43:26.1810552Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Updater.cs
-2026-11-03T08:43:26.1810696Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/UIStyle.cs
-2026-11-03T08:43:26.1810972Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/TownLife.cs
-2026-11-03T08:43:26.1811117Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Sound.cs
-2026-11-03T08:43:26.1811402Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Skill.cs
-2026-11-03T08:43:26.1811590Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Sight.cs
-2026-11-03T08:43:26.1811744Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/RoofFade.cs
-2026-11-03T08:43:26.1811883Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Quest.cs
-2026-11-03T08:43:26.1812035Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Portal.cs
-2026-11-03T08:43:26.1812176Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Mounts.cs
-2026-11-03T08:43:26.1812384Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Merchant.cs
-2026-11-03T08:43:26.1812536Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs
-2026-11-03T08:43:26.1812680Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs
-2026-11-03T08:43:26.1812925Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Health.cs
-2026-11-03T08:43:26.1813081Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Floater.cs
-2026-11-03T08:43:26.1813231Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Flicker.cs
-2026-11-03T08:43:26.1813442Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs
-2026-11-03T08:43:26.1813587Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Economy.cs
-2026-11-03T08:43:26.1813733Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/AutoTest.cs
-2026-11-03T08:43:26.1813951Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/VertexModifiers/Shadow.cs
-2026-11-03T08:43:26.1814175Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/VertexModifiers/Outline.cs
-2026-11-03T08:43:26.1814343Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Toggle.cs
-2026-11-03T08:43:26.1814624Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Slider.cs
-2026-11-03T08:43:26.1814804Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/RawImage.cs
-2026-11-03T08:43:26.1814962Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Image.cs
-2026-11-03T08:43:26.1815118Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/IMask.cs
-2026-11-03T08:43:26.1815291Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Graphic.cs
-2026-11-03T08:43:26.1815457Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/FontData.cs
-2026-11-03T08:43:26.1815616Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Dropdown.cs
-2026-11-03T08:43:26.1815878Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Culling/Clipping.cs
-2026-11-03T08:43:26.1816090Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Button.cs
-2026-11-03T08:43:26.1816265Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/svd.cs
-2026-11-03T08:43:26.1816435Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/math.cs
-2026-11-03T08:43:26.1816599Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half.cs
-2026-11-03T08:43:26.1816749Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/SharedStatic.cs
-2026-11-03T08:43:26.1816918Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Ssse3.cs
-2026-11-03T08:43:26.1817097Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse4_2.cs
-2026-11-03T08:43:26.1817378Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse4_1.cs
-2026-11-03T08:43:26.1817553Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Popcnt.cs
-2026-11-03T08:43:26.1817724Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Common.cs
-2026-11-03T08:43:26.1817974Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Hint.cs
-2026-11-03T08:43:26.1818122Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstString.cs
-2026-11-03T08:43:26.1818270Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstRuntime.cs
-2026-11-03T08:43:26.1818472Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/MorphRig.cs
-2026-11-03T08:43:26.1818663Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/MorphMap.cs
-2026-11-03T08:43:26.1818812Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Text.cs
-2026-11-03T08:43:26.1818980Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse3.cs
-2026-11-03T08:43:26.1819194Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse2.cs
-2026-11-03T08:43:26.1819358Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse.cs
-2026-11-03T08:43:26.1819516Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Fma.cs
-2026-11-03T08:43:26.1819681Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/F16C.cs
-2026-11-03T08:43:26.1819957Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Csr.cs
-2026-11-03T08:43:26.1820177Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Bmi2.cs
-2026-11-03T08:43:26.1820348Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Bmi1.cs
-2026-11-03T08:43:26.1820510Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Avx2.cs
-2026-11-03T08:43:26.1820672Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Avx.cs
-2026-11-03T08:43:26.1820958Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v64.cs
-2026-11-03T08:43:26.1821117Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v256.cs
-2026-11-03T08:43:26.1821421Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v128.cs
-2026-11-03T08:43:26.1821712Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON.cs
-2026-11-03T08:43:26.1821861Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs
-2026-11-03T08:43:26.1822008Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Rift.cs
-2026-11-03T08:43:26.1822147Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/HUD.cs
-2026-11-03T08:43:26.1822288Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Gore.cs
-2026-11-03T08:43:26.1822430Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/FX.cs
-2026-11-03T08:43:26.1822590Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Text.cs
-2026-11-03T08:43:26.1822739Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Misc.cs
-2026-11-03T08:43:26.1822891Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Mask.cs
-2026-11-03T08:43:26.1823166Z  0.1 kb	 0.0% Assets/Resources/PerformanceTestRunSettings.json
-2026-11-03T08:43:26.1823301Z  0.1 kb	 0.0% Assets/DefaultVolumeProfile.asset
-2026-11-03T08:43:26.1823477Z -------------------------------------------------------------------------------
-2026-11-03T08:43:26.1823662Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-2026-11-03T08:43:26.5125058Z Unloading 242 unused Assets / (0.7 MB). Loaded Objects now: 8528.
-2026-11-03T08:43:26.5126104Z Memory consumption went from 269.3 MB to 268.6 MB.
-2026-11-03T08:43:26.5127347Z Total: 543.379810 ms (FindLiveObjects: 25.184107 ms CreateObjectMapping: 0.419543 ms MarkObjects: 437.408587 ms  DeleteObjects: 80.365579 ms)
-2026-11-03T08:43:26.5128291Z 
-2026-11-03T08:43:26.5128631Z Build Finished, Result: Success.
-2026-11-03T08:43:27.8027924Z ##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793695407801,"processId":1589,"steps":[{"description":"Preprocess Player","duration":189},{"description":"Prepare For Build","duration":3435},{"description":"ProducePlayerScriptAssemblies","duration":32392},{"description":"Verify Build setup","duration":56},{"description":"Prepare assets for target
-2026-11-03T08:43:27.8116990Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-2026-11-03T08:43:28.0323844Z Loaded scene 'Temp/__Backupscenes/0.backup'
-2026-11-03T08:43:28.0324920Z 	Deserialize:            5.148 ms
-2026-11-03T08:43:28.0325627Z 	Integration:            220.221 ms
-2026-11-03T08:43:28.0326399Z 	Integration of assets:  0.003 ms
-2026-11-03T08:43:28.0326880Z 	Thread Wait Time:       0.018 ms
-2026-11-03T08:43:28.0327317Z 	Total Operation Time:   225.390 ms
-2026-11-03T08:43:28.0506594Z Unloading 0 unused Assets / (0 B). Loaded Objects now: 8521.
-2026-11-03T08:43:28.0507286Z Memory consumption went from 267.8 MB to 267.8 MB.
-2026-11-03T08:43:28.0508454Z Total: 18.575915 ms (FindLiveObjects: 1.564931 ms CreateObjectMapping: 0.214912 ms MarkObjects: 16.774323 ms  DeleteObjects: 0.021019 ms)
-2026-11-03T08:43:28.0509284Z 
-2026-11-03T08:43:28.4297022Z # Construction de l'APK Android
-2026-11-03T08:43:28.4297755Z 
-2026-11-03T08:43:28.4305036Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche
-2026-11-03T08:43:28.4306080Z - Signature : clé Korvalune (mises à jour sans désinstaller)
-2026-11-03T08:43:28.4306587Z - Icône : Assets/Korvalune/Resources/UI/Icone.png
-2026-11-03T08:43:28.4307347Z - Résultat : **Succeeded** en 25.1 min, 0 erreur(s), 14 avertissement(s)
-2026-11-03T08:43:28.4307948Z - APK : 848.7 Mo, version 0.1.67
-2026-11-03T08:43:28.4308153Z 
-2026-11-03T08:43:28.4308315Z ## Contenu empaqueté : 1952 Mo
-2026-11-03T08:43:28.4308595Z - Texture2D : 1318.6 Mo (2899)
-2026-11-03T08:43:28.4309075Z - Mesh : 343.7 Mo (637)
-2026-11-03T08:43:28.4309351Z - TextAsset : 233.3 Mo (15)
-2026-11-03T08:43:28.4309600Z - MonoBehaviour : 19.6 Mo (542)
-2026-11-03T08:43:28.4309860Z - AnimationClip : 10.2 Mo (358)
-2026-11-03T08:43:28.4310108Z - AudioClip : 8.3 Mo (170)
-2026-11-03T08:43:28.4310358Z - Cubemap : 6.1 Mo (22)
-2026-11-03T08:43:28.4310998Z - Shader : 4.5 Mo (56)
-2026-11-03T08:43:28.4311243Z - Avatar : 2.5 Mo (169)
-2026-11-03T08:43:28.4311477Z - Material : 1.8 Mo (1090)
-2026-11-03T08:43:28.4311728Z - Transform : 0.9 Mo (11994)
-2026-11-03T08:43:28.4312028Z - TerrainData : 0.8 Mo (2)
-2026-11-03T08:43:28.4312305Z 
-2026-11-03T08:43:28.4312436Z ### Plus gros fichiers sources
-2026-11-03T08:43:28.4316369Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F_Morphs.bytes
-2026-11-03T08:43:28.4317296Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F_Morphs.bytes
-2026-11-03T08:43:28.4318001Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F_Morphs.bytes
-2026-11-03T08:43:28.4318569Z - 19.6 Mo — Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale_Morphs.bytes
-2026-11-03T08:43:28.4319113Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Varek_F/Varek_F_Morphs.bytes
-2026-11-03T08:43:28.4320067Z - 19.6 Mo — Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F_Morphs.bytes
-2026-11-03T08:43:28.4321300Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M_Morphs.bytes
-2026-11-03T08:43:28.4322067Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M_Morphs.bytes
-2026-11-03T08:43:28.4322674Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M_Morphs.bytes
-2026-11-03T08:43:28.4323560Z - 19.3 Mo — Assets/Korvalune/Art/Characters/BaseMale/BaseMale_Morphs.bytes
-2026-11-03T08:43:28.4324108Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Varek_M/Varek_M_Morphs.bytes
-2026-11-03T08:43:28.4324626Z - 19.3 Mo — Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M_Morphs.bytes
-2026-11-03T08:43:28.4325349Z - 13.5 Mo — Assets/Korvalune/Art/Heroes/Morvanna_F/Morvanna_F.fbx
-2026-11-03T08:43:28.4325848Z - 13.5 Mo — Assets/Korvalune/Art/Heroes/Morvanna_M/Morvanna_M.fbx
-2026-11-03T08:43:28.4326454Z - 13.0 Mo — Assets/Korvalune/Art/Heroes/Varek_F/Varek_F.fbx
-2026-11-03T08:43:28.4327206Z - 12.6 Mo — Assets/Korvalune/Art/Heroes/Varek_M/Varek_M.fbx
-2026-11-03T08:43:28.4327712Z - 12.6 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_M/ElyraNoctis_M.fbx
-2026-11-03T08:43:28.4328237Z - 11.7 Mo — Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
-2026-11-03T08:43:28.4328899Z - 11.2 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_F/KaelDraven_F.fbx
-2026-11-03T08:43:28.4329775Z - 10.9 Mo — Assets/Korvalune/Art/Heroes/KaelDraven_M/KaelDraven_M.fbx
-2026-11-03T08:43:28.4330274Z - 10.7 Mo — Assets/Korvalune/Art/Heroes/Tharion_F/Tharion_F.fbx
-2026-11-03T08:43:28.4331175Z - 10.4 Mo — Assets/Korvalune/Art/Heroes/Tharion_M/Tharion_M.fbx
-2026-11-03T08:43:28.4331950Z - 9.4 Mo — Assets/Korvalune/Art/Mounts/GriffonRoyal/GriffonRoyal.fbx
-2026-11-03T08:43:28.4332478Z - 9.4 Mo — Assets/Korvalune/Art/Enemies/LoupTenebres/LoupTenebres.fbx
-2026-11-03T08:43:28.4333089Z - 9.3 Mo — Assets/Korvalune/Art/Mounts/ChevalDeGuerre/ChevalDeGuerre.fbx
-2026-11-03T08:43:28.4333943Z - 9.0 Mo — Assets/Korvalune/Art/Enemies/SorcierCorrompu/SorcierCorrompu.fbx
-2026-11-03T08:43:28.4334685Z - 8.4 Mo — 
-2026-11-03T08:43:28.4335183Z - 8.2 Mo — Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
-2026-11-03T08:43:28.4335850Z - 6.9 Mo — Assets/Korvalune/Art/Enemies/SqueletteGuerrier/SqueletteGuerrier.fbx
-2026-11-03T08:43:28.4336571Z - 6.7 Mo — Assets/Korvalune/Art/Characters/BaseFemale/BaseFemale.fbx
-2026-11-03T08:43:28.4337034Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-03T08:43:28.4337847Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-03T08:43:28.4339245Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-2026-11-03T08:43:28.4340047Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-2026-11-03T08:43:28.4340613Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
-2026-11-03T08:43:28.4341376Z UnityEngine.Debug:Log (object)
-2026-11-03T08:43:28.4341986Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:102)
-2026-11-03T08:43:28.4342370Z 
-2026-11-03T08:43:28.4342546Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 102)
-2026-11-03T08:43:28.4342808Z 
-2026-11-03T08:43:28.5455000Z Starting: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/OpenJDK/bin/java -classpath "/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/gradle/lib/gradle-launcher-8.4.jar" org.gradle.launcher.GradleMain "-Dorg.gradle.jvmargs=-Xmx4096m" "--stop" 
-2026-11-03T08:43:28.5456898Z WorkingDir: 
-2026-11-03T08:43:31.0860014Z Killing ADB server in 0.702987 seconds.
-2026-11-03T08:43:32.3400306Z [Physics::Module] Cleanup current backned.
-2026-11-03T08:43:32.3401162Z [Physics::Module] Id: 0xf2b8ea05
-2026-11-03T08:43:32.3492200Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
-2026-11-03T08:43:32.3493140Z [Licensing::IpcConnector] License Client channel disconnected successfully.
-2026-11-03T08:43:32.3852187Z AcceleratorClientConnectionCallback - disconnected - :0
-2026-11-03T08:43:32.5038805Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-11-03T08:43:32.5039285Z       Application is shutting down...
+2026-11-03T09:38:03.0589667Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2x2.gen.cs
+2026-11-03T09:38:03.0589809Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/uint2.gen.cs
+2026-11-03T09:38:03.0589958Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x4.gen.cs
+2026-11-03T09:38:03.0590110Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x3.gen.cs
+2026-11-03T09:38:03.0590252Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4x2.gen.cs
+2026-11-03T09:38:03.0590390Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x4.gen.cs
+2026-11-03T09:38:03.0590532Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x3.gen.cs
+2026-11-03T09:38:03.0590673Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3x2.gen.cs
+2026-11-03T09:38:03.0590821Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x4.gen.cs
+2026-11-03T09:38:03.0590965Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x3.gen.cs
+2026-11-03T09:38:03.0591107Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2x2.gen.cs
+2026-11-03T09:38:03.0591249Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half4.gen.cs
+2026-11-03T09:38:03.0591389Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half3.gen.cs
+2026-11-03T09:38:03.0591533Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half2.gen.cs
+2026-11-03T09:38:03.0591689Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x4.gen.cs
+2026-11-03T09:38:03.0591835Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x3.gen.cs
+2026-11-03T09:38:03.0592112Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4x2.gen.cs
+2026-11-03T09:38:03.0592317Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float4.gen.cs
+2026-11-03T09:38:03.0592468Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x4.gen.cs
+2026-11-03T09:38:03.0592613Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x3.gen.cs
+2026-11-03T09:38:03.0592758Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3x2.gen.cs
+2026-11-03T09:38:03.0592903Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float3.gen.cs
+2026-11-03T09:38:03.0593054Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x4.gen.cs
+2026-11-03T09:38:03.0593201Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x3.gen.cs
+2026-11-03T09:38:03.0593342Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2x2.gen.cs
+2026-11-03T09:38:03.0593485Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/float2.gen.cs
+2026-11-03T09:38:03.0593634Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double4.gen.cs
+2026-11-03T09:38:03.0593784Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double3.gen.cs
+2026-11-03T09:38:03.0593930Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/double2.gen.cs
+2026-11-03T09:38:03.0594078Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x4.gen.cs
+2026-11-03T09:38:03.0594225Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x3.gen.cs
+2026-11-03T09:38:03.0594369Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4x2.gen.cs
+2026-11-03T09:38:03.0594582Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool4.gen.cs
+2026-11-03T09:38:03.0594726Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x4.gen.cs
+2026-11-03T09:38:03.0594867Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x3.gen.cs
+2026-11-03T09:38:03.0595009Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3x2.gen.cs
+2026-11-03T09:38:03.0595202Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool3.gen.cs
+2026-11-03T09:38:03.0595395Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x4.gen.cs
+2026-11-03T09:38:03.0595543Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x3.gen.cs
+2026-11-03T09:38:03.0595732Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2x2.gen.cs
+2026-11-03T09:38:03.0595879Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/bool2.gen.cs
+2026-11-03T09:38:03.0596051Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/psrdnoise2D.cs
+2026-11-03T09:38:03.0596216Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise3Dgrad.cs
+2026-11-03T09:38:03.0596379Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular3D.cs
+2026-11-03T09:38:03.0596536Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular2x2.cs
+2026-11-03T09:38:03.0596693Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/cellular2D.cs
+2026-11-03T09:38:03.0596848Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/xxHash3.AVX2.cs
+2026-11-03T09:38:03.0597005Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_rdma.cs
+2026-11-03T09:38:03.0597182Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_dotprod.cs
+2026-11-03T09:38:03.0597345Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64_crypto.cs
+2026-11-03T09:38:03.0597479Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/WorldEvents.cs
+2026-11-03T09:38:03.0597615Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs
+2026-11-03T09:38:03.0597738Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/VfxLibrary.cs
+2026-11-03T09:38:03.0597852Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/TownPortal.cs
+2026-11-03T09:38:03.0597973Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs
+2026-11-03T09:38:03.0598094Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillBook.cs
+2026-11-03T09:38:03.0598212Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SkillAnims.cs
+2026-11-03T09:38:03.0598327Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/SaveSystem.cs
+2026-11-03T09:38:03.0598439Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/RiftLevel.cs
+2026-11-03T09:38:03.0598560Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/OptionsMenu.cs
+2026-11-03T09:38:03.0598674Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Occluders.cs
+2026-11-03T09:38:03.0598813Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/LegendaryPowers.cs
+2026-11-03T09:38:03.0598928Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/ItemIcons.cs
+2026-11-03T09:38:03.0599046Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/IntroPlayer.cs
+2026-11-03T09:38:03.0599163Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/HeroOutfit.cs
+2026-11-03T09:38:03.0599294Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/GroundPickup.cs
+2026-11-03T09:38:03.0599416Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/GameConfig.cs
+2026-11-03T09:38:03.0599544Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Equipment.cs
+2026-11-03T09:38:03.0599666Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Difficulty.cs
+2026-11-03T09:38:03.0599784Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/CameraRig.cs
+2026-11-03T09:38:03.0599905Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Breakable.cs
+2026-11-03T09:38:03.0600074Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Utility/VertexHelper.cs
+2026-11-03T09:38:03.0600268Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ToggleGroup.cs
+2026-11-03T09:38:03.0600409Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/SpriteState.cs
+2026-11-03T09:38:03.0600547Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Selectable.cs
+2026-11-03T09:38:03.0600684Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Scrollbar.cs
+2026-11-03T09:38:03.0600821Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ScrollRect.cs
+2026-11-03T09:38:03.0601037Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/RectMask2D.cs
+2026-11-03T09:38:03.0601174Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Navigation.cs
+2026-11-03T09:38:03.0601400Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/LayoutGroup.cs
+2026-11-03T09:38:03.0601567Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/CanvasScaler.cs
+2026-11-03T09:38:03.0601703Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/InputField.cs
+2026-11-03T09:38:03.0601840Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/IMaskable.cs
+2026-11-03T09:38:03.0602115Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/ColorBlock.cs
+2026-11-03T09:38:03.0602276Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/random.cs
+2026-11-03T09:38:03.0602433Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/matrix.gen.cs
+2026-11-03T09:38:03.0602573Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/matrix.cs
+2026-11-03T09:38:03.0602742Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise4D.cs
+2026-11-03T09:38:03.0602894Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise3D.cs
+2026-11-03T09:38:03.0603050Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/noise2D.cs
+2026-11-03T09:38:03.0603208Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/Noise/common.cs
+2026-11-03T09:38:03.0603354Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/xxHash3.cs
+2026-11-03T09:38:03.0603497Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Unicode.cs
+2026-11-03T09:38:03.0603629Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Memory.cs
+2026-11-03T09:38:03.0603791Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/Jobs/IJobFilter.cs
+2026-11-03T09:38:03.0603939Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/BitField.cs
+2026-11-03T09:38:03.0604076Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/NoAliasAttribute.cs
+2026-11-03T09:38:03.0604206Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/FunctionPointer.cs
+2026-11-03T09:38:03.0604336Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Editor/BurstLoader.cs
+2026-11-03T09:38:03.0604490Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Constant.cs
+2026-11-03T09:38:03.0604637Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Aliasing.cs
+2026-11-03T09:38:03.0604770Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstString.Float.cs
+2026-11-03T09:38:03.0604899Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstCompiler.cs
+2026-11-03T09:38:03.0605016Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Items.cs
+2026-11-03T09:38:03.0605141Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CreatorNames.cs
+2026-11-03T09:38:03.0605260Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/CharacterRig.cs
+2026-11-03T09:38:03.0605418Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Culling/IClipRegion.cs
+2026-11-03T09:38:03.0605546Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TextMeshPro.cs
+2026-11-03T09:38:03.0605673Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_TextInfo.cs
+2026-11-03T09:38:03.0605793Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_SubMesh.cs
+2026-11-03T09:38:03.0605911Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Style.cs
+2026-11-03T09:38:03.0606031Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Sprite.cs
+2026-11-03T09:38:03.0606216Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Settings.cs
+2026-11-03T09:38:03.0606337Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_MeshInfo.cs
+2026-11-03T09:38:03.0606456Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_LineInfo.cs
+2026-11-03T09:38:03.0606576Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Dropdown.cs
+2026-11-03T09:38:03.0606692Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Asset.cs
+2026-11-03T09:38:03.0606807Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/FastAction.cs
+2026-11-03T09:38:03.0607055Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int4.gen.cs
+2026-11-03T09:38:03.0607201Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int3.gen.cs
+2026-11-03T09:38:03.0607393Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/int2.gen.cs
+2026-11-03T09:38:03.0607522Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Common.cs
+2026-11-03T09:38:03.0607658Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_ctor.cs
+2026-11-03T09:38:03.0607815Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON_AArch64.cs
+2026-11-03T09:38:03.0607936Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/WorldMap.cs
+2026-11-03T09:38:03.0608053Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Updater.cs
+2026-11-03T09:38:03.0608161Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/UIStyle.cs
+2026-11-03T09:38:03.0608277Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/TownLife.cs
+2026-11-03T09:38:03.0608391Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Sound.cs
+2026-11-03T09:38:03.0608508Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Skill.cs
+2026-11-03T09:38:03.0608621Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Sight.cs
+2026-11-03T09:38:03.0608736Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/RoofFade.cs
+2026-11-03T09:38:03.0608848Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Quest.cs
+2026-11-03T09:38:03.0608970Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Portal.cs
+2026-11-03T09:38:03.0609095Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Mounts.cs
+2026-11-03T09:38:03.0609213Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Merchant.cs
+2026-11-03T09:38:03.0609325Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs
+2026-11-03T09:38:03.0609443Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs
+2026-11-03T09:38:03.0609555Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Health.cs
+2026-11-03T09:38:03.0609672Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Floater.cs
+2026-11-03T09:38:03.0609784Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Flicker.cs
+2026-11-03T09:38:03.0609903Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs
+2026-11-03T09:38:03.0610016Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Economy.cs
+2026-11-03T09:38:03.0610132Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/AutoTest.cs
+2026-11-03T09:38:03.0610300Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/VertexModifiers/Shadow.cs
+2026-11-03T09:38:03.0610471Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/VertexModifiers/Outline.cs
+2026-11-03T09:38:03.0610603Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Toggle.cs
+2026-11-03T09:38:03.0610727Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Slider.cs
+2026-11-03T09:38:03.0610861Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/RawImage.cs
+2026-11-03T09:38:03.0610985Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Image.cs
+2026-11-03T09:38:03.0611108Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/IMask.cs
+2026-11-03T09:38:03.0611243Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Graphic.cs
+2026-11-03T09:38:03.0611375Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/FontData.cs
+2026-11-03T09:38:03.0611507Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Dropdown.cs
+2026-11-03T09:38:03.0611660Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Culling/Clipping.cs
+2026-11-03T09:38:03.0611831Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Button.cs
+2026-11-03T09:38:03.0611966Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/svd.cs
+2026-11-03T09:38:03.0612228Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/math.cs
+2026-11-03T09:38:03.0612362Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/half.cs
+2026-11-03T09:38:03.0612476Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/SharedStatic.cs
+2026-11-03T09:38:03.0612715Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Ssse3.cs
+2026-11-03T09:38:03.0612863Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse4_2.cs
+2026-11-03T09:38:03.0613008Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse4_1.cs
+2026-11-03T09:38:03.0613194Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Popcnt.cs
+2026-11-03T09:38:03.0613323Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Common.cs
+2026-11-03T09:38:03.0613465Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/Hint.cs
+2026-11-03T09:38:03.0613585Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstString.cs
+2026-11-03T09:38:03.0613702Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/BurstRuntime.cs
+2026-11-03T09:38:03.0613821Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/MorphRig.cs
+2026-11-03T09:38:03.0613931Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/MorphMap.cs
+2026-11-03T09:38:03.0614045Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Content.cs
+2026-11-03T09:38:03.0614165Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_Text.cs
+2026-11-03T09:38:03.0614296Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse3.cs
+2026-11-03T09:38:03.0614427Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse2.cs
+2026-11-03T09:38:03.0614552Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Sse.cs
+2026-11-03T09:38:03.0614677Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Fma.cs
+2026-11-03T09:38:03.0614807Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/F16C.cs
+2026-11-03T09:38:03.0614932Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Csr.cs
+2026-11-03T09:38:03.0615062Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Bmi2.cs
+2026-11-03T09:38:03.0615191Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Bmi1.cs
+2026-11-03T09:38:03.0615320Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Avx2.cs
+2026-11-03T09:38:03.0615448Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/x86/Avx.cs
+2026-11-03T09:38:03.0615572Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v64.cs
+2026-11-03T09:38:03.0615691Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v256.cs
+2026-11-03T09:38:03.0615813Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/v128.cs
+2026-11-03T09:38:03.0615942Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/Intrinsics/Arm/NEON.cs
+2026-11-03T09:38:03.0616052Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs
+2026-11-03T09:38:03.0616171Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Rift.cs
+2026-11-03T09:38:03.0616277Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/HUD.cs
+2026-11-03T09:38:03.0616389Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/Gore.cs
+2026-11-03T09:38:03.0616497Z  0.1 kb	 0.0% Assets/Korvalune/Scripts/Runtime/Game/FX.cs
+2026-11-03T09:38:03.0616627Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Text.cs
+2026-11-03T09:38:03.0616747Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Misc.cs
+2026-11-03T09:38:03.0616869Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Mask.cs
+2026-11-03T09:38:03.0616997Z  0.1 kb	 0.0% Assets/Resources/PerformanceTestRunSettings.json
+2026-11-03T09:38:03.0617104Z  0.1 kb	 0.0% Assets/DefaultVolumeProfile.asset
+2026-11-03T09:38:03.0617247Z -------------------------------------------------------------------------------
+2026-11-03T09:38:03.1096452Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+2026-11-03T09:38:03.9259809Z Unloading 1674 unused Assets / (9.6 MB). Loaded Objects now: 4425.
+2026-11-03T09:38:03.9260400Z Memory consumption went from 184.2 MB to 174.6 MB.
+2026-11-03T09:38:03.9261257Z Total: 815.270860 ms (FindLiveObjects: 14.571376 ms CreateObjectMapping: 0.115551 ms MarkObjects: 746.382022 ms  DeleteObjects: 54.200269 ms)
+2026-11-03T09:38:03.9261910Z 
+2026-11-03T09:38:03.9262175Z Build Finished, Result: Success.
+2026-11-03T09:38:04.5824016Z ##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793698684581,"processId":1593,"steps":[{"description":"Preprocess Player","duration":146},{"description":"Prepare For Build","duration":2409},{"description":"ProducePlayerScriptAssemblies","duration":2744},{"description":"Verify Build setup","duration":12},{"description":"Prepare assets for target 
+2026-11-03T09:38:04.5909125Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+2026-11-03T09:38:12.8304903Z Loaded scene 'Temp/__Backupscenes/0.backup'
+2026-11-03T09:38:12.8305638Z 	Deserialize:            1.642 ms
+2026-11-03T09:38:12.8306088Z 	Integration:            8238.782 ms
+2026-11-03T09:38:12.8306520Z 	Integration of assets:  0.001 ms
+2026-11-03T09:38:12.8306976Z 	Thread Wait Time:       0.012 ms
+2026-11-03T09:38:12.8307409Z 	Total Operation Time:   8240.438 ms
+2026-11-03T09:38:12.8394467Z Unloading 0 unused Assets / (0 B). Loaded Objects now: 4418.
+2026-11-03T09:38:12.8395479Z Memory consumption went from 173.8 MB to 173.8 MB.
+2026-11-03T09:38:12.8396528Z Total: 9.704543 ms (FindLiveObjects: 0.464177 ms CreateObjectMapping: 0.158124 ms MarkObjects: 9.066038 ms  DeleteObjects: 0.015583 ms)
+2026-11-03T09:38:12.8397125Z 
+2026-11-03T09:38:12.9453540Z # Construction de l'APK Android
+2026-11-03T09:38:12.9454047Z 
+2026-11-03T09:38:12.9458410Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche
+2026-11-03T09:38:12.9459297Z - Signature : clé Korvalune (mises à jour sans désinstaller)
+2026-11-03T09:38:12.9459688Z - Icône : Assets/Korvalune/Resources/UI/Icone.png
+2026-11-03T09:38:12.9460069Z - Contenu téléchargeable : 91 paquets, 545 Mo (release contenu-71)
+2026-11-03T09:38:12.9460372Z     - art_catalog_models : 58.3 Mo
+2026-11-03T09:38:12.9460682Z     - art_catalog_skins : 34.6 Mo
+2026-11-03T09:38:12.9460947Z     - scenes : 28.2 Mo
+2026-11-03T09:38:12.9461146Z     - art_heroes_varek_f : 18.6 Mo
+2026-11-03T09:38:12.9461382Z     - art_heroes_morvanna_f : 18.3 Mo
+2026-11-03T09:38:12.9461622Z     - art_heroes_varek_m : 18.1 Mo
+2026-11-03T09:38:12.9461844Z     - art_heroes_morvanna_m : 17.9 Mo
+2026-11-03T09:38:12.9462316Z     - art_heroes_elyranoctis_m : 17.6 Mo
+2026-11-03T09:38:12.9462564Z     - art_heroes_elyranoctis_f : 17.4 Mo
+2026-11-03T09:38:12.9462794Z     - art_heroes_kaeldraven_f : 16.7 Mo
+2026-11-03T09:38:12.9463030Z     - art_heroes_tharion_f : 16.2 Mo
+2026-11-03T09:38:12.9463257Z     - art_heroes_kaeldraven_m : 16.2 Mo
+2026-11-03T09:38:12.9463768Z - Résultat : **Succeeded** en 5.8 min, 0 erreur(s), 12 avertissement(s)
+2026-11-03T09:38:12.9464084Z - APK : 88.0 Mo, version 0.1.71
+2026-11-03T09:38:12.9464225Z 
+2026-11-03T09:38:12.9464362Z ## Contenu empaqueté : 33 Mo
+2026-11-03T09:38:12.9464583Z - Texture2D : 16.7 Mo (274)
+2026-11-03T09:38:12.9464801Z - AudioClip : 8.3 Mo (170)
+2026-11-03T09:38:12.9465096Z - Cubemap : 6.6 Mo (23)
+2026-11-03T09:38:12.9465287Z - Shader : 1.3 Mo (34)
+2026-11-03T09:38:12.9465481Z - Sprite : 0.1 Mo (210)
+2026-11-03T09:38:12.9465832Z - MonoScript : 0.1 Mo (898)
+2026-11-03T09:38:12.9466031Z - Font : 0.1 Mo (1)
+2026-11-03T09:38:12.9466275Z - MonoBehaviour : 0.1 Mo (434)
+2026-11-03T09:38:12.9466586Z - RectTransform : 0.0 Mo (348)
+2026-11-03T09:38:12.9466788Z - GameObject : 0.0 Mo (348)
+2026-11-03T09:38:12.9466992Z - ComputeShader : 0.0 Mo (1)
+2026-11-03T09:38:12.9467203Z - TextAsset : 0.0 Mo (3)
+2026-11-03T09:38:12.9467328Z 
+2026-11-03T09:38:12.9467421Z ### Plus gros fichiers sources
+2026-11-03T09:38:12.9467660Z - 8.3 Mo — 
+2026-11-03T09:38:12.9468203Z - 2.7 Mo — Built-in Texture2D: Splash Screen Unity Logo
+2026-11-03T09:38:12.9468560Z - 1.3 Mo — Assets/Korvalune/Resources/UI/Lanceur_Peint.png
+2026-11-03T09:38:12.9468911Z - 1.0 Mo — Assets/Korvalune/Resources/UI/Lanceur_Fond.png
+2026-11-03T09:38:12.9469557Z - 0.7 Mo — Packages/com.unity.render-pipelines.universal/Shaders/PostProcessing/UberPost.shader
+2026-11-03T09:38:12.9469991Z - 0.5 Mo — Resources/unity_builtin_extra
+2026-11-03T09:38:12.9470293Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/coffre.png
+2026-11-03T09:38:12.9470804Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/quete.png
+2026-11-03T09:38:12.9471194Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/portail.png
+2026-11-03T09:38:12.9471536Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/potion.png
+2026-11-03T09:38:12.9471864Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/attack.png
+2026-11-03T09:38:12.9472357Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/bag.png
+2026-11-03T09:38:12.9472691Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/map.png
+2026-11-03T09:38:12.9473139Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/menu.png
+2026-11-03T09:38:12.9473471Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/book.png
+2026-11-03T09:38:12.9473787Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Icones/mana.png
+2026-11-03T09:38:12.9474367Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/SMAA/AreaTex.tga
+2026-11-03T09:38:12.9474862Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium01.png
+2026-11-03T09:38:12.9475376Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium05.png
+2026-11-03T09:38:12.9475988Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Large02.png
+2026-11-03T09:38:12.9476492Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Thin01.png
+2026-11-03T09:38:12.9477082Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium03.png
+2026-11-03T09:38:12.9477590Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium06.png
+2026-11-03T09:38:12.9478189Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium04.png
+2026-11-03T09:38:12.9478681Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Thin02.png
+2026-11-03T09:38:12.9479304Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium02.png
+2026-11-03T09:38:12.9479829Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Large01.png
+2026-11-03T09:38:12.9480252Z - 0.2 Mo — Assets/Korvalune/Resources/UI/Kit/Panneau.png
+2026-11-03T09:38:12.9480687Z - 0.2 Mo — Assets/Korvalune/Resources/UI/Icone_Peinte.png
+2026-11-03T09:38:12.9481022Z - 0.1 Mo — Assets/Korvalune/Resources/UI/Icone.png
+2026-11-03T09:38:12.9481338Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-03T09:38:12.9482116Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-03T09:38:12.9482839Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+2026-11-03T09:38:12.9483623Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+2026-11-03T09:38:12.9484058Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
+2026-11-03T09:38:12.9484332Z UnityEngine.Debug:Log (object)
+2026-11-03T09:38:12.9484791Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:111)
+2026-11-03T09:38:12.9485194Z 
+2026-11-03T09:38:12.9485337Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 111)
+2026-11-03T09:38:12.9485539Z 
+2026-11-03T09:38:13.0247809Z Starting: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/OpenJDK/bin/java -classpath "/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/gradle/lib/gradle-launcher-8.4.jar" org.gradle.launcher.GradleMain "-Dorg.gradle.jvmargs=-Xmx4096m" "--stop" 
+2026-11-03T09:38:13.0249308Z WorkingDir: 
+2026-11-03T09:38:14.0394910Z Killing ADB server in 0.167678 seconds.
+2026-11-03T09:38:15.0450022Z [Physics::Module] Cleanup current backned.
+2026-11-03T09:38:15.0450437Z [Physics::Module] Id: 0xf2b8ea05
+2026-11-03T09:38:15.0508421Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-11-03T09:38:15.0508897Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-11-03T09:38:15.0798589Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-11-03T09:38:15.2487954Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-03T09:38:15.2488325Z       Application is shutting down...
