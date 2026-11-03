@@ -162,10 +162,14 @@ namespace Korvalune.EditorTools
             for (int k = 0; k < 18; k++)
             {
                 var o = grave + new Vector2((float)rng.NextDouble() * 26 - 13, (float)rng.NextDouble() * 10 - 5);
-                var g = GameObject.CreatePrimitive(PrimitiveType.Cube); g.name = "Tombe";
-                g.transform.position = Ground(o) + Vector3.up * 0.55f; g.transform.localScale = new Vector3(0.7f, 1.1f + (float)rng.NextDouble() * 0.5f, 0.22f);
+                // pierres tombales modélisées : stèle cintrée, croix, stèle brisée, stèle à fronton (penchées, enfoncées)
+                var g = new GameObject("Tombe"); var mesh = TombMesh(k % 4);
+                g.AddComponent<MeshFilter>().sharedMesh = mesh; g.AddComponent<MeshRenderer>().sharedMaterial = StoneMaterial();
+                var bc = g.AddComponent<BoxCollider>(); bc.center = mesh.bounds.center; bc.size = mesh.bounds.size;
+                float sc = 0.85f + (float)rng.NextDouble() * 0.4f;
+                g.transform.position = Ground(o) - Vector3.up * 0.08f; g.transform.localScale = Vector3.one * sc;
                 g.transform.rotation = Quaternion.Euler((float)rng.NextDouble() * 14 - 7, (float)rng.NextDouble() * 40 - 20, (float)rng.NextDouble() * 14 - 7);
-                g.GetComponent<Renderer>().sharedMaterial = StoneMaterial(); g.isStatic = true;
+                g.isStatic = true;
             }
             for (int k = 0; k < 70; k++)
             {
@@ -601,6 +605,53 @@ namespace Korvalune.EditorTools
             return m;
         }
 
+        /// <summary>Pierre tombale : profil 2D extrudé (stèle cintrée, croix, stèle brisée, fronton), enregistré une fois.</summary>
+        static Mesh TombMesh(int variant)
+        {
+            var path = WorldArt + "/Tombes/Tombe_" + variant + ".asset";
+            var existing = AssetDatabase.LoadAssetAtPath<Mesh>(path); if (existing) return existing;
+            ModelPipeline.EnsureFolder(WorldArt + "/Tombes");
+            var pr = new List<Vector2>(); float w = 0.36f, h = 1.15f;
+            switch (variant)
+            {
+                case 0: pr.Add(new Vector2(-w, 0)); pr.Add(new Vector2(w, 0)); pr.Add(new Vector2(w, h - w)); for (int i = 1; i < 12; i++) { float a = Mathf.PI * i / 12f; pr.Add(new Vector2(Mathf.Cos(a) * w, h - w + Mathf.Sin(a) * w)); } pr.Add(new Vector2(-w, h - w)); break;
+                case 1: { float t = 0.11f, ah = 0.95f, aw = 0.36f; h = 1.45f; pr.AddRange(new[] { new Vector2(-t, 0), new Vector2(t, 0), new Vector2(t, ah - t), new Vector2(aw, ah - t), new Vector2(aw, ah + t), new Vector2(t, ah + t), new Vector2(t, h), new Vector2(-t, h), new Vector2(-t, ah + t), new Vector2(-aw, ah + t), new Vector2(-aw, ah - t), new Vector2(-t, ah - t) }); break; }
+                case 2: { h = 0.8f; pr.Add(new Vector2(-w, 0)); pr.Add(new Vector2(w, 0)); pr.Add(new Vector2(w, h)); var jr = new System.Random(3); for (int i = 1; i < 7; i++) pr.Add(new Vector2(w - 2 * w * i / 7f, h + (float)jr.NextDouble() * 0.22f - 0.05f + (i == 3 ? 0.18f : 0))); pr.Add(new Vector2(-w, h - 0.12f)); break; }
+                default: { w = 0.42f; h = 1.0f; pr.AddRange(new[] { new Vector2(-w, 0), new Vector2(w, 0), new Vector2(w, h), new Vector2(w * 0.55f, h), new Vector2(0, h + 0.28f), new Vector2(-w * 0.55f, h), new Vector2(-w, h) }); break; }
+            }
+            float d = variant == 1 ? 0.11f : 0.13f;
+            var v = new List<Vector3>(); var n = new List<Vector3>(); var uv = new List<Vector2>(); var tri = new List<int>();
+            var c = Vector2.zero; foreach (var p in pr) c += p; c /= pr.Count;
+            foreach (var z in new[] { -d, d })      // faces avant et arrière (éventail depuis le centre)
+            {
+                int b = v.Count; var nz = new Vector3(0, 0, Mathf.Sign(z));
+                v.Add(new Vector3(c.x, c.y, z)); n.Add(nz); uv.Add(c * 0.9f);
+                foreach (var p in pr) { v.Add(new Vector3(p.x, p.y, z)); n.Add(nz); uv.Add(p * 0.9f); }
+                for (int i = 0; i < pr.Count; i++) { int a = b + 1 + i, e = b + 1 + (i + 1) % pr.Count; if (z > 0) { tri.Add(b); tri.Add(a); tri.Add(e); } else { tri.Add(b); tri.Add(e); tri.Add(a); } }
+            }
+            float run = 0;
+            for (int i = 0; i < pr.Count; i++)      // tranche
+            {
+                var p0 = pr[i]; var p1 = pr[(i + 1) % pr.Count]; var e2 = (p1 - p0); float len = e2.magnitude; var nn = new Vector3(e2.y, -e2.x, 0).normalized;
+                int b = v.Count;
+                v.Add(new Vector3(p0.x, p0.y, -d)); v.Add(new Vector3(p1.x, p1.y, -d)); v.Add(new Vector3(p1.x, p1.y, d)); v.Add(new Vector3(p0.x, p0.y, d));
+                for (int k = 0; k < 4; k++) n.Add(nn);
+                uv.Add(new Vector2(run, 0)); uv.Add(new Vector2(run + len, 0)); uv.Add(new Vector2(run + len, 2 * d)); uv.Add(new Vector2(run, 2 * d)); run += len;
+                tri.Add(b); tri.Add(b + 2); tri.Add(b + 1); tri.Add(b); tri.Add(b + 3); tri.Add(b + 2);
+            }
+            var m = new Mesh { name = "Tombe_" + variant }; m.SetVertices(v); m.SetNormals(n); m.SetUVs(0, uv); m.SetTriangles(tri, 0);
+            // orientation des triangles de tranche : on vérifie avec la normale et on retourne si besoin
+            var tris = m.triangles; var verts = m.vertices; var norms = m.normals;
+            for (int i = 0; i < tris.Length; i += 3)
+            {
+                var fn = Vector3.Cross(verts[tris[i + 1]] - verts[tris[i]], verts[tris[i + 2]] - verts[tris[i]]);
+                if (Vector3.Dot(fn, norms[tris[i]]) < 0) { int t = tris[i + 1]; tris[i + 1] = tris[i + 2]; tris[i + 2] = t; }
+            }
+            m.triangles = tris; m.RecalculateTangents(); m.RecalculateBounds();
+            AssetDatabase.CreateAsset(m, path);
+            return m;
+        }
+
         static Material stone;
         public static Material StoneMaterial()
         {
@@ -608,8 +659,15 @@ namespace Korvalune.EditorTools
             var path = Root + "/Rendering/PierreTombale.mat";
             stone = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (!stone) { stone = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(stone, path); }
+            var monde = Shader.Find("Korvalune/PBR Monde");
+            if (monde != null && !ShaderUtil.ShaderHasError(monde) && stone.shader != monde) stone.shader = monde;   // mousse sur le dessus, variation
             var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Terrain/Roche_BaseMap.png");
             if (tex) stone.SetTexture("_BaseMap", tex);
+            var rn = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Terrain/Roche_Normal.png");
+            if (rn) { stone.SetTexture("_BumpMap", rn); stone.EnableKeyword("_NORMALMAP"); }
+            var ro = AssetDatabase.LoadAssetAtPath<Texture2D>(WorldArt + "/Terrain/Roche_Occlusion.png");
+            if (ro) { stone.SetTexture("_OcclusionMap", ro); stone.EnableKeyword("_OCCLUSIONMAP"); }
+            EditorUtility.SetDirty(stone);
             stone.SetColor("_BaseColor", new Color(0.75f, 0.74f, 0.72f)); stone.SetFloat("_Smoothness", 0.15f);
             return stone;
         }
