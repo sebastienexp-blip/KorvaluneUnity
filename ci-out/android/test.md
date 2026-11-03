@@ -1,7 +1,7 @@
 # Test de l'APK dans un émulateur Android (API 30, x86_64)
 
 - Android 11
-- APK : 88.0 Mo
+- APK : 85.9 Mo
 - ✅ Installation
 - ✅ Jeu en cours d'exécution à 20 s (capture ecran_20s.png)
 - ✅ Jeu en cours d'exécution à 45 s (capture ecran_45s.png)
@@ -27,8 +27,6 @@
     [Korvalune][test] chargement 90 %
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
-- Erreurs Unity dans le journal : 2
-    11-03 14:30:08.115  6054  6117 E Unity   : SharedTextureData source data is NULL.
-    11-03 14:30:08.116  6054  6117 E Unity   : SharedTextureData source data is NULL.
+- Erreurs Unity dans le journal : 0
 
 **RÉSULTAT : OK**
