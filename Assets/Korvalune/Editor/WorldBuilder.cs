@@ -387,7 +387,15 @@ namespace Korvalune.EditorTools
         static void Grass(TerrainData td)
         {
             var tex = GrassTexture(); if (!tex) return;
-            var proto = new DetailPrototype
+            // touffes en 3D (brins courbés) plutôt que des panneaux face caméra : vus de dessus, les panneaux devenaient des
+            // paquets de points brillants qui scintillaient
+            var clump = GrassClumpPrefab();
+            var proto = clump ? new DetailPrototype
+            {
+                prototype = clump, usePrototypeMesh = true, renderMode = DetailRenderMode.VertexLit, useInstancing = true,
+                minWidth = 0.8f, maxWidth = 1.3f, minHeight = 0.6f, maxHeight = 1.1f, noiseSpread = 0.4f,
+                healthyColor = Color.white, dryColor = new Color(1.0f, 0.92f, 0.75f)
+            } : new DetailPrototype
             {
                 prototypeTexture = tex, renderMode = DetailRenderMode.GrassBillboard, usePrototypeMesh = false,
                 minWidth = 0.7f, maxWidth = 1.3f, minHeight = 0.45f, maxHeight = 0.95f, noiseSpread = 0.4f,
@@ -407,6 +415,50 @@ namespace Korvalune.EditorTools
                 map[j, i] = Mathf.RoundToInt(Mathf.Clamp01((dens - 0.25f) * 1.6f) * 7f);
             }
             td.SetDetailLayer(0, 0, 0, map);
+        }
+
+        /// <summary>Touffe d'herbe en 3D : une douzaine de brins effilés et courbés qui rayonnent du centre, teinte du pied
+        /// (sombre) à la pointe (claire) par un dégradé, normales tournées vers le ciel (éclairage doux, sans face noire).</summary>
+        static GameObject GrassClumpPrefab()
+        {
+            string dir = WorldArt + "/Terrain", path = dir + "/Touffe.prefab";
+            var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path); if (existing) return existing;
+            // dégradé pied → pointe
+            var gpath = dir + "/Touffe_Degrade.png";
+            if (!File.Exists(gpath))
+            {
+                var g = new Texture2D(4, 64, TextureFormat.RGBA32, false);
+                for (int y = 0; y < 64; y++) { float f = y / 63f; var c = Color.Lerp(new Color(0.07f, 0.12f, 0.03f), new Color(0.42f, 0.52f, 0.20f), Mathf.Pow(f, 0.8f)); if (f > 0.85f) c = Color.Lerp(c, new Color(0.62f, 0.60f, 0.34f), (f - 0.85f) / 0.15f); for (int x = 0; x < 4; x++) g.SetPixel(x, y, c); }
+                g.Apply(); File.WriteAllBytes(gpath, g.EncodeToPNG()); Object.DestroyImmediate(g); AssetDatabase.ImportAsset(gpath);
+                var gi = (TextureImporter)AssetImporter.GetAtPath(gpath); gi.wrapMode = TextureWrapMode.Clamp; gi.mipmapEnabled = false; gi.textureCompression = TextureImporterCompression.Uncompressed; gi.SaveAndReimport();
+            }
+            var grad = AssetDatabase.LoadAssetAtPath<Texture2D>(gpath);
+            var rng = new System.Random(21); var v = new List<Vector3>(); var n = new List<Vector3>(); var uv = new List<Vector2>(); var tri = new List<int>();
+            for (int b = 0; b < 12; b++)
+            {
+                float ang = (float)(b * 2 * System.Math.PI / 12 + rng.NextDouble() * 0.5);
+                float h = 0.35f + 0.3f * (float)rng.NextDouble(), lean = 0.12f + 0.25f * (float)rng.NextDouble(), w = 0.022f + 0.012f * (float)rng.NextDouble();
+                var dir2 = new Vector3(Mathf.Cos(ang), 0, Mathf.Sin(ang)); var side = new Vector3(-dir2.z, 0, dir2.x);
+                var root = dir2 * 0.04f * (float)rng.NextDouble();
+                int baseIdx = v.Count; const int segs = 4;
+                for (int k = 0; k <= segs; k++)
+                {
+                    float f = k / (float)segs; var c = root + dir2 * (lean * f * f) + Vector3.up * (h * f);
+                    float ww = w * (1 - f * 0.92f);
+                    v.Add(c - side * ww); v.Add(c + side * ww);
+                    var nn = Vector3.Lerp(Vector3.up, -dir2, 0.25f).normalized; n.Add(nn); n.Add(nn);
+                    uv.Add(new Vector2(0, f)); uv.Add(new Vector2(1, f));
+                }
+                for (int k = 0; k < segs; k++) { int a = baseIdx + k * 2; tri.AddRange(new[] { a, a + 2, a + 1, a + 1, a + 2, a + 3 }); }
+            }
+            var mesh = new Mesh { name = "Touffe" }; mesh.SetVertices(v); mesh.SetNormals(n); mesh.SetUVs(0, uv); mesh.SetTriangles(tri, 0); mesh.RecalculateBounds(); mesh.RecalculateTangents();
+            AssetDatabase.CreateAsset(mesh, dir + "/Touffe_Mesh.asset");
+            var mat = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "Touffe" };
+            mat.SetTexture("_BaseMap", grad); mat.SetColor("_BaseColor", Color.white); mat.SetFloat("_Smoothness", 0.12f); mat.SetFloat("_Cull", 0f); mat.enableInstancing = true;
+            AssetDatabase.CreateAsset(mat, dir + "/Touffe.mat");
+            var go = new GameObject("Touffe"); go.AddComponent<MeshFilter>().sharedMesh = mesh; var mr = go.AddComponent<MeshRenderer>(); mr.sharedMaterial = mat; mr.shadowCastingMode = ShadowCastingMode.Off;
+            var pf = PrefabUtility.SaveAsPrefabAsset(go, path); Object.DestroyImmediate(go);
+            return pf;
         }
 
         /// <summary>Texture de touffe d'herbe (brins effilés, transparence), créée une fois dans Art/World/Terrain.</summary>

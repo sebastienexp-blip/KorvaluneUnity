@@ -129,7 +129,11 @@ namespace Korvalune.Game
             else lastPinch = 0;
             // fenêtre carrée dans un cadre rectangulaire : on garde les proportions
             var size = frame.rect.size; float aspect = size.x / Mathf.Max(1, size.y);
+            // la photo est carrée et le cadre plus large : on zoome au moins assez pour remplir la largeur (sinon les bords
+            // de l'image étaient étirés en bandes sur les côtés)
+            if (zoom < aspect) { zoom = aspect; }
             float h = 0.5f / zoom, w = h * aspect;
+            center.x = Mathf.Clamp(center.x, w, 1 - w); center.y = Mathf.Clamp(center.y, h, 1 - h);
             view.uvRect = new Rect(center.x - w, center.y - h, 2 * w, 2 * h);
             foreach (var (t, fixedPos, icon) in pins)
             {
