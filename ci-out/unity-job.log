@@ -1,407 +1,410 @@
-# Journal du job d'intégration (run 41633428897)
+# Journal du job d'intégration (run 41633816585)
 ## Lignes importantes
-689:2026-11-03T12:13:58.4293632Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-691:2026-11-03T12:13:58.4295190Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-739:2026-11-03T12:14:04.4615167Z ##[error]Process completed with exit code 1.
+1170:2026-11-03T12:20:35.1415468Z [  1/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+1692:2026-11-03T12:20:37.3462478Z Curl error 42: Callback aborted
+2282:2026-11-03T12:21:10.5549264Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+2284:2026-11-03T12:21:10.5550958Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+2492:2026-11-03T12:21:38.0024896Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-2026-11-03T12:13:13.6051014Z deleted: sha256:746727b9775f2fb76310b9d7db58175622b85bd9dd68af0599c4445c82ce2483
-2026-11-03T12:13:13.6052054Z deleted: sha256:7a3ba98e7e42c55e732a38661d60ee2de373b0896590e3bdc598097fe91fe7ae
-2026-11-03T12:13:13.6053075Z deleted: sha256:060f91b0872de59eb67f7d745908a0c0caa9309f3094c9c91bf9f484a42955ca
-2026-11-03T12:13:13.6054137Z deleted: sha256:f80bf75f16280363a2e032582f2fc16d27432c5f8b723df782b6bcbfb7e27924
-2026-11-03T12:13:13.6055187Z deleted: sha256:9ac373ada57ffc27dcc3394207b9ad1d5c5f01c043a8a5402696532556e352da
-2026-11-03T12:13:13.6056240Z deleted: sha256:2f861ab5a2cf99d08875a9f545a2471c19e91c93769c3a3cc7175c530a3970ec
-2026-11-03T12:13:13.6057252Z deleted: sha256:352b00e6763d6ebaab8cb99a3bac61fc65a5a1ff5cb48d539a0c353574d7f03a
-2026-11-03T12:13:13.6058046Z untagged: ghcr.io/github/gh-aw-mcpg:latest
-2026-11-03T12:13:13.6059042Z untagged: ghcr.io/github/gh-aw-mcpg@sha256:9c7f242f6dec2d7d7b55d4c9e07872d59b85377c6cb3de46c915a5d1ffb91442
-2026-11-03T12:13:13.6060096Z deleted: sha256:adada59dc2eb63475d1f06d3b2c975d2e50ed858007ac5283bf508391e5f7041
-2026-11-03T12:13:13.6061319Z deleted: sha256:9561da157f3318daea7aecb5753fbf1b9a08f11a5aa196e4acf885d183d679ba
-2026-11-03T12:13:13.6061944Z deleted: sha256:f9e4fd9ace9f49b24939125d3172311294b8db0ca6d5c3933d4553e7e38562e7
-2026-11-03T12:13:13.6062561Z deleted: sha256:e7fe6216fb621a5883dafaaed72af6b4d9218ab06c7b1cf16590092393ad315c
-2026-11-03T12:13:13.6063180Z deleted: sha256:ead5e88d3b34a4addd1a39e8dd4786fc6c5f06a67bfda3813ffbbf802f9020a5
-2026-11-03T12:13:13.6063792Z deleted: sha256:3fccb58823e210b8e26f60e33dc6464c62c41047ac58df29df7ad85fd5f29b7f
-2026-11-03T12:13:13.6064385Z deleted: sha256:076fa2779acee36fe423d7a96b35f9ee3669e369097ee039acf59e96197fcb84
-2026-11-03T12:13:13.6064977Z deleted: sha256:f4be26f88c84ae4994b8f72039b3a31e4177c1676751f4e51521cb99f00ba7ee
-2026-11-03T12:13:13.6065810Z deleted: sha256:3b0abdfd3c94e7bc73093f7488b4d6e7b164dfdf43193edaa6ba8df32def333a
-2026-11-03T12:13:13.6066422Z deleted: sha256:afa44dee9a0a5460f9bb4c303a6a93d323ad0d0decbf8f3dddea61b2ea31a06c
-2026-11-03T12:13:13.6067028Z deleted: sha256:b120877a8c6acddb44283da821e1eb98ad3ba9dba9954b6a89510661576ec1db
-2026-11-03T12:13:13.6067632Z deleted: sha256:a1ab8e74cca4db0e2c77a634e30586adfd4cf1e081268545aa8b185df216d11c
-2026-11-03T12:13:13.6068136Z untagged: ghcr.io/github/gh-aw-firewall/squid:latest
-2026-11-03T12:13:13.6068830Z untagged: ghcr.io/github/gh-aw-firewall/squid@sha256:acc55719d3816ebba2af7393d13bc72c690ddedf4e3ec74340104e3e0bda6b4d
-2026-11-03T12:13:13.6069575Z deleted: sha256:ceba3de0cc73ccb8d76055b6f4ff404a1f556c398b0c85038c5016f005d11bcb
-2026-11-03T12:13:13.6070188Z deleted: sha256:37cb58e0bfb4c148b36bdd6a1e540b0b8c2f28a8f9d281f7d2e3728c86c58d61
-2026-11-03T12:13:13.6071353Z deleted: sha256:f855a6188d1921e2c40b83e4db179844783988895a195abef6cf98bd73bf15b9
-2026-11-03T12:13:13.6071962Z deleted: sha256:72e88ce23c556a10fc021d13dc79028d769008e14542e1639438c3788cfb736d
-2026-11-03T12:13:13.6072545Z deleted: sha256:4f0183f634b4b9589f0d4ebbaa3c4fea25289e3888913b3404267afccb81751b
-2026-11-03T12:13:13.6073147Z deleted: sha256:2cf336166cfb412c1393d59cec3dc02407b9a0e7c1b0e6a5dfef1b03473270a0
-2026-11-03T12:13:13.6073734Z deleted: sha256:17b0094a813d97c34ca729739326189c9afdd4610bc44d121b69608ca549051f
-2026-11-03T12:13:13.6074315Z deleted: sha256:8ccd9236e1fc745540569864e5e03aa2976fda968ebc44d2bfbe7a2a2cc3824c
-2026-11-03T12:13:13.6074902Z deleted: sha256:74d97c428c51a828f9051a7a40a53ff1fc99e54fc30323ce36760701b0b7f711
-2026-11-03T12:13:13.6075492Z untagged: ghcr.io/dependabot/dependabot-updater-core:latest
-2026-11-03T12:13:13.6076246Z untagged: ghcr.io/dependabot/dependabot-updater-core@sha256:82243f9dd22d1586d11ec6719395c10e6f266cfaf338a0380d09c62873805ac8
-2026-11-03T12:13:13.6077002Z deleted: sha256:dae9747fa7601367bda9ad43f082b018a2f9cebb0f7935a5fafe064248a6b4da
-2026-11-03T12:13:13.6077612Z deleted: sha256:c7253a82f62ec4720821d29d60df65e893e7a4ffc9ac811f03f4937c279abe98
-2026-11-03T12:13:13.6078199Z deleted: sha256:365680fd9cf56f197f968e6d78b006e88986e3e241d07abb5c6ff0e3329908cf
-2026-11-03T12:13:13.6078939Z deleted: sha256:1f55ee4409bdd05c1c854571aca976c1c0589dd7a7b63aa38f844d2246546189
-2026-11-03T12:13:13.6079531Z deleted: sha256:31a516031fc6790be710d70d56aa6d5b4551c66e0bac1dd2b1f9e1f087e95b06
-2026-11-03T12:13:13.6080797Z deleted: sha256:b48225ea288dbbffcf8b4d12fe4ccba197b1f1e25baa69b2bf0b4d86fa1a7f9d
-2026-11-03T12:13:13.6081883Z deleted: sha256:395b02aff05e991750a877f0fd1ded7d73344116ba9894c09d71aef54ef079df
-2026-11-03T12:13:13.6082919Z deleted: sha256:1dece247c40cc99ca8a04639b5b9f9dcf015137529ee2b1d2c3142b4ee6a0527
-2026-11-03T12:13:13.6083829Z deleted: sha256:cb812a297de2b3ddba6d515330b4b8f03c3bdf714c011fcb623930dc53cf8ec6
-2026-11-03T12:13:13.6084441Z deleted: sha256:85bd9af1cf7b1e626e2d06802eee530bba05662df3dd6460aa3a776897f9f12b
-2026-11-03T12:13:13.6085038Z deleted: sha256:fc2fc45fa308da0331f8b01de899f5d33e02559971a958aed5fce1e55bb7157e
-2026-11-03T12:13:13.6085632Z deleted: sha256:10123147018cdd657f5d0bad237dcfb8416981375a3c26537901b2f7fad3f9cf
-2026-11-03T12:13:13.6086546Z deleted: sha256:32ab39660fd51c6dc3aae486b42d42bbe8fe4c1db78eaf57bb9c21198de48a16
-2026-11-03T12:13:13.6087170Z 
-2026-11-03T12:13:13.6087384Z Total reclaimed space: 2.488GB
-2026-11-03T12:13:13.6093869Z 
-2026-11-03T12:13:13.6101220Z ********************************************************************************
-2026-11-03T12:13:13.6120610Z => Docker images: Saved 2.5GiB
-2026-11-03T12:13:13.6132218Z ********************************************************************************
-2026-11-03T12:13:13.6132699Z 
-2026-11-03T12:13:13.6415486Z                total        used        free      shared  buff/cache   available
-2026-11-03T12:13:13.6416714Z Mem:            15Gi       921Mi        13Gi        45Mi       1.3Gi        14Gi
-2026-11-03T12:13:13.6417388Z Swap:             0B          0B          0B
-2026-11-03T12:13:13.6452817Z 
-2026-11-03T12:13:13.6459444Z ********************************************************************************
-2026-11-03T12:13:13.6474659Z numfmt: invalid option -- '4'
-2026-11-03T12:13:13.6475224Z Try 'numfmt --help' for more information.
-2026-11-03T12:13:13.6478380Z => Swap storage: Saved 
-2026-11-03T12:13:13.6485365Z ********************************************************************************
-2026-11-03T12:13:13.6486131Z 
-2026-11-03T12:13:13.6547659Z 
-2026-11-03T12:13:13.6555002Z ================================================================================
-2026-11-03T12:13:13.6555797Z AFTER CLEAN-UP:
-2026-11-03T12:13:13.6556117Z 
-2026-11-03T12:13:13.6556363Z $ dh -h /
-2026-11-03T12:13:13.6556826Z 
-2026-11-03T12:13:13.6567253Z Filesystem      Size  Used Avail Use% Mounted on
-2026-11-03T12:13:13.6567958Z /dev/root       145G   36G  109G  25% /
-2026-11-03T12:13:13.6571400Z $ dh -a /
-2026-11-03T12:13:13.6571640Z 
-2026-11-03T12:13:13.6579984Z Filesystem     1K-blocks     Used Available Use% Mounted on
-2026-11-03T12:13:13.6580993Z /dev/root      151263856 37516996 113730476  25% /
-2026-11-03T12:13:13.6581863Z $ dh -a
-2026-11-03T12:13:13.6582059Z 
-2026-11-03T12:13:13.6596098Z Filesystem     1K-blocks     Used Available Use% Mounted on
-2026-11-03T12:13:13.6596741Z /dev/root      151263856 37516996 113730476  25% /
-2026-11-03T12:13:13.6597295Z devtmpfs         7429216        0   7429216   0% /dev
-2026-11-03T12:13:13.6597878Z proc                   0        0         0    - /proc
-2026-11-03T12:13:13.6598420Z sysfs                  0        0         0    - /sys
-2026-11-03T12:13:13.6599093Z securityfs             0        0         0    - /sys/kernel/security
-2026-11-03T12:13:13.6599772Z tmpfs            8183760       84   8183676   1% /dev/shm
-2026-11-03T12:13:13.6600557Z devpts                 0        0         0    - /dev/pts
-2026-11-03T12:13:13.6600913Z tmpfs            3273504     1024   3272480   1% /run
-2026-11-03T12:13:13.6601249Z tmpfs               5120        0      5120   0% /run/lock
-2026-11-03T12:13:13.6601619Z cgroup2                0        0         0    - /sys/fs/cgroup
-2026-11-03T12:13:13.6601997Z none                   0        0         0    - /sys/fs/pstore
-2026-11-03T12:13:13.6602603Z efivarfs          131072       32    131036   1% /sys/firmware/efi/efivars
-2026-11-03T12:13:13.6603007Z bpf                    0        0         0    - /sys/fs/bpf
-2026-11-03T12:13:13.6603380Z systemd-1              -        -         -    - /proc/sys/fs/binfmt_misc
-2026-11-03T12:13:13.6603791Z hugetlbfs              0        0         0    - /dev/hugepages
-2026-11-03T12:13:13.6604408Z mqueue                 0        0         0    - /dev/mqueue
-2026-11-03T12:13:13.6605038Z tracefs                0        0         0    - /sys/kernel/tracing
-2026-11-03T12:13:13.6605687Z debugfs                0        0         0    - /sys/kernel/debug
-2026-11-03T12:13:13.6606334Z fusectl                0        0         0    - /sys/fs/fuse/connections
-2026-11-03T12:13:13.6607003Z configfs               0        0         0    - /sys/kernel/config
-2026-11-03T12:13:13.6607620Z /dev/sda16        901520    86444    751948  11% /boot
-2026-11-03T12:13:13.6608195Z /dev/sda15        106832     6250    100582   6% /boot/efi
-2026-11-03T12:13:13.6608608Z binfmt_misc            0        0         0    - /proc/sys/fs/binfmt_misc
-2026-11-03T12:13:13.6608984Z tmpfs            1636752       12   1636740   1% /run/user/1001
-2026-11-03T12:13:13.6609353Z ================================================================================
-2026-11-03T12:13:13.6609588Z 
-2026-11-03T12:13:13.6609594Z 
-2026-11-03T12:13:13.6609679Z /dev/root:
-2026-11-03T12:13:13.6640836Z 
-2026-11-03T12:13:13.6651298Z ********************************************************************************
-2026-11-03T12:13:13.6652030Z => Saved 23GiB
-2026-11-03T12:13:13.6652600Z ********************************************************************************
-2026-11-03T12:13:13.6653164Z 
-2026-11-03T12:13:13.6653533Z overall:
-2026-11-03T12:13:13.6653745Z 
-2026-11-03T12:13:13.6654030Z ********************************************************************************
-2026-11-03T12:13:13.6661240Z => Saved 23GiB
-2026-11-03T12:13:13.6667582Z ********************************************************************************
-2026-11-03T12:13:13.6668146Z 
-2026-11-03T12:13:13.6736976Z ##[end-action id=__jlumbroso_free-disk-space.__run;outcome=success;conclusion=success;duration_ms=103500]
-2026-11-03T12:13:13.6791497Z ##[group]Run # la machine n'a que 8 Go : sans échange, Unity est tué pendant les gros imports / la construction Android
-2026-11-03T12:13:13.6792343Z [36;1m# la machine n'a que 8 Go : sans échange, Unity est tué pendant les gros imports / la construction Android[0m
-2026-11-03T12:13:13.6792844Z [36;1msudo swapoff -a || true[0m
-2026-11-03T12:13:13.6793478Z [36;1msudo fallocate -l 16G /mnt/korvalune.swap && sudo chmod 600 /mnt/korvalune.swap && sudo mkswap /mnt/korvalune.swap && sudo swapon /mnt/korvalune.swap[0m
-2026-11-03T12:13:13.6794111Z [36;1mfree -h[0m
-2026-11-03T12:13:13.6814146Z shell: /usr/bin/bash -e {0}
-2026-11-03T12:13:13.6814431Z ##[endgroup]
-2026-11-03T12:13:13.7430915Z Setting up swapspace version 1, size = 16 GiB (17179865088 bytes)
-2026-11-03T12:13:13.7431709Z no label, UUID=fd8477af-b56b-4f82-8bc1-fe8d3938f344
-2026-11-03T12:13:13.7588300Z                total        used        free      shared  buff/cache   available
-2026-11-03T12:13:13.7589113Z Mem:            15Gi       934Mi        13Gi        45Mi       1.3Gi        14Gi
-2026-11-03T12:13:13.7589732Z Swap:           15Gi          0B        15Gi
-2026-11-03T12:13:13.7726624Z ##[group]Run actions/checkout@v4
-2026-11-03T12:13:13.7726921Z with:
-2026-11-03T12:13:13.7727174Z   repository: sebastienexp-blip/KorvaluneUnity
-2026-11-03T12:13:13.7729896Z   token: ***
-2026-11-03T12:13:13.7730105Z   ssh-strict: true
-2026-11-03T12:13:13.7730722Z   ssh-user: git
-2026-11-03T12:13:13.7730983Z   persist-credentials: true
-2026-11-03T12:13:13.7731221Z   clean: true
-2026-11-03T12:13:13.7731433Z   sparse-checkout-cone-mode: true
-2026-11-03T12:13:13.7731702Z   fetch-depth: 1
-2026-11-03T12:13:13.7731907Z   fetch-tags: false
-2026-11-03T12:13:13.7732114Z   show-progress: true
-2026-11-03T12:13:13.7732324Z   lfs: false
-2026-11-03T12:13:13.7732511Z   submodules: false
-2026-11-03T12:13:13.7732727Z   set-safe-directory: true
-2026-11-03T12:13:13.7732976Z   allow-unsafe-pr-checkout: false
-2026-11-03T12:13:13.7733226Z ##[endgroup]
-2026-11-03T12:13:14.0408325Z Syncing repository: sebastienexp-blip/KorvaluneUnity
-2026-11-03T12:13:14.0410571Z ##[group]Getting Git version info
-2026-11-03T12:13:14.0411340Z Working directory is '/home/runner/work/KorvaluneUnity/KorvaluneUnity'
-2026-11-03T12:13:14.0412361Z [command]/usr/bin/git version
-2026-11-03T12:13:14.0496371Z git version 2.56.0
-2026-11-03T12:13:14.0521074Z ##[endgroup]
-2026-11-03T12:13:14.0539178Z Temporarily overriding HOME='/home/runner/work/_temp/723091ba-c895-4510-b101-4210daa5f706' before making global git config changes
-2026-11-03T12:13:14.0540693Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-03T12:13:14.0545565Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-11-03T12:13:14.0605457Z Deleting the contents of '/home/runner/work/KorvaluneUnity/KorvaluneUnity'
-2026-11-03T12:13:14.0611472Z ##[group]Initializing the repository
-2026-11-03T12:13:14.0615823Z [command]/usr/bin/git init /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-11-03T12:13:14.0751488Z hint: Using 'master' as the name for the initial branch. This default branch name
-2026-11-03T12:13:14.0752430Z hint: will change to "main" in Git 3.0. To configure the initial branch name
-2026-11-03T12:13:14.0753262Z hint: to use in all of your new repositories, which will suppress this warning,
-2026-11-03T12:13:14.0753909Z hint: call:
-2026-11-03T12:13:14.0754206Z hint:
-2026-11-03T12:13:14.0754662Z hint: 	git config --global init.defaultBranch <name>
-2026-11-03T12:13:14.0755224Z hint:
-2026-11-03T12:13:14.0755751Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-2026-11-03T12:13:14.0756913Z hint: 'development'. The just-created branch can be renamed via this command:
-2026-11-03T12:13:14.0757552Z hint:
-2026-11-03T12:13:14.0757903Z hint: 	git branch -m <name>
-2026-11-03T12:13:14.0758272Z hint:
-2026-11-03T12:13:14.0758805Z hint: Disable this message with "git config set advice.defaultBranchName false"
-2026-11-03T12:13:14.0760465Z Initialized empty Git repository in /home/runner/work/KorvaluneUnity/KorvaluneUnity/.git/
-2026-11-03T12:13:14.0774465Z [command]/usr/bin/git remote add origin https://github.com/sebastienexp-blip/KorvaluneUnity
-2026-11-03T12:13:14.0836616Z ##[endgroup]
-2026-11-03T12:13:14.0837322Z ##[group]Disabling automatic garbage collection
-2026-11-03T12:13:14.0840017Z [command]/usr/bin/git config --local gc.auto 0
-2026-11-03T12:13:14.0880145Z ##[endgroup]
-2026-11-03T12:13:14.0881627Z ##[group]Setting up auth
-2026-11-03T12:13:14.0891701Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-03T12:13:14.0942618Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-03T12:13:14.1386741Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-03T12:13:14.1433551Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-03T12:13:14.1686263Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-03T12:13:14.1745629Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-03T12:13:14.2024234Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2026-11-03T12:13:14.2083831Z ##[endgroup]
-2026-11-03T12:13:14.2084282Z ##[group]Fetching the repository
-2026-11-03T12:13:14.2101239Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +75c59b7444c124805e2c5721fb27ba7e8aacfcad:refs/remotes/origin/main
-2026-11-03T12:13:43.3325020Z From https://github.com/sebastienexp-blip/KorvaluneUnity
-2026-11-03T12:13:43.3339062Z  * [new ref]         75c59b7444c124805e2c5721fb27ba7e8aacfcad -> origin/main
-2026-11-03T12:13:43.3345475Z ##[endgroup]
-2026-11-03T12:13:43.3346171Z ##[group]Determining the checkout info
-2026-11-03T12:13:43.3346685Z ##[endgroup]
-2026-11-03T12:13:43.3346944Z [command]/usr/bin/git sparse-checkout disable
-2026-11-03T12:13:43.3407995Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
-2026-11-03T12:13:43.3447255Z ##[group]Checking out the ref
-2026-11-03T12:13:43.3454278Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
-2026-11-03T12:13:44.4661013Z Updating files:  18% (2139/11850)
-2026-11-03T12:13:44.5107293Z Updating files:  19% (2252/11850)
-2026-11-03T12:13:44.5716818Z Updating files:  20% (2370/11850)
-2026-11-03T12:13:44.6409337Z Updating files:  21% (2489/11850)
-2026-11-03T12:13:44.7083106Z Updating files:  22% (2607/11850)
-2026-11-03T12:13:44.7715657Z Updating files:  23% (2726/11850)
-2026-11-03T12:13:44.8156749Z Updating files:  24% (2844/11850)
-2026-11-03T12:13:44.8863465Z Updating files:  25% (2963/11850)
-2026-11-03T12:13:44.9403417Z Updating files:  26% (3081/11850)
-2026-11-03T12:13:44.9952869Z Updating files:  27% (3200/11850)
-2026-11-03T12:13:45.0465892Z Updating files:  28% (3318/11850)
-2026-11-03T12:13:45.0921638Z Updating files:  29% (3437/11850)
-2026-11-03T12:13:45.1590814Z Updating files:  30% (3555/11850)
-2026-11-03T12:13:45.2143218Z Updating files:  31% (3674/11850)
-2026-11-03T12:13:45.3023561Z Updating files:  32% (3792/11850)
-2026-11-03T12:13:45.3628136Z Updating files:  33% (3911/11850)
-2026-11-03T12:13:45.3645306Z Updating files:  34% (4029/11850)
-2026-11-03T12:13:45.4660083Z Updating files:  34% (4035/11850)
-2026-11-03T12:13:45.5519651Z Updating files:  35% (4148/11850)
-2026-11-03T12:13:45.6228315Z Updating files:  36% (4266/11850)
-2026-11-03T12:13:45.7238444Z Updating files:  37% (4385/11850)
-2026-11-03T12:13:45.7888001Z Updating files:  38% (4503/11850)
-2026-11-03T12:13:45.8548579Z Updating files:  39% (4622/11850)
-2026-11-03T12:13:45.9140185Z Updating files:  40% (4740/11850)
-2026-11-03T12:13:46.0146588Z Updating files:  41% (4859/11850)
-2026-11-03T12:13:46.0649121Z Updating files:  42% (4977/11850)
-2026-11-03T12:13:46.1134243Z Updating files:  43% (5096/11850)
-2026-11-03T12:13:46.2019758Z Updating files:  44% (5214/11850)
-2026-11-03T12:13:46.3026667Z Updating files:  45% (5333/11850)
-2026-11-03T12:13:46.3650491Z Updating files:  46% (5451/11850)
-2026-11-03T12:13:46.3901762Z Updating files:  46% (5527/11850)
-2026-11-03T12:13:46.4806932Z Updating files:  47% (5570/11850)
-2026-11-03T12:13:46.5326310Z Updating files:  48% (5688/11850)
-2026-11-03T12:13:46.6848502Z Updating files:  49% (5807/11850)
-2026-11-03T12:13:46.7247981Z Updating files:  50% (5925/11850)
-2026-11-03T12:13:46.7375806Z Updating files:  51% (6044/11850)
-2026-11-03T12:13:46.7605420Z Updating files:  52% (6162/11850)
-2026-11-03T12:13:46.7914382Z Updating files:  53% (6281/11850)
-2026-11-03T12:13:46.8117790Z Updating files:  54% (6399/11850)
-2026-11-03T12:13:46.8321528Z Updating files:  55% (6518/11850)
-2026-11-03T12:13:46.8722705Z Updating files:  56% (6636/11850)
-2026-11-03T12:13:46.9022184Z Updating files:  57% (6755/11850)
-2026-11-03T12:13:46.9383427Z Updating files:  58% (6873/11850)
-2026-11-03T12:13:46.9578040Z Updating files:  59% (6992/11850)
-2026-11-03T12:13:46.9896497Z Updating files:  60% (7110/11850)
-2026-11-03T12:13:47.0146424Z Updating files:  61% (7229/11850)
-2026-11-03T12:13:47.0290942Z Updating files:  62% (7347/11850)
-2026-11-03T12:13:47.0511083Z Updating files:  63% (7466/11850)
-2026-11-03T12:13:47.0689270Z Updating files:  64% (7584/11850)
-2026-11-03T12:13:47.0769069Z Updating files:  65% (7703/11850)
-2026-11-03T12:13:47.0966747Z Updating files:  66% (7821/11850)
-2026-11-03T12:13:47.1263797Z Updating files:  67% (7940/11850)
-2026-11-03T12:13:47.1635762Z Updating files:  68% (8058/11850)
-2026-11-03T12:13:47.1792809Z Updating files:  69% (8177/11850)
-2026-11-03T12:13:47.1861437Z Updating files:  70% (8295/11850)
-2026-11-03T12:13:47.1950807Z Updating files:  71% (8414/11850)
-2026-11-03T12:13:47.2012794Z Updating files:  72% (8532/11850)
-2026-11-03T12:13:47.2062992Z Updating files:  73% (8651/11850)
-2026-11-03T12:13:47.2134903Z Updating files:  74% (8769/11850)
-2026-11-03T12:13:47.2245053Z Updating files:  75% (8888/11850)
-2026-11-03T12:13:47.2301824Z Updating files:  76% (9006/11850)
-2026-11-03T12:13:47.2344464Z Updating files:  77% (9125/11850)
-2026-11-03T12:13:47.2395986Z Updating files:  78% (9243/11850)
-2026-11-03T12:13:47.2452450Z Updating files:  79% (9362/11850)
-2026-11-03T12:13:47.2498041Z Updating files:  80% (9480/11850)
-2026-11-03T12:13:47.2541235Z Updating files:  81% (9599/11850)
-2026-11-03T12:13:47.2696378Z Updating files:  82% (9717/11850)
-2026-11-03T12:13:47.3277926Z Updating files:  83% (9836/11850)
-2026-11-03T12:13:47.3402948Z Updating files:  84% (9954/11850)
-2026-11-03T12:13:47.3522432Z Updating files:  85% (10073/11850)
-2026-11-03T12:13:47.3644088Z Updating files:  86% (10191/11850)
-2026-11-03T12:13:47.3704578Z Updating files:  86% (10274/11850)
-2026-11-03T12:13:47.3885407Z Updating files:  87% (10310/11850)
-2026-11-03T12:13:47.3993499Z Updating files:  88% (10428/11850)
-2026-11-03T12:13:47.4035786Z Updating files:  89% (10547/11850)
-2026-11-03T12:13:47.4079421Z Updating files:  90% (10665/11850)
-2026-11-03T12:13:47.4127873Z Updating files:  91% (10784/11850)
-2026-11-03T12:13:47.4169766Z Updating files:  92% (10902/11850)
-2026-11-03T12:13:47.4296181Z Updating files:  93% (11021/11850)
-2026-11-03T12:13:47.4496032Z Updating files:  94% (11139/11850)
-2026-11-03T12:13:47.4750117Z Updating files:  95% (11258/11850)
-2026-11-03T12:13:47.6445288Z Updating files:  96% (11376/11850)
-2026-11-03T12:13:47.7077647Z Updating files:  97% (11495/11850)
-2026-11-03T12:13:47.7667704Z Updating files:  98% (11613/11850)
-2026-11-03T12:13:47.8391254Z Updating files:  99% (11732/11850)
-2026-11-03T12:13:47.8391696Z Updating files: 100% (11850/11850)
-2026-11-03T12:13:47.8392070Z Updating files: 100% (11850/11850), done.
-2026-11-03T12:13:47.9719554Z Switched to a new branch 'main'
-2026-11-03T12:13:47.9721740Z branch 'main' set up to track 'origin/main'.
-2026-11-03T12:13:48.0032479Z ##[endgroup]
-2026-11-03T12:13:48.0091547Z [command]/usr/bin/git log -1 --format=%H
-2026-11-03T12:13:48.0134084Z 75c59b7444c124805e2c5721fb27ba7e8aacfcad
-2026-11-03T12:13:48.4328284Z ##[group]Run actions/cache/restore@v4
-2026-11-03T12:13:48.4328597Z with:
-2026-11-03T12:13:48.4328798Z   path: Library
-2026-11-03T12:13:48.4329204Z   key: Library-Forge-68e1e6977dca0a0928665f1a662b24b066ac19d6d461bdbccdec593cfa7b9860
-2026-11-03T12:13:48.4329692Z   restore-keys: Library-Forge-
-2026-11-03T12:13:48.4329965Z   enableCrossOsArchive: false
-2026-11-03T12:13:48.4330562Z   fail-on-cache-miss: false
-2026-11-03T12:13:48.4330835Z   lookup-only: false
-2026-11-03T12:13:48.4331054Z ##[endgroup]
-2026-11-03T12:13:48.6432132Z (node:2731) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-03T12:13:48.6433202Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-03T12:13:49.0403916Z Cache hit for restore-key: Library-Forge-68e1e6977dca0a0928665f1a662b24b066ac19d6d461bdbccdec593cfa7b9860-41631810806
-2026-11-03T12:13:49.0527994Z (node:2731) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-2026-11-03T12:13:50.4009186Z Received 8388608 of 1966834795 (0.4%), 8.0 MBs/sec
-2026-11-03T12:13:51.4028709Z Received 134217728 of 1966834795 (6.8%), 63.9 MBs/sec
-2026-11-03T12:13:52.4034198Z Received 268435456 of 1966834795 (13.6%), 85.2 MBs/sec
-2026-11-03T12:13:53.4047325Z Received 432013312 of 1966834795 (22.0%), 102.9 MBs/sec
-2026-11-03T12:13:54.4111550Z Received 608174080 of 1966834795 (30.9%), 115.9 MBs/sec
-2026-11-03T12:13:55.4078851Z Received 801112064 of 1966834795 (40.7%), 127.2 MBs/sec
-2026-11-03T12:13:56.4069415Z Received 964689920 of 1966834795 (49.0%), 131.3 MBs/sec
-2026-11-03T12:13:57.4066252Z Received 1140850688 of 1966834795 (58.0%), 135.9 MBs/sec
-2026-11-03T12:13:58.1949385Z ##[error]The operation was canceled.
-2026-11-03T12:13:58.2034095Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
-2026-11-03T12:13:58.2034654Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
-2026-11-03T12:13:58.2035333Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
-2026-11-03T12:13:58.2036085Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
-2026-11-03T12:13:58.2036760Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
-2026-11-03T12:13:58.2037389Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
-2026-11-03T12:13:58.2055745Z shell: /usr/bin/bash -e {0}
-2026-11-03T12:13:58.2056020Z ##[endgroup]
-2026-11-03T12:13:58.3178268Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
-2026-11-03T12:13:58.3178821Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
-2026-11-03T12:13:58.3179517Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
-2026-11-03T12:13:58.3180685Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
-2026-11-03T12:13:58.3181381Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
-2026-11-03T12:13:58.3182017Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
-2026-11-03T12:13:58.3200604Z shell: /usr/bin/bash -e {0}
-2026-11-03T12:13:58.3200877Z ##[endgroup]
-2026-11-03T12:13:58.4291679Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true
-2026-11-03T12:13:58.4292128Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true[0m
-2026-11-03T12:13:58.4292466Z [36;1mif [ ! -f ci-report.md ]; then[0m
-2026-11-03T12:13:58.4292913Z [36;1m  { echo "# Rapport absent : Unity s'est arrêté avant la fin"; echo; echo '```';[0m
-2026-11-03T12:13:58.4293632Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-2026-11-03T12:13:58.4294368Z [36;1m    echo '```'; echo; echo "## Erreurs de compilation (Library/Bee, Logs)"; echo '```';[0m
-2026-11-03T12:13:58.4295190Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-2026-11-03T12:13:58.4296448Z [36;1m    echo '```'; echo; echo "## Dernières étapes (ci-out/progress.log)"; echo '```'; tail -150 ci-out/progress.log 2>/dev/null || echo "(aucune : la méthode CI n'a pas démarré)"; echo '```'; } > ci-report.md || true[0m
-2026-11-03T12:13:58.4297252Z [36;1mfi[0m
-2026-11-03T12:13:58.4297598Z [36;1mM=$(head -c 60000 ci-report.md | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')[0m
-2026-11-03T12:13:58.4298321Z [36;1mif [ "skipped" = "success" ]; then echo "::notice title=Intégration Unity::${M}"; else echo "::error title=Intégration Unity::${M}"; fi[0m
-2026-11-03T12:13:58.4298916Z [36;1mmkdir -p ci-out[0m
-2026-11-03T12:13:58.4299328Z [36;1mtail -c 400000 unity-editor.log > ci-out/unity-editor-tail.log 2>/dev/null || true[0m
-2026-11-03T12:13:58.4317512Z shell: /usr/bin/bash -e {0}
-2026-11-03T12:13:58.4317789Z ##[endgroup]
-2026-11-03T12:13:58.5185754Z ##[error]# Rapport absent : Unity s'est arrêté avant la fin
-
-```
-```
-
-## Erreurs de compilation (Library/Bee, Logs)
-```
-```
-
-## Dernières étapes (ci-out/progress.log)
-```
-(aucune : la méthode CI n'a pas démarré)
-```
-2026-11-03T12:13:58.5233703Z ##[group]Run git config user.name "korvalune-ci"
-2026-11-03T12:13:58.5234120Z [36;1mgit config user.name "korvalune-ci"[0m
-2026-11-03T12:13:58.5234477Z [36;1mgit config user.email "ci@korvalune.invalid"[0m
-2026-11-03T12:13:58.5234977Z [36;1mgit add -A Assets ProjectSettings Packages ci-report.md ci-out 2>/dev/null || true[0m
-2026-11-03T12:13:58.5235550Z [36;1mif git diff --cached --quiet; then echo "rien à renvoyer"; exit 0; fi[0m
-2026-11-03T12:13:58.5236057Z [36;1mgit commit -m "CI Unity : fichiers générés et rapport [skip ci]"[0m
-2026-11-03T12:13:58.5236659Z [36;1mfor i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done[0m
-2026-11-03T12:13:58.5255235Z shell: /usr/bin/bash -e {0}
-2026-11-03T12:13:58.5255505Z ##[endgroup]
-2026-11-03T12:14:04.2619063Z rien à renvoyer
-2026-11-03T12:14:04.3251192Z ##[group]Run actions/cache/save@v4
-2026-11-03T12:14:04.3251547Z with:
-2026-11-03T12:14:04.3251753Z   path: Library
-2026-11-03T12:14:04.3252215Z   key: Library-Forge-68e1e6977dca0a0928665f1a662b24b066ac19d6d461bdbccdec593cfa7b9860-41633428897
-2026-11-03T12:14:04.3252740Z   enableCrossOsArchive: false
-2026-11-03T12:14:04.3253001Z ##[endgroup]
-2026-11-03T12:14:04.4334141Z (node:2840) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-03T12:14:04.4335083Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-03T12:14:04.4457491Z [warning]Path Validation Error: Path(s) specified in the action for caching do(es) not exist, hence no cache is being saved.
-2026-11-03T12:14:04.4462261Z ##[warning]Cache save failed.
-2026-11-03T12:14:04.4554354Z ##[group]Run if [ "skipped" = "success" ]; then exit 0; fi
-2026-11-03T12:14:04.4554787Z [36;1mif [ "skipped" = "success" ]; then exit 0; fi[0m
-2026-11-03T12:14:04.4555249Z [36;1mecho "::error::Échec de l'intégration Unity (voir ci-report.md)"; exit 1[0m
-2026-11-03T12:14:04.4573864Z shell: /usr/bin/bash -e {0}
-2026-11-03T12:14:04.4574130Z ##[endgroup]
-2026-11-03T12:14:04.4612721Z ##[error]Échec de l'intégration Unity (voir ci-report.md)
-2026-11-03T12:14:04.4615167Z ##[error]Process completed with exit code 1.
-2026-11-03T12:14:04.4708828Z Post job cleanup.
-2026-11-03T12:14:04.5604641Z [command]/usr/bin/git version
-2026-11-03T12:14:04.5635302Z git version 2.56.0
-2026-11-03T12:14:04.5709354Z Temporarily overriding HOME='/home/runner/work/_temp/14189293-b288-4980-bb1c-82fe557a65f0' before making global git config changes
-2026-11-03T12:14:04.5710950Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-03T12:14:04.5714838Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-11-03T12:14:04.5759270Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-03T12:14:04.5798430Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-03T12:14:04.6083927Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-03T12:14:04.6122483Z http.https://github.com/.extraheader
-2026-11-03T12:14:04.6135812Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-2026-11-03T12:14:04.6181818Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-03T12:14:04.6481057Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-03T12:14:04.6528914Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-03T12:14:04.6996532Z Cleaning up orphan processes
-2026-11-03T12:14:04.7345639Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache/restore@v4, actions/cache/save@v4, actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-11-03T12:20:35.1651549Z [133/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.UnityAdditionalFile.txt
+2026-11-03T12:20:35.1652972Z [134/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.UnityAdditionalFile.txt
+2026-11-03T12:20:35.1654434Z [135/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.rsp2
+2026-11-03T12:20:35.1655682Z [136/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.UnityAdditionalFile.txt
+2026-11-03T12:20:35.1657010Z [137/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll.mvfrm.rsp
+2026-11-03T12:20:35.1658327Z [138/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll.mvfrm.rsp
+2026-11-03T12:20:35.1659763Z [139/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll.mvfrm.rsp
+2026-11-03T12:20:35.1661212Z [140/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestAudioModule.dll_4544C891ECB4773F.mvfrm
+2026-11-03T12:20:35.1662899Z [141/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.rsp
+2026-11-03T12:20:35.1664081Z [142/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.rsp
+2026-11-03T12:20:35.1672185Z [143/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.rsp
+2026-11-03T12:20:35.1673240Z [144/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll.mvfrm.rsp
+2026-11-03T12:20:35.1674294Z [145/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.rsp2
+2026-11-03T12:20:35.1675414Z [146/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.UnityAdditionalFile.txt
+2026-11-03T12:20:35.1676614Z [147/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll.mvfrm.rsp
+2026-11-03T12:20:35.1677682Z [148/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.rsp2
+2026-11-03T12:20:35.1678820Z [149/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.UnityAdditionalFile.txt
+2026-11-03T12:20:35.1680170Z [150/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.rsp2
+2026-11-03T12:20:35.1681356Z [151/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.UnityAdditionalFile.txt
+2026-11-03T12:20:35.1682595Z [152/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll.mvfrm.rsp
+2026-11-03T12:20:35.1683665Z [153/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.rsp
+2026-11-03T12:20:35.1684630Z [154/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.rsp
+2026-11-03T12:20:35.1685636Z [155/199    0s] WriteText Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.rsp
+2026-11-03T12:20:35.1686913Z [156/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestTextureModule.dll_35641A745CC0FAF4.mvfrm
+2026-11-03T12:20:35.1688554Z [157/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll.mvfrm
+2026-11-03T12:20:35.1690033Z [158/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.dll.mvfrm
+2026-11-03T12:20:35.1691272Z [159/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.SysrootPackage.Editor.dll.mvfrm
+2026-11-03T12:20:35.1692680Z [160/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.dll.mvfrm
+2026-11-03T12:20:35.1693896Z [161/199    1s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.dll (+2 others)
+2026-11-03T12:20:35.1694986Z [162/199    1s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.dll (+2 others)
+2026-11-03T12:20:35.1696147Z [163/199    1s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll (+2 others)
+2026-11-03T12:20:35.1697370Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1703766Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Common.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1705707Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1707292Z [164/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Multiplayer.Center.Common.ref.dll_1579E59FCCBEB6B2.mvfrm
+2026-11-03T12:20:35.1708540Z [165/199    2s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.SysrootPackage.Editor.dll (+2 others)
+2026-11-03T12:20:35.1710102Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.SysrootPackage.Editor.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1711467Z [166/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.AI.Navigation.ref.dll_DE872EE15FE1F97C.mvfrm
+2026-11-03T12:20:35.1712876Z [167/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.AI.Navigation.Editor.ConversionSystem.ref.dll_0D6E4E7A57F11024.mvfrm
+2026-11-03T12:20:35.1714422Z [168/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Common.dll
+2026-11-03T12:20:35.1715306Z [169/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.dll
+2026-11-03T12:20:35.1716164Z [170/199    0s] CopyFiles Library/ScriptAssemblies/Unity.SysrootPackage.Editor.pdb
+2026-11-03T12:20:35.1717041Z [171/199    0s] CopyFiles Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll
+2026-11-03T12:20:35.1717945Z [172/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Common.pdb
+2026-11-03T12:20:35.1719541Z [173/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.ConversionSystem.dll
+2026-11-03T12:20:35.1720689Z [174/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.ConversionSystem.pdb
+2026-11-03T12:20:35.1721638Z [175/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.pdb
+2026-11-03T12:20:35.1722731Z [176/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll.mvfrm
+2026-11-03T12:20:35.1724090Z [177/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.SysrootPackage.Editor.ref.dll_795E971823712576.mvfrm
+2026-11-03T12:20:35.1725401Z [178/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll.mvfrm
+2026-11-03T12:20:35.1726673Z [179/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll.mvfrm
+2026-11-03T12:20:35.1727785Z [180/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll (+2 others)
+2026-11-03T12:20:35.1729528Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Sysroot.Linux_x86_64.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1731776Z [181/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.pdb
+2026-11-03T12:20:35.1733289Z [182/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll
+2026-11-03T12:20:35.1734646Z [183/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll (+2 others)
+2026-11-03T12:20:35.1735898Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Editor.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1737055Z [184/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.dll
+2026-11-03T12:20:35.1737915Z [185/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Editor.pdb
+2026-11-03T12:20:35.1739583Z [186/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Sysroot.Linux_x86_64.ref.dll_47C0B0C1257E42B5.mvfrm
+2026-11-03T12:20:35.1740812Z [187/199    1s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll (+2 others)
+2026-11-03T12:20:35.1742120Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Multiplayer.Center.Editor.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1743633Z [188/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.pdb
+2026-11-03T12:20:35.1744563Z [189/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.dll
+2026-11-03T12:20:35.1745702Z [190/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.AI.Navigation.Editor.ref.dll_9C82A0E57CE4B9F5.mvfrm
+2026-11-03T12:20:35.1747001Z [191/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll.mvfrm
+2026-11-03T12:20:35.1748275Z [192/199    0s] MovedFromExtractor-Combine Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll.mvfrm
+2026-11-03T12:20:35.1749683Z [193/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll (+2 others)
+2026-11-03T12:20:35.1750924Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.Toolchain.Linux-x86_64.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1752093Z [194/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.dll
+2026-11-03T12:20:35.1752960Z [195/199    0s] CopyFiles Library/ScriptAssemblies/Unity.Toolchain.Linux-x86_64.pdb
+2026-11-03T12:20:35.1753909Z [196/199    0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll (+2 others)
+2026-11-03T12:20:35.1755146Z [           0s] Csc Library/Bee/artifacts/2400b0aE.dag/Unity.AI.Navigation.Updater.dll (+2 others) [CacheWrite 00000000000000000000000000000004]
+2026-11-03T12:20:35.1756324Z [197/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Updater.pdb
+2026-11-03T12:20:35.1757198Z [198/199    0s] CopyFiles Library/ScriptAssemblies/Unity.AI.Navigation.Updater.dll
+2026-11-03T12:20:35.1758006Z *** Tundra build success (10.52 seconds), 198 items updated, 199 evaluated
+2026-11-03T12:20:35.1758631Z Total cache size 661976
+2026-11-03T12:20:35.1759303Z Total cache size after purge 661976, took 00:00:00.0150460
+2026-11-03T12:20:35.1804356Z AssetDatabase: script compilation time: 11.639093s
+2026-11-03T12:20:35.2017322Z Begin MonoManager ReloadAssembly
+2026-11-03T12:20:35.4918422Z - Loaded All Assemblies, in  0.289 seconds
+2026-11-03T12:20:35.5590847Z Start importing Assets using Guid(00000000000000001000000000000000) (DefaultImporter) -> (artifact id: '4b55c7cb15071bfc086d0e52a7664a41') in 0.018562248 seconds
+2026-11-03T12:20:35.5606778Z Start importing ProjectSettings/InputManager.asset using Guid(00000000000000002000000000000000) (LibraryAssetImporter) -> (artifact id: 'd7cbb2f293d488d47214d777b9ab9143') in 0.001504408 seconds
+2026-11-03T12:20:35.5618052Z Start importing ProjectSettings/TagManager.asset using Guid(00000000000000003000000000000000) (LibraryAssetImporter) -> (artifact id: 'e12af14f4aa32bc40c17248af2e3cce2') in 0.001108419 seconds
+2026-11-03T12:20:35.5642077Z Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '53cd9abebf724847b102d74e074a7005') in 0.002693277 seconds
+2026-11-03T12:20:35.5653341Z Start importing ProjectSettings/AudioManager.asset using Guid(00000000000000006000000000000000) (LibraryAssetImporter) -> (artifact id: '1f9b6fd92dcfbee817b95a134e3d28fc') in 0.00098591 seconds
+2026-11-03T12:20:35.5664556Z Start importing ProjectSettings/TimeManager.asset using Guid(00000000000000007000000000000000) (LibraryAssetImporter) -> (artifact id: '3e7b459e98cfb21a8ab539d867e021e1') in 0.00120586 seconds
+2026-11-03T12:20:35.5675902Z Start importing ProjectSettings/DynamicsManager.asset using Guid(00000000000000008000000000000000) (LibraryAssetImporter) -> (artifact id: '144119a1ab01c815a678c4d054cdf8e5') in 0.000987282 seconds
+2026-11-03T12:20:35.5689861Z Start importing ProjectSettings/QualitySettings.asset using Guid(00000000000000009000000000000000) (LibraryAssetImporter) -> (artifact id: '50d10dfdf9e7649bcfa4ef07fad090d4') in 0.001264099 seconds
+2026-11-03T12:20:35.5702908Z Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '02e711b73ebda4a0e7a32469dbba3ae8') in 0.000973687 seconds
+2026-11-03T12:20:35.5713879Z Start importing ProjectSettings/EditorSettings.asset using Guid(0000000000000000c000000000000000) (LibraryAssetImporter) -> (artifact id: '471e955cc34338ba6e9160a74550aa9b') in 0.001021817 seconds
+2026-11-03T12:20:35.5725802Z Start importing ProjectSettings/NavMeshAreas.asset using Guid(00000000000000004100000000000000) (LibraryAssetImporter) -> (artifact id: '98ab0a1852fd3ef0454a55ef8869d4c6') in 0.001031616 seconds
+2026-11-03T12:20:35.5736119Z Start importing ProjectSettings/Physics2DSettings.asset using Guid(00000000000000005100000000000000) (LibraryAssetImporter) -> (artifact id: '8032544aff07135c44b0aec745df5b87') in 0.001030443 seconds
+2026-11-03T12:20:35.5745474Z Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: 'b0333d69fa7e961821ffcb2378da820d') in 0.001153443 seconds
+2026-11-03T12:20:35.5759726Z Start importing ProjectSettings/ClusterInputManager.asset using Guid(00000000000000007100000000000000) (LibraryAssetImporter) -> (artifact id: '5a028a71a6163b7bc9a46219c48662ec') in 0.001005105 seconds
+2026-11-03T12:20:35.5770454Z Start importing ProjectSettings/UnityConnectSettings.asset using Guid(0000000000000000a100000000000000) (LibraryAssetImporter) -> (artifact id: '4978576e64e73b5a2e34ad1ebd36d3e4') in 0.001112807 seconds
+2026-11-03T12:20:35.5780858Z Start importing ProjectSettings/PresetManager.asset using Guid(0000000000000000b100000000000000) (LibraryAssetImporter) -> (artifact id: '669bd2cb5cdf99ef516d1350fa42393e') in 0.001063014 seconds
+2026-11-03T12:20:35.5810800Z Start importing ProjectSettings/VFXManager.asset using Guid(0000000000000000c100000000000000) (LibraryAssetImporter) -> (artifact id: 'c15523da67325d03c520fccf41939336') in 0.001063645 seconds
+2026-11-03T12:20:35.5823840Z Start importing ProjectSettings/VersionControlSettings.asset using Guid(0000000000000000d100000000000000) (LibraryAssetImporter) -> (artifact id: '6699f6a30141aac50ed115ec20e131c2') in 0.001136891 seconds
+2026-11-03T12:20:35.5827098Z Start importing ProjectSettings/MemorySettings.asset using Guid(0000000000000000f100000000000000) (LibraryAssetImporter) -> (artifact id: '19f032dc933bd79e61da5c81f7ddd1ac') in 0.00120537 seconds
+2026-11-03T12:20:35.5833627Z Start importing ProjectSettings/MultiplayerManager.asset using Guid(00000000000000000200000000000000) (LibraryAssetImporter) -> (artifact id: '2f864bba7a58beddb6fbf79980c9a838') in 0.001121924 seconds
+2026-11-03T12:20:35.5842128Z Start importing Library/BuildInstructions using Guid(00000000000000002300000000000000) (DefaultImporter) -> (artifact id: 'ade3aeda13ad9960ede0e143cb33502a') in 0.000715595 seconds
+2026-11-03T12:20:35.5853386Z Start importing Packages/com.unity.modules.imgui using Guid(c060426bfd6e82575228df6656368eaa) (DefaultImporter) -> (artifact id: '7d484ab5933192f91b6a2fb9f7498a1e') in 0.000671443 seconds
+2026-11-03T12:20:35.5858634Z Start importing Assets/Scenes using Guid(131a6b21c8605f84396be9f6751fb6e3) (DefaultImporter) -> (artifact id: '91527d591ccb2a4660704971243dc63d') in 0.000604318 seconds
+2026-11-03T12:20:35.5867430Z Start importing Packages/com.unity.sysroot using Guid(0513eb739d871a8969c8bc182c574140) (DefaultImporter) -> (artifact id: '174064be914462ca67def7c6b28ef65a') in 0.000730724 seconds
+2026-11-03T12:20:35.5875066Z Start importing Packages/com.unity.sysroot.linux-x86_64 using Guid(46b9c0cad0feb0477ff8dd4c486a9855) (DefaultImporter) -> (artifact id: '44cf6b72f441d9a80484501b342d2b6e') in 0.00064827 seconds
+2026-11-03T12:20:35.5883912Z Start importing Packages/com.unity.multiplayer.center using Guid(c6a6af5c77363b25a6878455c738e70e) (DefaultImporter) -> (artifact id: '1247f08500380f195e1d726471f57851') in 0.000717028 seconds
+2026-11-03T12:20:35.5891470Z Start importing Packages/com.unity.modules.uielements using Guid(2808ba6bccb2478ec9c7209d8bf1f3cc) (DefaultImporter) -> (artifact id: '49f971d306aab8cb20ddbc00ca94734a') in 0.000680019 seconds
+2026-11-03T12:20:35.5899912Z Start importing Packages/com.unity.modules.accessibility using Guid(783ee1c8fd4414848db1be97aacf44fb) (DefaultImporter) -> (artifact id: '8e348ba1cb91a7a56d611c91d2d841c4') in 0.000677414 seconds
+2026-11-03T12:20:35.5907783Z Start importing Packages/com.unity.modules.ui using Guid(39728903e57c60021f80449a8bbc0096) (DefaultImporter) -> (artifact id: '9ba448b29b75a8a1f5c4c31201266424') in 0.000688626 seconds
+2026-11-03T12:20:35.5915922Z Start importing Packages/com.unity.ai.navigation using Guid(fa896030ecfdc8bdb1e8661c8a32fcb8) (DefaultImporter) -> (artifact id: 'dc8453960773ade03796542eb7f80d66') in 0.000643933 seconds
+2026-11-03T12:20:35.5923809Z Start importing Packages/com.unity.modules.hierarchycore using Guid(6b81377a4453ba7362eb3322f9bcc6c6) (DefaultImporter) -> (artifact id: 'b5ba94375de312bec58cfc03230046fb') in 0.000684778 seconds
+2026-11-03T12:20:35.5931189Z Start importing Packages/com.unity.toolchain.linux-x86_64 using Guid(9bd9bcb62ec8c2335e8c5b8564f5c89e) (DefaultImporter) -> (artifact id: 'e78639e1b8c09ce5da583ac1f8c2112d') in 0.000665963 seconds
+2026-11-03T12:20:35.5940155Z Start importing Packages/com.unity.modules.jsonserialize using Guid(fc3a810351931f5e6183e16b9beb5563) (DefaultImporter) -> (artifact id: 'ae149b8f46567b37c6b77b16bb572fe8') in 0.000721287 seconds
+2026-11-03T12:20:35.5948928Z Start importing Packages/com.unity.modules.ai using Guid(fd871a8be47119612f7c254e96a822b7) (DefaultImporter) -> (artifact id: '619e67a2820f0fb43e606df1f0c95aa2') in 0.000713272 seconds
+2026-11-03T12:20:35.5957915Z Start importing Packages/com.unity.sysroot/Tests using Guid(21355b98f3d94d714ad8c543adb3c7ef) (DefaultImporter) -> (artifact id: '054e8ed07779d8f5227569c2d81c3b25') in 0.000683596 seconds
+2026-11-03T12:20:35.5967241Z Start importing Packages/com.unity.multiplayer.center/Editor using Guid(72aad6ae0dafb492cbf852432441bb38) (DefaultImporter) -> (artifact id: '1472e7f5e610b0cbc5fd254e2d90e8af') in 0.000696109 seconds
+2026-11-03T12:20:35.5975084Z Start importing Packages/com.unity.multiplayer.center/Common using Guid(f247964bd405431fbd31840f97bef608) (DefaultImporter) -> (artifact id: '80028f5919b4bee936c04608a509d2e3') in 0.000681863 seconds
+2026-11-03T12:20:35.5984436Z Start importing Packages/com.unity.ai.navigation/Editor using Guid(63b588f3892bb4b5eb73ad3d2791e05c) (DefaultImporter) -> (artifact id: '56542eb366809904ef22cfba0a6fd803') in 0.000744559 seconds
+2026-11-03T12:20:35.5996580Z Start importing Packages/com.unity.ai.navigation/Gizmos using Guid(93b9715f5a4bf471c8154f6cbab7e94d) (DefaultImporter) -> (artifact id: '9a1ea2e9334068cca4fb91a9c2309465') in 0.000762834 seconds
+2026-11-03T12:20:35.6007355Z Start importing Packages/com.unity.ai.navigation/Tests using Guid(a4ffdd6288cb842a8ac2b31823ceaab0) (DefaultImporter) -> (artifact id: '7c766eff0d351270b603bc59b4bdc5e3') in 0.000754609 seconds
+2026-11-03T12:20:35.6017533Z Start importing Packages/com.unity.sysroot/Editor using Guid(169765632ffb0f87cb8b3c23abe48007) (DefaultImporter) -> (artifact id: '2bcf5a40e96ba251d6e2564f1c6a5019') in 0.000767373 seconds
+2026-11-03T12:20:35.6027078Z Start importing Packages/com.unity.sysroot.linux-x86_64/Tests using Guid(27987f7a31ce040af97591e628278304) (DefaultImporter) -> (artifact id: '893a13eee328a7e4d90289e266905aa4') in 0.000773734 seconds
+2026-11-03T12:20:35.6037944Z Start importing Packages/com.unity.toolchain.linux-x86_64/Tests using Guid(5a0086b2cca8070de884733169bbf04e) (DefaultImporter) -> (artifact id: '9585ec7deb44b0754e02a80890270695') in 0.000800364 seconds
+2026-11-03T12:20:35.6048165Z Start importing Packages/com.unity.sysroot.linux-x86_64/Editor using Guid(9a994b3ee6d83415a9fd8831f7791f85) (DefaultImporter) -> (artifact id: 'cf6c60179e93fdd2ec449973fd1a8b38') in 0.000785477 seconds
+2026-11-03T12:20:35.6056828Z Start importing Packages/com.unity.multiplayer.center/Tests using Guid(baf75c9d3de4941df9ee5f3dd1d3bc34) (DefaultImporter) -> (artifact id: 'c292f37aeb22efaba797eb1a89034c56') in 0.000776149 seconds
+2026-11-03T12:20:35.6066880Z Start importing Packages/com.unity.toolchain.linux-x86_64/Editor using Guid(3bf5adcbe74ea0cf9b97900b9f6dfaac) (DefaultImporter) -> (artifact id: 'e2217ae5c102b6fb716c3e9ebf0c9a51') in 0.000769677 seconds
+2026-11-03T12:20:35.6076585Z Start importing Packages/com.unity.ai.navigation/EditorResources using Guid(bcb26a80e56f33046a81574f96664cfe) (DefaultImporter) -> (artifact id: '5a1cad08036fb88bee2b759db690ec3a') in 0.000785857 seconds
+2026-11-03T12:20:35.6089216Z Start importing Packages/com.unity.ai.navigation/Runtime using Guid(ce67aa87f613246dda63a54a59c6399e) (DefaultImporter) -> (artifact id: '9e38751fd2a295b42a1aa963f377ada5') in 0.00079306 seconds
+2026-11-03T12:20:35.6097772Z Start importing Packages/com.unity.multiplayer.center/Editor/Analytics using Guid(21f32d2f4add49b3b11fadb6889a2156) (DefaultImporter) -> (artifact id: '51aff480448f490e143cac19c8fd77f7') in 0.000761893 seconds
+2026-11-03T12:20:35.6124758Z Start importing Packages/com.unity.multiplayer.center/Editor/Features using Guid(22d3dbf8d488d49d2b1130d698010dee) (DefaultImporter) -> (artifact id: '97b7a3470b31512cc10a8dd26ae2abee') in 0.000930286 seconds
+2026-11-03T12:20:35.6132020Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem using Guid(d25d346918c1247368b4cb66a787b59e) (DefaultImporter) -> (artifact id: '8fe22541ee4ac1a9cb76ef1a05ebba54') in 0.000435312 seconds
+2026-11-03T12:20:35.6134952Z Start importing Packages/com.unity.sysroot.linux-x86_64/Tests/Editor using Guid(a4ba451dcf348469cb1fd6802655fd98) (DefaultImporter) -> (artifact id: 'f00b8449f9474a315e906e44e53d9c57') in 0.000364229 seconds
+2026-11-03T12:20:35.6138456Z Start importing Packages/com.unity.multiplayer.center/Tests/Editor using Guid(96c71b811fa50403690b154e216fe217) (DefaultImporter) -> (artifact id: 'f201ce797b3b9aaf0bd388d6daf5c8a9') in 0.000358089 seconds
+2026-11-03T12:20:35.6142113Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime using Guid(077676819252b4349a7677a483a0a8f4) (DefaultImporter) -> (artifact id: 'e8bad06de5cde9ef5960cb41e6af6758') in 0.000862873 seconds
+2026-11-03T12:20:35.6147268Z Start importing Packages/com.unity.multiplayer.center/Editor/OnBoarding using Guid(1726448925bf4bd1af6ca883bae8ff3f) (DefaultImporter) -> (artifact id: 'c547995c98e70de55ed7a0882b0b1d59') in 0.000971293 seconds
+2026-11-03T12:20:35.6171024Z Start importing Packages/com.unity.ai.navigation/Tests/Editor using Guid(276ab4071255d9f49931e6a8373248e1) (DefaultImporter) -> (artifact id: 'a23c4fe80deba16c509d4e02beb183e0') in 0.000917963 seconds
+2026-11-03T12:20:35.6172773Z Start importing Packages/com.unity.multiplayer.center/Editor/Recommendations using Guid(97646f506bf040e9bd4568124c8b425e) (DefaultImporter) -> (artifact id: '2b67414499aad658981bbbe944dda5b8') in 0.000548033 seconds
+2026-11-03T12:20:35.6181811Z Start importing Packages/com.unity.multiplayer.center/Editor/Questionnaire using Guid(a7f089ed51c2345ffb7ac0bc3562453f) (DefaultImporter) -> (artifact id: '91939e622deced05437de4135bda5ede') in 0.001304264 seconds
+2026-11-03T12:20:35.6199560Z Start importing Packages/com.unity.ai.navigation/Tests/VerifyEditorInPlaymode using Guid(48fe869bd7a418849ba6d20ca02072c7) (DefaultImporter) -> (artifact id: 'bcdc3d69dd8e912b25535d039f4cdfef') in 0.000710403 seconds
+2026-11-03T12:20:35.6212261Z Start importing Packages/com.unity.ai.navigation/Tests/PrebuiltAssets using Guid(09d22d38f275d7b48bc6a8082c1e4457) (DefaultImporter) -> (artifact id: '012968ab391b981ef7cb7e95c964214f') in 0.001272548 seconds
+2026-11-03T12:20:35.6223383Z Start importing Packages/com.unity.toolchain.linux-x86_64/Tests/Editor using Guid(a92e90f8d5f3b7bd48967a27d8fbdebe) (DefaultImporter) -> (artifact id: '1d2ff726bffae10ac439465f9348af55') in 0.000504963 seconds
+2026-11-03T12:20:35.6232955Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow using Guid(7a7dcde6448847648629a13d746ce966) (DefaultImporter) -> (artifact id: '25d35bc9e6545f61b784037e02201bc5') in 0.001004725 seconds
+2026-11-03T12:20:35.6245064Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay using Guid(aa309129cb54440488d6edd8358f5aec) (DefaultImporter) -> (artifact id: 'dc14845f51ac4d427dfe8b6b64d71932') in 0.000888719 seconds
+2026-11-03T12:20:35.6257982Z Start importing Packages/com.unity.ai.navigation/Editor/Updater using Guid(aaa4efef82a9346dba667d74ff3d5075) (DefaultImporter) -> (artifact id: '9a5110d6f215686fe9665b970337c6d7') in 0.000920057 seconds
+2026-11-03T12:20:35.6268811Z Start importing Packages/com.unity.sysroot/Tests/Editor using Guid(4cac27dd0398cfe66aa1f1eb45442a1a) (DefaultImporter) -> (artifact id: 'db7908cf7f80885aa72dec172125ef95') in 0.000437887 seconds
+2026-11-03T12:20:35.6282675Z Start importing Packages/com.unity.multiplayer.center/Tests/Runtime using Guid(8e4d240cf158245a9945c4df01d83bc1) (DefaultImporter) -> (artifact id: '9afa31a007ea527f1ed301c6b16e63c9') in 0.000964269 seconds
+2026-11-03T12:20:35.6303391Z Start importing Packages/com.unity.ai.navigation/Tests/Editor/Inspectors using Guid(8061144b555b4fbbb5226d6e18f4dd50) (DefaultImporter) -> (artifact id: 'bc57e0f35e9dda3d0be650d6c851be84') in 0.000967183 seconds
+2026-11-03T12:20:35.6307202Z Start importing Packages/com.unity.ai.navigation/Tests/Editor/Converter using Guid(585e4d2e85b344909fd03397aa977b50) (DefaultImporter) -> (artifact id: 'abe1e2683aa2e32392027ad0c59dfdff') in 0.000383466 seconds
+2026-11-03T12:20:35.6314452Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI using Guid(9bd34ec3fe8f4aed936c3a0cf2f32e56) (DefaultImporter) -> (artifact id: 'b73da0b57dd0696387d727e85cb54e01') in 0.001077661 seconds
+2026-11-03T12:20:35.6327625Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/OffMeshLinkTests using Guid(9c10f4966eb108848acf7461aaf6057e) (DefaultImporter) -> (artifact id: '81b55707962a68253e4065dd9caf05e1') in 0.000935727 seconds
+2026-11-03T12:20:35.6341010Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/OffMeshLinkTests/SceneSetup using Guid(028144d6018e97b4eabdb685c9fc01a0) (DefaultImporter) -> (artifact id: 'b10002eb36438d6ff18cf1ac6cb42d5c') in 0.000935626 seconds
+2026-11-03T12:20:35.6355210Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons using Guid(34a09eb4d6e8d44989194a25525c5147) (DefaultImporter) -> (artifact id: '6eef5c1301b509ae1757bc36a5ed6ea8') in 0.00099672 seconds
+2026-11-03T12:20:35.6368131Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/RecommendationView using Guid(eab7f42d361b483aaa760c5909002312) (DefaultImporter) -> (artifact id: '8eb859fe06dd083b30bd9c27d3ce7755') in 0.000944774 seconds
+2026-11-03T12:20:35.6387019Z Start importing Packages/com.unity.ai.navigation/Tests/VerifyEditorInPlaymode/Unity.AI.Navigation.Tests.EditorInPlaymode.asmdef using Guid(100055fbb0e2acd4a835038b0f7cd2f5) (AssemblyDefinitionImporter) -> (artifact id: 'bc800d037327f3aa3de25299032a48e7') in 0.001581292 seconds
+2026-11-03T12:20:35.6405650Z Start importing Packages/com.unity.toolchain.linux-x86_64/Tests/Editor/Unity.Toolchain.Linux-x86_64.EditorTests.asmdef using Guid(138e8122bb82938fe9a6eee7a4985427) (AssemblyDefinitionImporter) -> (artifact id: '7a7b3e46b3289357a9ed6aac425ed531') in 0.001161367 seconds
+2026-11-03T12:20:35.6430011Z Start importing Packages/com.unity.sysroot/Editor/Unity.SysrootPackage.Editor.asmdef using Guid(435a4e0ece4e23c4882730a295bbd8cd) (AssemblyDefinitionImporter) -> (artifact id: 'b36985a53ad91c94e488985541c0cafc') in 0.001331636 seconds
+2026-11-03T12:20:35.6439143Z Start importing Packages/com.unity.multiplayer.center/Common/Unity.Multiplayer.Center.Common.asmdef using Guid(84abd2ab34a74600a33a3bb9d72859fe) (AssemblyDefinitionImporter) -> (artifact id: '2e15fdfe053455410c46af8108d4b576') in 0.001438285 seconds
+2026-11-03T12:20:35.6458254Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/Unity.AI.Navigation.Tests.asmdef using Guid(455cd750f394b1c41b963b3335eae29c) (AssemblyDefinitionImporter) -> (artifact id: 'becc6752e4efb4a6d377a376faf9cff7') in 0.001120963 seconds
+2026-11-03T12:20:35.6478227Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/Unity.AI.Navigation.Editor.ConversionSystem.asmdef using Guid(c57630adab7a340ec94f10e4fcac12f1) (AssemblyDefinitionImporter) -> (artifact id: 'e598b58b76186828c99f16f776b7fbb5') in 0.001345912 seconds
+2026-11-03T12:20:35.6488986Z Start importing Packages/com.unity.ai.navigation/Editor/Updater/Unity.AI.Navigation.Updater.asmdef using Guid(1664e92176d434ccd902c1705fefe682) (AssemblyDefinitionImporter) -> (artifact id: '8c8fe093821397de6eabebbbee056d8c') in 0.000917192 seconds
+2026-11-03T12:20:35.6509233Z Start importing Packages/com.unity.multiplayer.center/Tests/Runtime/Unity.Multiplayer.Center.Tests.asmdef using Guid(2664430aff4254d79887d32c3fc1e221) (AssemblyDefinitionImporter) -> (artifact id: '10a8b6cec249c3f1431650b35fb0b23f') in 0.001815997 seconds
+2026-11-03T12:20:35.6528289Z Start importing Packages/com.unity.ai.navigation/Editor/Unity.AI.Navigation.Editor.asmdef using Guid(86c9d8e67265f41469be06142c397d17) (AssemblyDefinitionImporter) -> (artifact id: '546c987ea52dbb85d61b6633478d9319') in 0.001259823 seconds
+2026-11-03T12:20:35.6540972Z Start importing Packages/com.unity.ai.navigation/Tests/Runtime/OffMeshLinkTests/Unity.AI.Navigation.LegacyOffMeshLink.Tests.asmdef using Guid(68d7ff144262c9148888e665efa8692c) (AssemblyDefinitionImporter) -> (artifact id: 'd416964d2251ac6e914c20515dcb0f1d') in 0.001104772 seconds
+2026-11-03T12:20:35.6559232Z Start importing Packages/com.unity.multiplayer.center/Tests/Editor/Unity.Multiplayer.Center.Editor.Tests.asmdef using Guid(787ec048daec145b580d1134da5dd278) (AssemblyDefinitionImporter) -> (artifact id: '29dc17f91cb2a01d8b6be8c932a8280d') in 0.001633729 seconds
+2026-11-03T12:20:35.6577902Z Start importing Packages/com.unity.toolchain.linux-x86_64/Editor/Unity.Toolchain.Linux-x86_64.asmdef using Guid(f851af5d86c208af09cd265d08e3b3e2) (AssemblyDefinitionImporter) -> (artifact id: '5743b8e02569ca5b855321131136bc2d') in 0.001733816 seconds
+2026-11-03T12:20:35.6592892Z Start importing Packages/com.unity.ai.navigation/Tests/Editor/Unity.AI.Navigation.Editor.Tests.asmdef using Guid(794824b4a8f003f47a92875e8342f790) (AssemblyDefinitionImporter) -> (artifact id: 'f276d5f01ad4e3459993aefb76744551') in 0.001343808 seconds
+2026-11-03T12:20:35.6609891Z Start importing Packages/com.unity.sysroot.linux-x86_64/Tests/Editor/Unity.Sysroot.Linux-x86_64.EditorTests.asmdef using Guid(1ac444c25ae4642a2b37c1c9156d384f) (AssemblyDefinitionImporter) -> (artifact id: '6b38dc05b8e624468fb51ae076273d31') in 0.001486034 seconds
+2026-11-03T12:20:35.6624308Z Start importing Packages/com.unity.sysroot/Tests/Editor/Unity.Sysroot.EditorTests.asmdef using Guid(4b746f9393832b79384ac03cddf8eb94) (AssemblyDefinitionImporter) -> (artifact id: 'efef6c46ca41291844504e29698a7e33') in 0.001299796 seconds
+2026-11-03T12:20:35.6639851Z Start importing Packages/com.unity.sysroot.linux-x86_64/Editor/Unity.Sysroot.Linux-x86_64.asmdef using Guid(7bb4ea1d3f6d64e25ac0b0dd565b23aa) (AssemblyDefinitionImporter) -> (artifact id: '7292d3fc90152c959cc3cc2848ac714a') in 0.001281973 seconds
+2026-11-03T12:20:35.6654078Z Start importing Packages/com.unity.ai.navigation/Runtime/Unity.AI.Navigation.asmdef using Guid(8c4dd21966739024fbd72155091d199e) (AssemblyDefinitionImporter) -> (artifact id: 'cc5cca0622230da4c134ad5ba351c1cf') in 0.001306438 seconds
+2026-11-03T12:20:35.6669150Z Start importing Packages/com.unity.multiplayer.center/Editor/Unity.Multiplayer.Center.Editor.asmdef using Guid(be17709716f1648caa5de6d0c38103ed) (AssemblyDefinitionImporter) -> (artifact id: '6ce86c22cc7899b0214f30e55df0ec5c') in 0.001277144 seconds
+2026-11-03T12:20:35.6680130Z Start importing Packages/com.unity.modules.ui/package.ModuleCompilationTrigger using Guid(51fa60bb2bd1e5bc74e8cc95a7bfd5b7) (DefaultImporter) -> (artifact id: '237e32f9541121b786ca4b06eace0dfe') in 0.000939985 seconds
+2026-11-03T12:20:35.6691798Z Start importing Packages/com.unity.modules.hierarchycore/package.ModuleCompilationTrigger using Guid(d104359075a97392b803d3d5aebc77f7) (DefaultImporter) -> (artifact id: '5f087c93c58d9b1c35f89c539ed3a98d') in 0.000934314 seconds
+2026-11-03T12:20:35.6703980Z Start importing Packages/com.unity.modules.ai/package.ModuleCompilationTrigger using Guid(e2d09a26ce46dc617b54e49a534ace20) (DefaultImporter) -> (artifact id: 'a71f1fd08e4e9bf1ecd2d64209645034') in 0.001057303 seconds
+2026-11-03T12:20:35.6715559Z Start importing Packages/com.unity.modules.jsonserialize/package.ModuleCompilationTrigger using Guid(e6a135e3ea9cb46795d1b0e05ac3e1e5) (DefaultImporter) -> (artifact id: '8d26f1c211bce77f7cf17eccccd57b0d') in 0.000739019 seconds
+2026-11-03T12:20:35.6726573Z Start importing Packages/com.unity.modules.accessibility/package.ModuleCompilationTrigger using Guid(4745d06d5a7ca576dcf9e5e67b417652) (DefaultImporter) -> (artifact id: 'ae9e01646ac31a09b3de296582cd6de0') in 0.000908767 seconds
+2026-11-03T12:20:35.6739024Z Start importing Packages/com.unity.modules.uielements/package.ModuleCompilationTrigger using Guid(8a752aaaadd2410dd9a84e01c1bace9f) (DefaultImporter) -> (artifact id: 'ae37e7f0f1483578fc0d8d28fd17e0e2') in 0.000793581 seconds
+2026-11-03T12:20:35.6751376Z Start importing Packages/com.unity.modules.imgui/package.ModuleCompilationTrigger using Guid(be13c398521e3c1ad21fb9da30ab2ab6) (DefaultImporter) -> (artifact id: 'ea0574aa05344c7e80357502346d73fc') in 0.001089093 seconds
+2026-11-03T12:20:35.6760232Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-11-03T12:20:35.7892267Z Native extension for LinuxStandalone target not found
+2026-11-03T12:20:36.2551761Z Mono: successfully reloaded assembly
+2026-11-03T12:20:36.2784510Z - Finished resetting the current domain, in  0.602 seconds
+2026-11-03T12:20:36.2792683Z Domain Reload Profiling: 890ms
+2026-11-03T12:20:36.2793425Z 	BeginReloadAssembly (184ms)
+2026-11-03T12:20:36.2793898Z 		ExecutionOrderSort (0ms)
+2026-11-03T12:20:36.2794492Z 		DisableScriptedObjects (14ms)
+2026-11-03T12:20:36.2795006Z 		BackupInstance (0ms)
+2026-11-03T12:20:36.2795603Z 		ReleaseScriptingObjects (0ms)
+2026-11-03T12:20:36.2796127Z 		CreateAndSetChildDomain (50ms)
+2026-11-03T12:20:36.2796637Z 	RebuildCommonClasses (43ms)
+2026-11-03T12:20:36.2797166Z 	RebuildNativeTypeToScriptingClass (10ms)
+2026-11-03T12:20:36.2797764Z 	initialDomainReloadingComplete (29ms)
+2026-11-03T12:20:36.2798352Z 	LoadAllAssembliesAndSetupDomain (22ms)
+2026-11-03T12:20:36.2799260Z 		LoadAssemblies (85ms)
+2026-11-03T12:20:36.2799782Z 		RebuildTransferFunctionScriptingTraits (0ms)
+2026-11-03T12:20:36.2800373Z 		AnalyzeDomain (17ms)
+2026-11-03T12:20:36.2800818Z 			TypeCache.Refresh (10ms)
+2026-11-03T12:20:36.2801283Z 				TypeCache.ScanAssembly (4ms)
+2026-11-03T12:20:36.2801772Z 			BuildScriptInfoCaches (4ms)
+2026-11-03T12:20:36.2802260Z 			ResolveRequiredComponents (1ms)
+2026-11-03T12:20:36.2802754Z 	FinalizeReload (603ms)
+2026-11-03T12:20:36.2803192Z 		ReleaseScriptCaches (0ms)
+2026-11-03T12:20:36.2803663Z 		RebuildScriptCaches (0ms)
+2026-11-03T12:20:36.2804468Z 		SetupLoadedEditorAssemblies (462ms)
+2026-11-03T12:20:36.2805032Z 			LogAssemblyErrors (0ms)
+2026-11-03T12:20:36.2805567Z 			InitializePlatformSupportModulesInManaged (66ms)
+2026-11-03T12:20:36.2806218Z 			SetLoadedEditorAssemblies (5ms)
+2026-11-03T12:20:36.2806796Z 			BeforeProcessingInitializeOnLoad (142ms)
+2026-11-03T12:20:36.2807420Z 			ProcessInitializeOnLoadAttributes (198ms)
+2026-11-03T12:20:36.2808068Z 			ProcessInitializeOnLoadMethodAttributes (41ms)
+2026-11-03T12:20:36.2808714Z 			AfterProcessingInitializeOnLoad (9ms)
+2026-11-03T12:20:36.2809499Z 			EditorAssembliesLoaded (0ms)
+2026-11-03T12:20:36.2809981Z 		ExecutionOrderSort2 (0ms)
+2026-11-03T12:20:36.2810502Z 		AwakeInstancesAfterBackupRestoration (8ms)
+2026-11-03T12:20:36.3699539Z Start importing Library/BuildPlayer.prefs using Guid(00000000000000005000000000000000) (DefaultImporter) -> (artifact id: '083d37eb6b0e82b8f5c1ec86344d848d') in 0.005616935 seconds
+2026-11-03T12:20:36.3716177Z Start importing Assets/Scenes/SampleScene.unity using Guid(2cda990e2423bbf4892e6590ba056729) (DefaultImporter) -> (artifact id: '02327cc66a20cdc467be9bf65630cb1a') in 0.000939634 seconds
+2026-11-03T12:20:36.3731539Z Start importing Packages/com.unity.multiplayer.center/Editor/Questionnaire/Questionnaire.questionnaire using Guid(a659150180ae3489ba41c71780ba3779) (DefaultImporter) -> (artifact id: 'f015c12481ca2ebbe281edf6a5646fdb') in 0.00083076 seconds
+2026-11-03T12:20:36.3744111Z Start importing Packages/com.unity.multiplayer.center/Editor/Recommendations/RecommendationData_6000.0.recommendations using Guid(b66d076cdcfe3b14388de66307a0e7ff) (DefaultImporter) -> (artifact id: '1b3459ae4f98f07b813c3fa223d78525') in 0.00069103 seconds
+2026-11-03T12:20:36.3755958Z Start importing Packages/com.unity.ai.navigation/Tests/PrebuiltAssets/TestBundleWithAllLinks.prefab_ using Guid(c62c6d05e86bc124c9f6f5d49c93c158) (DefaultImporter) -> (artifact id: '21f4a55396d1cfd292f7b3ea579e8593') in 0.000598928 seconds
+2026-11-03T12:20:36.3767008Z Start importing Packages/com.unity.ai.navigation/Tests/PrebuiltAssets/Test_Links_Created_With_2_0_0.unity using Guid(5ad99e7d0c24c3845a39ca29f7c1c5e6) (DefaultImporter) -> (artifact id: '1b087aaedc6ede58ab89b478d2442f79') in 0.000547492 seconds
+2026-11-03T12:20:36.3838687Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@128.png using Guid(80899a9fbe3d3364eac2c5924c0a28cf) (TextureImporter) -> (artifact id: '964bdecda83139269d7de984acb3316c') in 0.006769595 seconds
+2026-11-03T12:20:36.3857611Z Start importing Packages/com.unity.ai.navigation/EditorResources/NavigationWindowIcon.png using Guid(b0172c3ab97e219478711e1fbe9630f2) (TextureImporter) -> (artifact id: '09994926588f00e3e7f31cfa1a07ed76') in 0.001487426 seconds
+2026-11-03T12:20:36.3897215Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@256.png using Guid(b05e7d8dc2bdbb14ab5b1da240ac65d5) (TextureImporter) -> (artifact id: '242c27ce589fd31da5a85a79b3a49579') in 0.00363767 seconds
+2026-11-03T12:20:36.3914438Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageInstalled@2x.png using Guid(318df756abab5463e9aa361360784865) (TextureImporter) -> (artifact id: '26bbafe216bf1ced645ac8f05cccc3cb') in 0.001538942 seconds
+2026-11-03T12:20:36.3929697Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On.png using Guid(c136efa5cc6d99a4d9e7bad0209aea25) (TextureImporter) -> (artifact id: '4d288b651dd63ab4ed6678450d6a7bad') in 0.001385857 seconds
+2026-11-03T12:20:36.3951787Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Loading.png using Guid(424a8de5def3b46dcb08edd00ad1c7bd) (TextureImporter) -> (artifact id: 'e88d4d355216a72f88b315d11c7d9f8b') in 0.00209995 seconds
+2026-11-03T12:20:36.3973305Z Start importing Packages/com.unity.ai.navigation/EditorResources/d_NavigationWindowIcon.png using Guid(425f55e9ef81a5e48b87c5d6b1bbf35c) (TextureImporter) -> (artifact id: '2aeb4ce123d71ce660a21c2d65ae99e2') in 0.001510449 seconds
+2026-11-03T12:20:36.3993387Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_Package.png using Guid(525a6cca8dd9a4d28875a8fe824710d9) (TextureImporter) -> (artifact id: 'd29594278abb14431ab5522a72284324') in 0.001683351 seconds
+2026-11-03T12:20:36.4064476Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshLink Icon.png using Guid(92f4afa3e25264f5b964937ccea49ff2) (TextureImporter) -> (artifact id: '47986880767c616cc29c15fce6af4983') in 0.007058445 seconds
+2026-11-03T12:20:36.4080148Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@2x.png using Guid(a206ff0ddc681e642a2e62fc57a7d51c) (TextureImporter) -> (artifact id: '73654f7638806b59111f400cc4da49ab') in 0.001616306 seconds
+2026-11-03T12:20:36.4113461Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CloudCode@2x.png using Guid(a23c0dd570fd44b57a03a8880002fcca) (TextureImporter) -> (artifact id: '456c95355a45abe4a6bb8f35c5e9af5a') in 0.003132918 seconds
+2026-11-03T12:20:36.4132882Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/ClientHosted.png using Guid(b2ce704e56cc84fb3b347499263c6244) (TextureImporter) -> (artifact id: '1b09bba3f64572b3527000f0145f764f') in 0.002119676 seconds
+2026-11-03T12:20:36.4163481Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DistributedAuthority@2x.png using Guid(0354877031b64465ea7e5cafea1a2653) (TextureImporter) -> (artifact id: '677bb664c7866a5fcec9bdacbe4217f5') in 0.002851543 seconds
+2026-11-03T12:20:36.4179688Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@2x.png using Guid(334589c596cc053418f700189f91111c) (TextureImporter) -> (artifact id: '47f92520bd96555fe1eff4feba0f15c3') in 0.001469052 seconds
+2026-11-03T12:20:36.4199170Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@16.png using Guid(731522d95656bec42a5fc0bdc672ebe9) (TextureImporter) -> (artifact id: '089789c60637ac1a73b1dd5bed28e7b4') in 0.001643848 seconds
+2026-11-03T12:20:36.4231274Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NGO@2x.png using Guid(83b28bcaaf34b4fd580114fb05d9f160) (TextureImporter) -> (artifact id: '916c85e4b25e4fb43dfb73ddac4d22f0') in 0.003230429 seconds
+2026-11-03T12:20:36.4249769Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@64.png using Guid(b3cd430fb0ffe164fa829262bb9e1d4b) (TextureImporter) -> (artifact id: 'dce22814395fd141463e17547c4b33c1') in 0.001597922 seconds
+2026-11-03T12:20:36.4264875Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay.png using Guid(e3f0b16456276c94aab8bd6664208dc3) (TextureImporter) -> (artifact id: '2967e8d6c9b4c34feacd66b6abeb3654') in 0.001448253 seconds
+2026-11-03T12:20:36.4284425Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageInstalled@2x.png using Guid(0423146d9f51c4563a0f2a8200b6cd38) (TextureImporter) -> (artifact id: 'fbec57b3f653c3bbcbf4ff250c6d4565') in 0.001498417 seconds
+2026-11-03T12:20:36.4320587Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@256.png using Guid(1497075210b6dcd4c8f31ecfc6c5c79c) (TextureImporter) -> (artifact id: '15a574aec6a4fbe4b6de4c0dfd16885d') in 0.003379838 seconds
+2026-11-03T12:20:36.4360196Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@128.png using Guid(44837f46c53a42246a6de7fa161e0d00) (TextureImporter) -> (artifact id: 'e27609b792470642fc1f19f6d1c52255') in 0.002075034 seconds
+2026-11-03T12:20:36.4386144Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@256.png using Guid(642f7453935154b44afc516c07b1d009) (TextureImporter) -> (artifact id: '3604dca0cca53308c51791b83ba918ae') in 0.004164263 seconds
+2026-11-03T12:20:36.4413166Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_Questionnaire.png using Guid(741761e72e6f24446bd8ba03ea3d0261) (TextureImporter) -> (artifact id: '448e267be0c914e94ab41fc73587cfee') in 0.001717015 seconds
+2026-11-03T12:20:36.4501562Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/EmptyViewIcon.png using Guid(84e4bbd00035e4671bf14e0380a89001) (TextureImporter) -> (artifact id: 'b7638aeb468c56d9e5a6352ee5886207') in 0.00877917 seconds
+2026-11-03T12:20:36.4531896Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageManager@2x.png using Guid(9431e8221045c4af189b2fa7174b9e9f) (TextureImporter) -> (artifact id: '9e9020a8a2a2af1722940474be650776') in 0.002898407 seconds
+2026-11-03T12:20:36.4596360Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshSurface Icon.png using Guid(e4f97225bcfb64760a1c81f460837f01) (TextureImporter) -> (artifact id: 'e79ffa7116f47e1b545af41a5a0ce180') in 0.005717564 seconds
+2026-11-03T12:20:36.4619677Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@64.png using Guid(151753cf3d5916d4fbf624668c268675) (TextureImporter) -> (artifact id: '7a6ecdb5355cffb2a6003eb671e55256') in 0.002356539 seconds
+2026-11-03T12:20:36.4672770Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NoNetcode@2x.png using Guid(b58a826ca804e4c67bab4283ad5a6102) (TextureImporter) -> (artifact id: 'e1d74f598241e8a73fdfc649a416d3a0') in 0.004826577 seconds
+2026-11-03T12:20:36.4713937Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@256.png using Guid(f5dd88efd8622424998bf5326c5421eb) (TextureImporter) -> (artifact id: '35ac908df9e9202c944933913a473924') in 0.003691803 seconds
+2026-11-03T12:20:36.4735872Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageInstalled.png using Guid(4616b2fa4acd1429e931835b80966c2a) (TextureImporter) -> (artifact id: '8af7918eeb10b9e2c9b1b44a3408d3a3') in 0.002039136 seconds
+2026-11-03T12:20:36.4760948Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@16.png using Guid(96c9a57d95a712d44978703ea9dd7f4e) (TextureImporter) -> (artifact id: '386e92554caf75e1bdd71d059df50425') in 0.002391472 seconds
+2026-11-03T12:20:36.4787547Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageManager@2x.png using Guid(a6fd0c627f5aa48fa81512221e70a11e) (TextureImporter) -> (artifact id: '5d35046e5870c033ff1d3faaf7e96a29') in 0.00184822 seconds
+2026-11-03T12:20:36.4859056Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshModifier Icon.png using Guid(b642c6bf23e624e23ad11b3e1d471932) (TextureImporter) -> (artifact id: '058adf1d3b4747dcbe2960fc203942e8') in 0.006451331 seconds
+2026-11-03T12:20:36.4891916Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DistributedAuthority.png using Guid(d63245ece6d8f476c8c7ca24da9937f6) (TextureImporter) -> (artifact id: 'b44ac27a1716b54742b80f5ea32e38a4') in 0.002391006 seconds
+2026-11-03T12:20:36.4914837Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/PackageManager.png using Guid(679f9999c6f8f497e806a2d5d0511879) (TextureImporter) -> (artifact id: 'd0db9cd40724a15177ff117a729f5da2') in 0.002238658 seconds
+2026-11-03T12:20:36.4952269Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageInstalled.png using Guid(77be953cf28de42a4ad8532539fef3f5) (TextureImporter) -> (artifact id: '081e5adbde036422c1250884d4edacc4') in 0.002197982 seconds
+2026-11-03T12:20:36.4971975Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/ClientHosted@2x.png using Guid(c7a38e6eccbfc49778cb8b77f594a971) (TextureImporter) -> (artifact id: '82164b4f6b50175723b47cdabb5dbc80') in 0.003265255 seconds
+2026-11-03T12:20:36.5022112Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CustomNetcode@2x.png using Guid(d7711b0cc806d430b8a95f1e33ec3649) (TextureImporter) -> (artifact id: '83a9eeac864c4794a161c72995ad4634') in 0.00438759 seconds
+2026-11-03T12:20:36.5043117Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@32.png using Guid(f7a3e2b3beab29040bc1a68f0ad0045c) (TextureImporter) -> (artifact id: '67ba54d6fd703df2649fb276027748a9') in 0.001934743 seconds
+2026-11-03T12:20:36.5079429Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DedicatedServer@2x.png using Guid(38b78df4a34c94fa6a52c90239606ff1) (TextureImporter) -> (artifact id: '6baa3adafd5d928bd47df3a1e4059e37') in 0.003167111 seconds
+2026-11-03T12:20:36.5107383Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@32.png using Guid(b8a654e77ffbbcd4abdda7fdb70fbb9e) (TextureImporter) -> (artifact id: '45dd48360035a2f30781e100b2ad8dcd') in 0.001695685 seconds
+2026-11-03T12:20:36.5131864Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NGO.png using Guid(99da7b3894f364efdb5fa1443952a55d) (TextureImporter) -> (artifact id: 'ece1a78420f07a18d01aa8bf1b6c320f') in 0.002075423 seconds
+2026-11-03T12:20:36.5158046Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/N4E.png using Guid(e9669051ff70449b5923861e0e0b8838) (TextureImporter) -> (artifact id: 'a6b05c43da9a029205d559f2ec8bdf83') in 0.002277411 seconds
+2026-11-03T12:20:36.5178208Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@32.png using Guid(f9a2f623ba32a844da6de770f5ccf17f) (TextureImporter) -> (artifact id: 'd9915cebbfdd80fb0e0c845fe2569081') in 0.001568948 seconds
+2026-11-03T12:20:36.5459452Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/EmptyViewIcon@2x.png using Guid(2adffcc506285402aa795dee6f3166d0) (TextureImporter) -> (artifact id: 'c34a61d458b432a7a680b56cca136591') in 0.027230545 seconds
+2026-11-03T12:20:36.5488490Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay.png using Guid(6a986a181c9bc6043b057a3d15edbaad) (TextureImporter) -> (artifact id: '5f0ba7180bdc7d3217e56da69bdf7130') in 0.001925935 seconds
+2026-11-03T12:20:36.5520014Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_Loading.png using Guid(dab91f148d99946e7b3c3a87ecf4b973) (TextureImporter) -> (artifact id: 'a047ee303d6680a4009166ad53f24e30') in 0.002837286 seconds
+2026-11-03T12:20:36.5553054Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@128.png using Guid(1b6bf0e7b03fea94987a73d0cb14781b) (TextureImporter) -> (artifact id: 'e31a88d86a40b5308c6f93e97ad50000') in 0.002609962 seconds
+2026-11-03T12:20:36.5581853Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/d_PackageManager.png using Guid(1b4c88814ec6241eb8e327515399c006) (TextureImporter) -> (artifact id: '40e2b773b80dc7302243fbc236781d33') in 0.003234229 seconds
+2026-11-03T12:20:36.5624459Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On@128.png using Guid(5b2a8a1e265e99b4fb8d77061490f397) (TextureImporter) -> (artifact id: '437a9fee1f77b11e26a9eca96245d3e1') in 0.001934311 seconds
+2026-11-03T12:20:36.5635877Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay On@16.png using Guid(1c89fbe185cd30b4584ab3d5476807eb) (TextureImporter) -> (artifact id: '6285f34a737e5eba651c8f5cff4fddbb') in 0.001623991 seconds
+2026-11-03T12:20:36.5675687Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/N4E@2x.png using Guid(2cb589d4e01184d928bb698f06e77561) (TextureImporter) -> (artifact id: 'abac31dec0aeef30c574c668d7bae915') in 0.003504402 seconds
+2026-11-03T12:20:36.5706311Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay On.png using Guid(5c5ac68c1bc4e104f9e987b9d1da4556) (TextureImporter) -> (artifact id: 'b9bd3cd26d566fd242c326f048d033f3') in 0.001768081 seconds
+2026-11-03T12:20:36.5763694Z Start importing Packages/com.unity.ai.navigation/Gizmos/NavMeshModifierVolume Icon.png using Guid(cc7b9475dbddf4f9088d327d6e10ab77) (TextureImporter) -> (artifact id: '88dc4f917ac169c753ca0367bd713487') in 0.006399172 seconds
+2026-11-03T12:20:36.5803619Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CustomNetcode.png using Guid(dce12af736e0a4a1ba35d6424f897dc9) (TextureImporter) -> (artifact id: '4453daebcc979751be637c2d07673ae3') in 0.002841586 seconds
+2026-11-03T12:20:36.5819695Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@64.png using Guid(fc46fceb4d1516544b7f503337211f65) (TextureImporter) -> (artifact id: '29dbf42a87ebc32e615f2d41d6944377') in 0.001510379 seconds
+2026-11-03T12:20:36.5839530Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@64.png using Guid(1dacc9e843ef1444fad71e40913ef05c) (TextureImporter) -> (artifact id: '9a0336d7199146eb9d337027a6eb4e1f') in 0.001841257 seconds
+2026-11-03T12:20:36.5865954Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/NoNetcode.png using Guid(1daed49eec0f94f7ebb36dfef6159884) (TextureImporter) -> (artifact id: 'bd4a14320a5c0a50b43a3b424b770833') in 0.00197696 seconds
+2026-11-03T12:20:36.5880756Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@2x.png using Guid(7d5867654fa2bf448b06f384143ceca7) (TextureImporter) -> (artifact id: 'fdbb8425df659f11a734bd5ded471b22') in 0.001457842 seconds
+2026-11-03T12:20:36.5899453Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@16.png using Guid(8d8d1929f2279804e8a744d3da25e23b) (TextureImporter) -> (artifact id: '45352a606c0503ae1ee8b51cf3334168') in 0.001815539 seconds
+2026-11-03T12:20:36.5923240Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/NavigationOverlay@2x.png using Guid(9d244ceb235342e4c8f308aa1f71be7e) (TextureImporter) -> (artifact id: '89a9dd4a2812d36208b10416bdc16ec4') in 0.001683019 seconds
+2026-11-03T12:20:36.5944670Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Package.png using Guid(9d9689eab72c8480c90679f4dcf18820) (TextureImporter) -> (artifact id: 'b091b6cbaf3c39d6e437566b7c3a3a2b') in 0.002178896 seconds
+2026-11-03T12:20:36.5970228Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/CloudCode.png using Guid(ad1d29f4654194951a3c8bf507914d05) (TextureImporter) -> (artifact id: 'e743b244d69d21632a4c3f40e5918eb7') in 0.002404377 seconds
+2026-11-03T12:20:36.5998160Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Questionnaire.png using Guid(dd70cd654275d47db807e918055e004f) (TextureImporter) -> (artifact id: 'b7d35593123a52c5927fd6da6eaa9d72') in 0.002687779 seconds
+2026-11-03T12:20:36.6030234Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/DedicatedServer.png using Guid(3fe892784421e47f5aa40c2784a6cb3e) (TextureImporter) -> (artifact id: '25d047273f7d8df802e9d7d4aa6b713e') in 0.002501177 seconds
+2026-11-03T12:20:36.6051866Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/Icons/Check.png using Guid(4f78a544322c742b89e63fb68557b1d2) (TextureImporter) -> (artifact id: '5cc387dfe2bc87ec82ef2c0dfe95eed1') in 0.002006886 seconds
+2026-11-03T12:20:36.6074294Z Start importing Packages/com.unity.ai.navigation/EditorResources/Overlay/d_NavigationOverlay@32.png using Guid(6f3c566cd9f63c9408d201ea50b51444) (TextureImporter) -> (artifact id: '5878d59a003f4d26282d91b4e37e0eae') in 0.002169038 seconds
+2026-11-03T12:20:36.6096355Z Start importing Packages/com.unity.ai.navigation/EditorResources/NavigationWindowIcon.asset using Guid(13a8a84f37ede4760a590fd13172bdd4) (NativeFormatImporter) -> (artifact id: 'cb7309e32185ef3988276790a75b3cb0') in 0.00134872 seconds
+2026-11-03T12:20:36.6115781Z Start importing Packages/com.unity.ai.navigation/EditorResources/d_NavigationWindowIcon.asset using Guid(df6a6289992d3406cb4cad0c522e4adf) (NativeFormatImporter) -> (artifact id: 'fc3269a0342f0683e78396e3ad4bad61') in 0.001328239 seconds
+2026-11-03T12:20:36.6132524Z Start importing Packages/com.unity.modules.jsonserialize/package.json using Guid(40bf3cec17fa0b49fe04443c8332d638) (PackageManifestImporter) -> (artifact id: '4bbe75e7d3a83ee7597a3bcba3a1e7c4') in 0.001460676 seconds
+2026-11-03T12:20:36.6147182Z Start importing Packages/com.unity.multiplayer.center/LICENSE.md using Guid(70554f6c9e4114e1084bb38f9ea400ce) (TextScriptImporter) -> (artifact id: 'c4bd63aaea861ad58925ef6690300eb1') in 0.001209898 seconds
+2026-11-03T12:20:36.6160745Z Start importing Packages/com.unity.sysroot.linux-x86_64/CHANGELOG.md using Guid(d079a46bd2b13441ebad731de9b00dbe) (TextScriptImporter) -> (artifact id: '57ce7193d96ac7cb884973f5dc96cc1b') in 0.001058466 seconds
+2026-11-03T12:20:36.6172363Z Start importing Packages/com.unity.modules.ai/package.json using Guid(f0f13f2ab3d6d13cfc6e4656824bfca8) (PackageManifestImporter) -> (artifact id: 'f55d3a21cd5f5d61fcb8b7e17ef38636') in 0.00095897 seconds
+2026-11-03T12:20:36.6182963Z Start importing Packages/com.unity.sysroot/README.md using Guid(51f3a1b7b38fe39689977681fe22df32) (TextScriptImporter) -> (artifact id: '741f6247cd2243e151c583a3bf0e1439') in 0.000978337 seconds
+2026-11-03T12:20:36.6194657Z Start importing Packages/com.unity.modules.imgui/package.json using Guid(42fe78c8fe682715a2cb531422e6ccb3) (PackageManifestImporter) -> (artifact id: '258497c2a57bcde162ae716914ae3ed9') in 0.000992873 seconds
+2026-11-03T12:20:36.6207579Z Start importing Packages/com.unity.sysroot.linux-x86_64/package.json using Guid(82b3e10190ae04847a3432984fd63265) (PackageManifestImporter) -> (artifact id: '4094a568cd5cd3cfeb4c917c630408bc') in 0.001124289 seconds
+2026-11-03T12:20:36.6220657Z Start importing Packages/com.unity.modules.accessibility/package.json using Guid(43674d438e19b89d7fe6af07234f3252) (PackageManifestImporter) -> (artifact id: 'ad5a70e9f56b60c0a8df45af38e584c0') in 0.001123027 seconds
+2026-11-03T12:20:36.6234012Z Start importing Packages/com.unity.multiplayer.center/README.md using Guid(c359bcaf4a0bc4040aac650bf14ec619) (TextScriptImporter) -> (artifact id: '1479d3316a4547e823ef71ef56c076f5') in 0.001121012 seconds
+2026-11-03T12:20:36.6245400Z Start importing Packages/com.unity.sysroot/package.json using Guid(0445a7983a983d97f848d19d5eeebf7b) (PackageManifestImporter) -> (artifact id: '7f1dd2edd35db95076b342361c26c918') in 0.001155076 seconds
+2026-11-03T12:20:36.6258413Z Start importing Packages/com.unity.toolchain.linux-x86_64/README.md using Guid(e476833ad0eb3d6afa792f32246c42d2) (TextScriptImporter) -> (artifact id: '21f55eb396a552c7f8bac32a390811cf') in 0.001004274 seconds
+2026-11-03T12:20:36.6269911Z Start importing Packages/com.unity.toolchain.linux-x86_64/LICENSE.md using Guid(25c7823ec1068a4d49626b816b321aab) (TextScriptImporter) -> (artifact id: '1bf07f43fff9386dc7e95e7eccf8ba7e') in 0.000967415 seconds
+2026-11-03T12:20:36.6282970Z Start importing Packages/com.unity.sysroot.linux-x86_64/README.md using Guid(169a1eb50937145adaa82ac869cadee2) (TextScriptImporter) -> (artifact id: 'b332939361d9146fe489ad078f14c787') in 0.001063883 seconds
+2026-11-03T12:20:36.6299533Z Start importing Packages/com.unity.sysroot/Third Party Notices.md using Guid(77480111a80ad46e7b0d10da3fd3a092) (TextScriptImporter) -> (artifact id: '33805c2bba0dba0746d6a85a888020d7') in 0.00115692 seconds
+2026-11-03T12:20:36.6316864Z Start importing Packages/com.unity.toolchain.linux-x86_64/package.json using Guid(b75d9a0470b1635b1a19f29fe9d743da) (PackageManifestImporter) -> (artifact id: '981fbf2bfd73b90175aa90fe3fedb2a6') in 0.001190392 seconds
+2026-11-03T12:20:36.6342062Z Start importing Packages/com.unity.sysroot/LICENSE.md using Guid(e76167c495d53ba6abcbb8df07973457) (TextScriptImporter) -> (artifact id: 'ebca5aabf661e3ccc2603fde66d31286') in 0.00114129 seconds
+2026-11-03T12:20:36.6345517Z Start importing Packages/com.unity.multiplayer.center/Third Party Notices.md using Guid(c8f6fa942856442b8bd72594d3ce7363) (TextScriptImporter) -> (artifact id: 'f117005acc7b64b33c08eea913553eaf') in 0.000658199 seconds
+2026-11-03T12:20:36.6358496Z Start importing Packages/com.unity.toolchain.linux-x86_64/ValidationConfig.json using Guid(19ec794be6c353ba2a3ca871b1793808) (TextScriptImporter) -> (artifact id: '0de4dea32159aaaeccb132b172fc06b9') in 0.001613292 seconds
+2026-11-03T12:20:36.6376321Z Start importing Packages/com.unity.sysroot/CHANGELOG.md using Guid(6903637d170abe311a972b9d76142805) (TextScriptImporter) -> (artifact id: '55e969f3ab6baf63ae71ad6e78823962') in 0.00110389 seconds
+2026-11-03T12:20:36.6393969Z Start importing Packages/com.unity.multiplayer.center/CHANGELOG.md using Guid(3bbd27b3dd7be4a74aeab8da6b0af5cc) (TextScriptImporter) -> (artifact id: 'b633de2c55fc0e0c2c63bfabd12d98df') in 0.001131552 seconds
+2026-11-03T12:20:36.6412202Z Start importing Packages/com.unity.modules.hierarchycore/package.json using Guid(9b1a5759726ef9d39a0ab82047b615f1) (PackageManifestImporter) -> (artifact id: 'f8312a43334a232c6dcc461c88a0f84c') in 0.001171006 seconds
+2026-11-03T12:20:36.6429770Z Start importing Packages/com.unity.toolchain.linux-x86_64/Third Party Notices.md using Guid(fb6d64d4cca2e56778082a1c7685fbac) (TextScriptImporter) -> (artifact id: '4143ea85c7b1e05d8d47eea64edaa883') in 0.001219366 seconds
+2026-11-03T12:20:36.6448210Z Start importing Packages/com.unity.ai.navigation/package.json using Guid(fbee67e09f48e4652bfa085460c895c7) (PackageManifestImporter) -> (artifact id: 'c0831351a23e6329037ed0fd459e8d8d') in 0.001181435 seconds
+2026-11-03T12:20:36.6463309Z Start importing Packages/com.unity.toolchain.linux-x86_64/CHANGELOG.md using Guid(ac31dd48a6c63fbdb8593e0542545f0d) (TextScriptImporter) -> (artifact id: '83e2fa1f565a5e1ab5a1df883c0aca94') in 0.001292542 seconds
+2026-11-03T12:20:36.6478719Z Start importing Packages/com.unity.ai.navigation/CHANGELOG.md using Guid(ccdfde25179bd45acb7145793b3b87f8) (TextScriptImporter) -> (artifact id: '463d9e54116d2d31af64809219d92b30') in 0.001362223 seconds
+2026-11-03T12:20:36.6506150Z Start importing Packages/com.unity.sysroot.linux-x86_64/LICENSE.md using Guid(6e81a17100c6f4c2a9256fd0e4e3915c) (TextScriptImporter) -> (artifact id: '547779d1c2685e2aee2ebc98bbabff85') in 0.002599602 seconds
+2026-11-03T12:20:36.6520962Z Start importing Packages/com.unity.modules.uielements/package.json using Guid(4f0f9b9f3ed97ad2b9ba8f1a8e4666c2) (PackageManifestImporter) -> (artifact id: 'ca9d50303d5bd8f93654306a000cf8a3') in 0.001250284 seconds
+2026-11-03T12:20:36.6535742Z Start importing Packages/com.unity.ai.navigation/README.md using Guid(6fc2b2cf518e540319637f5c5c573d3a) (TextScriptImporter) -> (artifact id: '47c7598b710f335f7016b41369f0f941') in 0.00135521 seconds
+2026-11-03T12:20:36.6550866Z Start importing Packages/com.unity.ai.navigation/LICENSE.md using Guid(af8f9a7f066204789819c6a616afe2c0) (TextScriptImporter) -> (artifact id: 'af9faaf49f00620cedd4938cd03ac155') in 0.001290298 seconds
+2026-11-03T12:20:36.6565290Z Start importing Packages/com.unity.modules.ui/package.json using Guid(bfd567a3d1631a761bca9e99fa53d86d) (PackageManifestImporter) -> (artifact id: '279189e7cd82f2da7fbbe656319204cf') in 0.001243361 seconds
+2026-11-03T12:20:36.6579711Z Start importing Packages/com.unity.multiplayer.center/package.json using Guid(df0857f6a11054383be91b1f8e1b5800) (PackageManifestImporter) -> (artifact id: '0db1fa71b39f36cc1f80be6b38d91a3a') in 0.001282333 seconds
+2026-11-03T12:20:36.7296289Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/light.uss using Guid(f1ac2efb1bcd4dfd95dc196ed3c11367) (ScriptedImporter) -> (artifact id: '53574dac69dd833ff6781c4de67e153d') in 0.071157066 seconds
+2026-11-03T12:20:36.7313658Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_widget.uss using Guid(63cb84b97408b4d25a6925daccffcd22) (ScriptedImporter) -> (artifact id: '9f2a56a83a810b427360d004488500bc') in 0.001754455 seconds
+2026-11-03T12:20:36.7377132Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/dark.uss using Guid(1984cd07fe96417f9e88f5771f6b4b32) (ScriptedImporter) -> (artifact id: 'b03a17b0975b9ec46fd1e2234bc8f251') in 0.006135392 seconds
+2026-11-03T12:20:36.7711311Z Start importing Packages/com.unity.multiplayer.center/Editor/MultiplayerCenterWindow/UI/MultiplayerCenterWindow.uss using Guid(bac00d6e07f0b4305bb395363c89d92b) (ScriptedImporter) -> (artifact id: '0f89668a6a1e6beb82a2233f487b2bc2') in 0.033102798 seconds
+2026-11-03T12:20:36.7731218Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_editor.uss using Guid(3eb99c80b411349188e1e5167887ac6c) (ScriptedImporter) -> (artifact id: '5cd23d48da9d8c72f3249bea3ea4bce8') in 0.002019389 seconds
+2026-11-03T12:20:36.8066402Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_widget_item.uxml using Guid(d6de7697d63d64fabbfb31425d93541e) (ScriptedImporter) -> (artifact id: 'a5cc9ad215e7a45b7a5bd190a24accbe') in 0.033199897 seconds
+2026-11-03T12:20:36.8153202Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_widget.uxml using Guid(aaa3e510761864dac9b71f85526490d6) (ScriptedImporter) -> (artifact id: '0888f50d539c1ee25721e299b08d8062') in 0.007659334 seconds
+2026-11-03T12:20:36.8251641Z Start importing Packages/com.unity.ai.navigation/Editor/ConversionSystem/converter_editor.uxml using Guid(cd1eb3c3c695c494d855ea678fe7395b) (ScriptedImporter) -> (artifact id: 'd51eb8fb5495202e5c0e138d84c633dd') in 0.009378706 seconds
+2026-11-03T12:20:36.8707035Z Loading style catalogs (6)
+2026-11-03T12:20:36.8708438Z 	StyleSheets/Extensions/base/common.uss
+2026-11-03T12:20:36.8710102Z 	UIPackageResources/StyleSheets/Default/Variables/Public/common.uss
+2026-11-03T12:20:36.8711131Z 	StyleSheets/Northstar/common.uss
+2026-11-03T12:20:36.8711915Z 	StyleSheets/Extensions/fonts/inter.uss
+2026-11-03T12:20:36.8712710Z 	StyleSheets/Extensions/base/dark.uss
+2026-11-03T12:20:36.8721788Z 	UIPackageResources/StyleSheets/Default/Northstar/Palette/dark.uss
+2026-11-03T12:20:37.0865340Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-11-03T12:20:37.0866914Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-11-03T12:20:37.0875996Z Asset Pipeline Refresh (id=5fe9f3e805093e152882de98367b2282): Total: 13.813 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+2026-11-03T12:20:37.0878072Z 	Summary:
+2026-11-03T12:20:37.0878827Z 		Imports: total=212 (actual=212, local cache=0, cache server=0)
+2026-11-03T12:20:37.0880012Z 		Asset DB Process Time: managed=18 ms, native=1410 ms
+2026-11-03T12:20:37.0880872Z 		Asset DB Callback time: managed=251 ms, native=177 ms
+2026-11-03T12:20:37.0881933Z 		Scripting: domain reloads=1, domain reload time=301 ms, compile time=11642 ms, other=11 ms
+2026-11-03T12:20:37.0883004Z 		Project Asset Count: scripts=98, non-scripts=114
+2026-11-03T12:20:37.0883866Z 		Asset File Changes: new=350, changed=350, moved=0, deleted=0
+2026-11-03T12:20:37.0884658Z 		Scan Filter Count: 1
+2026-11-03T12:20:37.0885317Z 	InvokeCustomDependenciesCallbacks: 0.006ms
+2026-11-03T12:20:37.0886089Z 	InvokePackagesCallback: 170.664ms
+2026-11-03T12:20:37.0886825Z 	ApplyChangesToAssetFolders: 0.144ms
+2026-11-03T12:20:37.0887500Z 	Scan: 78.674ms
+2026-11-03T12:20:37.0888088Z 	OnSourceAssetsModified: 1.829ms
+2026-11-03T12:20:37.0888839Z 	CategorizeAssetsWithTransientArtifact: 0.844ms
+2026-11-03T12:20:37.0890001Z 	ProcessAssetsWithTransientArtifactChanges: 3.176ms
+2026-11-03T12:20:37.0890957Z 	CategorizeAssets: 1.345ms
+2026-11-03T12:20:37.0891799Z 	ImportOutOfDateAssets: 1274.716ms (-11034.274ms without children)
+2026-11-03T12:20:37.0893115Z 		ImportManagerImport: 665.878ms (74.872ms without children)
+2026-11-03T12:20:37.0894030Z 			ImportInProcess: 590.226ms
+2026-11-03T12:20:37.0894735Z 			UpdateCategorizedAssets: 0.779ms
+2026-11-03T12:20:37.0895440Z 		CompileScripts: 11641.957ms
+2026-11-03T12:20:37.0896080Z 		ReloadNativeAssets: 0.000ms
+2026-11-03T12:20:37.0896757Z 		UnloadImportedAssets: 0.277ms
+2026-11-03T12:20:37.0897408Z 		ReloadImportedAssets: 0.059ms
+2026-11-03T12:20:37.0898181Z 		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.035ms
+2026-11-03T12:20:37.0899269Z 		InitializingProgressBar: 0.006ms
+2026-11-03T12:20:37.0900139Z 		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+2026-11-03T12:20:37.0901011Z 		OnDemandSchedulerStart: 0.778ms
+2026-11-03T12:20:37.0901713Z 	PostProcessAllAssets: 255.989ms
+2026-11-03T12:20:37.0902338Z 	Hotreload: 1.527ms
+2026-11-03T12:20:37.0902994Z 	GatherAllCurrentPrimaryArtifactRevisions: 0.001ms
+2026-11-03T12:20:37.0903791Z 	UnloadStreamsBegin: 2.306ms
+2026-11-03T12:20:37.0904463Z 	PersistCurrentRevisions: 0.234ms
+2026-11-03T12:20:37.0905144Z 	UnloadStreamsEnd: 0.008ms
+2026-11-03T12:20:37.0905792Z 	GenerateScriptTypeHashes: 0.477ms
+2026-11-03T12:20:37.0906730Z 	Untracked: 12021.285ms
+2026-11-03T12:20:37.0907158Z 
+2026-11-03T12:20:37.0907560Z Application.AssetDatabase Initial Refresh End
+2026-11-03T12:20:37.1068274Z Scanning for USB devices : 0.141ms
+2026-11-03T12:20:37.1112747Z Initializing Unity extensions:
+2026-11-03T12:20:37.1620312Z [Licensing::Client] Successfully resolved entitlement details
+2026-11-03T12:20:37.1718390Z UpdateMenuTitleForLanguage: 10
+2026-11-03T12:20:37.1726832Z [MODES] ModeService[none].Initialize
+2026-11-03T12:20:37.1733845Z [MODES] ModeService[none].LoadModes
+2026-11-03T12:20:37.1829257Z [MODES] Loading mode Default (0) for mode-current-id-BlankProject
+2026-11-03T12:20:37.2454734Z Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+2026-11-03T12:20:37.2539592Z Unloading 160 unused Assets / (0.6 MB). Loaded Objects now: 674.
+2026-11-03T12:20:37.2540746Z Memory consumption went from 78.4 MB to 77.7 MB.
+2026-11-03T12:20:37.2542174Z Total: 8.637542 ms (FindLiveObjects: 0.077625 ms CreateObjectMapping: 0.011992 ms MarkObjects: 7.930353 ms  DeleteObjects: 0.616541 ms)
+2026-11-03T12:20:37.2543052Z 
+2026-11-03T12:20:37.2750938Z Batchmode quit successfully invoked - shutting down!
+2026-11-03T12:20:37.3462478Z Curl error 42: Callback aborted
+2026-11-03T12:20:37.3900830Z [Physics::Module] Cleanup current backned.
+2026-11-03T12:20:37.3901703Z [Physics::Module] Id: 0xf2b8ea05
+2026-11-03T12:20:37.3922458Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-11-03T12:20:37.3923442Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-11-03T12:20:37.4062086Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-11-03T12:20:37.4084941Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-03T12:20:37.4085381Z       Application is shutting down...
+2026-11-03T12:20:38.6244219Z Cleanup mono
+2026-11-03T12:20:38.6784349Z debugger-agent: Unable to listen on 38
+2026-11-03T12:20:38.6844387Z Exiting batchmode successfully now!
