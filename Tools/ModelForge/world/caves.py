@@ -232,9 +232,31 @@ def stalagmite(c, h, r):
     m.V[:, 0] += 0.06 * h * np.sin(m.V[:, 1] * 3); return m
 
 
+def _lathe(c, prof, segs, uv=0.5, wobble=0.0, seed=0):
+    """Surface de révolution : prof = [(rayon, hauteur)] du bas vers le haut ; léger ondulé du bord (wobble)."""
+    c = np.asarray(c, float); a = np.linspace(0, 2 * np.pi, segs + 1)
+    ph = np.random.default_rng(seed).uniform(0, 6.3, 3)
+    wob = 1 + wobble * (np.sin(a * 5 + ph[0]) * 0.6 + np.sin(a * 9 + ph[1]) * 0.4)
+    wob[-1] = wob[0]
+    P = np.asarray(prof, float)
+    G = np.stack([c[0] + P[:, 0:1] * wob[None] * np.sin(a)[None], c[1] + P[:, 1:2] * np.ones_like(a)[None], c[2] + P[:, 0:1] * wob[None] * np.cos(a)[None]], -1)
+    length = np.r_[0, np.cumsum(np.hypot(np.diff(P[:, 0]), np.diff(P[:, 1])))]
+    UV = np.stack(np.meshgrid(a * max(P[:, 0].max(), 0.05), length), -1).reshape(-1, 2) * uv
+    m = Mesh(G.reshape(-1, 3), grid_faces(len(P), segs + 1), UV)
+    if (vertex_normals(m) * (m.V - c[None])).sum(1).mean() < 0: m.F = m.F[:, ::-1].copy()
+    return m
+
+
 def mushroom(c, s):
-    stem = cylinder(c, 0.05 * s, 0.35 * s, segs=6)
-    cap = cone(np.asarray(c) + (0, 0.3 * s, 0), 0.22 * s, 0.14 * s, segs=8, flare=0.4)
+    """Champignon : pied légèrement renflé et un chapeau en dôme (16 côtés) au bord ondulé et retroussé, dessous en lamelles."""
+    c = np.asarray(c, float); seed = int(abs(c[0] * 97 + c[2] * 31)) % 10000
+    stem = _lathe(c, [(0.075 * s, 0), (0.06 * s, 0.12 * s), (0.05 * s, 0.24 * s), (0.055 * s, 0.33 * s)], 10)
+    R, H, y0 = 0.24 * s, 0.13 * s, 0.30 * s
+    prof = [(R * 0.25, y0 + 0.01 * s), (R * 0.95, y0 - 0.005 * s), (R * 1.0, y0 + 0.01 * s)]          # dessous (lamelles) jusqu'au bord
+    for k in range(1, 7):
+        t = k / 6.0; prof.append((R * np.cos(t * np.pi / 2) ** 0.8, y0 + 0.012 * s + H * np.sin(t * np.pi / 2)))
+    prof[-1] = (0.0, prof[-1][1])
+    cap = _lathe(c, prof, 16, wobble=0.06, seed=seed)
     return stem, cap
 
 
