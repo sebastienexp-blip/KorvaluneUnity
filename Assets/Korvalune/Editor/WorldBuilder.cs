@@ -774,7 +774,10 @@ namespace Korvalune.EditorTools
                 Canvas.ForceUpdateCanvases();
                 CI.Step("vallée : rendu " + name);
                 var rt = new RenderTexture(w, hgt, 24, RenderTextureFormat.ARGB32) { antiAliasing = 1 };
-                cam.targetTexture = rt; cam.Render(); RenderTexture.active = rt;
+                cam.targetTexture = rt;
+                // l'interface (canevas en espace caméra) se recale sur la taille de la capture avant le rendu
+                Canvas.ForceUpdateCanvases(); game.Hud.Refresh(); Canvas.ForceUpdateCanvases();
+                cam.Render(); RenderTexture.active = rt;
                 var tex = new Texture2D(w, hgt, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, w, hgt), 0, 0); tex.Apply();
                 RenderTexture.active = null; cam.targetTexture = null;
                 File.WriteAllBytes($"ci-out/Jeu_{name}.png", tex.EncodeToPNG()); Object.DestroyImmediate(tex); rt.Release();
