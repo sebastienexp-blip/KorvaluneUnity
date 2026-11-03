@@ -33,7 +33,10 @@ def main(preview=False, only_trees=False, castle_only=False):
     if only_trees: return
     folder = os.path.join(EX.ART, 'World', 'Terrain')
     S = 512 if preview else 1024
-    for name, fn in (('Herbe', WM.grass), ('SousBois', WM.forest_floor), ('Chemin', WM.dirt), ('Roche', WM.rock), ('Sable', WM.sand), ('Eau', WM.water), ('Pave', T.cobbles)):
+    from world import terrain_hd as THD   # herbe, sous-bois et chemin : éléments dessinés un à un (haute définition)
+    for name, fn in (('Herbe', THD.grass), ('SousBois', THD.forest_floor), ('Chemin', THD.dirt)):
+        col, h, sm = fn(S); THD.save(folder, name, col, h, sm); print('  couche HD', name, flush=True)
+    for name, fn in (('Roche', WM.rock), ('Sable', WM.sand), ('Eau', WM.water), ('Pave', T.cobbles)):
         fn(S).save(folder, name); print('  couche', name, flush=True)
 
 

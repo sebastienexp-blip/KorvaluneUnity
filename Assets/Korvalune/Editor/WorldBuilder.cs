@@ -690,6 +690,24 @@ namespace Korvalune.EditorTools
             var litPath = Root + "/Rendering/Lit_Objets.mat"; var lit = AssetDatabase.LoadAssetAtPath<Material>(litPath);
             if (!lit) { lit = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(lit, litPath); }
             cfg.litMat = lit;
+            // base du décor généré en jeu (brèches) : shader PBR maison du monde + couche de détail (grain et micro-relief)
+            var wPath = Root + "/Rendering/Monde_Objets.mat"; var wm = AssetDatabase.LoadAssetAtPath<Material>(wPath);
+            var wsh = Shader.Find("Korvalune/PBR Monde");
+            if (wsh != null && !ShaderUtil.ShaderHasError(wsh))
+            {
+                if (!wm) { wm = new Material(wsh); AssetDatabase.CreateAsset(wm, wPath); } else if (wm.shader != wsh) wm.shader = wsh;
+                var dAlb = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Albedo.png");
+                var dNrm = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Normal.png");
+                if (dAlb && dNrm)
+                {
+                    wm.SetTexture("_DetailAlbedoMap", dAlb); wm.SetTexture("_DetailNormalMap", dNrm);
+                    wm.SetTextureScale("_DetailAlbedoMap", new Vector2(3f, 3f)); wm.SetFloat("_DetailAlbedoMapScale", 1f); wm.SetFloat("_DetailNormalMapScale", 0.5f);
+                    wm.EnableKeyword("_DETAIL_MULX2");
+                }
+                EditorUtility.SetDirty(wm);
+                cfg.worldMat = wm;
+            }
+            else cfg.worldMat = null;
             // matériau translucide (obstacles entre la caméra et le héros) : URP Lit en mode transparent
             var ghPath = Root + "/Rendering/Lit_Translucide.mat"; var gh = AssetDatabase.LoadAssetAtPath<Material>(ghPath);
             if (!gh) { gh = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(gh, ghPath); }

@@ -51,7 +51,7 @@ namespace Korvalune.Game
         bool[,] open; int W, H; Vector2Int origin;
         readonly List<RectInt> rooms = new List<RectInt>();
         readonly Dictionary<Material, Material> tinted = new Dictionary<Material, Material>();
-        Material litBase;
+        Material litBase, worldBase;
 
         void Awake()
         {
@@ -68,6 +68,7 @@ namespace Korvalune.Game
             ThemeEnemies.Clear(); ThemeEnemies.AddRange(th.enemies);
             var game = GetComponent<GameBootstrap>() ? GetComponent<GameBootstrap>() : FindFirstObjectByType<GameBootstrap>();
             litBase = game && game.config && game.config.litMat ? game.config.litMat : null;
+            worldBase = game && game.config && game.config.worldMat ? game.config.worldMat : null;
             var old = transform.Find("Niveau"); if (old) Kill(old.gameObject);
             root = new GameObject("Niveau").transform; root.SetParent(transform, false);
             Layout();
@@ -167,7 +168,9 @@ namespace Korvalune.Game
 
         Material Mat(Color c, float smooth, Color emission = default, Texture2D tex = null)
         {
-            var m = litBase ? new Material(litBase) : new Material(Shader.Find("Universal Render Pipeline/Lit"));
+            // décor de la brèche : shader PBR du monde (variation, dépôt, détail) ; éléments lumineux : URP Lit
+            var src = emission.maxColorComponent > 0.01f ? litBase : (worldBase ? worldBase : litBase);
+            var m = src ? new Material(src) : new Material(Shader.Find("Universal Render Pipeline/Lit"));
             m.SetColor("_BaseColor", c); if (tex) { m.SetTexture("_BaseMap", tex); m.mainTexture = tex; }
             if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", smooth);
             if (m.HasProperty("_Metallic")) m.SetFloat("_Metallic", 0f);

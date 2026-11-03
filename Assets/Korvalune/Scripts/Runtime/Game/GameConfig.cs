@@ -24,6 +24,7 @@ namespace Korvalune.Game
         public GameObject defaultHero => Res.Load<GameObject>(defaultHeroRes);
         public List<EnemyType> enemies = new List<EnemyType>();
         public Material fxAdditive, fxAlpha, ringMat, litMat, ghostMat;
+        [Tooltip("Base des matériaux de décor créés en jeu (brèches) : shader Korvalune/PBR Monde avec couche de détail")] public Material worldMat;
         public VfxLibrary vfx;
         public UnityEngine.Rendering.RenderPipelineAsset highPipeline, mobilePipeline;
         public Font font;
