@@ -101,7 +101,10 @@ namespace Korvalune.Game
         {
             if (!Riding || !saddle) return;
             // le bassin du cavalier se pose sur la selle (après l'animation, sans dérive)
+            // quand l'Animator est sur la racine du joueur (le contrôleur), on ne peut pas déplacer le modèle : on déplace
+            // directement le bassin, que l'animation réécrit à chaque image (aucune dérive)
             if (modelRoot && hips) modelRoot.position += saddle.position - hips.position;
+            else if (hips) hips.position += saddle.position - hips.position;
             else if (modelRoot) modelRoot.position = saddle.position;
         }
     }

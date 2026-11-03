@@ -864,10 +864,13 @@ namespace Korvalune.EditorTools
                 {
                     var rider = p.GetComponent<Rider>(); if (!rider) rider = p.gameObject.AddComponent<Rider>();
                     cc.enabled = false; p.position = Ground(new Vector2(-10, -90)); cc.enabled = true; p.rotation = Quaternion.Euler(0, 60, 0);
+                    var heroAnim = game.Player.Anim;
+                    bool hasRide = heroAnim && heroAnim.runtimeAnimatorController && heroAnim.runtimeAnimatorController.animationClips.Any(x => x.name == "Sk_Monte");
+                    string where = heroAnim ? (heroAnim.transform == p ? "Animator sur la racine" : "Animator sur " + heroAnim.name) : "pas d'Animator";
                     foreach (var md in Mounts.All)
                     {
                         rider.Mount(md);
-                        Pose(game.Player.gameObject, "Sk_Monte", 0.2f);
+                        if (heroAnim && hasRide) heroAnim.runtimeAnimatorController.animationClips.First(x => x.name == "Sk_Monte").SampleAnimation(heroAnim.gameObject, 0.2f);
                         var ma = p.Find("Monture") ? p.Find("Monture").GetComponentInChildren<Animator>() : null;
                         if (ma && ma.runtimeAnimatorController) { var ic = ma.runtimeAnimatorController.animationClips.FirstOrDefault(x => x.name == "Idle"); if (ic) ic.SampleAnimation(ma.gameObject, 0.2f); }
                         rider.Align();
@@ -875,7 +878,7 @@ namespace Korvalune.EditorTools
                         Shot("17_monture_" + md.id);
                         rider.Dismount(true);
                     }
-                    check("Montures", true, "ci-out/Jeu_17_monture_*.png");
+                    check("Montures", hasRide, "ci-out/Jeu_17_monture_*.png — " + where + (hasRide ? ", posture Sk_Monte" : ", posture Sk_Monte ABSENTE du contrôleur"));
                 }
                 catch (System.Exception ex) { check("Montures", false, ex.Message); }
                 game.Hud.TestShow("arbre"); Shot("14_arbre_competences");
