@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-11-03 13:47 UTC
+# Rapport d'intégration Unity — 2026-11-03 14:49 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
@@ -596,7 +596,7 @@
 ## T_Troncon_0_0.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_0/T_Troncon_0_0.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 22779 triangles, 17156 sommets (max 60000)
+- ✅ **Budget de triangles** 40223 triangles, 27348 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_0.prefab
 - ✅ **Échelle (hauteur)** 9.882 m (attendu 8.893484–10.86981), boîte 51.60×9.88×51.58, pieds à y=-3.133
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -611,7 +611,7 @@
 ## T_Troncon_0_1.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_1/T_Troncon_0_1.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 16919 triangles, 12906 sommets (max 60000)
+- ✅ **Budget de triangles** 28133 triangles, 19458 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_1.prefab
 - ✅ **Échelle (hauteur)** 11.108 m (attendu 9.997091–12.21867), boîte 44.14×11.11×51.66, pieds à y=-6.546
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -626,7 +626,7 @@
 ## T_Troncon_0_2.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_2/T_Troncon_0_2.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 29144 triangles, 21909 sommets (max 60000)
+- ✅ **Budget de triangles** 47478 triangles, 32621 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_2.prefab
 - ✅ **Échelle (hauteur)** 12.344 m (attendu 11.10972–13.57855), boîte 51.25×12.34×51.54, pieds à y=-10.292
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -642,7 +642,7 @@
 ## T_Troncon_0_3.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_3/T_Troncon_0_3.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 20654 triangles, 16189 sommets (max 60000)
+- ✅ **Budget de triangles** 34716 triangles, 24405 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_3.prefab
 - ✅ **Échelle (hauteur)** 13.776 m (attendu 12.39875–15.15403), boîte 53.29×13.78×51.90, pieds à y=-15.585
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -658,7 +658,7 @@
 ## T_Troncon_0_4.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_4/T_Troncon_0_4.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 7997 triangles, 5874 sommets (max 60000)
+- ✅ **Budget de triangles** 13871 triangles, 9306 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_4.prefab
 - ✅ **Échelle (hauteur)** 7.752 m (attendu 6.976654–8.527021), boîte 38.04×7.75×25.31, pieds à y=-15.585
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -685,7 +685,7 @@
 ## T_Troncon_1_0.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_0/T_Troncon_1_0.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 6105 triangles, 4532 sommets (max 60000)
+- ✅ **Budget de triangles** 11445 triangles, 7652 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_0.prefab
 - ✅ **Échelle (hauteur)** 8.305 m (attendu 7.474657–9.135691), boîte 25.26×8.31×36.17, pieds à y=-2.999
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -700,7 +700,7 @@
 ## T_Troncon_1_1.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_1/T_Troncon_1_1.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 6461 triangles, 5284 sommets (max 60000)
+- ✅ **Budget de triangles** 9665 triangles, 7156 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_1.prefab
 - ✅ **Échelle (hauteur)** 10.297 m (attendu 9.267158–11.32653), boîte 29.13×10.30×50.03, pieds à y=-5.632
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -715,7 +715,7 @@
 ## T_Troncon_1_2.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_2/T_Troncon_1_2.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 2290 triangles, 1664 sommets (max 60000)
+- ✅ **Budget de triangles** 3002 triangles, 2080 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_2.prefab
 - ✅ **Échelle (hauteur)** 7.842 m (attendu 7.058225–8.626719), boîte 29.51×7.84×27.48, pieds à y=-5.884
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -728,7 +728,7 @@
 ## T_Troncon_1_3.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_3/T_Troncon_1_3.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1674 triangles, 1454 sommets (max 60000)
+- ✅ **Budget de triangles** 2386 triangles, 1870 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_3.prefab
 - ✅ **Échelle (hauteur)** 7.915 m (attendu 7.12352–8.706525), boîte 19.69×7.92×38.79, pieds à y=-15.271
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -743,9 +743,9 @@
 ## T_Troncon_1_4.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_4/T_Troncon_1_4.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1825 triangles, 1351 sommets (max 60000)
+- ✅ **Budget de triangles** 2359 triangles, 1663 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_4.prefab
-- ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.27, pieds à y=-15.588
+- ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.19, pieds à y=-15.588
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -757,7 +757,7 @@
 ## T_Troncon_m1_0.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_0/T_Troncon_m1_0.fbx
 - ✅ **Import sans erreur ni avertissement** 
-- ✅ **Budget de triangles** 1674 triangles, 1371 sommets (max 60000)
+- ✅ **Budget de triangles** 2564 triangles, 1891 sommets (max 60000)
 - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_0.prefab
 - ✅ **Échelle (hauteur)** 8.249 m (attendu 7.424075–9.073869), boîte 17.66×8.25×28.55, pieds à y=-0.857
 - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
@@ -3025,4 +3025,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_156 captures écrites dans ci-out/ (OpenGLCore) en 5.5 min._
+_156 captures écrites dans ci-out/ (OpenGLCore) en 5.4 min._
