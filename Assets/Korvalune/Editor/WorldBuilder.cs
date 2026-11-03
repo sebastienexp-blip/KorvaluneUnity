@@ -159,9 +159,13 @@ namespace Korvalune.EditorTools
             var rng = new System.Random(7);
             // cimetière (camp des squelettes) : pierres tombales et rochers
             var grave = Grave;                                    // entre l'enceinte de la ville et le fleuve
+            var tombs = new List<Vector2>();
             for (int k = 0; k < 18; k++)
             {
-                var o = grave + new Vector2((float)rng.NextDouble() * 26 - 13, (float)rng.NextDouble() * 10 - 5);
+                // trois rangées de six tombes, alignées comme dans un vrai cimetière (avec le désordre des ans)
+                int row = k / 6, col = k % 6;
+                var o = grave + new Vector2(-4f + col * 3.3f + (float)rng.NextDouble() * 0.6f - 0.3f, -3.4f + row * 3.4f + (float)rng.NextDouble() * 0.5f - 0.25f);
+                tombs.Add(o);
                 // pierres tombales modélisées : stèle cintrée, croix, stèle brisée, stèle à fronton (penchées, enfoncées)
                 var g = new GameObject("Tombe"); var mesh = TombMesh(k % 4);
                 g.AddComponent<MeshFilter>().sharedMesh = mesh; g.AddComponent<MeshRenderer>().sharedMaterial = StoneMaterial();
@@ -174,12 +178,20 @@ namespace Korvalune.EditorTools
             for (int k = 0; k < 70; k++)
             {
                 Vector2 o;
-                if (k < 10) o = grave + new Vector2((float)rng.NextDouble() * 34 - 17, (float)rng.NextDouble() * 10 - 5);
+                if (k < 10)
+                {
+                    // rochers autour du cimetière, jamais sur une tombe (2,5 m d'écart au moins)
+                    int tries = 0;
+                    do { o = grave + new Vector2((float)rng.NextDouble() * 34 - 17, (float)rng.NextDouble() * 14 - 7); }
+                    while ((tombs.Exists(t => (t - o).sqrMagnitude < 3f * 3f) || (o - new Vector2(CryptEntrance.x, CryptEntrance.z)).sqrMagnitude < 36f) && ++tries < 40);
+                    if (tries >= 40) continue;
+                }
                 else
                 {
                     do { o = new Vector2((float)rng.NextDouble() * Size - Size / 2, (float)rng.NextDouble() * Size - Size / 2); }
                     while (o.magnitude < TownBuilder.WallR + 12 || RoadDist(o) < 10 || RiverDist(o) < 14 || o.x > 240 || NearHamlet(o, 20));
                 }
+                if (k < 10) { Place("World/Rocher0", Ground(o) - Vector3.up * 0.3f, (float)rng.NextDouble() * 360, 0.5f + (float)rng.NextDouble() * 0.4f); continue; }   // petits rochers au cimetière
                 Place($"World/Rocher{k % 3}", Ground(o) - Vector3.up * 0.3f, (float)rng.NextDouble() * 360, 0.6f + (float)rng.NextDouble() * (o.x < -150 ? 2.5f : 1.2f));
             }
 

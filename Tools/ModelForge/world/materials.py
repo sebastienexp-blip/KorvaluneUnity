@@ -63,19 +63,29 @@ def rock(S=1024, seed=1004):
 
 
 def boulder(S=1024, seed=1014):
-    """Rochers isolés : granit gris-brun à grandes plages de teinte, grain fin, quelques fissures sombres, lichens clairs et
-    mousse verte (pas de strates serrées : vues de haut, elles faisaient des « empreintes digitales »)."""
+    """Rochers isolés : granit altéré. Grain cristallin (mouchetures claires et sombres), grandes plages de teinte,
+    fractures nettes avec ombre et bord éclairé, croûtes de lichen gris et jaune, salissure dans les creux."""
     r = np.random.default_rng(seed)
     big = n01(fbm(S, S, r, base=S / 3, octaves=5)); mid = n01(fbm(S, S, r, base=S / 12, octaves=5))
-    grain = n01(noise(S, S, 1.2, r))
-    cr = gaussian_filter(scratches(S, S, r, 26, (0.08, 0.35), (1, 2), angle=1.0, spread=1.2), 1.0, mode='wrap')
-    lich = np.clip((n01(fbm(S, S, r, base=S / 16, octaves=4)) - 0.68) * 5, 0, 1)
-    moss = np.clip((n01(fbm(S, S, r, base=S / 7, octaves=4)) - 0.62) * 3.5, 0, 1)
-    base = np.array([0.46, 0.43, 0.39])[None, None] * (0.72 + 0.28 * big[..., None]) * (0.85 + 0.2 * mid[..., None]) * (0.92 + 0.12 * grain[..., None])
-    col = base * (1 - 0.55 * cr[..., None])
-    col = col * (1 - lich[..., None] * 0.5) + np.array([0.70, 0.71, 0.60])[None, None] * lich[..., None] * 0.5
-    col = col * (1 - moss[..., None] * 0.75) + np.array([0.22, 0.30, 0.12])[None, None] * moss[..., None] * 0.75
-    return _tex(col, 1.2 * mid + 0.4 * big + 0.5 * grain - 1.6 * cr + 0.3 * moss, 0.18 + 0.12 * mid + 0.1 * moss, 0.8)
+    fine = n01(fbm(S, S, r, base=S / 200, octaves=2))
+    spk = r.random((S, S)); dark = gaussian_filter((spk > 0.93).astype(float), 0.7, mode='wrap'); light = gaussian_filter((spk < 0.05).astype(float), 0.6, mode='wrap')
+    # fractures : lignes de niveau d'un bruit, nettes et rares
+    from world.terrain_hd import _voronoi
+    gy, gx = np.mgrid[0:5, 0:5]; pts = ((np.stack([gy.ravel(), gx.ravel()], 1) + 0.5 + r.uniform(-0.4, 0.4, (25, 2))) * S / 5) % S
+    d1, d2, cid = _voronoi(S, r, 25, pts); e = (d2 - d1) / 2.0 + 1.5 * (n01(fbm(S, S, r, base=S / 40, octaves=3)) - 0.5)
+    keep = np.clip((n01(fbm(S, S, r, base=S / 4, octaves=3)) - 0.5) * 5, 0, 1)        # seules certaines arêtes sont fendues
+    crack = np.clip(1 - (e - 0.5) / 1.4, 0, 1) * keep
+    ridge = np.clip(1 - np.abs(e - 2.6) / 1.2, 0, 1) * keep
+    lichG = np.clip((n01(fbm(S, S, r, base=S / 14, octaves=5)) - 0.68) * 5, 0, 1)
+    lichY = np.clip((n01(fbm(S, S, r, base=S / 22, octaves=4)) - 0.78) * 6, 0, 1)
+    base = np.array([0.47, 0.44, 0.40])[None, None] * (0.75 + 0.28 * big[..., None]) * (0.86 + 0.18 * mid[..., None]) * (0.94 + 0.08 * fine[..., None])
+    base = base * (1 - 0.35 * dark[..., None]) + 0.25 * light[..., None]
+    grime = np.clip(1 - mid * 1.6, 0, 1) * 0.3
+    col = base * (1 - grime[..., None]) * (1 - 0.65 * crack[..., None]) * (1 + 0.15 * ridge[..., None])
+    col = col * (1 - 0.55 * lichG[..., None]) + np.array([0.66, 0.67, 0.60])[None, None] * 0.55 * lichG[..., None]
+    col = col * (1 - 0.6 * lichY[..., None]) + np.array([0.62, 0.56, 0.24])[None, None] * 0.6 * lichY[..., None]
+    h = 1.2 * mid + 0.4 * big + 0.15 * fine + 0.2 * light - 1.4 * crack + 0.25 * (lichG + lichY)
+    return _tex(col, h, 0.16 + 0.1 * mid * (1 - lichG), 0.9)
 
 
 def sand(S=1024, seed=1005):
@@ -200,12 +210,23 @@ def planks(S=512, seed=1011, tone=(0.30, 0.20, 0.12)):
 
 
 def bark(S=512, seed=1008, tone=(0.30, 0.22, 0.15)):
+    """Écorce de chêne : plaques verticales épaisses séparées de fissures profondes qui se rejoignent (réseau en
+    losanges étirés), arêtes claires usées, mousse et lichens dans les creux."""
     r = np.random.default_rng(seed)
-    f = fbm(S, S, r, base=S / 16, octaves=5, aniso=(1.0, 0.08))
-    cr = np.clip(1 - np.abs(f) * 6, 0, 1) ** 2
-    g = n01(fbm(S, S, r, base=S / 8, octaves=4))
-    col = np.array(tone)[None, None] * (0.6 + 0.5 * g[..., None]) * (1 - 0.6 * cr[..., None])
-    return _tex(col, 1.0 * g - 2.5 * cr, 0.15, 1.0)
+    yy, xx = np.mgrid[0:S, 0:S].astype(float) / S
+    f = n01(fbm(S, S, r, base=S / 6, octaves=4, aniso=(1.0, 0.1)))
+    f2 = n01(fbm(S, S, r, base=S / 20, octaves=3, aniso=(1.0, 0.15)))
+    fiss = np.abs(np.sin((xx * 10 + f * 1.6 + f2 * 0.5) * np.pi))          # bandes verticales ondulées qui se rejoignent
+    fiss = gaussian_filter(fiss, 1.0, mode='wrap')
+    plate = np.clip((fiss - 0.18) / 0.5, 0, 1) ** 0.7
+    cross = np.clip((n01(fbm(S, S, r, base=S / 18, octaves=3, aniso=(0.3, 1.0))) - 0.66) * 5, 0, 1)   # fissures transversales
+    plate = plate * (1 - cross * 0.8)
+    g = n01(fbm(S, S, r, base=S / 30, octaves=4)); fine = n01(fbm(S, S, r, base=S / 120, octaves=3, aniso=(1.0, 0.08)))
+    moss = np.clip((n01(fbm(S, S, r, base=S / 6, octaves=4)) - 0.55) * 3, 0, 1) * (1 - plate)
+    col = np.array(tone)[None, None] * (0.4 + 0.7 * plate[..., None]) * (0.85 + 0.25 * g[..., None]) * (0.75 + 0.35 * fine[..., None])
+    col = col * (1 + 0.18 * np.clip(plate - 0.85, 0, 1)[..., None] * 6)  # arêtes usées plus claires
+    col = col * (1 - 0.45 * moss[..., None]) + np.array([0.17, 0.24, 0.08])[None, None] * 0.45 * moss[..., None]
+    return _tex(col, 2.2 * plate + 0.3 * g + 0.2 * fine, 0.12 + 0.08 * moss, 1.2, 3, 0.2)
 
 
 def leaves(S=1024, seed=1009, c1=(0.16, 0.30, 0.08), c2=(0.34, 0.46, 0.14), kind='broad', cols=2):
@@ -216,6 +237,7 @@ def leaves(S=1024, seed=1009, c1=(0.16, 0.30, 0.08), c2=(0.34, 0.46, 0.14), kind
     yy, xx = np.mgrid[0:S, 0:S].astype(float)
     cw = S // cols
     if kind == 'broad': return _leaf_clumps(S, r, c1, c2)
+    if kind == 'needle': return _pine_twigs(S, r, c1, c2, cols)
     for c in range(cols):
         for k in range(110 if kind == 'broad' else 320):
             cx = c * cw + r.uniform(0.12, 0.88) * cw; cy = r.uniform(0.08, 0.92) * S
@@ -241,6 +263,48 @@ def leaves(S=1024, seed=1009, c1=(0.16, 0.30, 0.08), c2=(0.34, 0.46, 0.14), kind
             x = int(c * cw + cw * (0.5 + 0.05 * np.sin(p * 6))); y = int((1 - p) * (S - 1))
             col[y, max(x - 2, 0):x + 2] = (0.25, 0.18, 0.10); alpha[y, max(x - 2, 0):x + 2] = 1
     return TexSet(np.clip(col, 0, 1), height_to_normal(gaussian_filter(hgt, 1), 0.8), np.zeros((S, S)), np.full((S, S), 0.3), np.clip(0.6 + 0.4 * hgt, 0, 1), None, alpha)
+
+
+def _pine_twigs(S, r, c1, c2, cols=2):
+    """Atlas de rameaux de pin : un axe brun par colonne, rameaux secondaires alternés, aiguilles fines groupées par
+    deux qui partent vers l'avant de chaque rameau, plus claires au bout (pousses de l'année)."""
+    SS = 2; W = S * SS
+    col = np.zeros((W, W, 3)); alpha = np.zeros((W, W)); hgt = np.zeros((W, W))
+    cw = W // cols
+
+    def line(x0, y0, x1, y1, wid, c, hval):
+        n = int(max(abs(x1 - x0), abs(y1 - y0)) + 2)
+        xs = np.linspace(x0, x1, n); ys = np.linspace(y0, y1, n)
+        for o in range(-int(wid), int(wid) + 1):
+            xi = np.clip(np.round(xs + o * 0.5).astype(int), 0, W - 1); yi = np.clip(np.round(ys).astype(int), 0, W - 1)
+            col[yi, xi] = c; alpha[yi, xi] = 1; hgt[yi, xi] = np.maximum(hgt[yi, xi], hval)
+
+    for c in range(cols):
+        cx = c * cw + cw / 2
+        line(cx, W * 0.98, cx + r.uniform(-0.05, 0.05) * cw, W * 0.02, 3 * SS, (0.22, 0.15, 0.09), 0.6)
+        for k in range(28):
+            t = 0.05 + 0.9 * k / 27; y = W * (1 - t); side = 1 if k % 2 else -1
+            L = cw * r.uniform(0.32, 0.47) * (1.1 - 0.35 * t)
+            ang = np.radians(r.uniform(30, 55)); ex = cx + side * L * np.sin(ang); ey = y - L * np.cos(ang)
+            line(cx, y, ex, ey, 1.5 * SS, (0.24, 0.17, 0.10), 0.5)
+            m = int(L / (1.3 * SS))
+            for j in range(m):
+                u = (j + 0.5) / m; px = cx + (ex - cx) * u; py = y + (ey - y) * u
+                tip = u > 0.8
+                for sgn in (-1, 1):
+                    na = ang * side + sgn * np.radians(r.uniform(28, 48)) + np.radians(r.uniform(-6, 6))
+                    nl = cw * r.uniform(0.09, 0.15)
+                    nx = px + np.sin(na) * nl * (1 if side > 0 else 1); ny = py - np.cos(na) * nl
+                    tt = r.uniform()
+                    cc = (np.array(c1) * (1 - tt) + np.array(c2) * tt) * (1.35 if tip else 1.0) * r.uniform(0.85, 1.15)
+                    line(px, py, nx, ny, 0.8 * SS, tuple(np.clip(cc, 0, 1)), 0.8 + 0.2 * r.uniform())
+    # réduction (anti-crénelage) et composition couleur sur alpha
+    def down(a): return a.reshape(S, SS, S, SS, *a.shape[2:]).mean((1, 3))
+    A = down(alpha); C = down(col * alpha[..., None]) / np.maximum(A[..., None], 1e-4); Hh = down(hgt)
+    # couleur étendue sous les zones transparentes (pas de liseré noir au mipmap)
+    w = gaussian_filter(A, 4) + 1e-4; ext = np.dstack([gaussian_filter(C[..., i] * A, 4) / w for i in range(3)])
+    C = np.where(A[..., None] > 0.02, C, ext)
+    return TexSet(np.clip(C, 0, 1), height_to_normal(gaussian_filter(Hh, 1), 0.8), np.zeros((S, S)), np.full((S, S), 0.25), np.clip(0.55 + 0.45 * Hh, 0, 1), None, np.clip(A * 1.3, 0, 1))
 
 
 def _leaf_clumps(S, r, c1, c2, cells=2):

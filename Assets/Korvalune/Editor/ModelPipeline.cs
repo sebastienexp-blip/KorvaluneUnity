@@ -181,7 +181,7 @@ namespace Korvalune.EditorTools
             // couche de détail (multicouche) : grain de couleur et micro-relief répétés finement par-dessus les textures
             var dAlb = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Albedo.png");
             var dNrm = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Normal.png");
-            bool detail = dAlb && dNrm && !fm.alphaClip && !emissive && mat.HasProperty("_DetailAlbedoMap");
+            bool detail = dAlb && dNrm && !emissive && !(fm.alphaClip && !e.dir.Contains("/World/")) && mat.HasProperty("_DetailAlbedoMap");
             if (detail)
             {
                 var dt = new Vector2(Mathf.Max(1, tiling.x) * 7f, Mathf.Max(1, tiling.y) * 7f);
