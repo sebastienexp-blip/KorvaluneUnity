@@ -146,7 +146,7 @@ namespace Korvalune.Game
         {
             if (!running) return;
             int lvl = Mathf.Max(game.Player.level, GameBootstrap.LevelAt(spot));
-            var pf = Resources.Load<GameObject>("Prefabs/World/Ville/S_Coffre");
+            var pf = Res.Load<GameObject>("Prefabs/World/Ville/S_Coffre");
             var go = pf ? Instantiate(pf) : new GameObject("Coffre de l'événement"); go.name = "Coffre de l'événement";
             go.transform.position = spot; go.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
             var chest = go.AddComponent<TreasureChest>(); chest.luck = 4f;

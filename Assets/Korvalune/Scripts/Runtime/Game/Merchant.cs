@@ -29,7 +29,7 @@ namespace Korvalune.Game
             // le marchand en personne, derrière son étal
             if (kind != MerchantKind.Coffre && kind != MerchantKind.Reliquaire && transform.Find("PNJ") == null)
             {
-                var pf = Resources.Load<GameObject>("Prefabs/Characters/PNJ_" + (kind == MerchantKind.Ecurie ? "Forgeron" : kind.ToString()));
+                var pf = Res.Load<GameObject>("Prefabs/Characters/PNJ_" + (kind == MerchantKind.Ecurie ? "Forgeron" : kind.ToString()));
                 if (pf)
                 {
                     var npc = Instantiate(pf, transform); npc.name = "PNJ"; npc.transform.localPosition = Vector3.zero; npc.transform.localRotation = Quaternion.identity;

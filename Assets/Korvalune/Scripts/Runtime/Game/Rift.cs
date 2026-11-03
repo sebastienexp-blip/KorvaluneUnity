@@ -252,7 +252,7 @@ namespace Korvalune.Game
             Cyl("Socle", new Vector3(0, 1.05f, 0), new Vector3(1.6f, 0.45f, 1.6f), stone);
             Cyl("Corniche", new Vector3(0, 1.55f, 0), new Vector3(1.9f, 0.06f, 1.9f), dark);
             // la mystique de pierre
-            var pf = Resources.Load<GameObject>("Prefabs/Characters/PNJ_Mystique");
+            var pf = Res.Load<GameObject>("Prefabs/Characters/PNJ_Mystique");
             if (pf)
             {
                 var st = Object.Instantiate(pf, root.transform); st.name = "Statue"; st.transform.localPosition = new Vector3(0, 1.6f, 0); st.transform.localRotation = Quaternion.identity; st.transform.localScale = Vector3.one * 1.35f;

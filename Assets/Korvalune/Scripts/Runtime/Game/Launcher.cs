@@ -19,6 +19,11 @@ namespace Korvalune.Game
         public string nextScene = "Korvalune_Selection";
         [Tooltip("Adresse du catalogue de contenu (JSON). Vide : tout le contenu est inclus dans l'APK.")]
         public string contentUrl = "";
+        /// <summary>Catalogue de contenu propre à cette version du jeu (paquets construits avec le même code).</summary>
+        public static string ContentCatalog
+        {
+            get { var v = Application.version.Split('.'); return $"https://github.com/sebastienexp-blip/KorvaluneUnity/releases/download/contenu-{v[v.Length - 1]}/catalogue.json"; }
+        }
 
         RawImage bg; RectTransform bgRt; Image bar, barBack; Text status, notes, version; Button play; Text playText;
         readonly List<(RectTransform rt, Image im, float speed, float phase)> embers = new List<(RectTransform, Image, float, float)>();
@@ -188,7 +193,9 @@ namespace Korvalune.Game
         IEnumerator UpdateContent()
         {
             yield return null;
-            if (string.IsNullOrEmpty(contentUrl))
+            if (string.IsNullOrEmpty(contentUrl)) contentUrl = ContentCatalog;
+            // version tout-en-un (éditeur, ancien APK) : les scènes sont déjà dans le jeu, rien à télécharger
+            if (Application.isEditor || Application.CanStreamedLevelBeLoaded("Korvalune_Vallee"))
             {
                 bar.fillAmount = 1; status.text = "Contenu à jour — tout est inclus dans cette version"; Ready(); yield break;
             }
@@ -200,8 +207,11 @@ namespace Korvalune.Game
                 yield return req.SendWebRequest();
                 if (req.result != UnityWebRequest.Result.Success)
                 {
-                    status.text = File.Exists(Path.Combine(dir, "catalogue.json")) ? "Hors ligne — contenu déjà téléchargé utilisé" : "Connexion impossible : le contenu sera téléchargé au prochain lancement";
-                    bar.fillAmount = File.Exists(Path.Combine(dir, "catalogue.json")) ? 1 : 0; Ready(); yield break;
+                    var local = Path.Combine(dir, "catalogue.json");
+                    if (File.Exists(local) && MountFrom(JsonUtility.FromJson<Catalog>(File.ReadAllText(local))))
+                    { status.text = "Hors ligne — contenu déjà téléchargé utilisé"; bar.fillAmount = 1; Ready(); }
+                    else { status.text = "Connexion requise pour télécharger le contenu du jeu — relancez une fois connecté"; bar.fillAmount = 0; }
+                    yield break;
                 }
                 cat = JsonUtility.FromJson<Catalog>(req.downloadHandler.text);
                 File.WriteAllText(Path.Combine(dir, "catalogue.json"), req.downloadHandler.text);
@@ -226,7 +236,7 @@ namespace Korvalune.Game
                     {
                         long now = done + have + (long)req.downloadedBytes;
                         bar.fillAmount = total > 0 ? (float)now / total : 1;
-                        status.text = $"Téléchargement du jeu : {Mo(now)} / {Mo(total)}  ({i + 1}/{todo.Count} — {p.name})";
+                        status.text = $"Téléchargement du contenu : {Mo(now)} / {Mo(total)}  ({i + 1}/{todo.Count} — {p.name})";
                         yield return null;
                     }
                     if (req.result != UnityWebRequest.Result.Success) { status.text = "Téléchargement interrompu — il reprendra au prochain lancement"; Ready(); yield break; }
@@ -234,7 +244,17 @@ namespace Korvalune.Game
                 if (File.Exists(f)) File.Delete(f);
                 File.Move(part, f); File.WriteAllText(f + ".hash", p.hash); done += p.size;
             }
-            bar.fillAmount = 1; status.text = $"Contenu à jour (version {cat.version})"; Ready();
+            bar.fillAmount = 1;
+            if (MountFrom(cat)) { status.text = $"Contenu à jour (version {cat.version})"; Ready(); }
+            else status.text = "Contenu incomplet — relancez le jeu pour terminer le téléchargement";
+        }
+
+        /// <summary>Ouvre les paquets du catalogue (déjà téléchargés).</summary>
+        static bool MountFrom(Catalog cat)
+        {
+            if (cat == null || cat.packs == null || cat.packs.Count == 0) return false;
+            var names = new List<string>(); foreach (var p in cat.packs) names.Add(p.name);
+            return Content.Mount(names);
         }
 
         static string Mo(long b) => $"{b / 1048576.0:0.0} Mo";

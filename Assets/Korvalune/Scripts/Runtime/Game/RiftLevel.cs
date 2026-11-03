@@ -154,7 +154,7 @@ namespace Korvalune.Game
 
         GameObject Put(string path, Vector3 pos, float yaw, float scale = 1f, Color? tint = null)
         {
-            var pf = Resources.Load<GameObject>("Prefabs/World/" + path); if (!pf) return null;
+            var pf = Res.Load<GameObject>("Prefabs/World/" + path); if (!pf) return null;
             var go = Instantiate(pf, root); go.transform.position = pos; go.transform.rotation = Quaternion.Euler(0, yaw, 0); go.transform.localScale *= scale;
             var c = tint ?? th.tint;
             foreach (var r in go.GetComponentsInChildren<Renderer>())

@@ -55,7 +55,7 @@ namespace Korvalune.Game
         {
             if (!pc) pc = GetComponent<PlayerController>();
             if (d == null || Riding || !pc || pc.Health.Dead) return;
-            var pf = Resources.Load<GameObject>("Prefabs/Mounts/" + d.prefab);
+            var pf = Res.Load<GameObject>("Prefabs/Mounts/" + d.prefab);
             if (!pf) { pc.Notify?.Invoke("Monture introuvable"); return; }
             def = d;
             mount = Instantiate(pf, transform, false); mount.name = "Monture"; mount.transform.localPosition = Vector3.zero; mount.transform.localRotation = Quaternion.identity;
@@ -141,10 +141,10 @@ namespace Korvalune.Game
             Box("Râtelier", new Vector3(W / 2 - 0.5f, 0.9f, 1.5f), new Vector3(0.6f, 0.9f, 1.6f), dark);
             Box("Abreuvoir", new Vector3(W / 2 - 0.5f, 0.35f, -1.5f), new Vector3(0.7f, 0.5f, 1.8f), wood);
             Box("Eau", new Vector3(W / 2 - 0.5f, 0.58f, -1.5f), new Vector3(0.55f, 0.02f, 1.6f), water, 0, false);
-            var hay = Resources.Load<GameObject>("Prefabs/World/Ville/M_Foin");
+            var hay = Res.Load<GameObject>("Prefabs/World/Ville/M_Foin");
             if (hay) foreach (var p in new[] { new Vector3(1.5f, 0, 2f), new Vector3(-2.5f, 0, -2.2f) }) { var h = Object.Instantiate(hay, root); h.transform.localPosition = p; }
             // cheval de démonstration, au repos dans l'enclos
-            var horse = Resources.Load<GameObject>("Prefabs/Mounts/ChevalDeGuerre");
+            var horse = Res.Load<GameObject>("Prefabs/Mounts/ChevalDeGuerre");
             if (horse)
             {
                 var h = Object.Instantiate(horse, root); h.name = "Cheval de l'écurie"; h.transform.localPosition = new Vector3(1.2f, 0, -0.3f); h.transform.localRotation = Quaternion.Euler(0, 200, 0);
