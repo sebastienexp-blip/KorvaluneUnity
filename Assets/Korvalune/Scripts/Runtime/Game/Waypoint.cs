@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Korvalune.Game
 {
-    /// <summary>Pierres de voyage : une dans chaque région (Vallée, Crypte, Terriers, Cité de l'Éclipse…), près du point
+    /// <summary>Pierres de voyage : une dans chaque région extérieure (les donjons, Crypte et Terriers, n'en ont pas), près du point
     /// d'arrivée. S'en approcher ouvre le même menu qui réunit TOUTES les régions du monde ; une région s'ouvre à partir de
     /// son niveau. Voyager charge la région et pose le héros à côté de sa pierre de voyage.</summary>
     public class Waypoint : MonoBehaviour
@@ -15,8 +15,6 @@ namespace Korvalune.Game
         public static readonly Region[] Regions =
         {
             new Region { scene = "Korvalune_Vallee",   name = "Vallée de Korvalune",  level = 1,  desc = "La ville, le château, le vieux cimetière" },
-            new Region { scene = "Korvalune_Crypte",   name = "Crypte de Korvalune",  level = 3,  desc = "Les morts-vivants sous le cimetière" },
-            new Region { scene = "Korvalune_Terriers", name = "Terriers de l'Astral", level = 6,  desc = "Galeries des araignées géantes" },
             new Region { scene = "Korvalune_Foret",    name = "Forêt de l'Astral",    level = 8,  desc = "Les grands bois au nord de la vallée" },
             new Region { scene = "Korvalune_Eclipse",  name = "Cité de l'Éclipse",    level = 14, desc = "Le Refuge Lunaire, au bord du golfe" },
             new Region { scene = "Korvalune_Desert",   name = "Désert des Étoiles",   level = 18, desc = "Dunes et ruines du temple des étoiles, au sud" },
