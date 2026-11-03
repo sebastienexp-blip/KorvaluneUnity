@@ -36,6 +36,7 @@ namespace Korvalune.Game
         public string MountName => def != null ? def.name : "";
 
         void Awake() { Current = this; pc = GetComponent<PlayerController>(); }
+        static void Kill(Object o) { if (!o) return; if (Application.isPlaying) Destroy(o); else DestroyImmediate(o); }
         void OnDestroy() { if (Current == this) Current = null; }
 
         public static bool Allowed() => Terrain.activeTerrain && !Rift.Active;
@@ -52,12 +53,13 @@ namespace Korvalune.Game
 
         public void Mount(Mounts.Def d)
         {
-            if (d == null || Riding || pc.Health.Dead) return;
+            if (!pc) pc = GetComponent<PlayerController>();
+            if (d == null || Riding || !pc || pc.Health.Dead) return;
             var pf = Resources.Load<GameObject>("Prefabs/Mounts/" + d.prefab);
             if (!pf) { pc.Notify?.Invoke("Monture introuvable"); return; }
             def = d;
             mount = Instantiate(pf, transform, false); mount.name = "Monture"; mount.transform.localPosition = Vector3.zero; mount.transform.localRotation = Quaternion.identity;
-            foreach (var c in mount.GetComponentsInChildren<Collider>()) Destroy(c);
+            foreach (var c in mount.GetComponentsInChildren<Collider>()) Kill(c);
             foreach (var mb in mount.GetComponentsInChildren<MonoBehaviour>()) if (!(mb is Rider)) mb.enabled = false;
             mountAnim = mount.GetComponentInChildren<Animator>(); if (mountAnim) mountAnim.applyRootMotion = false;
             foreach (var t in mount.GetComponentsInChildren<Transform>()) if (t.name == "Socket_Saddle") { saddle = t; break; }
@@ -67,6 +69,7 @@ namespace Korvalune.Game
             if (modelRoot) modelBase = modelRoot.localPosition;
             if (a) { a.SetBool("Monte", true); a.CrossFadeInFixedTime("Sk_Monte", 0.2f, 0, 0f); }
             baseWalk = pc.walkSpeed; baseRun = pc.runSpeed; pc.walkSpeed = baseWalk * d.speed; pc.runSpeed = baseRun * d.speed;
+            if (!Application.isPlaying) return;
             FX.Dust(transform.position, 1.2f); FX.Burst(transform.position + Vector3.up, d.color, 24, 3f, 0.12f, 0.6f, -0.4f);
             Sound.Play("sfx_invocation", transform.position, 0.6f);
             pc.Notify?.Invoke(d.name);
@@ -75,8 +78,8 @@ namespace Korvalune.Game
         public void Dismount(bool voluntary)
         {
             if (!Riding) return;
-            FX.Dust(transform.position, 1.2f);
-            Destroy(mount); mount = null; mountAnim = null; saddle = null;
+            if (Application.isPlaying) FX.Dust(transform.position, 1.2f);
+            Kill(mount); mount = null; mountAnim = null; saddle = null;
             if (modelRoot) modelRoot.localPosition = modelBase;
             var a = pc.Anim; if (a) a.SetBool("Monte", false);
             pc.walkSpeed = baseWalk; pc.runSpeed = baseRun;
@@ -91,7 +94,10 @@ namespace Korvalune.Game
             if (mountAnim) mountAnim.SetFloat(CharacterRig.SpeedId, pc.Speed / Mathf.Max(0.1f, def.speed), 0.1f, Time.deltaTime);
         }
 
-        void LateUpdate()
+        void LateUpdate() { Align(); }
+
+        /// <summary>Pose le bassin du cavalier sur la selle (appelé après l'animation ; aussi pour les captures de contrôle).</summary>
+        public void Align()
         {
             if (!Riding || !saddle) return;
             // le bassin du cavalier se pose sur la selle (après l'animation, sans dérive)

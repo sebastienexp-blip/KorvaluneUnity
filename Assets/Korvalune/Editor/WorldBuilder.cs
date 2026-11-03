@@ -845,6 +845,25 @@ namespace Korvalune.EditorTools
                     var tr = SkillBook.TreeOf(rn.classId);
                     for (int i = 0; i < rn.book.Count; i++) if (rn.book[i].unlockLevel <= 60 && (tr.parent[i] < 0 || rn.ranks[tr.parent[i]] > 0) && i % 3 != 2) rn.ranks[i] = 1 + i % 4;
                 }
+                // 17. le héros en selle : chaque monture, pour vérifier la posture et l'assise
+                try
+                {
+                    var rider = p.GetComponent<Rider>(); if (!rider) rider = p.gameObject.AddComponent<Rider>();
+                    cc.enabled = false; p.position = Ground(new Vector2(-10, -90)); cc.enabled = true; p.rotation = Quaternion.Euler(0, 60, 0);
+                    foreach (var md in Mounts.All)
+                    {
+                        rider.Mount(md);
+                        Pose(game.Player.gameObject, "Sk_Monte", 0.2f);
+                        var ma = p.Find("Monture") ? p.Find("Monture").GetComponentInChildren<Animator>() : null;
+                        if (ma && ma.runtimeAnimatorController) { var ic = ma.runtimeAnimatorController.animationClips.FirstOrDefault(x => x.name == "Idle"); if (ic) ic.SampleAnimation(ma.gameObject, 0.2f); }
+                        rider.Align();
+                        cam.transform.position = p.position + Quaternion.Euler(0, 60, 0) * new Vector3(4.2f, 2.6f, 1.0f); cam.transform.LookAt(p.position + Vector3.up * 1.3f);
+                        Shot("17_monture_" + md.id);
+                        rider.Dismount(true);
+                    }
+                    check("Montures", true, "ci-out/Jeu_17_monture_*.png");
+                }
+                catch (System.Exception ex) { check("Montures", false, ex.Message); }
                 game.Hud.TestShow("arbre"); Shot("14_arbre_competences");
                 game.Hud.TestShow("menu"); Shot("15_menu_pause");
                 game.Hud.TestShow("options"); Shot("16_options");
