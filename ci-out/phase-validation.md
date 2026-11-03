@@ -1,4 +1,4 @@
-# Rapport d'intégration Unity — 2026-11-03 10:04 UTC
+# Rapport d'intégration Unity — 2026-11-03 11:28 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 280 modèle(s) ModelForge trouvé(s)
@@ -3025,4 +3025,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_156 captures écrites dans ci-out/ (OpenGLCore) en 3.2 min._
+_156 captures écrites dans ci-out/ (OpenGLCore) en 5.5 min._
