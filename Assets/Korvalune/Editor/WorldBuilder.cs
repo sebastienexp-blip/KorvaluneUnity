@@ -133,6 +133,7 @@ namespace Korvalune.EditorTools
             terrain.heightmapPixelError = 4; terrain.basemapDistance = 220; terrain.treeBillboardDistance = 140; terrain.treeDistance = 600; terrain.detailObjectDistance = 60;
             terrain.drawInstanced = true;
             var tmat = new Material(Shader.Find("Universal Render Pipeline/Terrain/Lit")); var tmp = Root + "/Rendering/Terrain.mat";
+            tmat.EnableKeyword("_MASKMAP");                                                       // cartes de masque des couches (occlusion, relief, lissé)
             AssetDatabase.DeleteAsset(tmp); AssetDatabase.CreateAsset(tmat, tmp); terrain.materialTemplate = tmat;
             Trees(td, terrain);
             Grass(td);
@@ -469,7 +470,9 @@ namespace Korvalune.EditorTools
                 if (!l) { l = new TerrainLayer(); AssetDatabase.CreateAsset(l, path); }
                 l.diffuseTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"{WorldArt}/Terrain/{n}_BaseMap.png");
                 l.normalMapTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"{WorldArt}/Terrain/{n}_Normal.png");
-                l.tileSize = new Vector2(LayerTile[i], LayerTile[i]); l.normalScale = 1f; l.smoothness = 0.1f; l.metallic = 0;
+                l.maskMapTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"{WorldArt}/Terrain/{n}_Mask.png");   // occlusion, relief, lissé par couche
+                l.tileSize = new Vector2(LayerTile[i], LayerTile[i]); l.normalScale = 1.35f; l.smoothness = 0.1f; l.metallic = 0;
+                l.maskMapRemapMin = Vector4.zero; l.maskMapRemapMax = Vector4.one;
                 EditorUtility.SetDirty(l); list.Add(l);
             }
             return list.ToArray();

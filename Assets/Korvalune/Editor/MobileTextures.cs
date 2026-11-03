@@ -7,13 +7,17 @@ namespace Korvalune.EditorTools
     /// à jour, sans différence notable en jeu. Les textures d'interface et d'effets gardent leurs propres réglages.</summary>
     public class MobileTextures : AssetPostprocessor
     {
-        public override uint GetVersion() => 2;
+        public override uint GetVersion() => 3;
 
         void OnPreprocessTexture()
         {
             var p = assetPath.Replace('\\', '/');
             if (!p.StartsWith("Assets/Korvalune/Art/") || p.Contains("/VFX/")) return;
             var ti = (TextureImporter)assetImporter;
+            // textures multicouches : relief de détail en carte normale, masques du terrain en linéaire
+            if (p.EndsWith("Detail_Normal.png")) ti.textureType = TextureImporterType.NormalMap;
+            if (p.EndsWith("_Mask.png")) ti.sRGBTexture = false;
+            if (p.Contains("/Detail/")) { ti.wrapMode = UnityEngine.TextureWrapMode.Repeat; ti.mipmapEnabled = true; }
             int max; TextureImporterFormat fmt;
             if (p.EndsWith("_Normal.png")) { max = 512; fmt = TextureImporterFormat.ASTC_6x6; }
             else if (p.EndsWith("_Occlusion.png") || p.EndsWith("_MetallicSmoothness.png")) { max = 256; fmt = TextureImporterFormat.ASTC_8x8; }

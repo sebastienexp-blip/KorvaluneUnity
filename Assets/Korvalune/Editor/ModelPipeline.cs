@@ -163,6 +163,18 @@ namespace Korvalune.EditorTools
             Keyword(mat, "_EMISSION", emissive);
             mat.globalIlluminationFlags = emissive ? MaterialGlobalIlluminationFlags.RealtimeEmissive : MaterialGlobalIlluminationFlags.EmissiveIsBlack;
 
+            // couche de détail (multicouche) : grain de couleur et micro-relief répétés finement par-dessus les textures
+            var dAlb = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Albedo.png");
+            var dNrm = AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Art/World/Detail/Detail_Normal.png");
+            bool detail = dAlb && dNrm && !fm.alphaClip && !emissive && mat.HasProperty("_DetailAlbedoMap");
+            if (detail)
+            {
+                var dt = new Vector2(Mathf.Max(1, tiling.x) * 7f, Mathf.Max(1, tiling.y) * 7f);
+                mat.SetTexture("_DetailAlbedoMap", dAlb); mat.SetTextureScale("_DetailAlbedoMap", dt);
+                mat.SetTexture("_DetailNormalMap", dNrm); mat.SetTextureScale("_DetailNormalMap", dt);
+                mat.SetFloat("_DetailAlbedoMapScale", 1f); mat.SetFloat("_DetailNormalMapScale", 0.45f);
+            }
+            Keyword(mat, "_DETAIL_MULX2", detail);
             mat.SetFloat("_Cull", fm.doubleSided ? 0f : 2f);
             mat.SetFloat("_AlphaClip", fm.alphaClip ? 1f : 0f);
             mat.SetFloat("_Cutoff", fm.cutoff);
