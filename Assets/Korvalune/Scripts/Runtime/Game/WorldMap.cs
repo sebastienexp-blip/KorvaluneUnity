@@ -84,7 +84,9 @@ namespace Korvalune.Game
             cam.orthographic = true; cam.orthographicSize = side / 2; cam.aspect = 1; cam.nearClipPlane = 1; cam.farClipPlane = 600;
             cam.transform.position = new Vector3(worldMin.x + side / 2, worldMin.y + 400, worldMin.z + side / 2); cam.transform.rotation = Quaternion.Euler(90, 0, 0);
             cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = new Color(0.08f, 0.1f, 0.12f); cam.cullingMask = ~(1 << 5);
+            bool depthOn = Shader.IsKeywordEnabled("KORV_WATER_DEPTH"); Shader.DisableKeyword("KORV_WATER_DEPTH");   // vue orthographique : l'écume de l'eau y serait fausse
             cam.targetTexture = rt; cam.Render(); cam.targetTexture = null; Destroy(go);
+            if (depthOn) Shader.EnableKeyword("KORV_WATER_DEPTH");
             view.texture = rt; liveTex = rt;
         }
 

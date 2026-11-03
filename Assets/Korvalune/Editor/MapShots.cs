@@ -21,7 +21,9 @@ namespace Korvalune.EditorTools
             cam.transform.position = new Vector3(min.x + side / 2, min.y + 500, min.z + side / 2); cam.transform.rotation = Quaternion.Euler(90, 0, 0);
             cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = new Color(0.08f, 0.1f, 0.12f); cam.cullingMask = ~(1 << 5);
             float tree = t.treeDistance, bill = t.treeBillboardDistance; t.treeDistance = 2000; t.treeBillboardDistance = 2000;
+            bool depthOn = Shader.IsKeywordEnabled("KORV_WATER_DEPTH"); Shader.DisableKeyword("KORV_WATER_DEPTH");   // vue orthographique : pas d'écume calculée à tort
             cam.targetTexture = rt; cam.Render(); cam.targetTexture = null;
+            if (depthOn) Shader.EnableKeyword("KORV_WATER_DEPTH");
             t.treeDistance = tree; t.treeBillboardDistance = bill;
             var prev = RenderTexture.active; RenderTexture.active = rt;
             var tex = new Texture2D(S, S, TextureFormat.RGB24, false); tex.ReadPixels(new Rect(0, 0, S, S), 0, 0); tex.Apply();
