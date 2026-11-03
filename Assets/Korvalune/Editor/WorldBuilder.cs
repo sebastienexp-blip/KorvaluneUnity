@@ -158,6 +158,7 @@ namespace Korvalune.EditorTools
             Hamlets();
             Roadside();
             EclipseBuilder.ValleyEntrance();
+            SegmentBuilder.ValleyEntrances();               // portails vers la Forêt (nord), le Désert (sud) et les Pics (ouest)
             CaveBuilder.ValleyEntrance();
             BridgeObject();
             var rng = new System.Random(7);

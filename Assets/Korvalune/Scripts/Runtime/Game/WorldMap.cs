@@ -52,11 +52,11 @@ namespace Korvalune.Game
             { var d = Img(side, UIStyle.Disc(), c); d.rectTransform.anchorMin = d.rectTransform.anchorMax = new Vector2(0, 1); d.rectTransform.anchoredPosition = new Vector2(30, y); d.rectTransform.sizeDelta = new Vector2(26, 26); Lbl(side, s, new Vector2(60, y), 24, UIStyle.Parch, TextAnchor.MiddleLeft); y -= 46; }
             // régions : la zone actuelle (vue en direct) et les autres régions extérieures (photographiées à la construction)
             var here = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-            float by = 360;
+            float by = 250;
             foreach (var (scene, label) in Regions)
             {
                 if (scene != here && !Resources.Load<Texture2D>("UI/Cartes/" + scene)) continue;
-                string sc = scene; Btn(side, label, new Vector2(130, by), () => ShowRegion(sc), 240); by += 90;
+                string sc = scene; Btn(side, label, new Vector2(130, by), () => ShowRegion(sc), 240); by += 80;
             }
             Btn(side, "+", new Vector2(70, 160), () => SetZoom(zoom * 1.5f));
             Btn(side, "−", new Vector2(190, 160), () => SetZoom(zoom / 1.5f));
@@ -90,7 +90,7 @@ namespace Korvalune.Game
             view.texture = rt; liveTex = rt;
         }
 
-        static readonly (string scene, string label)[] Regions = { ("Korvalune_Vallee", "Vallée"), ("Korvalune_Eclipse", "Cité de l'Éclipse") };
+        static readonly (string scene, string label)[] Regions = { ("Korvalune_Vallee", "Vallée"), ("Korvalune_Foret", "Forêt Astrale"), ("Korvalune_Pics", "Pics Sélénites"), ("Korvalune_Desert", "Désert"), ("Korvalune_Eclipse", "Éclipse") };
         Texture liveTex; readonly List<GameObject> regionLabels = new List<GameObject>();
 
         /// <summary>Affiche une région : la zone actuelle avec ses repères, ou la photo d'une autre région (sans repères).</summary>

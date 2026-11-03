@@ -90,6 +90,7 @@ namespace Korvalune.EditorTools
                 Progress("DungeonCheck"); DungeonCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("CaveCheck"); CaveCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("EclipseCheck"); EclipseCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+                Progress("RegionsCheck"); RegionsCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("BrecheCheck"); BrecheCheck(); EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
                 Progress("Lanceur"); LauncherBuilder.Build(); Check("Écran de lancement", File.Exists(LauncherBuilder.ScenePath), LauncherBuilder.ScenePath);
                 File.WriteAllText("ci-report.md", Rep.ToString() + "\n_(rapport partiel : créateur de personnage en cours)_\n");
@@ -347,6 +348,23 @@ namespace Korvalune.EditorTools
                 BrecheBuilder.Captures(game, (w, ok, d) => Check(w, ok, d));
             }
             catch (Exception ex) { Check("Brèches", false, ex.Message); }
+        }
+
+        static void RegionsCheck()
+        {
+            Line("\n## Régions de la carte (segments reliés par portails)");
+            foreach (var d in SegmentBuilder.All)
+            {
+                try
+                {
+                    var game = SegmentBuilder.Build(d);
+                    int portals = UnityEngine.Object.FindObjectsByType<Korvalune.Game.Portal>(FindObjectsSortMode.None).Length;
+                    Check($"Scène : {d.name}", File.Exists(d.ScenePath) && portals >= 1, $"{d.ScenePath}, {game.camps.Count} camps, portail de retour : {portals}");
+                    SegmentBuilder.Captures(d, game, (w, ok, det) => Check(w, ok, det));
+                }
+                catch (Exception ex) { Check(d.name, false, ex.Message); }
+                EditorUtility.UnloadUnusedAssetsImmediate(); GC.Collect();
+            }
         }
 
         static void EclipseCheck()

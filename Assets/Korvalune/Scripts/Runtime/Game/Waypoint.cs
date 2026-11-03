@@ -17,7 +17,10 @@ namespace Korvalune.Game
             new Region { scene = "Korvalune_Vallee",   name = "Vallée de Korvalune",  level = 1,  desc = "La ville, le château, le vieux cimetière" },
             new Region { scene = "Korvalune_Crypte",   name = "Crypte de Korvalune",  level = 3,  desc = "Les morts-vivants sous le cimetière" },
             new Region { scene = "Korvalune_Terriers", name = "Terriers de l'Astral", level = 6,  desc = "Galeries des araignées géantes" },
+            new Region { scene = "Korvalune_Foret",    name = "Forêt de l'Astral",    level = 8,  desc = "Les grands bois au nord de la vallée" },
             new Region { scene = "Korvalune_Eclipse",  name = "Cité de l'Éclipse",    level = 14, desc = "Le Refuge Lunaire, au bord du golfe" },
+            new Region { scene = "Korvalune_Desert",   name = "Désert des Étoiles",   level = 18, desc = "Dunes et ruines du temple des étoiles, au sud" },
+            new Region { scene = "Korvalune_Pics",     name = "Pics Sélénites",       level = 26, desc = "Les cols de montagne, à l'ouest" },
         };
 
         public static Region Here { get { var s = SceneManager.GetActiveScene().name; foreach (var r in Regions) if (r.scene == s) return r; return null; } }
@@ -102,15 +105,15 @@ namespace Korvalune.Game
             Image I(RectTransform parent, Sprite s, Vector2 pos, Vector2 size, Color c) { var im = new GameObject("I", typeof(RectTransform), typeof(Image)).GetComponent<Image>(); im.rectTransform.SetParent(parent, false); im.rectTransform.anchoredPosition = pos; im.rectTransform.sizeDelta = size; im.sprite = s; im.type = Image.Type.Sliced; im.color = c; return im; }
             Text L(RectTransform parent, string s, Vector2 pos, Vector2 size, int fs, Color c, TextAnchor a = TextAnchor.MiddleCenter) { var t = new GameObject("T", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); t.rectTransform.SetParent(parent, false); t.rectTransform.anchoredPosition = pos; t.rectTransform.sizeDelta = size; t.font = font; t.fontSize = fs; t.alignment = a; t.color = c; t.text = s; t.raycastTarget = false; t.supportRichText = true; t.gameObject.AddComponent<Outline>().effectColor = Color.black; return t; }
             var shade = I(root, null, Vector2.zero, new Vector2(4000, 4000), new Color(0, 0, 0, 0.6f)); shade.raycastTarget = true;
-            float h = 250 + Regions.Length * 118;
+            float h = 240 + Regions.Length * 102;
             var p = I(root, UIStyle.Ornate(), Vector2.zero, new Vector2(1100, h), Color.white).rectTransform;
             I(p, null, Vector2.zero, new Vector2(1030, h - 70), new Color(0.30f, 0.235f, 0.17f, 0.96f));
             L(p, "Pierre de voyage", new Vector2(0, h / 2 - 70), new Vector2(900, 70), 44, UIStyle.Gold).fontStyle = FontStyle.Bold;
-            float y = h / 2 - 160; var here = Here;
+            float y = h / 2 - 150; var here = Here;
             foreach (var r in Regions)
             {
                 bool open = lvl >= r.level, cur = here != null && here.scene == r.scene;
-                var row = I(p, UIStyle.Slot(), new Vector2(0, y), new Vector2(960, 104), cur ? new Color(0.55f, 0.75f, 1f) : open ? new Color(0.95f, 0.82f, 0.62f) : new Color(0.5f, 0.46f, 0.42f));
+                var row = I(p, UIStyle.Slot(), new Vector2(0, y), new Vector2(960, 94), cur ? new Color(0.55f, 0.75f, 1f) : open ? new Color(0.95f, 0.82f, 0.62f) : new Color(0.5f, 0.46f, 0.42f));
                 L(row.rectTransform, $"<b>{r.name}</b>", new Vector2(-150, 16), new Vector2(620, 44), 32, open ? Color.white : new Color(0.75f, 0.72f, 0.68f), TextAnchor.MiddleLeft);
                 L(row.rectTransform, r.desc, new Vector2(-150, -22), new Vector2(620, 34), 22, UIStyle.Parch, TextAnchor.MiddleLeft);
                 L(row.rectTransform, cur ? "<color=#9fd7ff>Vous êtes ici</color>" : open ? $"Niveau {r.level}+  —  <color=#ffd95a>Voyager</color>" : $"<color=#ff8a7a>Niveau {r.level} requis</color>", new Vector2(300, 0), new Vector2(320, 44), 26, Color.white);
@@ -119,7 +122,7 @@ namespace Korvalune.Game
                     row.raycastTarget = true; var b = row.gameObject.AddComponent<Button>(); b.targetGraphic = row; var target = r;
                     b.onClick.AddListener(() => { Sound.UI("sfx_ui_clic", 0.6f); Travel(target); });
                 }
-                y -= 118;
+                y -= 102;
             }
             var close = I(p, UIStyle.Slot(), new Vector2(0, -h / 2 + 70), new Vector2(300, 74), new Color(0.8f, 0.7f, 0.6f)); close.raycastTarget = true;
             L(close.rectTransform, "Fermer", Vector2.zero, new Vector2(300, 74), 30, UIStyle.Gold);
