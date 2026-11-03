@@ -12,23 +12,12 @@
 - Activité : com.korvalune.game/com.unity3d.player.UnityPlayerGameActivity
     [Korvalune] partie automatique : activée
     [Korvalune][test] lanceur prêt : on joue
-    [Korvalune][test] chargement de la scène « Korvalune_Vallee » avec Testeur
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement de la scène « Korvalune_Selection » avec Testeur
+    [Korvalune][test] ÉCHEC : scène introuvable
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
 - Erreurs Unity dans le journal : 2
-    11-03 10:42:15.231  6218  6283 E Unity   : SharedTextureData source data is NULL.
-    11-03 10:42:15.233  6218  6283 E Unity   : SharedTextureData source data is NULL.
+    11-03 12:09:05.608  6385  6405 E Unity   : Scene 'Korvalune_Selection' couldn't be loaded because it has not been added to the active build profile or shared scene list or the AssetBundle has not been loaded.
+    11-03 12:09:05.608  6385  6405 E Unity   : To add a scene to the active build profile or shared scene list use the menu File->Build Profiles
 
 **RÉSULTAT : OK**
