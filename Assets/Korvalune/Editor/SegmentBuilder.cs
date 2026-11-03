@@ -86,7 +86,8 @@ namespace Korvalune.EditorTools
             // chemin principal et clairière d'arrivée aplanis
             float pd = PathDist(d, p), flat = d.kind == Kind.Pics ? 14f : 9f;
             float target = d.kind == Kind.Pics ? 12f : d.kind == Kind.Desert ? 6f : 8f;
-            h = Mathf.Lerp(h, target, Smooth(flat + 14f, flat, pd));
+            float keep = d.kind == Kind.Desert ? 0.55f : 1f;           // désert : piste à peine marquée dans les dunes (pas de tranchée)
+            h = Mathf.Lerp(h, target, keep * Smooth(flat + 14f, flat, pd));
             h = Mathf.Lerp(h, target, Smooth(26f, 16f, (p - d.entry).magnitude));
             // bords de la carte relevés (on ne sort pas du segment)
             float edge = Mathf.Max(Mathf.Abs(x), Mathf.Abs(z));
@@ -199,7 +200,7 @@ namespace Korvalune.EditorTools
                     case Kind.Desert: sable = 1.5f; roche = Smooth(0.2f, 0.32f, slope) * 3 + Smooth(22f, 26f, Height(d, x, z)) * 1.5f; chemin = 0.3f * N(x, z, 0.04f, 5f); break;
                     default: herbe = 0.6f * Smooth(30f, 18f, Height(d, x, z)); roche = Smooth(0.15f, 0.3f, slope) * 2.5f + Smooth(20f, 40f, Height(d, x, z)) * 1.5f; chemin = 0.3f; break;
                 }
-                chemin += path * 3f;
+                chemin += path * (d.kind == Kind.Desert ? 1.2f : 3f);
                 float s = herbe + chemin + roche + sousbois + sable + 1e-4f;
                 map[j, i, 0] = herbe / s; map[j, i, 1] = chemin / s; map[j, i, 3] = roche / s; map[j, i, 4] = sousbois / s; map[j, i, 5] = sable / s;
             }
