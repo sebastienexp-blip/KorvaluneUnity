@@ -495,6 +495,14 @@ namespace Korvalune.EditorTools
                 w2 = Smooth(4.5f, 2.0f, rd + noise * 1.5f) * 3 * (1 - town) + Smooth(40, 34, p.magnitude) * 2 + town * 0.35f;   // chemins, cour, terre battue en ville
                 w1 *= 1 - town; w3 *= 1 - town * 0.8f; w4 *= 1 - town;
                 float w5 = TownBuilder.Cobble(p) * 8;                                                   // rues pavées et place du marché
+                // ville : sol de terre battue et de pavés (plus de pré dans les rues), herbe seulement en petites touffes
+                float tufts = Smooth(0.62f, 0.78f, Mathf.PerlinNoise(x * 0.11f + 11, z * 0.11f + 5));
+                w0 *= 1 - town * (1 - 0.35f * tufts);
+                w2 += town * (0.9f + 0.6f * noise);
+                w5 += Smooth(24f, 18f, (p - TownBuilder.Plaza).magnitude) * 6;                          // grande place autour de la fontaine
+                // hors les murs : prairie variée (taches de terre et d'herbe sombre)
+                w1 += (1 - town) * Smooth(0.58f, 0.72f, Mathf.PerlinNoise(x * 0.025f + 50, z * 0.025f + 20)) * 0.7f;
+                w2 += (1 - town) * Smooth(0.70f, 0.82f, Mathf.PerlinNoise(x * 0.06f + 90, z * 0.06f + 40)) * 0.6f;
                 if (x > 230) w4 += Smooth(230, 260, x) * 2;
                 float s = w0 + w1 + w2 + w3 + w4 + w5;
                 map[j, i, 0] = w0 / s; map[j, i, 4] = w1 / s; map[j, i, 1] = w2 / s; map[j, i, 3] = w3 / s; map[j, i, 5] = w4 / s; map[j, i, 2] = w5 / s;
