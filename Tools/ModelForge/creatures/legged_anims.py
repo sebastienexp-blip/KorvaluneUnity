@@ -35,7 +35,9 @@ def gait(sk, name, T, stride, lift_h, bob, tail=8.0, head=3.0):
     for k in range(13):
         t = k * T / 12; w = 2 * np.pi * t / T; p = {}
         for i, s, sx, h in L:
-            ph = w + np.pi * ((i + (0 if sx > 0 else 1)) % 2)          # diagonales alternées
+            # chaque patte a son propre temps (onde qui remonte de l'arrière vers l'avant, côtés en opposition) :
+            # jamais deux pattes d'un même côté levées ensemble
+            ph = w + np.pi * (0 if sx > 0 else 1) + i * (np.pi / 2) * (1 if sx > 0 else -1) + 0.35 * i
             amp = np.degrees(np.arctan(0.5 * stride / h)); lift = np.degrees(np.arctan(lift_h / h))
             p.update(_leg(i, s, sx, amp * np.cos(ph), lift * max(0.0, np.sin(ph))))
         if 'Spinneret' in sk.names: p['Spinneret'] = qaxis((0, 1, 0), np.radians(tail * np.sin(w)))
@@ -49,7 +51,7 @@ def idle(sk):
     L = legs_of(sk); ks = []
     for k in range(9):
         t = k * 0.5; w = 2 * np.pi * t / 4.0; p = {}
-        for i, s, sx, h in L: p.update(_leg(i, s, sx, 1.5 * np.sin(w + i), 1.0 + np.sin(w * 2 + i)))
+        for i, s, sx, h in L: p.update(_leg(i, s, sx, 1.5 * np.sin(w + 1.7 * i + (0 if sx > 0 else 2.3)), 1.0 + np.sin(w * 2 + 1.3 * i + sx)))
         if 'Spinneret' in sk.names: p['Spinneret'] = qaxis((0, 1, 0), np.radians(6 * np.sin(w)))
         p['Thorax'] = qaxis((1, 0, 0), np.radians(2.5 * np.sin(w * 2)))
         ks.append(key(t, p, hips=(0, -0.012 + 0.012 * np.sin(w * 2), 0)))
@@ -61,9 +63,9 @@ def attack(sk):
     def P(rear, strike):
         p = {}
         for i, s, sx, h in L:
-            front = i < 2
-            if front: p.update(_leg(i, s, sx, 35 * rear - 20 * strike, 30 * rear, curl=25 * rear))
-            else: p.update(_leg(i, s, sx, -8 * rear, 0))
+            front = i < 2; d = 1.0 if sx > 0 else 0.8                 # gauche et droite légèrement décalées
+            if front: p.update(_leg(i, s, sx, (35 * rear - 20 * strike) * d * (1.0 if i == 0 else 0.6), 30 * rear * d, curl=25 * rear * d))
+            else: p.update(_leg(i, s, sx, -8 * rear * (1 + 0.3 * i), 3 * rear * (i - 1)))
         p['Thorax'] = qaxis((1, 0, 0), np.radians(-12 * rear + 22 * strike))
         if 'Spinneret' in sk.names: p['Spinneret'] = qaxis((1, 0, 0), np.radians(-15 * rear + 25 * strike))
         return p
@@ -80,7 +82,7 @@ def hit(sk):
 
 def death(sk):
     L = legs_of(sk); p = {}
-    for i, s, sx, h in L: p.update(_leg(i, s, sx, 10 * (1 if i < 2 else -1), 45, curl=60))
+    for i, s, sx, h in L: p.update(_leg(i, s, sx, (10 + 6 * i) * (1 if i < 2 else -1) * (1 if sx > 0 else 0.7), 35 + 8 * i, curl=50 + 7 * i))
     p['Thorax'] = qaxis((1, 0, 0), np.radians(15))
     lo = min(np.asarray(sk.pos[sk['Hips']])[1] * 0.55, 0.6)
     ks = [key(0, {}), key(0.45, p, hips=(0, -lo * 0.5, 0), hips_rot=(0, 0, 12)), key(1.2, p, hips=(0, -lo, 0), hips_rot=(0, 0, 150))]
