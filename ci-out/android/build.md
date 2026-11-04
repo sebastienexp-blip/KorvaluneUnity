@@ -3,7 +3,7 @@
 - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime
 - Signature : clé Korvalune (mises à jour sans désinstaller)
 - Icône : Assets/Korvalune/Resources/UI/Icone.png
-- Contenu téléchargeable : 100 paquets, 722 Mo (release contenu-98)
+- Contenu téléchargeable : 100 paquets, 722 Mo (release contenu-99)
     - scenes : 146.3 Mo
     - art_catalog_models : 58.3 Mo
     - art_catalog_skins : 34.6 Mo
@@ -16,8 +16,8 @@
     - art_heroes_kaeldraven_f : 17.2 Mo
     - art_heroes_kaeldraven_m : 16.7 Mo
     - art_heroes_tharion_f : 16.7 Mo
-- Résultat : **Succeeded** en 4.3 min, 0 erreur(s), 12 avertissement(s)
-- APK : 89.6 Mo, version 0.1.98
+- Résultat : **Succeeded** en 1.9 min, 0 erreur(s), 12 avertissement(s)
+- APK : 89.6 Mo, version 0.1.99
 
 ## Contenu empaqueté : 35 Mo
 - Texture2D : 23.0 Mo (295)
@@ -67,46 +67,46 @@
 
 ## Mémoire pendant la construction (dernières mesures)
 ```
-18:17:58 ram 6490/15983 swap 5/16383  3905008 Unity 539468 clang++ 
-18:18:03 ram 6143/15983 swap 5/16383  3905008 Unity 454044 dotnet 
-18:18:08 ram 6089/15983 swap 5/16383  3905008 Unity 454056 dotnet 
-18:18:13 ram 6218/15983 swap 5/16383  3905008 Unity 454056 dotnet 
-18:18:18 ram 6488/15983 swap 5/16383  3905008 Unity 454056 dotnet 
-18:18:23 ram 6498/15983 swap 5/16383  3905012 Unity 454204 clang++ 
-18:18:28 ram 6491/15983 swap 5/16383  3905012 Unity 546648 clang++ 
-18:18:33 ram 6918/15983 swap 5/16383  3905012 Unity 826460 clang++ 
-18:18:39 ram 7015/15983 swap 5/16383  3905012 Unity 1081208 clang++ 
-18:18:44 ram 6163/15983 swap 5/16383  3905012 Unity 454184 dotnet 
-18:18:49 ram 6214/15983 swap 5/16383  3905012 Unity 454184 dotnet 
-18:18:54 ram 6251/15983 swap 5/16383  3905012 Unity 454184 dotnet 
-18:18:59 ram 5801/15983 swap 5/16383  3905012 Unity 454160 dotnet 
-18:19:04 ram 5805/15983 swap 5/16383  3905012 Unity 454160 dotnet 
-18:19:09 ram 5866/15983 swap 5/16383  3908240 Unity 454184 dotnet 
-18:19:14 ram 6144/15983 swap 5/16383  3908240 Unity 454184 dotnet 
-18:19:19 ram 6146/15983 swap 5/16383  3908240 Unity 454184 dotnet 
-18:19:24 ram 6156/15983 swap 5/16383  3908200 Unity 454184 dotnet 
-18:19:29 ram 6173/15983 swap 5/16383  3908172 Unity 454164 dotnet 
-18:19:34 ram 6377/15983 swap 5/16383  3908052 Unity 559136 java 
-18:19:39 ram 6300/15983 swap 5/16383  3908052 Unity 499264 java 
-18:19:44 ram 6340/15983 swap 5/16383  3908056 Unity 537068 java 
-18:19:49 ram 6395/15983 swap 5/16383  3908056 Unity 592264 java 
-18:19:54 ram 6431/15983 swap 5/16383  3908056 Unity 610072 java 
-18:19:59 ram 6851/15983 swap 5/16383  3908044 Unity 1024880 java 
-18:20:04 ram 6760/15983 swap 642/16383  3604556 Unity 1625292 java 
-18:20:09 ram 6857/15983 swap 739/16383  3604504 Unity 1786704 java 
-18:20:14 ram 6814/15983 swap 827/16383  3604504 Unity 1830568 java 
-18:20:19 ram 6851/15983 swap 954/16383  3500416 Unity 1923700 java 
-18:20:24 ram 6786/15983 swap 1209/16383  3250756 Unity 1944840 java 
-18:20:29 ram 6784/15983 swap 1209/16383  3250768 Unity 1968108 java 
-18:20:34 ram 6390/15983 swap 1411/16383  3045008 Unity 1983724 java 
-18:20:39 ram 6388/15983 swap 1411/16383  3045048 Unity 1972412 java 
-18:20:44 ram 5817/15983 swap 2053/16383  2460884 Unity 2021344 java 
-18:20:49 ram 4952/15983 swap 2429/16383  2077148 Unity 1486968 java 
-18:20:54 ram 4847/15983 swap 2391/16383  2129608 Unity 1423624 java 
-18:20:59 ram 5121/15983 swap 2308/16383  2337192 Unity 1423672 java 
-18:21:04 ram 5325/15983 swap 2308/16383  2520788 Unity 1423812 java 
-18:21:09 ram 3836/15983 swap 2155/16383  2463108 Unity 224696 dotnet 
-18:21:14 ram 1524/15983 swap 457/16383  224696 dotnet 191264 MainThread 
+19:55:00 ram 4857/15983 swap 5/16383  2938112 Unity 455972 dotnet 
+19:55:05 ram 4852/15983 swap 5/16383  2962536 Unity 455972 dotnet 
+19:55:10 ram 4869/15983 swap 5/16383  3000936 Unity 455984 dotnet 
+19:55:15 ram 5081/15983 swap 5/16383  3207280 Unity 455984 dotnet 
+19:55:20 ram 5278/15983 swap 5/16383  3377712 Unity 455984 dotnet 
+19:55:25 ram 5394/15983 swap 5/16383  3535176 Unity 455984 dotnet 
+19:55:30 ram 5513/15983 swap 5/16383  3639716 Unity 455976 dotnet 
+19:55:35 ram 5742/15983 swap 5/16383  3942820 Unity 455976 dotnet 
+19:55:40 ram 5616/15983 swap 5/16383  3797976 Unity 456000 dotnet 
+19:55:45 ram 5513/15983 swap 5/16383  3681460 Unity 456000 dotnet 
+19:55:50 ram 5579/15983 swap 5/16383  3770940 Unity 456000 dotnet 
+19:55:55 ram 5763/15983 swap 5/16383  3911708 Unity 456000 dotnet 
+19:56:00 ram 5750/15983 swap 5/16383  3928108 Unity 456000 dotnet 
+19:56:05 ram 5746/15983 swap 5/16383  3928108 Unity 455976 dotnet 
+19:56:10 ram 5745/15983 swap 5/16383  3928108 Unity 455996 dotnet 
+19:56:15 ram 5891/15983 swap 5/16383  3865196 Unity 455996 dotnet 
+19:56:20 ram 6040/15983 swap 5/16383  3928916 Unity 455996 dotnet 
+19:56:25 ram 6492/15983 swap 5/16383  3929008 Unity 530080 UnityLinker 
+19:56:30 ram 6359/15983 swap 5/16383  3930980 Unity 455976 dotnet 
+19:56:35 ram 7283/15983 swap 5/16383  3931008 Unity 1387384 il2cpp 
+19:56:40 ram 7956/15983 swap 5/16383  3931008 Unity 2235428 il2cpp 
+19:56:45 ram 5953/15983 swap 5/16383  3934344 Unity 455976 dotnet 
+19:56:50 ram 6171/15983 swap 5/16383  3934344 Unity 455976 dotnet 
+19:56:55 ram 6217/15983 swap 5/16383  3934328 Unity 455976 dotnet 
+19:57:00 ram 6234/15983 swap 5/16383  3934312 Unity 455984 dotnet 
+19:57:05 ram 6444/15983 swap 5/16383  3934296 Unity 550724 java 
+19:57:10 ram 6541/15983 swap 5/16383  3934296 Unity 546588 java 
+19:57:16 ram 6542/15983 swap 5/16383  3934284 Unity 651268 java 
+19:57:21 ram 6553/15983 swap 5/16383  3934284 Unity 676832 java 
+19:57:26 ram 7111/15983 swap 5/16383  3934284 Unity 1171612 java 
+19:57:31 ram 7658/15983 swap 5/16383  3934268 Unity 1750848 java 
+19:57:36 ram 7922/15983 swap 5/16383  3934268 Unity 1858936 java 
+19:57:41 ram 7874/15983 swap 5/16383  3934236 Unity 1876896 java 
+19:57:46 ram 7861/15983 swap 5/16383  3934224 Unity 2026260 java 
+19:57:51 ram 7920/15983 swap 5/16383  3934224 Unity 2037816 java 
+19:57:56 ram 7924/15983 swap 5/16383  3934224 Unity 2037296 java 
+19:58:01 ram 8240/15983 swap 5/16383  3934168 Unity 2375768 java 
+19:58:06 ram 8344/15983 swap 5/16383  3935556 Unity 2387004 java 
+19:58:11 ram 3039/15983 swap 5/16383  455972 dotnet 430440 dotnet 
+19:58:16 ram 2059/15983 swap 5/16383  455972 dotnet 430440 dotnet 
 ```
 ## Noyau (OOM)
 ```
