@@ -1,0 +1,109 @@
+{
+  "model": "VoyantNeant.fbx",
+  "kind": "character",
+  "rig": "Generic",
+  "prefab": "Assets/Korvalune/Resources/Prefabs/Enemies/VoyantNeant.prefab",
+  "controller": "humanoid-combat",
+  "priority": 10,
+  "materials": [
+    {
+      "name": "VN_Corps",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/VN_Corps_BaseMap.png",
+      "normalMap": "Textures/VN_Corps_Normal.png",
+      "maskMap": "Textures/VN_Corps_MetallicSmoothness.png",
+      "occlusionMap": "Textures/VN_Corps_Occlusion.png",
+      "emissionMap": "Textures/VN_Corps_Emission.png"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Walk",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Run",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Attack",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.55
+      ]
+    },
+    {
+      "name": "Hit",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Death",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    }
+  ],
+  "attachments": [],
+  "animModel": "VoyantNeant_Anims.fbx",
+  "collider": {
+    "type": "capsule",
+    "center": [
+      0,
+      1.3,
+      0
+    ],
+    "height": 2.2,
+    "radius": 0.55
+  },
+  "expect": {
+    "heightMin": 2.0,
+    "heightMax": 3.0,
+    "maxTriangles": 200000,
+    "sockets": [],
+    "facingBone": "",
+    "behindBone": "",
+    "leftBone": "TentL1"
+  }
+}

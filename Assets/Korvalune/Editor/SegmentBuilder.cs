@@ -56,7 +56,7 @@ namespace Korvalune.EditorTools
             new Def { kind = Kind.Canyon,  scene = "Korvalune_Canyon",  name = "Canyon Écarlate",       tag = "Canyon",  quest = "Le sang de la pierre",       level = 150,
                       entry = South, enemies = new[] { "basilic", "demon", "sorcier" } },
             new Def { kind = Kind.Abime,   scene = "Korvalune_Abime",   name = "Abîme du Néant",        tag = "Abime",   quest = "Au bord du Néant",           level = 175,
-                      entry = South, enemies = new[] { "demon", "sorcier", "chevalier" } },
+                      entry = South, enemies = new[] { "voyant", "demon", "sorcier" } },
         };
 
         static float Smooth(float a, float b, float x) { float t = Mathf.Clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); }
@@ -89,10 +89,11 @@ namespace Korvalune.EditorTools
             Kind.Canyon when Has("BasilicEcarlate") => "basilic",
             Kind.Marais when Has("TisseuseBrumes") => "tisseuse",
             Kind.Volcan when Has("SalamandreForge") => "salamandre",
+            Kind.Abime when Has("VoyantNeant") => "voyant",
             _ => "demon",
         };
         /// <summary>Monstre de la liste dont le modèle n'existe pas encore → remplacé par un monstre existant.</summary>
-        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", "wendigo" when !Has("WendigoGivre") => "chevalier", "basilic" when !Has("BasilicEcarlate") => "loup", "tisseuse" when !Has("TisseuseBrumes") => "sorcier", "salamandre" when !Has("SalamandreForge") => "demon", _ => id };
+        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", "wendigo" when !Has("WendigoGivre") => "chevalier", "basilic" when !Has("BasilicEcarlate") => "loup", "tisseuse" when !Has("TisseuseBrumes") => "sorcier", "salamandre" when !Has("SalamandreForge") => "demon", "voyant" when !Has("VoyantNeant") => "sorcier", _ => id };
 
         /// <summary>Hameau en ruine au bout du chemin principal (un peu en retrait de son extrémité).</summary>
         static Vector2 HamletAt(Def d)

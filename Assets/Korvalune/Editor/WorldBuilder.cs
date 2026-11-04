@@ -867,6 +867,7 @@ namespace Korvalune.EditorTools
             if (R("Enemies/BasilicEcarlate") != null) E("basilic", "Basilic écarlate", "BasilicEcarlate", 600, 32, 4.2f, 3.0f, 2.0f, 17, 260, armor: 7, hitDelay: 0.55f, level: 15);
             if (R("Enemies/TisseuseBrumes") != null) E("tisseuse", "Tisseuse des brumes", "TisseuseBrumes", 420, 26, 3.6f, 3.2f, 2.2f, 17, 190, armor: 3, hitDelay: 0.55f, level: 12);
             if (R("Enemies/SalamandreForge") != null) E("salamandre", "Salamandre-forge", "SalamandreForge", 760, 36, 3.0f, 3.2f, 2.4f, 16, 300, armor: 9, hitDelay: 0.6f, level: 15);
+            if (R("Enemies/VoyantNeant") != null) E("voyant", "Voyant du Néant", "VoyantNeant", 480, 34, 3.4f, 3.4f, 2.4f, 20, 280, armor: 4, hitDelay: 0.5f, level: 16);
             cfg.highPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP.asset");
             cfg.mobilePipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Mobile.asset");
             cfg.ultraPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Ultra.asset");
