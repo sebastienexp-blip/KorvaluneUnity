@@ -55,6 +55,7 @@ namespace Korvalune.Game
         {
             if (!pc) pc = GetComponent<PlayerController>();
             if (d == null || Riding || !pc || pc.Health.Dead) return;
+            QuestEvents.Raise("monture");
             var pf = Res.Load<GameObject>("Prefabs/Mounts/" + d.prefab);
             if (!pf) { pc.Notify?.Invoke("Monture introuvable"); return; }
             def = d;

@@ -112,32 +112,11 @@ namespace Korvalune.Game
                 halo.transform.localScale = Vector3.one * (1.2f + 0.35f * r);
                 var hm = new Material(FX.additive); hm.SetColor("_BaseColor", new Color(c.r, c.g, c.b, 0.85f)); halo.GetComponent<Renderer>().sharedMaterial = hm;
             }
-            // faisceau vertical (dès magique)
-            if (r >= 1 && beamMat)
-            {
-                var b = GameObject.CreatePrimitive(PrimitiveType.Cylinder); b.name = "Faisceau"; Kill(b.GetComponent<Collider>());
-                b.transform.SetParent(transform, false);
-                float h = r switch { 1 => 1.6f, 2 => 2.8f, 3 => 6f, 4 => 6.5f, 5 => 9f, _ => 11f };
-                b.transform.localPosition = new Vector3(0, h / 2, 0); b.transform.localScale = new Vector3(0.18f + 0.05f * r, h / 2, 0.18f + 0.05f * r);
-                var bm = new Material(beamMat); bm.SetColor("_BaseColor", new Color(c.r, c.g, c.b, 0.55f + 0.06f * r)); b.GetComponent<Renderer>().sharedMaterial = bm;
-                b.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-                beam = b.transform;
-            }
+            // colonne de lumière à la couleur de la rareté (dès magique) : faisceau doux, volutes en spirale, anneau au sol
+            LootBeam.Attach(gameObject, c, r);
             // lumière
             glow = new GameObject("Lueur").AddComponent<Light>(); glow.transform.SetParent(transform, false); glow.transform.localPosition = new Vector3(0, 0.8f, 0);
             glow.type = LightType.Point; glow.color = c; glow.range = 3 + r; glow.intensity = 0.8f + 0.5f * r; glow.shadows = LightShadows.None;
-            // étincelles montantes et tourbillon
-            if (r >= 3 && FX.additive)
-            {
-                var ps = new GameObject("Étincelles").AddComponent<ParticleSystem>(); ps.transform.SetParent(transform, false);
-                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                var m = ps.main; m.loop = true; m.startLifetime = 1.6f; m.startSpeed = new ParticleSystem.MinMaxCurve(0.8f, 2.4f); m.startSize = new ParticleSystem.MinMaxCurve(0.05f, 0.14f); m.startColor = c; m.gravityModifier = -0.15f;
-                var em = ps.emission; em.rateOverTime = 10 + 8 * (r - 3);
-                var sh = ps.shape; sh.shapeType = ParticleSystemShapeType.Circle; sh.radius = 0.5f; sh.rotation = new Vector3(-90, 0, 0);
-                if (r >= 5) { var vel = ps.velocityOverLifetime; vel.enabled = true; vel.orbitalY = 2.5f; }
-                ps.GetComponent<ParticleSystemRenderer>().sharedMaterial = FX.additive;
-                ps.Play();
-            }
         }
 
         public static Material litBase;   // matériau URP Lit fourni par la configuration (le matériau par défaut des primitives est rose sur Android)

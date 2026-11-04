@@ -30,7 +30,13 @@ namespace Korvalune.Game
         public AppearanceSave look = new AppearanceSave();
         public string created, lastPlayed;
         public float playSeconds;
+        // mode histoire : avancement des quêtes, quête suivie, cinématiques et aides déjà vues
+        public List<QuestSave> quests = new List<QuestSave>();
+        public string tracked = "";
+        public List<string> seen = new List<string>();
     }
+
+    [Serializable] public class QuestSave { public string id; public int step; public int done; public bool completed; }
 
     [Serializable] public class AccountSave
     {

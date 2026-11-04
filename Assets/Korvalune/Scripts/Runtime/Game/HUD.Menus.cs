@@ -50,6 +50,7 @@ namespace Korvalune.Game
             if (bagPanel) bagPanel.SetActive(false);
             if (treePanel) treePanel.SetActive(false);
             if (shopPanel) shopPanel.SetActive(false);
+            if (journalPanel) journalPanel.SetActive(false);
         }
 
         /// <summary>Ouvre un panneau pour les captures du test automatique (« arbre », « sac », « menu », « options », "" = tout fermer).</summary>
@@ -62,6 +63,7 @@ namespace Korvalune.Game
                 case "sac": ToggleBag(); break;
                 case "menu": SetPause(true); break;
                 case "options": SetPause(true); ShowOptions(true); break;
+                case "journal": ToggleJournal(); break;
             }
         }
 
@@ -178,8 +180,8 @@ namespace Korvalune.Game
         void ToggleTree()
         {
             if (!treePanel) { Notify("Arbre de compétences indisponible"); return; }
-            if (bagPanel) bagPanel.SetActive(false);
-            treePanel.SetActive(!treePanel.activeSelf); if (treePanel.activeSelf) { Front(treePanel); RefreshTree(); }
+            if (bagPanel) bagPanel.SetActive(false); if (journalPanel) journalPanel.SetActive(false);
+            treePanel.SetActive(!treePanel.activeSelf); if (treePanel.activeSelf) { Front(treePanel); RefreshTree(); QuestEvents.Raise("arbre"); }
             Sound.UI(treePanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
 
@@ -247,7 +249,7 @@ namespace Korvalune.Game
             txt += sd.description + "\n\n";
             float mult = md.mult * (1 + 0.15f * (Mathf.Max(1, rk) - 1));
             if (sd.kind != SkillKind.Shield && sd.kind != SkillKind.Heal && sd.kind != SkillKind.Buff) txt += $"Dégâts : <b>{mult * 100:0} %</b> de l'arme\n";
-            txt += $"Recharge : <b>{md.cooldown * (1 - 0.04f * (Mathf.Max(1, rk) - 1)):0.#} s</b>   Mana : <b>{sd.mana:0}</b>\n";
+            txt += $"Recharge : <b>{md.cooldown * (1 - 0.04f * (Mathf.Max(1, rk) - 1)):0.#} s</b>   Mana : <b>{runner.ManaCost(sd):0}</b>\n";
             if (rk < sd.MaxRank) txt += $"<color=#9fd7ff>Rang suivant : dégâts +15 %, recharge −4 %</color>\n";
             int pa = runner.ParentOf(treeSel);
             if (pa >= 0 && runner.ranks[pa] == 0 && rk == 0) txt += $"\n<color=#ff8a70>Branche : apprenez d'abord « {runner.book[pa].name} ».</color>\n";
@@ -295,7 +297,7 @@ namespace Korvalune.Game
             }
             Difficulty.Current = next; RefreshDifficulty();
             FindFirstObjectByType<WorldPopulation>()?.Refresh();
-            Notify($"Difficulté : {Difficulty.Name}");
+            Notify($"Difficulté : {Difficulty.Name} — {Difficulty.Summary(Difficulty.Current)}");
         }
 
         void RefreshDifficulty()

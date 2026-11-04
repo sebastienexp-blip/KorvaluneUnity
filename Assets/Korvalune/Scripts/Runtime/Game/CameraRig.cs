@@ -20,7 +20,7 @@ namespace Korvalune.Game
 
         void LateUpdate()
         {
-            if (!target) return;
+            if (!target || Cinematic.Active) return;                                  // la cinématique conduit la caméra
             if (!cam) cam = GetComponent<Camera>();
             if (cam) cam.fieldOfView = fov;
             float wheel = Input.mouseScrollDelta.y;

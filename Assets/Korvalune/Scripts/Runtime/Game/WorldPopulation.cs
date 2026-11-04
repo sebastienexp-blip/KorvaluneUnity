@@ -179,11 +179,14 @@ namespace Korvalune.Game
         {
             var cfg = game.config; if (!cfg) return;
             int n = c.ids.Count;
+            // difficulté : des monstres en plus (copies des membres du camp)
+            var ids = new List<string>(c.ids); for (int k = 0; k < Difficulty.ExtraPerCamp && c.ids.Count > 0; k++) ids.Add(c.ids[k % c.ids.Count]);
+            n = ids.Count;
             // champion : une créature d'élite par camp de temps en temps (plus souvent dans les difficultés élevées)
-            int champ = n >= 2 && Random.value < 0.15f + 0.05f * Difficulty.Current ? Random.Range(0, n) : -1;
+            int champ = n >= 2 && Random.value < 0.15f + 0.08f * Difficulty.Current ? Random.Range(0, n) : -1;
             for (int i = 0; i < n; i++)
             {
-                var t = cfg.Enemy(c.ids[i]); if (t == null || !t.prefab) continue;
+                var t = cfg.Enemy(ids[i]); if (t == null || !t.prefab) continue;
                 float a = 2 * Mathf.PI * i / Mathf.Max(1, n) + Random.Range(-0.3f, 0.3f);
                 var p = c.center + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * c.radius * Random.Range(0.35f, 1f);
                 int lvl = Mathf.Max(1, c.level + (t.id == "demon" ? 2 : Random.Range(0, 2)));

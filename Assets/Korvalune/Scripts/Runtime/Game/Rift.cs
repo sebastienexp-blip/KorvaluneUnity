@@ -128,7 +128,8 @@ namespace Korvalune.Game
 
         void Victory()
         {
-            done = true; var pos = guardian ? guardian.transform.position : game.Player.transform.position;
+            done = true; QuestEvents.Raise("breche"); if (Rift.Tier > 0) QuestEvents.Raise("grande_breche");
+            var pos = guardian ? guardian.transform.position : game.Player.transform.position;
             var w = game.Player.wallet; var save = SaveSystem.Current;
             float used = Time.time - startedAt; var rng = new System.Random(); int lvl = game.Player.level;
             string msg;

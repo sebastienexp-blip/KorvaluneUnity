@@ -1088,6 +1088,7 @@ namespace Korvalune.EditorTools
                 game.Hud.TestShow("arbre"); Shot("14_arbre_competences");
                 game.Hud.TestShow("menu"); Shot("15_menu_pause");
                 game.Hud.TestShow("options"); Shot("16_options");
+                game.Hud.TestShow("journal"); Shot("17_journal_quetes");
                 game.Hud.TestShow("");
                 check("Butin et inventaire", eq.worn.Count > 0, $"{eq.worn.Count} objets portés, {pc.inventory.Count} dans le sac — {eq.Summary().Replace("<b>", "").Replace("</b>", "").Replace("\n", " ")}");
                 check("Captures de la vallée", true, "ci-out/Jeu_*.png");

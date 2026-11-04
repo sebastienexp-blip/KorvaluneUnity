@@ -20,6 +20,7 @@ namespace Korvalune.Game
 
         static void Open(Font font)
         {
+            QuestEvents.Raise("carte");
             var go = new GameObject("Carte", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             var cv = go.GetComponent<Canvas>(); cv.renderMode = RenderMode.ScreenSpaceOverlay; cv.sortingOrder = 200;
             var sc = go.GetComponent<CanvasScaler>(); sc.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; sc.referenceResolution = new Vector2(1920, 1080); sc.matchWidthOrHeight = 0.6f;

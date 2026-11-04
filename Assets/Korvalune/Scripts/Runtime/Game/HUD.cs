@@ -105,6 +105,7 @@ namespace Korvalune.Game
             if (player && player.GetComponent<Equipment>()) BuildBag(root);
             RoundButton(root, "Arbre", "book", new Vector2(0.5f, 1), new Vector2(60, -24), 96, ToggleTree, out _, out _);
             RoundButton(root, "Carte", "map", new Vector2(0.5f, 1), new Vector2(300, -24), 96, () => WorldMap.Toggle(font), out _, out _);
+            RoundButton(root, "Journal", "quete", new Vector2(0.5f, 1), new Vector2(-180, -24), 96, ToggleJournal, out _, out _);   // journal de quêtes
             if (runner) BuildTree(root);
             // bourse (sous le portrait) et potions de soin (au-dessus du joystick, à droite)
             var purse = Img(root, "Or", UIStyle.Icon("coin", new Color(1f, 0.82f, 0.3f)), new Vector2(0, 1), new Vector2(40, -212), new Vector2(40, 40));
@@ -126,6 +127,7 @@ namespace Korvalune.Game
             // portail de ville (violet)
             RoundButton(root, "PortailVille", "portail", new Vector2(0, 0), new Vector2(780, 40), 112, TownPortal.Cast, out _, out _);
             if (player) BuildShop(root);
+            BuildJournal(root);
             BuildMenu(root);
 
             notifyText = Label(root, "Notification", "", 38, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0, -170), new Vector2(1200, 60));
@@ -144,6 +146,7 @@ namespace Korvalune.Game
 
             if (player) player.Notify = Notify;
             if (quest) quest.Notify = Notify;
+            QuestLog.Notify = Notify;
             Health.AnyDamaged += OnDamaged;
         }
 
@@ -185,7 +188,7 @@ namespace Korvalune.Game
                 if (u != null && Application.isPlaying && Input.GetKeyDown(KeyCode.E)) Usable.UseNearest(player.transform.position);
             }
             if (potionCount) { potionCount.text = player.wallet.potions.ToString(); potionCd.fillAmount = player.PotionCooldown / 15f; }
-            if (manaCount) { manaCount.text = player.wallet.manaPotions.ToString(); manaCd.fillAmount = player.ManaPotionCooldown / 12f; }
+            if (manaCount) { manaCount.text = player.wallet.manaPotions.ToString(); manaCd.fillAmount = player.ManaPotionCooldown / 10f; }
             if (runner) RefreshSkills(h);
             else foreach (var (cd, t, i) in skillButtons)
             {
@@ -199,6 +202,7 @@ namespace Korvalune.Game
             if (quest) questText.text = quest.Describe();
             if (mapCam) { var p = player.transform.position; mapCam.transform.position = new Vector3(p.x, p.y + 120, p.z); }
             if (arrow) arrow.localRotation = Quaternion.Euler(0, 0, -player.transform.eulerAngles.y);
+            if (notifyText && notes.Count > 0 && Time.time - noteShownAt > (notes.Count > 3 ? 1.2f : 1.8f)) ShowNote(notes.Dequeue());
             if (notifyText && Time.time > notifyUntil) notifyText.color = Color.Lerp(notifyText.color, new Color(1, 1, 1, 0), 4 * Time.deltaTime);
             deathPanel.SetActive(h.Dead);
             UpdatePopups(); UpdateBars(); UpdateLootLabels(); UpdateMapDots();
@@ -256,7 +260,7 @@ namespace Korvalune.Game
                 float rem = runner.Remaining(si), full = d.cooldown;
                 cd.fillAmount = rem > 0 ? Mathf.Clamp01(rem / full) : 0;
                 t.text = rem > 0 ? Mathf.CeilToInt(rem).ToString() : "";
-                bool noMana = h.mana < d.mana && rem <= 0;
+                bool noMana = h.mana < runner.ManaCost(d) && rem <= 0;
                 cd.color = noMana ? new Color(0.1f, 0.15f, 0.5f, 0.55f) : new Color(0, 0, 0, 0.6f);
                 if (noMana || runner.ranks[si] <= 0) cd.fillAmount = 1;
             }
@@ -275,8 +279,8 @@ namespace Korvalune.Game
         public void ToggleBag()
         {
             if (!bagPanel) { Notify("Inventaire indisponible"); return; }
-            if (treePanel) treePanel.SetActive(false);
-            bagPanel.SetActive(!bagPanel.activeSelf); selected = null; if (bagPanel.activeSelf) { Front(bagPanel); RefreshBag(); }
+            if (treePanel) treePanel.SetActive(false); if (journalPanel) journalPanel.SetActive(false);
+            bagPanel.SetActive(!bagPanel.activeSelf); selected = null; if (bagPanel.activeSelf) { Front(bagPanel); RefreshBag(); QuestEvents.Raise("sac"); }
             PortraitActive(bagPanel.activeSelf);
             Sound.UI(bagPanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
@@ -323,7 +327,16 @@ namespace Korvalune.Game
         /// <summary>Un panneau plein écran est ouvert : on masque les noms et barres flottants du monde.</summary>
         bool ModalOpen => (bagPanel && bagPanel.activeSelf) || (treePanel && treePanel.activeSelf) || (shopPanel && shopPanel.activeSelf) || (pausePanel && pausePanel.activeSelf);
 
-        public void Notify(string msg) { if (!notifyText) return; notifyText.text = msg; notifyText.color = UIStyle.Parch; notifyUntil = Time.time + 2.5f + msg.Length * 0.03f; }
+        // les annonces arrivent parfois en rafale (fin de quête, récompense, nouvelle quête) : file d'attente, chacune
+        // reste lisible au moins 1,8 s ; au-delà de 4 en attente, on accélère
+        readonly Queue<string> notes = new Queue<string>(); float noteShownAt = -10f;
+        public void Notify(string msg)
+        {
+            if (!notifyText || string.IsNullOrEmpty(msg)) return;
+            if (Time.time - noteShownAt < 1.8f && Time.time < notifyUntil) { if (notes.Count < 8) notes.Enqueue(msg); return; }
+            ShowNote(msg);
+        }
+        void ShowNote(string msg) { notifyText.text = msg; notifyText.color = UIStyle.Parch; noteShownAt = Time.time; notifyUntil = Time.time + 2.5f + msg.Length * 0.03f; }
 
         void Revive()
         {

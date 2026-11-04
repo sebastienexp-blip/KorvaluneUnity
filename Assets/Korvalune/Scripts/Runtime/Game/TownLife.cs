@@ -100,7 +100,7 @@ namespace Korvalune.Game
             {
                 var hero = FindFirstObjectByType<PlayerController>();
                 if (hero) { var to = hero.transform.position - transform.position; to.y = 0; if (to.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(to); }
-                waitUntil = Time.time + 4f;
+                waitUntil = Time.time + 4f; QuestEvents.Raise("parler_villageois");
                 FindFirstObjectByType<GameBootstrap>()?.Hud?.Notify(Lines[rng.Next(Lines.Length)]);
             }
             void Pick()

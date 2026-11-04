@@ -63,7 +63,7 @@ namespace Korvalune.Game
             var game = GameBootstrap.Instance; var p = game ? game.Player : null; if (!p || p.Health.Dead || casting) return;
             if (Rift.Active) { p.Notify?.Invoke("La brèche retient votre âme : impossible d'ouvrir un portail"); return; }
             if (SceneManager.GetActiveScene().name == Town && GameBootstrap.InSafeZone(p.transform.position)) { p.Notify?.Invoke("Vous êtes déjà en ville"); return; }
-            game.StartCoroutine(Channel(game, p));
+            game.StartCoroutine(Channel(game, p)); QuestEvents.Raise("portail_ville");
         }
 
         static IEnumerator Channel(GameBootstrap game, PlayerController p)

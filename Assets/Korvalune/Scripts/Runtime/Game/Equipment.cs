@@ -46,7 +46,7 @@ namespace Korvalune.Game
             p.inventory.Remove(it);
             if (worn.TryGetValue(it.slot, out var old) && old != null) p.inventory.Add(old);
             worn[it.slot] = it;
-            Apply(true); Changed?.Invoke(); Sound.UI("sfx_equiper");
+            Apply(true); Changed?.Invoke(); Sound.UI("sfx_equiper"); QuestEvents.Raise("equiper");
             return true;
         }
 
@@ -204,7 +204,7 @@ namespace Korvalune.Game
                 hp += 3f * Sum("Vie");
                 crit += Sum("Chances de coup critique") / 100f;
                 cd *= 1f - Mathf.Clamp(Sum("Vitesse d'attaque") / 100f, 0, 0.5f);
-                regen += 0.1f * Sum("Régénération de mana");
+                regen += 0.1f * Sum("Régénération de mana") * Mathf.Max(1f, h.maxMana / 100f);
                 cdr = Mathf.Clamp(Sum("Réduction des temps de recharge") / 100f, 0, 0.5f);
             }
             if (p.wallet != null && Time.time < p.wallet.elixirUntil)
@@ -214,7 +214,8 @@ namespace Korvalune.Game
             }
             float ratio = h.maxHp > 0 ? h.hp / h.maxHp : 1;
             p.attackDamage = dmg; h.maxHp = hp; h.hp = Mathf.Clamp(hp * ratio, 1, hp); h.armor = armor;
-            p.critChance = Mathf.Clamp01(crit); p.attackCooldown = cd; h.manaRegen = regen; cooldownReduction = cdr;
+            regen += h.maxMana * 0.03f - baseRegen;                       // 3 % de la réserve par seconde (au lieu d'un fixe de 6/s)
+            p.critChance = Mathf.Clamp01(crit); p.attackCooldown = cd; h.manaRegen = Mathf.Max(1f, regen); cooldownReduction = cdr;
         }
 
         /// <summary>Résumé des caractéristiques pour le panneau d'inventaire.</summary>

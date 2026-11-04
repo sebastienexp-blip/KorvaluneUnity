@@ -32,7 +32,7 @@ namespace Korvalune.Game
 
         public void Open(PlayerController p)
         {
-            if (opened) return; opened = true;
+            if (opened) return; opened = true; QuestEvents.Raise("coffre");
             Sound.Play("sfx_coffre", transform.position);
             var r = new System.Random();
             long g = Economy.GoldDrop(r, p.level, 1.5f) * 3; LootDrop.SpawnGold(g, LootDrop.Near(transform.position, transform.forward * 1.2f));

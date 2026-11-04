@@ -146,6 +146,7 @@ namespace Korvalune.Game
 
         void Open()
         {
+            QuestEvents.Raise("pierre");
             var pc = FindFirstObjectByType<PlayerController>(); int lvl = pc ? pc.level : 1;
             var font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             panel = new GameObject("Voyage", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
