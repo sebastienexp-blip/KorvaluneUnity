@@ -1,0 +1,88 @@
+== wendigo  (08:21:58)
+  TRELLIS : trellis-community/TRELLIS
+  API : Client.predict() Usage Info
+---------------------------
+Named API endpoints: 12
+
+ - predict(api_name="/start_session") -> 
+    Parameters:
+     - None
+    Returns:
+     - None
+
+ - predict(api_name="/lambda") -> 
+    Parameters:
+     - None
+    Returns:
+     - None
+
+ - predict(api_name="/lambda_1") -> 
+    Parameters:
+     - None
+    Returns:
+     - None
+
+ - predict(image, api_name="/preprocess_image") -> image_prompt
+    Parameters:
+     - [Image] image: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)) (required)  (For input, either path or url must be provided. For output, path is always provided.) 
+    Returns:
+     - [Image] image_prompt: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)) 
+
+ - predict(images, api_name="/preprocess_images") -> image_prompt
+    Parameters:
+     - [Gallery] images: list[dict(image: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes)
+  échec trellis-community/TRELLIS : ValueError('Cannot find a function with `api_name`: /image_to_3d.')
+  TRELLIS : JeffreyXiang/TRELLIS
+  échec JeffreyXiang/TRELLIS : ValueError('The current space is in the invalid state: CONFIG_ERROR. Please contact the owner to fix this.')
+  TRELLIS : trellis-community/TRELLIS
+  API : Client.predict() Usage Info
+---------------------------
+Named API endpoints: 12
+
+ - predict(api_name="/start_session") -> 
+    Parameters:
+     - None
+    Returns:
+     - None
+
+ - predict(api_name="/lambda") -> 
+    Parameters:
+     - None
+    Returns:
+     - None
+
+ - predict(api_name="/lambda_1") -> 
+    Parameters:
+     - None
+    Returns:
+     - None
+
+ - predict(image, api_name="/preprocess_image") -> image_prompt
+    Parameters:
+     - [Image] image: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)) (required)  (For input, either path or url must be provided. For output, path is always provided.) 
+    Returns:
+     - [Image] image_prompt: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)) 
+
+ - predict(images, api_name="/preprocess_images") -> image_prompt
+    Parameters:
+     - [Gallery] images: list[dict(image: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes)
+  échec trellis-community/TRELLIS : ValueError('Cannot find a function with `api_name`: /image_to_3d.')
+  TRELLIS : JeffreyXiang/TRELLIS
+  échec JeffreyXiang/TRELLIS : ValueError('The current space is in the invalid state: CONFIG_ERROR. Please contact the owner to fix this.')
+  Hunyuan3D : tencent/Hunyuan3D-2.1
+  points d'entrée : ['/lambda', '/shape_generation', '/lambda_1', '/lambda_2', '/generation_all', '/lambda_3', '/lambda_4', '/on_gen_mode_change', '/on_decode_mode_change', '/lambda_5', '/on_export_click']
+  appel /generation_all ['image', 'check_box_rembg']
+  échec tencent/Hunyuan3D-2.1 : AppError("'The requested GPU duration (270s) is larger than the maximum allowedSubscribe to Hugging Face PRO to allow GPU tasks up to 40 min - https://huggingface.co/subscribe/pro?from=ZeroGPU'")
+  Hunyuan3D : tencent/Hunyuan3D-2
+  points d'entrée : ['/lambda', '/lambda_1', '/shape_generation', '/lambda_2', '/lambda_3', '/generation_all', '/lambda_4', '/lambda_5', '/on_gen_mode_change', '/on_decode_mode_change', '/lambda_6', '/on_export_click']
+  appel /generation_all ['image', 'check_box_rembg']
+  échec tencent/Hunyuan3D-2 : AppError("'NameError'")
+  Hunyuan3D : tencent/Hunyuan3D-2.1
+  points d'entrée : ['/lambda', '/shape_generation', '/lambda_1', '/lambda_2', '/generation_all', '/lambda_3', '/lambda_4', '/on_gen_mode_change', '/on_decode_mode_change', '/lambda_5', '/on_export_click']
+  appel /generation_all ['image', 'check_box_rembg']
+  échec tencent/Hunyuan3D-2.1 : AppError("'The requested GPU duration (270s) is larger than the maximum allowedSubscribe to Hugging Face PRO to allow GPU tasks up to 40 min - https://huggingface.co/subscribe/pro?from=ZeroGPU'")
+  Hunyuan3D : tencent/Hunyuan3D-2
+  points d'entrée : ['/lambda', '/lambda_1', '/shape_generation', '/lambda_2', '/lambda_3', '/generation_all', '/lambda_4', '/lambda_5', '/on_gen_mode_change', '/on_decode_mode_change', '/lambda_6', '/on_export_click']
+  appel /generation_all ['image', 'check_box_rembg']
+  échec tencent/Hunyuan3D-2 : AppError("'NameError'")
+  ❌ wendigo : aucune génération réussie
