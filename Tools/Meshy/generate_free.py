@@ -73,6 +73,31 @@ def fill(params, img, out):
     return kw
 
 
+SEEDS = [int(x) for x in os.environ.get('SEEDS', '7,21').split(',')]
+
+
+def trellis_hq(img, out, name):
+    """TRELLIS en qualité poussée (plus d'étapes, maillage moins simplifié, texture 2048) ; plusieurs graines pour choisir."""
+    from gradio_client import handle_file
+    c = client('trellis-community/TRELLIS')
+    try: call(c, api_name='/start_session')
+    except Exception as e: log(out, '   (start_session', repr(e)[:200], ')')
+    got = []
+    for sd in SEEDS:
+        dst = os.path.join(out, f'modele_s{sd}.glb')
+        if os.path.exists(dst): got.append(dst); continue
+        try:
+            res = call(c, image=handle_file(img), multiimages=[], seed=sd, ss_guidance_strength=8.0, ss_sampling_steps=30,
+                       slat_guidance_strength=3.5, slat_sampling_steps=30, multiimage_algo='stochastic', mesh_simplify=0.9,
+                       texture_size=2048, api_name='/generate_and_extract_glb')
+            f = first_file(res)
+            if f: shutil.copy(f, dst); got.append(dst); log(out, f'  ✅ {name} graine {sd} : {os.path.getsize(dst) // 1024} Ko')
+            else: log(out, '   graine', sd, 'sans fichier :', str(res)[:300])
+        except Exception as e:
+            log(out, '   graine', sd, 'échec :', repr(e)[:400])
+    return got
+
+
 def generic(space, img, out):
     c = client(space); api = dump_api(c, space) or {}
     eps = api.get('named_endpoints', {})
@@ -105,10 +130,13 @@ def generic(space, img, out):
 def run(name):
     out = os.path.join(HERE, 'out', name); os.makedirs(out, exist_ok=True)
     dst = os.path.join(out, 'modele.glb')
-    if os.path.exists(dst) and os.path.getsize(dst) > 10000:
-        print(f'== {name} : déjà généré', flush=True); return True
     log(out, f'== {name}  ({time.strftime("%H:%M:%S")})')
     img = os.path.join(HERE, 'concepts', f'{name}.png')
+    try:
+        if trellis_hq(img, out, name): return True
+    except Exception as e: log(out, '  TRELLIS HQ :', repr(e)[:400])
+    if os.path.exists(dst) and os.path.getsize(dst) > 10000:
+        print(f'== {name} : déjà généré', flush=True); return True
     for space in SPACES:
         try: f = generic(space, img, out)
         except Exception as e: log(out, '  échec', space, ':', repr(e)[:400]); f = None
