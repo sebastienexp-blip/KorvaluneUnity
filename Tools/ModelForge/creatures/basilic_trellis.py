@@ -94,7 +94,7 @@ def build(bank, female=False):
     return multileg(NAME, SRC, KEEP, BODY, FEET, (CX, 0.0, CZ), 'BT_Ecailles', _cache, EYES, 'BT_Oeil')
 
 
-def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=None, anim_scale=1.0, yaw=0.0, body_r=0.17):
+def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=None, anim_scale=1.0, yaw=0.0, body_r=0.17, body_bias=1.0):
     """Créature à quatre paires de membres (squelette de l'araignée géante) d'après un GLB généré."""
     V, UV, F, base = GC.load(SRC, GC.BASE_H, yaw)
     _cache['base'] = base
@@ -134,6 +134,8 @@ def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=
         a_, b_ = np.asarray(a_, float), np.asarray(b_, float); ab = b_ - a_
         t = np.clip(((V - a_) @ ab) / (ab @ ab + 1e-12), 0, 1); j = names.index(b)
         D[:, j] = np.minimum(D[:, j], np.linalg.norm(V - (a_ + t[:, None] * ab), axis=1))
+    body = [j for j, nm in enumerate(names) if not nm.startswith('Leg')]
+    D[:, body] *= body_bias                     # < 1 : le corps garde ses sommets (pattes courtes sous un gros corps)
     Wt = 1.0 / np.maximum(D, 0.012) ** 4; Wt /= Wt.sum(1, keepdims=True)
     inv2, Pm = GC._adjacency(V, F); n = inv2.max() + 1
     Wv = np.zeros((n, len(names))); np.add.at(Wv, inv2, Wt); Wv /= np.bincount(inv2, minlength=n)[:, None]
@@ -152,11 +154,8 @@ def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=
         if len(near): e[2] = near[:, 2].max() - 0.004
         g = _blob(e, (0.016, 0.011, 0.010), n=10); g.J = np.full((len(g.V), 4), sk['Thorax']); g.W = np.tile([1.0, 0, 0, 0], (len(g.V), 1))
         a.add(f'oeil{k}', g, EYE_MAT)
-    # animations de l'araignée, avec l'orientation réelle de chaque patte
-    old = AR.ANG
-    AR.ANG = tuple(0.5 * (angs[(i, 'L')] + angs[(i, 'R')]) for i in range(4))
-    try:
-        for cl in (AR.idle(sk), AR.walk(sk), AR.walk(sk, 'Run', 0.55, 22, 26, 0.03), AR.attack(sk), AR.hit(sk), AR.death(sk)): a.clips[cl.name] = cl
-    finally: AR.ANG = old
+    # animations : pattes qui pivotent à la hanche avec une foulée à leur mesure (voir legged_anims)
+    from creatures import legged_anims as LA
+    LA.build(sk, a, anim_scale)
     print(f'   {NAME} : {len(V)} sommets, {len(F)} triangles', flush=True)
     return a, {}, a.clips
