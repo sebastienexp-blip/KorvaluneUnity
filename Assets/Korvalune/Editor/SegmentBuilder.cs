@@ -206,7 +206,7 @@ namespace Korvalune.EditorTools
                 l.maskMapTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Art/World/Terrain/{n}_Mask.png");
                 float t = Tile.TryGetValue(n, out var tt) ? tt : 8f;
                 l.tileSize = new Vector2(t, t); l.normalScale = 1.35f; l.smoothness = 0.1f; l.metallic = 0;
-                l.maskMapRemapMin = Vector4.zero; l.maskMapRemapMax = Vector4.one;
+                l.maskMapRemapMin = Vector4.zero; l.maskMapRemapMax = new Vector4(1, 1, 1, 0.4f);   // lissé plafonné : sol sec, pas « après la pluie »
                 EditorUtility.SetDirty(l); list.Add(l);
             }
             return list.ToArray();

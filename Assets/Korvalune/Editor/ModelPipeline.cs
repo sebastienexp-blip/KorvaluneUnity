@@ -164,7 +164,11 @@ namespace Korvalune.EditorTools
             var mask = SetTex(mat, "_MetallicGlossMap", Rel(e, fm.maskMap), tiling);
             Keyword(mat, "_METALLICSPECGLOSSMAP", mask);
             mat.SetFloat("_Metallic", fm.metallic);
-            mat.SetFloat("_Smoothness", fm.smoothness);              // avec une carte : multiplicateur du lissé (canal A)
+            float smooth = fm.smoothness;
+            // décor (pierre, pavés, bois, sol) : lissé plafonné pour un aspect sec — sinon les surfaces semblent mouillées
+            if (e.dir.Contains("/World/") && fm.metallic < 0.5f && !System.Text.RegularExpressions.Regex.IsMatch(fm.name.ToLowerInvariant(), "eau|glace|cristal|crystal|verre|glass|lave|ice"))
+                smooth = Mathf.Min(smooth, 0.5f);
+            mat.SetFloat("_Smoothness", smooth);                     // avec une carte : multiplicateur du lissé (canal A)
             mat.SetFloat("_SmoothnessTextureChannel", 0f);
 
             var occ = SetTex(mat, "_OcclusionMap", Rel(e, fm.occlusionMap), tiling);

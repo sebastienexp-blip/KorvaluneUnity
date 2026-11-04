@@ -179,7 +179,7 @@ namespace Korvalune.Game
                     Stable.Place(this, st.pos, st.yaw);
                     TownPortal.PlaceReturn(this);                                                         // portail de ville : retour au combat
                 }
-                Waypoint.PlaceTownPortals(this);                                                         // en ville : un portail par région
+                // une seule entrée vers les régions : la pierre de voyage (plus de portails alignés en ville)
                 if (!Rift.Active && !AutoTest.Enabled) TownLife.Populate(this);                       // villageois, chiens, oiseaux
             }
             else foreach (var camp in camps) SpawnCamp(camp);
