@@ -57,6 +57,7 @@ namespace Korvalune.Game
         {
             if (busy || remote <= InstalledBuild) return;              // déjà à jour : rien à télécharger
             if (Application.platform != RuntimePlatform.Android) { Application.OpenURL(Page); return; }
+            if (installAct != null) { Install(); return; }                // déjà téléchargée : on relance l'installation
             try
             {
                 using var up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -101,21 +102,55 @@ namespace Korvalune.Game
                 label.text = total > 0 ? $"Téléchargement… {100 * done / total} %  ({done / 1048576} / {total / 1048576} Mo)" : "Téléchargement…";
             }
             label.text = "Téléchargé — installation…";
+            installAct = act;
+            Install();
+            busy = false;
+        }
+
+        AndroidJavaObject installAct; bool waitingPermission;
+
+        /// <summary>Ouvre l'installateur d'Android sur l'APK téléchargé : il remplace la version installée (même signature,
+        /// personnages et réglages conservés) après un seul toucher sur « Mettre à jour ». La première fois, Android demande
+        /// d'autoriser Korvalune à installer des applications : on ouvre ce réglage puis on reprend au retour dans le jeu.</summary>
+        void Install()
+        {
+            var act = installAct; if (act == null) return;
             try
             {
+                using var ver = new AndroidJavaClass("android.os.Build$VERSION");
+                if (ver.GetStatic<int>("SDK_INT") >= 26)
+                {
+                    var pm = act.Call<AndroidJavaObject>("getPackageManager");
+                    if (!pm.Call<bool>("canRequestPackageInstalls"))
+                    {
+                        using var uriC0 = new AndroidJavaClass("android.net.Uri");
+                        var pkg = uriC0.CallStatic<AndroidJavaObject>("parse", "package:" + act.Call<string>("getPackageName"));
+                        var st = new AndroidJavaObject("android.content.Intent", "android.settings.MANAGE_UNKNOWN_APP_SOURCES", pkg);
+                        st.Call<AndroidJavaObject>("addFlags", 0x10000000);
+                        act.Call("startActivity", st);
+                        waitingPermission = true;
+                        label.text = "Autorise « Korvalune » à installer la mise à jour, puis reviens dans le jeu";
+                        return;
+                    }
+                }
                 var uri = dm.Call<AndroidJavaObject>("getUriForDownloadedFile", downloadId);
-                var intent = new AndroidJavaObject("android.content.Intent", "android.intent.action.VIEW");
+                var intent = new AndroidJavaObject("android.content.Intent", "android.intent.action.INSTALL_PACKAGE");
                 intent.Call<AndroidJavaObject>("setDataAndType", uri, "application/vnd.android.package-archive");
                 intent.Call<AndroidJavaObject>("addFlags", 0x10000000 | 0x00000001);   // NEW_TASK | GRANT_READ_URI_PERMISSION
+                intent.Call<AndroidJavaObject>("putExtra", "android.intent.extra.NOT_UNKNOWN_SOURCE", true);
                 act.Call("startActivity", intent);
-                label.text = "Installe la mise à jour (tes personnages sont conservés)";
+                label.text = "Touchez « Mettre à jour » : le jeu se met à jour (personnages conservés)";
             }
             catch (System.Exception e)
             {
                 Debug.LogWarning("[Korvalune] installation : " + e.Message);
-                label.text = "Téléchargé : ouvre la notification « Korvalune » pour installer";
+                label.text = "Téléchargé : touchez la notification « Korvalune » pour installer";
             }
-            busy = false;
+        }
+
+        void OnApplicationFocus(bool focus)
+        {
+            if (focus && waitingPermission) { waitingPermission = false; Install(); }       // retour du réglage : on installe
         }
     }
 }
