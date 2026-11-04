@@ -91,15 +91,16 @@ def leg_chain(P, G, foot, body_pts, body_r=0.17):
 
 
 def build(bank, female=False):
-    return multileg(NAME, SRC, KEEP, BODY, FEET, (CX, 0.0, CZ), 'BT_Ecailles', _cache, EYES, 'BT_Oeil')
+    return multileg(NAME, SRC, KEEP, BODY, FEET, (CX, 0.0, CZ), 'BT_Ecailles', _cache, EYES, 'BT_Oeil', floor_cut=0.06)
 
 
-def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=None, anim_scale=1.0, yaw=0.0, body_r=0.17, body_bias=1.0):
+def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=None, anim_scale=1.0, yaw=0.0, body_r=0.17, body_bias=1.0, floor_cut=0.0):
     """Créature à quatre paires de membres (squelette de l'araignée géante) d'après un GLB généré."""
     V, UV, F, base = GC.load(SRC, GC.BASE_H, yaw)
     _cache['base'] = base
     C = GC.vertex_colors(UV, base)
     F = F[KEEP(V, C)[F].all(1)]
+    if floor_cut: F = F[~(V[F][:, :, 1] < floor_cut).all(1)]   # restes de sol collés aux pieds (étirés en aiguilles à la marche)
     F, _ = GC.drop_islands(V, F, 0.004)
     used = np.unique(F); rm = -np.ones(len(V), int); rm[used] = np.arange(len(used)); V, UV, F = V[used], UV[used], rm[F]
     inv, P, G = _graph(V, F)
@@ -140,7 +141,23 @@ def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=
     inv2, Pm = GC._adjacency(V, F); n = inv2.max() + 1
     Wv = np.zeros((n, len(names))); np.add.at(Wv, inv2, Wt); Wv /= np.bincount(inv2, minlength=n)[:, None]
     for _ in range(6): Wv = Pm @ Wv
-    Wt = Wv[inv2]; idx = np.argsort(-Wt, 1)[:, :4]; w = np.take_along_axis(Wt, idx, 1); w /= w.sum(1, keepdims=True)
+    Wt = Wv[inv2]
+    # pattes indépendantes : un sommet n'appartient qu'à UNE patte (celle qui l'influence le plus) ; les autres pattes
+    # n'ont aucun poids sur lui — sinon deux pattes voisines tirent la même peau et se collent l'une à l'autre
+    groups = {}
+    for j, nm in enumerate(names):
+        if nm.startswith('Leg'): groups.setdefault(nm.split('_')[0] + '_' + nm.split('_')[-1], []).append(j)
+    if groups:
+        G_ = list(groups.values()); tot = np.stack([Wt[:, g].sum(1) for g in G_], 1); best = np.argmax(tot, 1)
+        for gi, g in enumerate(G_):
+            Wt[np.ix_(best != gi, g)] = 0.0
+        # membranes générées entre deux pattes voisines : faces à cheval sur deux pattes retirées (sinon étirées en aiguilles)
+        lab = np.where(tot.max(1) > 0.35, best, -1); Lf = lab[F]
+        cross = ((Lf[:, 0] >= 0) & (Lf[:, 1] >= 0) & (Lf[:, 0] != Lf[:, 1])) | ((Lf[:, 1] >= 0) & (Lf[:, 2] >= 0) & (Lf[:, 1] != Lf[:, 2])) | \
+                ((Lf[:, 0] >= 0) & (Lf[:, 2] >= 0) & (Lf[:, 0] != Lf[:, 2]))
+        F = F[~cross]
+        F, _ = GC.drop_islands(V, F, 0.003)                   # bouts de griffe isolés par la séparation des pattes
+    idx = np.argsort(-Wt, 1)[:, :4]; w = np.take_along_axis(Wt, idx, 1); w /= w.sum(1, keepdims=True) + 1e-12
     lut = np.array([sk.names.index(nm) for nm in names])
     c = np.asarray(center, float)
     m = Mesh(V - c, F, UV.copy(), lut[idx], w); m.UV[:, 1] = 1 - m.UV[:, 1]
