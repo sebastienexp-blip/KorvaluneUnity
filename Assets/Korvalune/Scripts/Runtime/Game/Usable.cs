@@ -41,7 +41,7 @@ namespace Korvalune.Game
         public static bool UseNearest(Vector3 p)
         {
             var u = Nearest(p); if (!u) return false;
-            Sound.UI("sfx_ui_clic", 0.5f); u.use(); return true;
+            Sound.UI("sfx_ui_clic", 0.5f); QuestEvents.Raise("utiliser"); u.use(); return true;
         }
     }
 }

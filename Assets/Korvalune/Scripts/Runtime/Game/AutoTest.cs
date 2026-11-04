@@ -57,6 +57,7 @@ namespace Korvalune.Game
                 yield return new WaitForSecondsRealtime(10f); Log("panneau : inventaire"); hud.TestShow("sac");
                 yield return new WaitForSecondsRealtime(10f); Log("panneau : menu"); hud.TestShow("menu");
                 yield return new WaitForSecondsRealtime(10f); Log("panneau : options"); hud.TestShow("options");
+                yield return new WaitForSecondsRealtime(10f); Log("panneau : journal de quêtes"); hud.TestShow("journal");
                 yield return new WaitForSecondsRealtime(10f); hud.TestShow("");
             }
             Report(p, cc, "fin");

@@ -54,7 +54,7 @@ namespace Korvalune.Game
 
         public void Break(Vector3 from)
         {
-            if (broken) return; broken = true;
+            if (broken) return; broken = true; QuestEvents.Raise("casser");
             var k = Resolve();
             // volume réel de l'objet (rendus), matériau de base pour les éclats
             var rs = GetComponentsInChildren<Renderer>();

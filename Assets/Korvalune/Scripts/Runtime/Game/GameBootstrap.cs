@@ -146,6 +146,7 @@ namespace Korvalune.Game
                 q.steps.Add(new Quest.Objective { text = "Rejoindre la porte du Château de Korvalune", place = castleGate, radius = 8f });
             }
             Hud.quest = q;
+            var log = ui.AddComponent<QuestLog>(); log.hero = Player;                    // journal : histoire, secondaires, tutoriels
             Hud.Build(Cam);
             Player.joystick = Hud.Joystick;
             Hud.Notify(zoneName);

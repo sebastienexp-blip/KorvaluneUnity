@@ -59,7 +59,7 @@ namespace Korvalune.Game
             if (Tapped()) { var pc = player.GetComponent<PlayerController>(); if (d <= talkRadius) Open(); else pc.WalkTo(transform.position + transform.forward * -1.4f, Open); }
         }
 
-        public void Open() { Opened?.Invoke(this); }
+        public void Open() { Opened?.Invoke(this); QuestEvents.Raise("marchand"); }
 
         bool Tapped()
         {

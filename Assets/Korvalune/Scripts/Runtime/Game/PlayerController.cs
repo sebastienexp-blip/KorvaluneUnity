@@ -35,6 +35,7 @@ namespace Korvalune.Game
         public bool DrinkPotion()
         {
             if (wallet.potions <= 0 || Time.time < potionReady || Health.Dead) return false;
+            QuestEvents.Raise("potion");
             wallet.potions--; potionReady = Time.time + 15f; Health.Heal(Health.maxHp * 0.45f); Sound.UI("sfx_potion", 0.9f);
             FX.Burst(transform.position + Vector3.up, new Color(1f, 0.25f, 0.2f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
             return true;
@@ -44,6 +45,7 @@ namespace Korvalune.Game
         public bool DrinkManaPotion()
         {
             if (wallet.manaPotions <= 0 || Time.time < manaReady || Health.Dead) return false;
+            QuestEvents.Raise("potion");
             wallet.manaPotions--; manaReady = Time.time + 12f; Health.mana = Mathf.Min(Health.maxMana, Health.mana + Health.maxMana * 0.6f); Sound.UI("sfx_potion", 0.9f);
             FX.Burst(transform.position + Vector3.up, new Color(0.25f, 0.45f, 1f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
             return true;
@@ -78,7 +80,7 @@ namespace Korvalune.Game
 
         void Update()
         {
-            if (Health == null || Health.Dead) { Anim?.SetFloat(CharacterRig.SpeedId, 0); return; }
+            if (Health == null || Health.Dead || Cinematic.Active) { Anim?.SetFloat(CharacterRig.SpeedId, 0); return; }
             if (Time.time > buffUntil) damageMult = 1f;
             Vector2 inp = joystick ? joystick.Value : Vector2.zero;
             var kb = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -312,6 +314,7 @@ namespace Korvalune.Game
         public void Attack()
         {
             if (Health.Dead || Health.Stunned || Time.time < nextAttack || Busy) return;
+            QuestEvents.Raise("attaque");
             if (Ranged && (!Target || Target.Dead)) Target = AcquireTarget(AttackReach + 2f);
             if (Moving)
             {   // en mouvement : pas de course vers la cible, on frappe (ou on tire) sur le monstre visible le plus proche à portée

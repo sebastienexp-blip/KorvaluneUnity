@@ -50,6 +50,7 @@ namespace Korvalune.Game
             if (bagPanel) bagPanel.SetActive(false);
             if (treePanel) treePanel.SetActive(false);
             if (shopPanel) shopPanel.SetActive(false);
+            if (journalPanel) journalPanel.SetActive(false);
         }
 
         /// <summary>Ouvre un panneau pour les captures du test automatique (« arbre », « sac », « menu », « options », "" = tout fermer).</summary>
@@ -62,6 +63,7 @@ namespace Korvalune.Game
                 case "sac": ToggleBag(); break;
                 case "menu": SetPause(true); break;
                 case "options": SetPause(true); ShowOptions(true); break;
+                case "journal": ToggleJournal(); break;
             }
         }
 
@@ -178,8 +180,8 @@ namespace Korvalune.Game
         void ToggleTree()
         {
             if (!treePanel) { Notify("Arbre de compétences indisponible"); return; }
-            if (bagPanel) bagPanel.SetActive(false);
-            treePanel.SetActive(!treePanel.activeSelf); if (treePanel.activeSelf) { Front(treePanel); RefreshTree(); }
+            if (bagPanel) bagPanel.SetActive(false); if (journalPanel) journalPanel.SetActive(false);
+            treePanel.SetActive(!treePanel.activeSelf); if (treePanel.activeSelf) { Front(treePanel); RefreshTree(); QuestEvents.Raise("arbre"); }
             Sound.UI(treePanel.activeSelf ? "sfx_ui_ouvrir" : "sfx_ui_fermer", 0.7f);
         }
 

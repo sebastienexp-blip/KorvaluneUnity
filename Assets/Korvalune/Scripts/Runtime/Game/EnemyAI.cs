@@ -70,6 +70,7 @@ namespace Korvalune.Game
         void Update()
         {
             if (hp.Dead) return;
+            if (Cinematic.Active) { Anim(0); return; }                                        // cinématique : tout le monde se fige
             if (side == Faction.Player) { AllyUpdate(); return; }
             if (!target || Time.frameCount % 20 == 0) PickTarget();
             float speed = 0;

@@ -80,6 +80,11 @@ namespace Korvalune.EditorTools
         };
 
         /// <summary>Chef de la bande du hameau : le monstre le plus lourd de la région.</summary>
+        static string ChiefLabel(string id) => id switch
+        {
+            "chevalier" => "le chevalier maudit", "demon" => "le démon", "abbe" => "l'Abbé noyé", "tisseuse" => "la Tisseuse des brumes", "wendigo" => "le Wendigo des glaces",
+            "salamandre" => "la Salamandre-forge", "basilic" => "le Basilic écarlate", "voyant" => "le Voyant du Néant", _ => id,
+        };
         static bool Has(string prefab) => File.Exists($"{Root}/Resources/Prefabs/Enemies/{prefab}.prefab");
         static string Chief(Def d) => d.kind switch
         {
@@ -320,6 +325,7 @@ namespace Korvalune.EditorTools
             game.questSteps.Add(new Quest.Objective { text = $"Explorer : {d.name}", place = Ground(d, path[2]), radius = 14f });
             game.questSteps.Add(new Quest.Objective { text = "Vaincre les créatures de la région", enemyId = Avail(d.enemies[0]), count = 8 });
             game.questSteps.Add(new Quest.Objective { text = "Libérer le hameau en ruine au bout du chemin", place = Ground(d, hc), radius = 14f });
+            game.questSteps.Add(new Quest.Objective { text = $"Abattre le chef du hameau : {ChiefLabel(Chief(d))}", enemyId = Chief(d), count = 1 });
 
             // ---- portail du retour, à l'entrée : vers le bout de la route de la vallée, ou la ville
             var back = new GameObject("Retour").AddComponent<Portal>();
