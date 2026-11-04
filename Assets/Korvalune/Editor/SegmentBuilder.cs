@@ -50,7 +50,7 @@ namespace Korvalune.EditorTools
             new Def { kind = Kind.Marais,  scene = "Korvalune_Marais",  name = "Marais de Brumenoire",  tag = "Marais",  quest = "Ce qui dort sous la vase",   level = 85,
                       entry = South, enemies = new[] { "araignee", "sorcier", "squelette" } },
             new Def { kind = Kind.Toundra, scene = "Korvalune_Toundra", name = "Toundra de Givrecœur",  tag = "Toundra", quest = "Le cœur de givre",           level = 105,
-                      entry = South, enemies = new[] { "loup", "chevalier", "sorcier" } },
+                      entry = South, enemies = new[] { "loup", "wendigo", "sorcier" } },
             new Def { kind = Kind.Volcan,  scene = "Korvalune_Volcan",  name = "Terres de Cendrefer",   tag = "Volcan",  quest = "Les forges de Cendrefer",    level = 125,
                       entry = South, enemies = new[] { "demon", "chevalier", "squelette" } },
             new Def { kind = Kind.Canyon,  scene = "Korvalune_Canyon",  name = "Canyon Écarlate",       tag = "Canyon",  quest = "Le sang de la pierre",       level = 150,
@@ -85,10 +85,11 @@ namespace Korvalune.EditorTools
         {
             Kind.Foret => "chevalier",
             Kind.Cote when Has("AbbeNoye") => "abbe",
+            Kind.Toundra when Has("WendigoGivre") => "wendigo",
             _ => "demon",
         };
         /// <summary>Monstre de la liste dont le modèle n'existe pas encore → remplacé par un monstre existant.</summary>
-        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", _ => id };
+        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", "wendigo" when !Has("WendigoGivre") => "chevalier", _ => id };
 
         /// <summary>Hameau en ruine au bout du chemin principal (un peu en retrait de son extrémité).</summary>
         static Vector2 HamletAt(Def d)

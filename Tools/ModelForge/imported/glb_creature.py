@@ -228,7 +228,7 @@ def prop(name, V, UV, F, frame, mat, axis=None):
     return g
 
 
-def build(name, path, landmarks, rigid=(), yaw=0.0, mat='Peau', smooth=12, min_island=0.002, floor=0.008, weapon=None, keep=None, cut=None):
+def build(name, path, landmarks, rigid=(), yaw=0.0, mat='Peau', smooth=12, min_island=0.002, floor=0.008, weapon=None, keep=None, cut=None, center=None):
     """weapon : (sélection(V, C), nom) — morceau détaché en arme tenue par Socket_Weapon_R.
     keep : sélection(V, C) des sommets à garder (retire les morceaux d'autres créatures collés par la génération)."""
     V, UV, F, base = load(path, BASE_H, yaw)
@@ -250,5 +250,9 @@ def build(name, path, landmarks, rigid=(), yaw=0.0, mat='Peau', smooth=12, min_i
     a = Asset(name, sk); a.bind_global = B
     m = Mesh(V, F, UV, J, W); m.UV = m.UV.copy(); m.UV[:, 1] = 1 - m.UV[:, 1]     # glTF (origine en haut) → FBX/Unity
     a.add('corps', m, mat)
+    if center is not None:                     # recentrage : le bassin à l'origine (repères donnés avant recentrage)
+        c = np.array([center[0], 0.0, center[1]])
+        m.V -= c; sk.pos = [p - c for p in sk.pos]; sk._rg = None
+        for M_ in B: M_[:3, 3] -= c
     print(f'   {name} : {len(V)} sommets, {len(F)} triangles ({dropped} retirés en débris)', flush=True)
     return a, base, gear

@@ -863,6 +863,7 @@ namespace Korvalune.EditorTools
             E("demon", "Démon brute", "DemonBrute", 650, 34, 3.4f, 3.2f, 2.4f, 18, 300, armor: 6, hitDelay: 0.6f, level: 12);
             // créatures des régions lointaines (modèles générés d'après les concepts puis retouchés)
             if (R("Enemies/AbbeNoye") != null) E("abbe", "Abbé noyé", "AbbeNoye", 340, 24, 2.7f, 2.7f, 2.1f, 16, 150, armor: 3, hitDelay: 0.55f, level: 10);
+            if (R("Enemies/WendigoGivre") != null) E("wendigo", "Wendigo des glaces", "WendigoGivre", 520, 30, 4.6f, 2.9f, 1.9f, 18, 240, armor: 4, hitDelay: 0.5f, level: 14);
             cfg.highPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP.asset");
             cfg.mobilePipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Mobile.asset");
             cfg.ultraPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(Root + "/Rendering/Korvalune_URP_Ultra.asset");

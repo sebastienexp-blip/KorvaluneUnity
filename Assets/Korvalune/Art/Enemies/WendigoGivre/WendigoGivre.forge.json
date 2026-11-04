@@ -1,0 +1,154 @@
+{
+  "model": "WendigoGivre.fbx",
+  "kind": "character",
+  "rig": "Human",
+  "prefab": "Assets/Korvalune/Resources/Prefabs/Enemies/WendigoGivre.prefab",
+  "controller": "humanoid-combat",
+  "priority": 10,
+  "materials": [
+    {
+      "name": "WT_Fourrure",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/WT_Fourrure_BaseMap.png",
+      "normalMap": "Textures/WT_Fourrure_Normal.png",
+      "maskMap": "Textures/WT_Fourrure_MetallicSmoothness.png",
+      "occlusionMap": "Textures/WT_Fourrure_Occlusion.png"
+    },
+    {
+      "name": "WT_Lueur",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/WT_Lueur_BaseMap.png",
+      "normalMap": "Textures/WT_Lueur_Normal.png",
+      "maskMap": "Textures/WT_Lueur_MetallicSmoothness.png",
+      "occlusionMap": "Textures/WT_Lueur_Occlusion.png",
+      "emissionMap": "Textures/WT_Lueur_Emission.png"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Walk",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Run",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Attack",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.4
+      ]
+    },
+    {
+      "name": "Block",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Hit",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Dodge",
+      "loop": false,
+      "rootMotion": true,
+      "events": []
+    },
+    {
+      "name": "Death",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.55
+      ]
+    }
+  ],
+  "attachments": [],
+  "animModel": "WendigoGivre_Anims.fbx",
+  "collider": {
+    "type": "capsule",
+    "center": [
+      0,
+      1.3,
+      0
+    ],
+    "height": 2.6,
+    "radius": 0.45
+  },
+  "expect": {
+    "heightMin": 2.4,
+    "heightMax": 3.6,
+    "maxTriangles": 200000,
+    "sockets": [],
+    "facingBone": "LeftToes",
+    "behindBone": "LeftFoot",
+    "leftBone": "LeftHand"
+  }
+}
