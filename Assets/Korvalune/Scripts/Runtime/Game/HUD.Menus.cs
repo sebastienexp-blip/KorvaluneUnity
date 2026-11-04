@@ -249,7 +249,7 @@ namespace Korvalune.Game
             txt += sd.description + "\n\n";
             float mult = md.mult * (1 + 0.15f * (Mathf.Max(1, rk) - 1));
             if (sd.kind != SkillKind.Shield && sd.kind != SkillKind.Heal && sd.kind != SkillKind.Buff) txt += $"Dégâts : <b>{mult * 100:0} %</b> de l'arme\n";
-            txt += $"Recharge : <b>{md.cooldown * (1 - 0.04f * (Mathf.Max(1, rk) - 1)):0.#} s</b>   Mana : <b>{sd.mana:0}</b>\n";
+            txt += $"Recharge : <b>{md.cooldown * (1 - 0.04f * (Mathf.Max(1, rk) - 1)):0.#} s</b>   Mana : <b>{runner.ManaCost(sd):0}</b>\n";
             if (rk < sd.MaxRank) txt += $"<color=#9fd7ff>Rang suivant : dégâts +15 %, recharge −4 %</color>\n";
             int pa = runner.ParentOf(treeSel);
             if (pa >= 0 && runner.ranks[pa] == 0 && rk == 0) txt += $"\n<color=#ff8a70>Branche : apprenez d'abord « {runner.book[pa].name} ».</color>\n";

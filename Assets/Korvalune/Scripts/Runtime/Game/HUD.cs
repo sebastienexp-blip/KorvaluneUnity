@@ -188,7 +188,7 @@ namespace Korvalune.Game
                 if (u != null && Application.isPlaying && Input.GetKeyDown(KeyCode.E)) Usable.UseNearest(player.transform.position);
             }
             if (potionCount) { potionCount.text = player.wallet.potions.ToString(); potionCd.fillAmount = player.PotionCooldown / 15f; }
-            if (manaCount) { manaCount.text = player.wallet.manaPotions.ToString(); manaCd.fillAmount = player.ManaPotionCooldown / 12f; }
+            if (manaCount) { manaCount.text = player.wallet.manaPotions.ToString(); manaCd.fillAmount = player.ManaPotionCooldown / 10f; }
             if (runner) RefreshSkills(h);
             else foreach (var (cd, t, i) in skillButtons)
             {
@@ -260,7 +260,7 @@ namespace Korvalune.Game
                 float rem = runner.Remaining(si), full = d.cooldown;
                 cd.fillAmount = rem > 0 ? Mathf.Clamp01(rem / full) : 0;
                 t.text = rem > 0 ? Mathf.CeilToInt(rem).ToString() : "";
-                bool noMana = h.mana < d.mana && rem <= 0;
+                bool noMana = h.mana < runner.ManaCost(d) && rem <= 0;
                 cd.color = noMana ? new Color(0.1f, 0.15f, 0.5f, 0.55f) : new Color(0, 0, 0, 0.6f);
                 if (noMana || runner.ranks[si] <= 0) cd.fillAmount = 1;
             }

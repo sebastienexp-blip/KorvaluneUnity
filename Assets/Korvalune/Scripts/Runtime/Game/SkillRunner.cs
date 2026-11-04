@@ -44,6 +44,10 @@ namespace Korvalune.Game
 
         public void Equip(int slot, int skill) { if (slot >= 0 && slot < loadout.Length && skill >= 0 && skill < book.Count) loadout[slot] = skill; }
 
+        /// <summary>Coût en mana réel : les coûts de base sont pensés pour une réserve de 100 ; ils grandissent avec la réserve
+        /// du héros (8 par niveau), pour que la mana compte à tous les niveaux (et que la potion de mana serve).</summary>
+        public float ManaCost(SkillDef d) => d.mana * Mathf.Max(1f, p.Health.maxMana / 100f) * 0.85f;
+
         public bool Use(int slot)
         {
             if (slot < 0 || slot >= loadout.Length) return false;
@@ -53,7 +57,7 @@ namespace Korvalune.Game
             if (p.Health.Dead || p.Health.Stunned) return false;
             if (ranks[i] <= 0) { p.Notify?.Invoke($"« {d.name} » n'est pas encore apprise"); return false; }
             if (Time.time < readyAt[i]) return false;
-            if (!p.Health.Spend(d.mana)) { p.Notify?.Invoke("Pas assez de mana"); return false; }
+            if (!p.Health.Spend(ManaCost(d))) { p.Notify?.Invoke("Pas assez de mana"); return false; }
             QuestEvents.Raise("competence");
             readyAt[i] = Time.time + d.cooldown * (1 - 0.04f * (ranks[i] - 1)) * (1 - (eqp ? eqp.cooldownReduction : 0));
             if (d.empowered) Vfx.Burst(Pos + Vector3.up * 1.2f, d.element, 14, 3f);         // éclat de l'élément : la compétence est transformée

@@ -251,6 +251,41 @@ namespace Korvalune.Game
             S(M, "Étreinte d'outre-tombe", SkillKind.Nova, Element.Ombre, 63, 14, 34, 2.6f, 6, desc: "Ouvre les bras : les âmes alentour sont arrachées et vous soignent.", heal: true);
             S(T, "Marteau boomerang", SkillKind.Projectile, Element.Sacre, 7, 5, 14, 1.8f, 1.2f, 14, desc: "Lance le marteau qui traverse les ennemis.", pierce: true);
             S(T, "Prière de l'aube", SkillKind.Heal, Element.Sacre, 63, 24, 30, 0.45f, 4, desc: "S'agenouille et prie : rend une grande partie de la vie.");
+            foreach (var l in byClass.Values) foreach (var d in l) Balance(d);
+        }
+
+        /// <summary>Dégâts cumulés d'un lancer sur UNE cible, en multiples des dégâts du héros (rang 1).</summary>
+        public static float PerCast(SkillDef d) => d.kind switch
+        {
+            SkillKind.Combo => d.mult * (Mathf.Max(1, d.count) - 1 + 1.6f),
+            SkillKind.Whirl => d.mult * 0.35f * Mathf.Max(1f, d.duration / 0.25f),
+            SkillKind.Zone or SkillKind.Totem => d.mult * 0.5f * Mathf.Max(1f, d.duration / 0.5f) * 0.6f,       // la cible ne reste pas tout le temps dedans
+            SkillKind.Beam => d.mult * 0.3f * Mathf.Max(1f, d.duration / 0.25f) * 0.7f,
+            SkillKind.Rain => d.mult * Mathf.Max(1, d.count) * 0.4f,                                             // impacts au hasard dans la zone
+            SkillKind.Barrage => d.mult * Mathf.Max(1, d.count) * 0.6f,                                          // projectiles en éventail
+            SkillKind.Summon => d.mult * Mathf.Max(1, d.count) * Mathf.Max(1f, d.duration) * 0.5f,
+            SkillKind.Trap => d.mult * Mathf.Max(1, d.count),
+            _ => d.mult,
+        };
+
+        /// <summary>Rééquilibrage de toutes les compétences (appliqué aux données de base) :
+        /// - plus une compétence se débloque tard, plus elle frappe fort (×1 au niveau 1, ×2,4 au niveau 170) ;
+        /// - efficacité minimale (dégâts par seconde de recharge) pour qu'aucune compétence ne soit inutile, et
+        ///   plafond pour que les petites compétences à recharge courte ne dominent pas ;
+        /// - pluies : au moins 6 impacts ; recharges plafonnées à 45 s ; un renforcement dure moins que sa recharge.</summary>
+        static void Balance(SkillDef d)
+        {
+            if (d.kind == SkillKind.Rain && d.count < 6) d.count = 6;
+            d.cooldown = Mathf.Clamp(d.cooldown, 1f, 45f);
+            if ((d.kind == SkillKind.Buff || d.kind == SkillKind.Shield) && d.duration > 0) d.cooldown = Mathf.Max(d.cooldown, d.duration * 1.6f);
+            bool dmg = d.mult > 0 && d.kind != SkillKind.Buff && d.kind != SkillKind.Shield && d.kind != SkillKind.Heal && d.kind != SkillKind.Curse && d.kind != SkillKind.Teleport;
+            if (!dmg) return;
+            float lvlK = 1f + d.unlockLevel / 120f;
+            d.mult *= lvlK;
+            float cdEff = Mathf.Max(d.cooldown, 1.2f), e = PerCast(d) / cdEff;
+            float floor = 0.42f * lvlK, cap = 1.45f * Mathf.Sqrt(lvlK);
+            if (e < floor) d.mult *= floor / e;
+            else if (e > cap) d.mult *= cap / e;
         }
     }
 }

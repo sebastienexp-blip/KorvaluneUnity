@@ -40,13 +40,13 @@ namespace Korvalune.Game
             FX.Burst(transform.position + Vector3.up, new Color(1f, 0.25f, 0.2f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
             return true;
         }
-        float manaReady;
+        float manaReady, manaSurgeUntil;
         public float ManaPotionCooldown => Mathf.Max(0, manaReady - Time.time);
         public bool DrinkManaPotion()
         {
             if (wallet.manaPotions <= 0 || Time.time < manaReady || Health.Dead) return false;
             QuestEvents.Raise("potion");
-            wallet.manaPotions--; manaReady = Time.time + 12f; Health.mana = Mathf.Min(Health.maxMana, Health.mana + Health.maxMana * 0.6f); Sound.UI("sfx_potion", 0.9f);
+            wallet.manaPotions--; manaReady = Time.time + 10f; Health.mana = Mathf.Min(Health.maxMana, Health.mana + Health.maxMana * 0.7f); manaSurgeUntil = Time.time + 6f; Sound.UI("sfx_potion", 0.9f);
             FX.Burst(transform.position + Vector3.up, new Color(0.25f, 0.45f, 1f), 30, 2.5f, 0.15f, 0.8f, -0.4f);
             return true;
         }
@@ -81,6 +81,7 @@ namespace Korvalune.Game
         void Update()
         {
             if (Health == null || Health.Dead || Cinematic.Active) { Anim?.SetFloat(CharacterRig.SpeedId, 0); return; }
+            if (Time.time < manaSurgeUntil && Health.maxMana > 0) Health.mana = Mathf.Min(Health.maxMana, Health.mana + Health.manaRegen * 1.5f * Time.deltaTime);   // potion : regain de mana accéléré
             if (Time.time > buffUntil) damageMult = 1f;
             Vector2 inp = joystick ? joystick.Value : Vector2.zero;
             var kb = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

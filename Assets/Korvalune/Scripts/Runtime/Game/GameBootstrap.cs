@@ -216,10 +216,18 @@ namespace Korvalune.Game
             return "KaelDraven";
         }
 
-        /// <summary>Courbes de progression des monstres : vie +30 %, dégâts +20 %, expérience +35 % par niveau.</summary>
-        public static float HpAt(int l) => 1f + 0.30f * (l - 1);
-        public static float DmgAt(int l) => 1f + 0.20f * (l - 1);
-        public static float XpAt(int l) => 1f + 0.35f * (l - 1);
+        /// <summary>Courbes de progression des monstres, calées sur la progression du héros équipé à son niveau (ses dégâts
+        /// croissent d'environ 35 par niveau avec l'équipement) : un monstre ordinaire tombe en 2 ou 3 coups au même
+        /// niveau en difficulté Normale, une brute ou un chef en 15 à 25 ; les difficultés multiplient ensuite.
+        /// Vie +90 % par niveau (+ terme quadratique en fin de jeu), dégâts +28 %, expérience +45 %.</summary>
+        public static float HpAt(int l) => 1f + 0.90f * (l - 1) + 0.004f * (l - 1) * (l - 1);
+        public static float DmgAt(int l) => 1f + 0.28f * (l - 1);
+        public static float XpAt(int l) => 1f + 0.45f * (l - 1);
+        // les caractéristiques de la configuration valent au « niveau naturel » de chaque monstre selon les anciennes courbes
+        // (+30 % de vie, +20 % de dégâts, +35 % d'expérience par niveau) : on les ramène au niveau 1 avec celles-ci
+        static float HpAt0(int l) => 1f + 0.30f * (l - 1);
+        static float DmgAt0(int l) => 1f + 0.20f * (l - 1);
+        static float XpAt0(int l) => 1f + 0.35f * (l - 1);
 
         public GameObject Spawn(GameConfig.EnemyType t, Vector3 pos, int level = 0)
         {
@@ -233,7 +241,7 @@ namespace Korvalune.Game
             foreach (var c in e.GetComponents<Collider>()) Kill(c);
             var cc = e.AddComponent<CharacterController>(); cc.height = height / e.transform.localScale.y; cc.radius = radius / e.transform.localScale.y; cc.center = new Vector3(0, cc.height / 2 + 0.02f, 0);
             int bl = Mathf.Max(1, t.level);
-            float hpM = Mathf.Max(0.55f, HpAt(level) / HpAt(bl)), dmgM = Mathf.Max(0.6f, DmgAt(level) / DmgAt(bl)), xpM = Mathf.Max(0.5f, XpAt(level) / XpAt(bl));
+            float hpM = Mathf.Max(0.55f, HpAt(level) / HpAt0(bl)), dmgM = Mathf.Max(0.6f, DmgAt(level) / DmgAt0(bl)), xpM = Mathf.Max(0.5f, XpAt(level) / XpAt0(bl));
             hpM *= Difficulty.Hp * EnemyHpScale; dmgM *= Difficulty.Damage; xpM *= Difficulty.Xp;
             if (Rift.Active) { hpM *= Rift.HpMult; dmgM *= Rift.DmgMult; xpM *= Rift.XpMult; }             // difficulté choisie (Éprouvant, Funeste, Abîmes)
             var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = Mathf.Round(t.hp * hpM); h.hp = h.maxHp; h.armor = t.armor * Mathf.Min(2f, dmgM); h.displayName = t.label; h.level = level;
