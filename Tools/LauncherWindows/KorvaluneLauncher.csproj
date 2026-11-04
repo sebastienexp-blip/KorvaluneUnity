@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Lanceur Windows de Korvalune : un seul .exe (.NET Framework 4.8, déjà présent sur Windows 10 et 11 : rien à installer).
+       Construit par .github/workflows/lanceur-windows.yml (dotnet build -c Release -p:Version=1.0.<n>). -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>KorvaluneLauncher</AssemblyName>
+    <RootNamespace>Korvalune.Lanceur</RootNamespace>
+    <ApplicationIcon>korvalune.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.0.0</Version>
+    <Company>Korvalune Studio</Company>
+    <Product>Korvalune</Product>
+    <Description>Lanceur de Korvalune</Description>
+    <Copyright>Korvalune Studio</Copyright>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <DebugType>none</DebugType>
+    <Nullable>disable</Nullable>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <GenerateResourceUsePreserializedResources>false</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="fond.jpg" LogicalName="fond.jpg" />
+    <EmbeddedResource Include="korvalune.ico" LogicalName="korvalune.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

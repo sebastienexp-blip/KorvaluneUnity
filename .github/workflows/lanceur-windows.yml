@@ -24,8 +24,6 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Construire le lanceur
         shell: pwsh
@@ -74,4 +72,4 @@ jobs:
           git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
           git add -A ci-out/lanceur
           git commit -m "Lanceur Windows : captures [skip ci]" || exit 0
-          for i in 1 2 3; do git pull --rebase --autostash -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase --autostash -X ours origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break; sleep 5; done

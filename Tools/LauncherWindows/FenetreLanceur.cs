@@ -91,7 +91,7 @@ namespace Korvalune.Lanceur
             bFermer = Ajouter(new RectangleF(W - 46, 0, 46, 34), "✕", Close, 3);
 
             for (int i = 0; i < 70; i++) braises.Add(NouvelleBraise(true));
-            Notes(Depot.NotesHorsLigne() ?? "## Notes de version\nElles s'afficheront ici dès la connexion au serveur.");
+            Notes(Depot.NotesHorsLigne() ?? "Elles s'afficheront ici dès la connexion au serveur.");
             MajBoutons();
 
             anim = new System.Windows.Forms.Timer { Interval = 33 };
