@@ -10,6 +10,8 @@ ART = os.path.join(ROOT, 'Assets', 'Korvalune', 'Art')
 def scale_asset(asset, s):
     """Mise à l'échelle uniforme (maillages, squelette, déplacements du bassin)."""
     for _, m, _ in asset.parts: m.V = m.V * s
+    if getattr(asset, 'bind_global', None) is not None:
+        for M in asset.bind_global: M[:3, 3] *= s
     if asset.skeleton is not None:
         asset.skeleton.pos = [p * s for p in asset.skeleton.pos]; asset.skeleton._rg = None
     for c in asset.clips.values():

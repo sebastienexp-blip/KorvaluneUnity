@@ -46,7 +46,7 @@ namespace Korvalune.EditorTools
             new Def { kind = Kind.Pics,    scene = "Korvalune_Pics",    name = "Pics Sélénites",        tag = "Pics",    quest = "Les cols sélénites",         level = 45,
                       entry = new Vector2(150, 0), valleyGate = new Vector2(-212, 10), enemies = new[] { "chevalier", "sorcier", "loup" } },
             new Def { kind = Kind.Cote,    scene = "Korvalune_Cote",    name = "Côte des Naufrages",    tag = "Cote",    quest = "Les épaves de la Mer des Tempêtes", level = 65,
-                      entry = South, enemies = new[] { "squelette", "araignee", "chevalier" } },
+                      entry = South, enemies = new[] { "squelette", "abbe", "araignee" } },
             new Def { kind = Kind.Marais,  scene = "Korvalune_Marais",  name = "Marais de Brumenoire",  tag = "Marais",  quest = "Ce qui dort sous la vase",   level = 85,
                       entry = South, enemies = new[] { "araignee", "sorcier", "squelette" } },
             new Def { kind = Kind.Toundra, scene = "Korvalune_Toundra", name = "Toundra de Givrecœur",  tag = "Toundra", quest = "Le cœur de givre",           level = 105,
@@ -80,10 +80,15 @@ namespace Korvalune.EditorTools
         };
 
         /// <summary>Chef de la bande du hameau : le monstre le plus lourd de la région.</summary>
+        static bool Has(string prefab) => File.Exists($"{Root}/Resources/Prefabs/Enemies/{prefab}.prefab");
         static string Chief(Def d) => d.kind switch
         {
-            Kind.Foret => "chevalier", _ => "demon",            // (les nouveaux monstres prendront le relais une fois modélisés)
+            Kind.Foret => "chevalier",
+            Kind.Cote when Has("AbbeNoye") => "abbe",
+            _ => "demon",
         };
+        /// <summary>Monstre de la liste dont le modèle n'existe pas encore → remplacé par un monstre existant.</summary>
+        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", _ => id };
 
         /// <summary>Hameau en ruine au bout du chemin principal (un peu en retrait de son extrémité).</summary>
         static Vector2 HamletAt(Def d)
@@ -298,17 +303,17 @@ namespace Korvalune.EditorTools
             for (int i = 1; i < path.Length; i++)
             {
                 var c = path[i] + new Vector2((float)rng.NextDouble() * 30 - 15, (float)rng.NextDouble() * 30 - 15);
-                game.camps.Add(new GameBootstrap.Camp { enemyId = d.enemies[(i - 1) % d.enemies.Length], center = Ground(d, c), count = 4 + i / 2, radius = 6 });
+                game.camps.Add(new GameBootstrap.Camp { enemyId = Avail(d.enemies[(i - 1) % d.enemies.Length]), center = Ground(d, c), count = 4 + i / 2, radius = 6 });
                 var c2 = path[i] + new Vector2((float)rng.NextDouble() * 50 - 25, (float)rng.NextDouble() * 50 - 25);
-                game.camps.Add(new GameBootstrap.Camp { enemyId = d.enemies[i % d.enemies.Length], center = Ground(d, c2), count = 3 + i / 2, radius = 5 });
+                game.camps.Add(new GameBootstrap.Camp { enemyId = Avail(d.enemies[i % d.enemies.Length]), center = Ground(d, c2), count = 3 + i / 2, radius = 5 });
             }
             // le hameau en ruine du bout du chemin est tenu par une bande et son chef
             var hc = HamletAt(d);
-            game.camps.Add(new GameBootstrap.Camp { enemyId = d.enemies[0], center = Ground(d, hc + new Vector2(-6, 4)), count = 6, radius = 8 });
-            game.camps.Add(new GameBootstrap.Camp { enemyId = d.enemies[1], center = Ground(d, hc + new Vector2(7, -3)), count = 4, radius = 6 });
+            game.camps.Add(new GameBootstrap.Camp { enemyId = Avail(d.enemies[0]), center = Ground(d, hc + new Vector2(-6, 4)), count = 6, radius = 8 });
+            game.camps.Add(new GameBootstrap.Camp { enemyId = Avail(d.enemies[1]), center = Ground(d, hc + new Vector2(7, -3)), count = 4, radius = 6 });
             game.camps.Add(new GameBootstrap.Camp { enemyId = Chief(d), center = Ground(d, hc), count = 1, radius = 2 });
             game.questSteps.Add(new Quest.Objective { text = $"Explorer : {d.name}", place = Ground(d, path[2]), radius = 14f });
-            game.questSteps.Add(new Quest.Objective { text = "Vaincre les créatures de la région", enemyId = d.enemies[0], count = 8 });
+            game.questSteps.Add(new Quest.Objective { text = "Vaincre les créatures de la région", enemyId = Avail(d.enemies[0]), count = 8 });
             game.questSteps.Add(new Quest.Objective { text = "Libérer le hameau en ruine au bout du chemin", place = Ground(d, hc), radius = 14f });
 
             // ---- portail du retour, à l'entrée : vers le bout de la route de la vallée, ou la ville

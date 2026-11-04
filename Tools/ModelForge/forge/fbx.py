@@ -67,6 +67,7 @@ def write_fbx(path, asset, creator='Korvalune ModelForge', binary=True):
     from .geo import concat as _concat
     mat_ids = {}
     G = sk.rest_global() if sk is not None else None
+    GB = getattr(asset, 'bind_global', None) or G      # pose de liaison du maillage (≠ repos pour les modèles importés)
     pose_nodes = []
     for sname in sorted(slots, key=lambda k: (k != '', k)):
         groups = {}
@@ -144,7 +145,7 @@ def write_fbx(path, asset, creator='Korvalune ModelForge', binary=True):
                 vidx, slot_ = np.nonzero(sel)
                 if len(vidx) == 0: continue
                 wts = W[vidx, slot_]
-                L = G[bi].copy(); L[:3, 3] *= CM
+                L = GB[bi].copy(); L[:3, 3] *= CM
                 cid = ids()
                 O.append(f'\tDeformer: {cid}, "SubDeformer::{name}_{mname}", "Cluster" {{\n\t\tVersion: 100\n\t\tUserData: "", ""\n'
                          f'\t\tIndexes: {_arr(vidx)}\n\t\tWeights: {_arr(wts, "{:.5f}")}\n'
@@ -154,7 +155,7 @@ def write_fbx(path, asset, creator='Korvalune ModelForge', binary=True):
         pid = ids()
         nodes = list(pose_nodes)
         for bi in range(len(sk.names)):
-            L = G[bi].copy(); L[:3, 3] *= CM
+            L = GB[bi].copy(); L[:3, 3] *= CM
             nodes.append(f'\t\tPoseNode:  {{\n\t\t\tNode: {bone_ids[bi]}\n\t\t\tMatrix: {_arr(_mat16(L), "{:.8f}")}\n\t\t}}')
         O.append(f'\tPose: {pid}, "Pose::BIND_POSES", "BindPose" {{\n\t\tType: "BindPose"\n\t\tVersion: 100\n\t\tNbPoseNodes: {len(nodes)}\n' + '\n'.join(nodes) + '\n\t}')
 

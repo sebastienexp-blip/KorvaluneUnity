@@ -86,22 +86,23 @@ def fit(L):
     for k in ('Hips', 'Spine', 'Chest', 'UpperChest', 'Neck', 'Head', 'HeadTop'): R[k] = P[k].copy()
     for S, sx in (('Left', 1), ('Right', -1)):
         R[f'{S}Shoulder'] = P[f'{S}Shoulder'].copy()
-        R[f'{S}UpperArm'] = np.array([P[f'{S}UpperArm'][0], P[f'{S}Shoulder'][1] - 0.01, P[f'{S}Shoulder'][2]])
+        R[f'{S}UpperArm'] = R[f'{S}Shoulder'] + np.array([sx * np.linalg.norm(P[f'{S}UpperArm'] - P[f'{S}Shoulder']), 0, 0])
         x = R[f'{S}UpperArm']
         for a, b in (('UpperArm', 'LowerArm'), ('LowerArm', 'Hand'), ('Hand', 'HandTip')):
             ln = np.linalg.norm(P[f'{S}{b}'] - P[f'{S}{a}']); x = x + np.array([sx * ln, 0, 0]); R[f'{S}{b}'] = x
         R[f'{S}UpperLeg'] = P[f'{S}UpperLeg'].copy(); x = R[f'{S}UpperLeg']
         for a, b in (('UpperLeg', 'LowerLeg'), ('LowerLeg', 'Foot')):
             ln = np.linalg.norm(P[f'{S}{b}'] - P[f'{S}{a}']); x = x + np.array([0, -ln, 0]); R[f'{S}{b}'] = x
-        ln = np.linalg.norm(P[f'{S}Toes'] - P[f'{S}Foot']); R[f'{S}Toes'] = R[f'{S}Foot'] + np.array([0, -R[f'{S}Foot'][1] * 0.75, ln])
+        ln = np.linalg.norm(P[f'{S}Toes'] - P[f'{S}Foot']); d = np.array([0, -0.5, 1.0]); R[f'{S}Toes'] = R[f'{S}Foot'] + d / np.linalg.norm(d) * ln
     # rotation posée de chaque os (repos → pose) : alignement de la direction de l'os ; la main suit l'avant-bras
     Rot = {}
     for a, b in CHAIN: Rot[a] = _rotation_between(R[b] - R[a], P[b] - P[a])
     return R, P, Rot
 
 
-def skin(V, F, R, P, Rot, rigid=(), smooth=12, exclude=()):
-    """Poids (4 influences) calculés dans la pose du modèle ; renvoie (J indices dans `names`, W, V en pose T, names)."""
+def skin(V, F, R, P, Rot, rigid=(), smooth=12, exclude=(), C=None):
+    """Poids (4 influences) calculés dans la pose du modèle ; renvoie (J indices dans `names`, W, names). Le maillage reste
+    dans sa pose d'origine : la pose de liaison (bind_global) porte la différence avec le repos en pose T."""
     names = [a for a, _ in CHAIN if a not in exclude]
     segs = [(P[a], P[b]) for a, b in CHAIN if a not in exclude]
     D = np.zeros((len(V), len(names)))
@@ -109,27 +110,40 @@ def skin(V, F, R, P, Rot, rigid=(), smooth=12, exclude=()):
         ab = b - a; t = np.clip(((V - a) @ ab) / (ab @ ab + 1e-12), 0, 1)
         D[:, k] = np.linalg.norm(V - (a + t[:, None] * ab), axis=1)
     Wt = 1.0 / np.maximum(D, 0.01) ** 4
-    for (lo, hi), bone in rigid:
-        m = np.all((V >= lo) & (V <= hi), axis=1); Wt[m] = 0; Wt[m, names.index(bone)] = 1
+    masks = [(_mask(sel, V, C), bone) for sel, bone in rigid]
+    for m, bone in masks: Wt[m] = 0; Wt[m, names.index(bone)] = 1
     Wt /= Wt.sum(1, keepdims=True)
     inv, Pm = _adjacency(V, F)
     n = inv.max() + 1; Wv = np.zeros((n, len(names))); np.add.at(Wv, inv, Wt); Wv /= np.bincount(inv, minlength=n)[:, None]
     lock = np.zeros(n, bool)
-    for (lo, hi), bone in rigid: lock[inv[np.all((V >= lo) & (V <= hi), axis=1)]] = True
+    for m, bone in masks: lock[inv[m]] = True
     W0 = Wv.copy()
     for _ in range(smooth):
         Wv = Pm @ Wv; Wv[lock] = W0[lock]
     Wt = Wv[inv]
     idx = np.argsort(-Wt, 1)[:, :4]; w = np.take_along_axis(Wt, idx, 1); w /= w.sum(1, keepdims=True)
-    # pose du modèle → pose T : inverse du skinning linéaire (matrice mélangée par sommet)
-    Ms = []
-    for nm in names:
-        M = np.eye(4); M[:3, :3] = Rot[nm]; M[:3, 3] = P[nm] - Rot[nm] @ R[nm]; Ms.append(M)
-    Ms = np.stack(Ms)
-    B = np.einsum('vk,vkij->vij', w, Ms[idx])
-    Vh = np.c_[V, np.ones(len(V))]
-    Vt = np.einsum('vij,vj->vi', np.linalg.inv(B), Vh)[:, :3]
-    return idx, w, Vt, names
+    return idx, w, names
+
+
+def _mask(sel, V, C):
+    if callable(sel): return np.asarray(sel(V, C), bool)
+    lo, hi = sel; return np.all((V >= lo) & (V <= hi), axis=1)
+
+
+def capsule(a, b, r):
+    """Sélection des sommets à moins de r du segment [a, b] (bâton, crosse…)."""
+    a = np.asarray(a, float); b = np.asarray(b, float)
+    def f(V, C):
+        ab = b - a; t = np.clip(((V - a) @ ab) / (ab @ ab), 0, 1)
+        return np.linalg.norm(V - (a + t[:, None] * ab), axis=1) < r
+    return f
+
+
+def vertex_colors(UV, base):
+    """Couleur sRGB (0..1) de la texture sous chaque sommet (UV glTF, origine en haut)."""
+    a = np.asarray(base.convert('RGB'), np.float32) / 255.0; h, w = a.shape[:2]
+    x = np.clip((UV[:, 0] % 1) * w, 0, w - 1).astype(int); y = np.clip((UV[:, 1] % 1) * h, 0, h - 1).astype(int)
+    return a[y, x]
 
 
 def skeleton(R):
@@ -173,15 +187,68 @@ def texture(base_img, size=2048, gain=1.0, gamma=1.0, sat=1.0, relief=6.0, smoot
     return TexSet(np.clip(c2, 0, 1), nrm, np.clip(metal, 0, 1), np.clip(sm, 0, 1), ao, emit=em)
 
 
-def build(name, path, landmarks, rigid=(), yaw=0.0, mat='Peau', smooth=12, min_island=0.002):
+def bind_pose(sk, R, P, Rot):
+    """Matrices globales de liaison : os déformants à leur position et orientation dans la pose du modèle ; les autres
+    (doigts, orteils, cape, attaches) suivent leur parent."""
+    rest = sk.rest_global(); out = [None] * len(sk.names)
+    for i, n in enumerate(sk.names):
+        if n in Rot:
+            M = np.eye(4); M[:3, :3] = Rot[n]; M[:3, 3] = P[n]
+        else:
+            p = sk.parents[i]
+            M = rest[i].copy() if p < 0 else out[p] @ np.linalg.inv(rest[p]) @ rest[i]
+        out[i] = M
+    return out
+
+
+def split(V, UV, F, mask):
+    """Sépare les faces dont un sommet est dans mask : (reste, morceau), chacun réindexé."""
+    fm = mask[F].any(1)
+    parts = []
+    for sel in (~fm, fm):
+        Fs = F[sel]; used = np.unique(Fs); rm = -np.ones(len(V), int); rm[used] = np.arange(len(used))
+        parts.append((V[used], UV[used], rm[Fs], used))
+    return parts
+
+
+def prop(name, V, UV, F, frame, mat, axis=None):
+    """Accessoire rigide (arme) exprimé dans le repère d'un point d'attache (matrice globale frame). axis = (bas, haut,
+    prise) en coordonnées du modèle : la hampe est remise le long de +Y du point d'attache, prise à l'origine, crochet
+    vers +X (convention des armes du jeu)."""
+    if axis is not None:
+        lo, hi, grip = (np.asarray(x, float) for x in axis)
+        d = hi - lo; d /= np.linalg.norm(d); g = lo + d * ((grip - lo) @ d)
+        R1 = _rotation_between(d, np.array([0, 1.0, 0])); W_ = (V - g) @ R1.T
+        top = W_[W_[:, 1] > W_[:, 1].max() - 0.25]; off = top[:, [0, 2]].mean(0); ang = np.arctan2(off[1], off[0])
+        c, s_ = np.cos(ang), np.sin(ang); Ry = np.array([[c, 0, s_], [0, 1, 0], [-s_, 0, c]])
+        Vl = W_ @ Ry.T
+    else:
+        Mi = np.linalg.inv(frame); Vl = V @ Mi[:3, :3].T + Mi[:3, 3]
+    g = Asset(name); m = Mesh(Vl, F, UV.copy()); m.UV[:, 1] = 1 - m.UV[:, 1]; g.add(name, m, mat)
+    return g
+
+
+def build(name, path, landmarks, rigid=(), yaw=0.0, mat='Peau', smooth=12, min_island=0.002, floor=0.008, weapon=None, keep=None, cut=None):
+    """weapon : (sélection(V, C), nom) — morceau détaché en arme tenue par Socket_Weapon_R.
+    keep : sélection(V, C) des sommets à garder (retire les morceaux d'autres créatures collés par la génération)."""
     V, UV, F, base = load(path, BASE_H, yaw)
+    F = F[~np.all(V[F][:, :, 1] < floor, axis=1)]                    # socle plat généré sous les pieds
+    C = vertex_colors(UV, base)
+    if keep is not None: F = F[_mask(keep, V, C)[F].all(1)]
+    if cut is not None: F = F[~_mask(cut, V, C)[F].any(1)]
     F, dropped = drop_islands(V, F, min_island)
+    used = np.unique(F); remap = -np.ones(len(V), int); remap[used] = np.arange(len(used)); V, UV, F, C = V[used], UV[used], remap[F], C[used]
     R, P, Rot = fit(landmarks)
-    J, W, Vt, names = skin(V, F, R, P, Rot, rigid, smooth)
     sk = skeleton(R)
+    B = bind_pose(sk, R, P, Rot)
+    gear = {}
+    if weapon is not None:
+        (V, UV, F, u0), (Vw, UVw, Fw, _) = split(V, UV, F, _mask(weapon[0], V, C)); C = C[u0]
+        gear[weapon[1]] = prop(weapon[1], Vw, UVw, Fw, B[sk['Socket_Weapon_R']], mat, weapon[2] if len(weapon) > 2 else None)
+    J, W, names = skin(V, F, R, P, Rot, rigid, smooth, C=C)
     lut = np.array([sk.names.index(n) for n in names]); J = lut[J]
-    a = Asset(name, sk)
-    m = Mesh(Vt, F, UV, J, W); m.UV = m.UV.copy(); m.UV[:, 1] = 1 - m.UV[:, 1]     # glTF (origine en haut) → FBX/Unity
+    a = Asset(name, sk); a.bind_global = B
+    m = Mesh(V, F, UV, J, W); m.UV = m.UV.copy(); m.UV[:, 1] = 1 - m.UV[:, 1]     # glTF (origine en haut) → FBX/Unity
     a.add('corps', m, mat)
-    print(f'   {name} : {len(Vt)} sommets, {len(F)} triangles ({dropped} retirés en débris)', flush=True)
-    return a, base
+    print(f'   {name} : {len(V)} sommets, {len(F)} triangles ({dropped} retirés en débris)', flush=True)
+    return a, base, gear

@@ -1,0 +1,224 @@
+{
+  "model": "AbbeNoye.fbx",
+  "kind": "character",
+  "rig": "Human",
+  "prefab": "Assets/Korvalune/Resources/Prefabs/Enemies/AbbeNoye.prefab",
+  "controller": "humanoid-combat",
+  "priority": 10,
+  "materials": [
+    {
+      "name": "AN_Bone",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.55,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/AN_Bone_BaseMap.png",
+      "normalMap": "Textures/AN_Bone_Normal.png",
+      "maskMap": "Textures/AN_Bone_MetallicSmoothness.png",
+      "occlusionMap": "Textures/AN_Bone_Occlusion.png"
+    },
+    {
+      "name": "AN_Eye",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        3.5,
+        3.5,
+        3.5
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/AN_Eye_BaseMap.png",
+      "normalMap": "Textures/AN_Eye_Normal.png",
+      "maskMap": "Textures/AN_Eye_MetallicSmoothness.png",
+      "occlusionMap": "Textures/AN_Eye_Occlusion.png",
+      "emissionMap": "Textures/AN_Eye_Emission.png"
+    },
+    {
+      "name": "AN_Hollow",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        0,
+        0,
+        0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/AN_Hollow_BaseMap.png",
+      "normalMap": "Textures/AN_Hollow_Normal.png",
+      "maskMap": "Textures/AN_Hollow_MetallicSmoothness.png",
+      "occlusionMap": "Textures/AN_Hollow_Occlusion.png"
+    },
+    {
+      "name": "AT_Robe",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        2.5,
+        2.5,
+        2.5
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/AT_Robe_BaseMap.png",
+      "normalMap": "Textures/AT_Robe_Normal.png",
+      "maskMap": "Textures/AT_Robe_MetallicSmoothness.png",
+      "occlusionMap": "Textures/AT_Robe_Occlusion.png",
+      "emissionMap": "Textures/AT_Robe_Emission.png"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Walk",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Run",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Attack",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.4
+      ]
+    },
+    {
+      "name": "Block",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Hit",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Dodge",
+      "loop": false,
+      "rootMotion": true,
+      "events": []
+    },
+    {
+      "name": "Death",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.55
+      ]
+    }
+  ],
+  "attachments": [
+    {
+      "socket": "Socket_Weapon_R",
+      "model": "../../Weapons/CrosseAbbe/CrosseAbbe.fbx"
+    }
+  ],
+  "animModel": "AbbeNoye_Anims.fbx",
+  "collider": {
+    "type": "capsule",
+    "center": [
+      0,
+      1.0,
+      0
+    ],
+    "height": 2.0,
+    "radius": 0.36
+  },
+  "expect": {
+    "heightMin": 1.9,
+    "heightMax": 2.6,
+    "maxTriangles": 200000,
+    "sockets": [
+      "Socket_Weapon_R"
+    ],
+    "facingBone": "LeftToes",
+    "behindBone": "LeftFoot",
+    "leftBone": "LeftHand"
+  }
+}

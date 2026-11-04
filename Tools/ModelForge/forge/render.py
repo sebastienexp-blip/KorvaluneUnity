@@ -22,7 +22,7 @@ def posed_meshes(asset, clip=None, frame=0, attachments=()):
     if sk is not None:
         lr = {} if clip is None else {b: q[min(frame, clip.n - 1)] for b, q in clip.rot.items()}
         off = None if clip is None or 'Hips' not in clip.pos else clip.pos['Hips'][min(frame, clip.n - 1)]
-        G = sk.fk(lr, off); R = sk.rest_global()
+        G = sk.fk(lr, off); R = getattr(asset, 'bind_global', None) or sk.rest_global()
         Mk = np.stack([G[i] @ np.linalg.inv(R[i]) for i in range(len(G))])
     for mn, m in groups.items():
         N0 = m.N if m.N is not None else vertex_normals(m)

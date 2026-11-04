@@ -20,11 +20,11 @@ dist, fov, Wp, Hp = 80.0, 1.6, 700, 1000
 fpx = 1 / np.tan(np.radians(fov / 2)) * Hp / 2 / dist       # pixels par mètre au plan de la cible
 cy = 0.95
 fig, ax = plt.subplots(1, 3, figsize=(21, 10))
-for a, (yaw, hi, t) in zip(ax, ((0, 0, 'FACE  (x → gauche du perso)'), (90, 2, 'PROFIL GAUCHE  (z → avant)'), (180, 0, 'DOS (x inversé)'))):
+for a, (yaw, hi, t) in zip(ax, ((0, 0, 'FACE  (x → gauche du perso)'), (90, 2, 'PROFIL GAUCHE  (z ← avant à gauche)'), (180, 0, 'DOS (x inversé)'))):
     im = np.asarray(render(prims, size=(Wp, Hp), yaw=yaw, pitch=0, target=(0, cy, 0), dist=dist, fov=fov, ss=1, ground=False))
     sgn = -1 if yaw == 180 else 1
     ext = [-Wp / 2 / fpx, Wp / 2 / fpx, cy - Hp / 2 / fpx, cy + Hp / 2 / fpx]
-    if yaw == 180: ext = [ext[1], ext[0], ext[2], ext[3]]
+    if yaw in (90, 180): ext = [ext[1], ext[0], ext[2], ext[3]]   # l'image va vers -z (profil) ou -x (dos)
     a.imshow(im, extent=ext)
     if L:
         for k, p in L.items(): a.plot(p[hi], p[1], 'r+', ms=12, mew=1.5); a.annotate(k, (p[hi], p[1]), fontsize=7, color='yellow')

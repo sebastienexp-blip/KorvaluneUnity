@@ -18,7 +18,8 @@ ENEMIES = {
     'loup':      ('creatures.loup', 'Generic', (1.30, 1.65), (0.70, 1.40, 0.45), dict(facingBone='Head', behindBone='Hips', leftBone='Ear_L')),
     'araignee':  ('creatures.araignee', 'Generic', (0.95, 1.40), (0.55, 1.10, 0.90), dict(facingBone='Thorax', behindBone='Abdomen', leftBone='Leg0_Coxa_L')),
     # créatures des régions lointaines (d'après la planche de concepts validée)
-    'abbe':      ('enemies.abbe_noye', 'Human', (1.80, 2.40), (1.00, 2.00, 0.36), None),
+    'abbe':      ('enemies.abbe_trellis', 'Human', (1.90, 2.60), (1.00, 2.00, 0.36), None),
+    'abbe_proc': ('enemies.abbe_noye', 'Human', (1.80, 2.40), (1.00, 2.00, 0.36), None),
     'wendigo':   ('enemies.wendigo', 'Human', (2.40, 3.60), (1.30, 2.60, 0.45), None),
     'salamandre': ('creatures.salamandre_forge', 'Generic', (0.70, 1.40), (0.60, 1.20, 0.70), dict(facingBone='Head', behindBone='Hips', leftBone='Ear_L')),
     # brouillons refusés (non exportés)
