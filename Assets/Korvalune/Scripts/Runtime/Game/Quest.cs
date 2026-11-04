@@ -93,8 +93,8 @@ namespace Korvalune.Game
             bool last = current == steps.Count - 1;
             if (hero && !(last && chapter != null))
             {
-                float xp = chapter != null ? Mathf.Round(PlayerController.XpForLevel(hero.level) * 0.10f) : (60f + 18f * hero.level) * (last ? 4f : 1f);
-                hero.GainXp(Mathf.Round(xp)); long gold = (long)((20 + 6 * hero.level) * (last ? 5 : 1)); hero.AddGold(gold);
+                float xp = (chapter != null ? Mathf.Round(PlayerController.XpForLevel(hero.level) * 0.10f) : (60f + 18f * hero.level) * (last ? 4f : 1f)) * Difficulty.Quest;
+                hero.GainXp(Mathf.Round(xp)); long gold = (long)((20 + 6 * hero.level) * (last ? 5 : 1) * Difficulty.Quest); hero.AddGold(gold);
                 Notify?.Invoke($"<color=#ffd24a>+{Mathf.Round(xp):N0} XP, +{gold} or</color>");
             }
             Notify?.Invoke("Objectif accompli : " + Current.text);

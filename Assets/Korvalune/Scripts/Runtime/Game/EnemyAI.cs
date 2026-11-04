@@ -82,7 +82,7 @@ namespace Korvalune.Game
             switch (state)
             {
                 case S.Idle:
-                    if (target && th && !th.Dead && dist < type.aggro && !GameBootstrap.InSafeZone(target.position))
+                    if (target && th && !th.Dead && dist < type.aggro * Difficulty.Aggro && !GameBootstrap.InSafeZone(target.position))
                     {
                         state = S.Chase;
                         if (type.id == "loup") Sound.Play("sfx_loup_grogne", transform.position, 0.8f, 0.1f, 0.6f);
@@ -92,26 +92,26 @@ namespace Korvalune.Game
                     {
                         if (Time.time > wanderAt) { wanderAt = Time.time + Random.Range(3f, 7f); var r = Random.insideUnitCircle * 4f; wanderTo = home + new Vector3(r.x, 0, r.y); }
                         var d = Flat(wanderTo - transform.position);
-                        if (d.magnitude > 0.6f) { move = d.normalized; speed = type.speed * 0.35f; }
+                        if (d.magnitude > 0.6f) { move = d.normalized; speed = type.speed * 0.35f * Difficulty.Speed; }
                     }
                     break;
                 case S.Chase:
                     if (!target || th == null || th.Dead || fromHome > leash || GameBootstrap.InSafeZone(target.position) || GameBootstrap.InSafeZone(transform.position)) { state = S.Return; break; }
                     var dir = Flat(target.position - transform.position);
                     // hystérésis : on ne repart pas au moindre pas de recul de la cible (sinon marche/arrêt à chaque image)
-                    if (dist > type.attackRange * (closing ? 0.8f : 1.0f)) { closing = true; move = dir.normalized; speed = type.speed; }
+                    if (dist > type.attackRange * (closing ? 0.8f : 1.0f)) { closing = true; move = dir.normalized; speed = type.speed * Difficulty.Speed; }
                     else
                     {
                         closing = false;
                         Face(dir);
-                        if (Time.time > nextAttack) { nextAttack = Time.time + type.attackCooldown; StartCoroutine(Strike(th)); }
+                        if (Time.time > nextAttack) { nextAttack = Time.time + type.attackCooldown * Difficulty.Haste; StartCoroutine(Strike(th)); }
                     }
                     break;
                 case S.Return:
                     var back = Flat(home - transform.position);
                     if (back.magnitude < 1.5f) { state = S.Idle; hp.Heal(hp.maxHp); }
-                    else { move = back.normalized; speed = type.speed * 1.2f; }
-                    if (target && th && !th.Dead && dist < type.aggro * 0.6f && fromHome < leash * 0.7f && !GameBootstrap.InSafeZone(target.position)) state = S.Chase;
+                    else { move = back.normalized; speed = type.speed * 1.2f * Difficulty.Speed; }
+                    if (target && th && !th.Dead && dist < type.aggro * 0.6f * Difficulty.Aggro && fromHome < leash * 0.7f && !GameBootstrap.InSafeZone(target.position)) state = S.Chase;
                     break;
             }
             // séparation entre ennemis
@@ -151,7 +151,7 @@ namespace Korvalune.Game
             {
                 var dir = Flat(foe.transform.position - transform.position);
                 if (bd > type.attackRange * 0.9f) { move = dir.normalized; speed = type.speed * 1.1f; }
-                else { Face(dir); if (Time.time > nextAttack) { nextAttack = Time.time + type.attackCooldown; StartCoroutine(Strike(foe)); } }
+                else { Face(dir); if (Time.time > nextAttack) { nextAttack = Time.time + type.attackCooldown * Difficulty.Haste; StartCoroutine(Strike(foe)); } }
             }
             else if (owner)
             {

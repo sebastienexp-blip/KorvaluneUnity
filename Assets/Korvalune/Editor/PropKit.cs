@@ -38,6 +38,19 @@ namespace Korvalune.EditorTools
         /// <summary>Crée (une fois par construction) la table, le tabouret et les urnes.</summary>
         public static void Ensure()
         {
+            // un objet dont le matériau a disparu s'affiche en rose en jeu : on régénère alors tout le kit
+            foreach (var g in AssetDatabase.FindAssets("t:Prefab P_", new[] { Dir }))
+            {
+                var go = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(g)); if (!go) continue;
+                bool bad = false;
+                foreach (var r in go.GetComponentsInChildren<Renderer>(true)) foreach (var m in r.sharedMaterials) if (!m) bad = true;
+                if (bad)
+                {
+                    Debug.Log($"[Korvalune] kit d'objets : matériau manquant sur {go.name}, régénération");
+                    foreach (var h in AssetDatabase.FindAssets("t:Prefab P_", new[] { Dir })) AssetDatabase.DeleteAsset(AssetDatabase.GUIDToAssetPath(h));
+                    break;
+                }
+            }
             EnsureMore();
             if (AssetDatabase.LoadAssetAtPath<GameObject>($"{Dir}/P_Table.prefab") && AssetDatabase.LoadAssetAtPath<GameObject>($"{Dir}/P_Urne0.prefab")) return;
             var rng = new System.Random(5);

@@ -143,8 +143,8 @@ namespace Korvalune.Game
                 }
             }
             int lvl = player ? player.level : 1;
-            float xp = Mathf.Round(PlayerController.XpForLevel(lvl) * d.xpShare);
-            long gold = d.gold + (long)(lvl * 8 * (d.kind == Story.Kind.Principale ? 4 : 1));
+            float xp = Mathf.Round(PlayerController.XpForLevel(lvl) * d.xpShare * Difficulty.Quest);
+            long gold = (long)((d.gold + lvl * 8 * (d.kind == Story.Kind.Principale ? 4 : 1)) * Difficulty.Quest);
             sb.Append($"\n<color=#f0c070><b>Récompenses</b></color>\n{xp:N0} points d'expérience (au niveau {lvl})\n{gold:N0} pièces d'or\n");
             if (d.kind == Story.Kind.Principale) sb.Append("Chaque objectif du chapitre rapporte aussi de l'expérience.\n");
             if (st == "locked") { var r = Story.Get(d.requires); sb.Append($"\n<color=#c8a080>Se débloque après : {r?.title}</color>\n"); }

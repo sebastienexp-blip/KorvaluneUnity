@@ -116,8 +116,8 @@ namespace Korvalune.Game
             var hero = Instance ? Instance.hero : Object.FindFirstObjectByType<PlayerController>();
             if (hero)
             {
-                float xp = Mathf.Round(PlayerController.XpForLevel(hero.level) * d.xpShare);
-                long gold = d.gold + (long)(hero.level * 8 * (d.kind == Story.Kind.Principale ? 4 : 1));
+                float xp = Mathf.Round(PlayerController.XpForLevel(hero.level) * d.xpShare * Difficulty.Quest);
+                long gold = (long)((d.gold + hero.level * 8 * (d.kind == Story.Kind.Principale ? 4 : 1)) * Difficulty.Quest);
                 hero.GainXp(xp); hero.AddGold(gold);
                 string label = d.kind == Story.Kind.Principale ? $"Chapitre {Story.ChapterNumber(d)} terminé" : d.kind == Story.Kind.Tutoriel ? "Tutoriel terminé" : "Quête terminée";
                 Notify?.Invoke($"<color=#ffd24a>{label} : {d.title}  —  +{xp:N0} XP, +{gold:N0} or</color>");

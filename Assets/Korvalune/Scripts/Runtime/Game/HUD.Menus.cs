@@ -297,7 +297,7 @@ namespace Korvalune.Game
             }
             Difficulty.Current = next; RefreshDifficulty();
             FindFirstObjectByType<WorldPopulation>()?.Refresh();
-            Notify($"Difficulté : {Difficulty.Name}");
+            Notify($"Difficulté : {Difficulty.Name} — {Difficulty.Summary(Difficulty.Current)}");
         }
 
         void RefreshDifficulty()
