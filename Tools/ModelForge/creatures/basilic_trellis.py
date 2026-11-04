@@ -62,8 +62,12 @@ def _graph(V, F):
 
 def leg_chain(P, G, foot, body_pts, body_r=0.17):
     """Chemin le plus court sur la surface, du pied jusqu'au corps → 6 points (attache … pied) le long de la patte."""
-    fx, fz = foot
-    cand = np.nonzero((P[:, 1] < 0.12) & (np.hypot(P[:, 0] - fx, P[:, 2] - fz) < 0.10))[0]
+    if len(foot) == 2:
+        fx, fz = foot
+        cand = np.nonzero((P[:, 1] < 0.12) & (np.hypot(P[:, 0] - fx, P[:, 2] - fz) < 0.10))[0]
+    else:
+        fx, fy, fz = foot
+        cand = np.nonzero((np.abs(P[:, 1] - fy) < 0.06) & (np.hypot(P[:, 0] - fx, P[:, 2] - fz) < 0.08))[0]
     start = cand[np.argmin(P[cand, 1])]
     dist, pred = dijkstra(G, indices=start, return_predecessors=True)
     # cible : sommet du corps le plus proche (au sens du chemin) sur l'axe du corps
@@ -87,6 +91,11 @@ def leg_chain(P, G, foot, body_pts, body_r=0.17):
 
 
 def build(bank, female=False):
+    return multileg(NAME, SRC, KEEP, BODY, FEET, (CX, 0.0, CZ), 'BT_Ecailles', _cache, EYES, 'BT_Oeil')
+
+
+def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=None, anim_scale=1.0):
+    """Créature à quatre paires de membres (squelette de l'araignée géante) d'après un GLB généré."""
     V, UV, F, base = GC.load(SRC, GC.BASE_H)
     _cache['base'] = base
     C = GC.vertex_colors(UV, base)
@@ -126,10 +135,10 @@ def build(bank, female=False):
     for _ in range(6): Wv = Pm @ Wv
     Wt = Wv[inv2]; idx = np.argsort(-Wt, 1)[:, :4]; w = np.take_along_axis(Wt, idx, 1); w /= w.sum(1, keepdims=True)
     lut = np.array([sk.names.index(nm) for nm in names])
-    c = np.array([CX, 0, CZ])
+    c = np.asarray(center, float)
     m = Mesh(V - c, F, UV.copy(), lut[idx], w); m.UV[:, 1] = 1 - m.UV[:, 1]
     sk.pos = [p - c for p in sk.pos]; sk._rg = None
-    a = Asset(NAME, sk); a.add('corps', m, 'BT_Ecailles')
+    a = Asset(NAME, sk); a.add('corps', m, MAT)
     from heroes.female_kit import _blob
     BV = m.V
     for k, e in enumerate(EYES):
@@ -137,7 +146,7 @@ def build(bank, female=False):
         near = BV[np.linalg.norm(BV[:, [0, 1]] - e[[0, 1]], axis=1) < 0.015]
         if len(near): e[2] = near[:, 2].max() - 0.004
         g = _blob(e, (0.016, 0.011, 0.010), n=10); g.J = np.full((len(g.V), 4), sk['Thorax']); g.W = np.tile([1.0, 0, 0, 0], (len(g.V), 1))
-        a.add(f'oeil{k}', g, 'BT_Oeil')
+        a.add(f'oeil{k}', g, EYE_MAT)
     # animations de l'araignée, avec l'orientation réelle de chaque patte
     old = AR.ANG
     AR.ANG = tuple(0.5 * (angs[(i, 'L')] + angs[(i, 'R')]) for i in range(4))

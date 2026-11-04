@@ -48,7 +48,7 @@ namespace Korvalune.EditorTools
             new Def { kind = Kind.Cote,    scene = "Korvalune_Cote",    name = "Côte des Naufrages",    tag = "Cote",    quest = "Les épaves de la Mer des Tempêtes", level = 65,
                       entry = South, enemies = new[] { "squelette", "abbe", "araignee" } },
             new Def { kind = Kind.Marais,  scene = "Korvalune_Marais",  name = "Marais de Brumenoire",  tag = "Marais",  quest = "Ce qui dort sous la vase",   level = 85,
-                      entry = South, enemies = new[] { "araignee", "sorcier", "squelette" } },
+                      entry = South, enemies = new[] { "araignee", "tisseuse", "squelette" } },
             new Def { kind = Kind.Toundra, scene = "Korvalune_Toundra", name = "Toundra de Givrecœur",  tag = "Toundra", quest = "Le cœur de givre",           level = 105,
                       entry = South, enemies = new[] { "loup", "wendigo", "sorcier" } },
             new Def { kind = Kind.Volcan,  scene = "Korvalune_Volcan",  name = "Terres de Cendrefer",   tag = "Volcan",  quest = "Les forges de Cendrefer",    level = 125,
@@ -87,10 +87,11 @@ namespace Korvalune.EditorTools
             Kind.Cote when Has("AbbeNoye") => "abbe",
             Kind.Toundra when Has("WendigoGivre") => "wendigo",
             Kind.Canyon when Has("BasilicEcarlate") => "basilic",
+            Kind.Marais when Has("TisseuseBrumes") => "tisseuse",
             _ => "demon",
         };
         /// <summary>Monstre de la liste dont le modèle n'existe pas encore → remplacé par un monstre existant.</summary>
-        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", "wendigo" when !Has("WendigoGivre") => "chevalier", "basilic" when !Has("BasilicEcarlate") => "loup", _ => id };
+        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", "wendigo" when !Has("WendigoGivre") => "chevalier", "basilic" when !Has("BasilicEcarlate") => "loup", "tisseuse" when !Has("TisseuseBrumes") => "sorcier", _ => id };
 
         /// <summary>Hameau en ruine au bout du chemin principal (un peu en retrait de son extrémité).</summary>
         static Vector2 HamletAt(Def d)
