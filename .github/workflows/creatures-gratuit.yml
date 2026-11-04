@@ -14,12 +14,15 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: creatures-gratuit
-  cancel-in-progress: false
 
 jobs:
   generer:
+    # une créature par machine : chaque machine a son propre quota de calcul gratuit Hugging Face
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        creature: [abbe, wendigo, tisseuse, salamandre, basilic, voyant]
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
@@ -34,11 +37,14 @@ jobs:
       - name: Générer
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: python3 Tools/Meshy/generate_free.py ${{ github.event.inputs.creatures }}
+        run: |
+          sel="${{ github.event.inputs.creatures }}"
+          if [ -n "$sel" ] && ! echo " $sel " | grep -q " ${{ matrix.creature }} "; then echo "non demandée"; exit 0; fi
+          python3 Tools/Meshy/generate_free.py ${{ matrix.creature }}
       - name: Enregistrer
         if: always()
         run: |
           git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
           git add Tools/Meshy/out || true
-          git commit -m "Créatures : modèles générés (gratuit) [skip ci]" || exit 0
+          git commit -m "Créatures : ${{ matrix.creature }} générée (gratuit) [skip ci]" || exit 0
           for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done

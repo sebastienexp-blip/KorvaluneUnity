@@ -42,70 +42,108 @@ def first_file(res):
     return None
 
 
-def trellis(img, out):
-    from gradio_client import Client, handle_file
-    for space in ('trellis-community/TRELLIS', 'JeffreyXiang/TRELLIS'):
+SPACES = ['trellis-community/TRELLIS', 'tencent/Hunyuan3D-2', 'tencent/Hunyuan3D-2mini-Turbo', 'VAST-AI/TripoSG',
+          'stabilityai/stable-fast-3d', 'tencent/Hunyuan3D-2.1', 'JeffreyXiang/TRELLIS']
+
+
+def dump_api(c, space):
+    """Écrit la description complète de l'API d'un espace (pour écrire les appels exacts ensuite)."""
+    import json
+    try:
+        api = c.view_api(return_format='dict', print_info=False)
+        d = os.path.join(HERE, 'out', '_api'); os.makedirs(d, exist_ok=True)
+        json.dump(api, open(os.path.join(d, space.replace('/', '__') + '.json'), 'w'), indent=1, default=str)
+        return api
+    except Exception as e:
+        print('  view_api', space, e, flush=True); return None
+
+
+def fill(params, img, out):
+    """Arguments d'un point d'entrée : l'image du concept, détourage et texture activés, valeurs par défaut sinon."""
+    from gradio_client import handle_file
+    kw = {}
+    for p in params:
+        n = p.get('parameter_name') or p.get('label'); low = (n or '').lower(); typ = str(p.get('python_type', {}).get('type', '')).lower()
+        if not n: continue
+        if low in ('image', 'image_prompt', 'input_image', 'img') or ('image' in low and 'dict' in typ and 'list' not in typ): kw[n] = handle_file(img)
+        elif low in ('images', 'multiimages', 'mv_image_front'): continue
+        elif 'rembg' in low or 'remove_bg' in low or 'background' in low: kw[n] = True
+        elif 'texture' in low and 'bool' in typ: kw[n] = True
+        elif 'seed' == low: kw[n] = 7
+    return kw
+
+
+SEEDS = [int(x) for x in os.environ.get('SEEDS', '7,21').split(',')]
+
+
+def trellis_hq(img, out, name):
+    """TRELLIS en qualité poussée (plus d'étapes, maillage moins simplifié, texture 2048) ; plusieurs graines pour choisir."""
+    from gradio_client import handle_file
+    c = client('trellis-community/TRELLIS')
+    try: call(c, api_name='/start_session')
+    except Exception as e: log(out, '   (start_session', repr(e)[:200], ')')
+    got = []
+    for sd in SEEDS:
+        dst = os.path.join(out, f'modele_s{sd}.glb')
+        if os.path.exists(dst): got.append(dst); continue
         try:
-            log(out, f'  TRELLIS : {space}')
-            c = client(space)
-            try: log(out, '  API :', str(c.view_api(return_format='str', print_info=False))[:1500])
-            except Exception: pass
-            try: call(c, api_name='/start_session')
-            except Exception as e: log(out, '  (start_session :', e, ')')
-            im = handle_file(img)
-            try: im = call(c, image=im, api_name='/preprocess_image') or im
-            except Exception as e: log(out, '  (preprocess :', e, ')')
-            call(c, image=im if not isinstance(im, str) else handle_file(im), multiimages=[], seed=7, ss_guidance_strength=7.5, ss_sampling_steps=12,
-                      slat_guidance_strength=3.0, slat_sampling_steps=12, multiimage_algo='stochastic', api_name='/image_to_3d')
-            res = call(c, mesh_simplify=0.85, texture_size=2048, api_name='/extract_glb')
+            res = call(c, image=handle_file(img), multiimages=[], seed=sd, ss_guidance_strength=8.0, ss_sampling_steps=30,
+                       slat_guidance_strength=3.5, slat_sampling_steps=30, multiimage_algo='stochastic', mesh_simplify=0.9,
+                       texture_size=2048, api_name='/generate_and_extract_glb')
             f = first_file(res)
-            if f: return f
-            log(out, '  résultat sans fichier :', res)
+            if f: shutil.copy(f, dst); got.append(dst); log(out, f'  ✅ {name} graine {sd} : {os.path.getsize(dst) // 1024} Ko')
+            else: log(out, '   graine', sd, 'sans fichier :', str(res)[:300])
         except Exception as e:
-            log(out, '  échec', space, ':', repr(e)[:500])
-    return None
+            log(out, '   graine', sd, 'échec :', repr(e)[:400])
+    return got
 
 
-def hunyuan(img, out):
-    from gradio_client import Client, handle_file
-    for space in ('tencent/Hunyuan3D-2.1', 'tencent/Hunyuan3D-2'):
+def generic(space, img, out):
+    c = client(space); api = dump_api(c, space) or {}
+    eps = api.get('named_endpoints', {})
+    log(out, f'  {space} : points d\'entrée', list(eps))
+    if '/start_session' in eps:
+        try: call(c, api_name='/start_session')
+        except Exception as e: log(out, '   (start_session', repr(e)[:200], ')')
+    order = [n for k in ('generate_and_extract_glb', 'image_to_3d', 'generation_all', 'generate', 'run', 'shape_generation', 'predict')
+             for n in eps if k in n]
+    seen = set()
+    for ep in order:
+        if ep in seen: continue
+        seen.add(ep)
+        kw = fill(eps[ep]['parameters'], img, out)
+        if not any(hasattr(v, 'get') or isinstance(v, dict) for v in kw.values()) and not any('image' in k.lower() for k in kw): continue
+        log(out, '   appel', ep, list(kw))
         try:
-            log(out, f'  Hunyuan3D : {space}')
-            c = client(space)
-            api = c.view_api(return_format='dict', print_info=False)
-            names = list((api or {}).get('named_endpoints', {}).keys()); log(out, '  points d\'entrée :', names)
-            ep = next((n for n in names if 'generation_all' in n), None) or next((n for n in names if 'gen' in n), None)
-            if not ep: continue
-            params = api['named_endpoints'][ep]['parameters']
-            kw = {}
-            for p in params:
-                n = p.get('parameter_name') or p.get('label')
-                if n in ('image', 'Image'): kw[n] = handle_file(img)
-                elif 'rembg' in (n or ''): kw[n] = True
-                elif 'texture' in (n or '').lower(): kw[n] = True
-            log(out, '  appel', ep, list(kw))
             res = call(c, api_name=ep, **kw)
-            f = first_file(res)
-            if f: return f
-            log(out, '  résultat sans fichier :', str(res)[:500])
         except Exception as e:
-            log(out, '  échec', space, ':', repr(e)[:500])
+            log(out, '   échec', ep, ':', repr(e)[:400]); continue
+        f = first_file(res)
+        if not f and any('extract_glb' in n for n in eps):
+            try: f = first_file(call(c, api_name=next(n for n in eps if 'extract_glb' in n), mesh_simplify=0.85, texture_size=2048))
+            except Exception as e: log(out, '   extract_glb', repr(e)[:300])
+        if f: return f
+        log(out, '   résultat sans fichier :', str(res)[:300])
     return None
 
 
 def run(name):
     out = os.path.join(HERE, 'out', name); os.makedirs(out, exist_ok=True)
     dst = os.path.join(out, 'modele.glb')
-    if os.path.exists(dst) and os.path.getsize(dst) > 10000:
-        print(f'== {name} : déjà généré', flush=True); return True
     log(out, f'== {name}  ({time.strftime("%H:%M:%S")})')
     img = os.path.join(HERE, 'concepts', f'{name}.png')
-    for fn in (trellis, hunyuan):
-        for attempt in range(2):
-            f = fn(img, out)
-            if f:
-                shutil.copy(f, dst); log(out, f'  ✅ {name} : {os.path.getsize(dst) // 1024} Ko'); return True
-            time.sleep(30)                                   # quota de calcul : on laisse souffler avant de réessayer
+    try:
+        if trellis_hq(img, out, name): return True
+        return False                                         # pas de repli sur Hunyuan (fond non détouré, sans texture)
+    except Exception as e: log(out, '  TRELLIS HQ :', repr(e)[:400])
+    if os.path.exists(dst) and os.path.getsize(dst) > 10000:
+        print(f'== {name} : déjà généré', flush=True); return True
+    for space in SPACES:
+        try: f = generic(space, img, out)
+        except Exception as e: log(out, '  échec', space, ':', repr(e)[:400]); f = None
+        if f:
+            ext = os.path.splitext(f)[1].lower(); dst = os.path.join(out, 'modele' + ext)
+            shutil.copy(f, dst); log(out, f'  ✅ {name} via {space} : {os.path.getsize(dst) // 1024} Ko'); return True
     log(out, f'  ❌ {name} : aucune génération réussie')
     return False
 
