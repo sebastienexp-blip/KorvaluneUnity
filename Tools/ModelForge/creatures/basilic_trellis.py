@@ -94,9 +94,9 @@ def build(bank, female=False):
     return multileg(NAME, SRC, KEEP, BODY, FEET, (CX, 0.0, CZ), 'BT_Ecailles', _cache, EYES, 'BT_Oeil')
 
 
-def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=None, anim_scale=1.0):
+def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=None, anim_scale=1.0, yaw=0.0, body_r=0.17):
     """Créature à quatre paires de membres (squelette de l'araignée géante) d'après un GLB généré."""
-    V, UV, F, base = GC.load(SRC, GC.BASE_H)
+    V, UV, F, base = GC.load(SRC, GC.BASE_H, yaw)
     _cache['base'] = base
     C = GC.vertex_colors(UV, base)
     F = F[KEEP(V, C)[F].all(1)]
@@ -115,8 +115,13 @@ def multileg(NAME, SRC, KEEP, BODY, FEET, center, MAT, _cache, EYES=(), EYE_MAT=
         sk.add(f'Chelicera_{s}', 'Thorax', h + (0.03 * sx, -0.08, 0.02)); sk.add(f'Fang_{s}', f'Chelicera_{s}', h + (0.03 * sx, -0.10, 0.06))
         sk.add(f'Palp1_{s}', 'Thorax', h + (0.05 * sx, -0.10, -0.02)); sk.add(f'Palp2_{s}', f'Palp1_{s}', h + (0.07 * sx, -0.10, 0.0))
         for i, foot in enumerate(FEET[s]):
-            pts = leg_chain(P, G, foot, axis_pts)
             par = 'Thorax' if i < 2 else 'Abdomen'
+            if foot is None:                     # membre absent : chaîne d'os sans influence, cachée dans le corps
+                b0 = np.asarray(BODY[par], float)
+                for k, seg in enumerate(AR.SEGS):
+                    n = f'Leg{i}_{seg}_{s}'; sk.add(n, par, b0 + (0.02 * sx * (k + 1), -0.01 * k, 0)); par = n
+                angs[(i, s)] = 90.0; continue
+            pts = leg_chain(P, G, foot, axis_pts, body_r)
             for k, seg in enumerate(AR.SEGS):
                 n = f'Leg{i}_{seg}_{s}'; sk.add(n, par, pts[k]); par = n
                 segs.append((n, pts[k], pts[k + 1]))

@@ -21,7 +21,7 @@ ENEMIES = {
     'abbe':      ('enemies.abbe_trellis', 'Human', (1.90, 2.60), (1.00, 2.00, 0.36), None),
     'abbe_proc': ('enemies.abbe_noye', 'Human', (1.80, 2.40), (1.00, 2.00, 0.36), None),
     'wendigo':   ('enemies.wendigo_trellis', 'Human', (2.40, 3.60), (1.30, 2.60, 0.45), None),
-    'salamandre': ('creatures.salamandre_forge', 'Generic', (0.70, 1.40), (0.60, 1.20, 0.70), dict(facingBone='Head', behindBone='Hips', leftBone='Ear_L')),
+    'salamandre': ('creatures.salamandre_trellis', 'Generic', (1.20, 2.20), (0.70, 1.30, 0.90), dict(facingBone='Thorax', behindBone='Abdomen', leftBone='Leg0_Coxa_L')),
     'basilic':   ('creatures.basilic_trellis', 'Generic', (1.80, 3.20), (0.90, 1.60, 0.80), dict(facingBone='Thorax', behindBone='Abdomen', leftBone='Leg0_Coxa_L')),
     'tisseuse':  ('creatures.tisseuse_trellis', 'Generic', (1.80, 3.00), (1.00, 2.00, 0.70), dict(facingBone='Thorax', behindBone='Abdomen', leftBone='Leg0_Coxa_L')),
     # brouillons refusés (non exportés)

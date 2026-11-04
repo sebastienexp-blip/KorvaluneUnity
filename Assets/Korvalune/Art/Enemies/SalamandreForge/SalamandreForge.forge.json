@@ -1,0 +1,109 @@
+{
+  "model": "SalamandreForge.fbx",
+  "kind": "character",
+  "rig": "Generic",
+  "prefab": "Assets/Korvalune/Resources/Prefabs/Enemies/SalamandreForge.prefab",
+  "controller": "humanoid-combat",
+  "priority": 10,
+  "materials": [
+    {
+      "name": "SF_Corps",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 1.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        4.5,
+        4.5,
+        4.5
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/SF_Corps_BaseMap.png",
+      "normalMap": "Textures/SF_Corps_Normal.png",
+      "maskMap": "Textures/SF_Corps_MetallicSmoothness.png",
+      "occlusionMap": "Textures/SF_Corps_Occlusion.png",
+      "emissionMap": "Textures/SF_Corps_Emission.png"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Walk",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Run",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Attack",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.55
+      ]
+    },
+    {
+      "name": "Hit",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Death",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    }
+  ],
+  "attachments": [],
+  "animModel": "SalamandreForge_Anims.fbx",
+  "collider": {
+    "type": "capsule",
+    "center": [
+      0,
+      0.7,
+      0
+    ],
+    "height": 1.3,
+    "radius": 0.9
+  },
+  "expect": {
+    "heightMin": 1.2,
+    "heightMax": 2.2,
+    "maxTriangles": 200000,
+    "sockets": [],
+    "facingBone": "Thorax",
+    "behindBone": "Abdomen",
+    "leftBone": "Leg0_Coxa_L"
+  }
+}

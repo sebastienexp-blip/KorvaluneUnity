@@ -52,7 +52,7 @@ namespace Korvalune.EditorTools
             new Def { kind = Kind.Toundra, scene = "Korvalune_Toundra", name = "Toundra de Givrecœur",  tag = "Toundra", quest = "Le cœur de givre",           level = 105,
                       entry = South, enemies = new[] { "loup", "wendigo", "sorcier" } },
             new Def { kind = Kind.Volcan,  scene = "Korvalune_Volcan",  name = "Terres de Cendrefer",   tag = "Volcan",  quest = "Les forges de Cendrefer",    level = 125,
-                      entry = South, enemies = new[] { "demon", "chevalier", "squelette" } },
+                      entry = South, enemies = new[] { "salamandre", "demon", "chevalier" } },
             new Def { kind = Kind.Canyon,  scene = "Korvalune_Canyon",  name = "Canyon Écarlate",       tag = "Canyon",  quest = "Le sang de la pierre",       level = 150,
                       entry = South, enemies = new[] { "basilic", "demon", "sorcier" } },
             new Def { kind = Kind.Abime,   scene = "Korvalune_Abime",   name = "Abîme du Néant",        tag = "Abime",   quest = "Au bord du Néant",           level = 175,
@@ -88,10 +88,11 @@ namespace Korvalune.EditorTools
             Kind.Toundra when Has("WendigoGivre") => "wendigo",
             Kind.Canyon when Has("BasilicEcarlate") => "basilic",
             Kind.Marais when Has("TisseuseBrumes") => "tisseuse",
+            Kind.Volcan when Has("SalamandreForge") => "salamandre",
             _ => "demon",
         };
         /// <summary>Monstre de la liste dont le modèle n'existe pas encore → remplacé par un monstre existant.</summary>
-        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", "wendigo" when !Has("WendigoGivre") => "chevalier", "basilic" when !Has("BasilicEcarlate") => "loup", "tisseuse" when !Has("TisseuseBrumes") => "sorcier", _ => id };
+        static string Avail(string id) => id switch { "abbe" when !Has("AbbeNoye") => "chevalier", "wendigo" when !Has("WendigoGivre") => "chevalier", "basilic" when !Has("BasilicEcarlate") => "loup", "tisseuse" when !Has("TisseuseBrumes") => "sorcier", "salamandre" when !Has("SalamandreForge") => "demon", _ => id };
 
         /// <summary>Hameau en ruine au bout du chemin principal (un peu en retrait de son extrémité).</summary>
         static Vector2 HamletAt(Def d)
