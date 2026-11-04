@@ -8,6 +8,12 @@ obligatoire. Les squelettes et animations sont posés ensuite dans ModelForge (p
 concepts/<nom>.png → out/<nom>/modele.glb (+ journal.txt). Une créature déjà générée n'est pas relancée."""
 import os, shutil, sys, time, traceback
 
+LIMIT = 900   # s max par appel : une file d'attente bloquée ne fige plus tout le travail
+
+
+def call(c, **kw):
+    return c.submit(**kw).result(timeout=LIMIT)
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 NAMES = ['abbe', 'wendigo', 'tisseuse', 'salamandre', 'basilic', 'voyant']
 TOKEN = os.environ.get('HF_TOKEN') or None
@@ -44,14 +50,14 @@ def trellis(img, out):
             c = client(space)
             try: log(out, '  API :', str(c.view_api(return_format='str', print_info=False))[:1500])
             except Exception: pass
-            try: c.predict(api_name='/start_session')
+            try: call(c, api_name='/start_session')
             except Exception as e: log(out, '  (start_session :', e, ')')
             im = handle_file(img)
-            try: im = c.predict(image=im, api_name='/preprocess_image') or im
+            try: im = call(c, image=im, api_name='/preprocess_image') or im
             except Exception as e: log(out, '  (preprocess :', e, ')')
-            c.predict(image=im if not isinstance(im, str) else handle_file(im), multiimages=[], seed=7, ss_guidance_strength=7.5, ss_sampling_steps=12,
+            call(c, image=im if not isinstance(im, str) else handle_file(im), multiimages=[], seed=7, ss_guidance_strength=7.5, ss_sampling_steps=12,
                       slat_guidance_strength=3.0, slat_sampling_steps=12, multiimage_algo='stochastic', api_name='/image_to_3d')
-            res = c.predict(mesh_simplify=0.85, texture_size=2048, api_name='/extract_glb')
+            res = call(c, mesh_simplify=0.85, texture_size=2048, api_name='/extract_glb')
             f = first_file(res)
             if f: return f
             log(out, '  résultat sans fichier :', res)
@@ -78,7 +84,7 @@ def hunyuan(img, out):
                 elif 'rembg' in (n or ''): kw[n] = True
                 elif 'texture' in (n or '').lower(): kw[n] = True
             log(out, '  appel', ep, list(kw))
-            res = c.predict(api_name=ep, **kw)
+            res = call(c, api_name=ep, **kw)
             f = first_file(res)
             if f: return f
             log(out, '  résultat sans fichier :', str(res)[:500])
