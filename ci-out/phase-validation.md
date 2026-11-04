@@ -1,8 +1,8 @@
-# Rapport d'intégration Unity — 2026-11-03 22:14 UTC
+# Rapport d'intégration Unity — 2026-11-04 09:57 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
-- 280 modèle(s) ModelForge trouvé(s)
-- 0 modèle(s) intégré(s), 280 déjà à jour (inchangés)
+- 287 modèle(s) ModelForge trouvé(s)
+- 0 modèle(s) intégré(s), 287 déjà à jour (inchangés)
 
 ## ArcDeChasse.fbx (prop, rig None)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/ArcDeChasse/ArcDeChasse.fbx
@@ -63,6 +63,15 @@
 - ✅ **Matériau SC_Gold** shader Korvalune/PBR Personnage, base SC_Gold_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau SC_Dark** shader Korvalune/PBR Personnage, base SC_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Matériau SC_Crystal** shader Korvalune/PBR Personnage, base SC_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** box
+
+## CrosseAbbe.fbx (prop, rig None)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Weapons/CrosseAbbe/CrosseAbbe.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 3205 triangles, 2767 sommets (max 25000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Weapons/CrosseAbbe.prefab
+- ✅ **Échelle (hauteur)** 2.565 m (attendu 2.436583–2.693066), boîte 0.64×2.56×0.45, pieds à y=-1.680
+- ✅ **Matériau AT_Robe** shader Korvalune/PBR Personnage, base AT_Robe_BaseMap, normale oui, métal/lissé oui, AO oui
 - ✅ **Collider** box
 
 ## CursedBlade.fbx (prop, rig None)
@@ -1795,6 +1804,34 @@
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.810 m, événements 0
 - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
 
+## AbbeNoye.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/AbbeNoye/AbbeNoye.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 30567 triangles, 24310 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/AbbeNoye.prefab
+- ✅ **Échelle (hauteur)** 2.230 m (attendu 1.9–2.6), boîte 2.90×2.23×1.18, pieds à y=-0.059
+- ✅ **Orientation gauche/droite** LeftHand.x = -0.818
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.173 > LeftFoot.z=0.000
+- ✅ **Point d'attache Socket_Weapon_R** 
+- ✅ **Équipement posé sur Socket_Weapon_R** ../../Weapons/CrosseAbbe/CrosseAbbe.fbx
+- ✅ **Matériau AT_Robe** shader Korvalune/PBR Personnage, base AT_Robe_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau AN_Bone** shader Korvalune/PBR Personnage, base AN_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau AN_Hollow** shader Korvalune/PBR Personnage, base AN_Hollow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau AN_Eye** shader Korvalune/PBR Personnage, base AN_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=True, 20 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 0/30
+- ✅ **Contrôleur d'animation** AbbeNoye
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 1.328 m, événements 0
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.627 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 0.649 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=True, déplacement max 1.241 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.701 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.595 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 2.162 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 2.613 m, événements 1
+
 ## AraigneeGeante.fbx (character, rig Generic)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/AraigneeGeante/AraigneeGeante.fbx
 - ✅ **Import sans erreur ni avertissement** 
@@ -1818,6 +1855,25 @@
 - ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.978 m, événements 1
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.287 m, événements 0
 - ✅ **Clip Death** 1.20 s, boucle=False, humanoïde=False, déplacement max 1.394 m, événements 0
+
+## BasilicEcarlate.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/BasilicEcarlate/BasilicEcarlate.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 26320 triangles, 19974 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/BasilicEcarlate.prefab
+- ✅ **Échelle (hauteur)** 2.546 m (attendu 1.8–3.2), boîte 1.54×2.55×4.07, pieds à y=0.043
+- ✅ **Orientation gauche/droite** Leg0_Coxa_L.x = -0.292
+- ✅ **Orientation avant (+Z)** Thorax.z=0.508 > Abdomen.z=-0.653
+- ✅ **Matériau BT_Ecailles** shader Korvalune/PBR Personnage, base BT_Ecailles_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** BasilicEcarlate
+- ✅ **Clip Idle** 4.00 s, boucle=True, humanoïde=False, déplacement max 0.029 m, événements 0
+- ✅ **Clip Walk** 1.10 s, boucle=True, humanoïde=False, déplacement max 0.329 m, événements 2
+- ✅ **Clip Run** 0.63 s, boucle=True, humanoïde=False, déplacement max 0.831 m, événements 2
+- ✅ **Clip Attack** 1.10 s, boucle=False, humanoïde=False, déplacement max 0.700 m, événements 1
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.236 m, événements 0
+- ✅ **Clip Death** 1.20 s, boucle=False, humanoïde=False, déplacement max 0.485 m, événements 0
 
 ## ChevalierMaudit.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/ChevalierMaudit/ChevalierMaudit.fbx
@@ -1910,6 +1966,25 @@
 - ✅ **Clip Howl** 2.80 s, boucle=False, humanoïde=False, déplacement max 0.653 m, événements 0
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.222 m, événements 0
 - ✅ **Clip Death** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.612 m, événements 0
+
+## SalamandreForge.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/SalamandreForge/SalamandreForge.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 22343 triangles, 17363 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/SalamandreForge.prefab
+- ✅ **Échelle (hauteur)** 1.875 m (attendu 1.2–2.2), boîte 1.72×1.87×4.50, pieds à y=0.000
+- ✅ **Orientation gauche/droite** Leg1_Tarsus_L.x = -0.443
+- ✅ **Orientation avant (+Z)** Thorax.z=1.000 > Abdomen.z=-0.625
+- ✅ **Matériau SF_Corps** shader Korvalune/PBR Personnage, base SF_Corps_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** SalamandreForge
+- ✅ **Clip Idle** 4.00 s, boucle=True, humanoïde=False, déplacement max 0.022 m, événements 0
+- ✅ **Clip Walk** 1.10 s, boucle=True, humanoïde=False, déplacement max 0.176 m, événements 2
+- ✅ **Clip Run** 0.63 s, boucle=True, humanoïde=False, déplacement max 0.417 m, événements 2
+- ✅ **Clip Attack** 1.10 s, boucle=False, humanoïde=False, déplacement max 0.624 m, événements 1
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.305 m, événements 0
+- ✅ **Clip Death** 1.20 s, boucle=False, humanoïde=False, déplacement max 0.643 m, événements 0
 
 ## SorcierCorrompu.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/SorcierCorrompu/SorcierCorrompu.fbx
@@ -2006,6 +2081,70 @@
 - ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.477 m, événements 0
 - ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 1.809 m, événements 0
 - ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 1.941 m, événements 1
+
+## TisseuseBrumes.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/TisseuseBrumes/TisseuseBrumes.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 39141 triangles, 29795 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/TisseuseBrumes.prefab
+- ✅ **Échelle (hauteur)** 2.275 m (attendu 1.8–3), boîte 1.51×2.27×1.21, pieds à y=-0.013
+- ✅ **Orientation gauche/droite** Leg0_Coxa_L.x = -0.234
+- ✅ **Orientation avant (+Z)** Thorax.z=0.058 > Abdomen.z=-0.058
+- ✅ **Matériau TB_Corps** shader Korvalune/PBR Personnage, base TB_Corps_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau AN_Bone** shader Korvalune/PBR Personnage, base AN_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau AN_Hollow** shader Korvalune/PBR Personnage, base AN_Hollow_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau AN_Eye** shader Korvalune/PBR Personnage, base AN_Eye_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** TisseuseBrumes
+- ✅ **Clip Idle** 4.00 s, boucle=True, humanoïde=False, déplacement max 0.035 m, événements 0
+- ✅ **Clip Walk** 1.10 s, boucle=True, humanoïde=False, déplacement max 0.278 m, événements 2
+- ✅ **Clip Run** 0.63 s, boucle=True, humanoïde=False, déplacement max 0.634 m, événements 2
+- ✅ **Clip Attack** 1.10 s, boucle=False, humanoïde=False, déplacement max 0.522 m, événements 1
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.158 m, événements 0
+- ✅ **Clip Death** 1.20 s, boucle=False, humanoïde=False, déplacement max 0.625 m, événements 0
+
+## VoyantNeant.fbx (character, rig Generic)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/VoyantNeant/VoyantNeant.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 16962 triangles, 13718 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/VoyantNeant.prefab
+- ✅ **Échelle (hauteur)** 2.471 m (attendu 2–3), boîte 1.15×2.47×1.05, pieds à y=0.000
+- ✅ **Orientation gauche/droite** TentL1.x = -0.270
+- ✅ **Matériau VN_Corps** shader Korvalune/PBR Personnage, base VN_Corps_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=False, 0 os mappés
+- ✅ **Contrôleur d'animation** VoyantNeant
+- ✅ **Clip Idle** 3.00 s, boucle=True, humanoïde=False, déplacement max 0.208 m, événements 0
+- ✅ **Clip Walk** 1.20 s, boucle=True, humanoïde=False, déplacement max 0.411 m, événements 2
+- ✅ **Clip Run** 0.70 s, boucle=True, humanoïde=False, déplacement max 0.541 m, événements 2
+- ✅ **Clip Attack** 1.00 s, boucle=False, humanoïde=False, déplacement max 0.775 m, événements 1
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=False, déplacement max 0.329 m, événements 0
+- ✅ **Clip Death** 1.30 s, boucle=False, humanoïde=False, déplacement max 0.878 m, événements 0
+
+## WendigoGivre.fbx (character, rig Human)
+- ✅ **Import du FBX** Assets/Korvalune/Art/Enemies/WendigoGivre/WendigoGivre.fbx
+- ✅ **Import sans erreur ni avertissement** 
+- ✅ **Budget de triangles** 31810 triangles, 27091 sommets (max 200000)
+- ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/Enemies/WendigoGivre.prefab
+- ✅ **Échelle (hauteur)** 2.977 m (attendu 2.4–3.6), boîte 4.34×2.98×1.47, pieds à y=-0.077
+- ✅ **Orientation gauche/droite** LeftHand.x = -1.615
+- ✅ **Orientation avant (+Z)** LeftToes.z=0.417 > LeftFoot.z=-0.032
+- ✅ **Matériau WT_Fourrure** shader Korvalune/PBR Personnage, base WT_Fourrure_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Matériau WT_Lueur** shader Korvalune/PBR Personnage, base WT_Lueur_BaseMap, normale oui, métal/lissé oui, AO oui
+- ✅ **Collider** capsule
+- ✅ **Avatar** valide=True, humain=True, 20 os mappés
+- ✅ **Os humanoïdes obligatoires** tous mappés
+  - doigts mappés : 0/30
+- ✅ **Contrôleur d'animation** WendigoGivre
+- ✅ **Clip Idle** 2.40 s, boucle=True, humanoïde=True, déplacement max 2.289 m, événements 0
+- ✅ **Clip Walk** 1.07 s, boucle=True, humanoïde=True, déplacement max 0.705 m, événements 2
+- ✅ **Clip Run** 0.67 s, boucle=True, humanoïde=True, déplacement max 1.137 m, événements 2
+- ✅ **Clip Attack** 0.93 s, boucle=False, humanoïde=True, déplacement max 2.992 m, événements 1
+- ✅ **Clip Block** 1.20 s, boucle=True, humanoïde=True, déplacement max 0.903 m, événements 0
+- ✅ **Clip Hit** 0.50 s, boucle=False, humanoïde=True, déplacement max 0.725 m, événements 0
+- ✅ **Clip Dodge** 0.73 s, boucle=False, humanoïde=True, déplacement max 2.738 m, événements 0
+- ✅ **Clip Death** 1.60 s, boucle=False, humanoïde=True, déplacement max 3.274 m, événements 1
 
 ## ElyraNoctis_F.fbx (character, rig Human)
 - ✅ **Import du FBX** Assets/Korvalune/Art/Heroes/ElyraNoctis_F/ElyraNoctis_F.fbx
@@ -3025,4 +3164,4 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_156 captures écrites dans ci-out/ (OpenGLCore) en 5.4 min._
+_169 captures écrites dans ci-out/ (OpenGLCore) en 5.4 min._
