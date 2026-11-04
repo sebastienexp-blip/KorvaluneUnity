@@ -1,0 +1,109 @@
+{
+  "model": "BasilicEcarlate.fbx",
+  "kind": "character",
+  "rig": "Generic",
+  "prefab": "Assets/Korvalune/Resources/Prefabs/Enemies/BasilicEcarlate.prefab",
+  "controller": "humanoid-combat",
+  "priority": 10,
+  "materials": [
+    {
+      "name": "BT_Ecailles",
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0.0,
+      "smoothness": 1.0,
+      "normalScale": 1.0,
+      "occlusionStrength": 1.0,
+      "tiling": [
+        1,
+        1
+      ],
+      "doubleSided": false,
+      "emission": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "maxSize": 2048,
+      "mobileMaxSize": 1024,
+      "alphaClip": false,
+      "cutoff": 0.5,
+      "baseMap": "Textures/BT_Ecailles_BaseMap.png",
+      "normalMap": "Textures/BT_Ecailles_Normal.png",
+      "maskMap": "Textures/BT_Ecailles_MetallicSmoothness.png",
+      "occlusionMap": "Textures/BT_Ecailles_Occlusion.png",
+      "emissionMap": "Textures/BT_Ecailles_Emission.png"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "loop": true,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Walk",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Run",
+      "loop": true,
+      "rootMotion": false,
+      "events": [
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "name": "Attack",
+      "loop": false,
+      "rootMotion": false,
+      "events": [
+        0.55
+      ]
+    },
+    {
+      "name": "Hit",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    },
+    {
+      "name": "Death",
+      "loop": false,
+      "rootMotion": false,
+      "events": []
+    }
+  ],
+  "attachments": [],
+  "animModel": "BasilicEcarlate_Anims.fbx",
+  "collider": {
+    "type": "capsule",
+    "center": [
+      0,
+      0.9,
+      0
+    ],
+    "height": 1.6,
+    "radius": 0.8
+  },
+  "expect": {
+    "heightMin": 1.8,
+    "heightMax": 3.2,
+    "maxTriangles": 200000,
+    "sockets": [],
+    "facingBone": "Thorax",
+    "behindBone": "Abdomen",
+    "leftBone": "Leg0_Coxa_L"
+  }
+}

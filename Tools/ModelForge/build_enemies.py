@@ -22,6 +22,7 @@ ENEMIES = {
     'abbe_proc': ('enemies.abbe_noye', 'Human', (1.80, 2.40), (1.00, 2.00, 0.36), None),
     'wendigo':   ('enemies.wendigo_trellis', 'Human', (2.40, 3.60), (1.30, 2.60, 0.45), None),
     'salamandre': ('creatures.salamandre_forge', 'Generic', (0.70, 1.40), (0.60, 1.20, 0.70), dict(facingBone='Head', behindBone='Hips', leftBone='Ear_L')),
+    'basilic':   ('creatures.basilic_trellis', 'Generic', (1.80, 3.20), (0.90, 1.60, 0.80), dict(facingBone='Thorax', behindBone='Abdomen', leftBone='Leg0_Coxa_L')),
     # brouillons refusés (non exportés)
     'noye':      ('enemies.noye', 'Human', (1.70, 2.05), (0.93, 1.86, 0.33), None),
     'goule':     ('enemies.goule', 'Human', (1.70, 2.10), (0.93, 1.86, 0.33), None),
