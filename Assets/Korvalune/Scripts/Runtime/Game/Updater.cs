@@ -11,8 +11,16 @@ namespace Korvalune.Game
     /// s'ouvre : la nouvelle version s'installe par-dessus l'ancienne (même signature), personnages et réglages conservés.</summary>
     public class Updater : MonoBehaviour
     {
+#if UNITY_STANDALONE_WIN
+        // version Windows : publiée dans « windows-derniere » ; la mise à jour passe par le lanceur Korvalune
+        const string Base = "https://github.com/sebastienexp-blip/KorvaluneUnity/releases/download/windows-derniere/";
+        const string Page = "https://github.com/sebastienexp-blip/KorvaluneUnity/releases/tag/windows-derniere";
+#else
         const string Base = "https://github.com/sebastienexp-blip/KorvaluneUnity/releases/download/apk-derniere/";
         const string Page = "https://github.com/sebastienexp-blip/KorvaluneUnity/releases/tag/apk-derniere";
+#endif
+        /// <summary>Lanceur Windows installé (il télécharge et installe les nouvelles versions du jeu).</summary>
+        static string LauncherExe => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Korvalune", "KorvaluneLauncher.exe");
         public static int InstalledBuild
         {
             get { var v = Application.version.Split('.'); return v.Length > 0 && int.TryParse(v[v.Length - 1], out var n) ? n : 0; }
@@ -50,12 +58,28 @@ namespace Korvalune.Game
             }
             if (remote <= InstalledBuild) { label.text = $"<size=20><color=#8fd08f>Version 0.1.{InstalledBuild} — à jour</color></size>"; yield break; }
             bg.enabled = true;
-            label.text = $"Mise à jour disponible (version 0.1.{remote}) — toucher pour télécharger";
+            label.text = Application.platform == RuntimePlatform.WindowsPlayer
+                ? $"Mise à jour disponible (version 0.1.{remote}) — cliquer pour l'installer avec le lanceur"
+                : $"Mise à jour disponible (version 0.1.{remote}) — toucher pour télécharger";
         }
 
         void Click()
         {
             if (busy || remote <= InstalledBuild) return;              // déjà à jour : rien à télécharger
+            if (Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                // Windows : le lanceur télécharge la nouvelle version, remplace l'ancienne (personnages conservés) et relance le jeu
+                try
+                {
+                    if (System.IO.File.Exists(LauncherExe))
+                    {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(LauncherExe, "--mise-a-jour") { UseShellExecute = true });
+                        Application.Quit(); return;
+                    }
+                }
+                catch (System.Exception e) { Debug.LogWarning("[Korvalune] lanceur : " + e.Message); }
+                Application.OpenURL(Page); return;
+            }
             if (Application.platform != RuntimePlatform.Android) { Application.OpenURL(Page); return; }
             if (installAct != null) { Install(); return; }                // déjà téléchargée : on relance l'installation
             try
