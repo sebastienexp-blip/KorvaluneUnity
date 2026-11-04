@@ -292,6 +292,7 @@ namespace Korvalune.Game
         {
             if (!hero) { var p = FindFirstObjectByType<PlayerController>(); if (!p) return; hero = p.transform; }
             var cam = Camera.main; var tag = transform.Find("Nom"); if (tag && cam) tag.rotation = Quaternion.LookRotation(tag.position - cam.transform.position);
+            if (!GetComponent<Usable>()) Usable.Add(gameObject, "Statue des brèches", 6f, () => { if (!panel) Open(); });
             float d = Vector3.Distance(hero.position, transform.position);
             if (d < 4.4f && !shown && !panel) { shown = true; Open(); }
             if (d > 6.5f) shown = false;

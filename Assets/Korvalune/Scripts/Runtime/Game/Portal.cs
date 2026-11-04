@@ -77,6 +77,7 @@ namespace Korvalune.Game
                 var c = Color.Lerp(new Color(0.85f, 0.75f, 0.55f), glowColor, pulse); c.a = Mathf.Clamp01(heat * 1.5f); nameText.color = c;
             }
             // toucher l'entrée → le héros y court puis entre
+            if (!GetComponent<Usable>()) Usable.Add(gameObject, string.IsNullOrEmpty(displayName) ? label : $"Entrer : {displayName}", radius + 3.5f, Enter);
             if (TappedThis()) p.WalkTo(transform.position, Enter);
             // marcher droit dedans suffit aussi
             if (!armed) armed = d > radius + 2.5f;

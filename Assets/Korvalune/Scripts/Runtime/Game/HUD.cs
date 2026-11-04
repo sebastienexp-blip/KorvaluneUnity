@@ -91,6 +91,15 @@ namespace Korvalune.Game
                 skillIcons.Add(bg.transform.Find("Masque/Icône").GetComponent<Image>()); shownIcon.Add("");
                 skillButtons.Add((cd, t, i));
             }
+            // bouton « Utiliser » (au-dessus des compétences) : parle, ouvre, voyage… sur ce qui est le plus proche ; visible
+            // seulement quand quelque chose est à portée, avec l'action écrite au-dessus (touche E au clavier)
+            useButton = RoundButton(root, "Utiliser", "use", new Vector2(1, 0), new Vector2(-120, 520), 128, () => { if (player) Usable.UseNearest(player.transform.position); }, out _, out _).gameObject;
+            useButton.transform.Find("Masque").gameObject.SetActive(UIStyle.IsPainted("use"));
+            var ut = Label((RectTransform)useButton.transform, "Texte", "Utiliser", 26, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(128, 128));
+            ut.color = UIStyle.Gold; ut.fontStyle = FontStyle.Bold; ut.gameObject.AddComponent<Outline>().effectColor = Color.black; ut.gameObject.SetActive(!UIStyle.IsPainted("use"));
+            useLabel = Label((RectTransform)useButton.transform, "Action", "", 30, TextAnchor.LowerCenter, new Vector2(0.5f, 1f), new Vector2(0, 34), new Vector2(520, 60));
+            useLabel.color = UIStyle.Parch; useLabel.gameObject.AddComponent<Outline>().effectColor = Color.black;
+            useButton.SetActive(false);
             // menus (inventaire, compétences) — coins du haut
             RoundButton(root, "Inventaire", "bag", new Vector2(0.5f, 1), new Vector2(-60, -24), 96, ToggleBag, out _, out _);
             if (player && player.GetComponent<Equipment>()) BuildBag(root);
@@ -139,7 +148,7 @@ namespace Korvalune.Game
         }
 
         void OnDestroy() { Health.AnyDamaged -= OnDamaged; Merchant.Opened -= OpenShop; }
-        Text goldText, potionCount, manaCount; Image potionCd, manaCd;
+        Text goldText, potionCount, manaCount, useLabel; Image potionCd, manaCd; GameObject useButton;
 
         Sprite arrowSprite;
         Sprite Arrow()
@@ -168,6 +177,13 @@ namespace Korvalune.Game
             manaFill.fillAmount = h.maxMana > 0 ? h.mana / h.maxMana : 0;
             xpFill.fillAmount = player.xp / player.xpNext; levelText.text = "Nv " + player.level;
             if (goldText) goldText.text = player.wallet.gold.ToString("N0");
+            if (useButton)
+            {
+                var u = Usable.Nearest(player.transform.position);
+                if (useButton.activeSelf != (u != null)) useButton.SetActive(u != null);
+                if (u != null && useLabel.text != u.label) useLabel.text = u.label;
+                if (u != null && Application.isPlaying && Input.GetKeyDown(KeyCode.E)) Usable.UseNearest(player.transform.position);
+            }
             if (potionCount) { potionCount.text = player.wallet.potions.ToString(); potionCd.fillAmount = player.PotionCooldown / 15f; }
             if (manaCount) { manaCount.text = player.wallet.manaPotions.ToString(); manaCd.fillAmount = player.ManaPotionCooldown / 12f; }
             if (runner) RefreshSkills(h);

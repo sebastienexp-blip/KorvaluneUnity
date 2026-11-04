@@ -49,6 +49,7 @@ namespace Korvalune.Game
         {
             if (!Application.isPlaying) return;
             if (!player) { var p = FindFirstObjectByType<PlayerController>(); if (!p) return; player = p.transform; }
+            if (!GetComponent<Usable>()) Usable.Add(gameObject, string.IsNullOrEmpty(displayName) ? title : $"Parler à {displayName}", talkRadius + 1.5f, Open);
             float d = Vector3.Distance(player.position, transform.position);
             heat = Mathf.MoveTowards(heat, d < 12f ? 1 : 0, Time.deltaTime * 2);
             var cam = Camera.main;

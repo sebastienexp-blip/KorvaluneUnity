@@ -22,6 +22,7 @@ namespace Korvalune.Game
             if (opened || !Application.isPlaying) return;
             if (glow) glow.intensity = 1.4f + 0.5f * Mathf.Sin(Time.time * 3);
             var p = FindFirstObjectByType<PlayerController>(); if (!p) return;
+            if (!GetComponent<Usable>()) Usable.Add(gameObject, "Ouvrir le coffre", 3.2f, () => Open(p), () => !opened);
             if (Tapped())
             {
                 if (Vector3.Distance(p.transform.position, transform.position) < 2.6f) Open(p);

@@ -138,6 +138,7 @@ namespace Korvalune.Game
         void Update()
         {
             if (!hero) { var p = FindFirstObjectByType<PlayerController>(); if (!p) return; hero = p.transform; }
+            if (!GetComponent<Usable>()) Usable.Add(gameObject, "Pierre de voyage", 4.5f, () => { if (!panel) Open(); });
             float d = Vector3.Distance(hero.position, transform.position);
             if (d < 2.6f && !shown && !panel) { shown = true; Open(); }
             if (d > 5f) shown = false;
