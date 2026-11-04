@@ -39,8 +39,6 @@ jobs:
           free -h; df -h
 
       - uses: actions/checkout@v4
-        with:
-          ref: main
 
       - uses: actions/cache/restore@v4
         with:
@@ -145,4 +143,4 @@ jobs:
           git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
           git add ci-out/windows/build.md 2>/dev/null || true
           git commit -m "Windows : rapport de construction [skip ci]" || exit 0
-          for i in 1 2 3; do git pull --rebase --autostash -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase --autostash -X ours origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break; sleep 5; done
