@@ -1,407 +1,411 @@
-# Journal du job d'intégration (run 41808293683)
+# Journal du job d'intégration (run 41808791522)
 ## Lignes importantes
-565:2026-11-04T09:35:48.9595540Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-567:2026-11-04T09:35:48.9597138Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-615:2026-11-04T09:35:49.2305439Z ##[error]Process completed with exit code 1.
+1176:2026-11-04T09:45:47.5241740Z [  2/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+1697:2026-11-04T09:45:49.6332510Z Curl error 42: Callback aborted
+25622:2026-11-04T09:57:19.0016389Z Curl error 42: Callback aborted
+28228:2026-11-04T10:04:15.0116933Z Curl error 42: Callback aborted
+32717:2026-11-04T10:23:51.9714867Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+32719:2026-11-04T10:23:51.9716360Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-2026-11-04T09:34:35.8208743Z [36;1mprintDH "AFTER CLEAN-UP:"[0m
-2026-11-04T09:34:35.8209810Z [36;1m[0m
-2026-11-04T09:34:35.8210539Z [36;1mecho ""[0m
-2026-11-04T09:34:35.8211308Z [36;1mecho ""[0m
-2026-11-04T09:34:35.8212062Z [36;1m[0m
-2026-11-04T09:34:35.8212837Z [36;1mecho "/dev/root:"[0m
-2026-11-04T09:34:35.8214125Z [36;1mprintSavedSpace $((AVAILABLE_ROOT_END - AVAILABLE_ROOT_INITIAL))[0m
-2026-11-04T09:34:35.8215866Z [36;1mecho "overall:"[0m
-2026-11-04T09:34:35.8217034Z [36;1mprintSavedSpace $((AVAILABLE_END - AVAILABLE_INITIAL))[0m
-2026-11-04T09:34:35.8249086Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
-2026-11-04T09:34:35.8250573Z ##[endgroup]
-2026-11-04T09:34:35.8561851Z ================================================================================
-2026-11-04T09:34:35.8563210Z BEFORE CLEAN-UP:
-2026-11-04T09:34:35.8563679Z 
-2026-11-04T09:34:35.8564012Z $ dh -h /
-2026-11-04T09:34:35.8564429Z 
-2026-11-04T09:34:35.8564876Z Filesystem      Size  Used Avail Use% Mounted on
-2026-11-04T09:34:35.8566012Z /dev/root       145G   59G   86G  41% /
-2026-11-04T09:34:35.8566957Z $ dh -a /
-2026-11-04T09:34:35.8567369Z 
-2026-11-04T09:34:35.8572724Z Filesystem     1K-blocks     Used Available Use% Mounted on
-2026-11-04T09:34:35.8574532Z /dev/root      151263856 61307032  89940440  41% /
-2026-11-04T09:34:35.8575624Z $ dh -a
-2026-11-04T09:34:35.8576037Z 
-2026-11-04T09:34:35.8589390Z Filesystem     1K-blocks     Used Available Use% Mounted on
-2026-11-04T09:34:35.8591154Z /dev/root      151263856 61307032  89940440  41% /
-2026-11-04T09:34:35.8592328Z devtmpfs         7429220        0   7429220   0% /dev
-2026-11-04T09:34:35.8593518Z proc                   0        0         0    - /proc
-2026-11-04T09:34:35.8594671Z sysfs                  0        0         0    - /sys
-2026-11-04T09:34:35.8595950Z securityfs             0        0         0    - /sys/kernel/security
-2026-11-04T09:34:35.8597827Z tmpfs            8183764       84   8183680   1% /dev/shm
-2026-11-04T09:34:35.8599138Z devpts                 0        0         0    - /dev/pts
-2026-11-04T09:34:35.8600708Z tmpfs            3273508     1012   3272496   1% /run
-2026-11-04T09:34:35.8601894Z tmpfs               5120        0      5120   0% /run/lock
-2026-11-04T09:34:35.8603127Z cgroup2                0        0         0    - /sys/fs/cgroup
-2026-11-04T09:34:35.8604382Z none                   0        0         0    - /sys/fs/pstore
-2026-11-04T09:34:35.8606314Z efivarfs          131072       32    131036   1% /sys/firmware/efi/efivars
-2026-11-04T09:34:35.8608692Z bpf                    0        0         0    - /sys/fs/bpf
-2026-11-04T09:34:35.8611825Z systemd-1              -        -         -    - /proc/sys/fs/binfmt_misc
-2026-11-04T09:34:35.8614309Z hugetlbfs              0        0         0    - /dev/hugepages
-2026-11-04T09:34:35.8616574Z mqueue                 0        0         0    - /dev/mqueue
-2026-11-04T09:34:35.8618819Z debugfs                0        0         0    - /sys/kernel/debug
-2026-11-04T09:34:35.8621443Z tracefs                0        0         0    - /sys/kernel/tracing
-2026-11-04T09:34:35.8623825Z fusectl                0        0         0    - /sys/fs/fuse/connections
-2026-11-04T09:34:35.8626219Z configfs               0        0         0    - /sys/kernel/config
-2026-11-04T09:34:35.8628402Z /dev/sda16        901520    86444    751948  11% /boot
-2026-11-04T09:34:35.8630717Z /dev/sda15        106832     6250    100582   6% /boot/efi
-2026-11-04T09:34:35.8632416Z binfmt_misc            0        0         0    - /proc/sys/fs/binfmt_misc
-2026-11-04T09:34:35.8633815Z tmpfs            1636752       12   1636740   1% /run/user/1001
-2026-11-04T09:34:35.8635129Z ================================================================================
-2026-11-04T09:34:35.8635943Z 
-2026-11-04T09:35:14.4593914Z 
-2026-11-04T09:35:14.4600810Z ********************************************************************************
-2026-11-04T09:35:14.4623661Z => Android library: Saved 11GiB
-2026-11-04T09:35:14.4630712Z ********************************************************************************
-2026-11-04T09:35:14.4631213Z 
-2026-11-04T09:35:20.9442429Z 
-2026-11-04T09:35:20.9451757Z ********************************************************************************
-2026-11-04T09:35:20.9470679Z => .NET runtime: Saved 5.7GiB
-2026-11-04T09:35:20.9477363Z ********************************************************************************
-2026-11-04T09:35:20.9477874Z 
-2026-11-04T09:35:22.4962905Z 
-2026-11-04T09:35:22.4969369Z ********************************************************************************
-2026-11-04T09:35:22.4989262Z => Haskell runtime: Saved 3.6GiB
-2026-11-04T09:35:22.4997845Z ********************************************************************************
-2026-11-04T09:35:22.4998342Z 
-2026-11-04T09:35:39.7921366Z Deleted Images:
-2026-11-04T09:35:39.7921925Z untagged: ghcr.io/github/gh-aw-mcpg:latest
-2026-11-04T09:35:39.7923007Z untagged: ghcr.io/github/gh-aw-mcpg@sha256:3719f62df6229fc6670098c3df6d7ff792a7a67ddf9c7e016a5653f39b72e1a4
-2026-11-04T09:35:39.7924398Z deleted: sha256:eacd6ee6b337225d9d0d18d31787590fff169fc27d0021e3021049520c319453
-2026-11-04T09:35:39.7925682Z deleted: sha256:46a214cc8f95204d4ef2e08e4b7b966b99dfc4288b8a5cd17298b5872bb94e6c
-2026-11-04T09:35:39.7926828Z deleted: sha256:8e33c09bc9b2ca2c5aa794116b7a793c361476771ff50fa8a2ec56de079b0269
-2026-11-04T09:35:39.7927798Z deleted: sha256:43967d788b7ef05eacbb1b00885604200cf836bad3fb412ddd988671242675a6
-2026-11-04T09:35:39.7928794Z deleted: sha256:419e430001716b929fb81ca7f2f6c33ac52f3c77d225d960c8ffac07d7e2e01f
-2026-11-04T09:35:39.7929456Z deleted: sha256:e4707ec8f688c6776667fe39a22e750ef0cb608530bcf9e4b99170086cf03e03
-2026-11-04T09:35:39.7930591Z deleted: sha256:076fa2779acee36fe423d7a96b35f9ee3669e369097ee039acf59e96197fcb84
-2026-11-04T09:35:39.7931222Z deleted: sha256:f4be26f88c84ae4994b8f72039b3a31e4177c1676751f4e51521cb99f00ba7ee
-2026-11-04T09:35:39.7932074Z deleted: sha256:3b0abdfd3c94e7bc73093f7488b4d6e7b164dfdf43193edaa6ba8df32def333a
-2026-11-04T09:35:39.7932712Z deleted: sha256:afa44dee9a0a5460f9bb4c303a6a93d323ad0d0decbf8f3dddea61b2ea31a06c
-2026-11-04T09:35:39.7948113Z deleted: sha256:b120877a8c6acddb44283da821e1eb98ad3ba9dba9954b6a89510661576ec1db
-2026-11-04T09:35:39.7948831Z deleted: sha256:a1ab8e74cca4db0e2c77a634e30586adfd4cf1e081268545aa8b185df216d11c
-2026-11-04T09:35:39.7949388Z untagged: ghcr.io/dependabot/dependabot-updater-core:latest
-2026-11-04T09:35:39.7950513Z untagged: ghcr.io/dependabot/dependabot-updater-core@sha256:57ad85c77c5f48eeb75f4e75497bb59ea3952f16107aec618947f0bf3cae584d
-2026-11-04T09:35:39.7951287Z deleted: sha256:f4aec6b5f30a94c5579d63adab17d66683d3118cbc3ac3c7aff9a5c06c6060b3
-2026-11-04T09:35:39.7952214Z deleted: sha256:9ef73ae26794fd0686554aa4399fe07748768d350d58f44cc704dec38de1e8db
-2026-11-04T09:35:39.7952790Z deleted: sha256:b934334e7dbd20f6fc725b8a8cb3ec44b959a74a816b611197434ccd51a52d63
-2026-11-04T09:35:39.7953335Z deleted: sha256:95480d49da3f4d74cd595dc74da9f4bb021f8b7be717a8a033f40288373b0c7a
-2026-11-04T09:35:39.7953925Z deleted: sha256:3087339e688b4bf6db9cf7a600d7b29d940438abf05f1461d0f50db4a12ca02d
-2026-11-04T09:35:39.7954477Z deleted: sha256:07ee710eb8e2562dd77b550027f87ba78ff4deb887a5f4ebec9be858645d7f80
-2026-11-04T09:35:39.7955017Z deleted: sha256:77eebd254f1d23d64a395d7165836d038052e21403c92df5a4fb3025e9da42f0
-2026-11-04T09:35:39.7955554Z deleted: sha256:0bd3f2c9cc2763d5a4076579d40d672a8fcf39fa425afbd6a8ec087eb6ed9edc
-2026-11-04T09:35:39.7956102Z deleted: sha256:59ba1a8423bcb2bd26c9dc08d5be3013be5c25b239f9f4a1c75923c29930452e
-2026-11-04T09:35:39.7956655Z deleted: sha256:21a6aa6d5b48a68c8375aeb8ddf6b804b99560e29fd9f5432db04e7c709e1cb0
-2026-11-04T09:35:39.7957203Z deleted: sha256:361c7ab37f39f15d5590d568f971c22baa55668dfd76e9fe60c7b216dd6e162b
-2026-11-04T09:35:39.7957739Z deleted: sha256:7a978acce86a5832ce021c8269fd903fd8d15adc0d8009e7df52766e1fdced64
-2026-11-04T09:35:39.7958290Z deleted: sha256:bec87777bc2fb2edcdf9af11df1531469e7df911309c1413082b18fcb8610278
-2026-11-04T09:35:39.7958759Z untagged: ghcr.io/github/gh-aw-firewall/agent:latest
-2026-11-04T09:35:39.7959421Z untagged: ghcr.io/github/gh-aw-firewall/agent@sha256:921e50aed7b2a67265f42ab03c7d54a32c641922cc64f0875a5ae2bcb8b37532
-2026-11-04T09:35:39.7971218Z deleted: sha256:200c0f2889185e7a2d4b0960734b33c0c52e43069fb74241a52531d614216f3e
-2026-11-04T09:35:39.7971871Z deleted: sha256:1b125d2125be6e6cfea131ab9145bb1512e7e97089171c3c6f28fc1ea5cf660e
-2026-11-04T09:35:39.7972427Z deleted: sha256:20a3d2678c83a147d1ac519b991b59808369549c5177b5a1d87944e90f6cab66
-2026-11-04T09:35:39.7973300Z deleted: sha256:7944b5986f23b186520b056b5cdc5aa4c2ea822e971000704931cf23f7540516
-2026-11-04T09:35:39.7974065Z deleted: sha256:f7a6d4e1b76978d44e0e0ab921db8640c56101fb388a9e5a65fc8af93f944247
-2026-11-04T09:35:39.7975234Z deleted: sha256:6f0aa48cf07f2c1f910e7f852bd912e5bad8a4434a72a2078603dcd9e13a0504
-2026-11-04T09:35:39.7976189Z deleted: sha256:d20eab489c26ddd2149fb937ce0904f0e18578311fcabb5cb00a0a040e56ab00
-2026-11-04T09:35:39.7977168Z deleted: sha256:4f4d0f16838cd281064848be7cf25c727dd24b7474a0c2848a3960370b3237ad
-2026-11-04T09:35:39.7978157Z deleted: sha256:2ade3d2d2c87148bb542de11ed9c65b88bb64e3ae72308668b3dfba517c81425
-2026-11-04T09:35:39.7979037Z deleted: sha256:eab216415be375a3f1ddde3d1dac447d848887d17718b23657e7f6bddd4259e5
-2026-11-04T09:35:39.7980070Z deleted: sha256:3e9d2aedcbc7d4b4761125212e0c9b1446438acb7692418aeac4380ebcc2bb00
-2026-11-04T09:35:39.7980661Z deleted: sha256:bfffcc9ff0e0260210135233aef491bee012a323750101f3b4a9f8deead9cdc0
-2026-11-04T09:35:39.7981206Z deleted: sha256:23f073d3d17b6915b5301d5848ca9cf87ca53d8ca8dc259b7bc35da652bf4a52
-2026-11-04T09:35:39.7981759Z deleted: sha256:886470a8ada2bcadfb428774037ef42b70d12b97ff992cbc81a6432253eadab1
-2026-11-04T09:35:39.7982454Z deleted: sha256:759ca0da8575801b4b2b78018bef7ad8ce666c733a6b7df77f4bcca08de01c21
-2026-11-04T09:35:39.7983429Z deleted: sha256:d2657c92ddec4255591ab2f5b9257d31bed8662f231939da1312074bc704e0ab
-2026-11-04T09:35:39.7984394Z deleted: sha256:43f936c3045122b147ae16a04f7f78acd61cd80437e26de2ddc42fe07061d125
-2026-11-04T09:35:39.7985223Z deleted: sha256:c6d1aa812940f029f129f7887e2ed0ea99dc8273566a42445c6589f7f0956bf5
-2026-11-04T09:35:39.7986097Z deleted: sha256:a2d60a7128b59194213545778b989e507fcae1e4321c12111e8db7ac2d56666a
-2026-11-04T09:35:39.7987055Z deleted: sha256:6865ad8f7a30a8966287e9d1793cadb32cf1be9d492f16d4ca99e01bea28b6d5
-2026-11-04T09:35:39.7988025Z deleted: sha256:e1605e86b381b120e04a784c916c8694e3055e62af6d947a6f7f66520fbbbef4
-2026-11-04T09:35:39.7989121Z deleted: sha256:f6e0e88dd8e11c81dba77d657b271e1ed7c33882e8f4dfaa7768cbaee94d94fc
-2026-11-04T09:35:39.7990345Z untagged: ghcr.io/github/github-mcp-server:latest
-2026-11-04T09:35:39.7991671Z untagged: ghcr.io/github/github-mcp-server@sha256:250bc6ce70788207608ef74cef4397230ff2e8481218da74d6093e4bd9101132
-2026-11-04T09:35:39.7992929Z deleted: sha256:4d955ee421ef7194cbef8a50bfe034a27d1e682875a6e8049023ab55bf80a8ec
-2026-11-04T09:35:39.7993977Z deleted: sha256:7beebe31d1d8200dde3d1d5025547bd66be6a16fb1ec36d4d6612d3c10bbe031
-2026-11-04T09:35:39.7994986Z deleted: sha256:1e1cabb4a65e50fb84bc4612619b0025e4a1d06d5e38699d1e67e5a8e4f333db
-2026-11-04T09:35:39.7995950Z deleted: sha256:86766d6a6e947f4a599c6e23307470f8f75732fc3d143ec1f3260e4406202bee
-2026-11-04T09:35:39.7996932Z deleted: sha256:2944471a0bbdfb4985f84f8d287edb5cd982d1060589e707a6cb0cbe82cdfe89
-2026-11-04T09:35:39.7997923Z deleted: sha256:5e555e7975e2202f21fb93d460d701a340ade876f3afccb70d702f1dc5ab80db
-2026-11-04T09:35:39.7998855Z deleted: sha256:2a080d78a1c5e3615170178f1c6f4c726340da9d5ff2926cb66e2fd97851da9d
-2026-11-04T09:35:39.8000184Z deleted: sha256:af4a114029fbf94a3cf75c5cfaa5e947019cd6faae4b800c9306ac9079363def
-2026-11-04T09:35:39.8000801Z deleted: sha256:c7b875d3de914680ec64ba55be5865955ec595e7370812894ee68a502e2e8391
-2026-11-04T09:35:39.8001365Z deleted: sha256:85d9b4c1ef131ee259952a35027e942f79626303ab143eff7ef00d55201bd06f
-2026-11-04T09:35:39.8002093Z deleted: sha256:492c6420fd79f4cd4e761bec1e74db6044d45adb5b073a82289af68aa3162e3f
-2026-11-04T09:35:39.8003093Z deleted: sha256:14b282df61c0316a80216cec27e753777da93de1d7e062072ef3b517f984fcf1
-2026-11-04T09:35:39.8004115Z deleted: sha256:fdaace00fc3f072b9060f703047b30a2c14d8bde7dbbf31a396802c032923732
-2026-11-04T09:35:39.8005104Z deleted: sha256:7f73eafc455b691b504d4d3c3f3c7be90e135c1d0ba4988b2cac29579cd6b567
-2026-11-04T09:35:39.8005940Z deleted: sha256:32a12b65383df6b6553c8d59f691675ca1980f8cec9c51cce163c3c8f7665a41
-2026-11-04T09:35:39.8006525Z deleted: sha256:5217b01660b515ac25ea055a8bd04a20790c7d6bd6085374b59b9081283911af
-2026-11-04T09:35:39.8007365Z deleted: sha256:7223ea1323e8c1159ec17f07d35acc27bdd1cc2bc3ed425b44ef21dac9915db0
-2026-11-04T09:35:39.8008037Z untagged: ghcr.io/github/gh-aw-firewall/api-proxy:latest
-2026-11-04T09:35:39.8008754Z untagged: ghcr.io/github/gh-aw-firewall/api-proxy@sha256:f36a9fc78aef0509ed5fa280819848cbdf099f60d7b338455ea54a5def18d6b1
-2026-11-04T09:35:39.8009490Z deleted: sha256:a98c768e5b7637fd6304e52ead38cbb5bcc19991d338a4d22d2b1b1ce9aa2fd5
-2026-11-04T09:35:39.8010548Z deleted: sha256:05e467c374f6726bd8f2fe681c7a4767fc2eb0809947c77843d494b61b5f1843
-2026-11-04T09:35:39.8011371Z deleted: sha256:aa38195a74aea620046b40847ef8a8a8853d98845c7a63cff338f0284c6bf301
-2026-11-04T09:35:39.8012061Z deleted: sha256:59d25fec560c38533c878d1a3065ef30648dbf6fd228a1141a34841222c06792
-2026-11-04T09:35:39.8012654Z deleted: sha256:1c2af7dc573ae284a75a48b580396a264dbc0d0e088960bfe3c8bc9d43e6dce3
-2026-11-04T09:35:39.8013223Z deleted: sha256:c521dfd291301c3c925083b0b0c831a9db036685f0bcb43e5125e3b32434b29b
-2026-11-04T09:35:39.8013805Z deleted: sha256:d4ef6f4be478015eae4ee2a35c7d684a239d877bddf69ad7acb4402573ecc0a8
-2026-11-04T09:35:39.8014416Z deleted: sha256:1403a4f40d7afb12e964718e02eafff685d21717ec39f42dffc591905fc304cc
-2026-11-04T09:35:39.8015386Z deleted: sha256:930366789cb044393065f3ec3b553c313f01f946b4af55247923bce3b3f567e0
-2026-11-04T09:35:39.8016421Z deleted: sha256:2c1eef2f1f5bfb979da046156c9b8d0f9032ead80dc7f0d0fa9808f276b106d7
-2026-11-04T09:35:39.8017387Z deleted: sha256:fe6fff3c2bb2a85955504fd1f79350460cee2ac988201815065909e54220a4ac
-2026-11-04T09:35:39.8018174Z deleted: sha256:060f91b0872de59eb67f7d745908a0c0caa9309f3094c9c91bf9f484a42955ca
-2026-11-04T09:35:39.8018816Z deleted: sha256:f80bf75f16280363a2e032582f2fc16d27432c5f8b723df782b6bcbfb7e27924
-2026-11-04T09:35:39.8019807Z deleted: sha256:9ac373ada57ffc27dcc3394207b9ad1d5c5f01c043a8a5402696532556e352da
-2026-11-04T09:35:39.8020523Z deleted: sha256:2f861ab5a2cf99d08875a9f545a2471c19e91c93769c3a3cc7175c530a3970ec
-2026-11-04T09:35:39.8021098Z deleted: sha256:352b00e6763d6ebaab8cb99a3bac61fc65a5a1ff5cb48d539a0c353574d7f03a
-2026-11-04T09:35:39.8021811Z untagged: ghcr.io/github/gh-aw-firewall/squid:latest
-2026-11-04T09:35:39.8023162Z untagged: ghcr.io/github/gh-aw-firewall/squid@sha256:34260cb89ea5d6d55b93ce13a5fe1772dbe8e1592e1200370160b7f5a0bd2ecd
-2026-11-04T09:35:39.8024482Z deleted: sha256:ceba3de0cc73ccb8d76055b6f4ff404a1f556c398b0c85038c5016f005d11bcb
-2026-11-04T09:35:39.8025585Z deleted: sha256:37cb58e0bfb4c148b36bdd6a1e540b0b8c2f28a8f9d281f7d2e3728c86c58d61
-2026-11-04T09:35:39.8026608Z deleted: sha256:f855a6188d1921e2c40b83e4db179844783988895a195abef6cf98bd73bf15b9
-2026-11-04T09:35:39.8027586Z deleted: sha256:72e88ce23c556a10fc021d13dc79028d769008e14542e1639438c3788cfb736d
-2026-11-04T09:35:39.8028570Z deleted: sha256:4f0183f634b4b9589f0d4ebbaa3c4fea25289e3888913b3404267afccb81751b
-2026-11-04T09:35:39.8030448Z deleted: sha256:2cf336166cfb412c1393d59cec3dc02407b9a0e7c1b0e6a5dfef1b03473270a0
-2026-11-04T09:35:39.8031536Z deleted: sha256:17b0094a813d97c34ca729739326189c9afdd4610bc44d121b69608ca549051f
-2026-11-04T09:35:39.8032574Z deleted: sha256:8ccd9236e1fc745540569864e5e03aa2976fda968ebc44d2bfbe7a2a2cc3824c
-2026-11-04T09:35:39.8033580Z deleted: sha256:74d97c428c51a828f9051a7a40a53ff1fc99e54fc30323ce36760701b0b7f711
-2026-11-04T09:35:39.8034137Z 
-2026-11-04T09:35:39.8034343Z Total reclaimed space: 2.488GB
-2026-11-04T09:35:39.8034721Z 
-2026-11-04T09:35:39.8036328Z ********************************************************************************
-2026-11-04T09:35:39.8057872Z => Docker images: Saved 2.5GiB
-2026-11-04T09:35:39.8064795Z ********************************************************************************
-2026-11-04T09:35:39.8065286Z 
-2026-11-04T09:35:39.8409182Z                total        used        free      shared  buff/cache   available
-2026-11-04T09:35:39.8410282Z Mem:            15Gi       891Mi        13Gi        45Mi       1.3Gi        14Gi
-2026-11-04T09:35:39.8411056Z Swap:             0B          0B          0B
-2026-11-04T09:35:39.8445511Z 
-2026-11-04T09:35:39.8452520Z ********************************************************************************
-2026-11-04T09:35:39.8473607Z => Swap storage: Saved 0B
-2026-11-04T09:35:39.8482238Z ********************************************************************************
-2026-11-04T09:35:39.8483026Z 
-2026-11-04T09:35:39.8551309Z 
-2026-11-04T09:35:39.8558087Z ================================================================================
-2026-11-04T09:35:39.8559128Z AFTER CLEAN-UP:
-2026-11-04T09:35:39.8559472Z 
-2026-11-04T09:35:39.8559988Z $ dh -h /
-2026-11-04T09:35:39.8560239Z 
-2026-11-04T09:35:39.8569446Z Filesystem      Size  Used Avail Use% Mounted on
-2026-11-04T09:35:39.8570260Z /dev/root       145G   36G  109G  25% /
-2026-11-04T09:35:39.8585137Z $ dh -a /
-2026-11-04T09:35:39.8585343Z 
-2026-11-04T09:35:39.8597322Z Filesystem     1K-blocks     Used Available Use% Mounted on
-2026-11-04T09:35:39.8598193Z /dev/root      151263856 37280232 113967240  25% /
-2026-11-04T09:35:39.8598771Z $ dh -a
-2026-11-04T09:35:39.8598927Z 
-2026-11-04T09:35:39.8616362Z Filesystem     1K-blocks     Used Available Use% Mounted on
-2026-11-04T09:35:39.8617019Z /dev/root      151263856 37280232 113967240  25% /
-2026-11-04T09:35:39.8617404Z devtmpfs         7429220        0   7429220   0% /dev
-2026-11-04T09:35:39.8617751Z proc                   0        0         0    - /proc
-2026-11-04T09:35:39.8618067Z sysfs                  0        0         0    - /sys
-2026-11-04T09:35:39.8618421Z securityfs             0        0         0    - /sys/kernel/security
-2026-11-04T09:35:39.8618808Z tmpfs            8183764       84   8183680   1% /dev/shm
-2026-11-04T09:35:39.8619191Z devpts                 0        0         0    - /dev/pts
-2026-11-04T09:35:39.8619876Z tmpfs            3273508     1012   3272496   1% /run
-2026-11-04T09:35:39.8620505Z tmpfs               5120        0      5120   0% /run/lock
-2026-11-04T09:35:39.8621089Z cgroup2                0        0         0    - /sys/fs/cgroup
-2026-11-04T09:35:39.8621535Z none                   0        0         0    - /sys/fs/pstore
-2026-11-04T09:35:39.8621929Z efivarfs          131072       32    131036   1% /sys/firmware/efi/efivars
-2026-11-04T09:35:39.8622681Z bpf                    0        0         0    - /sys/fs/bpf
-2026-11-04T09:35:39.8623074Z systemd-1              -        -         -    - /proc/sys/fs/binfmt_misc
-2026-11-04T09:35:39.8623503Z hugetlbfs              0        0         0    - /dev/hugepages
-2026-11-04T09:35:39.8640789Z mqueue                 0        0         0    - /dev/mqueue
-2026-11-04T09:35:39.8645213Z debugfs                0        0         0    - /sys/kernel/debug
-2026-11-04T09:35:39.8645882Z tracefs                0        0         0    - /sys/kernel/tracing
-2026-11-04T09:35:39.8646591Z fusectl                0        0         0    - /sys/fs/fuse/connections
-2026-11-04T09:35:39.8647303Z configfs               0        0         0    - /sys/kernel/config
-2026-11-04T09:35:39.8647888Z /dev/sda16        901520    86444    751948  11% /boot
-2026-11-04T09:35:39.8648244Z /dev/sda15        106832     6250    100582   6% /boot/efi
-2026-11-04T09:35:39.8648674Z binfmt_misc            0        0         0    - /proc/sys/fs/binfmt_misc
-2026-11-04T09:35:39.8649077Z tmpfs            1636752       12   1636740   1% /run/user/1001
-2026-11-04T09:35:39.8650072Z ================================================================================
-2026-11-04T09:35:39.8650724Z 
-2026-11-04T09:35:39.8650940Z 
-2026-11-04T09:35:39.8651142Z /dev/root:
-2026-11-04T09:35:39.8651291Z 
-2026-11-04T09:35:39.8651433Z ********************************************************************************
-2026-11-04T09:35:39.8669295Z => Saved 23GiB
-2026-11-04T09:35:39.8681877Z ********************************************************************************
-2026-11-04T09:35:39.8682345Z 
-2026-11-04T09:35:39.8682969Z overall:
-2026-11-04T09:35:39.8683300Z 
-2026-11-04T09:35:39.8694168Z ********************************************************************************
-2026-11-04T09:35:39.8715152Z => Saved 23GiB
-2026-11-04T09:35:39.8726915Z ********************************************************************************
-2026-11-04T09:35:39.8727376Z 
-2026-11-04T09:35:39.8797820Z ##[end-action id=__jlumbroso_free-disk-space.__run;outcome=success;conclusion=success;duration_ms=64087]
-2026-11-04T09:35:39.8855711Z ##[group]Run # la machine n'a que 8 Go : sans échange, Unity est tué pendant les gros imports / la construction Android
-2026-11-04T09:35:39.8856543Z [36;1m# la machine n'a que 8 Go : sans échange, Unity est tué pendant les gros imports / la construction Android[0m
-2026-11-04T09:35:39.8857056Z [36;1msudo swapoff -a || true[0m
-2026-11-04T09:35:39.8857697Z [36;1msudo fallocate -l 16G /mnt/korvalune.swap && sudo chmod 600 /mnt/korvalune.swap && sudo mkswap /mnt/korvalune.swap && sudo swapon /mnt/korvalune.swap[0m
-2026-11-04T09:35:39.8858347Z [36;1mfree -h[0m
-2026-11-04T09:35:39.8878084Z shell: /usr/bin/bash -e {0}
-2026-11-04T09:35:39.8878357Z ##[endgroup]
-2026-11-04T09:35:39.9415219Z Setting up swapspace version 1, size = 16 GiB (17179865088 bytes)
-2026-11-04T09:35:39.9415881Z no label, UUID=7dbd7faa-2874-4703-94f7-706695652ec3
-2026-11-04T09:35:39.9542420Z                total        used        free      shared  buff/cache   available
-2026-11-04T09:35:39.9542998Z Mem:            15Gi       902Mi        13Gi        45Mi       1.3Gi        14Gi
-2026-11-04T09:35:39.9543364Z Swap:           15Gi          0B        15Gi
-2026-11-04T09:35:39.9685693Z ##[group]Run actions/checkout@v4
-2026-11-04T09:35:39.9685996Z with:
-2026-11-04T09:35:39.9686248Z   repository: sebastienexp-blip/KorvaluneUnity
-2026-11-04T09:35:39.9688674Z   token: ***
-2026-11-04T09:35:39.9688892Z   ssh-strict: true
-2026-11-04T09:35:39.9689105Z   ssh-user: git
-2026-11-04T09:35:39.9689329Z   persist-credentials: true
-2026-11-04T09:35:39.9689911Z   clean: true
-2026-11-04T09:35:39.9690138Z   sparse-checkout-cone-mode: true
-2026-11-04T09:35:39.9690396Z   fetch-depth: 1
-2026-11-04T09:35:39.9690605Z   fetch-tags: false
-2026-11-04T09:35:39.9690817Z   show-progress: true
-2026-11-04T09:35:39.9691046Z   lfs: false
-2026-11-04T09:35:39.9691236Z   submodules: false
-2026-11-04T09:35:39.9691454Z   set-safe-directory: true
-2026-11-04T09:35:39.9691708Z   allow-unsafe-pr-checkout: false
-2026-11-04T09:35:39.9691961Z ##[endgroup]
-2026-11-04T09:35:40.2663313Z Syncing repository: sebastienexp-blip/KorvaluneUnity
-2026-11-04T09:35:40.2665794Z ##[group]Getting Git version info
-2026-11-04T09:35:40.2666350Z Working directory is '/home/runner/work/KorvaluneUnity/KorvaluneUnity'
-2026-11-04T09:35:40.2667026Z [command]/usr/bin/git version
-2026-11-04T09:35:40.2750099Z git version 2.56.0
-2026-11-04T09:35:40.2775698Z ##[endgroup]
-2026-11-04T09:35:40.2792263Z Temporarily overriding HOME='/home/runner/work/_temp/2f203922-8ddf-44a3-9d32-b94f63639a66' before making global git config changes
-2026-11-04T09:35:40.2793656Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-04T09:35:40.2799151Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-11-04T09:35:40.2865463Z Deleting the contents of '/home/runner/work/KorvaluneUnity/KorvaluneUnity'
-2026-11-04T09:35:40.2871897Z ##[group]Initializing the repository
-2026-11-04T09:35:40.2877295Z [command]/usr/bin/git init /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-11-04T09:35:40.2997654Z hint: Using 'master' as the name for the initial branch. This default branch name
-2026-11-04T09:35:40.2998639Z hint: will change to "main" in Git 3.0. To configure the initial branch name
-2026-11-04T09:35:40.3000138Z hint: to use in all of your new repositories, which will suppress this warning,
-2026-11-04T09:35:40.3000982Z hint: call:
-2026-11-04T09:35:40.3001470Z hint:
-2026-11-04T09:35:40.3002196Z hint: 	git config --global init.defaultBranch <name>
-2026-11-04T09:35:40.3002744Z hint:
-2026-11-04T09:35:40.3003257Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-2026-11-04T09:35:40.3004123Z hint: 'development'. The just-created branch can be renamed via this command:
-2026-11-04T09:35:40.3005072Z hint:
-2026-11-04T09:35:40.3005406Z hint: 	git branch -m <name>
-2026-11-04T09:35:40.3005789Z hint:
-2026-11-04T09:35:40.3006251Z hint: Disable this message with "git config set advice.defaultBranchName false"
-2026-11-04T09:35:40.3011383Z Initialized empty Git repository in /home/runner/work/KorvaluneUnity/KorvaluneUnity/.git/
-2026-11-04T09:35:40.3025783Z [command]/usr/bin/git remote add origin https://github.com/sebastienexp-blip/KorvaluneUnity
-2026-11-04T09:35:40.3080016Z ##[endgroup]
-2026-11-04T09:35:40.3080694Z ##[group]Disabling automatic garbage collection
-2026-11-04T09:35:40.3086187Z [command]/usr/bin/git config --local gc.auto 0
-2026-11-04T09:35:40.3139001Z ##[endgroup]
-2026-11-04T09:35:40.3140358Z ##[group]Setting up auth
-2026-11-04T09:35:40.3150738Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-04T09:35:40.3196321Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-04T09:35:40.3682926Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-04T09:35:40.3729065Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-04T09:35:40.3985071Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-04T09:35:40.4034235Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-04T09:35:40.4290281Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2026-11-04T09:35:40.4340629Z ##[endgroup]
-2026-11-04T09:35:40.4341214Z ##[group]Fetching the repository
-2026-11-04T09:35:40.4353789Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8278716f730c502ae5eb8bcf859406fa404449e3:refs/remotes/origin/main
-2026-11-04T09:35:48.8384831Z ##[error]The operation was canceled.
-2026-11-04T09:35:48.8478105Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
-2026-11-04T09:35:48.8478756Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
-2026-11-04T09:35:48.8479482Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
-2026-11-04T09:35:48.8480499Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
-2026-11-04T09:35:48.8481134Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
-2026-11-04T09:35:48.8481754Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
-2026-11-04T09:35:48.8500006Z shell: /usr/bin/bash -e {0}
-2026-11-04T09:35:48.8500295Z ##[endgroup]
-2026-11-04T09:35:48.9057324Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md
-2026-11-04T09:35:48.9057879Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true; rm -f ci-report.md[0m
-2026-11-04T09:35:48.9058565Z [36;1m# licence de l'éditeur précédent (dossier personnel partagé entre les étapes) : sinon l'activation suivante échoue[0m
-2026-11-04T09:35:48.9059308Z [36;1msudo find "$RUNNER_TEMP/_github_home" -name "Unity_lic.ulf" -delete 2>/dev/null || true[0m
-2026-11-04T09:35:48.9060336Z [36;1m# éditeur précédent arrêté par la limite de temps : conteneur encore actif et verrou du projet[0m
-2026-11-04T09:35:48.9061002Z [36;1mdocker ps -q | xargs -r docker kill || true; sudo rm -f Temp/UnityLockfile || true[0m
-2026-11-04T09:35:48.9080008Z shell: /usr/bin/bash -e {0}
-2026-11-04T09:35:48.9080435Z ##[endgroup]
-2026-11-04T09:35:48.9593391Z ##[group]Run sudo chown -R "$(id -u):$(id -g)" . || true
-2026-11-04T09:35:48.9593845Z [36;1msudo chown -R "$(id -u):$(id -g)" . || true[0m
-2026-11-04T09:35:48.9594358Z [36;1mif [ ! -f ci-report.md ]; then[0m
-2026-11-04T09:35:48.9594800Z [36;1m  { echo "# Rapport absent : Unity s'est arrêté avant la fin"; echo; echo '```';[0m
-2026-11-04T09:35:48.9595540Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-2026-11-04T09:35:48.9596252Z [36;1m    echo '```'; echo; echo "## Erreurs de compilation (Library/Bee, Logs)"; echo '```';[0m
-2026-11-04T09:35:48.9597138Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-2026-11-04T09:35:48.9598355Z [36;1m    echo '```'; echo; echo "## Dernières étapes (ci-out/progress.log)"; echo '```'; tail -150 ci-out/progress.log 2>/dev/null || echo "(aucune : la méthode CI n'a pas démarré)"; echo '```'; } > ci-report.md || true[0m
-2026-11-04T09:35:48.9599197Z [36;1mfi[0m
-2026-11-04T09:35:48.9599844Z [36;1mM=$(head -c 60000 ci-report.md | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')[0m
-2026-11-04T09:35:48.9600674Z [36;1mif [ "skipped" = "success" ]; then echo "::notice title=Intégration Unity::${M}"; else echo "::error title=Intégration Unity::${M}"; fi[0m
-2026-11-04T09:35:48.9601272Z [36;1mmkdir -p ci-out[0m
-2026-11-04T09:35:48.9601683Z [36;1mtail -c 400000 unity-editor.log > ci-out/unity-editor-tail.log 2>/dev/null || true[0m
-2026-11-04T09:35:48.9620323Z shell: /usr/bin/bash -e {0}
-2026-11-04T09:35:48.9620597Z ##[endgroup]
-2026-11-04T09:35:48.9925807Z ##[error]# Rapport absent : Unity s'est arrêté avant la fin
-
-```
-```
-
-## Erreurs de compilation (Library/Bee, Logs)
-```
-```
-
-## Dernières étapes (ci-out/progress.log)
-```
-(aucune : la méthode CI n'a pas démarré)
-```
-2026-11-04T09:35:48.9967685Z ##[group]Run git config user.name "korvalune-ci"
-2026-11-04T09:35:48.9968114Z [36;1mgit config user.name "korvalune-ci"[0m
-2026-11-04T09:35:48.9968467Z [36;1mgit config user.email "ci@korvalune.invalid"[0m
-2026-11-04T09:35:48.9968989Z [36;1mgit add -A Assets ProjectSettings Packages ci-report.md ci-out 2>/dev/null || true[0m
-2026-11-04T09:35:48.9969945Z [36;1mif git diff --cached --quiet; then echo "rien à renvoyer"; exit 0; fi[0m
-2026-11-04T09:35:48.9970514Z [36;1mgit commit -m "CI Unity : fichiers générés et rapport [skip ci]"[0m
-2026-11-04T09:35:48.9971138Z [36;1mfor i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done[0m
-2026-11-04T09:35:48.9989766Z shell: /usr/bin/bash -e {0}
-2026-11-04T09:35:48.9990036Z ##[endgroup]
-2026-11-04T09:35:49.0121991Z rien à renvoyer
-2026-11-04T09:35:49.0833574Z ##[group]Run actions/cache/save@v4
-2026-11-04T09:35:49.0833877Z with:
-2026-11-04T09:35:49.0834083Z   path: Library
-2026-11-04T09:35:49.0834303Z   key: Library-Forge--41808293683
-2026-11-04T09:35:49.0834575Z   enableCrossOsArchive: false
-2026-11-04T09:35:49.0834826Z ##[endgroup]
-2026-11-04T09:35:49.2011034Z (node:2545) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-04T09:35:49.2012313Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-04T09:35:49.2143950Z [warning]Path Validation Error: Path(s) specified in the action for caching do(es) not exist, hence no cache is being saved.
-2026-11-04T09:35:49.2148820Z ##[warning]Cache save failed.
-2026-11-04T09:35:49.2242231Z ##[group]Run if [ "skipped" = "success" ]; then exit 0; fi
-2026-11-04T09:35:49.2242687Z [36;1mif [ "skipped" = "success" ]; then exit 0; fi[0m
-2026-11-04T09:35:49.2243160Z [36;1mecho "::error::Échec de l'intégration Unity (voir ci-report.md)"; exit 1[0m
-2026-11-04T09:35:49.2261284Z shell: /usr/bin/bash -e {0}
-2026-11-04T09:35:49.2261545Z ##[endgroup]
-2026-11-04T09:35:49.2302750Z ##[error]Échec de l'intégration Unity (voir ci-report.md)
-2026-11-04T09:35:49.2305439Z ##[error]Process completed with exit code 1.
-2026-11-04T09:35:49.2405804Z Post job cleanup.
-2026-11-04T09:35:49.3331740Z [command]/usr/bin/git version
-2026-11-04T09:35:49.3385948Z git version 2.56.0
-2026-11-04T09:35:49.3432153Z Temporarily overriding HOME='/home/runner/work/_temp/f43f9c9f-a27d-4276-a8d5-2806934842d7' before making global git config changes
-2026-11-04T09:35:49.3433572Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-04T09:35:49.3438322Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-11-04T09:35:49.3493536Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-04T09:35:49.3587212Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-04T09:35:49.3887243Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-04T09:35:49.3935528Z http.https://github.com/.extraheader
-2026-11-04T09:35:49.3950812Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-2026-11-04T09:35:49.4017837Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-04T09:35:49.4323367Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-04T09:35:49.4376028Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-04T09:35:49.4845309Z Cleaning up orphan processes
-2026-11-04T09:35:49.5145230Z Terminate orphan process: pid (2464) (git)
-2026-11-04T09:35:49.5221110Z Terminate orphan process: pid (2465) (git)
-2026-11-04T09:35:49.5295883Z Terminate orphan process: pid (2466) (git-remote-https)
-2026-11-04T09:35:49.5384154Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache/save@v4, actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-11-04T10:23:42.7559767Z - ✅ **Budget de triangles** 192 triangles, 384 sommets (max 40000)
+2026-11-04T10:23:42.7560601Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Sol0.prefab
+2026-11-04T10:23:42.7561593Z - ✅ **Échelle (hauteur)** 0.269 m (attendu 0.2558983–0.2828349), boîte 4.00×0.27×4.00, pieds à y=-0.260
+2026-11-04T10:23:42.7562725Z - ✅ **Matériau D_Flag** shader Korvalune/PBR Monde, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7563877Z - ✅ **Matériau W_Dark** shader Korvalune/PBR Monde, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7564675Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7564897Z 
+2026-11-04T10:23:42.7565044Z ## D_Sol1.fbx (prop, rig None)
+2026-11-04T10:23:42.7565673Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Sol1/D_Sol1.fbx
+2026-11-04T10:23:42.7566322Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7566967Z - ✅ **Budget de triangles** 204 triangles, 408 sommets (max 40000)
+2026-11-04T10:23:42.7567771Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Sol1.prefab
+2026-11-04T10:23:42.7568770Z - ✅ **Échelle (hauteur)** 0.271 m (attendu 0.2575258–0.2846338), boîte 4.00×0.27×4.00, pieds à y=-0.260
+2026-11-04T10:23:42.7570267Z - ✅ **Matériau D_Flag** shader Korvalune/PBR Monde, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7571317Z - ✅ **Matériau W_Dark** shader Korvalune/PBR Monde, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7572100Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7572367Z 
+2026-11-04T10:23:42.7572531Z ## D_Sol2.fbx (prop, rig None)
+2026-11-04T10:23:42.7573168Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Sol2/D_Sol2.fbx
+2026-11-04T10:23:42.7573826Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7574481Z - ✅ **Budget de triangles** 180 triangles, 360 sommets (max 40000)
+2026-11-04T10:23:42.7575288Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Sol2.prefab
+2026-11-04T10:23:42.7576302Z - ✅ **Échelle (hauteur)** 0.268 m (attendu 0.2549626–0.2818007), boîte 4.00×0.27×4.00, pieds à y=-0.260
+2026-11-04T10:23:42.7577423Z - ✅ **Matériau D_Flag** shader Korvalune/PBR Monde, base D_Flag_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7578590Z - ✅ **Matériau W_Dark** shader Korvalune/PBR Monde, base W_Dark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7579697Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7579910Z 
+2026-11-04T10:23:42.7580092Z ## D_Torche.fbx (prop, rig None)
+2026-11-04T10:23:42.7580781Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Crypte/D_Torche/D_Torche.fbx
+2026-11-04T10:23:42.7581457Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7582114Z - ✅ **Budget de triangles** 78 triangles, 108 sommets (max 40000)
+2026-11-04T10:23:42.7582942Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Crypte/D_Torche.prefab
+2026-11-04T10:23:42.7583986Z - ✅ **Échelle (hauteur)** 0.550 m (attendu 0.5225–0.5775), boîte 0.18×0.55×0.33, pieds à y=1.750
+2026-11-04T10:23:42.7585042Z - ✅ **Matériau D_Iron** shader Korvalune/PBR Monde, base D_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7586203Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7587000Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7587204Z 
+2026-11-04T10:23:42.7587371Z ## Pin0.fbx (prop, rig None)
+2026-11-04T10:23:42.7587956Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin0/Pin0.fbx
+2026-11-04T10:23:42.7588580Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7589335Z - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
+2026-11-04T10:23:42.7590106Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin0.prefab
+2026-11-04T10:23:42.7591047Z - ✅ **Échelle (hauteur)** 11.034 m (attendu 10.4823–11.5857), boîte 6.63×11.03×6.83, pieds à y=0.000
+2026-11-04T10:23:42.7592134Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7593403Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7594277Z - ✅ **Collider** capsule
+2026-11-04T10:23:42.7594525Z 
+2026-11-04T10:23:42.7594716Z ## Pin0_LOD1.fbx (prop, rig None)
+2026-11-04T10:23:42.7595358Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin0_LOD1/Pin0_LOD1.fbx
+2026-11-04T10:23:42.7596008Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7596665Z - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
+2026-11-04T10:23:42.7597448Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin0_LOD1.prefab
+2026-11-04T10:23:42.7598400Z - ✅ **Échelle (hauteur)** 11.034 m (attendu 10.4823–11.5857), boîte 6.77×11.03×6.90, pieds à y=0.000
+2026-11-04T10:23:42.7599625Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7600936Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7601804Z - ✅ **Collider** capsule
+2026-11-04T10:23:42.7602052Z 
+2026-11-04T10:23:42.7602226Z ## Pin1.fbx (prop, rig None)
+2026-11-04T10:23:42.7602916Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin1/Pin1.fbx
+2026-11-04T10:23:42.7603552Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7604206Z - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
+2026-11-04T10:23:42.7605023Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin1.prefab
+2026-11-04T10:23:42.7605962Z - ✅ **Échelle (hauteur)** 13.034 m (attendu 12.3823–13.6857), boîte 6.48×13.03×6.69, pieds à y=0.000
+2026-11-04T10:23:42.7607037Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7608382Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7609554Z - ✅ **Collider** capsule
+2026-11-04T10:23:42.7609793Z 
+2026-11-04T10:23:42.7609971Z ## Pin1_LOD1.fbx (prop, rig None)
+2026-11-04T10:23:42.7610593Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin1_LOD1/Pin1_LOD1.fbx
+2026-11-04T10:23:42.7611269Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7611897Z - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
+2026-11-04T10:23:42.7612696Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin1_LOD1.prefab
+2026-11-04T10:23:42.7613657Z - ✅ **Échelle (hauteur)** 13.034 m (attendu 12.3823–13.6857), boîte 6.67×13.03×6.67, pieds à y=0.000
+2026-11-04T10:23:42.7614727Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7615992Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7616941Z - ✅ **Collider** capsule
+2026-11-04T10:23:42.7617179Z 
+2026-11-04T10:23:42.7617344Z ## Pin2.fbx (prop, rig None)
+2026-11-04T10:23:42.7617903Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2/Pin2.fbx
+2026-11-04T10:23:42.7618529Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7619358Z - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
+2026-11-04T10:23:42.7620150Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2.prefab
+2026-11-04T10:23:42.7621063Z - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.61×15.03×6.84, pieds à y=0.000
+2026-11-04T10:23:42.7622163Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7623438Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7624303Z - ✅ **Collider** capsule
+2026-11-04T10:23:42.7624556Z 
+2026-11-04T10:23:42.7624731Z ## Pin2_LOD1.fbx (prop, rig None)
+2026-11-04T10:23:42.7625352Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2_LOD1/Pin2_LOD1.fbx
+2026-11-04T10:23:42.7626024Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7626652Z - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
+2026-11-04T10:23:42.7627470Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2_LOD1.prefab
+2026-11-04T10:23:42.7628408Z - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.79×15.03×6.74, pieds à y=0.000
+2026-11-04T10:23:42.7629635Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7630930Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7631797Z - ✅ **Collider** capsule
+2026-11-04T10:23:42.7632039Z 
+2026-11-04T10:23:42.7632210Z ## Rocher0.fbx (prop, rig None)
+2026-11-04T10:23:42.7632827Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher0/Rocher0.fbx
+2026-11-04T10:23:42.7633489Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7634126Z - ✅ **Budget de triangles** 736 triangles, 588 sommets (max 60000)
+2026-11-04T10:23:42.7634928Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher0.prefab
+2026-11-04T10:23:42.7636020Z - ✅ **Échelle (hauteur)** 0.713 m (attendu 0.6775863–0.7489111), boîte 1.37×0.71×1.38, pieds à y=-0.339
+2026-11-04T10:23:42.7637147Z - ✅ **Matériau W_Rock** shader Korvalune/PBR Monde, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7637979Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7638221Z 
+2026-11-04T10:23:42.7638392Z ## Rocher1.fbx (prop, rig None)
+2026-11-04T10:23:42.7639010Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher1/Rocher1.fbx
+2026-11-04T10:23:42.7639750Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7640396Z - ✅ **Budget de triangles** 736 triangles, 583 sommets (max 60000)
+2026-11-04T10:23:42.7641179Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher1.prefab
+2026-11-04T10:23:42.7642142Z - ✅ **Échelle (hauteur)** 1.337 m (attendu 1.269715–1.403369), boîte 2.39×1.34×1.90, pieds à y=-0.620
+2026-11-04T10:23:42.7643241Z - ✅ **Matériau W_Rock** shader Korvalune/PBR Monde, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7644028Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7644257Z 
+2026-11-04T10:23:42.7644408Z ## Rocher2.fbx (prop, rig None)
+2026-11-04T10:23:42.7645019Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
+2026-11-04T10:23:42.7645663Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7646315Z - ✅ **Budget de triangles** 800 triangles, 721 sommets (max 60000)
+2026-11-04T10:23:42.7647082Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
+2026-11-04T10:23:42.7648039Z - ✅ **Échelle (hauteur)** 1.484 m (attendu 1.409374–1.557729), boîte 3.57×1.48×3.09, pieds à y=-0.779
+2026-11-04T10:23:42.7649281Z - ✅ **Matériau W_Rock** shader Korvalune/PBR Monde, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7650067Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7650292Z 
+2026-11-04T10:23:42.7650474Z ## T_Troncon_0_0.fbx (prop, rig None)
+2026-11-04T10:23:42.7651232Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_0/T_Troncon_0_0.fbx
+2026-11-04T10:23:42.7652000Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7652655Z - ✅ **Budget de triangles** 40223 triangles, 27348 sommets (max 60000)
+2026-11-04T10:23:42.7653568Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_0.prefab
+2026-11-04T10:23:42.7654603Z - ✅ **Échelle (hauteur)** 9.882 m (attendu 8.893484–10.86981), boîte 51.60×9.88×51.58, pieds à y=-3.133
+2026-11-04T10:23:42.7655725Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7656915Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7658051Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7659319Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7660562Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7661783Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7663115Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7663967Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7664198Z 
+2026-11-04T10:23:42.7664379Z ## T_Troncon_0_1.fbx (prop, rig None)
+2026-11-04T10:23:42.7665145Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_1/T_Troncon_0_1.fbx
+2026-11-04T10:23:42.7665920Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7666581Z - ✅ **Budget de triangles** 28133 triangles, 19458 sommets (max 60000)
+2026-11-04T10:23:42.7667508Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_1.prefab
+2026-11-04T10:23:42.7668691Z - ✅ **Échelle (hauteur)** 11.108 m (attendu 9.997091–12.21867), boîte 44.14×11.11×51.66, pieds à y=-6.546
+2026-11-04T10:23:42.7669977Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7671147Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7672318Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7673470Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7674843Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7676063Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7677281Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7678114Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7678344Z 
+2026-11-04T10:23:42.7678498Z ## T_Troncon_0_2.fbx (prop, rig None)
+2026-11-04T10:23:42.7679339Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_2/T_Troncon_0_2.fbx
+2026-11-04T10:23:42.7680012Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7680694Z - ✅ **Budget de triangles** 47478 triangles, 32621 sommets (max 60000)
+2026-11-04T10:23:42.7681574Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_2.prefab
+2026-11-04T10:23:42.7682654Z - ✅ **Échelle (hauteur)** 12.344 m (attendu 11.10972–13.57855), boîte 51.25×12.34×51.54, pieds à y=-10.292
+2026-11-04T10:23:42.7683781Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7684948Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7686097Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7687222Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7688476Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7689854Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7691181Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7692449Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7693260Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7693488Z 
+2026-11-04T10:23:42.7693787Z ## T_Troncon_0_3.fbx (prop, rig None)
+2026-11-04T10:23:42.7694526Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_3/T_Troncon_0_3.fbx
+2026-11-04T10:23:42.7695290Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7695999Z - ✅ **Budget de triangles** 34716 triangles, 24405 sommets (max 60000)
+2026-11-04T10:23:42.7696898Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_3.prefab
+2026-11-04T10:23:42.7697937Z - ✅ **Échelle (hauteur)** 13.776 m (attendu 12.39875–15.15403), boîte 53.29×13.78×51.90, pieds à y=-15.585
+2026-11-04T10:23:42.7699212Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7700421Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7701560Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7702728Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7703926Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7705143Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7706327Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7707624Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7708533Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7708740Z 
+2026-11-04T10:23:42.7708919Z ## T_Troncon_0_4.fbx (prop, rig None)
+2026-11-04T10:23:42.7709952Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_4/T_Troncon_0_4.fbx
+2026-11-04T10:23:42.7710704Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7711396Z - ✅ **Budget de triangles** 13871 triangles, 9306 sommets (max 60000)
+2026-11-04T10:23:42.7712276Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_4.prefab
+2026-11-04T10:23:42.7713359Z - ✅ **Échelle (hauteur)** 7.752 m (attendu 6.976654–8.527021), boîte 38.04×7.75×25.31, pieds à y=-15.585
+2026-11-04T10:23:42.7714475Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7715652Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7716822Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7717963Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7719287Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7720466Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7721676Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7722932Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7723776Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7724003Z 
+2026-11-04T10:23:42.7724184Z ## T_Troncon_0_m1.fbx (prop, rig None)
+2026-11-04T10:23:42.7724946Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_m1/T_Troncon_0_m1.fbx
+2026-11-04T10:23:42.7725720Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7726359Z - ✅ **Budget de triangles** 492 triangles, 362 sommets (max 60000)
+2026-11-04T10:23:42.7727255Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_m1.prefab
+2026-11-04T10:23:42.7738343Z - ✅ **Échelle (hauteur)** 7.372 m (attendu 6.634953–8.109386), boîte 21.70×7.37×16.81, pieds à y=-0.518
+2026-11-04T10:23:42.7740023Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7741277Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7742441Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7743210Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7743442Z 
+2026-11-04T10:23:42.7743635Z ## T_Troncon_1_0.fbx (prop, rig None)
+2026-11-04T10:23:42.7744413Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_0/T_Troncon_1_0.fbx
+2026-11-04T10:23:42.7745161Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7745831Z - ✅ **Budget de triangles** 11445 triangles, 7652 sommets (max 60000)
+2026-11-04T10:23:42.7746727Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_0.prefab
+2026-11-04T10:23:42.7747788Z - ✅ **Échelle (hauteur)** 8.305 m (attendu 7.474657–9.135691), boîte 25.26×8.31×36.17, pieds à y=-2.999
+2026-11-04T10:23:42.7748903Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7750194Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7751344Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7752560Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7753722Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7754944Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7756309Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7757137Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7757371Z 
+2026-11-04T10:23:42.7757527Z ## T_Troncon_1_1.fbx (prop, rig None)
+2026-11-04T10:23:42.7758285Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_1/T_Troncon_1_1.fbx
+2026-11-04T10:23:42.7759029Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7759800Z - ✅ **Budget de triangles** 9665 triangles, 7156 sommets (max 60000)
+2026-11-04T10:23:42.7760712Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_1.prefab
+2026-11-04T10:23:42.7761755Z - ✅ **Échelle (hauteur)** 10.297 m (attendu 9.267158–11.32653), boîte 29.13×10.30×50.03, pieds à y=-5.632
+2026-11-04T10:23:42.7762885Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7764070Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7765230Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7766367Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7767533Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7768748Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7770127Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7770969Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7771177Z 
+2026-11-04T10:23:42.7771352Z ## T_Troncon_1_2.fbx (prop, rig None)
+2026-11-04T10:23:42.7772210Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_2/T_Troncon_1_2.fbx
+2026-11-04T10:23:42.7772955Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7773635Z - ✅ **Budget de triangles** 3002 triangles, 2080 sommets (max 60000)
+2026-11-04T10:23:42.7774557Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_2.prefab
+2026-11-04T10:23:42.7775612Z - ✅ **Échelle (hauteur)** 7.842 m (attendu 7.058225–8.626719), boîte 29.51×7.84×27.48, pieds à y=-5.884
+2026-11-04T10:23:42.7776713Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7777898Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7779047Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7780291Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7781522Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7782336Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7782561Z 
+2026-11-04T10:23:42.7782735Z ## T_Troncon_1_3.fbx (prop, rig None)
+2026-11-04T10:23:42.7783477Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_3/T_Troncon_1_3.fbx
+2026-11-04T10:23:42.7784240Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7784890Z - ✅ **Budget de triangles** 2386 triangles, 1870 sommets (max 60000)
+2026-11-04T10:23:42.7785839Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_3.prefab
+2026-11-04T10:23:42.7786887Z - ✅ **Échelle (hauteur)** 7.915 m (attendu 7.12352–8.706525), boîte 19.69×7.92×38.79, pieds à y=-15.271
+2026-11-04T10:23:42.7787985Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7789253Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7790400Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7791573Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7792711Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7793926Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7795200Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7796010Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7796232Z 
+2026-11-04T10:23:42.7796406Z ## T_Troncon_1_4.fbx (prop, rig None)
+2026-11-04T10:23:42.7797150Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_4/T_Troncon_1_4.fbx
+2026-11-04T10:23:42.7797913Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7798555Z - ✅ **Budget de triangles** 2359 triangles, 1663 sommets (max 60000)
+2026-11-04T10:23:42.7799600Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_4.prefab
+2026-11-04T10:23:42.7800663Z - ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.19, pieds à y=-15.588
+2026-11-04T10:23:42.7801797Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7802974Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7804117Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7805362Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7806564Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7807963Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7808781Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7809010Z 
+2026-11-04T10:23:42.7809270Z ## T_Troncon_m1_0.fbx (prop, rig None)
+2026-11-04T10:23:42.7810053Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_0/T_Troncon_m1_0.fbx
+2026-11-04T10:23:42.7810843Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7811510Z - ✅ **Budget de triangles** 2564 triangles, 1891 sommets (max 60000)
+2026-11-04T10:23:42.7812403Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_0.prefab
+2026-11-04T10:23:42.7813462Z - ✅ **Échelle (hauteur)** 8.249 m (attendu 7.424075–9.073869), boîte 17.66×8.25×28.55, pieds à y=-0.857
+2026-11-04T10:23:42.7814575Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7815748Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7816894Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7818052Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7819330Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7820623Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7821873Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7822704Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7822927Z 
+2026-11-04T10:23:42.7823101Z ## T_Troncon_m1_2.fbx (prop, rig None)
+2026-11-04T10:23:42.7823847Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_2/T_Troncon_m1_2.fbx
+2026-11-04T10:23:42.7824625Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7825261Z - ✅ **Budget de triangles** 573 triangles, 453 sommets (max 60000)
+2026-11-04T10:23:42.7826146Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_2.prefab
+2026-11-04T10:23:42.7827181Z - ✅ **Échelle (hauteur)** 8.029 m (attendu 7.225704–8.831416), boîte 15.16×8.03×34.64, pieds à y=-8.063
+2026-11-04T10:23:42.7828306Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7829568Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7830735Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7831890Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7832659Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7832887Z 
+2026-11-04T10:23:42.7833061Z ## T_Troncon_m1_3.fbx (prop, rig None)
+2026-11-04T10:23:42.7833812Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_3/T_Troncon_m1_3.fbx
+2026-11-04T10:23:42.7834581Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7835211Z - ✅ **Budget de triangles** 12 triangles, 27 sommets (max 60000)
+2026-11-04T10:23:42.7836104Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_3.prefab
+2026-11-04T10:23:42.7837150Z - ✅ **Échelle (hauteur)** 1.981 m (attendu 1.783069–2.179307), boîte 8.95×1.98×6.48, pieds à y=-3.652
+2026-11-04T10:23:42.7838233Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7839200Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7839422Z 
+2026-11-04T10:23:42.7839606Z ## T_Troncon_m1_m1.fbx (prop, rig None)
+2026-11-04T10:23:42.7840407Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_m1/T_Troncon_m1_m1.fbx
+2026-11-04T10:23:42.7841220Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7841882Z - ✅ **Budget de triangles** 289 triangles, 197 sommets (max 60000)
+2026-11-04T10:23:42.7842762Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_m1.prefab
+2026-11-04T10:23:42.7843824Z - ✅ **Échelle (hauteur)** 7.828 m (attendu 7.045424–8.611073), boîte 16.62×7.83×17.46, pieds à y=-0.524
+2026-11-04T10:23:42.7844932Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7846110Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7847270Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7848033Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7848257Z 
+2026-11-04T10:23:42.7848429Z ## M_Banc.fbx (prop, rig None)
+2026-11-04T10:23:42.7849050Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banc/M_Banc.fbx
+2026-11-04T10:23:42.7849821Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7850456Z - ✅ **Budget de triangles** 36 triangles, 72 sommets (max 40000)
+2026-11-04T10:23:42.7851282Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banc.prefab
+2026-11-04T10:23:42.7852282Z - ✅ **Échelle (hauteur)** 0.500 m (attendu 0.475–0.525), boîte 1.80×0.50×0.45, pieds à y=0.000
+2026-11-04T10:23:42.7853350Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7854130Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7854407Z 
+2026-11-04T10:23:42.7854592Z ## M_Banniere.fbx (prop, rig None)
+2026-11-04T10:23:42.7855311Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banniere/M_Banniere.fbx
+2026-11-04T10:23:42.7856009Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7856653Z - ✅ **Budget de triangles** 60 triangles, 99 sommets (max 40000)
+2026-11-04T10:23:42.7857489Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banniere.prefab
+2026-11-04T10:23:42.7858446Z - ✅ **Échelle (hauteur)** 6.000 m (attendu 5.7–6.3), boîte 1.21×6.00×0.12, pieds à y=0.000
+2026-11-04T10:23:42.7859606Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7860862Z - ✅ **Matériau T_ClothRed** shader Korvalune/PBR Monde, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7862141Z - ✅ **Matériau T_ClothCream** shader Korvalune/PBR Monde, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7863000Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7863226Z 
+2026-11-04T10:23:42.7863421Z ## M_Caisses.fbx (prop, rig None)
+2026-11-04T10:23:42.7864085Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Caisses/M_Caisses.fbx
+2026-11-04T10:23:42.7864791Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7865435Z - ✅ **Budget de triangles** 324 triangles, 648 sommets (max 40000)
+2026-11-04T10:23:42.7866274Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Caisses.prefab
+2026-11-04T10:23:42.7867228Z - ✅ **Échelle (hauteur)** 1.620 m (attendu 1.539–1.701), boîte 2.06×1.62×1.16, pieds à y=-0.010
+2026-11-04T10:23:42.7868305Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7869602Z - ✅ **Matériau T_Timber** shader Korvalune/PBR Monde, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7870434Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7870659Z 
+2026-11-04T10:23:42.7870836Z ## M_Charrette.fbx (prop, rig None)
+2026-11-04T10:23:42.7871635Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Charrette/M_Charrette.fbx
+2026-11-04T10:23:42.7872372Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7873002Z - ✅ **Budget de triangles** 396 triangles, 660 sommets (max 40000)
+2026-11-04T10:23:42.7873915Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Charrette.prefab
+2026-11-04T10:23:42.7874908Z - ✅ **Échelle (hauteur)** 1.475 m (attendu 1.40125–1.54875), boîte 2.04×1.48×4.39, pieds à y=0.000
+2026-11-04T10:23:42.7876001Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7877171Z - ✅ **Matériau T_Iron** shader Korvalune/PBR Monde, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7878330Z - ✅ **Matériau T_Hay** shader Korvalune/PBR Monde, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7879084Z - ✅ **Collider** mesh
+2026-11-04T10:23:42.7879404Z 
+2026-11-04T10:23:42.7879593Z ## M_Etal0.fbx (prop, rig None)
+2026-11-04T10:23:42.7880252Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal0/M_Etal0.fbx
+2026-11-04T10:23:42.7880917Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-04T10:23:42.7881586Z - ✅ **Budget de triangles** 756 triangles, 1512 sommets (max 40000)
+2026-11-04T10:23:42.7882415Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal0.prefab
+2026-11-04T10:23:42.7883405Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 4.46×2.96×2.41, pieds à y=-0.010
+2026-11-04T10:23:42.7884489Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7885746Z - ✅ **Matériau T_Timber** shader Korvalune/PBR Monde, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7886965Z - ✅ **Matériau T_ClothRed** shader Korvalune/PBR Monde, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7888270Z - ✅ **Matériau T_ClothCream** shader Korvalune/PBR Monde, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7889606Z - ✅ **Matériau T_Plant** shader Korvalune/PBR Monde, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7890863Z - ✅ **Matériau T_ClothBlue** shader Korvalune/PBR Monde, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-04T10:23:42.7892917Z - ✅ **Matériau T_ClothGreen** sStart importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '80ce1acbd47b43261e84be4eb39a128f') in 0.001349827 seconds
+2026-11-04T10:23:42.7895242Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '8267674c5657de7ed964a34d50b2044e') in 0.001154396 seconds
+2026-11-04T10:23:42.7896704Z Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+2026-11-04T10:23:42.7897422Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-11-04T10:23:42.7898426Z Asset Pipeline Refresh (id=59df95e738428b7c9a4afb125597c30f): Total: 0.034 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-11-04T10:23:42.8199280Z Unloading 3239 unused Assets / (0.58 GB). Loaded Objects now: 7605.
+2026-11-04T10:23:42.8200108Z Memory consumption went from 2.22 GB to 1.65 GB.
+2026-11-04T10:23:42.8201258Z Total: 49.271277 ms (FindLiveObjects: 0.575618 ms CreateObjectMapping: 0.265188 ms MarkObjects: 36.217331 ms  DeleteObjects: 12.211961 ms)
+2026-11-04T10:23:42.8202139Z 
+2026-11-04T10:23:43.2214771Z [Physics::Module] Cleanup current backned.
+2026-11-04T10:23:43.2215488Z [Physics::Module] Id: 0xf2b8ea05
+2026-11-04T10:23:43.2217924Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-11-04T10:23:43.2218701Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-11-04T10:23:43.2244868Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-11-04T10:23:43.2349230Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-04T10:23:43.2350045Z       Application is shutting down...
