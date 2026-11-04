@@ -1,0 +1,148 @@
+# Version Windows du jeu : construite après une intégration Unity réussie (ou à la demande), compressée, découpée en
+# morceaux de moins de 2 Go (limite de GitHub) et publiée dans la release « windows-derniere » avec sa version, la liste
+# des morceaux et leurs empreintes SHA-256 (paquet.txt) et les notes de version. Le lanceur Windows s'en sert pour
+# installer et mettre à jour le jeu.
+name: Windows — jeu
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Unity — intégration des modèles"]
+    types: [completed]
+
+concurrency:
+  group: windows-jeu
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: Libérer de l'espace disque
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+
+      - name: Mémoire d'échange (16 Go)
+        run: |
+          sudo swapoff -a || true
+          sudo fallocate -l 16G /mnt/korvalune.swap && sudo chmod 600 /mnt/korvalune.swap && sudo mkswap /mnt/korvalune.swap && sudo swapon /mnt/korvalune.swap
+          free -h; df -h
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: Library
+          key: Library-Windows-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: |
+            Library-Windows-
+            Library-Forge-
+            Library-Android-
+
+      - name: Charger la licence Unity
+        env:
+          SECRET_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          if [ -n "$SECRET_LICENSE" ]; then LIC="$SECRET_LICENSE";
+          elif [ -f .licence/Unity_lic.ulf ]; then LIC="$(cat .licence/Unity_lic.ulf)";
+          else echo "::error::Secret UNITY_LICENSE absent"; exit 1; fi
+          { echo "UNITY_LICENSE<<ULF_EOF"; echo "$LIC"; echo "ULF_EOF"; } >> "$GITHUB_ENV"
+
+      - name: Numéro de version
+        run: echo "${GITHUB_RUN_NUMBER}" > ci-build-number.txt
+
+      - name: Unity — construction Windows
+        id: unity
+        uses: game-ci/unity-builder@v4
+        continue-on-error: true
+        timeout-minutes: 240
+        env:
+          UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows64
+          buildMethod: Korvalune.EditorTools.WindowsBuild.Build
+          allowDirtyBuild: true
+          dockerMemoryLimit: 30g
+
+      - name: Rapport de construction
+        if: always()
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" . || true
+          mkdir -p ci-out/windows
+          if [ ! -f ci-out/windows/build.md ]; then
+            { echo "# Construction Windows : Unity s'est arrêté avant la fin"; echo '```';
+              grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;
+              echo '```'; } > ci-out/windows/build.md || true
+          fi
+          ls -la build/Windows 2>/dev/null || true
+          cat ci-out/windows/build.md
+
+      - name: Sauver le cache Library
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: Library
+          key: Library-Windows-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.run_id }}
+
+      - name: Résultat
+        run: test -f build/Windows/Korvalune.exe
+
+      - name: Archive et morceaux
+        run: |
+          B=$(cat ci-build-number.txt)
+          cd build/Windows
+          rm -rf *_BurstDebugInformation_DoNotShip *_BackUpThisFolder_ButDontShipItWithYourGame
+          du -sh .
+          zip -q -r -6 ../jeu.zip .
+          cd ..; mkdir -p publier
+          split -b 1900m -d -a 3 jeu.zip "publier/Korvalune-Windows-$B.zip."
+          rm jeu.zip
+          cd publier
+          : > paquet.txt
+          for f in Korvalune-Windows-$B.zip.*; do echo "$f $(stat -c%s "$f") $(sha256sum "$f" | cut -d' ' -f1)" >> paquet.txt; done
+          cat paquet.txt
+          echo "$B" > version.txt
+          cp ../../Assets/Korvalune/Resources/UI/NotesDeVersion.txt notes.txt
+          ls -la
+
+      - name: Publier
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          R=windows-derniere; B=$(cat ci-build-number.txt); cd build/publier
+          if ! gh release view $R -R ${{ github.repository }} >/dev/null 2>&1; then
+            gh release create $R -R ${{ github.repository }} --title "Korvalune pour Windows" --latest=false \
+              --notes "Téléchargez **KorvaluneLauncher.exe** et lancez-le : il installe Korvalune, le tient à jour et crée les raccourcis. Windows 10 ou 11, 64 bits."
+          fi
+          # ordre : les morceaux d'abord, puis leur liste, la version en dernier (un lanceur ne voit la nouvelle version
+          # qu'une fois tout en ligne)
+          for f in Korvalune-Windows-$B.zip.*; do gh release upload $R "$f" -R ${{ github.repository }} --clobber; done
+          gh release upload $R paquet.txt notes.txt -R ${{ github.repository }} --clobber
+          gh release upload $R version.txt -R ${{ github.repository }} --clobber
+          # ménage : morceaux des versions précédentes
+          gh release view $R -R ${{ github.repository }} --json assets --jq '.assets[].name' | grep '^Korvalune-Windows-' | grep -v "^Korvalune-Windows-$B\.zip\." | while read a; do
+            gh release delete-asset $R "$a" -R ${{ github.repository }} -y || true
+          done
+          gh release edit $R -R ${{ github.repository }} --title "Korvalune 0.1.$B pour Windows"
+
+      - name: Enregistrer le rapport
+        if: always()
+        run: |
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add ci-out/windows/build.md 2>/dev/null || true
+          git commit -m "Windows : rapport de construction [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase --autostash -X ours origin main && git push origin HEAD:main && break; sleep 5; done

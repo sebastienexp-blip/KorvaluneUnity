@@ -72,7 +72,7 @@ namespace Korvalune.Game
         GameObject Quad(string name, Vector3 pos, Vector3 scale, Material m)
         {
             var q = GameObject.CreatePrimitive(PrimitiveType.Quad); q.name = name;
-            var cl = q.GetComponent<Collider>(); if (cl) Destroy(cl);
+            var cl = q.GetComponent<Collider>(); if (cl) { if (Application.isPlaying) Destroy(cl); else DestroyImmediate(cl); }
             q.transform.SetParent(transform, false); q.transform.localPosition = pos; q.transform.localScale = scale;
             var r = q.GetComponent<Renderer>(); r.sharedMaterial = m; r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; r.receiveShadows = false;
             return q;

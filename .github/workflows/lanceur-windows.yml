@@ -1,0 +1,77 @@
+# Lanceur Windows (KorvaluneLauncher.exe) : construit sur une machine Windows, capturé à l'écran pour vérification,
+# puis publié dans la release « windows-derniere » avec son numéro de version (lanceur.txt) : les lanceurs déjà
+# installés se mettent à jour d'eux-mêmes.
+name: Windows — lanceur
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Tools/LauncherWindows/**'
+      - '.github/workflows/lanceur-windows.yml'
+
+concurrency:
+  group: lanceur-windows
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  lanceur:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Construire le lanceur
+        shell: pwsh
+        run: |
+          dotnet build Tools/LauncherWindows/KorvaluneLauncher.csproj -c Release -p:Version=1.0.${{ github.run_number }} -o out
+          Get-ChildItem out | Format-Table Name, Length
+
+      - name: Captures d'écran du lanceur
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force ci-out/lanceur | Out-Null
+          Remove-Item ci-out/lanceur/* -Force -ErrorAction SilentlyContinue
+          foreach ($cas in @(@{n='lanceur'; a=@()}, @{n='lanceur_telechargement'; a=@('--demo')})) {
+            $png = Join-Path $pwd "ci-out/lanceur/$($cas.n).png"
+            $p = Start-Process -FilePath out/KorvaluneLauncher.exe -ArgumentList (@('--capture', "`"$png`"") + $cas.a) -PassThru
+            if (-not $p.WaitForExit(60000)) { $p.Kill(); "arrêt forcé : $($cas.n)" }
+            if (Test-Path $png) { "capture : $png" } else { "pas de capture : $($cas.n)"; Get-Content "$png.erreur.txt" -ErrorAction SilentlyContinue }
+          }
+          "Lanceur 1.0.${{ github.run_number }} construit" | Out-File ci-out/lanceur/resultat.md -Encoding utf8
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lanceur-windows
+          path: |
+            out/KorvaluneLauncher.exe
+            ci-out/lanceur
+
+      - name: Publier
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          R=windows-derniere
+          if ! gh release view $R -R ${{ github.repository }} >/dev/null 2>&1; then
+            gh release create $R -R ${{ github.repository }} --title "Korvalune pour Windows" --latest=false \
+              --notes "Téléchargez **KorvaluneLauncher.exe** et lancez-le : il installe Korvalune, le tient à jour et crée les raccourcis. Windows 10 ou 11, 64 bits."
+          fi
+          echo "${{ github.run_number }}" > lanceur.txt
+          cp out/KorvaluneLauncher.exe KorvaluneLauncher.exe
+          gh release upload $R KorvaluneLauncher.exe -R ${{ github.repository }} --clobber
+          gh release upload $R lanceur.txt -R ${{ github.repository }} --clobber
+
+      - name: Enregistrer les captures
+        shell: bash
+        run: |
+          git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
+          git add -A ci-out/lanceur
+          git commit -m "Lanceur Windows : captures [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase --autostash -X ours origin main && git push origin HEAD:main && break; sleep 5; done
