@@ -38,4 +38,4 @@ GEAR = []
 
 
 def build(bank, female=False):
-    return multileg(NAME, SRC, KEEP, BODY, FEET, (0.0, 0.0, 0.0), 'SF_Corps', _cache, yaw=YAW, body_r=0.42)
+    return multileg(NAME, SRC, KEEP, BODY, FEET, (0.0, 0.0, 0.0), 'SF_Corps', _cache, yaw=YAW, body_r=0.42, body_bias=0.55, anim_scale=0.7)
