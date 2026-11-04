@@ -198,7 +198,12 @@ namespace Korvalune.Game
         }
 
         static void Changed() { PlayerPrefs.Save(); Settings.Apply(); var hud = FindFirstObjectByType<HUD>(); if (hud) hud.ApplySettings(); }
-        public static void Vibrate() { if (Settings.Vibration == 0 && Application.isMobilePlatform) Handheld.Vibrate(); }
+        public static void Vibrate()
+        {
+#if UNITY_ANDROID || UNITY_IOS
+            if (Settings.Vibration == 0 && Application.isMobilePlatform) Handheld.Vibrate();   // vibration : téléphones seulement
+#endif
+        }
 
         void ShowPage(int i)
         {
