@@ -134,6 +134,7 @@ def run(name):
     img = os.path.join(HERE, 'concepts', f'{name}.png')
     try:
         if trellis_hq(img, out, name): return True
+        return False                                         # pas de repli sur Hunyuan (fond non détouré, sans texture)
     except Exception as e: log(out, '  TRELLIS HQ :', repr(e)[:400])
     if os.path.exists(dst) and os.path.getsize(dst) > 10000:
         print(f'== {name} : déjà généré', flush=True); return True
