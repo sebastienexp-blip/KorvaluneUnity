@@ -323,7 +323,7 @@ namespace Korvalune.Game
         /// <summary>Un panneau plein écran est ouvert : on masque les noms et barres flottants du monde.</summary>
         bool ModalOpen => (bagPanel && bagPanel.activeSelf) || (treePanel && treePanel.activeSelf) || (shopPanel && shopPanel.activeSelf) || (pausePanel && pausePanel.activeSelf);
 
-        public void Notify(string msg) { if (!notifyText) return; notifyText.text = msg; notifyText.color = UIStyle.Parch; notifyUntil = Time.time + 2.5f; }
+        public void Notify(string msg) { if (!notifyText) return; notifyText.text = msg; notifyText.color = UIStyle.Parch; notifyUntil = Time.time + 2.5f + msg.Length * 0.03f; }
 
         void Revive()
         {

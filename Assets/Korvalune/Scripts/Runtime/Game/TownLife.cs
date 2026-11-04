@@ -40,7 +40,7 @@ namespace Korvalune.Game
                 go.transform.localScale *= 0.55f + 0.1f * (float)rng.NextDouble();
                 var coat = new[] { new Color(0.75f, 0.55f, 0.35f), new Color(0.95f, 0.9f, 0.8f), new Color(0.35f, 0.25f, 0.18f), new Color(0.85f, 0.7f, 0.45f) }[i % 4];
                 foreach (var rr in go.GetComponentsInChildren<Renderer>()) foreach (var m in rr.materials) { if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", coat * 1.6f); if (m.HasProperty("_EmissionColor")) m.SetColor("_EmissionColor", Color.black); }
-                var w = go.AddComponent<Walker>(); w.Setup(center, r, 2.2f, rng.Next());
+                var w = go.AddComponent<Walker>(); w.dog = true; w.Setup(center, r, 2.2f, rng.Next());
                 if (people.Count > 0) w.follow = people[i % people.Count].transform;
             }
             Birds(root.transform, center + Vector3.up * 22f, 9, rng);
@@ -80,9 +80,29 @@ namespace Korvalune.Game
         // ---------------------------------------------------------------------------------------------- comportements
         public class Walker : MonoBehaviour
         {
-            public Transform follow;
+            public Transform follow; public bool dog;
             Vector3 center, target; float radius, speed, waitUntil, stuckSince; Animator anim; System.Random rng; Vector3 lastPos;
-            public void Setup(Vector3 c, float r, float s, int seed) { center = c; radius = r; speed = s; rng = new System.Random(seed); anim = GetComponentInChildren<Animator>(); Pick(); waitUntil = Time.time + (float)rng.NextDouble() * 4f; }
+            public void Setup(Vector3 c, float r, float s, int seed)
+            {
+                center = c; radius = r; speed = s; rng = new System.Random(seed); anim = GetComponentInChildren<Animator>(); Pick(); waitUntil = Time.time + (float)rng.NextDouble() * 4f;
+                if (!follow) Usable.Add(gameObject, "Parler au villageois", 2.6f, Talk, () => follow == null && !dog);
+            }
+            static readonly string[] Lines = {
+                "« Les morts ne restent plus dans le vieux cimetière… méfiez-vous, voyageur. »",
+                "« La pierre de voyage vous mènera loin d'ici. Plus loin que je n'oserais aller. »",
+                "« On dit qu'un abbé noyé marche encore sur la Côte des Naufrages. »",
+                "« Le forgeron a reçu du bon acier. Passez le voir avant de partir. »",
+                "« Les brèches s'ouvrent toujours plus profond. La statue en sait quelque chose. »",
+                "« Ma grand-mère parlait d'un abîme au bord du monde… je n'y croyais pas. »",
+                "« Merci de veiller sur la vallée. »",
+            };
+            void Talk()
+            {
+                var hero = FindFirstObjectByType<PlayerController>();
+                if (hero) { var to = hero.transform.position - transform.position; to.y = 0; if (to.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(to); }
+                waitUntil = Time.time + 4f;
+                FindFirstObjectByType<GameBootstrap>()?.Hud?.Notify(Lines[rng.Next(Lines.Length)]);
+            }
             void Pick()
             {
                 var s = Spot(center, radius, rng); target = s ?? center;
