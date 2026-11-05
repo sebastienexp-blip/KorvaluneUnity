@@ -23,6 +23,7 @@ namespace Korvalune.EditorTools
             {
                 Directory.CreateDirectory("ci-out/android");
                 ProjectSetup.EnsureUrp(); ProjectSetup.EnsureMobile();
+                LauncherBuilder.Build();                                        // écran de démarrage (Bootstrap) toujours à jour
                 // scènes : reconstruites si l'intégration ne les a pas encore produites
                 if (!File.Exists(CatalogBuilder.ScenePath)) { var cat = CatalogBuilder.Build(); if (cat) CatalogBuilder.BuildScene(cat); }
                 if (!File.Exists(WorldBuilder.ScenePath)) WorldBuilder.Build();
@@ -85,6 +86,17 @@ namespace Korvalune.EditorTools
                     if (manifest != null) { scenes = new[] { LauncherBuilder.ScenePath }; EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(LauncherBuilder.ScenePath, true) }; }
                 }
                 catch (Exception ex) { manifest = null; rep.AppendLine("- ⚠ Paquets de contenu non construits (APK tout-en-un) : " + ex.Message.Split('\n')[0]); }
+
+                // code du jeu mis à jour depuis le jeu (HybridCLR) : seulement avec le contenu téléchargeable ; en cas d'échec,
+                // APK classique (le code est alors dans l'APK, mis à jour par un nouvel APK)
+                bool hot = false;
+                if (manifest != null)
+                {
+                    try { hot = HotUpdate.Prepare(build, rep); }
+                    catch (Exception ex) { hot = false; HotUpdate.Disable(); rep.AppendLine("- ⚠ Mise à jour du code depuis le jeu indisponible (APK classique) : " + ex.Message.Split('\n')[0]); }
+                }
+                else HotUpdate.Disable();
+                if (hot) manifest = null;          // le code des paquets est dans la bibliothèque téléchargée, pas dans l'APK
 
                 Directory.CreateDirectory(Path.GetDirectoryName(Out));
                 var r = BuildPipeline.BuildPlayer(new BuildPlayerOptions { scenes = scenes, locationPathName = Out, target = BuildTarget.Android, targetGroup = BuildTargetGroup.Android, options = BuildOptions.None, assetBundleManifestPath = manifest });

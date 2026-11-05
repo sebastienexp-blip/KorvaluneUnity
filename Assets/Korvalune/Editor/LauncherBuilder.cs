@@ -20,7 +20,8 @@ namespace Korvalune.EditorTools
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var cam = new GameObject("Main Camera").AddComponent<Camera>(); cam.tag = "MainCamera"; cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = Color.black;
             cam.gameObject.AddComponent<AudioListener>();
-            new GameObject("Lanceur").AddComponent<Launcher>();
+            // démarrage (code figé dans l'APK) : charge le code du jeu — téléchargé sur Android — puis crée le lanceur
+            new GameObject("Démarrage").AddComponent<Korvalune.Boot.Bootstrap>();
             EditorSceneManager.SaveScene(scene, ScenePath);
             var list = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();
             list.Insert(0, new EditorBuildSettingsScene(ScenePath, true));
