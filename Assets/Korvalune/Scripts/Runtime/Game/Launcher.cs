@@ -22,7 +22,7 @@ namespace Korvalune.Game
         /// <summary>Catalogue de contenu propre à cette version du jeu (paquets construits avec le même code).</summary>
         public static string ContentCatalog
         {
-            get { var v = Application.version.Split('.'); return $"https://github.com/sebastienexp-blip/KorvaluneUnity/releases/download/contenu-{v[v.Length - 1]}/catalogue.json"; }
+            get { return Korvalune.Boot.GameVersion.ContentBase(Korvalune.Boot.GameVersion.Build) + "catalogue.json"; }
         }
 
         RawImage bg; RectTransform bgRt; Image bar, barBack; Text status, notes, version; Button play; Text playText;
@@ -93,7 +93,7 @@ namespace Korvalune.Game
             status.gameObject.AddComponent<Outline>().effectColor = Color.black;
             barBack = Img(root, "Barre", UIStyle.Bar(), new Vector2(0, 0), new Vector2(100, 100), new Vector2(1100, 30)); barBack.type = Image.Type.Sliced; barBack.color = new Color(0.08f, 0.05f, 0.04f, 0.95f);
             bar = Img(barBack.rectTransform, "Remplissage", UIStyle.Bar(), new Vector2(0, 0.5f), new Vector2(4, 0), new Vector2(1092, 22)); bar.type = Image.Type.Filled; bar.fillMethod = Image.FillMethod.Horizontal; bar.color = new Color(0.95f, 0.70f, 0.30f); bar.fillAmount = 0;
-            version = Label(root, "Version", "Version " + Application.version, 24, TextAnchor.LowerLeft, new Vector2(0, 0), new Vector2(100, 40), new Vector2(600, 34)); version.color = new Color(0.7f, 0.65f, 0.58f);
+            version = Label(root, "Version", "Version " + Korvalune.Boot.GameVersion.Label, 24, TextAnchor.LowerLeft, new Vector2(0, 0), new Vector2(100, 40), new Vector2(600, 34)); version.color = new Color(0.7f, 0.65f, 0.58f);
 
             var pb = Img(root, "Jouer", UIStyle.Button(), new Vector2(0, 1), new Vector2(96, -318), new Vector2(400, 112));          // colonne de gauche, sous le titre
             pb.raycastTarget = true; pb.type = Image.Type.Simple;

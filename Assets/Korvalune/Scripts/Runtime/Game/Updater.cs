@@ -23,10 +23,10 @@ namespace Korvalune.Game
         static string LauncherExe => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Korvalune", "KorvaluneLauncher.exe");
         public static int InstalledBuild
         {
-            get { var v = Application.version.Split('.'); return v.Length > 0 && int.TryParse(v[v.Length - 1], out var n) ? n : 0; }
+            get { return Korvalune.Boot.GameVersion.Build; }       // version du code chargé (peut dépasser celle de l'APK)
         }
 
-        Text label; Image bg; int remote; long downloadId = -1; bool busy;
+        Text label; Image bg; int remote; bool restartOnly; long downloadId = -1; bool busy;
         AndroidJavaObject dm;
 
         public static void Attach(RectTransform root, Font font)
@@ -57,6 +57,23 @@ namespace Korvalune.Game
                 { label.text = $"<size=20><color=#a08c6c>Version 0.1.{InstalledBuild} — vérification des mises à jour impossible (hors ligne)</color></size>"; yield break; }
             }
             if (remote <= InstalledBuild) { label.text = $"<size=20><color=#8fd08f>Version 0.1.{InstalledBuild} — à jour</color></size>"; yield break; }
+            if (Application.platform == RuntimePlatform.Android && Korvalune.Boot.GameVersion.HotLoaded)
+            {
+                // mise à jour par le jeu : le nouveau code et le nouveau contenu se téléchargent au prochain démarrage,
+                // sans APK — sauf si cette version demande un APK plus récent (changement du moteur)
+                Korvalune.Boot.CodeManifest m = null;
+                using (var r = UnityWebRequest.Get(Korvalune.Boot.GameVersion.ContentBase(remote) + "code.json"))
+                {
+                    r.timeout = 8; yield return r.SendWebRequest();
+                    if (r.result == UnityWebRequest.Result.Success) try { m = JsonUtility.FromJson<Korvalune.Boot.CodeManifest>(r.downloadHandler.text); } catch { }
+                }
+                if (m != null && m.apkMin <= Korvalune.Boot.GameVersion.ApkBuild)
+                {
+                    restartOnly = true; bg.enabled = true;
+                    label.text = $"Version 0.1.{remote} disponible — toucher pour fermer le jeu : elle s'installera en le rouvrant";
+                    yield break;
+                }
+            }
             bg.enabled = true;
             label.text = Application.platform == RuntimePlatform.WindowsPlayer
                 ? $"Mise à jour disponible (version 0.1.{remote}) — cliquer pour l'installer avec le lanceur"
@@ -66,6 +83,7 @@ namespace Korvalune.Game
         void Click()
         {
             if (busy || remote <= InstalledBuild) return;              // déjà à jour : rien à télécharger
+            if (restartOnly) { label.text = "Rouvrez Korvalune pour passer à la nouvelle version"; Application.Quit(); return; }
             if (Application.platform == RuntimePlatform.WindowsPlayer)
             {
                 // Windows : le lanceur télécharge la nouvelle version, remplace l'ancienne (personnages conservés) et relance le jeu

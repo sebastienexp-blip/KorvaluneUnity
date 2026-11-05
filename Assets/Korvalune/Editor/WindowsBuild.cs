@@ -26,7 +26,8 @@ namespace Korvalune.EditorTools
                 Directory.CreateDirectory("ci-out/windows");
                 ProjectSetup.EnsureUrp(); ProjectSetup.EnsureMobile();
                 // scènes : reconstruites si l'intégration ne les a pas encore produites (mêmes scènes que l'APK)
-                if (!File.Exists(LauncherBuilder.ScenePath)) LauncherBuilder.Build();
+                LauncherBuilder.Build();                                     // écran de démarrage toujours à jour
+                HotUpdate.Disable();                                         // Windows (Mono) : code compris dans le programme, mis à jour par le lanceur
                 if (!File.Exists(CatalogBuilder.ScenePath)) { var cat = CatalogBuilder.Build(); if (cat) CatalogBuilder.BuildScene(cat); }
                 if (!File.Exists(WorldBuilder.ScenePath)) WorldBuilder.Build();
                 if (!File.Exists(SelectionBuilder.ScenePath)) SelectionBuilder.Build();
