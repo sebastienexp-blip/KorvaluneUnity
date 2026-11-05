@@ -3,8 +3,8 @@
 - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime
 - Signature : clé Korvalune (mises à jour sans désinstaller)
 - Icône : Assets/Korvalune/Resources/UI/Icone.png
-- Contenu téléchargeable : 100 paquets, 722 Mo (release contenu-102)
-    - scenes : 146.4 Mo
+- Contenu téléchargeable : 100 paquets, 722 Mo (release contenu-103)
+    - scenes : 146.3 Mo
     - art_catalog_models : 58.3 Mo
     - art_catalog_skins : 34.6 Mo
     - art_heroes_varek_f : 19.0 Mo
@@ -16,11 +16,10 @@
     - art_heroes_kaeldraven_f : 17.2 Mo
     - art_heroes_kaeldraven_m : 16.7 Mo
     - art_heroes_tharion_f : 16.7 Mo
-- HybridCLR : installation 9.0.3 (il2cpp v6000.0.x-9.0.1)
-- HybridCLR : génération en 2.5 min
+- HybridCLR : génération en 1.6 min
 - Code mis à jour depuis le jeu : Korvalune.Runtime 653 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
-- Résultat : **Succeeded** en 17.0 min, 0 erreur(s), 12 avertissement(s)
-- APK : 129.1 Mo, version 0.1.102
+- Résultat : **Succeeded** en 16.7 min, 0 erreur(s), 12 avertissement(s)
+- APK : 129.1 Mo, version 0.1.103
 
 ## Contenu empaqueté : 35 Mo
 - Texture2D : 23.0 Mo (295)
@@ -70,46 +69,46 @@
 
 ## Mémoire pendant la construction (dernières mesures)
 ```
-09:46:40 ram 6981/15983 swap 1/16383  4806296 Unity 454608 Unity.ILPP.Runn 
-09:46:45 ram 6891/15983 swap 1/16383  4806296 Unity 456872 Unity.ILPP.Runn 
-09:46:50 ram 7048/15983 swap 1/16383  4806296 Unity 457752 Unity.ILPP.Runn 
-09:46:55 ram 6870/15983 swap 1/16383  4806284 Unity 459440 Unity.ILPP.Runn 
-09:47:01 ram 7136/15983 swap 1/16383  4806284 Unity 460976 Unity.ILPP.Runn 
-09:47:06 ram 6980/15983 swap 1/16383  4806284 Unity 462888 Unity.ILPP.Runn 
-09:47:11 ram 6889/15983 swap 1/16383  4806256 Unity 464608 Unity.ILPP.Runn 
-09:47:16 ram 7010/15983 swap 1/16383  4806256 Unity 465928 Unity.ILPP.Runn 
-09:47:21 ram 7071/15983 swap 1/16383  4806260 Unity 468216 Unity.ILPP.Runn 
-09:47:26 ram 6927/15983 swap 1/16383  4806260 Unity 469688 Unity.ILPP.Runn 
-09:47:31 ram 7023/15983 swap 1/16383  4806260 Unity 470920 Unity.ILPP.Runn 
-09:47:36 ram 7239/15983 swap 369/16383  4514680 Unity 1230608 ld.lld 
-09:47:41 ram 6678/15983 swap 1235/16383  3870196 Unity 2273580 ld.lld 
-09:47:46 ram 5941/15983 swap 1947/16383  3176000 Unity 2855468 ld.lld 
-09:47:52 ram 4332/15983 swap 2528/16383  2645864 Unity 431792 Unity.ILPP.Runn 
-09:47:57 ram 3793/15983 swap 2787/16383  2434604 Unity 408624 Unity.ILPP.Runn 
-09:48:02 ram 4214/15983 swap 2787/16383  2434032 Unity 432444 llvm-objcopy 
-09:48:07 ram 3819/15983 swap 2787/16383  2433744 Unity 419892 Unity.ILPP.Runn 
-09:48:12 ram 3818/15983 swap 2787/16383  2434848 Unity 422924 Unity.ILPP.Runn 
-09:48:17 ram 3933/15983 swap 2787/16383  2434864 Unity 422924 Unity.ILPP.Runn 
-09:48:22 ram 4140/15983 swap 2787/16383  2434884 Unity 423008 Unity.ILPP.Runn 
-09:48:27 ram 4179/15983 swap 2787/16383  2434880 Unity 424856 Unity.ILPP.Runn 
-09:48:32 ram 4384/15983 swap 2787/16383  2434824 Unity 549816 java 
-09:48:37 ram 4539/15983 swap 2787/16383  2434840 Unity 535228 java 
-09:48:42 ram 4554/15983 swap 2787/16383  2434856 Unity 659800 java 
-09:48:47 ram 4556/15983 swap 2787/16383  2433036 Unity 681232 java 
-09:48:52 ram 4984/15983 swap 2787/16383  2432956 Unity 1161848 java 
-09:48:57 ram 5622/15983 swap 2787/16383  2432916 Unity 1803492 java 
-09:49:02 ram 5929/15983 swap 2787/16383  2432816 Unity 1981444 java 
-09:49:07 ram 5699/15983 swap 2787/16383  2432720 Unity 1687292 java 
-09:49:12 ram 5658/15983 swap 2787/16383  2432732 Unity 1735476 java 
-09:49:17 ram 5747/15983 swap 2787/16383  2432732 Unity 1743928 java 
-09:49:22 ram 5611/15983 swap 2787/16383  2431952 Unity 1744908 java 
-09:49:27 ram 5621/15983 swap 2787/16383  2431868 Unity 1745656 java 
-09:49:32 ram 5853/15983 swap 2787/16383  2431656 Unity 1944832 java 
-09:49:37 ram 6055/15983 swap 2787/16383  2431472 Unity 2113936 java 
-09:49:42 ram 5968/15983 swap 2782/16383  2441088 Unity 2056292 java 
-09:49:47 ram 3565/15983 swap 2362/16383  2407604 Unity 193776 MainThread 
-09:49:52 ram 1281/15983 swap 25/16383  193776 MainThread 158432 provjobd3510909 
-09:49:57 ram 1259/15983 swap 25/16383  193776 MainThread 148756 Runner.Worker 
+12:14:17 ram 6638/15983 swap 251/16383  4671940 Unity 664380 Unity.ILPP.Runn 
+12:14:22 ram 6801/15983 swap 251/16383  4671940 Unity 666652 Unity.ILPP.Runn 
+12:14:27 ram 6766/15983 swap 251/16383  4671940 Unity 667676 Unity.ILPP.Runn 
+12:14:32 ram 6630/15983 swap 251/16383  4671944 Unity 670092 Unity.ILPP.Runn 
+12:14:37 ram 6661/15983 swap 251/16383  4671944 Unity 671500 Unity.ILPP.Runn 
+12:14:42 ram 6843/15983 swap 251/16383  4671944 Unity 673116 Unity.ILPP.Runn 
+12:14:47 ram 6765/15983 swap 251/16383  4671944 Unity 674460 Unity.ILPP.Runn 
+12:14:52 ram 6702/15983 swap 251/16383  4671944 Unity 675876 Unity.ILPP.Runn 
+12:14:57 ram 7025/15983 swap 251/16383  4671944 Unity 677188 Unity.ILPP.Runn 
+12:15:02 ram 6707/15983 swap 251/16383  4671944 Unity 678420 Unity.ILPP.Runn 
+12:15:07 ram 6815/15983 swap 251/16383  4671944 Unity 680396 Unity.ILPP.Runn 
+12:15:12 ram 6591/15983 swap 251/16383  4671944 Unity 682612 Unity.ILPP.Runn 
+12:15:17 ram 6656/15983 swap 251/16383  4671944 Unity 683196 Unity.ILPP.Runn 
+12:15:22 ram 6633/15983 swap 251/16383  4671948 Unity 685196 Unity.ILPP.Runn 
+12:15:27 ram 6898/15983 swap 251/16383  4671948 Unity 1081284 ld.lld 
+12:15:32 ram 6715/15983 swap 252/16383  4671948 Unity 1812556 ld.lld 
+12:15:37 ram 6689/15983 swap 294/16383  4669820 Unity 1990188 ld.lld 
+12:15:42 ram 6272/15983 swap 735/16383  4465208 Unity 2597140 ld.lld 
+12:15:47 ram 5339/15983 swap 1123/16383  4084716 Unity 525552 Unity.ILPP.Runn 
+12:15:52 ram 4848/15983 swap 1624/16383  3571920 Unity 530544 Unity.ILPP.Runn 
+12:15:57 ram 4267/15983 swap 2165/16383  3020488 Unity 532688 Unity.ILPP.Runn 
+12:16:02 ram 4387/15983 swap 2165/16383  3021372 Unity 532688 Unity.ILPP.Runn 
+12:16:08 ram 4549/15983 swap 2165/16383  3021392 Unity 532720 Unity.ILPP.Runn 
+12:16:13 ram 4640/15983 swap 2165/16383  3021396 Unity 533248 Unity.ILPP.Runn 
+12:16:18 ram 4668/15983 swap 2165/16383  3021328 Unity 534944 Unity.ILPP.Runn 
+12:16:23 ram 5064/15983 swap 2164/16383  3021300 Unity 727024 java 
+12:16:28 ram 4895/15983 swap 2253/16383  2930332 Unity 587616 java 
+12:16:33 ram 4934/15983 swap 2253/16383  2930312 Unity 679344 java 
+12:16:38 ram 5236/15983 swap 2523/16383  2689808 Unity 1306424 java 
+12:16:43 ram 5523/15983 swap 2523/16383  2689780 Unity 1456512 java 
+12:16:48 ram 5276/15983 swap 2523/16383  2689716 Unity 1159772 java 
+12:16:53 ram 5306/15983 swap 2523/16383  2689696 Unity 1342192 java 
+12:16:58 ram 5536/15983 swap 2523/16383  2689584 Unity 1578340 java 
+12:17:03 ram 5639/15983 swap 2523/16383  2689564 Unity 1588484 java 
+12:17:08 ram 5572/15983 swap 2523/16383  2689116 Unity 1589520 java 
+12:17:13 ram 5721/15983 swap 2523/16383  2688256 Unity 1729944 java 
+12:17:18 ram 5871/15983 swap 2523/16383  2687940 Unity 1853008 java 
+12:17:23 ram 5933/15983 swap 2522/16383  2689464 Unity 1971636 java 
+12:17:28 ram 3571/15983 swap 2182/16383  2609536 Unity 133740 provjobd1136245 
+12:17:33 ram 1156/15983 swap 252/16383  125256 provjobd1136245 107836 Unity.Licensing 
 ```
 ## Noyau (OOM)
 ```
