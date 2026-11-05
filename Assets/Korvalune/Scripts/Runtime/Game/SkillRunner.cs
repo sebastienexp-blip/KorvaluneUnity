@@ -207,10 +207,9 @@ namespace Korvalune.Game
             if (d.stun && d.duration > 0) h.Stun(d.duration);
             if (d.heal && d.kind != SkillKind.Heal && d.kind != SkillKind.Nova) p.Health.Heal(dmg * 0.04f);   // voie « vampirique »
             Vfx.Burst(h.transform.position + Vector3.up * 1.1f, d.element, 10, 4f);
-            // coups de mêlée et ondes de choc : le monstre recule ; un critique marque un bref arrêt sur image
+            // coups de mêlée et ondes de choc : le monstre recule
             if (d.kind == SkillKind.Strike || d.kind == SkillKind.Cleave || d.kind == SkillKind.Combo || d.kind == SkillKind.Nova || d.kind == SkillKind.Leap || d.kind == SkillKind.Dash)
                 CombatFeel.Knock(h, Pos, crit ? 1.3f : 0.8f);
-            if (crit && !d.ghost) CombatFeel.HitStop(0.04f);
         }
 
         void HitArea(Vector3 c, float r, float dmg, SkillDef d, Vector3? fwd = null, float cone = 360)

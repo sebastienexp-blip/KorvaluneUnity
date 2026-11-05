@@ -545,7 +545,7 @@ namespace Korvalune.Game
                 FX.Burst(h.transform.position + Vector3.up * 1.1f, crit ? new Color(1f, 0.85f, 0.3f) : new Color(1f, 0.55f, 0.25f), crit ? 30 : 16);
                 any = true;
             }
-            if (any) { FindFirstObjectByType<CameraRig>()?.Shake(0.06f); CombatFeel.HitStop(0.045f); }
+            if (any) { FindFirstObjectByType<CameraRig>()?.Shake(0.06f); }
         }
 
         public bool UseSkill(int i)

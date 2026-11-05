@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Korvalune.Game
 {
-    /// <summary>Sensations de combat : arrêt sur image très bref quand un coup porte (« hit-stop », plus marqué sur un
-    /// critique) et recul des monstres frappés au corps à corps. Rend chaque coup lisible et percutant.</summary>
+    /// <summary>Sensations de combat : recul des monstres frappés au corps à corps (plus fort sur un critique).</summary>
     public class CombatFeel : MonoBehaviour
     {
         static CombatFeel inst;
@@ -16,23 +15,6 @@ namespace Korvalune.Game
                 return inst;
             }
         }
-        float lastStop = -1;
-        const float StopScale = 0.06f;
-
-        /// <summary>Arrêt sur image (secondes réelles). Sans effet pendant une pause, une cinématique ou s'il vient d'y en avoir un.</summary>
-        public static void HitStop(float seconds)
-        {
-            if (!Application.isPlaying || Time.timeScale < 0.99f || Cinematic.Active || Settings.HitStop == 1) return;
-            var i = I; if (Time.unscaledTime - i.lastStop < 0.14f) return;
-            i.lastStop = Time.unscaledTime; i.StartCoroutine(i.Stop(seconds));
-        }
-        IEnumerator Stop(float s)
-        {
-            Time.timeScale = StopScale;
-            yield return new WaitForSecondsRealtime(s);
-            if (Mathf.Approximately(Time.timeScale, StopScale)) Time.timeScale = 1f;      // la pause a pu passer par là
-        }
-
         /// <summary>Recul d'un monstre touché (les gros monstres et les boss reculent moins).</summary>
         public static void Knock(Health h, Vector3 from, float dist)
         {
