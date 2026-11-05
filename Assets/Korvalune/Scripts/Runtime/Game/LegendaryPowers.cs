@@ -17,9 +17,14 @@ namespace Korvalune.Game
         public Element? toElement;
         public bool pierce, stun;
         public bool setRing;                           // anneau de convergence : les ensembles comptent une pièce de plus
+        /// <summary>Déclencheur (comme dans Diablo 4) : utiliser la compétence « trigger » lance aussi la compétence « cast »
+        /// (même non apprise), à « proc » de sa puissance. Ces pouvoirs ne modifient aucune compétence (Matches = faux).</summary>
+        public string trigger = "", cast = ""; public float proc;
+        public bool IsTrigger => !string.IsNullOrEmpty(trigger);
 
         public bool Matches(SkillDef d)
         {
+            if (IsTrigger) return false;
             if (!string.IsNullOrEmpty(skill)) return d.name == skill;
             if (element.HasValue && d.element != element.Value) return false;
             if (kind.HasValue && d.kind != kind.Value) return false;
@@ -36,7 +41,7 @@ namespace Korvalune.Game
         public string power4, power6;
     }
 
-    /// <summary>Catalogue des pouvoirs légendaires (une douzaine par classe + quelques pouvoirs communs) et des ensembles
+    /// <summary>Catalogue des pouvoirs légendaires (une douzaine de pouvoirs de transformation et une trentaine de déclencheurs par classe, plus quelques pouvoirs communs) et des ensembles
     /// (4 par classe, 20 en tout).</summary>
     public static class Powers
     {
@@ -81,6 +86,12 @@ namespace Korvalune.Game
         public static string Describe(PowerDef p, float s = 1f)
         {
             if (p.setRing) return "Les ensembles portés comptent une pièce de plus (à partir de 2 pièces).";
+            if (p.IsTrigger)
+            {
+                int icd = Mathf.RoundToInt(ProcCooldown(p));
+                return $"Quand vous utilisez « {p.trigger} », « {p.cast} » se déclenche aussi à {Mathf.RoundToInt(ProcPower(p, s) * 100)} % de sa puissance, même sans l'avoir apprise"
+                     + (icd >= 2 ? $" (au plus une fois toutes les {icd} s)." : ".");
+            }
             string who = !string.IsNullOrEmpty(p.skill) ? $"« {p.skill} »"
                 : p.element.HasValue && p.kind.HasValue ? $"Vos {KindName(p.kind.Value)} {ElementName(p.element.Value)}"
                 : p.element.HasValue ? $"Vos compétences {ElementName(p.element.Value)}"
@@ -98,6 +109,16 @@ namespace Korvalune.Game
             return who + " : " + string.Join(", ", parts) + ".";
         }
 
+        /// <summary>Puissance d'un déclenchement (force de l'objet comprise, plafonnée à 150 %).</summary>
+        public static float ProcPower(PowerDef p, float s) => Mathf.Min(1.5f, p.proc * s);
+        /// <summary>Délai minimal entre deux déclenchements : 40 % de la recharge de la compétence déclenchée (une grosse
+        /// compétence ne peut pas partir à chaque coup d'une petite).</summary>
+        public static float ProcCooldown(PowerDef p)
+        {
+            foreach (var d in SkillBook.For(p.cls)) if (d.name == p.cast) return d.cooldown * 0.4f;
+            return 0f;
+        }
+
         public static int Count(PowerDef p, float s) => p.count + (s >= 1.5f ? 1 : 0);
 
         // ------------------------------------------------------------------------------------------ catalogue
@@ -113,6 +134,9 @@ namespace Korvalune.Game
         }
         static PowerDef L(string cls, string id, string name, string skill, float dmg = 0, float radius = 0, int count = 0, float duration = 0, float cooldown = 0, float echo = 0, Element? to = null, bool pierce = false, bool stun = false)
             => Add(new PowerDef { cls = cls, id = id, name = name, skill = skill, dmg = dmg, radius = radius, count = count, duration = duration, cooldown = cooldown, echo = echo, toElement = to, pierce = pierce, stun = stun });
+
+        static void P(string cls, string id, string name, string trigger, string cast, float power)
+            => Add(new PowerDef { cls = cls, id = id, name = name, trigger = trigger, cast = cast, proc = power });
 
         static void S(string cls, string id, string name, string of, AffixSave[] two, PowerDef four, PowerDef six)
         {
@@ -206,6 +230,170 @@ namespace Korvalune.Game
             L(T, "thar.boomerang", "Retour du Juste", "Marteau boomerang", dmg: 1.0f, count: 2, pierce: true);
             L(T, "thar.pluie", "Arsenal céleste", "Pluie de marteaux", dmg: 0.7f, count: 8, radius: 0.3f);
             L(T, "thar.soleil", "Second soleil", "Soleil levant", dmg: 1.6f, radius: 0.7f, echo: 0.6f);
+
+            // ---- pouvoirs déclencheurs propres à chaque classe (une trentaine chacune) : une compétence en lance une autre
+            // ---- K : déclencheurs
+            P(K, "kael.dec01", "Taille-armure de Kael", "Tranche-ombre", "Brise-armure", 0.7f);
+            P(K, "kael.dec02", "Écu du Tonnerre noir", "Coup de bouclier", "Onde de choc", 0.8f);
+            P(K, "kael.dec03", "Sillage du Colosse", "Charge du déchu", "Écrasement sismique", 0.8f);
+            P(K, "kael.dec04", "Tourment des Lames", "Tourbillon d'acier", "Lames spectrales", 0.6f);
+            P(K, "kael.dec05", "Clameur des Épées", "Cri de guerre", "Tempête de lames", 0.8f);
+            P(K, "kael.dec06", "Estoc de l'Abîme", "Fente perçante", "Fissure abyssale", 0.6f);
+            P(K, "kael.dec07", "Chute des Âmes", "Bond fracassant", "Moisson d'âmes", 0.7f);
+            P(K, "kael.dec08", "Sceau sanglant", "Lame de sang", "Marque du déchu", 1.0f);
+            P(K, "kael.dec09", "Forge des Lames enfouies", "Écrasement sismique", "Pieu d'acier", 0.8f);
+            P(K, "kael.dec10", "Bastion des Enchaînés", "Rempart d'ombre", "Chaînes funestes", 1.0f);
+            P(K, "kael.dec11", "Faux du Calice", "Faucheuse", "Lame de sang", 0.9f);
+            P(K, "kael.dec12", "Étau des Enchaînés", "Chaînes funestes", "Onde de choc", 0.9f);
+            P(K, "kael.dec13", "Fièvre de la Saignée", "Frénésie sanglante", "Saignée", 1.0f);
+            P(K, "kael.dec14", "Écho du Rempart", "Onde de choc", "Coup de bouclier", 1.0f);
+            P(K, "kael.dec15", "Vengeance du Juge", "Riposte", "Lame du jugement", 0.6f);
+            P(K, "kael.dec16", "Serment du Bourreau", "Exécution", "Dernier serment", 0.4f);
+            P(K, "kael.dec17", "Lames du Vent noir", "Lames spectrales", "Fente perçante", 0.8f);
+            P(K, "kael.dec18", "Sentence du Déchu", "Marque du déchu", "Exécution", 0.7f);
+            P(K, "kael.dec19", "Fêlure maudite", "Brise-armure", "Marque du déchu", 1.0f);
+            P(K, "kael.dec20", "Ciel de fer", "Tempête de lames", "Éclipse d'acier", 0.5f);
+            P(K, "kael.dec21", "Hampe de la Démesure", "Étendard maudit", "Frénésie sanglante", 1.0f);
+            P(K, "kael.dec22", "Sang du Porte-étendard", "Saignée", "Étendard maudit", 1.0f);
+            P(K, "kael.dec23", "Cortège de l'Avatar", "Avatar de l'ombre", "Légion déchue", 1.0f);
+            P(K, "kael.dec24", "Faille aux Épées", "Fissure abyssale", "Tempête de lames", 0.7f);
+            P(K, "kael.dec25", "Herse d'acier", "Garde inébranlable", "Pieu d'acier", 1.0f);
+            P(K, "kael.dec26", "Linceul des Moissonnés", "Moisson d'âmes", "Rempart d'ombre", 1.0f);
+            P(K, "kael.dec27", "Verdict sismique", "Lame du jugement", "Écrasement sismique", 1.0f);
+            P(K, "kael.dec28", "Cor de la Légion", "Légion déchue", "Cri de guerre", 1.0f);
+            P(K, "kael.dec29", "Crépuscule des Juges", "Éclipse d'acier", "Lame du jugement", 0.8f);
+            P(K, "kael.dec30", "Danse du Faucheur", "Assaut du déchu", "Faucheuse", 0.8f);
+            P(K, "kael.dec31", "Pal sanglant", "Pieu d'acier", "Saignée", 0.8f);
+            // ---- E : déclencheurs
+            P(E, "elyra.dec01", "Étincelle du Vide", "Trait du Néant", "Éclair", 0.6f);
+            P(E, "elyra.dec02", "Fourche d'Arthésia", "Éclair", "Lame de foudre", 0.6f);
+            P(E, "elyra.dec03", "Geôle de l'Hiver", "Nova de givre", "Prison de givre", 1.0f);
+            P(E, "elyra.dec04", "Gravité de l'Orbe", "Orbe du Néant", "Trou noir", 0.7f);
+            P(E, "elyra.dec05", "Pas glacé", "Téléportation", "Nova de givre", 1.0f);
+            P(E, "elyra.dec06", "Lance des Blizzards", "Lance de glace", "Tornade de givre", 0.6f);
+            P(E, "elyra.dec07", "Paratonnerre d'Elyra", "Champ d'éclairs", "Chaîne de foudre", 0.8f);
+            P(E, "elyra.dec08", "Égide implosive", "Bouclier arcanique", "Singularité", 0.6f);
+            P(E, "elyra.dec09", "Constellation brisée", "Effondrement stellaire", "Pluie d'étoiles", 0.7f);
+            P(E, "elyra.dec10", "Prisme du Néant", "Rayon du Néant", "Orbe du Néant", 1.0f);
+            P(E, "elyra.dec11", "Couronne du Grand Hiver", "Tempête de glace", "Hiver éternel", 0.5f);
+            P(E, "elyra.dec12", "Cage d'orage", "Chaîne de foudre", "Champ d'éclairs", 0.8f);
+            P(E, "elyra.dec13", "Horizon des Astres", "Trou noir", "Effondrement stellaire", 1.0f);
+            P(E, "elyra.dec14", "Éclats de la Geôle", "Prison de givre", "Lance de glace", 1.0f);
+            P(E, "elyra.dec15", "Traîne de Seralyth", "Pluie d'étoiles", "Comète", 0.7f);
+            P(E, "elyra.dec16", "Kaléidoscope du Vide", "Éclats arcaniques", "Trait du Néant", 1.0f);
+            P(E, "elyra.dec17", "Grimoire du Familier", "Familier du Néant", "Cercle de runes", 1.0f);
+            P(E, "elyra.dec18", "Cœur d'orage", "Surcharge", "Chaîne de foudre", 1.0f);
+            P(E, "elyra.dec19", "Sillage d'orage", "Distorsion", "Champ d'éclairs", 0.9f);
+            P(E, "elyra.dec20", "Runes jaillissantes", "Cercle de runes", "Éclats arcaniques", 1.0f);
+            P(E, "elyra.dec21", "Comète d'Auralith", "Comète", "Tempête de glace", 0.8f);
+            P(E, "elyra.dec22", "Fil de la Surtension", "Lame de foudre", "Surcharge", 1.0f);
+            P(E, "elyra.dec23", "Œil du Blizzard", "Tornade de givre", "Nova de givre", 0.9f);
+            P(E, "elyra.dec24", "Point de non-retour", "Singularité", "Trou noir", 1.0f);
+            P(E, "elyra.dec25", "Reflets stellaires", "Miroir astral", "Pluie d'étoiles", 0.9f);
+            P(E, "elyra.dec26", "Sceau de l'Hiver sans fin", "Hiver éternel", "Prison de givre", 1.0f);
+            P(E, "elyra.dec27", "Verdict d'Arthésia", "Jugement céleste", "Lame de foudre", 1.0f);
+            P(E, "elyra.dec28", "Brèche implosive", "Faille dimensionnelle", "Singularité", 0.8f);
+            P(E, "elyra.dec29", "Témoins de l'Apocalypse", "Apocalypse du Néant", "Miroir astral", 1.0f);
+            P(E, "elyra.dec30", "Revers du Néant", "Rafale arcanique", "Orbe du Néant", 0.7f);
+            P(E, "elyra.dec31", "Spirale aux Éclats", "Spirale du Néant", "Éclats arcaniques", 0.7f);
+            // ---- V : déclencheurs
+            P(V, "varek.dec01", "Pointe fragmentée", "Carreau perçant", "Carreau éclatant", 0.5f);
+            P(V, "varek.dec02", "Carquois de la Vouivre", "Volée", "Flèche empoisonnée", 0.8f);
+            P(V, "varek.dec03", "Mèche ardente", "Carreau incendiaire", "Grenade de cendres", 0.7f);
+            P(V, "varek.dec04", "Collet du Trappeur", "Piège à mâchoires", "Filet", 1.0f);
+            P(V, "varek.dec05", "Roulade piégée", "Roulade", "Piège explosif", 1.0f);
+            P(V, "varek.dec06", "Fiole de la Fièvre", "Flèche empoisonnée", "Nuage toxique", 0.7f);
+            P(V, "varek.dec07", "Cendres en gerbe", "Grenade de cendres", "Carreau incendiaire", 1.0f);
+            P(V, "varek.dec08", "Appel du Fauconnier", "Marque du chasseur", "Faucon de cendres", 1.0f);
+            P(V, "varek.dec09", "Averse de braises", "Pluie de carreaux", "Flèches de feu", 0.6f);
+            P(V, "varek.dec10", "Chapelet de poudre", "Piège explosif", "Mines", 0.7f);
+            P(V, "varek.dec11", "Sentinelle de Maldrakor", "Tourelle", "Tir de barrage", 0.8f);
+            P(V, "varek.dec12", "Serres marquées", "Faucon de cendres", "Marque du chasseur", 1.0f);
+            P(V, "varek.dec13", "Rafale d'orage", "Tir de barrage", "Carreau tonnerre", 0.6f);
+            P(V, "varek.dec14", "Brume des Marais", "Nuage toxique", "Fumigène", 1.0f);
+            P(V, "varek.dec15", "Cœur de lave", "Carreau éclatant", "Éruption", 0.4f);
+            P(V, "varek.dec16", "Tir de l'Invisible", "Camouflage", "Tir fatal", 1.0f);
+            P(V, "varek.dec17", "Proie clouée", "Filet", "Pluie de carreaux", 0.9f);
+            P(V, "varek.dec18", "Regard du Dernier soupir", "Tir fatal", "Œil du faucon", 1.0f);
+            P(V, "varek.dec19", "Ciel incendié", "Flèches de feu", "Brasier", 0.7f);
+            P(V, "varek.dec20", "Hurlement des Traits", "Loup spectral", "Volée", 1.0f);
+            P(V, "varek.dec21", "Voile du Rôdeur", "Fumigène", "Camouflage", 1.0f);
+            P(V, "varek.dec22", "Champ de crocs", "Mines", "Piège à mâchoires", 1.0f);
+            P(V, "varek.dec23", "Ciel du Chasseur", "Chasseur des cendres", "Flèches de feu", 1.0f);
+            P(V, "varek.dec24", "Tourelle d'orage", "Carreau tonnerre", "Tourelle", 1.0f);
+            P(V, "varek.dec25", "Éventail d'acier", "Tir en éventail", "Carreau perçant", 1.0f);
+            P(V, "varek.dec26", "Colère de Cendrefer", "Éruption", "Déluge de cendres", 0.4f);
+            P(V, "varek.dec27", "Chasse sauvage", "Meute", "Chasseur des cendres", 1.0f);
+            P(V, "varek.dec28", "Gueule embrasée", "Brasier", "Éruption", 0.7f);
+            P(V, "varek.dec29", "Ailes du Faucon", "Œil du faucon", "Tir en éventail", 1.0f);
+            P(V, "varek.dec30", "Saut du Poseur de mines", "Salto arrière", "Mines", 1.0f);
+            P(V, "varek.dec31", "Botte du Braconnier", "Ruade", "Filet", 1.0f);
+            // ---- M : déclencheurs
+            P(M, "morv.dec01", "Échine éclatée", "Lance d'os", "Nova d'os", 0.6f);
+            P(M, "morv.dec02", "Âme démultipliée", "Éclat d'âme", "Esprit vengeur", 0.8f);
+            P(M, "morv.dec03", "Tombe piégée", "Lever les morts", "Explosion de cadavre", 1.0f);
+            P(M, "morv.dec04", "Cadavre pestilentiel", "Explosion de cadavre", "Peste", 0.6f);
+            P(M, "morv.dec05", "Cage de l'Ossuaire", "Prison d'os", "Mur d'ossements", 1.0f);
+            P(M, "morv.dec06", "Calice débordant", "Siphon de sang", "Marée de sang", 0.4f);
+            P(M, "morv.dec07", "Couronne de la Geôlière", "Nova d'os", "Prison d'os", 1.0f);
+            P(M, "morv.dec08", "Cuirasse des Relevés", "Armure d'os", "Lever les morts", 1.0f);
+            P(M, "morv.dec09", "Sort des Faibles", "Malédiction de faiblesse", "Âmes errantes", 1.0f);
+            P(M, "morv.dec10", "Cortège hurlant", "Esprit vengeur", "Éclat d'âme", 1.0f);
+            P(M, "morv.dec11", "Herse d'ossements", "Mur d'ossements", "Lance d'os", 1.0f);
+            P(M, "morv.dec12", "Lame du Pacte", "Lame de sang", "Pacte de sang", 1.0f);
+            P(M, "morv.dec13", "Nuée errante", "Âmes errantes", "Tempête d'âmes", 0.6f);
+            P(M, "morv.dec14", "Pas du Colosse d'os", "Golem d'os", "Nova d'os", 1.0f);
+            P(M, "morv.dec15", "Miasme débilitant", "Peste", "Malédiction de faiblesse", 1.0f);
+            P(M, "morv.dec16", "Faux du Fossoyeur", "Moisson", "Fossoyeur", 1.0f);
+            P(M, "morv.dec17", "Orage de la Déchirure", "Tempête d'âmes", "Déchirure de l'âme", 0.5f);
+            P(M, "morv.dec18", "Pacte des Mages", "Pacte de sang", "Mages squelettes", 1.0f);
+            P(M, "morv.dec19", "Mains de la Tombe", "Fossoyeur", "Explosion de cadavre", 1.0f);
+            P(M, "morv.dec20", "Conclave des Crânes", "Mages squelettes", "Nuée de crânes", 0.7f);
+            P(M, "morv.dec21", "Ressac funèbre", "Vague de mort", "Moisson", 1.0f);
+            P(M, "morv.dec22", "Hurlement des Crânes", "Nuée de crânes", "Cri de la banshee", 0.6f);
+            P(M, "morv.dec23", "Gardien du Linceul", "Linceul", "Golem d'os", 1.0f);
+            P(M, "morv.dec24", "Lamento", "Cri de la banshee", "Vague de mort", 1.0f);
+            P(M, "morv.dec25", "Reflux écarlate", "Marée de sang", "Lame de sang", 1.0f);
+            P(M, "morv.dec26", "Étendard de la Peste", "Armée des morts", "Fléau", 0.6f);
+            P(M, "morv.dec27", "Faux de la Déchirure", "Déchirure de l'âme", "Faux spectrale", 0.8f);
+            P(M, "morv.dec28", "Moisson des Âmes", "Faux spectrale", "Tempête d'âmes", 0.8f);
+            P(M, "morv.dec29", "Fléau écarlate", "Fléau", "Marée de sang", 0.7f);
+            P(M, "morv.dec30", "Couronne du Seigneur", "Seigneur de la mort", "Armée des morts", 1.0f);
+            P(M, "morv.dec31", "Paume ouverte", "Sacrifice de sang", "Esprit vengeur", 1.0f);
+            P(M, "morv.dec32", "Étreinte du Linceul", "Étreinte d'outre-tombe", "Linceul", 1.0f);
+            // ---- T : déclencheurs
+            P(T, "thar.dec01", "Marteau du Verdict", "Marteau béni", "Jugement", 0.6f);
+            P(T, "thar.dec02", "Pavois consacré", "Coup de pavois", "Consécration", 1.0f);
+            P(T, "thar.dec03", "Orbite lumineuse", "Marteau tournoyant", "Chaîne sacrée", 0.7f);
+            P(T, "thar.dec04", "Terre promise", "Consécration", "Sanctuaire", 0.6f);
+            P(T, "thar.dec05", "Charge du Marteau", "Charge sacrée", "Martèlement", 1.0f);
+            P(T, "thar.dec06", "Bénédiction du Rempart", "Bénédiction", "Bouclier de foi", 1.0f);
+            P(T, "thar.dec07", "Tribunal céleste", "Jugement", "Colère divine", 0.6f);
+            P(T, "thar.dec08", "Égide rayonnante", "Bouclier de foi", "Onde purificatrice", 0.7f);
+            P(T, "thar.dec09", "Loupe du Soleil", "Rayon solaire", "Marteau de feu", 0.8f);
+            P(T, "thar.dec10", "Héraut du Courage", "Aura de courage", "Gardien céleste", 1.0f);
+            P(T, "thar.dec11", "Arsenal des Cieux", "Colère divine", "Pluie de marteaux", 0.6f);
+            P(T, "thar.dec12", "Enclume et pavois", "Martèlement", "Coup de pavois", 1.0f);
+            P(T, "thar.dec13", "Lumière qui brûle", "Lumière guérisseuse", "Consécration", 1.0f);
+            P(T, "thar.dec14", "Rosaire de lances", "Chaîne sacrée", "Lance de lumière", 0.8f);
+            P(T, "thar.dec15", "Atterrissage du Juge", "Bond du croisé", "Jugement", 1.0f);
+            P(T, "thar.dec16", "Forge solaire", "Marteau de feu", "Fureur solaire", 1.0f);
+            P(T, "thar.dec17", "Hampe et marteau", "Lance de lumière", "Marteau tournoyant", 1.0f);
+            P(T, "thar.dec18", "Regard du Gardien", "Gardien céleste", "Éblouissement", 1.0f);
+            P(T, "thar.dec19", "Coup de grâce", "Éblouissement", "Châtiment", 1.0f);
+            P(T, "thar.dec20", "Sentence ultime", "Châtiment", "Avènement", 0.4f);
+            P(T, "thar.dec21", "Retour de l'Arsenal", "Pluie de marteaux", "Marteau boomerang", 1.0f);
+            P(T, "thar.dec22", "Source sacrée", "Sanctuaire", "Lumière guérisseuse", 0.5f);
+            P(T, "thar.dec23", "Aube furieuse", "Fureur solaire", "Soleil levant", 0.6f);
+            P(T, "thar.dec24", "Onde du Marteau", "Onde purificatrice", "Marteau béni", 1.0f);
+            P(T, "thar.dec25", "Ailes de la Croisade", "Ange gardien", "Croisade", 1.0f);
+            P(T, "thar.dec26", "Naissance d'une étoile", "Soleil levant", "Supernova", 0.3f);
+            P(T, "thar.dec27", "Arrêt du Juge", "Juge céleste", "Châtiment", 1.0f);
+            P(T, "thar.dec28", "Bannière des Marteaux", "Croisade", "Pluie de marteaux", 1.0f);
+            P(T, "thar.dec29", "Avènement de l'Ange", "Avènement", "Ange gardien", 1.0f);
+            P(T, "thar.dec30", "Marteau du Retour", "Marteau boomerang", "Martèlement", 0.8f);
+            P(T, "thar.dec31", "Prière exaucée", "Prière de l'aube", "Soleil levant", 0.8f);
+            P(T, "thar.dec32", "Cendres bénies", "Supernova", "Sanctuaire", 1.0f);
 
             // ---- ensembles : 2 pièces = caractéristiques, 4 pièces = pouvoir, 6 pièces = pouvoir majeur
             S(K, "set.kael.serment", "Serment du Déchu", "du Serment déchu", new[] { A("Force", 60), A("Vie", 80) },

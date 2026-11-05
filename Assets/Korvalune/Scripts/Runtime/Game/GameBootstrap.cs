@@ -122,7 +122,7 @@ namespace Korvalune.Game
             {
                 if (save.skillRanks != null && save.skillRanks.Count == Runner.book.Count) Runner.ranks = save.skillRanks.ToArray();
                 if (save.skillVariants != null && save.skillVariants.Count == Runner.book.Count) Runner.variants = save.skillVariants.ToArray();
-                if (save.loadout != null && save.loadout.Count == Runner.loadout.Length) Runner.loadout = save.loadout.ToArray();
+                if (save.loadout != null && save.loadout.Count > 0) Runner.SetLoadout(save.loadout);   // 5 emplacements sur téléphone, 8 sur ordinateur
             }
             // équipement : caractéristiques de base (niveau) + objets portés
             var eq = hero.AddComponent<Equipment>(); eq.Init();

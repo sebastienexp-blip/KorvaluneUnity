@@ -25,6 +25,7 @@ namespace Korvalune.Game
         public static int Muted { get => Get("muet", 0); set => Set("muet", value); }
         // jeu
         public static int AutoAim { get => Get("visee", 0); set => Set("visee", value); }                  // activée / désactivée
+        public static int HitStop { get => Get("arret_coup", 0); set => Set("arret_coup", value); }       // impact des coups (arrêt sur image) : activé / désactivé
         public static int AutoLoot { get => Get("ramasse", 0); set => Set("ramasse", value); }             // non / communs / magiques / rares
         public static int EnemyNames { get => Get("noms", 0); set => Set("noms", value); }                 // tous / cible / masqués
         public static int Shake { get => Get("secousses", 0); set => Set("secousses", value); }            // activées / désactivées
@@ -179,6 +180,7 @@ namespace Korvalune.Game
 
             y = 0; var j = (RectTransform)pages[2].page.transform;
             Row(j, ref y, "Visée automatique", new[] { "Activée", "Désactivée" }, () => Settings.AutoAim, k => Settings.AutoAim = k);
+            Row(j, ref y, "Impact des coups", new[] { "Activé", "Désactivé" }, () => Settings.HitStop, k => Settings.HitStop = k);
             Row(j, ref y, "Ramassage auto", new[] { "Aucun", "Communs", "Magiques", "Rares" }, () => Settings.AutoLoot, k => Settings.AutoLoot = k);
             Row(j, ref y, "Distance caméra", new[] { "Proche", "Normale", "Lointaine" }, () => PlayerPrefs.GetInt("korvalune.zoom", 1), k => { PlayerPrefs.SetInt("korvalune.zoom", k); Changed(); });
             Row(j, ref y, "Secousses d'écran", new[] { "Activées", "Désactivées" }, () => Settings.Shake, k => Settings.Shake = k);

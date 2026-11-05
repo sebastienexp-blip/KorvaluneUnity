@@ -26,6 +26,17 @@ namespace Korvalune.Game
             if (ranks == null || ranks.Length != book.Count) { ranks = new int[book.Count]; ranks[0] = 1; }
             if (variants == null || variants.Length != book.Count) variants = new int[book.Count];
             readyAt = new float[book.Count];
+            SetLoadout(loadout);
+        }
+
+        /// <summary>Barre de compétences à la taille de la plateforme (5 sur téléphone, 8 sur ordinateur) : garde les
+        /// compétences déjà placées et complète avec les premières compétences du livre qui n'y sont pas encore.</summary>
+        public void SetLoadout(IList<int> saved)
+        {
+            int n = Platform.SkillSlots; var l = new List<int>();
+            if (saved != null) foreach (var i in saved) if (l.Count < n && i >= 0 && i < book.Count && !l.Contains(i)) l.Add(i);
+            for (int i = 0; l.Count < n && i < book.Count; i++) if (!l.Contains(i)) l.Add(i);
+            loadout = l.ToArray();
         }
 
         public bool Unlocked(int i) => p && p.level >= book[i].unlockLevel;
@@ -66,11 +77,12 @@ namespace Korvalune.Game
             var tgt = Aimable(d.kind) ? p.AcquireTarget(Mathf.Max(p.autoAimRange, d.range + 2f)) : null;
             float reach = Reach(d);
             if (tgt && reach > 0 && Flat(tgt.transform.position - Pos).magnitude > reach + 0.3f)
-            { StartCoroutine(ApproachThenRun(d, ranks[i], tgt, reach, echo)); return true; }
+            { StartCoroutine(ApproachThenRun(d, ranks[i], tgt, reach, echo, book[i])); return true; }
             if (tgt) Face(tgt);
             Sound.Play(Sound.CastOf(d), Pos, 0.9f);
             StartCoroutine(Run(d, ranks[i]));
             if (echo > 0 && Echoable(d.kind)) StartCoroutine(Echo(d, ranks[i], echo));
+            Procs(book[i]);
             return true;
         }
 
@@ -89,7 +101,7 @@ namespace Korvalune.Game
         };
 
         /// <summary>Le héros court vers sa cible (1,6 s au plus, le joystick reprend la main), puis lance la compétence.</summary>
-        IEnumerator ApproachThenRun(SkillDef d, int rank, Health tgt, float reach, float echo)
+        IEnumerator ApproachThenRun(SkillDef d, int rank, Health tgt, float reach, float echo, SkillDef source)
         {
             float until = Time.time + 1.6f;
             while (tgt && !tgt.Dead && Time.time < until && !p.Health.Dead && !p.Health.Stunned)
@@ -107,7 +119,48 @@ namespace Korvalune.Game
             Sound.Play(Sound.CastOf(d), Pos, 0.9f);
             StartCoroutine(Run(d, rank));
             if (echo > 0 && Echoable(d.kind)) StartCoroutine(Echo(d, rank, echo));
+            Procs(source);
         }
+
+        // ------------------------------------------------------------------ légendaires déclencheurs
+        readonly Dictionary<string, float> procReady = new Dictionary<string, float>();
+
+        /// <summary>Pouvoirs déclencheurs portés (comme dans Diablo 4) : la compétence utilisée en lance une autre, même non
+        /// apprise, à puissance réduite, sans coût de mana ni recharge (mais avec un délai minimal par pouvoir).</summary>
+        void Procs(SkillDef used)
+        {
+            var eqp = GetComponent<Equipment>(); if (!eqp || used == null) return;
+            foreach (var (pw, s) in eqp.ActivePowers())
+            {
+                if (!pw.IsTrigger || pw.trigger != used.name) continue;
+                if (procReady.TryGetValue(pw.id, out var t) && Time.time < t) continue;
+                int ci = book.FindIndex(b => b.name == pw.cast); if (ci < 0) continue;
+                procReady[pw.id] = Time.time + Powers.ProcCooldown(pw);
+                StartCoroutine(Proc(used, ci, Powers.ProcPower(pw, s)));
+            }
+        }
+
+        IEnumerator Proc(SkillDef used, int ci, float power)
+        {
+            // après un déplacement (bond, charge, téléportation), la compétence part à l'arrivée
+            bool travel = used.kind == SkillKind.Leap || used.kind == SkillKind.Dash || used.kind == SkillKind.Teleport || used.kind == SkillKind.Evade;
+            yield return new WaitForSeconds(travel ? 0.7f : 0.35f);
+            if (p.Health.Dead) yield break;
+            var eqp = GetComponent<Equipment>();
+            float echo = 0; var c = eqp ? eqp.Modify(book[ci], out echo) : book[ci];      // les autres légendaires s'appliquent aussi
+            int rank = Mathf.Max(1, ranks[ci]);
+            if (variants != null && ci < variants.Length && ranks[ci] >= SkillVariants.MinRank) c = SkillVariants.Apply(c, variants[ci]);
+            var e = c.Clone(); e.anim = ""; e.ghost = true; e.empowered = true;
+            if (e.kind != SkillKind.Buff && e.kind != SkillKind.Shield && e.kind != SkillKind.Heal) e.mult *= power;
+            else e.duration *= Mathf.Lerp(0.6f, 1f, Mathf.Clamp01(power));
+            var col = Vfx.Of(e.element);
+            Vfx.Shock(Pos, col.outer, 1.8f); Vfx.Burst(Pos + Vector3.up * 1.5f, e.element, 20, 3.5f);
+            Sound.Play(Sound.CastOf(e), Pos, 0.7f, 0.1f, 0f);
+            yield return Run(e, rank);
+        }
+
+        /// <summary>Verrouillage du héros pendant l'animation (pas pour une copie spectrale : écho ou déclenchement).</summary>
+        void LockFor(SkillDef d, float t) { if (!d.ghost) p.Lock(t); }
 
         /// <summary>Types de compétences qu'un écho peut relancer (pas les déplacements ni les effets sur soi).</summary>
         static bool Echoable(SkillKind k) => !(k == SkillKind.Leap || k == SkillKind.Dash || k == SkillKind.Teleport || k == SkillKind.Evade
@@ -154,6 +207,10 @@ namespace Korvalune.Game
             if (d.stun && d.duration > 0) h.Stun(d.duration);
             if (d.heal && d.kind != SkillKind.Heal && d.kind != SkillKind.Nova) p.Health.Heal(dmg * 0.04f);   // voie « vampirique »
             Vfx.Burst(h.transform.position + Vector3.up * 1.1f, d.element, 10, 4f);
+            // coups de mêlée et ondes de choc : le monstre recule ; un critique marque un bref arrêt sur image
+            if (d.kind == SkillKind.Strike || d.kind == SkillKind.Cleave || d.kind == SkillKind.Combo || d.kind == SkillKind.Nova || d.kind == SkillKind.Leap || d.kind == SkillKind.Dash)
+                CombatFeel.Knock(h, Pos, crit ? 1.3f : 0.8f);
+            if (crit && !d.ghost) CombatFeel.HitStop(0.04f);
         }
 
         void HitArea(Vector3 c, float r, float dmg, SkillDef d, Vector3? fwd = null, float cone = 360)
@@ -191,7 +248,7 @@ namespace Korvalune.Game
                 case SkillKind.Strike:
                 case SkillKind.Cleave:
                 {
-                    p.FaceNearest(d.radius + 2); float w = Play(d, 0.3f); p.Lock(w + 0.25f);
+                    p.FaceNearest(d.radius + 2); float w = Play(d, 0.3f); LockFor(d, w + 0.25f);
                     yield return new WaitForSeconds(w);
                     Vfx.Slash(p.transform, d.element, d.radius * 1.3f, d.kind == SkillKind.Cleave ? 0 : Random.Range(-30f, 30f));
                     if (d.kind == SkillKind.Cleave) { Vfx.Slash(p.transform, d.element, d.radius * 1.3f, 180); Vfx.Shock(Pos, Vfx.Of(d.element).outer, d.radius); }
@@ -202,7 +259,7 @@ namespace Korvalune.Game
                 case SkillKind.Combo:
                 {
                     p.FaceNearest(d.radius + 3); float w = Play(d, 0.25f);
-                    var times = HitTimes(d, Mathf.Max(2, d.count), 0.16f); p.Lock(times[times.Length - 1] + 0.3f);
+                    var times = HitTimes(d, Mathf.Max(2, d.count), 0.16f); LockFor(d, times[times.Length - 1] + 0.3f);
                     float prev = 0;
                     for (int k = 0; k < times.Length; k++)
                     {
@@ -217,7 +274,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Evade:
                 {
-                    var start = Pos; Play(d, 0f); p.Lock(0.6f);
+                    var start = Pos; Play(d, 0f); LockFor(d, 0.6f);
                     Vfx.Explosion(start + Vector3.up * 0.3f, d.element, d.radius); HitArea(start, d.radius, dmg, d); Shake(0.12f);
                     float t = 0, dur = 0.45f; var back = -Fwd;
                     while (t < dur) { float dt = Time.deltaTime; t += dt; p.Move(back * d.range / dur * dt); yield return null; }
@@ -225,7 +282,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Whirl:
                 {
-                    p.Lock(d.duration); float t = 0, next = 0, replay = 0, yaw = p.transform.eulerAngles.y;
+                    LockFor(d, d.duration); float t = 0, next = 0, replay = 0, yaw = p.transform.eulerAngles.y;
                     bool own = HasState(d.anim);
                     Vfx.Aura(p.transform, d.element, d.radius * 0.8f, d.duration);
                     while (t < d.duration)
@@ -239,7 +296,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Line:
                 {
-                    p.FaceNearest(d.range); float w = Play(d, 0.25f); p.Lock(w + 0.2f);
+                    p.FaceNearest(d.range); float w = Play(d, 0.25f); LockFor(d, w + 0.2f);
                     yield return new WaitForSeconds(w);
                     var a = Pos + Vector3.up; var b = a + Fwd * d.range;
                     if (d.element == Element.Foudre) Vfx.Bolt(a, b, d.element, 1.0f, 0.35f); else Vfx.Beam(a, b, d.element, d.radius, 0.35f);
@@ -255,7 +312,7 @@ namespace Korvalune.Game
                 case SkillKind.Projectile:
                 case SkillKind.Barrage:
                 {
-                    var tp = TargetPoint(d.range); float w = Play(d, 0.2f); p.Lock(w + 0.15f);
+                    var tp = TargetPoint(d.range); float w = Play(d, 0.2f); LockFor(d, w + 0.15f);
                     yield return new WaitForSeconds(w);
                     int n = Mathf.Max(1, d.count + (d.kind == SkillKind.Barrage ? rank - 1 : 0)); float spread = d.kind == SkillKind.Barrage ? 70f : 0f;
                     for (int k = 0; k < n; k++)
@@ -275,7 +332,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Nova:
                 {
-                    float w = Play(d, 0.25f); p.Lock(w + 0.25f);
+                    float w = Play(d, 0.25f); LockFor(d, w + 0.25f);
                     yield return new WaitForSeconds(w);
                     Vfx.Explosion(Pos + Vector3.up * 0.3f, d.element, d.radius * 0.6f); Vfx.Shock(Pos, Vfx.Of(d.element).outer, d.radius); Vfx.Shock(Pos, Vfx.Of(d.element).core, d.radius * 0.6f, 0.6f);
                     int hits = 0;
@@ -286,7 +343,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.GroundAoE:
                 {
-                    var tp = TargetPoint(d.range); float w = Mathf.Max(0.45f, Play(d, 0.55f)); p.Lock(w + 0.2f);
+                    var tp = TargetPoint(d.range); float w = Mathf.Max(0.45f, Play(d, 0.55f)); LockFor(d, w + 0.2f);
                     Vfx.Runes(tp, d.element, d.radius, w + 0.15f);
                     yield return new WaitForSeconds(w);
                     Vfx.Beam(tp + Vector3.up * 30, tp, d.element, d.radius * 0.7f, 0.25f);
@@ -296,7 +353,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Rain:
                 {
-                    var tp = TargetPoint(d.range); float w = Play(d, 0.2f); p.Lock(w + 0.2f);
+                    var tp = TargetPoint(d.range); float w = Play(d, 0.2f); LockFor(d, w + 0.2f);
                     Vfx.Runes(tp, d.element, d.radius, d.duration + w + 0.3f);
                     yield return new WaitForSeconds(w);
                     int n = d.count + 2 * (rank - 1); float dt = d.duration / Mathf.Max(1, n);
@@ -311,7 +368,7 @@ namespace Korvalune.Game
                 case SkillKind.Zone:
                 case SkillKind.Totem:
                 {
-                    var tp = d.range > 0 ? TargetPoint(d.range) : Pos; float w = Play(d, 0.2f); p.Lock(w + 0.2f);
+                    var tp = d.range > 0 ? TargetPoint(d.range) : Pos; float w = Play(d, 0.2f); LockFor(d, w + 0.2f);
                     yield return new WaitForSeconds(w);
                     Vfx.Zone(tp, d.element, d.radius, d.duration);
                     if (d.kind == SkillKind.Totem) Vfx.Beam(tp, tp + Vector3.up * 4, d.element, 0.6f, d.duration);
@@ -327,7 +384,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Chain:
                 {
-                    p.FaceNearest(d.range); float w = Play(d, 0.2f); p.Lock(w + 0.15f);
+                    p.FaceNearest(d.range); float w = Play(d, 0.2f); LockFor(d, w + 0.15f);
                     yield return new WaitForSeconds(w);
                     var from = Pos + Vector3.up * 1.4f; var done = new HashSet<Health>();
                     int n = d.count + (rank - 1);
@@ -344,7 +401,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Beam:
                 {
-                    p.FaceNearest(d.range); float w = Play(d, 0.2f); p.Lock(d.duration + w);
+                    p.FaceNearest(d.range); float w = Play(d, 0.2f); LockFor(d, d.duration + w);
                     yield return new WaitForSeconds(w);
                     float t = 0, tick = 0;
                     while (t < d.duration)
@@ -372,7 +429,7 @@ namespace Korvalune.Game
                     var tp = TargetPoint(d.range); var start = Pos; var dir = tp - start; dir.y = 0; float dist = Mathf.Min(dir.magnitude, d.range); dir = dir.sqrMagnitude > 0.01f ? dir.normalized : Fwd;
                     if (d.kind == SkillKind.Teleport)
                     {
-                        float w0 = Play(d, 0f); p.Lock(w0 + 0.3f); yield return new WaitForSeconds(w0);
+                        float w0 = Play(d, 0f); LockFor(d, w0 + 0.3f); yield return new WaitForSeconds(w0);
                         Vfx.Explosion(start + Vector3.up, d.element, 1.2f);
                         var cc = GetComponent<CharacterController>(); cc.enabled = false; p.transform.position = GameBootstrap.Ground(start + dir * dist); cc.enabled = true;
                         Vfx.Explosion(Pos + Vector3.up * 0.5f, d.element, d.radius); HitArea(Pos, d.radius, dmg, d);
@@ -381,7 +438,7 @@ namespace Korvalune.Game
                     bool ownLeap = HasState(d.anim);
                     if (ownLeap) { float w0 = Play(d, 0f); if (d.kind == SkillKind.Leap) yield return new WaitForSeconds(Mathf.Min(0.15f, w0)); }
                     else anim?.SetTrigger(CharacterRig.DodgeId);
-                    p.Lock(0.6f);
+                    LockFor(d, 0.6f);
                     float t = 0, dur = d.kind == SkillKind.Leap ? (ownLeap ? 0.42f : 0.5f) : 0.25f; var hitOnce = new HashSet<Health>();
                     while (t < dur)
                     {
@@ -397,7 +454,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Buff:
                 {
-                    { float w = Play(d, 0.1f); p.Lock(w + 0.2f); yield return new WaitForSeconds(w); }
+                    { float w = Play(d, 0.1f); LockFor(d, w + 0.2f); yield return new WaitForSeconds(w); }
                     p.damageMult = 1f + d.mult * (1 + 0.1f * (rank - 1)); p.buffUntil = Time.time + d.duration;
                     if (d.mana <= 0) p.Health.TakeDamage(p.Health.maxHp * 0.1f, p.Health);
                     Vfx.Aura(p.transform, d.element, 1.2f, d.duration); Vfx.Explosion(Pos + Vector3.up, d.element, 1.5f);
@@ -406,7 +463,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Shield:
                 {
-                    { float w = Play(d, 0.1f); p.Lock(w + 0.2f); yield return new WaitForSeconds(w); }
+                    { float w = Play(d, 0.1f); LockFor(d, w + 0.2f); yield return new WaitForSeconds(w); }
                     shieldUntil = Time.time + d.duration; shieldPower = Mathf.Clamp01(d.mult + 0.05f * (rank - 1));
                     Vfx.Aura(p.transform, d.element, 1.0f, d.duration); Vfx.Shock(Pos, Vfx.Of(d.element).outer, 2.5f);
                     p.Notify?.Invoke($"{d.name} : dégâts subis −{Mathf.RoundToInt(shieldPower * 100)} %");
@@ -414,14 +471,14 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Heal:
                 {
-                    { float w = Play(d, 0.1f); p.Lock(w + 0.2f); yield return new WaitForSeconds(w); }
+                    { float w = Play(d, 0.1f); LockFor(d, w + 0.2f); yield return new WaitForSeconds(w); }
                     p.Health.Heal(p.Health.maxHp * (d.mult + 0.05f * (rank - 1)));
                     Vfx.Aura(p.transform, d.element, 1.0f, 1.5f); Vfx.Explosion(Pos + Vector3.up, d.element, 1.2f);
                     break;
                 }
                 case SkillKind.Curse:
                 {
-                    var tp = d.range > 0 ? TargetPoint(d.range) : Pos; float w = Play(d, 0.2f); p.Lock(w + 0.2f);
+                    var tp = d.range > 0 ? TargetPoint(d.range) : Pos; float w = Play(d, 0.2f); LockFor(d, w + 0.2f);
                     Vfx.Runes(tp, d.element, d.radius, w + 1.2f);
                     yield return new WaitForSeconds(w); Vfx.Zone(tp, d.element, d.radius, 1.0f);
                     curseUntil = Time.time + d.duration;
@@ -430,7 +487,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Pull:
                 {
-                    { float w = Play(d, 0.1f); p.Lock(w + 0.2f); yield return new WaitForSeconds(w); }
+                    { float w = Play(d, 0.1f); LockFor(d, w + 0.2f); yield return new WaitForSeconds(w); }
                     var tp = d.range > 0 ? TargetPoint(d.range) : Pos; Vfx.Zone(tp, d.element, d.radius * 0.5f, 1.2f);
                     float t = 0;
                     var targets = Health.Around(tp, d.radius, Faction.Player);
@@ -449,7 +506,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Trap:
                 {
-                    { float w = Play(d, 0.1f); p.Lock(w + 0.2f); yield return new WaitForSeconds(w); }
+                    { float w = Play(d, 0.1f); LockFor(d, w + 0.2f); yield return new WaitForSeconds(w); }
                     int n = Mathf.Max(1, d.count);
                     for (int k = 0; k < n; k++)
                     {
@@ -461,7 +518,7 @@ namespace Korvalune.Game
                 }
                 case SkillKind.Summon:
                 {
-                    { float w = Play(d, 0.1f); p.Lock(w + 0.2f); yield return new WaitForSeconds(w); }
+                    { float w = Play(d, 0.1f); LockFor(d, w + 0.2f); yield return new WaitForSeconds(w); }
                     var t = config ? config.enemies.Find(x => x.id == SummonType(d)) : null;
                     if (t == null || !t.prefab) { p.Notify?.Invoke("Invocation indisponible"); break; }
                     var boot = FindFirstObjectByType<GameBootstrap>();

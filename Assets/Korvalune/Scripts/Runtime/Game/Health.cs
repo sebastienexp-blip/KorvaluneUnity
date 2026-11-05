@@ -33,6 +33,8 @@ namespace Korvalune.Game
             if (hpRegen > 0) hp = Mathf.Min(maxHp, hp + hpRegen * Time.deltaTime);
         }
 
+        /// <summary>Invulnérable jusqu'à cet instant (esquive du héros).</summary>
+        public float invulnerableUntil;
         public bool Spend(float m) { if (mana < m) return false; mana -= m; return true; }
 
         public void Stun(float seconds) { if (!Dead) StunnedUntil = Mathf.Max(StunnedUntil, Time.time + seconds); }
@@ -43,6 +45,7 @@ namespace Korvalune.Game
         public void TakeDamage(float amount, Health source, bool crit = false)
         {
             if (Dead || amount <= 0) return;
+            if (Time.time < invulnerableUntil) return;                 // esquive : invulnérable pendant la roulade
             if (modifyIncoming != null) amount = modifyIncoming(amount);
             amount = Mathf.Max(1f, amount - armor);
             hp = Mathf.Max(0, hp - amount);

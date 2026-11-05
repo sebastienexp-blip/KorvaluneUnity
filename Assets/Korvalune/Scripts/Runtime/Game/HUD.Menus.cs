@@ -153,13 +153,15 @@ namespace Korvalune.Game
 
             // ---- compétences équipées (barre du bas)
             Label(panel, "Équipées", "Compétences équipées", 26, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(-230, 168), new Vector2(560, 34)).color = UIStyle.Gold;
-            Label(panel, "Aide", "Choisissez une compétence apprise, puis touchez un emplacement pour l'y placer.", 21, TextAnchor.MiddleLeft, new Vector2(0.5f, 0), new Vector2(330, 82), new Vector2(520, 70)).color = new Color(0.85f, 0.78f, 0.66f);
+            bool eight = runner.loadout.Length > 5;           // ordinateur : 8 emplacements, plus serrés
+            float step = eight ? 100 : 120, sz = eight ? 92 : 110, x0 = eight ? -520 : -470;
+            Label(panel, "Aide", Platform.Desktop ? "Choisissez une compétence apprise, puis cliquez sur un emplacement : touches 1 à 8 en jeu." : "Choisissez une compétence apprise, puis touchez un emplacement pour l'y placer.", 21, TextAnchor.MiddleLeft, new Vector2(0.5f, 0), eight ? new Vector2(440, 70) : new Vector2(330, 82), eight ? new Vector2(380, 100) : new Vector2(520, 70)).color = new Color(0.85f, 0.78f, 0.66f);
             for (int s = 0; s < runner.loadout.Length; s++)
             {
                 int slot = s;
-                var bg = Img(panel, "Emplacement" + s, UIStyle.Slot(), new Vector2(0.5f, 0), new Vector2(-470 + s * 120, 40), new Vector2(110, 110)); bg.type = Image.Type.Sliced; bg.raycastTarget = true;
-                var ic = Img(bg.rectTransform, "Icône", null, new Vector2(0.5f, 0.5f), new Vector2(0, 6), new Vector2(76, 76));
-                var num = Label(bg.rectTransform, "N", (s + 1).ToString(), 22, TextAnchor.LowerCenter, new Vector2(0.5f, 0.5f), new Vector2(0, -2), new Vector2(100, 104));
+                var bg = Img(panel, "Emplacement" + s, UIStyle.Slot(), new Vector2(0.5f, 0), new Vector2(x0 + s * step, 40), new Vector2(sz, sz)); bg.type = Image.Type.Sliced; bg.raycastTarget = true;
+                var ic = Img(bg.rectTransform, "Icône", null, new Vector2(0.5f, 0.5f), new Vector2(0, 6), new Vector2(sz * 0.69f, sz * 0.69f));
+                var num = Label(bg.rectTransform, "N", (s + 1).ToString(), 22, TextAnchor.LowerCenter, new Vector2(0.5f, 0.5f), new Vector2(0, -2), new Vector2(sz - 10, sz - 6));
                 num.color = UIStyle.Gold; num.gameObject.AddComponent<Outline>().effectColor = Color.black;
                 var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => PickTreeSlot(slot));
                 treeSlots.Add((bg, ic, num));
@@ -236,7 +238,7 @@ namespace Korvalune.Game
             for (int s = 0; s < treeSlots.Count; s++)
             {
                 var (bg, ic, num) = treeSlots[s]; var d = runner.book[runner.loadout[s]];
-                SetSkillIcon(ic, d, 0.7f, 76, 90); ic.color = runner.ranks[runner.loadout[s]] > 0 ? Color.white : new Color(0.4f, 0.4f, 0.4f);
+                SetSkillIcon(ic, d, 0.7f, ic.rectTransform.sizeDelta.x, ic.rectTransform.sizeDelta.x * 1.18f); ic.color = runner.ranks[runner.loadout[s]] > 0 ? Color.white : new Color(0.4f, 0.4f, 0.4f);
                 bg.color = runner.loadout[s] == treeSel ? new Color(1f, 0.85f, 0.55f) : Color.white;
             }
             // fiche
