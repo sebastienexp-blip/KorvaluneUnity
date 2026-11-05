@@ -78,18 +78,41 @@ namespace Korvalune.Game
             Img((RectTransform)jb.transform, "Fond", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(260, 260)).color = new Color(0.1f, 0.06f, 0.04f, 0.45f);
             var knob = Img((RectTransform)jb.transform, "Pouce", UIStyle.Button(), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(130, 130));
             Joystick = zone.gameObject.AddComponent<VirtualJoystick>(); Joystick.knob = knob.rectTransform; Joystick.ring = jb.rectTransform; Joystick.radius = 105;
+            bool pc = Platform.Desktop;
+            if (pc) zone.gameObject.SetActive(false);        // ordinateur : on se déplace à la souris
 
             // ---- attaque et compétences (bas droite)
             var atk = RoundButton(root, "Attaque", "attack", new Vector2(1, 0), new Vector2(-70, 60), 230, () => player?.Attack(), out _, out _);
+            if (pc) atk.gameObject.SetActive(false);           // ordinateur : clic gauche sur un ennemi (ou Espace)
             var pos = new[] { new Vector2(-330, 70), new Vector2(-310, 230), new Vector2(-200, 345), new Vector2(-45, 345), new Vector2(-490, 60) };
             int nb = runner ? runner.loadout.Length : 4;
+            skillSize = pc ? 104 : 140;
+            if (pc)
+            {   // barre de 8 compétences en bas à droite (à droite des potions), touches 1 à 8 (comme Diablo 4)
+                pos = new Vector2[nb];
+                for (int i = 0; i < nb; i++) pos[i] = new Vector2(-40 - (nb - 1 - i) * 116, 66);
+                var bar = Img(root, "BarreCompétences", UIStyle.Panel(), new Vector2(1, 0), new Vector2(-22, 48), new Vector2(nb * 116 + 34, 140));
+                bar.type = Image.Type.Sliced; bar.color = new Color(1, 1, 1, 0.55f); bar.transform.SetAsFirstSibling(); bar.raycastTarget = false;
+            }
             for (int i = 0; i < nb; i++)
             {
                 int k = i;
-                var bg = RoundButton(root, "Compétence" + i, runner ? IconOf(runner.book[runner.loadout[i]]) : "stomp", new Vector2(1, 0), pos[i], 140,
+                var bg = RoundButton(root, "Compétence" + i, runner ? IconOf(runner.book[runner.loadout[i]]) : "stomp", new Vector2(1, 0), pos[Mathf.Min(i, pos.Length - 1)], skillSize,
                     () => { if (runner) runner.Use(k); else player?.UseSkill(k); }, out var cd, out var t);
+                if (pc)
+                {   // touche du clavier sous l'icône
+                    var key = Label(bg.rectTransform, "Touche", (i + 1).ToString(), 24, TextAnchor.MiddleCenter, new Vector2(0.5f, 0f), new Vector2(0, -16), new Vector2(40, 30));
+                    key.color = UIStyle.Gold; key.fontStyle = FontStyle.Bold; key.gameObject.AddComponent<Outline>().effectColor = Color.black;
+                }
                 skillIcons.Add(bg.transform.Find("Masque/Icône").GetComponent<Image>()); shownIcon.Add("");
                 skillButtons.Add((cd, t, i));
+            }
+            // esquive (roulade invulnérable) : à côté des compétences ; touche Espace sur ordinateur
+            var dg = RoundButton(root, "Esquive", "leap", new Vector2(1, 0), pc ? new Vector2(-40, 200) : new Vector2(-470, 240), pc ? 96 : 104, () => player?.Dodge(), out dodgeCd, out _);
+            if (pc)
+            {
+                var dk = Label(dg.rectTransform, "Touche", "Espace", 20, TextAnchor.MiddleCenter, new Vector2(0.5f, 0f), new Vector2(0, -26), new Vector2(110, 28));
+                dk.color = UIStyle.Gold; dk.gameObject.AddComponent<Outline>().effectColor = Color.black;
             }
             // bouton « Utiliser » (au-dessus des compétences) : parle, ouvre, voyage… sur ce qui est le plus proche ; visible
             // seulement quand quelque chose est à portée, avec l'action écrite au-dessus (touche E au clavier)
@@ -244,8 +267,14 @@ namespace Korvalune.Game
             }
         }
 
+        float skillSize = 140; Image dodgeCd;
         void RefreshSkills(Health h)
         {
+            if (dodgeCd && player)
+            {
+                float rem = player.DodgeReadyAt - Time.time;
+                dodgeCd.fillAmount = rem > 0 ? Mathf.Clamp01(rem / player.dodgeCooldown) : 0;
+            }
             for (int k = 0; k < skillButtons.Count; k++)
             {
                 var (cd, t, i) = skillButtons[k];
@@ -254,7 +283,7 @@ namespace Korvalune.Game
                 if (shownIcon[k] != key)
                 {
                     shownIcon[k] = key;
-                    SetSkillIcon(skillIcons[k], d, 0.65f, 140 * 0.62f, 140 * 0.8f);
+                    SetSkillIcon(skillIcons[k], d, 0.65f, skillSize * 0.62f, skillSize * 0.8f);
                     skillIcons[k].color = runner.ranks[si] > 0 ? Color.white : new Color(0.35f, 0.35f, 0.35f, 1);
                 }
                 float rem = runner.Remaining(si), full = d.cooldown;

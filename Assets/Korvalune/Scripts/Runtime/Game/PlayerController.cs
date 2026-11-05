@@ -8,8 +8,8 @@ namespace Korvalune.Game
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
-        public float walkSpeed = 2.4f, runSpeed = 5.2f, turnSpeed = 720f, gravity = -20f;
-        public float attackDamage = 18f, attackRange = 2.4f, attackCone = 140f, attackCooldown = 0.75f, critChance = 0.12f;
+        public float walkSpeed = 3.0f, runSpeed = 6.6f, turnSpeed = 720f, gravity = -20f;
+        public float attackDamage = 18f, attackRange = 2.4f, attackCone = 140f, attackCooldown = 0.6f, critChance = 0.12f;
         public VirtualJoystick joystick;
         public Transform cam;
         public const int MaxLevel = 200;
@@ -86,6 +86,11 @@ namespace Korvalune.Game
             Vector2 inp = joystick ? joystick.Value : Vector2.zero;
             var kb = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (kb.sqrMagnitude > inp.sqrMagnitude) inp = Vector2.ClampMagnitude(kb, 1);
+            if (Platform.Desktop)
+            {   // ordinateur : déplacement et attaque à la souris (comme Diablo 4) ; le clavier garde la priorité
+                if (kb.sqrMagnitude > 0.01f) { clickMove = null; forced = null; }
+                var m = MouseControl(); if (inp.sqrMagnitude < 0.01f && m.sqrMagnitude > 0) inp = m;
+            }
             Vector3 fwd = cam ? Vector3.ProjectOnPlane(cam.forward, Vector3.up).normalized : Vector3.forward;
             Vector3 right = Vector3.Cross(Vector3.up, fwd);
             Vector3 dir = fwd * inp.y + right * inp.x;
@@ -93,7 +98,7 @@ namespace Korvalune.Game
             // en attaquant ou en lançant une compétence, on peut continuer à se déplacer (moins vite au corps à corps)
             // et le héros reste tourné vers sa cible : tir et sorts partent vers le monstre visé, pas vers le joystick
             bool aiming = Busy && AimAt && !AimAt.Dead;
-            if (Busy) mag *= Ranged ? 0.85f : 0.65f;        // on garde l'élan en frappant (le haut du corps joue le geste)
+            if (Busy) mag *= Ranged ? 0.95f : 0.85f;        // on garde l'élan en frappant (le haut du corps joue le geste)
             float spd = mag < 0.6f ? walkSpeed * mag / 0.6f : Mathf.Lerp(walkSpeed, runSpeed, (mag - 0.6f) / 0.4f);
             if (aiming)
             {
@@ -144,10 +149,169 @@ namespace Korvalune.Game
                 }
                 else { walkTo = null; var a = arrived; arrived = null; a?.Invoke(); }
             }
-            if (Input.GetKeyDown(KeyCode.Space)) Attack();
+            // Espace : esquive sur ordinateur (comme Diablo 4 ; on attaque au clic), attaque au clavier sinon ; Maj : esquive partout
+            if (Input.GetKeyDown(KeyCode.Space)) { if (Platform.Desktop) Dodge(); else Attack(); }
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) Dodge();
             var runner = GetComponent<SkillRunner>();
-            if (runner) { for (int i = 0; i < runner.loadout.Length; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) runner.Use(i); }
+            if (runner)
+            {
+                for (int i = 0; i < runner.loadout.Length && i < 9; i++)
+                    if (Input.GetKeyDown(KeyCode.Alpha1 + i) || Input.GetKeyDown(KeyCode.Keypad1 + i)) { AimCursor(); runner.Use(i); }
+                // ordinateur : clic droit = compétence de l'emplacement 1, lancée vers le curseur
+                if (Platform.Desktop && Input.GetMouseButtonDown(1) && !OverUI()) { AimCursor(); runner.Use(0); }
+            }
             else for (int i = 0; i < skills.Length && i < 4; i++) if (Input.GetKeyDown(KeyCode.Alpha1 + i)) UseSkill(i);
+        }
+
+        // ------------------------------------------------------------------ esquive
+        public float dodgeCooldown = 2.5f, dodgeDistance = 5f;
+        public float DodgeReadyAt { get; private set; }
+        public bool Dodging { get; private set; }
+
+        /// <summary>Roulade rapide dans la direction du déplacement (sinon vers l'avant), invulnérable pendant le geste :
+        /// on traverse les coups et on sort des encerclements. Recharge de 2,5 s.</summary>
+        public void Dodge()
+        {
+            if (Health.Dead || Health.Stunned || Dodging || Time.time < DodgeReadyAt || Cinematic.Active) return;
+            Vector2 inp = joystick ? joystick.Value : Vector2.zero;
+            var kb = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); if (kb.sqrMagnitude > inp.sqrMagnitude) inp = kb;
+            Vector3 f = cam ? Vector3.ProjectOnPlane(cam.forward, Vector3.up).normalized : Vector3.forward, r = Vector3.Cross(Vector3.up, f);
+            var dir = f * inp.y + r * inp.x;
+            if (dir.sqrMagnitude < 0.04f && clickMove.HasValue) dir = clickMove.Value - transform.position;
+            if (dir.sqrMagnitude < 0.04f && Platform.Desktop && Camera.main)
+            {   // ordinateur, immobile : vers le curseur
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition); var plane = new Plane(Vector3.up, transform.position);
+                if (plane.Raycast(ray, out var t)) dir = ray.GetPoint(t) - transform.position;
+            }
+            dir.y = 0; if (dir.sqrMagnitude < 0.04f) dir = transform.forward;
+            DodgeReadyAt = Time.time + dodgeCooldown;
+            StartCoroutine(DodgeRoutine(dir.normalized));
+        }
+
+        IEnumerator DodgeRoutine(Vector3 dir)
+        {
+            Dodging = true; approach = false; walkTo = null; clickMove = null;
+            const float dur = 0.28f;
+            Health.invulnerableUntil = Time.time + dur + 0.05f;
+            transform.rotation = Quaternion.LookRotation(dir);
+            // geste du héros s'il en a un (élan, clignement, ruée) ; sinon la course accélérée suffit
+            if (HasClip("Sk_Dash")) Gesture("Sk_Dash"); else if (HasClip("Sk_Blink")) Gesture("Sk_Blink"); else if (HasClip("Sk_Charge")) Gesture("Sk_Charge");
+            Sound.Play("sfx_baton_whoosh", transform.position, 0.8f, 0.1f, 0.05f);
+            FX.Burst(transform.position + Vector3.up * 0.4f, new Color(0.85f, 0.8f, 0.7f, 0.7f), 14, 2f, 0.1f, 0.4f, 0.35f);
+            for (float t = 0; t < dur; t += Time.deltaTime)
+            {
+                float k = 1.5f - t / dur;                      // départ vif
+                cc.Move(dir * (dodgeDistance / dur) * k * 0.8f * Time.deltaTime + Vector3.up * -2f * Time.deltaTime);
+                Anim?.SetFloat(CharacterRig.SpeedId, runSpeed * 1.4f, 0.03f, Time.deltaTime);
+                if (Random.value < 0.5f) FX.Burst(transform.position + Vector3.up * 0.2f, new Color(0.7f, 0.65f, 0.58f, 0.5f), 2, 1f, 0.08f, 0.3f, 0.3f);
+                yield return null;
+            }
+            Dodging = false;
+        }
+
+        // ------------------------------------------------------------------ souris (ordinateur)
+        /// <summary>Point du sol visé au clic (le héros y court) ; ennemi désigné au clic (le héros l'attaque).</summary>
+        Vector3? clickMove; Health forced; bool mouseHeld, heldOnEnemy;
+        readonly RaycastHit[] rayHits = new RaycastHit[16];
+
+        static bool OverUI() => UnityEngine.EventSystems.EventSystem.current && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+
+        /// <summary>Clic gauche sur le sol : le héros y court (maintenu : il suit le curseur) ; sur un ennemi : il va le frapper
+        /// (maintenu : il continue d'attaquer) ; sur un marchand, un coffre, une porte… : il y va et l'utilise.
+        /// Renvoie l'équivalent « joystick » du déplacement à la souris.</summary>
+        Vector2 MouseControl()
+        {
+            if (forced && forced.Dead) forced = null;
+            if (Input.GetMouseButtonUp(0)) { mouseHeld = false; heldOnEnemy = false; }
+            if (Input.GetMouseButtonDown(0) && !OverUI()) Click(true);
+            else if (mouseHeld && !heldOnEnemy) Click(false);              // bouton maintenu : la destination suit le curseur
+            if (mouseHeld && heldOnEnemy && forced && !Busy) Attack();    // bouton maintenu sur un ennemi : attaques enchaînées
+            if (!clickMove.HasValue || Health.Stunned) return Vector2.zero;
+            var to = clickMove.Value - transform.position; to.y = 0;
+            if (to.magnitude < 0.35f) { clickMove = null; return Vector2.zero; }
+            Vector3 f = cam ? Vector3.ProjectOnPlane(cam.forward, Vector3.up).normalized : Vector3.forward, r = Vector3.Cross(Vector3.up, f);
+            var d = to.normalized; float k = Mathf.Clamp01(to.magnitude / 0.8f);       // ralentit juste à l'arrivée
+            return new Vector2(Vector3.Dot(d, r), Vector3.Dot(d, f)) * Mathf.Max(0.65f, k);
+        }
+
+        void Click(bool down)
+        {
+            var c = Camera.main; if (!c) return;
+            var ray = c.ScreenPointToRay(Input.mousePosition);
+            int n = Physics.RaycastNonAlloc(ray, rayHits, 300f, ~0, QueryTriggerInteraction.Collide);
+            RaycastHit ground = default; float gd = float.MaxValue; Health enemy = null; float ed = float.MaxValue;
+            for (int i = 0; i < n; i++)
+            {
+                var h = rayHits[i]; var col = h.collider; if (!col || col.transform.IsChildOf(transform)) continue;
+                if (down)
+                {
+                    // objets qui gèrent eux-mêmes le toucher (portails, coffres, marchands) : on les laisse faire
+                    if (col.GetComponentInParent<Portal>() || col.GetComponentInParent<TreasureChest>() || col.GetComponentInParent<Merchant>()) { mouseHeld = false; clickMove = null; return; }
+                    var u = col.GetComponentInParent<Usable>();
+                    if (u && u.use != null && (u.available == null || u.available())) { mouseHeld = false; clickMove = null; forced = null; var at = u.transform.position; var back = transform.position - at; back.y = 0;
+                        if (back.sqrMagnitude > 0.01f) at += back.normalized * Mathf.Min(1.6f, u.range * 0.5f);      // s'arrête devant, pas dedans
+                        WalkTo(at, () => { if (u) u.use(); }); return; }
+                    var hp = col.GetComponentInParent<Health>();
+                    if (hp && !hp.Dead && hp.faction != Faction.Player && h.distance < ed) { ed = h.distance; enemy = hp; }
+                }
+                if (!col.isTrigger && h.distance < gd && !col.GetComponentInParent<Health>()) { gd = h.distance; ground = h; }
+            }
+            // un ennemi tout près du point visé compte comme cliqué (les monstres sont petits à l'écran)
+            if (down && !enemy && gd < float.MaxValue)
+            {
+                float bd = 1.4f;
+                foreach (var hp in Health.Around(ground.point, 1.4f, Faction.Player)) { float d = Vector3.Distance(hp.transform.position, ground.point); if (d < bd) { bd = d; enemy = hp; } }
+            }
+            if (down && enemy)
+            {
+                forced = enemy; Target = enemy; clickMove = null; walkTo = null; mouseHeld = true; heldOnEnemy = true;
+                Attack();                                   // à portée : frappe ; sinon le héros court jusqu'à lui puis frappe
+                if (approach) approachUntil = Time.time + 4f;
+                return;
+            }
+            if (gd == float.MaxValue) return;
+            if (down) { mouseHeld = true; heldOnEnemy = false; forced = null; approach = false; walkTo = null; arrived = null; ClickMarker(ground.point); }
+            clickMove = ground.point;
+        }
+
+        /// <summary>Avant une compétence au clavier : l'ennemi le plus proche du curseur devient la cible (sorts lancés vers le curseur).</summary>
+        void AimCursor()
+        {
+            if (!Platform.Desktop || !Camera.main) return;
+            var plane = new Plane(Vector3.up, transform.position);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 pt;
+            if (Physics.Raycast(ray, out var hit, 300f, ~0, QueryTriggerInteraction.Ignore)) pt = hit.point;
+            else if (plane.Raycast(ray, out var t)) pt = ray.GetPoint(t); else return;
+            Health best = null; float bd = 6f;
+            foreach (var h in Health.Around(pt, 6f, Faction.Player)) { float d = Vector3.Distance(h.transform.position, pt); if (d < bd) { bd = d; best = h; } }
+            if (best) { forced = best; Target = best; }
+            else
+            {   // aucun ennemi près du curseur : on se tourne vers lui
+                var d = pt - transform.position; d.y = 0; if (d.sqrMagnitude > 0.04f) transform.rotation = Quaternion.LookRotation(d);
+            }
+        }
+
+        Transform clickFx;
+        /// <summary>Petit cercle doré qui se resserre là où l'on a cliqué.</summary>
+        void ClickMarker(Vector3 p)
+        {
+            if (!clickFx)
+            {
+                var go = new GameObject("Clic"); var lr = go.AddComponent<LineRenderer>();
+                lr.useWorldSpace = false; lr.loop = true; lr.positionCount = 32; lr.widthMultiplier = 0.06f;
+                for (int i = 0; i < 32; i++) { float a = i / 32f * Mathf.PI * 2; lr.SetPosition(i, new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * 0.5f); }
+                lr.sharedMaterial = FX.additive ? FX.additive : new Material(Shader.Find("Sprites/Default"));
+                lr.startColor = lr.endColor = new Color(1f, 0.82f, 0.4f, 0.9f);
+                clickFx = go.transform;
+            }
+            clickFx.position = p + Vector3.up * 0.06f; clickFx.localScale = Vector3.one * 1.4f; clickFx.gameObject.SetActive(true);
+            StopCoroutine(nameof(ShrinkClick)); StartCoroutine(nameof(ShrinkClick));
+        }
+        IEnumerator ShrinkClick()
+        {
+            for (float t = 0; t < 0.35f; t += Time.deltaTime) { if (clickFx) clickFx.localScale = Vector3.one * Mathf.Lerp(1.4f, 0.2f, t / 0.35f); yield return null; }
+            if (clickFx) clickFx.gameObject.SetActive(false);
         }
 
         // ------------------------------------------------------------------ ciblage automatique
@@ -163,6 +327,14 @@ namespace Korvalune.Game
 
         void UpdateTarget(Vector2 stick)
         {
+            if (forced && !forced.Dead && (forced.transform.position - transform.position).sqrMagnitude < 40f * 40f)
+            {   // ennemi désigné à la souris : il reste la cible tant qu'il vit
+                Target = forced;
+                if (!marker) marker = TargetMarker();
+                marker.gameObject.SetActive(true); marker.position = Target.transform.position + Vector3.up * 0.06f; marker.Rotate(0, 90 * Time.deltaTime, 0);
+                return;
+            }
+            forced = null;
             if (Settings.AutoAim == 1) { if (Target && (Target.Dead || (Target.transform.position - transform.position).sqrMagnitude > 16f)) Target = null; return; }
             Vector3 want = transform.forward;
             if (stick.sqrMagnitude > 0.04f && cam)
@@ -333,7 +505,7 @@ namespace Korvalune.Game
             if (Magic) Gesture(HasClip("Sk_Flick") ? "Sk_Flick" : HasClip("Sk_CastFwd") ? "Sk_CastFwd" : "Attack");     // geste de lancer, pas de coup
             else Gesture(!Armed ? (HasClip("Sk_Poing") ? "Sk_Poing" : "Attack") : Bow && HasClip("Sk_TirArc") ? "Sk_TirArc" : "Attack");
             Sound.Play(Magic ? "sfx_trait_neant" : !Armed ? "sfx_epee_whoosh" : Sound.WeaponOf(Loot.PlayerClass).swing, transform.position, !Armed && !Magic ? 0.45f : 0.75f);
-            lockUntil = Time.time + (Ranged ? 0.3f : 0.45f);
+            lockUntil = Time.time + (Ranged ? 0.24f : 0.34f);
             StartCoroutine(Ranged ? Shoot(0.22f) : Hit(0.38f));
         }
 
@@ -368,11 +540,12 @@ namespace Korvalune.Game
                 if (!Sight.Clear(transform.position, h)) continue;              // pas de coup à travers un mur
                 bool crit = Random.value < critChance;
                 h.TakeDamage(attackDamage * damageMult * (crit ? 2f : 1f) * Random.Range(0.9f, 1.1f), Health, crit);
+                CombatFeel.Knock(h, transform.position, crit ? 1.0f : 0.55f);     // le monstre recule sous le coup
                 if (!any) Sound.Play(Armed ? Sound.WeaponOf(Loot.PlayerClass).hit : "sfx_ennemi_touche", h.transform.position, 0.85f);
                 FX.Burst(h.transform.position + Vector3.up * 1.1f, crit ? new Color(1f, 0.85f, 0.3f) : new Color(1f, 0.55f, 0.25f), crit ? 30 : 16);
                 any = true;
             }
-            if (any) FindFirstObjectByType<CameraRig>()?.Shake(0.06f);
+            if (any) { FindFirstObjectByType<CameraRig>()?.Shake(0.06f); CombatFeel.HitStop(0.045f); }
         }
 
         public bool UseSkill(int i)

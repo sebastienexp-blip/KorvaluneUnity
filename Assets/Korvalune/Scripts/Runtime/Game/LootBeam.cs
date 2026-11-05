@@ -80,7 +80,7 @@ namespace Korvalune.Game
 
         public static void Attach(GameObject go, Color c, int rarity)
         {
-            if (!FX.additive || rarity < 1) return;
+            if (!FX.additive || rarity < (int)Rarity.Legendaire) return;     // pas d'aura jusqu'à rare
             var lb = go.AddComponent<LootBeam>(); lb.col = c; lb.rarity = rarity; lb.Build();
         }
 

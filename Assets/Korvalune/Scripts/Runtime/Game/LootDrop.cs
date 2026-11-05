@@ -104,6 +104,10 @@ namespace Korvalune.Game
             foreach (var x in new[] { -0.27f, 0.27f }) foreach (var z in new[] { -0.18f, 0.18f })
                 Part(box, "Coin", new Vector3(x, 0.17f, z), new Vector3(0.06f, 0.32f, 0.06f), trim, 0.9f, 0.55f);
             Part(box, "Serrure", new Vector3(0, 0.3f, 0.2f), new Vector3(0.1f, 0.12f, 0.03f), Color.Lerp(trim, Color.white, 0.25f), 1f, 0.7f, r >= 2 ? c * 1.6f : Color.black);
+            // aura (halo au sol, colonne de lumière, lueur) : seulement à partir de légendaire ; commun, magique et rare
+            // restent de simples coffrets aux ferrures colorées, pour que le butin important saute aux yeux
+            bool aura = r >= (int)Rarity.Legendaire;
+            if (!aura) return;
             // halo au sol
             if (FX.additive)
             {
@@ -112,7 +116,7 @@ namespace Korvalune.Game
                 halo.transform.localScale = Vector3.one * (1.2f + 0.35f * r);
                 var hm = new Material(FX.additive); hm.SetColor("_BaseColor", new Color(c.r, c.g, c.b, 0.85f)); halo.GetComponent<Renderer>().sharedMaterial = hm;
             }
-            // colonne de lumière à la couleur de la rareté (dès magique) : faisceau doux, volutes en spirale, anneau au sol
+            // colonne de lumière à la couleur de la rareté : faisceau doux, volutes en spirale, anneau au sol
             LootBeam.Attach(gameObject, c, r);
             // lumière
             glow = new GameObject("Lueur").AddComponent<Light>(); glow.transform.SetParent(transform, false); glow.transform.localPosition = new Vector3(0, 0.8f, 0);
