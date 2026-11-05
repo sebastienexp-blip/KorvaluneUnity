@@ -194,8 +194,9 @@ namespace Korvalune.Game
             const float dur = 0.28f;
             Health.invulnerableUntil = Time.time + dur + 0.05f;
             transform.rotation = Quaternion.LookRotation(dir);
-            // geste du héros s'il en a un (élan, clignement, ruée) ; sinon la course accélérée suffit
-            if (HasClip("Sk_Dash")) Gesture("Sk_Dash"); else if (HasClip("Sk_Blink")) Gesture("Sk_Blink"); else if (HasClip("Sk_Charge")) Gesture("Sk_Charge");
+            // animation d'esquive propre au héros (roulade), sinon un geste d'élan
+            if (Anim && Anim.HasState(0, Animator.StringToHash("Dodge"))) Anim.SetTrigger(CharacterRig.DodgeId);
+            else if (HasClip("Sk_Dash")) Gesture("Sk_Dash"); else if (HasClip("Sk_Blink")) Gesture("Sk_Blink");
             Sound.Play("sfx_baton_whoosh", transform.position, 0.8f, 0.1f, 0.05f);
             FX.Burst(transform.position + Vector3.up * 0.4f, new Color(0.85f, 0.8f, 0.7f, 0.7f), 14, 2f, 0.1f, 0.4f, 0.35f);
             for (float t = 0; t < dur; t += Time.deltaTime)
