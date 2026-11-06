@@ -202,7 +202,7 @@ namespace Korvalune.Game
             {
                 var a = 2 * Mathf.PI * i / Mathf.Max(1, camp.count) + Random.Range(-0.3f, 0.3f);
                 var p = camp.center + new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * camp.radius * Random.Range(0.4f, 1f);
-                Spawn(t, Ground(p));
+                Spawn(t, Ground(p, Rift.Active));
             }
         }
 
@@ -327,12 +327,14 @@ namespace Korvalune.Game
 
         static void Kill(Object o) { if (Application.isPlaying) Destroy(o); else DestroyImmediate(o); }
 
-        public static Vector3 Ground(Vector3 p)
+        public static Vector3 Ground(Vector3 p, bool high = false)
         {
             var t = Terrain.activeTerrain;
             if (t) p.y = t.SampleHeight(p) + t.transform.position.y + 0.05f;
-            // sondage court au-dessus du point : sous un toit, une voûte ou la masse rocheuse d'une grotte, on reste au sol
-            if (Physics.Raycast(p + Vector3.up * 2.5f, Vector3.down, out var hit, 30f, ~0, QueryTriggerInteraction.Ignore)) p.y = Mathf.Max(t ? p.y : -1e6f, hit.point.y + 0.05f);
+            // sondage court au-dessus du point : sous un toit, une voûte ou la masse rocheuse d'une grotte, on reste au sol.
+            // En faille (high) le sol peut être bien plus haut que le point : le sondage part du haut, sans toit à traverser.
+            float from = high ? 40f : 2.5f;
+            if (Physics.Raycast(p + Vector3.up * from, Vector3.down, out var hit, from + 30f, ~0, QueryTriggerInteraction.Ignore)) p.y = Mathf.Max(t ? p.y : -1e6f, hit.point.y + 0.05f);
             return p;
         }
     }
