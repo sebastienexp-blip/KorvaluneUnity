@@ -405,9 +405,12 @@ namespace Korvalune.Game
         }
 
         /// <summary>Point du sol : sondage depuis le haut (falaises du canyon) ou juste au-dessus (sols de crypte, sous les piliers).</summary>
-        Vector3 Surface(Vector3 p, bool high = false)
+        // Le canyon de faille monte jusqu'à 9 m au-dessus de son niveau de base : un sondage depuis 2,5 m manquait les
+        // plateaux, et tout ce qui y était posé (ennemis compris) tombait sous la carte, invisible. Le sondage part donc
+        // toujours du haut (la faille n'a pas de toit).
+        Vector3 Surface(Vector3 p, bool high = true)
         {
-            if (Physics.Raycast(p + Vector3.up * (high ? 30f : 2.5f), Vector3.down, out var hit, high ? 60f : 10f, ~0, QueryTriggerInteraction.Ignore)) return hit.point;
+            if (Physics.Raycast(p + Vector3.up * 30f, Vector3.down, out var hit, 60f, ~0, QueryTriggerInteraction.Ignore)) return hit.point;
             return p;
         }
 
