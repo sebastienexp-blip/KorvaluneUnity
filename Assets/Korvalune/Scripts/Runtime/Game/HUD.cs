@@ -192,7 +192,16 @@ namespace Korvalune.Game
         }
 
         // ------------------------------------------------------------------------------------------ mise à jour
-        void LateUpdate() { Refresh(); }
+        void LateUpdate()
+        {
+            if (fitted && fitted.gameObject.activeInHierarchy)
+            {
+                UnityEngine.Canvas.ForceUpdateCanvases();
+                FitPanel(fitted);
+            }
+            else fitted = null;
+            Refresh();
+        }
 
         /// <summary>Met à jour barres, recharges, quête, mini-carte (appelé chaque image ; appelable hors jeu pour les captures).</summary>
         public void Refresh()
@@ -348,6 +357,16 @@ namespace Korvalune.Game
         {
             if (!panel) return;
             var rt = (RectTransform)panel.transform; rt.SetAsLastSibling();
+            FitPanel(rt);
+            fitted = rt;
+        }
+
+        // panneau plein écran dont l'échelle est recalculée tant qu'il est ouvert : à la première ouverture après un
+        // changement de scène, la taille de l'interface n'est pas encore stabilisée et l'échelle calculée une fois était fausse
+        RectTransform fitted;
+
+        void FitPanel(RectTransform rt)
+        {
             var area = root.rect.size; var sz = rt.sizeDelta;
             float k = Mathf.Min(1f, (area.y - 12f) / Mathf.Max(1f, sz.y), (area.x - 12f) / Mathf.Max(1f, sz.x));
             rt.localScale = new Vector3(k, k, 1f);
