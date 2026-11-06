@@ -433,9 +433,11 @@ namespace Korvalune.Game
             nextDots = Time.unscaledTime + 0.25f;
             float half = mapCam.orthographicSize, scale = mapRect.sizeDelta.x * 0.5f / half;
             var pp = player.transform.position; int k = 0;
-            void Dot(Vector3 w, Color c, float size)
+            void Dot(Vector3 w, Color c, float size, bool pinToEdge = false)
             {
-                var d = w - pp; if (Mathf.Abs(d.x) > half || Mathf.Abs(d.z) > half) return;
+                var d = w - pp;
+                if (pinToEdge) { d.x = Mathf.Clamp(d.x, -half * 0.94f, half * 0.94f); d.z = Mathf.Clamp(d.z, -half * 0.94f, half * 0.94f); }
+                else if (Mathf.Abs(d.x) > half || Mathf.Abs(d.z) > half) return;
                 if (k >= mapDots.Count) { var im = Img(mapRect, "Point", UIStyle.Disc(), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.one * 10); im.rectTransform.pivot = new Vector2(0.5f, 0.5f); mapDots.Add(im); }
                 var dot = mapDots[k++]; dot.gameObject.SetActive(true); dot.color = c; dot.rectTransform.sizeDelta = Vector2.one * size;
                 dot.rectTransform.anchoredPosition = new Vector2(d.x, d.z) * scale;
@@ -445,6 +447,13 @@ namespace Korvalune.Game
                 if (!h || h.Dead || h.faction != Faction.Enemy) continue;
                 var ai = h.GetComponent<EnemyAI>(); if (ai && ai.side != Faction.Enemy) continue;
                 bool ch = ai && ai.champion;
+                // le gobelin chapardeur : point doré pulsant, toujours visible (épinglé au bord de la carte s'il est loin)
+                if (h.GetComponent<TreasureThief>())
+                {
+                    float pulse = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 6f);
+                    Dot(h.transform.position, new Color(1f, 0.85f, 0.2f), 20 + 6 * pulse, true);
+                    continue;
+                }
                 Dot(h.transform.position, ch ? new Color(1f, 0.78f, 0.25f) : new Color(0.95f, 0.18f, 0.12f), ch ? 15 : 10);
             }
             foreach (var por in FindObjectsByType<Portal>(FindObjectsSortMode.None)) Dot(por.transform.position, new Color(0.7f, 0.4f, 1f), 16);
