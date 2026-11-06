@@ -30,6 +30,9 @@ namespace Korvalune.Game
             var l = new GameObject("Éclat").AddComponent<Light>(); l.transform.SetParent(e.transform, false); l.transform.localPosition = Vector3.up * 1.4f;
             l.type = LightType.Point; l.color = new Color(1f, 0.82f, 0.3f); l.intensity = 2.6f; l.range = 5f; l.shadows = LightShadows.None; th.glow = l;
             Sound.Play("sfx_or", pos, 0.8f);
+            // petit cri de gobelin à l'apparition : on l'entend avant de le voir
+            Sound.Play("sfx_loup_grogne", pos, 0.35f, 0.25f);
+            game.Hud?.Notify("<color=#ffd24a>Un gobelin chapardeur rôde : il emporte un sac d'or !</color>");
             return e;
         }
 
