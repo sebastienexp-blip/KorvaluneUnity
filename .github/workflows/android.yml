@@ -46,7 +46,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.ref_name }}
 
       - uses: actions/cache/restore@v4
         with:
@@ -127,7 +127,7 @@ jobs:
           gh release delete -R ${{ github.repository }} $T -y --cleanup-tag 2>/dev/null || true
           cd build/Contenu
           files=$(ls | grep -v '\.manifest$' | grep -vx 'Contenu')
-          gh release create -R ${{ github.repository }} $T $files --title "Contenu 0.1.$B" --notes "Paquets de contenu de Korvalune 0.1.$B" --prerelease --target main
+          gh release create -R ${{ github.repository }} $T $files --title "Contenu 0.1.$B" --notes "Paquets de contenu de Korvalune 0.1.$B" --prerelease --target ${{ github.ref_name }}
           # ménage : on garde les 3 dernières publications de contenu
           gh release list -R ${{ github.repository }} --limit 200 --json tagName --jq '.[].tagName' | grep '^contenu-' | sort -t- -k2 -n -r | tail -n +4 | while read t; do gh release delete -R ${{ github.repository }} "$t" -y --cleanup-tag || true; done
 
@@ -141,7 +141,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.ref_name }}
       - name: Journal de la construction Android
         env:
           GH_TOKEN: ${{ github.token }}
@@ -160,7 +160,7 @@ jobs:
           git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
           git add ci-out/android
           git commit -m "Android : journal de construction [skip ci]" || exit 0
-          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase -X ours origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break; sleep 5; done
 
   test:
     needs: build
@@ -169,7 +169,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.ref_name }}
       - uses: actions/download-artifact@v4
         with:
           name: apk
@@ -203,7 +203,7 @@ jobs:
           cp dl/ci-out/android/build.md ci-out/android/build.md 2>/dev/null || true
           git add -A ci-out/android
           git commit -m "Android : APK construit et testé dans l'émulateur [skip ci]" || true
-          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase -X ours origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }} && break; sleep 5; done
           if grep -q "RÉSULTAT : OK" ci-out/android/test.md 2>/dev/null; then
             V=$(grep -oE "version [0-9.]+" ci-out/android/build.md | head -1 | cut -d' ' -f2)
             gh release delete apk-derniere -y --cleanup-tag 2>/dev/null || true
