@@ -27,7 +27,7 @@
 - Cubemap : 1.6 Mo (13)
 - Shader : 1.3 Mo (34)
 - Sprite : 0.1 Mo (210)
-- MonoScript : 0.1 Mo (914)
+- MonoScript : 0.1 Mo (916)
 - Font : 0.1 Mo (1)
 - MonoBehaviour : 0.1 Mo (434)
 - RectTransform : 0.0 Mo (348)
