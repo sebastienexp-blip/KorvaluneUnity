@@ -36,6 +36,12 @@ namespace Korvalune.Game
         public static int Gore { get => Get("gore", 0); set => Set("gore", value); }                      // complet / sang seulement / désactivé
         public static int QuestPanel { get => Get("quete", 0); set => Set("quete", value); }               // affichée / masquée
         public static int Gps { get => Get("gps", 0); set => Set("gps", value); }                          // tracé au sol : activé / désactivé
+        public static int Monstres { get => Get("monstres", 0); set => Set("monstres", value); }           // puissance : normale / facile / très facile
+        public static int Objets { get => Get("objets", 0); set => Set("objets", value); }                 // objets au sol : illimités / nombreux / limités
+        /// <summary>Multiplicateur de vie et de dégâts des monstres selon le réglage (1 = normal).</summary>
+        public static float MonstresMul => Monstres == 2 ? 0.55f : Monstres == 1 ? 0.75f : 1f;
+        /// <summary>Nombre maximum d'objets au sol (0 = pas de limite).</summary>
+        public static int ObjetsMax => Objets == 2 ? 40 : Objets == 1 ? 120 : 0;
 
         public static float AmbienceVolume => Muted == 1 ? 0 : Ambience / 4f;
         public static float UiVolume => Muted == 1 ? 0 : UiSound / 4f;
@@ -170,6 +176,7 @@ namespace Korvalune.Game
             Row(g, ref y, "Effets de lumière", new[] { "Complets", "Réduits", "Aucun" }, () => Settings.PostFx, k => Settings.PostFx = k);
             Row(g, ref y, "Luminosité", new[] { "Sombre", "Normale", "Claire", "Très claire" }, () => Settings.Brightness, k => Settings.Brightness = k);
             Row(g, ref y, "Distance de vue", new[] { "Courte", "Normale", "Longue" }, () => Settings.ViewDistance, k => Settings.ViewDistance = k);
+            Row(g, ref y, "Objets au sol (performance)", new[] { "Illimités", "Nombreux", "Limités (fluide)" }, () => Settings.Objets, k => Settings.Objets = k);
 
             y = 0; var s = (RectTransform)pages[1].page.transform;
             Row(s, ref y, "Musique", pct, () => Mathf.RoundToInt(Sound.Music * 4), k => { Sound.Music = k / 4f; Changed(); });
@@ -185,6 +192,7 @@ namespace Korvalune.Game
             Row(j, ref y, "Secousses d'écran", new[] { "Activées", "Désactivées" }, () => Settings.Shake, k => Settings.Shake = k);
             Row(j, ref y, "Gore (sang, démembrement)", new[] { "Complet", "Sang seul", "Désactivé" }, () => Settings.Gore, k => Settings.Gore = k);
             Row(j, ref y, "Vibrations", new[] { "Activées", "Désactivées" }, () => Settings.Vibration, k => { Settings.Vibration = k; if (k == 0) Vibrate(); });
+            Row(j, ref y, "Puissance des monstres", new[] { "Normale", "Facile", "Très facile" }, () => Settings.Monstres, k => Settings.Monstres = k);
 
             y = 0; var u = (RectTransform)pages[3].page.transform;
             Row(u, ref y, "Taille de l'interface", new[] { "Petite", "Normale", "Grande", "Très grande" }, () => PlayerPrefs.GetInt("korvalune.ui", 2), k => { PlayerPrefs.SetInt("korvalune.ui", k); Changed(); });
