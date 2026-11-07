@@ -148,6 +148,7 @@ namespace Korvalune.Game
             Hud.quest = q;
             var log = ui.AddComponent<QuestLog>(); log.hero = Player;                    // journal : histoire, secondaires, tutoriels
             Hud.Build(Cam);
+            if (Waypoint.Here != null && !Rift.Active) gameObject.AddComponent<WorldBossEvents>();   // boss mondiaux : régions extérieures seulement
             Player.joystick = Hud.Joystick;
             Hud.Notify(zoneName);
 

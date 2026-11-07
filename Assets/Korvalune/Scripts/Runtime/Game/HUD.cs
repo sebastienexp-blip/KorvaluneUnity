@@ -447,6 +447,13 @@ namespace Korvalune.Game
                 if (!h || h.Dead || h.faction != Faction.Enemy) continue;
                 var ai = h.GetComponent<EnemyAI>(); if (ai && ai.side != Faction.Enemy) continue;
                 bool ch = ai && ai.champion;
+                // boss : point violet pulsant, toujours visible (épinglé au bord de la carte s'il est loin)
+                if (h.GetComponent<BossMarker>())
+                {
+                    float bp = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 4f);
+                    Dot(h.transform.position, new Color(0.85f, 0.3f, 1f), 24 + 8 * bp, true);
+                    continue;
+                }
                 // le gobelin chapardeur : point doré pulsant, toujours visible (épinglé au bord de la carte s'il est loin)
                 if (h.GetComponent<TreasureThief>())
                 {
