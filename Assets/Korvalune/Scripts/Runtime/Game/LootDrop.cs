@@ -16,6 +16,21 @@ namespace Korvalune.Game
         public static Material beamMat;
         public static readonly System.Collections.Generic.List<LootDrop> All = new System.Collections.Generic.List<LootDrop>();
         void OnEnable() { All.Add(this); }
+
+        /// <summary>Réglage « Objets au sol » : au-delà du plafond, on retire les plus anciens (jamais les légendaires).
+        /// Retirés de la liste d'abord, puis détruits : OnDisable ne peut pas s'en charger dans la même boucle.</summary>
+        static void Trim()
+        {
+            int max = Settings.ObjetsMax; if (max <= 0) return;
+            while (All.Count > max)
+            {
+                // le dernier posé (celui qu'on vient de créer) n'est jamais retiré
+                int i = All.FindIndex(0, All.Count - 1, d => !d || d.item == null || d.item.rarity < Rarity.Legendaire);
+                if (i < 0) break;
+                var old = All[i]; All.RemoveAt(i);
+                if (old) Kill(old.gameObject);
+            }
+        }
         void OnDisable() { All.Remove(this); }
         static void Kill(Object o) { if (!o) return; if (Application.isPlaying) Destroy(o); else DestroyImmediate(o); }
 
@@ -33,6 +48,7 @@ namespace Korvalune.Game
             if (amount <= 0) return null;
             var go = new GameObject($"Or {amount}"); go.transform.position = pos + Vector3.up * 0.02f;
             var d = go.AddComponent<LootDrop>(); d.gold = amount; d.born = Time.time; d.pickupRadius = 1.4f;
+            Trim();
             // vraies pièces : disques d'or épais à tranche plus sombre, empilés en petites piles, d'autres à plat ou sur la tranche
             int n = Mathf.Clamp(4 + (int)(Mathf.Log(amount + 1, 2) * 1.5f), 6, 22);
             var face = new Color(1f, 0.80f, 0.32f); var rim = new Color(0.62f, 0.42f, 0.12f);
@@ -82,6 +98,7 @@ namespace Korvalune.Game
             var go = new GameObject("Butin " + it.name);
             go.transform.position = pos + Vector3.up * 0.05f;
             var d = go.AddComponent<LootDrop>(); d.item = it; d.Build(); if (!All.Contains(d)) All.Add(d);
+            Trim();
             Sound.Play(Sound.DropOf(it.rarity), pos, it.rarity >= Rarity.Legendaire ? 1f : 0.6f, 0.04f, 0.1f);
             return d;
         }

@@ -150,6 +150,7 @@ namespace Korvalune.Game
             Hud.Build(Cam);
             if (Waypoint.Here != null && !Rift.Active) gameObject.AddComponent<WorldBossEvents>();   // boss mondiaux : régions extérieures seulement
             gameObject.AddComponent<GroundGps>();                                                      // tracé au sol vers le point GPS ou la quête
+            if (Rift.Active) gameObject.AddComponent<GroundGuard>();                                   // faille : aucun monstre ne reste sous le relief
             Player.joystick = Hud.Joystick;
             Hud.Notify(zoneName);
 
@@ -246,6 +247,10 @@ namespace Korvalune.Game
             float hpM = Mathf.Max(0.55f, HpAt(level) / HpAt0(bl)), dmgM = Mathf.Max(0.6f, DmgAt(level) / DmgAt0(bl)), xpM = Mathf.Max(0.5f, XpAt(level) / XpAt0(bl));
             hpM *= Difficulty.Hp * EnemyHpScale; dmgM *= Difficulty.Damage; xpM *= Difficulty.Xp;
             if (Rift.Active) { hpM *= Rift.HpMult; dmgM *= Rift.DmgMult; xpM *= Rift.XpMult; }             // difficulté choisie (Éprouvant, Funeste, Abîmes)
+            // débuts en douceur : niveaux 1 à 5 plus faciles (60 % puis progressivement 100 % au niveau 6), puis réglage du joueur
+            float early = level >= 6 ? 1f : Mathf.Lerp(0.6f, 1f, Mathf.Max(0, level - 1) / 5f);
+            float tune = early * Settings.MonstresMul;
+            hpM *= tune; dmgM *= tune;
             var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = Mathf.Round(t.hp * hpM); h.hp = h.maxHp; h.armor = t.armor * Mathf.Min(2f, dmgM); h.displayName = t.label; h.level = level;
             var ai = e.AddComponent<EnemyAI>(); ai.type = t; ai.damage = t.damage * dmgM; ai.xp = Mathf.Round(t.xp * xpM);
             return e;
