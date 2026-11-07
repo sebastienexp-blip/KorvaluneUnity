@@ -22,6 +22,15 @@ namespace Korvalune.Game
 
         public static void SetTarget(Vector3 world) { Manual = world; }
 
+        /// <summary>Points intermédiaires du tracé entre deux lieux (sans le départ ni l'arrivée), posés à plat : pour les cartes.</summary>
+        public static System.Collections.Generic.List<Vector3> Samples(Vector3 from, Vector3 to, int segments)
+        {
+            var l = new System.Collections.Generic.List<Vector3>();
+            var a = new Vector3(from.x, 0, from.z); var b = new Vector3(to.x, 0, to.z);
+            for (int i = 1; i < segments; i++) l.Add(Vector3.Lerp(a, b, i / (float)segments));
+            return l;
+        }
+
         /// <summary>Le point à indiquer : celui posé à la main, sinon le lieu de l'étape de quête en cours.</summary>
         public static Vector3? Pick(Quest q)
         {

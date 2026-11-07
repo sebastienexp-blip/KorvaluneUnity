@@ -13,6 +13,7 @@ namespace Korvalune.Game
         public static WorldMap Current;
         RawImage view; RectTransform frame, markers; RenderTexture rt;
         RectTransform repere; Text distLbl, tracerLbl;   // repère GPS posé à la main, et ses commandes
+        readonly List<RectTransform> trail = new List<RectTransform>(); Quest questRef;   // tracé GPS sur la carte
         Vector3 worldMin, worldSize; float zoom = 1f; Vector2 center = new Vector2(0.5f, 0.5f);
         readonly List<(Transform t, Vector3 fixedPos, RectTransform icon)> pins = new List<(Transform, Vector3, RectTransform)>();
         RectTransform heroPin; Transform hero; Font font; float lastPinch;
@@ -80,6 +81,7 @@ namespace Korvalune.Game
             Btn(frame, "Effacer le repère", new Vector2(16, 16), () => GroundGps.Manual = null, 280);
             Btn(frame, "Tracé", new Vector2(310, 16), () => Settings.Gps = 1 - Settings.Gps, 280);
             tracerLbl = frame.GetChild(frame.childCount - 1).GetComponentInChildren<Text>();
+            questRef = FindFirstObjectByType<Quest>();
             if (hero) center = UvOf(hero.position);
             SetZoom(2f);
         }
@@ -206,6 +208,18 @@ namespace Korvalune.Game
             }
             else { repere.gameObject.SetActive(false); if (distLbl) distLbl.text = "Aucun repère : touchez la carte pour en poser un"; }
             if (tracerLbl) tracerLbl.text = Settings.Gps == 0 ? "Tracé : activé" : "Tracé : désactivé";
+            // tracé GPS : pointillés du héros jusqu'à la cible (repère posé ou étape de quête), comme sur la mini-carte
+            int used = 0;
+            Vector3? tg = Settings.Gps == 0 && hero != null ? GroundGps.Pick(questRef) : null;
+            if (tg.HasValue)
+            {
+                foreach (var p in GroundGps.Samples(hero.position, tg.Value, 40))
+                {
+                    if (used >= trail.Count) trail.Add(Img(markers, UIStyle.Disc(), new Color(1f, 0.82f, 0.25f, 0.8f)).rectTransform);
+                    var dot = trail[used++]; dot.sizeDelta = new Vector2(9, 9); dot.gameObject.SetActive(true); Place(dot, p, size, w, h);
+                }
+            }
+            for (int i = used; i < trail.Count; i++) trail[i].gameObject.SetActive(false);
             if (hero && heroPin) { Place(heroPin, hero.position, size, w, h); heroPin.localRotation = Quaternion.Euler(0, 0, -hero.eulerAngles.y); }
         }
 
