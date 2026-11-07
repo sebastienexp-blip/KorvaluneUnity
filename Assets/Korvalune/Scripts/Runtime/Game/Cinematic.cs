@@ -136,8 +136,10 @@ namespace Korvalune.Game
             title = Txt(root, "Chapitre", 40, new Vector2(0.5f, 0.5f), new Vector2(0, 70), new Vector2(1600, 60)); title.color = new Color(0.93f, 0.74f, 0.42f, 0);
             subtitle = Txt(root, "Titre", 86, new Vector2(0.5f, 0.5f), new Vector2(0, -10), new Vector2(1800, 120)); subtitle.fontStyle = FontStyle.Bold; subtitle.color = new Color(0.98f, 0.92f, 0.8f, 0);
             sub = Txt(root, "SousTitre", 38, new Vector2(0.5f, 0), new Vector2(0, 30), new Vector2(1560, 110)); sub.color = new Color(0.98f, 0.94f, 0.86f, 1);
-            hint = Txt(root, "Passer", 26, new Vector2(1, 1), new Vector2(-170, -40), new Vector2(320, 40)); hint.text = "Toucher pour passer ›"; hint.alignment = TextAnchor.MiddleRight; hint.color = new Color(0.9f, 0.82f, 0.65f, 0);
-            var btn = fader.gameObject.AddComponent<Button>(); btn.transition = Selectable.Transition.None; btn.onClick.AddListener(() => skip = true);
+            hint = Txt(root, "Passer", 26, new Vector2(1, 1), new Vector2(-170, -40), new Vector2(320, 40)); hint.text = "Passer ›"; hint.alignment = TextAnchor.MiddleRight; hint.color = new Color(0.9f, 0.82f, 0.65f, 0);
+            // seul le bouton « Passer » interrompt la cinématique (toucher l'écran ne la passe plus)
+            hint.raycastTarget = true;
+            var btn = hint.gameObject.AddComponent<Button>(); btn.transition = Selectable.Transition.None; btn.onClick.AddListener(() => skip = true);
             StartCoroutine(Run(outro));
         }
 
