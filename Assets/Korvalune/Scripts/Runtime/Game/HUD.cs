@@ -249,9 +249,12 @@ namespace Korvalune.Game
         {
             if (d == null) return null;
             string key = "Icons/Skills/" + d.classId + "_" + d.index;
-            if (painted.TryGetValue(key, out var sp)) return sp;
+            // le cache survit aux changements de scène : une peinture déchargée par Unity (sprite détruit) est rechargée,
+            // au lieu de rester une image vide (les compétences apparaissaient noires)
+            if (painted.TryGetValue(key, out var sp) && sp) return sp;
             var tex = Resources.Load<Texture2D>(key);
-            if (tex) { tex.wrapMode = TextureWrapMode.Clamp; sp = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100f); sp.name = key; }
+            sp = null;
+            if (tex) { tex.wrapMode = TextureWrapMode.Clamp; tex.hideFlags = HideFlags.DontUnloadUnusedAsset; sp = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100f); sp.name = key; sp.hideFlags = HideFlags.DontUnloadUnusedAsset; }
             return painted[key] = sp;
         }
 
