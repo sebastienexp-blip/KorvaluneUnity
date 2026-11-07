@@ -372,6 +372,8 @@ namespace Korvalune.Game
         {
             var area = root.rect.size; var sz = rt.sizeDelta;
             float k = Mathf.Min(1f, (area.y - 12f) / Mathf.Max(1f, sz.y), (area.x - 12f) / Mathf.Max(1f, sz.x));
+            // zone encore non dimensionnée (hauteur nulle ou négative) : une échelle nulle ou négative cachait tout le panneau
+            if (!(k > 0.05f) || area.y < 40f) k = 0.5f;
             rt.localScale = new Vector3(k, k, 1f);
         }
 
