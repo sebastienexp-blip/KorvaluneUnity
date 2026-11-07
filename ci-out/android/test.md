@@ -25,8 +25,6 @@
     [Korvalune][test] chargement 90 %
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
-- Erreurs Unity dans le journal : 2
-    11-07 08:54:09.093  6271  6293 E Unity   : Scene 'Korvalune_Selection' couldn't be loaded because it has not been added to the active build profile or shared scene list or the AssetBundle has not been loaded.
-    11-07 08:54:09.093  6271  6293 E Unity   : To add a scene to the active build profile or shared scene list use the menu File->Build Profiles
+- Erreurs Unity dans le journal : 0
 
 **RÉSULTAT : OK**
