@@ -68,7 +68,7 @@ namespace Korvalune.Game
         }
 
         // ========================================================================================== arbre de compétences
-        GameObject treePanel; Text treePoints, treeDetail, treeLearnText; RectTransform treeDetailBox; Image treeLearn; int treeSel = -1;
+        GameObject treePanel; Text treePoints, treeDetail, treeLearnText; RectTransform treeDetailBox; Image treeLearn; int treeSel = -1; float treeSlotIcon = 60f;
         readonly Dictionary<int, (Image node, Image glow, Image icon, Image lockIcon, Text rank, Text name)> treeNodes = new Dictionary<int, (Image, Image, Image, Image, Text, Text)>();
         readonly List<(int child, Image line)> treeLines = new List<(int, Image)>();
         readonly List<(Image bg, Image icon, Text num)> treeSlots = new List<(Image, Image, Text)>();
@@ -161,6 +161,7 @@ namespace Korvalune.Game
                 int slot = s;
                 var bg = Img(panel, "Emplacement" + s, UIStyle.Slot(), new Vector2(0.5f, 0), new Vector2(x0 + s * step, 40), new Vector2(sz, sz)); bg.type = Image.Type.Sliced; bg.raycastTarget = true;
                 var ic = Img(bg.rectTransform, "Icône", null, new Vector2(0.5f, 0.5f), new Vector2(0, 6), new Vector2(sz * 0.69f, sz * 0.69f));
+                treeSlotIcon = sz * 0.69f;   // taille fixe : relire la taille de l'icône à chaque rafraîchissement la faisait grossir sans fin
                 var num = Label(bg.rectTransform, "N", (s + 1).ToString(), 22, TextAnchor.LowerCenter, new Vector2(0.5f, 0.5f), new Vector2(0, -2), new Vector2(sz - 10, sz - 6));
                 num.color = UIStyle.Gold; num.gameObject.AddComponent<Outline>().effectColor = Color.black;
                 var b = bg.gameObject.AddComponent<Button>(); b.targetGraphic = bg; b.onClick.AddListener(() => PickTreeSlot(slot));
@@ -238,7 +239,7 @@ namespace Korvalune.Game
             for (int s = 0; s < treeSlots.Count; s++)
             {
                 var (bg, ic, num) = treeSlots[s]; var d = runner.book[runner.loadout[s]];
-                SetSkillIcon(ic, d, 0.7f, ic.rectTransform.sizeDelta.x, ic.rectTransform.sizeDelta.x * 1.18f); ic.color = runner.ranks[runner.loadout[s]] > 0 ? Color.white : new Color(0.4f, 0.4f, 0.4f);
+                SetSkillIcon(ic, d, 0.7f, treeSlotIcon, treeSlotIcon * 1.18f); ic.color = runner.ranks[runner.loadout[s]] > 0 ? Color.white : new Color(0.4f, 0.4f, 0.4f);
                 bg.color = runner.loadout[s] == treeSel ? new Color(1f, 0.85f, 0.55f) : Color.white;
             }
             // fiche
