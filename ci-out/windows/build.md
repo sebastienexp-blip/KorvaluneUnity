@@ -2,8 +2,8 @@
 
 - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime
 - Icône : Assets/Korvalune/Resources/UI/Icone.png
-- Résultat : **Succeeded** en 6.4 min, 0 erreur(s), 2 avertissement(s)
-- Jeu : 1937 Mo, version 0.1.10
+- Résultat : **Succeeded** en 6.7 min, 0 erreur(s), 2 avertissement(s)
+- Jeu : 1937 Mo, version 0.1.11
 
 ## Contenu empaqueté : 4423 Mo
 - Texture2D : 3779.9 Mo (6004)
