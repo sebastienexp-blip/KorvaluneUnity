@@ -28,14 +28,6 @@
     [Korvalune][test] chargement 90 %
     [Korvalune][test] chargement 90 %
     [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
-    [Korvalune][test] chargement 90 %
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
 - Erreurs Unity dans le journal : 2
