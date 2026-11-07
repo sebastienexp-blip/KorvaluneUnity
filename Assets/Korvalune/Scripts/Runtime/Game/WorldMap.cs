@@ -12,6 +12,7 @@ namespace Korvalune.Game
     {
         public static WorldMap Current;
         RawImage view; RectTransform frame, markers; RenderTexture rt;
+        RectTransform repere; Text distLbl, tracerLbl;   // repère GPS posé à la main, et ses commandes
         Vector3 worldMin, worldSize; float zoom = 1f; Vector2 center = new Vector2(0.5f, 0.5f);
         readonly List<(Transform t, Vector3 fixedPos, RectTransform icon)> pins = new List<(Transform, Vector3, RectTransform)>();
         RectTransform heroPin; Transform hero; Font font; float lastPinch;
@@ -71,6 +72,14 @@ namespace Korvalune.Game
             Btn(side, "Me centrer", new Vector2(130, 70), () => { if (hero) center = UvOf(hero.position); Clamp(); }, 240);
             Btn(side, "Fermer", new Vector2(130, -20), Close, 240);
             BuildPins();
+            // repère GPS : pastille dorée à l'endroit posé, distance, effacer, activer/couper le tracé au sol
+            repere = Img(markers, UIStyle.Disc(), new Color(1f, 0.82f, 0.2f)).rectTransform; repere.sizeDelta = new Vector2(30, 30); repere.gameObject.SetActive(false);
+            distLbl = Lbl(frame, "", Vector2.zero, 26, UIStyle.Gold, TextAnchor.MiddleLeft);
+            distLbl.rectTransform.anchorMin = distLbl.rectTransform.anchorMax = Vector2.zero; distLbl.rectTransform.pivot = Vector2.zero;
+            distLbl.rectTransform.anchoredPosition = new Vector2(20, 104); distLbl.rectTransform.sizeDelta = new Vector2(900, 40); distLbl.alignment = TextAnchor.MiddleLeft;
+            Btn(frame, "Effacer le repère", new Vector2(16, 16), () => GroundGps.Manual = null, 280);
+            Btn(frame, "Tracé", new Vector2(310, 16), () => Settings.Gps = 1 - Settings.Gps, 280);
+            tracerLbl = frame.GetChild(frame.childCount - 1).GetComponentInChildren<Text>();
             if (hero) center = UvOf(hero.position);
             SetZoom(2f);
         }
@@ -189,6 +198,14 @@ namespace Korvalune.Game
                 if (t == null && fixedPos == Vector3.zero) { icon.gameObject.SetActive(false); continue; }
                 Place(icon, t ? t.position : fixedPos, size, w, h);
             }
+            // repère posé à la main : pastille, distance depuis le héros, état du tracé
+            if (GroundGps.Manual.HasValue)
+            {
+                repere.gameObject.SetActive(true); Place(repere, GroundGps.Manual.Value, size, w, h);
+                if (hero && distLbl) { var d = GroundGps.Manual.Value - hero.position; d.y = 0; distLbl.text = $"Repère : {d.magnitude:0} m"; }
+            }
+            else { repere.gameObject.SetActive(false); if (distLbl) distLbl.text = "Aucun repère : touchez la carte pour en poser un"; }
+            if (tracerLbl) tracerLbl.text = Settings.Gps == 0 ? "Tracé : activé" : "Tracé : désactivé";
             if (hero && heroPin) { Place(heroPin, hero.position, size, w, h); heroPin.localRotation = Quaternion.Euler(0, 0, -hero.eulerAngles.y); }
         }
 
