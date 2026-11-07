@@ -8,7 +8,7 @@ namespace Korvalune.Game
     /// <summary>Carte plein écran : vue de dessus de toute la zone (photographiée une fois à l'ouverture), qu'on fait glisser
     /// du doigt et qu'on agrandit (pincement, boutons + / −). Repères : héros, villes et zone sûre, portails et entrées de
     /// donjons, marchands, Oracle des Brèches, objectif de quête, camps de monstres en cours. Légende à droite.</summary>
-    public class WorldMap : MonoBehaviour, IDragHandler, IScrollHandler
+    public class WorldMap : MonoBehaviour, IDragHandler, IScrollHandler, IPointerClickHandler
     {
         public static WorldMap Current;
         RawImage view; RectTransform frame, markers; RenderTexture rt;
@@ -154,6 +154,17 @@ namespace Korvalune.Game
             center -= new Vector2(e.delta.x * scale / size.x * k, e.delta.y * scale / size.y * k); Clamp();
         }
         public void OnScroll(PointerEventData e) { SetZoom(zoom * (e.scrollDelta.y > 0 ? 1.2f : 1 / 1.2f)); }
+
+        /// <summary>Un tap sur la carte pose le point GPS à cet endroit (le tracé au sol s'affiche si le GPS est activé).</summary>
+        public void OnPointerClick(PointerEventData e)
+        {
+            if (!view || e.dragging) return;
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(view.rectTransform, e.position, e.pressEventCamera, out var lp)) return;
+            var r = view.rectTransform.rect; var ur = view.uvRect;
+            var uv = new Vector2(ur.xMin + (lp.x / r.width + 0.5f) * ur.width, ur.yMin + (lp.y / r.height + 0.5f) * ur.height);
+            GroundGps.SetTarget(worldMin + new Vector3(uv.x * worldSize.x, 0, uv.y * worldSize.z));
+            Sound.UI("sfx_ui_clic", 0.5f);
+        }
 
         void Update()
         {

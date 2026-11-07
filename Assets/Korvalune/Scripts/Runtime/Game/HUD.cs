@@ -442,6 +442,8 @@ namespace Korvalune.Game
                 var dot = mapDots[k++]; dot.gameObject.SetActive(true); dot.color = c; dot.rectTransform.sizeDelta = Vector2.one * size;
                 dot.rectTransform.anchoredPosition = new Vector2(d.x, d.z) * scale;
             }
+            // point GPS (tracé au sol) : or, épinglé au bord s'il est loin
+            if (Settings.Gps == 0 && !Rift.Active) { var gt = GroundGps.Pick(quest); if (gt.HasValue) Dot(gt.Value, new Color(1f, 0.82f, 0.25f), 16, true); }
             foreach (var h in Health.All)
             {
                 if (!h || h.Dead || h.faction != Faction.Enemy) continue;

@@ -35,6 +35,7 @@ namespace Korvalune.Game
         public static int NameSize { get => Get("taille_noms", 1); set => Set("taille_noms", value); }     // petite / normale / grande
         public static int Gore { get => Get("gore", 0); set => Set("gore", value); }                      // complet / sang seulement / désactivé
         public static int QuestPanel { get => Get("quete", 0); set => Set("quete", value); }               // affichée / masquée
+        public static int Gps { get => Get("gps", 0); set => Set("gps", value); }                          // tracé au sol : activé / désactivé
 
         public static float AmbienceVolume => Muted == 1 ? 0 : Ambience / 4f;
         public static float UiVolume => Muted == 1 ? 0 : UiSound / 4f;
@@ -192,6 +193,7 @@ namespace Korvalune.Game
             Row(u, ref y, "Chiffres de dégâts", new[] { "Affichés", "Masqués" }, () => PlayerPrefs.GetInt("korvalune.degats", 0), k => { PlayerPrefs.SetInt("korvalune.degats", k); HUD.ShowDamageNumbers = k == 0; Changed(); });
             Row(u, ref y, "Mini-carte / quête", new[] { "Affichées", "Carte seule", "Masquées" }, () => Settings.Minimap == 1 ? 2 : Settings.QuestPanel == 1 ? 1 : 0,
                 k => { PlayerPrefs.SetInt("korvalune.quete", k >= 1 ? 1 : 0); Settings.Minimap = k == 2 ? 1 : 0; });
+            Row(u, ref y, "GPS au sol", new[] { "Activé", "Désactivé" }, () => Settings.Gps, k => Settings.Gps = k);
             Row(u, ref y, "Compteur d'images/s", new[] { "Affiché", "Masqué" }, () => Settings.FpsCounter, k => Settings.FpsCounter = k);
 
             ShowPage(PlayerPrefs.GetInt("korvalune.onglet", 0));
