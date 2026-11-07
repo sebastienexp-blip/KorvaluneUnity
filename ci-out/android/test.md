@@ -12,8 +12,21 @@
 - Activité : com.korvalune.game/com.unity3d.player.UnityPlayerGameActivity
     [Korvalune] partie automatique : activée
     [Korvalune][test] lanceur prêt : on joue
-    [Korvalune][test] chargement de la scène « Korvalune_Selection » avec Testeur
-    [Korvalune][test] ÉCHEC : scène introuvable
+    [Korvalune][test] chargement de la scène « Korvalune_Vallee » avec Testeur
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
+    [Korvalune][test] chargement 90 %
 - ⚠️ Partie automatique inachevée (voir partie.txt)
 - ✅ Aucun plantage dans le journal
 - Erreurs Unity dans le journal : 2
