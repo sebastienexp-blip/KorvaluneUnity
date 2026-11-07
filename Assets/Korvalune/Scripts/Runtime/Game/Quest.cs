@@ -46,10 +46,13 @@ namespace Korvalune.Game
                 if (st.completed) current = steps.Count;
                 else { current = Mathf.Clamp(st.step, 0, steps.Count); if (!Finished) steps[current].done = st.done; }
             }
-            // première arrivée dans la région : cinématique d'ouverture du chapitre
-            if (Application.isPlaying && !Finished && !QuestLog.Seen("intro_" + chapter.id) && !AutoTest.Enabled)
-                StartCoroutine(PlayIntro());
+            // le chapitre ne démarre plus à l'arrivée : un PNJ donneur le propose et l'ouvre par un dialogue
+            if (Application.isPlaying && !Finished && !AutoTest.Enabled && !QuestLog.Seen("intro_" + chapter.id))
+                QuestGiver.Spawn(this);
         }
+
+        /// <summary>Le chapitre a été ouvert par son PNJ : seulement alors ses objectifs avancent.</summary>
+        bool Started => chapter == null || AutoTest.Enabled || QuestLog.Seen("intro_" + chapter.id);
 
         System.Collections.IEnumerator PlayIntro()
         {
@@ -60,7 +63,7 @@ namespace Korvalune.Game
 
         void OnDied(Health h)
         {
-            if (Finished || h.faction != Faction.Enemy) return;
+            if (Finished || !Started || h.faction != Faction.Enemy) return;
             var ai = h.GetComponent<EnemyAI>();
             var o = Current;
             if (ai && ai.type != null && o.enemyId == ai.type.id) { o.done++; Save(); Advance(); }
@@ -68,7 +71,7 @@ namespace Korvalune.Game
 
         void Update()
         {
-            if (Finished || !player || Cinematic.Active) return;
+            if (Finished || !player || Cinematic.Active || !Started) return;
             var o = Current;
             if (string.IsNullOrEmpty(o.enemyId) && o.radius > 0)
             {
