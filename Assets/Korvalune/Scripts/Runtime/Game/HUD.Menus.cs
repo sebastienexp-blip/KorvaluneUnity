@@ -328,9 +328,9 @@ namespace Korvalune.Game
             var o = OrnatePanel(root, "Options", new Vector2(1060, 980), "Options"); optionsPanel = o.gameObject;
             float oy = -120;
             var cfg = FindFirstObjectByType<GameBootstrap>()?.config;
-            OptionRow(o, ref oy, "Qualité graphique", new[] { "Ultra", "Élevé", "Faible" },
-                () => GraphicsQuality.Current == GraphicsQuality.Tier.Ultra ? 0 : GraphicsQuality.Current == GraphicsQuality.Tier.Haute ? 1 : 2,
-                k => GraphicsQuality.Apply(cfg, (k == 0 ? GraphicsQuality.Tier.Ultra : k == 1 ? GraphicsQuality.Tier.Haute : GraphicsQuality.Tier.Mobile), true));
+            OptionRow(o, ref oy, "Qualité graphique", new[] { "Ultra", "Élevé", "Faible", "Très faible" },
+                () => GraphicsQuality.MenuIndex(GraphicsQuality.Current),
+                k => GraphicsQuality.Apply(cfg, GraphicsQuality.FromMenu(k), true));
             OptionRow(o, ref oy, "Musique", new[] { "Muet", "25 %", "50 %", "75 %", "100 %" },
                 () => Mathf.RoundToInt(Sound.Music * 4),
                 k => { Sound.Music = k / 4f; });

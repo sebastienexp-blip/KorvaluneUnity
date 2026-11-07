@@ -14,7 +14,7 @@ namespace Korvalune.Game
         static void Set(string k, int v) { PlayerPrefs.SetInt("korvalune." + k, v); PlayerPrefs.Save(); Apply(); Changed?.Invoke(); }
 
         // graphismes
-        public static int Fps { get => Get("fps", GraphicsQuality.Current == GraphicsQuality.Tier.Mobile ? 0 : 1); set => Set("fps", value); }          // 30 / 60
+        public static int Fps { get => Get("fps", GraphicsQuality.Low ? 0 : 1); set => Set("fps", value); }          // 30 / 60
         public static int Shadows { get => Get("ombres", 0); set => Set("ombres", value); }                // activées / désactivées
         public static int PostFx { get => Get("postfx", 0); set => Set("postfx", value); }                 // complets / réduits / désactivés
         public static int Brightness { get => Get("lumi", 1); set => Set("lumi", value); }                 // sombre / normale / claire / très claire
@@ -64,7 +64,7 @@ namespace Korvalune.Game
                 if (data) { data.renderShadows = Shadows == 0; data.renderPostProcessing = PostFx < 2; }
                 cam.farClipPlane = ViewDistance == 0 ? 260 : ViewDistance == 2 ? 900 : 520;
             }
-            foreach (var v in Object.FindObjectsByType<Volume>(FindObjectsSortMode.None)) v.weight = PostFx == 0 ? (GraphicsQuality.Current == GraphicsQuality.Tier.Mobile ? 0.6f : 1f) : PostFx == 1 ? 0.45f : 0f;
+            foreach (var v in Object.FindObjectsByType<Volume>(FindObjectsSortMode.None)) v.weight = PostFx == 0 ? (GraphicsQuality.Low ? 0.6f : 1f) : PostFx == 1 ? 0.45f : 0f;
             var t = Terrain.activeTerrain;
             if (t) { t.treeDistance = ViewDistance == 0 ? 160 : ViewDistance == 2 ? 600 : 360; t.detailObjectDistance = ViewDistance == 0 ? 20 : ViewDistance == 2 ? 70 : 45; }
             // luminosité : on part des valeurs d'origine de la scène (mémorisées une fois)
@@ -169,8 +169,8 @@ namespace Korvalune.Game
             string[] pct = { "Muet", "25 %", "50 %", "75 %", "100 %" };
 
             float y = 0; var g = (RectTransform)pages[0].page.transform;
-            Row(g, ref y, "Qualité", new[] { "Ultra", "Élevé", "Faible" }, () => GraphicsQuality.Current == GraphicsQuality.Tier.Ultra ? 0 : GraphicsQuality.Current == GraphicsQuality.Tier.Haute ? 1 : 2,
-                k => { if (cfg) GraphicsQuality.Apply(cfg, (k == 0 ? GraphicsQuality.Tier.Ultra : k == 1 ? GraphicsQuality.Tier.Haute : GraphicsQuality.Tier.Mobile), true); else PlayerPrefs.SetInt("korvalune.qualite", (int)(k == 0 ? GraphicsQuality.Tier.Ultra : k == 1 ? GraphicsQuality.Tier.Haute : GraphicsQuality.Tier.Mobile)); Settings.Apply(); });
+            Row(g, ref y, "Qualité", new[] { "Ultra", "Élevé", "Faible", "Très faible" }, () => GraphicsQuality.MenuIndex(GraphicsQuality.Current),
+                k => { var t = GraphicsQuality.FromMenu(k); if (cfg) GraphicsQuality.Apply(cfg, t, true); else PlayerPrefs.SetInt("korvalune.qualite", (int)t); Settings.Apply(); });
             Row(g, ref y, "Images par seconde", new[] { "30", "60" }, () => Settings.Fps, k => Settings.Fps = k);
             Row(g, ref y, "Ombres", new[] { "Activées", "Désactivées" }, () => Settings.Shadows, k => Settings.Shadows = k);
             Row(g, ref y, "Effets de lumière", new[] { "Complets", "Réduits", "Aucun" }, () => Settings.PostFx, k => Settings.PostFx = k);
