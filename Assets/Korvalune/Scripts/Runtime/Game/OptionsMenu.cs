@@ -176,7 +176,7 @@ namespace Korvalune.Game
             Row(g, ref y, "Effets de lumière", new[] { "Complets", "Réduits", "Aucun" }, () => Settings.PostFx, k => Settings.PostFx = k);
             Row(g, ref y, "Luminosité", new[] { "Sombre", "Normale", "Claire", "Très claire" }, () => Settings.Brightness, k => Settings.Brightness = k);
             Row(g, ref y, "Distance de vue", new[] { "Courte", "Normale", "Longue" }, () => Settings.ViewDistance, k => Settings.ViewDistance = k);
-            Row(g, ref y, "Objets au sol (performance)", new[] { "Illimités", "Nombreux", "Limités (fluide)" }, () => Settings.Objets, k => Settings.Objets = k);
+            Row(g, ref y, "Qualité des objets au sol", new[] { "Élevée", "Moyenne", "Faible" }, () => Settings.Objets, k => Settings.Objets = k);
 
             y = 0; var s = (RectTransform)pages[1].page.transform;
             Row(s, ref y, "Musique", pct, () => Mathf.RoundToInt(Sound.Music * 4), k => { Sound.Music = k / 4f; Changed(); });
