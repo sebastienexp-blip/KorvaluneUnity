@@ -14,8 +14,8 @@ namespace Korvalune.Game
         public static void Spawn(Quest q)
         {
             var ch = q.chapter; if (ch == null || !q.player) return;
-            // première quête : son donneur attend dans l'enceinte du château (la cour, derrière la porte d'entrée)
-            var at = ch.id == "ch01" ? new Vector3(6f, 0f, -26f) : q.player.position + q.player.right * 5f;
+            // première quête : son donneur attend juste devant l'enceinte du château
+            var at = ch.id == "ch01" ? new Vector3(6f, 0f, -43f) : q.player.position + q.player.right * 5f;
             at = GameBootstrap.Ground(at);
             var go = new GameObject("PNJ donneur " + ch.id);
             go.transform.position = at;
