@@ -105,6 +105,13 @@ namespace Korvalune.Game
             return l;
         }
 
+        float SetStrength(string setId)
+        {
+            var best = Rarity.Commun;
+            foreach (var p in Active()) if (p.set == setId && p.rarity > best) best = p.rarity;
+            return Powers.Strength(best);
+        }
+
         /// <summary>Tous les pouvoirs actifs : objets légendaires portés + bonus d'ensembles (4 et 6 pièces), avec leur force.</summary>
         public List<(PowerDef power, float strength)> ActivePowers()
         {
@@ -116,8 +123,10 @@ namespace Korvalune.Game
             }
             foreach (var (def, n) in ActiveSets())
             {
-                if (n >= 4) { var a = Powers.Get(def.power4); if (a != null) l.Add((a, 1f)); }
-                if (n >= 6) { var b = Powers.Get(def.power6); if (b != null) l.Add((b, 1f)); }
+                // la force d'un ensemble suit la rareté de ses pièces portées (la plus haute compte)
+                float st = SetStrength(def.id);
+                if (n >= 4) { var a = Powers.Get(def.power4); if (a != null) l.Add((a, st)); }
+                if (n >= 6) { var b = Powers.Get(def.power6); if (b != null) l.Add((b, st)); }
             }
             return l;
         }
