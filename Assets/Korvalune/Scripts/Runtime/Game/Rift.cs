@@ -15,6 +15,26 @@ namespace Korvalune.Game
         public static bool Active;
         public static int Tier;                          // 0 = brèche astrale ; ≥ 1 = Grande Brèche de ce niveau
         public const float TimeLimit = 15 * 60f;
+        // brèche astrale laissée ouverte (gardien vaincu, ou quittée par un portail) : reprise ou fermeture à la statue
+        public static int? KeepSeed, KeepTheme;
+        public static bool Suspended, ResumeDone;
+        static string susScene; static Vector3 susPos; static int susSeed, susTheme, susTier; static bool susDone;
+        public static bool SuspendedDone => susDone;
+        public static void Suspend(string scene, Vector3 pos, int seed, int theme, int tier, bool done)
+        {
+            Suspended = true; susScene = scene; susPos = pos; susSeed = seed; susTheme = theme; susTier = tier; susDone = done;
+        }
+        /// <summary>Ferme la brèche laissée ouverte (bouton de la statue).</summary>
+        public static void Forget() { Suspended = false; }
+        /// <summary>Reprend la brèche laissée ouverte, au même endroit et avec le même niveau.</summary>
+        public static void ResumeOpen()
+        {
+            if (!Suspended) return;
+            Suspended = false; Active = true; Tier = susTier; ResumeDone = susDone;
+            KeepSeed = susSeed; KeepTheme = susTheme;
+            GameBootstrap.nextSpawn = susPos;
+            SceneManager.LoadScene(susScene);
+        }
         static readonly string[] Scenes = { "Korvalune_Breche" };                               // niveau généré à chaque entrée (RiftLevel)
         static readonly string[] Legacy = { "Korvalune_Crypte", "Korvalune_Terriers" };
         public static bool IsRiftScene(string s) => System.Array.IndexOf(Scenes, s) >= 0 || System.Array.IndexOf(Legacy, s) >= 0;
@@ -37,6 +57,7 @@ namespace Korvalune.Game
         public static void Enter(int tier)
         {
             Deaths = 0;
+            KeepSeed = null; KeepTheme = null; Suspended = false; ResumeDone = false;   // une nouvelle brèche remplace l'ancienne
             var game = Object.FindFirstObjectByType<GameBootstrap>();
             if (game) game.Persist();
             Active = true; Tier = Mathf.Max(0, tier);
@@ -94,9 +115,31 @@ namespace Korvalune.Game
             var pop = g.GetComponent<WorldPopulation>(); if (pop) pop.noRespawn = true;
             d.BuildUi();
             g.Hud.Notify(Rift.Title);
+            if (Rift.ResumeDone) { Rift.ResumeDone = false; d.done = true; d.OpenBack(g.Player.transform.position); g.Hud.Notify("Brèche rouverte : le gardien a déjà été vaincu"); }
         }
 
         void OnDestroy() { Health.AnyDied -= OnDied; }
+
+        public bool Done => done;
+
+        /// <summary>Portail « Revenir » : depuis une brèche astrale, on quitte en la laissant ouverte.</summary>
+        void OpenBack(Vector3 pos)
+        {
+            var back = new GameObject("Retour en ville").AddComponent<Portal>();
+            back.transform.position = LootDrop.Near(pos, new Vector3(3, 0, 0));
+            back.targetScene = "Korvalune_Vallee"; back.label = "Revenir"; back.displayName = "Vallée de Korvalune"; back.glowColor = new Color(0.75f, 0.45f, 1f);
+            back.arrival = game.playerSpawn;          // remplacé par le point d'arrivée de la vallée (voir Portal)
+            back.useSceneSpawn = true; back.gate = true;
+            back.onEnter = () => { if (Rift.Tier <= 0) LeaveOpen(); else Rift.ReturnToTown(); };
+        }
+
+        /// <summary>Quitte la brèche astrale sans la fermer : elle reste ouverte jusqu'à fermeture à la statue.</summary>
+        void LeaveOpen()
+        {
+            var lvl = game.GetComponent<RiftLevel>();
+            Rift.Suspend(SceneManager.GetActiveScene().name, game.Player.transform.position, lvl ? lvl.Seed : 0, lvl ? lvl.Theme : -1, Rift.Tier, done);
+            Rift.ReturnToTown();
+        }
 
         void OnDied(Health h)
         {
@@ -135,7 +178,7 @@ namespace Korvalune.Game
             string msg;
             if (Rift.Tier <= 0)
             {
-                w.riftKeys++; msg = "Brèche refermée ! +1 Sceau de brèche (Grandes Brèches)";
+                w.riftKeys++; msg = "Gardien vaincu ! +1 Sceau de brèche — la brèche reste ouverte, fermez-la à la statue";
             }
             else if (!timedOut)
             {
@@ -156,14 +199,9 @@ namespace Korvalune.Game
             w.starShard += 2 + Rift.Tier; w.shadow += 3 + Rift.Tier;
             game.Player.Notify?.Invoke($"<color=#c58cff>{msg}</color>"); game.Hud.Notify(msg);
             Sound.Play("sfx_quete", pos, 1f);
-            // portail de retour
-            var back = new GameObject("Retour en ville").AddComponent<Portal>();
-            back.transform.position = LootDrop.Near(pos, new Vector3(3, 0, 0));
-            back.targetScene = "Korvalune_Vallee"; back.label = "Revenir"; back.displayName = "Vallée de Korvalune"; back.glowColor = new Color(0.75f, 0.45f, 1f);
-            back.arrival = game.playerSpawn;          // remplacé par le point d'arrivée de la vallée (voir Portal)
-            back.useSceneSpawn = true; back.gate = true; back.onEnter = Rift.ReturnToTown;
+            OpenBack(pos);
             if (save != null) game.Persist();
-            returnAt = Time.time + 15f;                        // le temps de ramasser le butin, puis retour automatique
+            if (Rift.Tier > 0) returnAt = Time.time + 15f;   // Grande Brèche : retour automatique ; brèche astrale : reste ouverte
         }
 
         float returnAt = -1;
@@ -192,7 +230,7 @@ namespace Korvalune.Game
             if (Rift.Tier > 0 && !done && !timedOut && left <= 0) { timedOut = true; game.Hud.Notify("<color=#ff6060>Temps écoulé</color>"); }
             fill.fillAmount = guardianUp ? (guardian && !guardian.Dead ? guardian.hp / guardian.maxHp : 0) : progress / required;
             fill.color = guardianUp ? new Color(0.85f, 0.2f, 0.25f) : new Color(0.7f, 0.4f, 1f);
-            bar.text = done ? "Brèche refermée" : guardianUp ? "Gardien de la brèche" : $"{Rift.Title} — {Mathf.FloorToInt(100 * progress / required)} %";
+            bar.text = done ? (Rift.Tier <= 0 ? "Brèche ouverte — gardien vaincu" : "Brèche refermée") : guardianUp ? "Gardien de la brèche" : $"{Rift.Title} — {Mathf.FloorToInt(100 * progress / required)} %";
             if (timer) timer.text = Rift.Tier <= 0 ? (Rift.Deaths > 0 ? $"☠ {Rift.Deaths}" : "") : timedOut ? "00:00" : $"{Mathf.FloorToInt(Mathf.Max(0, left) / 60):00}:{Mathf.FloorToInt(Mathf.Max(0, left) % 60):00}";
             if (timer) timer.color = left < 60 && !done ? new Color(1f, 0.4f, 0.35f) : Color.white;
         }
@@ -315,7 +353,12 @@ namespace Korvalune.Game
             var p = I(root, UIStyle.Ornate(), Vector2.zero, new Vector2(1100, 760), Color.white).rectTransform;
             L(p, "Statue des Brèches", new Vector2(0, 310), new Vector2(900, 70), 44, UIStyle.Gold).fontStyle = FontStyle.Bold;
             L(p, "« Les failles s'ouvrent sur des terres que la lune a oubliées. Remplis la jauge, abats le Gardien. »\nBrèche astrale : mourir ne fait pas quitter la brèche.  Grande Brèche : chaque mort coûte du temps.", new Vector2(0, 230), new Vector2(980, 90), 23, UIStyle.Parch);
-            B(p, "Ouvrir une Brèche astrale", new Vector2(0, 140), new Vector2(620, 84), () => { Close(); OpenGate(0); });
+            if (Rift.Suspended)
+            {
+                B(p, "Reprendre la brèche", new Vector2(-190, 140), new Vector2(480, 84), () => { Close(); Rift.ResumeOpen(); });
+                B(p, "Fermer la brèche", new Vector2(190, 140), new Vector2(420, 84), () => { Rift.Forget(); Close(); Open(); });
+            }
+            else B(p, "Ouvrir une Brèche astrale", new Vector2(0, 140), new Vector2(620, 84), () => { Close(); OpenGate(0); });
             L(p, $"Sceaux de brèche : {w.riftKeys}    —    meilleur niveau : {w.riftBest}", new Vector2(0, 50), new Vector2(940, 50), 26, UIStyle.Parch);
             var lvl = L(p, "", new Vector2(0, -40), new Vector2(500, 70), 40, Color.white);
             System.Action refresh = () => lvl.text = $"Grande Brèche : niveau {pick}";
