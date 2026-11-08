@@ -78,6 +78,7 @@ namespace Korvalune.Game
         static void Compose(Camp camp, GameConfig cfg, System.Random rng)
         {
             int L = camp.level;
+            MonsterVariants.Register(cfg);   // créatures nouvelles disponibles dans les camps (une seule fois)
             var pool = new List<(GameConfig.EnemyType t, float w)>(); float total = 0;
             foreach (var e in cfg.enemies)
             {
