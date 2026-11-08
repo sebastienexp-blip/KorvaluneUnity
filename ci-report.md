@@ -3204,65 +3204,28 @@ _169 captures écrites dans ci-out/ (OpenGLCore) en 4.6 min._
 - ✅ **Héros posé sur le sol** y = 12.9
 
 ## Sélection des personnages
-- ✅ **Scène de sélection** Assets/Korvalune/Scenes/Korvalune_Selection.unity
-- ✅ **Classes proposées** 5 classes
-- ✅ **Ordre des scènes** Korvalune_Selection, Korvalune_Vallee, Showcase
-- ✅ **Écran de sélection** ci-out/Selection_*.png, 3 héros d'essai, 5 emplacements
-
+16:40:54 - ✅ **Scène de sélection** Assets/Korvalune/Scenes/Korvalune_Selection.unity
+16:40:54 - ✅ **Classes proposées** 5 classes
+16:40:54 - ✅ **Ordre des scènes** Korvalune_Selection, Korvalune_Vallee, Showcase
+16:41:12 - ✅ **Écran de sélection** ci-out/Selection_*.png, 3 héros d'essai, 5 emplacements
+16:41:12 DungeonCheck
+16:41:12 
 ## Crypte de Korvalune (premier donjon)
-- ✅ **Scène de la crypte** Assets/Korvalune/Scenes/Korvalune_Crypte.unity
-- ✅ **Salles construites** 189 pièces de décor, 28 flammes
-- ✅ **Camps de la crypte** squelette×4, squelette×5, chevalier×1, araignee×2, demon×1, squelette×2
-- ✅ **Sortie vers la vallée** 
-- ✅ **Captures de la crypte** ci-out/Crypte_*.png
-
+16:41:14 - ✅ **Scène de la crypte** Assets/Korvalune/Scenes/Korvalune_Crypte.unity
+16:41:14 - ✅ **Salles construites** 189 pièces de décor, 28 flammes
+16:41:14 - ✅ **Camps de la crypte** squelette×4, squelette×5, chevalier×1, araignee×2, demon×1, squelette×2
+16:41:14 - ✅ **Sortie vers la vallée** 
+16:41:21   · crypte : capture 1_entree
+16:41:28   · crypte : capture 2_salle_aux_piliers
+16:41:35   · crypte : capture 3_salle_du_gardien
+16:41:35 - ✅ **Captures de la crypte** ci-out/Crypte_*.png
+16:41:35 CaveCheck
+16:41:35 
 ## Terriers de l'Astral (donjon-parcours)
-- ✅ **Scène des terriers** Assets/Korvalune/Scenes/Korvalune_Terriers.unity
-- ✅ **Parcours construit** 82 lumières, 3 coffres, 18 groupes d'ennemis
-- ✅ **Terriers : parcours praticable de l'entrée au gardien** 56 points du tracé dégagés
-- ✅ **Captures des terriers** ci-out/Terriers_*.png
-
-## Cité de l'Éclipse (deuxième ville)
-- ✅ **Scène de la Cité de l'Éclipse** Assets/Korvalune/Scenes/Korvalune_Eclipse.unity
-- ✅ **Cité peuplée** 4 marchands, 1 portail(s), 3 groupes fixes, niveau +13
-- ✅ **Cité : chemin libre jusqu'au sanctuaire** arrivée → porte ouest → place → pont → cristal
-
-## Régions de la carte (segments reliés par portails)
-- ✅ **Scène : Forêt de l'Astral** Assets/Korvalune/Scenes/Korvalune_Foret.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Forêt de l'Astral** ci-out/Region_Foret_*.png, 11 camps, niveaux 8 à 33
-- ✅ **Scène : Désert des Étoiles** Assets/Korvalune/Scenes/Korvalune_Desert.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Désert des Étoiles** ci-out/Region_Desert_*.png, 11 camps, niveaux 25 à 50
-- ✅ **Scène : Pics Sélénites** Assets/Korvalune/Scenes/Korvalune_Pics.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Pics Sélénites** ci-out/Region_Pics_*.png, 11 camps, niveaux 45 à 70
-- ✅ **Scène : Côte des Naufrages** Assets/Korvalune/Scenes/Korvalune_Cote.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Côte des Naufrages** ci-out/Region_Cote_*.png, 11 camps, niveaux 65 à 90
-- ✅ **Scène : Marais de Brumenoire** Assets/Korvalune/Scenes/Korvalune_Marais.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Marais de Brumenoire** ci-out/Region_Marais_*.png, 11 camps, niveaux 85 à 110
-- ✅ **Scène : Toundra de Givrecœur** Assets/Korvalune/Scenes/Korvalune_Toundra.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Toundra de Givrecœur** ci-out/Region_Toundra_*.png, 11 camps, niveaux 105 à 130
-- ✅ **Scène : Terres de Cendrefer** Assets/Korvalune/Scenes/Korvalune_Volcan.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Terres de Cendrefer** ci-out/Region_Volcan_*.png, 11 camps, niveaux 125 à 150
-- ✅ **Scène : Canyon Écarlate** Assets/Korvalune/Scenes/Korvalune_Canyon.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Canyon Écarlate** ci-out/Region_Canyon_*.png, 11 camps, niveaux 150 à 175
-- ✅ **Scène : Abîme du Néant** Assets/Korvalune/Scenes/Korvalune_Abime.unity, 11 camps, portail de retour : 1
-- ✅ **Région : Abîme du Néant** ci-out/Region_Abime_*.png, 11 camps, niveaux 175 à 200
-
-## Brèches (niveaux générés)
-- ✅ **Scène des brèches** Assets/Korvalune/Scenes/Korvalune_Breche.unity
-- ✅ **Brèche : Crypte engloutie** 774 éléments de décor, 13 groupes d'ennemis
-- ✅ **Brèche : Fournaise des damnés** 718 éléments de décor, 10 groupes d'ennemis
-- ✅ **Brèche : Nécropole astrale** 1247 éléments de décor, 17 groupes d'ennemis
-- ✅ **Brèche : Bois pétrifié** 596 éléments de décor, 15 groupes d'ennemis
-- ✅ **Brèche : Glacier des âmes** 1236 éléments de décor, 14 groupes d'ennemis
-- ✅ **Écran de lancement** Assets/Korvalune/Scenes/Korvalune_Lanceur.unity
-
-## Créateur de personnage
-- ✅ **Catalogue** 5 classes, 77 peaux, 48 yeux, 35 coiffures (102 variantes), 26 sourcils, 9 cils, 123/125 curseurs homme/femme
-- ✅ **Classes jouables en homme et en femme** KaelDraven [HF], ElyraNoctis [HF], Varek [HF], Morvanna [HF], Tharion [HF]
-- ✅ **Scène du créateur** Assets/Korvalune/Scenes/CharacterCreator.unity
-- ✅ **Captures du créateur** ci-out/Createur_*.png
-
-## Journal Unity (erreurs et avertissements)
-- ❌ Error: Destroy may not be called from edit mode! Use DestroyImmediate instead.
-
-**RÉSULTAT : tout est valide.**
+16:41:36   · terriers : tronçons
+16:41:36   · terriers : 69 lumières
+16:41:36   · terriers : scène enregistrée
+16:41:36 - ✅ **Scène des terriers** Assets/Korvalune/Scenes/Korvalune_Terriers.unity
+16:41:36 - ✅ **Parcours construit** 82 lumières, 3 coffres, 18 groupes d'ennemis
+16:41:42   · terriers : capture 1_entree
+```
