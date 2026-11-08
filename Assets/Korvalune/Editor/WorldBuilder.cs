@@ -554,6 +554,8 @@ namespace Korvalune.EditorTools
                         var cen = (a + b + c) / 3f; var n = Vector3.Cross(b - a, c - a).normalized;
                         bool door = dark && Mathf.Abs(cen.x) <= 3.2f && cen.y >= feet - 0.5f && cen.y <= feet + 4.6f && cen.z <= frontZ + 30f && n.z < -0.3f;   // passage de la porte d'entrée + vantail de la cour
                         if (door) { removed++; continue; }
+                        if (Mathf.Abs(cen.x) <= 3.2f && cen.y >= feet - 0.5f && cen.y <= feet + 4.6f && cen.z <= frontZ + 30f && n.z < -0.3f)
+                            Debug.Log($"[Château] candidat matériau={(s < mats.Length && mats[s] ? mats[s].name : "?")} centre=({cen.x:0.0},{cen.y:0.0},{cen.z:0.0}) n.z={n.z:0.00}");
                         keep.Add(tris[t]); keep.Add(tris[t + 1]); keep.Add(tris[t + 2]);
                     }
                     copy.SetTriangles(keep.ToArray(), s, false);

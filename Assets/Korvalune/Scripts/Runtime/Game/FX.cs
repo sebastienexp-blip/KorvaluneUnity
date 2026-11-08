@@ -16,7 +16,7 @@ namespace Korvalune.Game
             var r = go.GetComponent<ParticleSystemRenderer>(); r.sharedMaterial = mat; r.renderMode = ParticleSystemRenderMode.Billboard;
             var m = ps.main; m.playOnAwake = false; m.loop = false; m.duration = life; m.startLifetime = life; m.simulationSpace = ParticleSystemSimulationSpace.World;
             var em = ps.emission; em.rateOverTime = 0;
-            Object.Destroy(go, life + 1.5f);
+            if (Application.isPlaying) Object.Destroy(go, life + 1.5f);   // hors jeu (captures de l'éditeur) : Destroy est refusé en mode édition
             return ps;
         }
 
