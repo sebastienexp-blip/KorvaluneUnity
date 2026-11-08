@@ -137,7 +137,7 @@ namespace Korvalune.Game
         void LeaveOpen()
         {
             var lvl = game.GetComponent<RiftLevel>();
-            Rift.Suspend(SceneManager.GetActiveScene().name, game.Player.transform.position, lvl ? lvl.Seed : 0, lvl ? lvl.Theme : -1, Rift.Tier, done);
+            Rift.Suspend(SceneManager.GetActiveScene().name, game.Player.transform.position, lvl ? lvl.Seed : 0, lvl ? lvl.ThemeIndex : -1, Rift.Tier, done);
             Rift.ReturnToTown();
         }
 
