@@ -81,7 +81,16 @@ namespace Korvalune.Game
             casting = false;
             var here = SceneManager.GetActiveScene().name; var at = p.transform.position;
             bool inRift = Rift.Active; int tier = Rift.Tier;
-            Open(LootDrop.Near(at, p.transform.forward * 2.2f), "Portail de ville", () => { returnScene = here; returnPos = at; riftReturn = inRift; riftTier = tier; GameBootstrap.nextSpawn = null; SceneManager.LoadScene(Town); });
+            Open(LootDrop.Near(at, p.transform.forward * 2.2f), "Portail de ville", () =>
+            {
+                returnScene = here; returnPos = at; riftReturn = inRift; riftTier = tier;
+                if (inRift)   // brèche astrale : laissée ouverte, reprise à la statue ou par le retour au combat
+                {
+                    var rd = Object.FindFirstObjectByType<RiftDirector>(); var lv = Object.FindFirstObjectByType<RiftLevel>();
+                    Rift.Suspend(here, at, lv ? lv.Seed : 0, lv ? lv.Theme : -1, tier, rd && rd.Done);
+                }
+                GameBootstrap.nextSpawn = null; SceneManager.LoadScene(Town);
+            });
         }
 
         static Portal Open(Vector3 pos, string name, System.Action enter)
@@ -101,7 +110,7 @@ namespace Korvalune.Game
             {
                 returnScene = null; GameBootstrap.nextSpawn = pos;
                 // brèche astrale quittée par le portail : elle est rouverte telle quelle au retour (même endroit)
-                if (riftReturn && Rift.IsRiftScene(scene)) { Rift.Active = true; Rift.Tier = riftTier; }
+                if (riftReturn && Rift.Suspended) { riftReturn = false; Rift.ResumeOpen(); return; }
                 riftReturn = false;
                 SceneManager.LoadScene(scene);
             });
