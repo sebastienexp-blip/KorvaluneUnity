@@ -408,9 +408,9 @@ namespace Korvalune.Game
             S(K, "set.kael.legion", "Légion des Damnés", "de la Légion damnée", new[] { A("Force", 50), A("Réduction des temps de recharge", 8) },
                 new PowerDef { kind = SkillKind.Summon, count = 2, dmg = 1.0f },
                 new PowerDef { kind = SkillKind.Rain, dmg = 2.0f, count = 6, toElement = Element.Ombre });
-            S(K, "set.kael.breche", "Égide de la Brèche", "de l'Égide de la brèche", new[] { A("Armure", 100), A("Vie", 100) },
-                new PowerDef { element = Element.Neant, dmg = 1.2f, radius = 0.3f },
-                new PowerDef { element = Element.Neant, kind = SkillKind.Rain, dmg = 2.2f, count = 5, toElement = Element.Neant, echo = 0.4f });
+            S(K, "set.kael.breche", "Égide de la Brèche", "de l'Égide de la brèche", new[] { A("Armure", 250), A("Vie", 250), A("Force", 120) },
+                new PowerDef { element = Element.Neant, dmg = 2.2f, radius = 0.4f, echo = 0.3f },
+                new PowerDef { element = Element.Neant, kind = SkillKind.Rain, dmg = 4.0f, count = 7, toElement = Element.Neant, echo = 0.8f, radius = 0.5f });
 
             S(E, "set.elyra.eclipse", "Arcanes de l'Éclipse", "des Arcanes de l'Éclipse", new[] { A("Intelligence", 60), A("Régénération de mana", 15) },
                 new PowerDef { element = Element.Neant, dmg = 1.0f, radius = 0.25f },
