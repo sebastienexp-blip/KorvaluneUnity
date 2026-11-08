@@ -165,14 +165,14 @@ namespace Korvalune.Game
                     if (set.id == "set.kael.breche")
                     {
                         // Égide de la Brèche : pièces les plus puissantes du jeu, au-dessus des légendaires classiques
-                        it.rarity = Rarity.Mythique;
+                        it.rarity = Rarity.Ancestral;
                         it.power = Mathf.Round(it.power * 1.6f);
                         for (int j = 0; j < it.affixes.Count; j++) { var a = it.affixes[j]; a.value = Mathf.Round(a.value * 1.6f); it.affixes[j] = a; }
                         var extra = new List<string>(Stats); foreach (var a in it.affixes) extra.Remove(a.stat);
                         if (extra.Count > 0)
                         {
                             var s2 = extra[r.Next(extra.Count)];
-                            it.affixes.Add(new AffixSave { stat = s2, value = Mathf.Round(AffixValue(s2, it.ilvl, Rarity.Mythique, r) * 1.6f) });
+                            it.affixes.Add(new AffixSave { stat = s2, value = Mathf.Round(AffixValue(s2, it.ilvl, Rarity.Ancestral, r) * 1.6f) });
                         }
                     }
                 }
