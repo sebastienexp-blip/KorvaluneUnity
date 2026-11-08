@@ -51,7 +51,7 @@ namespace Korvalune.Game
             gameObject.SetActive(true); label.text = ""; bg.enabled = false;
             using (var r = UnityWebRequest.Get(Base + "version.txt"))
             {
-                r.timeout = 8;
+                r.timeout = 20;   // réseau mobile lent : 8 s faisaient croire à tort « hors ligne »
                 yield return r.SendWebRequest();
                 if (r.result != UnityWebRequest.Result.Success || !int.TryParse(r.downloadHandler.text.Trim(), out remote))
                 { label.text = $"<size=20><color=#a08c6c>Version 0.1.{InstalledBuild} — vérification des mises à jour impossible (hors ligne)</color></size>"; yield break; }
