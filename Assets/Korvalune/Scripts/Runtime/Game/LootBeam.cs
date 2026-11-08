@@ -165,7 +165,7 @@ namespace Korvalune.Game
                 // scintillement doux, chaque faisceau à son rythme
                 float a = baseA[i] * grow * (0.82f + 0.12f * Mathf.Sin(t * (2.3f + i * 0.7f)) + 0.06f * Mathf.Sin(t * 7.1f + i));
                 var c = mats[i].GetColor("_BaseColor"); c.a = a;
-                if (rainbow) { var rc = Color.HSVToRGB(Mathf.Repeat(t * 0.2f + i * 0.17f, 1f), 0.6f, 1f); c.r = rc.r; c.g = rc.g; c.b = rc.b; }
+                if (rainbow) { var rc = Color.HSVToRGB(i / (float)quads.Length, 0.7f, 1f); c.r = rc.r; c.g = rc.g; c.b = rc.b; }   // faisceaux fixes, du rouge au violet
                 mats[i].SetColor("_BaseColor", c);
             }
             if (ringTr)
