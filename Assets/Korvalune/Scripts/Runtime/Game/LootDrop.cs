@@ -125,20 +125,25 @@ namespace Korvalune.Game
             // restent de simples coffrets aux ferrures colorées, pour que le butin important saute aux yeux
             bool aura = r >= (int)Rarity.Legendaire;
             if (!aura) return;
+            rainbow = IsRainbow(item);
             // halo au sol
             if (FX.additive)
             {
                 var halo = GameObject.CreatePrimitive(PrimitiveType.Quad); halo.name = "Halo"; Kill(halo.GetComponent<Collider>());
                 halo.transform.SetParent(transform, false); halo.transform.localPosition = new Vector3(0, 0.03f, 0); halo.transform.localRotation = Quaternion.Euler(90, 0, 0);
                 halo.transform.localScale = Vector3.one * (1.2f + 0.35f * r);
-                var hm = new Material(FX.additive); hm.SetColor("_BaseColor", new Color(c.r, c.g, c.b, 0.85f)); halo.GetComponent<Renderer>().sharedMaterial = hm;
+                var hm = new Material(FX.additive); hm.SetColor("_BaseColor", new Color(c.r, c.g, c.b, 0.85f)); halo.GetComponent<Renderer>().sharedMaterial = hm; haloMat = hm;
             }
             // colonne de lumière à la couleur de la rareté : faisceau doux, volutes en spirale, anneau au sol
-            LootBeam.Attach(gameObject, c, r);
+            LootBeam.Attach(gameObject, c, r, rainbow);
             // lumière
             glow = new GameObject("Lueur").AddComponent<Light>(); glow.transform.SetParent(transform, false); glow.transform.localPosition = new Vector3(0, 0.8f, 0);
             glow.type = LightType.Point; glow.color = c; glow.range = 3 + r; glow.intensity = 0.8f + 0.5f * r; glow.shadows = LightShadows.None;
         }
+
+        /// <summary>Aura arc-en-ciel : pièces des ensembles spéciaux (ici l'Égide de la Brèche).</summary>
+        public static bool IsRainbow(ItemSave it) => it != null && it.set == "set.kael.breche";
+        Material haloMat; bool rainbow;
 
         public static Material litBase;   // matériau URP Lit fourni par la configuration (le matériau par défaut des primitives est rose sur Android)
         static void Part(Transform parent, string name, Vector3 pos, Vector3 size, Color col, float metal, float smooth, Color emission = default)
@@ -168,6 +173,12 @@ namespace Korvalune.Game
                 return;
             }
             if (glow) glow.intensity = (0.8f + 0.5f * (int)item.rarity) * (0.85f + 0.15f * Mathf.Sin(t * 3));
+            if (rainbow)
+            {
+                var rc = Color.HSVToRGB(Mathf.Repeat(t * 0.2f, 1f), 0.6f, 1f);
+                if (glow) glow.color = rc;
+                if (haloMat) haloMat.SetColor("_BaseColor", new Color(rc.r, rc.g, rc.b, 0.85f));
+            }
             if (beam) beam.localRotation = Quaternion.Euler(0, t * 40, 0);
             // objets : on touche leur nom pour les ramasser ; ramassage automatique optionnel des raretés modestes
             if (!dropped && Settings.AutoLoot > 0 && (int)item.rarity < Settings.AutoLoot && t > 0.6f)

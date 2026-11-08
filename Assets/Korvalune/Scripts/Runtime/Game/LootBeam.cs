@@ -11,6 +11,7 @@ namespace Korvalune.Game
     {
         static Texture2D beamTex, softTex, ringTex;
         Transform[] quads; Material[] mats; float[] baseA; float born; Color col; int rarity;
+        bool rainbow;   // aura arc-en-ciel (pièces des ensembles spéciaux)
         ParticleSystem wisps;
 
         static Texture2D BeamTex()
@@ -78,10 +79,10 @@ namespace Korvalune.Game
             return q;
         }
 
-        public static void Attach(GameObject go, Color c, int rarity)
+        public static void Attach(GameObject go, Color c, int rarity, bool rainbow = false)
         {
             if (!FX.additive || rarity < (int)Rarity.Legendaire) return;     // pas d'aura jusqu'à rare
-            var lb = go.AddComponent<LootBeam>(); lb.col = c; lb.rarity = rarity; lb.Build();
+            var lb = go.AddComponent<LootBeam>(); lb.col = c; lb.rarity = rarity; lb.rainbow = rainbow; lb.Build();
         }
 
         void Build()
@@ -163,7 +164,9 @@ namespace Korvalune.Game
                 if (cam) { var d = cam.transform.position - q.position; d.y = 0; if (d.sqrMagnitude > 1e-4f) q.rotation = Quaternion.LookRotation(-d.normalized, Vector3.up); }
                 // scintillement doux, chaque faisceau à son rythme
                 float a = baseA[i] * grow * (0.82f + 0.12f * Mathf.Sin(t * (2.3f + i * 0.7f)) + 0.06f * Mathf.Sin(t * 7.1f + i));
-                var c = mats[i].GetColor("_BaseColor"); c.a = a; mats[i].SetColor("_BaseColor", c);
+                var c = mats[i].GetColor("_BaseColor"); c.a = a;
+                if (rainbow) { var rc = Color.HSVToRGB(Mathf.Repeat(t * 0.2f + i * 0.17f, 1f), 0.6f, 1f); c.r = rc.r; c.g = rc.g; c.b = rc.b; }
+                mats[i].SetColor("_BaseColor", c);
             }
             if (ringTr)
             {
