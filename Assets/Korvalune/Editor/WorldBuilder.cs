@@ -552,7 +552,7 @@ namespace Korvalune.EditorTools
                     {
                         var a = mf.transform.TransformPoint(verts[tris[t]]); var b = mf.transform.TransformPoint(verts[tris[t + 1]]); var c = mf.transform.TransformPoint(verts[tris[t + 2]]);
                         var cen = (a + b + c) / 3f; var n = Vector3.Cross(b - a, c - a).normalized;
-                        bool door = dark && Mathf.Abs(cen.x) <= 3.2f && cen.y >= feet - 0.5f && cen.y <= feet + 4.6f && cen.z <= frontZ + 4f && n.z < -0.3f;
+                        bool door = dark && Mathf.Abs(cen.x) <= 3.2f && cen.y >= feet - 0.5f && cen.y <= feet + 4.6f && cen.z <= frontZ + 30f && n.z < -0.3f;   // passage de la porte d'entrée + vantail de la cour
                         if (door) { removed++; continue; }
                         keep.Add(tris[t]); keep.Add(tris[t + 1]); keep.Add(tris[t + 2]);
                     }
@@ -566,7 +566,7 @@ namespace Korvalune.EditorTools
             Debug.Log($"[Château] porte : {removed} triangles retirés, pieds y={feet:0.00}, façade z={frontZ:0.00}");
         }
 
-        // vérifie que la façade est ouverte à hauteur du héros, devant la porte
+        // vérifie que le passage de la porte d'entrée est libre à hauteur du héros ; liste les obstacles rencontrés
         public static bool CastleDoorOpen(out string detail)
         {
             var c = GameObject.Find("ChateauKorvalune"); detail = "château absent";
@@ -576,9 +576,9 @@ namespace Korvalune.EditorTools
             var wb = rens[0].bounds; foreach (var r in rens) wb.Encapsulate(r.bounds);
             Physics.SyncTransforms();
             var o = new Vector3(0, wb.min.y + 1.2f, wb.min.z - 6f);
-            bool hit = Physics.Raycast(o, Vector3.forward, out var h, 12f);
-            detail = hit ? $"obstacle à {h.distance:0.0} m de la façade ({h.collider.name})" : "aucun obstacle devant la porte";
-            return !hit || h.distance > 6.2f;
+            var hits = Physics.RaycastAll(o, Vector3.forward, 24f).OrderBy(h => h.distance).ToArray();
+            detail = hits.Length == 0 ? "passage libre sur 24 m" : "obstacles : " + string.Join(", ", hits.Select(h => $"{h.collider.name} à {h.distance:0.0} m"));
+            return hits.Length == 0;
         }
 
         static GameObject Place(string rel, Vector3 pos, float yaw, float scale = 1f)
