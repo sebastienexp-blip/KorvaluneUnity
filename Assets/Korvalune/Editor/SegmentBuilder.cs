@@ -24,7 +24,7 @@ namespace Korvalune.EditorTools
         const string Root = ModelPipeline.Root;
         const float Size = 360f, MaxH = 110f, Floor = -6f, MetersPerLevel = 13f;
 
-        public enum Kind { Foret, Desert, Pics, Cote, Marais, Toundra, Volcan, Canyon, Abime }
+        public enum Kind { Foret, Desert, Pics, Cote, Marais, Toundra, Volcan, Canyon, Abime, Catacombes }
 
         public class Def
         {
@@ -57,6 +57,8 @@ namespace Korvalune.EditorTools
                       entry = South, enemies = new[] { "basilic", "demon", "sorcier" } },
             new Def { kind = Kind.Abime,   scene = "Korvalune_Abime",   name = "Abîme du Néant",        tag = "Abime",   quest = "Au bord du Néant",           level = 175,
                       entry = South, enemies = new[] { "voyant", "demon", "sorcier" } },
+            new Def { kind = Kind.Catacombes, scene = "Korvalune_Catacombes", name = "Catacombes de Verre", tag = "Catacombes", quest = "Les catacombes de verre", level = 185,
+                      entry = South, enemies = new[] { "ombre_rampante", "rampant", "hurleur" } },
         };
 
         static float Smooth(float a, float b, float x) { float t = Mathf.Clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); }
@@ -403,6 +405,8 @@ namespace Korvalune.EditorTools
                 case Kind.Volcan: sunI = 1.45f; sunC = new Color(1f, 0.82f, 0.62f); skyTint = new Color(0.62f, 0.5f, 0.45f); thick = 1.6f; amSky = new Color(0.62f, 0.55f, 0.52f); amEq = new Color(0.5f, 0.38f, 0.3f); amGr = new Color(0.3f, 0.16f, 0.1f);
                     look.hasTop = true; look.top = new Color(0.16f, 0.14f, 0.13f, 0.04f); look.topStrength = 0.6f; break;
                 case Kind.Canyon: sunC = new Color(1f, 0.9f, 0.76f); amEq = new Color(0.6f, 0.46f, 0.38f); amGr = new Color(0.36f, 0.2f, 0.14f); break;
+                case Kind.Catacombes: sunI = 0.9f; sunC = new Color(0.8f, 0.72f, 1f); skyTint = new Color(0.3f, 0.24f, 0.48f); thick = 1.6f; amSky = new Color(0.4f, 0.34f, 0.6f); amEq = new Color(0.32f, 0.28f, 0.42f); amGr = new Color(0.14f, 0.1f, 0.22f);
+                    look.hasTop = true; look.top = new Color(0.4f, 0.3f, 0.6f, 0.25f); look.topStrength = 0.5f; break;
                 case Kind.Abime: sunI = 1.35f; sunC = new Color(0.92f, 0.86f, 1f); skyTint = new Color(0.56f, 0.48f, 0.78f); thick = 1.4f; amSky = new Color(0.6f, 0.55f, 0.78f); amEq = new Color(0.45f, 0.4f, 0.55f); amGr = new Color(0.2f, 0.14f, 0.26f);
                     look.hasTop = true; look.top = new Color(0.36f, 0.3f, 0.45f, 0.2f); look.topStrength = 0.45f; break;
             }

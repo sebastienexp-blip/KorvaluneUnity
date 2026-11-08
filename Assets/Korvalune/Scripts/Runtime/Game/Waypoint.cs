@@ -25,6 +25,7 @@ namespace Korvalune.Game
             new Region { scene = "Korvalune_Volcan",   name = "Terres de Cendrefer",   level = 125, desc = "Cendre, lave et forges oubliées" },
             new Region { scene = "Korvalune_Canyon",   name = "Canyon Écarlate",       level = 150, desc = "Gorges et pitons de grès rouge" },
             new Region { scene = "Korvalune_Abime",    name = "Abîme du Néant",        level = 175, desc = "Le bord du monde, jusqu'au niveau 200" },
+            new Region { scene = "Korvalune_Catacombes", name = "Catacombes de Verre", level = 185, desc = "Cristal noir et lueur violette, sous le bord du monde" },
         };
 
         public static Region Here { get { var s = SceneManager.GetActiveScene().name; foreach (var r in Regions) if (r.scene == s) return r; return null; } }

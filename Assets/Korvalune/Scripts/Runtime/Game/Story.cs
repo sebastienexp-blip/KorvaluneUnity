@@ -118,6 +118,11 @@ namespace Korvalune.Game
                         "Referme le dernier sceau, Éveillé. Et ferme-lui les yeux." },
                 new[] { "L'Œil se ferme. Le silence tombe sur l'Abîme.", "Au-dessus de Korvalune, la lune fendue se ressoude, lentement, comme une plaie qui guérit.",
                         "Les sept sceaux tiennent. Pour combien de temps… nul ne le sait. Mais cette nuit, la vallée dort en paix." });
+            Chap("ch13", "Korvalune_Catacombes", "Les catacombes de verre", 185, "le Golem de cristal",
+                "Sous Korvalune, des catacombes de verre noir descendent jusqu'à la racine de la Fracture. Un golem de cristal garde le cœur qui chante sous la vallée.",
+                new[] { "Les anciens n'ont pas enterré leurs morts : ils les ont scellés dans le verre.", "Chaque corps porte une lueur violette, et toutes répètent le même nom.",
+                        "Au fond, le golem veille sur un cœur de verre qui bat encore." },
+                new[] { "Le golem se fend comme une vitre. Le cœur s'éteint, et le chant se tait.", "Le silence revient sous Korvalune. Pour la première fois, le sol est sûr." });
 
             // ======================================================================================== quêtes secondaires
             void Side(string id, string title, int lvl, string desc, string req, float xp, params Obj[] objs)
