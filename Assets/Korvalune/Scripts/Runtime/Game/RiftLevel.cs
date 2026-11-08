@@ -48,7 +48,7 @@ namespace Korvalune.Game
 
         // ---------------------------------------------------------------- état de génération
         Theme th; System.Random rng; Transform root;
-        public int Seed, Theme = -1;                          // graine et thème du niveau (pour reprendre une brèche à l'identique)
+        public int Seed, ThemeIndex = -1;                          // graine et thème du niveau (pour reprendre une brèche à l'identique)
         bool[,] open; int W, H; Vector2Int origin;
         readonly List<RectInt> rooms = new List<RectInt>();
         readonly Dictionary<Material, Material> tinted = new Dictionary<Material, Material>();
@@ -68,7 +68,7 @@ namespace Korvalune.Game
             rng = new System.Random(seed);
             if (theme < 0) { theme = rng.Next(Themes.Length); if (theme == lastTheme) theme = (theme + 1 + rng.Next(Themes.Length - 1)) % Themes.Length; }
             lastTheme = theme; th = Themes[theme]; ThemeName = th.name;
-            Seed = seed; Theme = theme;
+            Seed = seed; ThemeIndex = theme;
             ThemeEnemies.Clear(); ThemeEnemies.AddRange(th.enemies);
             var game = GetComponent<GameBootstrap>() ? GetComponent<GameBootstrap>() : FindFirstObjectByType<GameBootstrap>();
             litBase = game && game.config && game.config.litMat ? game.config.litMat : null;

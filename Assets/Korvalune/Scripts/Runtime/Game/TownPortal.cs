@@ -87,7 +87,7 @@ namespace Korvalune.Game
                 if (inRift)   // brèche astrale : laissée ouverte, reprise à la statue ou par le retour au combat
                 {
                     var rd = Object.FindFirstObjectByType<RiftDirector>(); var lv = Object.FindFirstObjectByType<RiftLevel>();
-                    Rift.Suspend(here, at, lv ? lv.Seed : 0, lv ? lv.Theme : -1, tier, rd && rd.Done);
+                    Rift.Suspend(here, at, lv ? lv.Seed : 0, lv ? lv.ThemeIndex : -1, tier, rd && rd.Done);
                 }
                 GameBootstrap.nextSpawn = null; SceneManager.LoadScene(Town);
             });
