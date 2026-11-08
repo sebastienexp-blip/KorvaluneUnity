@@ -122,6 +122,8 @@ namespace Korvalune.Game
         }
 
         public static float Mult(Rarity rar) => rar switch { Rarity.Commun => 1f, Rarity.Magique => 1.15f, Rarity.Rare => 1.35f, Rarity.Legendaire => 1.6f, Rarity.Unique => 1.75f, Rarity.Mythique => 2.0f, _ => 2.3f };
+        /// <summary>Nombre de caractéristiques d'un objet selon sa rareté (la principale comprise) : progresse à chaque rareté.</summary>
+        public static int AffixCount(Rarity rar) => rar switch { Rarity.Commun => 1, Rarity.Magique => 2, Rarity.Rare => 3, Rarity.Legendaire => 4, Rarity.Unique => 5, Rarity.Mythique => 6, _ => 7 };
         public static bool IsPercent(string s) => s.StartsWith("Chances") || s.StartsWith("Vitesse") || s.StartsWith("Réduction");
         /// <summary>Valeur d'un affixe selon le niveau d'objet et la rareté (pourcentages pour critique, vitesse, recharge).</summary>
         public static float AffixValue(string s, int ilvl, Rarity rar, System.Random r)
@@ -137,7 +139,7 @@ namespace Korvalune.Game
             string cls = PickClass(r);
             var bases = slot == Slot.Arme ? WeaponBases[cls] : slot == Slot.MainGauche ? OffBases[cls] : Bases[slot];
             var b = bases[r.Next(bases.Length)];
-            int naff = rar switch { Rarity.Commun => 0, Rarity.Magique => 1, Rarity.Rare => 3, Rarity.Legendaire => 4, Rarity.Unique => 4, Rarity.Mythique => 5, _ => 5 };
+            int naff = AffixCount(rar);
             float mult = Mult(rar);
             var it = new ItemSave { id = Guid.NewGuid().ToString("N").Substring(0, 12), baseName = b, slot = slot, rarity = rar, ilvl = Mathf.Max(1, level + r.Next(-2, 3)) };
             it.power = Mathf.Round((10 + it.ilvl * 4.2f) * mult);
@@ -164,15 +166,16 @@ namespace Korvalune.Game
                     it.set = set.id; it.cls = cls;
                     if (set.id == "set.kael.breche")
                     {
-                        // Égide de la Brèche : pièces les plus puissantes du jeu, au-dessus des légendaires classiques
+                        // Égide de la Brèche : rareté Ancestral, avec la même échelle que les autres raretés (valeurs et caractéristiques)
+                        float k = Mult(Rarity.Ancestral) / Mult(Rarity.Legendaire);
                         it.rarity = Rarity.Ancestral;
-                        it.power = Mathf.Round(it.power * 1.6f);
-                        for (int j = 0; j < it.affixes.Count; j++) { var a = it.affixes[j]; a.value = Mathf.Round(a.value * 1.6f); it.affixes[j] = a; }
+                        it.power = Mathf.Round(it.power * k);
+                        for (int j = 0; j < it.affixes.Count; j++) { var a = it.affixes[j]; a.value = Mathf.Round(a.value * k); it.affixes[j] = a; }
                         var extra = new List<string>(Stats); foreach (var a in it.affixes) extra.Remove(a.stat);
-                        if (extra.Count > 0)
+                        while (it.affixes.Count < AffixCount(Rarity.Ancestral) && extra.Count > 0)
                         {
-                            var s2 = extra[r.Next(extra.Count)];
-                            it.affixes.Add(new AffixSave { stat = s2, value = Mathf.Round(AffixValue(s2, it.ilvl, Rarity.Ancestral, r) * 1.6f) });
+                            var s2 = extra[r.Next(extra.Count)]; extra.Remove(s2);
+                            it.affixes.Add(new AffixSave { stat = s2, value = AffixValue(s2, it.ilvl, Rarity.Ancestral, r) });
                         }
                     }
                 }
