@@ -156,14 +156,25 @@ namespace Korvalune.Game
             guardianUp = true;
             var p = game.Player.transform;
             var at = LootDrop.Near(p.position, p.forward * 7f);
-            var t = game.config.Enemy("demon") ?? game.config.enemies[0];
-            Vfx.Shock(at, new Color(0.8f, 0.4f, 1f), 5f); Vfx.Explosion(at, Element.Neant, 3f); Sound.Play("sfx_demon_rugit", at, 1f);
-            var e = game.Spawn(t, at, Mathf.Max(1, game.Player.level + 2 + Rift.Tier / 4));
-            guardian = e.GetComponent<Health>();
-            guardian.maxHp = Mathf.Round(guardian.maxHp * 9f); guardian.hp = guardian.maxHp; guardian.armor *= 1.5f;
-            guardian.displayName = "Gardien de la brèche";
-            var ai = e.GetComponent<EnemyAI>(); if (ai) { ai.champion = true; ai.damage = (ai.damage > 0 ? ai.damage : ai.type.damage) * 1.6f; ai.xp = (ai.xp > 0 ? ai.xp : ai.type.xp) * 10f; }
-            e.transform.localScale *= 1.6f;
+            // le gardien est l'un des cinq boss du catalogue, tiré au sort à chaque brèche
+            var def = BossCatalog.All.Count > 0 ? BossCatalog.All[Random.Range(0, BossCatalog.All.Count)] : null;
+            var lvl = Mathf.Max(1, game.Player.level + 2 + Rift.Tier / 4);
+            GameObject e = def != null ? BossCatalog.Spawn(game, def, at) : null;
+            if (!e)
+            {
+                // repli : démon de base, renforcé comme avant
+                var t = game.config.Enemy("demon") ?? game.config.enemies[0];
+                e = game.Spawn(t, at, lvl);
+                guardian = e.GetComponent<Health>();
+                guardian.maxHp = Mathf.Round(guardian.maxHp * 9f); guardian.hp = guardian.maxHp; guardian.armor *= 1.5f;
+                e.transform.localScale *= 1.6f;
+            }
+            else
+            {
+                guardian = e.GetComponent<Health>();
+                guardian.displayName = def.title;
+            }
+            var ai = e.GetComponent<EnemyAI>(); if (ai) { ai.champion = true; ai.xp = (ai.xp > 0 ? ai.xp : ai.type.xp) * 10f; }
             var l = new GameObject("Aura").AddComponent<Light>(); l.transform.SetParent(e.transform, false); l.transform.localPosition = Vector3.up * 2f;
             l.type = LightType.Point; l.color = new Color(0.75f, 0.35f, 1f); l.intensity = 3.5f; l.range = 8f; l.shadows = LightShadows.None;
             game.Hud.Notify("<color=#c58cff>Le Gardien de la brèche surgit !</color>");
