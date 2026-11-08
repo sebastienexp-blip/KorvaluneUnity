@@ -154,7 +154,9 @@ namespace Korvalune.EditorTools
             water.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.Off;
 
             // ---- château, pont, rochers
+            EnsureCastleReadable();                          // le maillage doit être lisible pour percer la porte
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
+            CarveCastleDoor(castle);                         // porte : retire le vantail de la collision et du rendu
             TownBuilder.Build();
             Hamlets();
             Roadside();
@@ -520,6 +522,64 @@ namespace Korvalune.EditorTools
             return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
         }
         public static Vector3 Ground(Vector3 p) => new Vector3(p.x, Height(p.x, p.z), p.z);
+
+        // ---- porte du château : le vantail (matériau W_Dark, face avant) est retiré du maillage pour que le héros puisse entrer
+        static void EnsureCastleReadable()
+        {
+            var imp = AssetImporter.GetAtPath(WorldArt + "/ChateauKorvalune/ChateauKorvalune.fbx") as ModelImporter;
+            if (imp && !imp.isReadable) { imp.isReadable = true; imp.SaveAndReimport(); }
+        }
+
+        static void CarveCastleDoor(GameObject castle)
+        {
+            if (!castle) return;
+            var rens = castle.GetComponentsInChildren<Renderer>(true);
+            if (rens.Length == 0) return;
+            var wb = rens[0].bounds; foreach (var r in rens) wb.Encapsulate(r.bounds);
+            float feet = wb.min.y, frontZ = wb.min.z;
+            int removed = 0, idx = 0;
+            foreach (var mf in castle.GetComponentsInChildren<MeshFilter>(true))
+            {
+                var mesh = mf.sharedMesh; var ren = mf.GetComponent<Renderer>();
+                if (!mesh || !ren || !mesh.isReadable) continue;
+                var mats = ren.sharedMaterials; var verts = mesh.vertices;
+                var copy = Object.Instantiate(mesh); copy.name = mesh.name + "_Porte";
+                for (int s = 0; s < mesh.subMeshCount; s++)
+                {
+                    bool dark = s < mats.Length && mats[s] && mats[s].name == "W_Dark";
+                    var tris = mesh.GetTriangles(s); var keep = new List<int>(tris.Length);
+                    for (int t = 0; t + 2 < tris.Length; t += 3)
+                    {
+                        var a = mf.transform.TransformPoint(verts[tris[t]]); var b = mf.transform.TransformPoint(verts[tris[t + 1]]); var c = mf.transform.TransformPoint(verts[tris[t + 2]]);
+                        var cen = (a + b + c) / 3f; var n = Vector3.Cross(b - a, c - a).normalized;
+                        bool door = dark && Mathf.Abs(cen.x) <= 3.2f && cen.y >= feet - 0.5f && cen.y <= feet + 4.6f && cen.z <= frontZ + 4f && n.z < -0.3f;
+                        if (door) { removed++; continue; }
+                        keep.Add(tris[t]); keep.Add(tris[t + 1]); keep.Add(tris[t + 2]);
+                    }
+                    copy.SetTriangles(keep.ToArray(), s, false);
+                }
+                var path = WorldArt + "/ChateauKorvalune/ChateauKorvalune_Porte_" + idx++ + ".asset";
+                AssetDatabase.DeleteAsset(path); AssetDatabase.CreateAsset(copy, path);
+                mf.sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(path);
+                var mc = mf.GetComponent<MeshCollider>(); if (mc) mc.sharedMesh = mf.sharedMesh;
+            }
+            Debug.Log($"[Château] porte : {removed} triangles retirés, pieds y={feet:0.00}, façade z={frontZ:0.00}");
+        }
+
+        // vérifie que la façade est ouverte à hauteur du héros, devant la porte
+        public static bool CastleDoorOpen(out string detail)
+        {
+            var c = GameObject.Find("ChateauKorvalune"); detail = "château absent";
+            if (!c) return false;
+            var rens = c.GetComponentsInChildren<Renderer>(true);
+            if (rens.Length == 0) return false;
+            var wb = rens[0].bounds; foreach (var r in rens) wb.Encapsulate(r.bounds);
+            Physics.SyncTransforms();
+            var o = new Vector3(0, wb.min.y + 1.2f, wb.min.z - 6f);
+            bool hit = Physics.Raycast(o, Vector3.forward, out var h, 12f);
+            detail = hit ? $"obstacle à {h.distance:0.0} m de la façade ({h.collider.name})" : "aucun obstacle devant la porte";
+            return !hit || h.distance > 6.2f;
+        }
 
         static GameObject Place(string rel, Vector3 pos, float yaw, float scale = 1f)
         {
@@ -1030,6 +1090,7 @@ namespace Korvalune.EditorTools
                 }
                 foreach (var rf in Object.FindObjectsByType<RoofFade>(FindObjectsSortMode.None)) foreach (var r in rf.GetComponentsInChildren<Renderer>()) r.enabled = true;
                 cam.transform.position = Ground(new Vector2(0, -24)) + new Vector3(0, 7, 0); cam.transform.LookAt(Ground(new Vector2(0, -2)) + Vector3.up * 3); Shot("13_cour_du_chateau");
+                check("Château : porte franchissable", CastleDoorOpen(out var doorDetail), doorDetail);
                 TownBuilder.Checks(check);
                 // illustrations du jeu : fond de l'écran de lancement et icône de l'application
                 try { LauncherBuilder.RenderKeyArt(cam); check("Illustration du lanceur et icône", File.Exists(LauncherBuilder.ArtDir + "/Lanceur_Fond.png"), "ci-out/Lanceur_Fond.png, ci-out/Icone.png"); }
