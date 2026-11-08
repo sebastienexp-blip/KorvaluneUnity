@@ -3188,10 +3188,10 @@ _169 captures écrites dans ci-out/ (OpenGLCore) en 4.6 min._
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon, abbe, wendigo, basilic, tisseuse, salamandre, voyant
 - ✅ **Ville : échoppes des marchands** Coffre, Reliquaire Céleste, Marchande de curiosités, Alchimiste, Marchand, Armurier, Joaillier, Forgeron, Mystique
 - ✅ **Ville : maisons** 41 maisons
-- ✅ **Ville : rue principale praticable jusqu'au château** dégagée
+- ❌ **Ville : rue principale praticable jusqu'au château** M_Lanterne en z=-48
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
 - ✅ **Montures** ci-out/Jeu_17_monture_*.png — Animator sur la racine, posture Sk_Monte
-- ✅ **Butin et inventaire** 1 objets portés, 25 dans le sac — Dégâts 152   Vie 481   Armure 2 Critique 12 %   Attaque 1.67/s   Recharge −6 % Mana 100 (+3/s)   Régén. vie 1.5/s   Vitesse 6.6 m/s Dégâts par seconde ≈ 283   Force 118
+- ✅ **Butin et inventaire** 4 objets portés, 22 dans le sac — Dégâts 781   Vie 220   Armure 118 Critique 27.3 %   Attaque 1.77/s   Recharge −12 % Mana 100 (+13.1/s)   Régén. vie 1.5/s   Vitesse 6.6 m/s Dégâts par seconde ≈ 1755   Force 570   <color=#ff9a3c>1 pouvoir(s) légendaire(s)</color>
 - ✅ **Captures de la vallée** ci-out/Jeu_*.png
 - ✅ **Départ du héros au sec (au-dessus de l'eau)** y = 13.0, eau à 10.4
 - ✅ **Camp « squelette » au sec** y = 12.0
