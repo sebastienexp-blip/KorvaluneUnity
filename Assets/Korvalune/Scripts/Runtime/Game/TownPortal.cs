@@ -56,12 +56,12 @@ namespace Korvalune.Game
         public const string Town = "Korvalune_Vallee";
         static string returnScene; static Vector3 returnPos;
         public static bool HasReturn => !string.IsNullOrEmpty(returnScene);
-        static bool casting;
+        static bool casting; static bool riftReturn; static int riftTier;
 
         public static void Cast()
         {
             var game = GameBootstrap.Instance; var p = game ? game.Player : null; if (!p || p.Health.Dead || casting) return;
-            if (Rift.Active) { p.Notify?.Invoke("La brèche retient votre âme : impossible d'ouvrir un portail"); return; }
+            if (Rift.Active && Rift.Tier > 0) { p.Notify?.Invoke("La Grande Brèche retient votre âme : impossible d'ouvrir un portail"); return; }   // brèche astrale normale : portail permis, la brèche reste ouverte
             if (SceneManager.GetActiveScene().name == Town && GameBootstrap.InSafeZone(p.transform.position)) { p.Notify?.Invoke("Vous êtes déjà en ville"); return; }
             game.StartCoroutine(Channel(game, p)); QuestEvents.Raise("portail_ville");
         }
@@ -80,7 +80,8 @@ namespace Korvalune.Game
             }
             casting = false;
             var here = SceneManager.GetActiveScene().name; var at = p.transform.position;
-            Open(LootDrop.Near(at, p.transform.forward * 2.2f), "Portail de ville", () => { returnScene = here; returnPos = at; GameBootstrap.nextSpawn = null; SceneManager.LoadScene(Town); });
+            bool inRift = Rift.Active; int tier = Rift.Tier;
+            Open(LootDrop.Near(at, p.transform.forward * 2.2f), "Portail de ville", () => { returnScene = here; returnPos = at; riftReturn = inRift; riftTier = tier; GameBootstrap.nextSpawn = null; SceneManager.LoadScene(Town); });
         }
 
         static Portal Open(Vector3 pos, string name, System.Action enter)
@@ -98,10 +99,14 @@ namespace Korvalune.Game
             var scene = returnScene; var pos = returnPos;
             Open(GameBootstrap.Ground(game.playerSpawn + new Vector3(2.5f, 0, 2.5f)), "Retour au combat", () =>
             {
-                returnScene = null; GameBootstrap.nextSpawn = pos; SceneManager.LoadScene(scene);
+                returnScene = null; GameBootstrap.nextSpawn = pos;
+                // brèche astrale quittée par le portail : elle est rouverte telle quelle au retour (même endroit)
+                if (riftReturn && Rift.IsRiftScene(scene)) { Rift.Active = true; Rift.Tier = riftTier; }
+                riftReturn = false;
+                SceneManager.LoadScene(scene);
             });
         }
 
-        public static void Clear() { returnScene = null; }
+        public static void Clear() { returnScene = null; riftReturn = false; }
     }
 }
