@@ -253,6 +253,12 @@ namespace Korvalune.Game
             hpM *= tune; dmgM *= tune;
             var h = e.AddComponent<Health>(); h.faction = Faction.Enemy; h.maxHp = Mathf.Round(t.hp * hpM); h.hp = h.maxHp; h.armor = t.armor * Mathf.Min(2f, dmgM); h.displayName = t.label; h.level = level;
             var ai = e.AddComponent<EnemyAI>(); ai.type = t; ai.damage = t.damage * dmgM; ai.xp = Mathf.Round(t.xp * xpM);
+            // créatures nouvelles : teinte propre (multiplie la couleur du modèle)
+            if (MonsterVariants.TintOf(t.id, out var tint))
+                foreach (var rd in e.GetComponentsInChildren<Renderer>())
+                {
+                    var m = rd.material; if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", m.GetColor("_BaseColor") * tint);
+                }
             return e;
         }
 
