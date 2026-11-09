@@ -1,333 +1,321 @@
-# Journal de la construction Android (run 42510987681)
+# Journal de la construction Android (run 42577662689)
 ## Lignes importantes
-1695:2026-11-08T19:07:27.9443065Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
-1916:2026-11-08T19:10:13.4980054Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2039:2026-11-08T19:12:22.7032509Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-23462:2026-11-08T19:18:21.0181006Z Build Finished, Result: Success.
-46779:2026-11-08T19:19:06.0652793Z [ 127/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/vm/Exception.h
-46780:2026-11-08T19:19:06.0653627Z [ 128/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/vm/Exception.cpp
-46905:2026-11-08T19:19:06.1177516Z [ 253/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/utils/Exception.cpp
-46911:2026-11-08T19:19:06.1189762Z [ 259/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/utils/ExceptionSupportStack.h
-46912:2026-11-08T19:19:06.1191162Z [ 260/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/utils/Exception.h
-47312:2026-11-08T19:19:06.2762224Z [ 660/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/icalls/mscorlib/System/Exception.h
-47323:2026-11-08T19:19:06.2793076Z [ 671/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/icalls/mscorlib/System/Exception.cpp
-47477:2026-11-08T19:19:06.3384960Z [ 825/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/icalls/System/System.Net.Sockets/SocketException.cpp
-47487:2026-11-08T19:19:06.3411535Z [ 835/2729  0s] CopyFiles Temp/HybridCLR/StrippedAOTDllsTempProj/Android/unityLibrary/src/main/Il2CppOutputProject/IL2CPP/libil2cpp/icalls/System/System.Net.Sockets/SocketException.h
-51995:2026-11-08T19:19:50.1134521Z  0.2 kb	 0.0% Packages/com.unity.rendering.light-transport/Runtime/UnifiedRayTracing/UnifiedRayTracingException.cs
-52991:2026-11-08T19:19:50.1528803Z Build Finished, Result: Success.
-64084:2026-11-08T19:40:29.4404886Z  0.2 kb	 0.0% Packages/com.unity.rendering.light-transport/Runtime/UnifiedRayTracing/UnifiedRayTracingException.cs
-64731:2026-11-08T19:40:29.4751286Z Build Finished, Result: Success.
-64744:2026-11-08T19:40:30.5160701Z # Construction de l'APK Android
-64746:2026-11-08T19:40:30.5162471Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
-64763:2026-11-08T19:40:30.5171147Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
-64765:2026-11-08T19:40:30.5172352Z - APK : 129.3 Mo, version 0.1.131
-64901:2026-11-08T19:40:42.9866706Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-64902:2026-11-08T19:40:42.9867298Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-64954:2026-11-08T19:40:43.4420918Z # Construction de l'APK Android
-64956:2026-11-08T19:40:43.4422335Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
-64973:2026-11-08T19:40:43.4430243Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
-64975:2026-11-08T19:40:43.4431341Z - APK : 129.3 Mo, version 0.1.131
-65256:2026-11-08T19:42:01.0826203Z [36;1m[ -f build/Contenu/catalogue.json ] || { echo "APK tout-en-un : pas de paquets"; exit 0; }[0m
+1695:2026-11-09T07:34:53.6458733Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+1887:2026-11-09T07:35:45.0445251Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2015:2026-11-09T07:39:18.6110404Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+36903:2026-11-09T07:55:21.6337775Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+36935:2026-11-09T07:55:21.6766611Z #30 0x0060becaf8e473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+36936:2026-11-09T07:55:21.6767445Z #31 0x0060becaf64663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+36950:2026-11-09T07:56:07.5425597Z Build failed, with exit code 139
+37014:2026-11-09T07:56:12.4255500Z Please note that the exit code is not very descriptive.
+37019:2026-11-09T07:56:12.7008694Z ##[error]Build failed with exit code 139
+37024:2026-11-09T07:56:12.7296784Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+37025:2026-11-09T07:56:12.7297505Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+37075:2026-11-09T07:56:13.0788928Z # Construction de l'APK Android
+37077:2026-11-09T07:56:13.0791149Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
+37094:2026-11-09T07:56:13.0801345Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
+37096:2026-11-09T07:56:13.0802694Z - APK : 129.3 Mo, version 0.1.131
+37398:2026-11-09T07:56:30.3980818Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-11-08T19:40:29.4687700Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.universal/Runtime/StpUtils.cs
-2026-11-08T19:40:29.4688063Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.universal/Runtime/Overrides/Vignette.cs
-2026-11-08T19:40:29.4688405Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.universal/Runtime/Overrides/Bloom.cs
-2026-11-08T19:40:29.4688648Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/XR/XRView.cs
-2026-11-08T19:40:29.4688908Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/XR/XRSystem.cs
-2026-11-08T19:40:29.4689160Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/XR/XRPass.cs
-2026-11-08T19:40:29.4689491Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/XR/XRLayout.cs
-2026-11-08T19:40:29.4689833Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/GPUDriven/BatchLayers.cs
-2026-11-08T19:40:29.4690234Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUI.Containers.cs
-2026-11-08T19:40:29.4690511Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/UnsafeBitArray.cs
-2026-11-08T19:40:29.4690861Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/UTF8ArrayUnsafeUtility.cs
-2026-11-08T19:40:29.4691162Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/StreamCompressionModel.cs
-2026-11-08T19:40:29.4691458Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/NativeArrayExtensions.cs
-2026-11-08T19:40:29.4691789Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/FixedStringInternalMethods.cs
-2026-11-08T19:40:29.4692139Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/FixedStringFormatMethods.gen.cs
-2026-11-08T19:40:29.4692445Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/SkipLocalsInitAttribute.cs
-2026-11-08T19:40:29.4692717Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/IgnoreWarningAttribute.cs
-2026-11-08T19:40:29.4693010Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_squelette_mort.mp3
-2026-11-08T19:40:29.4693226Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_poterie_brise.mp3
-2026-11-08T19:40:29.4693478Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_pluie_fleches.mp3
-2026-11-08T19:40:29.4693697Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_neant_explosion.mp3
-2026-11-08T19:40:29.4693912Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_marteau_impact.mp3
-2026-11-08T19:40:29.4694125Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_heros_touche_h.mp3
-2026-11-08T19:40:29.4694324Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_heros_touche_f.mp3
-2026-11-08T19:40:29.4694538Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_foudre_chaine.mp3
-2026-11-08T19:40:29.4694755Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_feu_explosion.mp3
-2026-11-08T19:40:29.4694952Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_ennemi_touche.mp3
-2026-11-08T19:40:29.4695164Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_ennemi_attaque.mp3
-2026-11-08T19:40:29.4695377Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_carreau_impact.mp3
-2026-11-08T19:40:29.4695608Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_butin_legendaire.mp3
-2026-11-08T19:40:29.4695934Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_butin_ancestral.mp3
-2026-11-08T19:40:29.4696102Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_bouclier_magique.mp3
-2026-11-08T19:40:29.4696501Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_bouclier_bloc.mp3
-2026-11-08T19:40:29.4696762Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_ScrollbarEventHandler.cs
-2026-11-08T19:40:29.4697144Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_PackageResourceImporter.cs
-2026-11-08T19:40:29.4697501Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Volume/VolumeStack.cs
-2026-11-08T19:40:29.4697921Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/TextureCurve.cs
-2026-11-08T19:40:29.4698315Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/MeshGizmo.cs
-2026-11-08T19:40:29.4698673Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/HashFNV1A32.cs
-2026-11-08T19:40:29.4699015Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/HableCurve.cs
-2026-11-08T19:40:29.4699420Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/GPUPrefixSum/GPUPrefixSum.cs
-2026-11-08T19:40:29.4699754Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/CoreUtils.cs
-2026-11-08T19:40:29.4700096Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/ColorUtils.cs
-2026-11-08T19:40:29.4700424Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Textures/TextureXR.cs
-2026-11-08T19:40:29.4700769Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Textures/RTHandles.cs
-2026-11-08T19:40:29.4701118Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Stripping/IStripper.cs
-2026-11-08T19:40:29.4701517Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/ShaderLibrary/Sampling/Hammersley.cs
-2026-11-08T19:40:29.4701907Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Lighting/ProbeVolume/ProbeVolume.cs
-2026-11-08T19:40:29.4702269Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/GPUDriven/FrustumPlanes.cs
-2026-11-08T19:40:29.4702667Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Scripts/UIFoldout.cs
-2026-11-08T19:40:29.4703018Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUpdater.cs
-2026-11-08T19:40:29.4703380Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUI.Panel.cs
-2026-11-08T19:40:29.4703744Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUI.Fields.cs
-2026-11-08T19:40:29.4704094Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugShapes.cs
-2026-11-08T19:40:29.4704444Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugOverlay.cs
-2026-11-08T19:40:29.4704791Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugManager.cs
-2026-11-08T19:40:29.4705119Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Camera/FreeCamera.cs
-2026-11-08T19:40:29.4705465Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/PropertyAttributes.cs
-2026-11-08T19:40:29.4705890Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/UnsafeList.cs
-2026-11-08T19:40:29.4706275Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/FixedStringParseMethods.cs
-2026-11-08T19:40:29.4706655Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/FixedStringAppendMethods.cs
-2026-11-08T19:40:29.4706908Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_ui_ouvrir.mp3
-2026-11-08T19:40:29.4707105Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_ui_fermer.mp3
-2026-11-08T19:40:29.4707270Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_trait_neant.mp3
-2026-11-08T19:40:29.4707407Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_tourbillon.mp3
-2026-11-08T19:40:29.4707655Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_tir_charge.mp3
-2026-11-08T19:40:29.4707854Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_sol_impact.mp3
-2026-11-08T19:40:29.4708009Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_pas_pierre.mp3
-2026-11-08T19:40:29.4708244Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_pas_herbe.mp3
-2026-11-08T19:40:29.4708646Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_neant_lancer.mp3
-2026-11-08T19:40:29.4708854Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_malediction.mp3
-2026-11-08T19:40:29.4709144Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_loup_mort.mp3
-2026-11-08T19:40:29.4709299Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_loup_grogne.mp3
-2026-11-08T19:40:29.4709588Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_invocation.mp3
-2026-11-08T19:40:29.4709782Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_heros_mort.mp3
-2026-11-08T19:40:29.4710101Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_glace_lancer.mp3
-2026-11-08T19:40:29.4710378Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_glace_impact.mp3
-2026-11-08T19:40:29.4710569Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_feu_lancer.mp3
-2026-11-08T19:40:29.4710781Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_epee_whoosh.mp3
-2026-11-08T19:40:29.4711013Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_epee_coup.mp3
-2026-11-08T19:40:29.4711211Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_demon_rugit.mp3
-2026-11-08T19:40:29.4711475Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_cri_guerre.mp3
-2026-11-08T19:40:29.4711674Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_carreau_feu.mp3
-2026-11-08T19:40:29.4711934Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_butin_commun.mp3
-2026-11-08T19:40:29.4712138Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_bois_brise.mp3
-2026-11-08T19:40:29.4712300Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_baton_whoosh.mp3
-2026-11-08T19:40:29.4712559Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_arbalete_tir.mp3
-2026-11-08T19:40:29.4712875Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Utility/ReflectionMethodsCache.cs
-2026-11-08T19:40:29.4713062Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/MultipleDisplayUtilities.cs
-2026-11-08T19:40:29.4713431Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/HorizontalLayoutGroup.cs
-2026-11-08T19:40:29.4713770Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/IGraphicEnabledDisabled.cs
-2026-11-08T19:40:29.4714097Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/GraphicRebuildTracker.cs
-2026-11-08T19:40:29.4714482Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Culling/RectangularVertexClipper.cs
-2026-11-08T19:40:29.4714853Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/UIElements/PanelEventHandler.cs
-2026-11-08T19:40:29.4715231Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/Raycasters/Physics2DRaycaster.cs
-2026-11-08T19:40:29.4715624Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/InputModules/PointerInputModule.cs
-2026-11-08T19:40:29.4716193Z  0.1 kb	 0.0% Packages/com.unity.rendering.light-transport/Runtime/UnifiedRayTracing/Compute/RadeonRays/Scan.cs
-2026-11-08T19:40:29.4716573Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/ShaderLibrary/DummyShaderLibrary.cs
-2026-11-08T19:40:29.4722919Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/GPUSort/GPUSort.Data.cs
-2026-11-08T19:40:29.4723356Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/BitArray.cs
-2026-11-08T19:40:29.4723728Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Inputs/InputRegistering.cs
-2026-11-08T19:40:29.4724036Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/UnsafeText.cs
-2026-11-08T19:40:29.4724362Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/UnsafeStream.cs
-2026-11-08T19:40:29.4724720Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/RewindableAllocator.cs
-2026-11-08T19:40:29.4725057Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/FixedStringMethods.cs
-2026-11-08T19:40:29.4725393Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/AutoFreeAllocator.cs
-2026-11-08T19:40:29.4725908Z  0.1 kb	 0.0% Packages/com.unity.burst/Runtime/CompilerServices/AssumeRangeAttribute.cs
-2026-11-08T19:40:29.4726280Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_volee.mp3
-2026-11-08T19:40:29.4726482Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_ui_clic.mp3
-2026-11-08T19:40:29.4726794Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_tranche.mp3
-2026-11-08T19:40:29.4726935Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_teleport.mp3
-2026-11-08T19:40:29.4727109Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_sacre.mp3
-2026-11-08T19:40:29.4727223Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_rayon.mp3
-2026-11-08T19:40:29.4727401Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_ramasser.mp3
-2026-11-08T19:40:29.4727643Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_quete.mp3
-2026-11-08T19:40:29.4727842Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_potion.mp3
-2026-11-08T19:40:29.4728063Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_portail.mp3
-2026-11-08T19:40:29.4728250Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_poison.mp3
-2026-11-08T19:40:29.4728447Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_pluie.mp3
-2026-11-08T19:40:29.4728634Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_plouf.mp3
-2026-11-08T19:40:29.4728824Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_piege.mp3
-2026-11-08T19:40:29.4728978Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_ombre.mp3
-2026-11-08T19:40:29.4729214Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_niveau.mp3
-2026-11-08T19:40:29.4729392Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_gemme.mp3
-2026-11-08T19:40:29.4729581Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_foudre.mp3
-2026-11-08T19:40:29.4729762Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_forge.mp3
-2026-11-08T19:40:29.4730044Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_fiole.mp3
-2026-11-08T19:40:29.4730218Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_equiper.mp3
-2026-11-08T19:40:29.4730463Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_critique.mp3
-2026-11-08T19:40:29.4730650Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_cri_mort.mp3
-2026-11-08T19:40:29.4730840Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_coffre.mp3
-2026-11-08T19:40:29.4731044Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_cendre.mp3
-2026-11-08T19:40:29.4731272Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_araignee.mp3
-2026-11-08T19:40:29.4731474Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_achat.mp3
-2026-11-08T19:40:29.4731744Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/mus_vallee.ogg
-2026-11-08T19:40:29.4731925Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/mus_donjon.ogg
-2026-11-08T19:40:29.4732080Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/mus_combat.ogg
-2026-11-08T19:40:29.4732318Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/amb_ville.mp3
-2026-11-08T19:40:29.4732483Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/amb_vallee.mp3
-2026-11-08T19:40:29.4732721Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/amb_torche.mp3
-2026-11-08T19:40:29.4732903Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/amb_grotte.mp3
-2026-11-08T19:40:29.4733090Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/amb_donjon.mp3
-2026-11-08T19:40:29.4733380Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Animation/CoroutineTween.cs
-2026-11-08T19:40:29.4733562Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/EventInterfaces.cs
-2026-11-08T19:40:29.4733859Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMPro_ExtensionMethods.cs
-2026-11-08T19:40:29.4734173Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_TextParsingUtilities.cs
-2026-11-08T19:40:29.4734461Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_TextElement_Legacy.cs
-2026-11-08T19:40:29.4734741Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_FontAssetUtilities.cs
-2026-11-08T19:40:29.4735047Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/MaterialReferenceManager.cs
-2026-11-08T19:40:29.4735347Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/FontFeatureCommonGSUB.cs
-2026-11-08T19:40:29.4736008Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.universal/Runtime/2D/Shadows/ShadowProvider/VertexDictionary.cs
-2026-11-08T19:40:29.4736411Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Volume/Volume.cs
-2026-11-08T19:40:29.4736740Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Volume/IVolume.cs
-2026-11-08T19:40:29.4737060Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/GPUSort/GPUSort.cs
-2026-11-08T19:40:29.4737453Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/FSRUtils.cs
-2026-11-08T19:40:29.4737853Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blitter.cs
-2026-11-08T19:40:29.4738187Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Textures/RTHandle.cs
-2026-11-08T19:40:29.4738525Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUI.cs
-2026-11-08T19:40:29.4738843Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/UnsafeQueue.cs
-2026-11-08T19:40:29.4739164Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/NativeHashMap.cs
-2026-11-08T19:40:29.4739524Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/FixedStringFormat.gen.cs
-2026-11-08T19:40:29.4739856Z  0.1 kb	 0.0% Packages/com.unity.collections/Unity.Collections/FixedString.gen.cs
-2026-11-08T19:40:29.4740102Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_soin.mp3
-2026-11-08T19:40:29.4740285Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_sang.mp3
-2026-11-08T19:40:29.4740465Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_rune.mp3
-2026-11-08T19:40:29.4740761Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_os.mp3
-2026-11-08T19:40:29.4740931Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_or.mp3
-2026-11-08T19:40:29.4741165Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_nova.mp3
-2026-11-08T19:40:29.4741345Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_nage.mp3
-2026-11-08T19:40:29.4741490Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_echo.mp3
-2026-11-08T19:40:29.4741724Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/sfx_bond.mp3
-2026-11-08T19:40:29.4741905Z  0.1 kb	 0.0% Assets/Korvalune/Resources/Audio/mus_menu.ogg
-2026-11-08T19:40:29.4742216Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/SetPropertyUtility.cs
-2026-11-08T19:40:29.4742432Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/MaterialModifiers/IMaterialModifier.cs
-2026-11-08T19:40:29.4742620Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/VerticalLayoutGroup.cs
-2026-11-08T19:40:29.4742962Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/ContentSizeFitter.cs
-2026-11-08T19:40:29.4743300Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/Layout/AspectRatioFitter.cs
-2026-11-08T19:40:29.4743613Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/FontUpdateTracker.cs
-2026-11-08T19:40:29.4743952Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/CanvasUpdateRegistry.cs
-2026-11-08T19:40:29.4744266Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/UI/Core/AnimationTriggers.cs
-2026-11-08T19:40:29.4744641Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/UIElements/PanelRaycaster.cs
-2026-11-08T19:40:29.4745008Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/Raycasters/PhysicsRaycaster.cs
-2026-11-08T19:40:29.4745365Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/Raycasters/BaseRaycaster.cs
-2026-11-08T19:40:29.4745690Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/RaycasterManager.cs
-2026-11-08T19:40:29.4746112Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/RaycastResult.cs
-2026-11-08T19:40:29.4746509Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/InputModules/TouchInputModule.cs
-2026-11-08T19:40:29.4746881Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/InputModules/BaseInputModule.cs
-2026-11-08T19:40:29.4747183Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/ExecuteEvents.cs
-2026-11-08T19:40:29.4747640Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/EventData/PointerEventData.cs
-2026-11-08T19:40:29.4748044Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/EventData/BaseEventData.cs
-2026-11-08T19:40:29.4748387Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/UGUI/EventSystem/EventData/AxisEventData.cs
-2026-11-08T19:40:29.4748687Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_TextProcessingStack.cs
-2026-11-08T19:40:29.4749065Z  0.1 kb	 0.0% Packages/com.unity.ugui/Runtime/TMP/TMP_FontFeaturesCommon.cs
-2026-11-08T19:40:29.4749478Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/Lights/LightAnchor.cs
-2026-11-08T19:40:29.4749797Z  0.1 kb	 0.0% Packages/com.unity.render-pipelines.core/Runtime/GPUDriven/AABB.cs
-2026-11-08T19:40:29.4750118Z  0.1 kb	 0.0% Packages/com.unity.mathematics/Unity.Mathematics/rigid_transform.cs
-2026-11-08T19:40:29.4750414Z Unloading 1729 unused Assets / (2.6 MB). Loaded Objects now: 4616.
-2026-11-08T19:40:29.4750624Z Memory consumption went from 182.5 MB to 179.9 MB.
-2026-11-08T19:40:29.4751053Z Total: 22.027095 ms (FindLiveObjects: 0.589714 ms CreateObjectMapping: 0.090043 ms MarkObjects: 15.211098 ms  DeleteObjects: 6.135120 ms)
-2026-11-08T19:40:29.4751125Z 
-2026-11-08T19:40:29.4751286Z Build Finished, Result: Success.
-2026-11-08T19:40:30.2481384Z ##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1794166830247,"processId":1593,"steps":[{"description":"Preprocess Player","duration":114},{"description":"Prepare For Build","duration":3},{"description":"ProducePlayerScriptAssemblies","duration":3524},{"description":"Verify Build setup","duration":70},{"description":"Prepare assets for target pla
-2026-11-08T19:40:30.2522526Z Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-2026-11-08T19:40:30.4691333Z Loaded scene 'Temp/__Backupscenes/0.backup'
-2026-11-08T19:40:30.4691865Z 	Deserialize:            0.941 ms
-2026-11-08T19:40:30.4692246Z 	Integration:            217.248 ms
-2026-11-08T19:40:30.4692603Z 	Integration of assets:  0.001 ms
-2026-11-08T19:40:30.4692941Z 	Thread Wait Time:       0.016 ms
-2026-11-08T19:40:30.4693282Z 	Total Operation Time:   218.206 ms
-2026-11-08T19:40:30.4798637Z Unloading 0 unused Assets / (10.6 KB). Loaded Objects now: 4616.
-2026-11-08T19:40:30.4799833Z Memory consumption went from 179.1 MB to 179.1 MB.
-2026-11-08T19:40:30.4800752Z Total: 10.875428 ms (FindLiveObjects: 0.537726 ms CreateObjectMapping: 0.159927 ms MarkObjects: 10.154179 ms  DeleteObjects: 0.022884 ms)
-2026-11-08T19:40:30.4801470Z 
-2026-11-08T19:40:30.5160701Z # Construction de l'APK Android
-2026-11-08T19:40:30.5161018Z 
-2026-11-08T19:40:30.5162471Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
-2026-11-08T19:40:30.5164187Z - Signature : clé Korvalune (mises à jour sans désinstaller)
-2026-11-08T19:40:30.5164692Z - Icône : Assets/Korvalune/Resources/UI/Icone.png
-2026-11-08T19:40:30.5165278Z - Contenu téléchargeable : 100 paquets, 734 Mo (release contenu-131)
-2026-11-08T19:40:30.5165707Z     - scenes : 157.7 Mo
-2026-11-08T19:40:30.5166155Z     - art_catalog_models : 58.3 Mo
-2026-11-08T19:40:30.5166481Z     - art_catalog_skins : 34.6 Mo
-2026-11-08T19:40:30.5166815Z     - art_heroes_varek_f : 19.0 Mo
-2026-11-08T19:40:30.5167338Z     - art_heroes_morvanna_f : 18.8 Mo
-2026-11-08T19:40:30.5167687Z     - art_heroes_varek_m : 18.5 Mo
-2026-11-08T19:40:30.5168009Z     - art_heroes_morvanna_m : 18.4 Mo
-2026-11-08T19:40:30.5168464Z     - art_heroes_elyranoctis_m : 18.2 Mo
-2026-11-08T19:40:30.5168822Z     - art_heroes_elyranoctis_f : 18.0 Mo
-2026-11-08T19:40:30.5169183Z     - art_heroes_kaeldraven_f : 17.2 Mo
-2026-11-08T19:40:30.5169636Z     - art_heroes_kaeldraven_m : 16.7 Mo
-2026-11-08T19:40:30.5169995Z     - art_heroes_tharion_f : 16.7 Mo
-2026-11-08T19:40:30.5170411Z - HybridCLR : génération en 1.8 min
-2026-11-08T19:40:30.5171147Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
-2026-11-08T19:40:30.5171887Z - Résultat : **Succeeded** en 20.4 min, 0 erreur(s), 12 avertissement(s)
-2026-11-08T19:40:30.5172352Z - APK : 129.3 Mo, version 0.1.131
-2026-11-08T19:40:30.5172569Z 
-2026-11-08T19:40:30.5172747Z ## Contenu empaqueté : 35 Mo
-2026-11-08T19:40:30.5173074Z - Texture2D : 23.5 Mo (296)
-2026-11-08T19:40:30.5173384Z - AudioClip : 8.4 Mo (174)
-2026-11-08T19:40:30.5173682Z - Cubemap : 1.6 Mo (13)
-2026-11-08T19:40:30.5173967Z - Shader : 1.3 Mo (34)
-2026-11-08T19:40:30.5174258Z - Sprite : 0.1 Mo (210)
-2026-11-08T19:40:30.5174550Z - MonoScript : 0.1 Mo (917)
-2026-11-08T19:40:30.5174842Z - Font : 0.1 Mo (1)
-2026-11-08T19:40:30.5175128Z - MonoBehaviour : 0.1 Mo (434)
-2026-11-08T19:40:30.5175447Z - RectTransform : 0.0 Mo (348)
-2026-11-08T19:40:30.5175888Z - GameObject : 0.0 Mo (348)
-2026-11-08T19:40:30.5176182Z - TextAsset : 0.0 Mo (15)
-2026-11-08T19:40:30.5176494Z - ComputeShader : 0.0 Mo (1)
-2026-11-08T19:40:30.5176692Z 
-2026-11-08T19:40:30.5176808Z ### Plus gros fichiers sources
-2026-11-08T19:40:30.5177155Z - 8.4 Mo — 
-2026-11-08T19:40:30.5177527Z - 2.7 Mo — Built-in Texture2D: Splash Screen Unity Logo
-2026-11-08T19:40:30.5178065Z - 1.3 Mo — Assets/Korvalune/Resources/UI/Lanceur_Peint.png
-2026-11-08T19:40:30.5178607Z - 1.0 Mo — Assets/Korvalune/Resources/UI/Lanceur_Fond.png
-2026-11-08T19:40:30.5179328Z - 0.7 Mo — Packages/com.unity.render-pipelines.universal/Shaders/PostProcessing/UberPost.shader
-2026-11-08T19:40:30.5179988Z - 0.5 Mo — Resources/unity_builtin_extra
-2026-11-08T19:40:30.5180522Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Catacombes.png
-2026-11-08T19:40:30.5181159Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Eclipse.png
-2026-11-08T19:40:30.5181751Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Toundra.png
-2026-11-08T19:40:30.5182155Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Pics.png
-2026-11-08T19:40:30.5182657Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Volcan.png
-2026-11-08T19:40:30.5183246Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Abime.png
-2026-11-08T19:40:30.5183637Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Desert.png
-2026-11-08T19:40:30.5184069Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Foret.png
-2026-11-08T19:40:30.5184451Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Cote.png
-2026-11-08T19:40:30.5184826Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Canyon.png
-2026-11-08T19:40:30.5185223Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Marais.png
-2026-11-08T19:40:30.5185588Z - 0.5 Mo — Assets/Korvalune/Resources/UI/Cartes/Korvalune_Vallee.png
-2026-11-08T19:40:30.5186434Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/SMAA/AreaTex.tga
-2026-11-08T19:40:30.5187193Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium01.png
-2026-11-08T19:40:30.5187734Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium05.png
-2026-11-08T19:40:30.5188232Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Large02.png
-2026-11-08T19:40:30.5188718Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Thin01.png
-2026-11-08T19:40:30.5189256Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium03.png
-2026-11-08T19:40:30.5189901Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium06.png
-2026-11-08T19:40:30.5190481Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium04.png
-2026-11-08T19:40:30.5190968Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Thin02.png
-2026-11-08T19:40:30.5191465Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Medium02.png
-2026-11-08T19:40:30.5192027Z - 0.3 Mo — Packages/com.unity.render-pipelines.universal/Textures/FilmGrain/Large01.png
-2026-11-08T19:40:30.5192505Z - 0.2 Mo — Assets/Korvalune/Resources/UI/Kit/Panneau.png
-2026-11-08T19:40:30.5192840Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-08T19:40:30.5193438Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-08T19:40:30.5194141Z UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-2026-11-08T19:40:30.5194757Z UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-2026-11-08T19:40:30.5195195Z UnityEngine.Logger:Log (UnityEngine.LogType,object)
-2026-11-08T19:40:30.5195470Z UnityEngine.Debug:Log (object)
-2026-11-08T19:40:30.5195996Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:124)
-2026-11-08T19:40:30.5196297Z 
-2026-11-08T19:40:30.5196434Z (Filename: Assets/Korvalune/Editor/AndroidBuild.cs Line: 124)
-2026-11-08T19:40:30.5196640Z 
-2026-11-08T19:40:30.5589238Z Starting: /opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/OpenJDK/bin/java -classpath "/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/gradle/lib/gradle-launcher-8.4.jar" org.gradle.launcher.GradleMain "-Dorg.gradle.jvmargs=-Xmx4096m" "--stop" 
-2026-11-08T19:40:30.5591039Z WorkingDir: 
-2026-11-08T19:40:31.9434245Z Killing ADB server in 0.207062 seconds.
-2026-11-08T19:40:32.3062648Z [Physics::Module] Cleanup current backned.
-2026-11-08T19:40:32.3063125Z [Physics::Module] Id: 0xf2b8ea05
-2026-11-08T19:40:32.3128603Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
-2026-11-08T19:40:32.3129324Z [Licensing::IpcConnector] License Client channel disconnected successfully.
-2026-11-08T19:40:32.3181770Z AcceleratorClientConnectionCallback - disconnected - :0
-2026-11-08T19:40:32.3380928Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-11-08T19:40:32.3381258Z       Application is shutting down...
+2026-11-09T07:55:21.6102925Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6104648Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6107130Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6109383Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6110712Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6111327Z 
+2026-11-09T07:55:21.6111728Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6112556Z 
+2026-11-09T07:55:21.6113435Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6114579Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6115890Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6117257Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6118879Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6121346Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6123975Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6125307Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6125919Z 
+2026-11-09T07:55:21.6126321Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6126899Z 
+2026-11-09T07:55:21.6127410Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6128351Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6129472Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6130824Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6132836Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6135341Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6138291Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6139782Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6140399Z 
+2026-11-09T07:55:21.6140804Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6141383Z 
+2026-11-09T07:55:21.6142036Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6142992Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6144239Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6145612Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6147243Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6149703Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6152214Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6153891Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6154658Z 
+2026-11-09T07:55:21.6155255Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6155928Z 
+2026-11-09T07:55:21.6156468Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6157471Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6158689Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6160108Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6162041Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6164634Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6166978Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6168384Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6169050Z 
+2026-11-09T07:55:21.6169476Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6170114Z 
+2026-11-09T07:55:21.6170647Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6171650Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6173045Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6174497Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6176231Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6178987Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6181406Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6182981Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6183629Z 
+2026-11-09T07:55:21.6184093Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6184714Z 
+2026-11-09T07:55:21.6185272Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6186403Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6187632Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6189063Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6190764Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6193407Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6195880Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6197408Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6198088Z 
+2026-11-09T07:55:21.6198526Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6199144Z 
+2026-11-09T07:55:21.6199704Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6200705Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6202029Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6203438Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6205078Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6207675Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6209933Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6211299Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6212084Z 
+2026-11-09T07:55:21.6212502Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6213075Z 
+2026-11-09T07:55:21.6213696Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6214647Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6215782Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6217166Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6219008Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6221629Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6224123Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6225451Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6226179Z 
+2026-11-09T07:55:21.6226593Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6227168Z 
+2026-11-09T07:55:21.6227719Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6228681Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6229820Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6231190Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6232970Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6235557Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6237991Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6239378Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6239996Z 
+2026-11-09T07:55:21.6240407Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6240983Z 
+2026-11-09T07:55:21.6241490Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6242592Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6243727Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6245105Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6246740Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6249251Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6251549Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6253015Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6253631Z 
+2026-11-09T07:55:21.6254043Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6254623Z 
+2026-11-09T07:55:21.6255132Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6256144Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6257284Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6258889Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6260568Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6263338Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6265665Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6267165Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6267775Z 
+2026-11-09T07:55:21.6268184Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6268766Z 
+2026-11-09T07:55:21.6269265Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6270213Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6271348Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6272896Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6274518Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6277241Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6279512Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6280841Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6281448Z 
+2026-11-09T07:55:21.6282001Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6282585Z 
+2026-11-09T07:55:21.6283088Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6284051Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6285190Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6286578Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6288282Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6290828Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6293218Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6294547Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6295165Z 
+2026-11-09T07:55:21.6295582Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6296162Z 
+2026-11-09T07:55:21.6296672Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6297730Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6298859Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6300227Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6302025Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6304597Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6307036Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6308374Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6308986Z 
+2026-11-09T07:55:21.6309397Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6309975Z 
+2026-11-09T07:55:21.6310483Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T07:55:21.6311425Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6312718Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6314096Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6315920Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6318484Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6320747Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6322260Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6322870Z 
+2026-11-09T07:55:21.6323277Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6323869Z 
+2026-11-09T07:55:21.6324386Z Error finding targetGameObject from AddedComponent.targetCorrespondingSourceObject (nullptr)
+2026-11-09T07:55:21.6325310Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T07:55:21.6326453Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T07:55:21.6327830Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6329496Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T07:55:21.6332210Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T07:55:21.6334470Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T07:55:21.6335827Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T07:55:21.6336439Z 
+2026-11-09T07:55:21.6336851Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T07:55:21.6337543Z 
+2026-11-09T07:55:21.6337775Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+2026-11-09T07:55:21.6737865Z Obtained 49 stack frames.
+2026-11-09T07:55:21.6738475Z #0  0x0060becaafc2ac in burst_signal_handler(int, siginfo_t*, void*)
+2026-11-09T07:55:21.6739083Z #1  0x0079f2fbc5c520 in (Unknown)
+2026-11-09T07:55:21.6739485Z #2  0x0060becc266210 in (Unknown)
+2026-11-09T07:55:21.6739920Z #3  0x0060becc268818 in (Unknown)
+2026-11-09T07:55:21.6740228Z #4  0x0060becc231565 in (Unknown)
+2026-11-09T07:55:21.6741388Z #5  0x0060becc22d5e5 in MergeAllPrefabInstanceInfosDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, core::hash_map<int, PrefabInstanceInfo, core::hash<int>, std::equal_to<int> >&, AwakeFromLoadQueue&, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-09T07:55:21.6744668Z #6  0x0060becc22ccba in MergeAllPrefabInstancesDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, AwakeFromLoadQueue*, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-09T07:55:21.6745632Z #7  0x0060becabb57d9 in LoadSceneOperation::CompleteAwakeSequence()
+2026-11-09T07:55:21.6746168Z #8  0x0060becabb50d5 in LoadSceneOperation::CompletePreloadManagerLoadSceneEditor()
+2026-11-09T07:55:21.6746686Z #9  0x0060becabb48ec in LoadSceneOperation::IntegrateMainThread()
+2026-11-09T07:55:21.6747302Z #10 0x0060becabb77f7 in PreloadManager::UpdatePreloadingSingleStep(PreloadManager::UpdatePreloadingFlags, int)
+2026-11-09T07:55:21.6747976Z #11 0x0060becabb87a2 in PreloadManager::WaitForAllAsyncOperationsToComplete()
+2026-11-09T07:55:21.6749012Z #12 0x0060becc2a6e85 in EditorSceneManager::RestoreSceneBackups(core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, EditorSceneManager::PlayModeChange)
+2026-11-09T07:55:21.6750341Z #13 0x0060becc2a6045 in EditorSceneManager::OpenSceneForBuild(core::basic_string<char, core::StringStorageDefault<char> > const&, core::basic_string<char, core::StringStorageDefault<char> > const&)
+2026-11-09T07:55:21.6751137Z #14 0x0060beccff07f4 in (Unknown)
+2026-11-09T07:55:21.6751408Z #15 0x0060beccfe63f3 in (Unknown)
+2026-11-09T07:55:21.6753425Z #16 0x0060beccfe4834 in DoBuildPlayer(BuildPlayerSetup const&, core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, core::basic_string<char, core::StringStorageDefault<char> >, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, bool,
+2026-11-09T07:55:21.6755216Z #17 0x0060becbed2237 in (Unknown)
+2026-11-09T07:55:21.6756816Z #18 0x0060becbed69e5 in BuildAssetBundles(core::basic_string<char, core::StringStorageDefault<char> > const&, core::vector<AssetBundleBuildInfo, core::allocator<AssetBundleBuildInfo, 0ul> > const&, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, BuildTa
+2026-11-09T07:55:21.6758763Z #19 0x0060beca55c84d in BuildPipeline_CUSTOM_BuildAssetBundlesInternal(BuildAssetBundlesParameters__ const&)
+2026-11-09T07:55:21.6759710Z #20 0x0000004171d68c in (wrapper managed-to-native) UnityEditor.BuildPipeline:BuildAssetBundlesInternal_Injected (UnityEditor.BuildAssetBundlesParameters&)
+2026-11-09T07:55:21.6760718Z #21 0x0000004171d4bf in UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6761524Z #22 0x0000004171d3db in UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T07:55:21.6762665Z #23 0x0000004171d25f in UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget)
+2026-11-09T07:55:21.6763779Z #24 0x00000041717443 in Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder)
+2026-11-09T07:55:21.6764396Z #25 0x00000041703cab in Korvalune.EditorTools.AndroidBuild:Build ()
+2026-11-09T07:55:21.6764972Z #26 0x0000004170037e in (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
+2026-11-09T07:55:21.6765467Z #27 0x0079f200846406 in (Unknown)
+2026-11-09T07:55:21.6765718Z #28 0x0079f2009e3bf9 in (Unknown)
+2026-11-09T07:55:21.6765984Z #29 0x0079f2009e3b5d in mono_runtime_invoke
+2026-11-09T07:55:21.6766611Z #30 0x0060becaf8e473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+2026-11-09T07:55:21.6767445Z #31 0x0060becaf64663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+2026-11-09T07:55:21.6767931Z #32 0x0060becbd8b1f4 in Application::ParseARGVCommands()
+2026-11-09T07:55:21.6768321Z #33 0x0060becbd8a24f in Application::FinishLoadingProject()
+2026-11-09T07:55:21.6768692Z #34 0x0060becc4999a0 in InitializeUnity(void*)
+2026-11-09T07:55:21.6768993Z #35 0x0079f2fc4102c8 in (Unknown)
+2026-11-09T07:55:21.6769273Z #36 0x0079f2fc40fc44 in g_main_context_dispatch
+2026-11-09T07:55:21.6769577Z #37 0x0079f2fc465488 in (Unknown)
+2026-11-09T07:55:21.6769837Z #38 0x0079f2fc40f2b3 in g_main_loop_run
+2026-11-09T07:55:21.6770114Z #39 0x0079f2fca1fd2d in gtk_main
+2026-11-09T07:55:21.6770373Z #40 0x0060becc498f8c in main
+2026-11-09T07:55:21.6770617Z #41 0x0079f2fbc43d90 in (Unknown)
+2026-11-09T07:55:21.6770878Z #42 0x0079f2fbc43e40 in __libc_start_main
+2026-11-09T07:55:21.6771147Z #43 0x0060beca357029 in (Unknown)
+2026-11-09T07:56:07.5352600Z Segmentation fault (core dumped)
+2026-11-09T07:56:07.5425597Z Build failed, with exit code 139
+2026-11-09T07:56:07.9601361Z 
+2026-11-09T07:56:07.9601796Z ###########################
+2026-11-09T07:56:07.9602538Z #       Build output      #
+2026-11-09T07:56:07.9602821Z ###########################
+2026-11-09T07:56:07.9603095Z 
+2026-11-09T07:56:07.9621524Z total 8.0K
+2026-11-09T07:56:07.9622370Z drwxr-xr-x 2 root root 4.0K Nov  9 07:41 .
+2026-11-09T07:56:07.9622783Z drwxr-xr-x 4 root root 4.0K Nov  9 07:50 ..
+2026-11-09T07:56:08.0676476Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-11-09T07:56:08.0678165Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-11-09T07:56:08.0679064Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-11-09T07:56:08.0679619Z [UnityConnectServicesConfig] Service configuration:
+2026-11-09T07:56:08.0680002Z     "servicesConfigBaseUrl": "",
+2026-11-09T07:56:08.0680306Z     "disableServicesWindow": false,
+2026-11-09T07:56:08.0680640Z     "disableUserLogin": false,
+2026-11-09T07:56:08.0680962Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-11-09T07:56:08.0681322Z     "clientConnectTimeoutSec": 5,
+2026-11-09T07:56:08.0681636Z     "clientHandshakeTimeoutSec": 10,
+2026-11-09T07:56:08.0682259Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-11-09T07:56:08.0682637Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-11-09T07:56:08.0682978Z     "licensingServiceBaseUrl": "",
+2026-11-09T07:56:08.0683289Z     "enableProxyAutoconfig": "false"
+2026-11-09T07:56:08.0683496Z 
+2026-11-09T07:56:08.0768556Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-11-09T07:56:08.0768929Z Branch:                  6000.0/staging
+2026-11-09T07:56:08.0769227Z Build type:              Release
+2026-11-09T07:56:08.0769505Z Batch mode:              YES
+2026-11-09T07:56:08.0769760Z System name:             Linux
+2026-11-09T07:56:08.0770120Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
+2026-11-09T07:56:08.0770552Z Kernel version:          7.0.0-1019-azure
+2026-11-09T07:56:08.0770853Z Architecture:            x86_64
+2026-11-09T07:56:08.0771135Z Available memory:        15983 MB
+2026-11-09T07:56:08.8787505Z User *** logged in successfully
+2026-11-09T07:56:08.8788324Z [UnityConnect::TryLogin] Request Succeeded.
+2026-11-09T07:56:08.8789429Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-11-09T07:56:08.8790990Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-11-09T07:56:08.8809363Z [Licensing::Module] Successfully launched the LicensingClient (PId: 7208)
+2026-11-09T07:56:09.4499579Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-09T07:56:09.449243Z"
+2026-11-09T07:56:09.4501313Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-11-09T07:56:09.5088378Z [Licensing::Client] Handshaking with LicensingClient:
+2026-11-09T07:56:09.5090065Z   Version:                 1.16.0+1c867a9
+2026-11-09T07:56:09.5092032Z   Session Id:              0beb917dfa164c66af535a5c9c5b546e
+2026-11-09T07:56:09.5093654Z   Correlation Id:          d0b093dc42bedad704a3c80e44ee861a
+2026-11-09T07:56:09.5094345Z   External correlation Id: 6910965615570388851
+2026-11-09T07:56:09.5094934Z   Machine Id:              Jn4DX89gZRpauH4Gaqe0guty11c=
+2026-11-09T07:56:09.5096190Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.06s, handshake: 0.00s)
+2026-11-09T07:56:09.5098015Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-09T07:56:09.507979Z"
+2026-11-09T07:56:09.5099572Z [Licensing::Module] Connected to LicensingClient (PId: 7208, launch time: 0.00, total connection time: 0.63s)
+2026-11-09T07:56:09.5238230Z [Licensing::Client] Successfully updated the access token
+2026-11-09T07:56:09.5239286Z [Licensing::Module] Successfully updated the access token qlOPN5El-z...
+2026-11-09T07:56:10.8075760Z [Licensing::Client] Successfully processed license management request
+2026-11-09T07:56:10.8076684Z [Licensing::Module] Successfully returned the entitlement license
+2026-11-09T07:56:10.8369431Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-11-09T07:56:11.8800378Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-09T07:56:11.8802777Z       Application is shutting down...
+2026-11-09T07:56:11.8905435Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-11-09T07:56:11.8906184Z       ALC ILPP context 2 is unloading
+2026-11-09T07:56:12.4138554Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-11-09T07:56:12.4253051Z 
+2026-11-09T07:56:12.4254086Z ###########################
+2026-11-09T07:56:12.4254554Z #         Failure         #
+2026-11-09T07:56:12.4254987Z ###########################
+2026-11-09T07:56:12.4255233Z 
+2026-11-09T07:56:12.4255500Z Please note that the exit code is not very descriptive.
+2026-11-09T07:56:12.4256118Z Most likely it will not help you solve the issue.
+2026-11-09T07:56:12.4256502Z 
+2026-11-09T07:56:12.4257103Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-11-09T07:56:12.4257835Z 
+2026-11-09T07:56:12.7008694Z ##[error]Build failed with exit code 139
