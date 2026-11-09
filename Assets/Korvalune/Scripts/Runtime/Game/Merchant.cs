@@ -33,7 +33,7 @@ namespace Korvalune.Game
                 if (pf)
                 {
                     var npc = Instantiate(pf, transform); npc.name = "PNJ"; npc.transform.localPosition = Vector3.zero; npc.transform.localRotation = Quaternion.identity;
-                    foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) Destroy(c);
+                    foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) { if (Application.isPlaying) Destroy(c); else DestroyImmediate(c); }
                 }
             }
             var go = new GameObject("Nom"); go.transform.SetParent(transform, false); go.transform.localPosition = Vector3.up * 2.45f; tagT = go.transform;
