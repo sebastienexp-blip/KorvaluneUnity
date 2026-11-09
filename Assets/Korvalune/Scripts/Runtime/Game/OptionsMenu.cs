@@ -156,13 +156,13 @@ namespace Korvalune.Game
             var title = Lbl(panel, "Titre", "Options", 46, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0, -60), new Vector2(600, 70)); title.color = UIStyle.Gold; title.fontStyle = FontStyle.Bold;
             Btn(panel, "Fermer", "Fermer", new Vector2(0.5f, 0), new Vector2(0, 46), new Vector2(340, 80), Close, 32);
 
-            string[] tabs = { "Graphismes", "Son", "Jeu", "Interface" };
+            string[] tabs = { "Graphismes", "Son", "Jeu", "Interface", "Commandes" };
             for (int i = 0; i < tabs.Length; i++)
             {
                 int k = i;
                 var page = new GameObject(tabs[i], typeof(RectTransform)).GetComponent<RectTransform>();
                 page.SetParent(panel, false); page.anchorMin = Vector2.zero; page.anchorMax = Vector2.one; page.offsetMin = new Vector2(60, 140); page.offsetMax = new Vector2(-60, -200);
-                var tb = Btn(panel, "Onglet" + i, tabs[i], new Vector2(0.5f, 1), new Vector2(-480 + i * 320, -140), new Vector2(300, 72), () => ShowPage(k), 30);
+                var tb = Btn(panel, "Onglet" + i, tabs[i], new Vector2(0.5f, 1), new Vector2(-(tabs.Length - 1) * 160 + i * 320, -140), new Vector2(300, 72), () => ShowPage(k), 30);
                 pages.Add((page.gameObject, tb, tb.GetComponentInChildren<Text>()));
             }
             var cfg = FindFirstObjectByType<GameBootstrap>()?.config;
@@ -204,7 +204,36 @@ namespace Korvalune.Game
             Row(u, ref y, "GPS au sol", new[] { "Activé", "Désactivé" }, () => Settings.Gps, k => Settings.Gps = k);
             Row(u, ref y, "Compteur d'images/s", new[] { "Affiché", "Masqué" }, () => Settings.FpsCounter, k => Settings.FpsCounter = k);
 
+            BuildControls((RectTransform)pages[4].page.transform);
+
             ShowPage(PlayerPrefs.GetInt("korvalune.onglet", 0));
+        }
+
+        /// <summary>Page « Commandes » : clavier et souris (ordinateur) puis tactile (téléphone), dans deux colonnes.</summary>
+        void BuildControls(RectTransform page)
+        {
+            const string pc = "<color=#f1c76a><b>Ordinateur — clavier et souris</b></color>\n\n" +
+                "<b>Clic gauche</b> sur un monstre : attaquer\n" +
+                "<b>Clic gauche</b> au sol : se déplacer\n" +
+                "<b>Clic droit</b> : compétence 1, lancée vers le curseur\n" +
+                "<b>Touches 1 à 8</b> : compétences de la barre\n" +
+                "<b>Espace</b> : esquive\n" +
+                "<b>Maj</b> : esquive (partout)\n" +
+                "<b>E</b> : utiliser (parler, ouvrir, voyager)\n" +
+                "<b>Molette</b> : zoom de la caméra\n" +
+                "<b>M</b> ou <b>Échap</b> : fermer la carte ou les menus";
+            const string tactile = "<color=#f1c76a><b>Téléphone — tactile</b></color>\n\n" +
+                "<b>Joystick</b> (zone gauche) : déplacer le héros\n" +
+                "<b>Bouton Attaque</b> (bas droite) : frapper ou tirer\n" +
+                "<b>Boutons de compétences</b> : 5 emplacements\n" +
+                "<b>Bouton Esquive</b> : roulade invulnérable\n" +
+                "<b>Bouton Utiliser</b> : apparaît près d'un objet ou d'un personnage\n" +
+                "<b>Pincement à deux doigts</b> : zoom de la caméra\n" +
+                "<b>Vibrations</b> : réglables dans l'onglet Jeu";
+            var left = Lbl(page, "Clavier", pc, 27, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(330, -300), new Vector2(620, 580));
+            left.color = UIStyle.Parch; left.lineSpacing = 1.25f;
+            var right = Lbl(page, "Tactile", tactile, 27, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1000, -300), new Vector2(620, 580));
+            right.color = UIStyle.Parch; right.lineSpacing = 1.25f;
         }
 
         static void Changed() { PlayerPrefs.Save(); Settings.Apply(); var hud = FindFirstObjectByType<HUD>(); if (hud) hud.ApplySettings(); }
