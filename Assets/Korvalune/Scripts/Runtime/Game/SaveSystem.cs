@@ -99,6 +99,7 @@ namespace Korvalune.Game
             if (Account == null) Load();
             if (Account.characters.Count >= AccountSave.Slots) return null;
             var c = new CharacterSave { name = name.Trim(), classId = classId, female = female, look = look ?? new AppearanceSave(), created = DateTime.UtcNow.ToString("o"), lastPlayed = DateTime.UtcNow.ToString("o") };
+            c.equipped.Add(Loot.StarterWeapon(classId));          // arme de départ de la classe
             Account.characters.Add(c); Account.lastSelected = Account.characters.Count - 1; Save();
             return c;
         }

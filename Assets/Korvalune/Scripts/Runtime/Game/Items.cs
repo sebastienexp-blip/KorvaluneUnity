@@ -133,6 +133,16 @@ namespace Korvalune.Game
             return IsPercent(s) ? Mathf.Round((2 + ilvl * 0.06f) * mult * 10) / 10 : Mathf.Round((3 + ilvl * 1.4f) * mult);
         }
 
+        /// <summary>Arme de départ d'un nouveau personnage : la première arme de sa classe, commune, niveau 1.</summary>
+        public static ItemSave StarterWeapon(string cls)
+        {
+            var bases = WeaponBases.TryGetValue(cls ?? "", out var list) ? list : WeaponBases[Powers.K];
+            var it = new ItemSave { id = Guid.NewGuid().ToString("N").Substring(0, 12), baseName = bases[0], slot = Slot.Arme, rarity = Rarity.Commun, ilvl = 1, reqLevel = 1, cls = cls ?? "" };
+            it.power = Mathf.Round(10 + it.ilvl * 4.2f);
+            it.maxDurability = it.durability = MaxDurabilityOf(Slot.Arme);
+            return it;
+        }
+
         public static ItemSave Roll(System.Random r, int level, float luck = 0)
         {
             var rar = RollRarity(r, level, luck);
