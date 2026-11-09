@@ -1,321 +1,321 @@
-# Journal de la construction Android (run 42577662689)
+# Journal de la construction Android (run 42607210925)
 ## Lignes importantes
-1695:2026-11-09T07:34:53.6458733Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
-1887:2026-11-09T07:35:45.0445251Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2015:2026-11-09T07:39:18.6110404Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-36903:2026-11-09T07:55:21.6337775Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
-36935:2026-11-09T07:55:21.6766611Z #30 0x0060becaf8e473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
-36936:2026-11-09T07:55:21.6767445Z #31 0x0060becaf64663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
-36950:2026-11-09T07:56:07.5425597Z Build failed, with exit code 139
-37014:2026-11-09T07:56:12.4255500Z Please note that the exit code is not very descriptive.
-37019:2026-11-09T07:56:12.7008694Z ##[error]Build failed with exit code 139
-37024:2026-11-09T07:56:12.7296784Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-37025:2026-11-09T07:56:12.7297505Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-37075:2026-11-09T07:56:13.0788928Z # Construction de l'APK Android
-37077:2026-11-09T07:56:13.0791149Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
-37094:2026-11-09T07:56:13.0801345Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
-37096:2026-11-09T07:56:13.0802694Z - APK : 129.3 Mo, version 0.1.131
-37398:2026-11-09T07:56:30.3980818Z ##[error]Process completed with exit code 1.
+1695:2026-11-09T11:15:19.3726600Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+1887:2026-11-09T11:16:06.6296155Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2015:2026-11-09T11:19:38.7601722Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+36790:2026-11-09T11:35:55.5904889Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+36822:2026-11-09T11:35:55.6376187Z #30 0x005e7497127473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+36823:2026-11-09T11:35:55.6377235Z #31 0x005e74970fd663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+36837:2026-11-09T11:36:41.9395581Z Build failed, with exit code 139
+36901:2026-11-09T11:36:47.0337653Z Please note that the exit code is not very descriptive.
+36906:2026-11-09T11:36:47.3125059Z ##[error]Build failed with exit code 139
+36911:2026-11-09T11:36:47.3409845Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+36912:2026-11-09T11:36:47.3410586Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+36962:2026-11-09T11:36:47.7182506Z # Construction de l'APK Android
+36964:2026-11-09T11:36:47.7185866Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
+36981:2026-11-09T11:36:47.7194756Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
+36983:2026-11-09T11:36:47.7196502Z - APK : 129.3 Mo, version 0.1.131
+37288:2026-11-09T11:37:09.3883024Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-11-09T07:55:21.6102925Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6104648Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6107130Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6109383Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6110712Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6111327Z 
-2026-11-09T07:55:21.6111728Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6112556Z 
-2026-11-09T07:55:21.6113435Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6114579Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6115890Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6117257Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6118879Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6121346Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6123975Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6125307Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6125919Z 
-2026-11-09T07:55:21.6126321Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6126899Z 
-2026-11-09T07:55:21.6127410Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6128351Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6129472Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6130824Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6132836Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6135341Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6138291Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6139782Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6140399Z 
-2026-11-09T07:55:21.6140804Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6141383Z 
-2026-11-09T07:55:21.6142036Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6142992Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6144239Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6145612Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6147243Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6149703Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6152214Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6153891Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6154658Z 
-2026-11-09T07:55:21.6155255Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6155928Z 
-2026-11-09T07:55:21.6156468Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6157471Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6158689Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6160108Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6162041Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6164634Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6166978Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6168384Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6169050Z 
-2026-11-09T07:55:21.6169476Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6170114Z 
-2026-11-09T07:55:21.6170647Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6171650Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6173045Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6174497Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6176231Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6178987Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6181406Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6182981Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6183629Z 
-2026-11-09T07:55:21.6184093Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6184714Z 
-2026-11-09T07:55:21.6185272Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6186403Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6187632Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6189063Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6190764Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6193407Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6195880Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6197408Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6198088Z 
-2026-11-09T07:55:21.6198526Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6199144Z 
-2026-11-09T07:55:21.6199704Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6200705Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6202029Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6203438Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6205078Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6207675Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6209933Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6211299Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6212084Z 
-2026-11-09T07:55:21.6212502Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6213075Z 
-2026-11-09T07:55:21.6213696Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6214647Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6215782Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6217166Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6219008Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6221629Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6224123Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6225451Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6226179Z 
-2026-11-09T07:55:21.6226593Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6227168Z 
-2026-11-09T07:55:21.6227719Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6228681Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6229820Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6231190Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6232970Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6235557Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6237991Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6239378Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6239996Z 
-2026-11-09T07:55:21.6240407Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6240983Z 
-2026-11-09T07:55:21.6241490Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6242592Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6243727Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6245105Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6246740Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6249251Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6251549Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6253015Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6253631Z 
-2026-11-09T07:55:21.6254043Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6254623Z 
-2026-11-09T07:55:21.6255132Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6256144Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6257284Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6258889Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6260568Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6263338Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6265665Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6267165Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6267775Z 
-2026-11-09T07:55:21.6268184Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6268766Z 
-2026-11-09T07:55:21.6269265Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6270213Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6271348Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6272896Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6274518Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6277241Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6279512Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6280841Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6281448Z 
-2026-11-09T07:55:21.6282001Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6282585Z 
-2026-11-09T07:55:21.6283088Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6284051Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6285190Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6286578Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6288282Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6290828Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6293218Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6294547Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6295165Z 
-2026-11-09T07:55:21.6295582Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6296162Z 
-2026-11-09T07:55:21.6296672Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6297730Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6298859Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6300227Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6302025Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6304597Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6307036Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6308374Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6308986Z 
-2026-11-09T07:55:21.6309397Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6309975Z 
-2026-11-09T07:55:21.6310483Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T07:55:21.6311425Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6312718Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6314096Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6315920Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6318484Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6320747Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6322260Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6322870Z 
-2026-11-09T07:55:21.6323277Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6323869Z 
-2026-11-09T07:55:21.6324386Z Error finding targetGameObject from AddedComponent.targetCorrespondingSourceObject (nullptr)
-2026-11-09T07:55:21.6325310Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T07:55:21.6326453Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T07:55:21.6327830Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6329496Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T07:55:21.6332210Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T07:55:21.6334470Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T07:55:21.6335827Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T07:55:21.6336439Z 
-2026-11-09T07:55:21.6336851Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T07:55:21.6337543Z 
-2026-11-09T07:55:21.6337775Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
-2026-11-09T07:55:21.6737865Z Obtained 49 stack frames.
-2026-11-09T07:55:21.6738475Z #0  0x0060becaafc2ac in burst_signal_handler(int, siginfo_t*, void*)
-2026-11-09T07:55:21.6739083Z #1  0x0079f2fbc5c520 in (Unknown)
-2026-11-09T07:55:21.6739485Z #2  0x0060becc266210 in (Unknown)
-2026-11-09T07:55:21.6739920Z #3  0x0060becc268818 in (Unknown)
-2026-11-09T07:55:21.6740228Z #4  0x0060becc231565 in (Unknown)
-2026-11-09T07:55:21.6741388Z #5  0x0060becc22d5e5 in MergeAllPrefabInstanceInfosDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, core::hash_map<int, PrefabInstanceInfo, core::hash<int>, std::equal_to<int> >&, AwakeFromLoadQueue&, TransferInstructionFlags, ErrorsAndWarningsCapture*)
-2026-11-09T07:55:21.6744668Z #6  0x0060becc22ccba in MergeAllPrefabInstancesDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, AwakeFromLoadQueue*, TransferInstructionFlags, ErrorsAndWarningsCapture*)
-2026-11-09T07:55:21.6745632Z #7  0x0060becabb57d9 in LoadSceneOperation::CompleteAwakeSequence()
-2026-11-09T07:55:21.6746168Z #8  0x0060becabb50d5 in LoadSceneOperation::CompletePreloadManagerLoadSceneEditor()
-2026-11-09T07:55:21.6746686Z #9  0x0060becabb48ec in LoadSceneOperation::IntegrateMainThread()
-2026-11-09T07:55:21.6747302Z #10 0x0060becabb77f7 in PreloadManager::UpdatePreloadingSingleStep(PreloadManager::UpdatePreloadingFlags, int)
-2026-11-09T07:55:21.6747976Z #11 0x0060becabb87a2 in PreloadManager::WaitForAllAsyncOperationsToComplete()
-2026-11-09T07:55:21.6749012Z #12 0x0060becc2a6e85 in EditorSceneManager::RestoreSceneBackups(core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, EditorSceneManager::PlayModeChange)
-2026-11-09T07:55:21.6750341Z #13 0x0060becc2a6045 in EditorSceneManager::OpenSceneForBuild(core::basic_string<char, core::StringStorageDefault<char> > const&, core::basic_string<char, core::StringStorageDefault<char> > const&)
-2026-11-09T07:55:21.6751137Z #14 0x0060beccff07f4 in (Unknown)
-2026-11-09T07:55:21.6751408Z #15 0x0060beccfe63f3 in (Unknown)
-2026-11-09T07:55:21.6753425Z #16 0x0060beccfe4834 in DoBuildPlayer(BuildPlayerSetup const&, core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, core::basic_string<char, core::StringStorageDefault<char> >, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, bool,
-2026-11-09T07:55:21.6755216Z #17 0x0060becbed2237 in (Unknown)
-2026-11-09T07:55:21.6756816Z #18 0x0060becbed69e5 in BuildAssetBundles(core::basic_string<char, core::StringStorageDefault<char> > const&, core::vector<AssetBundleBuildInfo, core::allocator<AssetBundleBuildInfo, 0ul> > const&, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, BuildTa
-2026-11-09T07:55:21.6758763Z #19 0x0060beca55c84d in BuildPipeline_CUSTOM_BuildAssetBundlesInternal(BuildAssetBundlesParameters__ const&)
-2026-11-09T07:55:21.6759710Z #20 0x0000004171d68c in (wrapper managed-to-native) UnityEditor.BuildPipeline:BuildAssetBundlesInternal_Injected (UnityEditor.BuildAssetBundlesParameters&)
-2026-11-09T07:55:21.6760718Z #21 0x0000004171d4bf in UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6761524Z #22 0x0000004171d3db in UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T07:55:21.6762665Z #23 0x0000004171d25f in UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget)
-2026-11-09T07:55:21.6763779Z #24 0x00000041717443 in Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder)
-2026-11-09T07:55:21.6764396Z #25 0x00000041703cab in Korvalune.EditorTools.AndroidBuild:Build ()
-2026-11-09T07:55:21.6764972Z #26 0x0000004170037e in (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
-2026-11-09T07:55:21.6765467Z #27 0x0079f200846406 in (Unknown)
-2026-11-09T07:55:21.6765718Z #28 0x0079f2009e3bf9 in (Unknown)
-2026-11-09T07:55:21.6765984Z #29 0x0079f2009e3b5d in mono_runtime_invoke
-2026-11-09T07:55:21.6766611Z #30 0x0060becaf8e473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
-2026-11-09T07:55:21.6767445Z #31 0x0060becaf64663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
-2026-11-09T07:55:21.6767931Z #32 0x0060becbd8b1f4 in Application::ParseARGVCommands()
-2026-11-09T07:55:21.6768321Z #33 0x0060becbd8a24f in Application::FinishLoadingProject()
-2026-11-09T07:55:21.6768692Z #34 0x0060becc4999a0 in InitializeUnity(void*)
-2026-11-09T07:55:21.6768993Z #35 0x0079f2fc4102c8 in (Unknown)
-2026-11-09T07:55:21.6769273Z #36 0x0079f2fc40fc44 in g_main_context_dispatch
-2026-11-09T07:55:21.6769577Z #37 0x0079f2fc465488 in (Unknown)
-2026-11-09T07:55:21.6769837Z #38 0x0079f2fc40f2b3 in g_main_loop_run
-2026-11-09T07:55:21.6770114Z #39 0x0079f2fca1fd2d in gtk_main
-2026-11-09T07:55:21.6770373Z #40 0x0060becc498f8c in main
-2026-11-09T07:55:21.6770617Z #41 0x0079f2fbc43d90 in (Unknown)
-2026-11-09T07:55:21.6770878Z #42 0x0079f2fbc43e40 in __libc_start_main
-2026-11-09T07:55:21.6771147Z #43 0x0060beca357029 in (Unknown)
-2026-11-09T07:56:07.5352600Z Segmentation fault (core dumped)
-2026-11-09T07:56:07.5425597Z Build failed, with exit code 139
-2026-11-09T07:56:07.9601361Z 
-2026-11-09T07:56:07.9601796Z ###########################
-2026-11-09T07:56:07.9602538Z #       Build output      #
-2026-11-09T07:56:07.9602821Z ###########################
-2026-11-09T07:56:07.9603095Z 
-2026-11-09T07:56:07.9621524Z total 8.0K
-2026-11-09T07:56:07.9622370Z drwxr-xr-x 2 root root 4.0K Nov  9 07:41 .
-2026-11-09T07:56:07.9622783Z drwxr-xr-x 4 root root 4.0K Nov  9 07:50 ..
-2026-11-09T07:56:08.0676476Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
-2026-11-09T07:56:08.0678165Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
-2026-11-09T07:56:08.0679064Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
-2026-11-09T07:56:08.0679619Z [UnityConnectServicesConfig] Service configuration:
-2026-11-09T07:56:08.0680002Z     "servicesConfigBaseUrl": "",
-2026-11-09T07:56:08.0680306Z     "disableServicesWindow": false,
-2026-11-09T07:56:08.0680640Z     "disableUserLogin": false,
-2026-11-09T07:56:08.0680962Z     "entitlementCacheTimeoutInSeconds": 60,
-2026-11-09T07:56:08.0681322Z     "clientConnectTimeoutSec": 5,
-2026-11-09T07:56:08.0681636Z     "clientHandshakeTimeoutSec": 10,
-2026-11-09T07:56:08.0682259Z     "clientResolveEntitlementsTimeoutSec": 30,
-2026-11-09T07:56:08.0682637Z     "clientUpdateLicenseTimeoutSec": 30,
-2026-11-09T07:56:08.0682978Z     "licensingServiceBaseUrl": "",
-2026-11-09T07:56:08.0683289Z     "enableProxyAutoconfig": "false"
-2026-11-09T07:56:08.0683496Z 
-2026-11-09T07:56:08.0768556Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
-2026-11-09T07:56:08.0768929Z Branch:                  6000.0/staging
-2026-11-09T07:56:08.0769227Z Build type:              Release
-2026-11-09T07:56:08.0769505Z Batch mode:              YES
-2026-11-09T07:56:08.0769760Z System name:             Linux
-2026-11-09T07:56:08.0770120Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
-2026-11-09T07:56:08.0770552Z Kernel version:          7.0.0-1019-azure
-2026-11-09T07:56:08.0770853Z Architecture:            x86_64
-2026-11-09T07:56:08.0771135Z Available memory:        15983 MB
-2026-11-09T07:56:08.8787505Z User *** logged in successfully
-2026-11-09T07:56:08.8788324Z [UnityConnect::TryLogin] Request Succeeded.
-2026-11-09T07:56:08.8789429Z [Licensing::Module] Trying to connect to existing licensing client channel...
-2026-11-09T07:56:08.8790990Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
-2026-11-09T07:56:08.8809363Z [Licensing::Module] Successfully launched the LicensingClient (PId: 7208)
-2026-11-09T07:56:09.4499579Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-09T07:56:09.449243Z"
-2026-11-09T07:56:09.4501313Z [SignatureVerifier] Application signature verification not supported on this platform.
-2026-11-09T07:56:09.5088378Z [Licensing::Client] Handshaking with LicensingClient:
-2026-11-09T07:56:09.5090065Z   Version:                 1.16.0+1c867a9
-2026-11-09T07:56:09.5092032Z   Session Id:              0beb917dfa164c66af535a5c9c5b546e
-2026-11-09T07:56:09.5093654Z   Correlation Id:          d0b093dc42bedad704a3c80e44ee861a
-2026-11-09T07:56:09.5094345Z   External correlation Id: 6910965615570388851
-2026-11-09T07:56:09.5094934Z   Machine Id:              Jn4DX89gZRpauH4Gaqe0guty11c=
-2026-11-09T07:56:09.5096190Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.06s, handshake: 0.00s)
-2026-11-09T07:56:09.5098015Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-09T07:56:09.507979Z"
-2026-11-09T07:56:09.5099572Z [Licensing::Module] Connected to LicensingClient (PId: 7208, launch time: 0.00, total connection time: 0.63s)
-2026-11-09T07:56:09.5238230Z [Licensing::Client] Successfully updated the access token
-2026-11-09T07:56:09.5239286Z [Licensing::Module] Successfully updated the access token qlOPN5El-z...
-2026-11-09T07:56:10.8075760Z [Licensing::Client] Successfully processed license management request
-2026-11-09T07:56:10.8076684Z [Licensing::Module] Successfully returned the entitlement license
-2026-11-09T07:56:10.8369431Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
-2026-11-09T07:56:11.8800378Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-11-09T07:56:11.8802777Z       Application is shutting down...
-2026-11-09T07:56:11.8905435Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-11-09T07:56:11.8906184Z       ALC ILPP context 2 is unloading
-2026-11-09T07:56:12.4138554Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
-2026-11-09T07:56:12.4253051Z 
-2026-11-09T07:56:12.4254086Z ###########################
-2026-11-09T07:56:12.4254554Z #         Failure         #
-2026-11-09T07:56:12.4254987Z ###########################
-2026-11-09T07:56:12.4255233Z 
-2026-11-09T07:56:12.4255500Z Please note that the exit code is not very descriptive.
-2026-11-09T07:56:12.4256118Z Most likely it will not help you solve the issue.
-2026-11-09T07:56:12.4256502Z 
-2026-11-09T07:56:12.4257103Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
-2026-11-09T07:56:12.4257835Z 
-2026-11-09T07:56:12.7008694Z ##[error]Build failed with exit code 139
+2026-11-09T11:35:55.5647603Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5649388Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5652078Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5655179Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5656632Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5657302Z 
+2026-11-09T11:35:55.5657748Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5658374Z 
+2026-11-09T11:35:55.5658925Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5660136Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5661348Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5662826Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5664782Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5667456Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5671240Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5672713Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5673749Z 
+2026-11-09T11:35:55.5674219Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5675161Z 
+2026-11-09T11:35:55.5675721Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5676764Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5678139Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5680039Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5682146Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5685488Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5687894Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5689345Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5690013Z 
+2026-11-09T11:35:55.5690479Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5691128Z 
+2026-11-09T11:35:55.5691732Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5692781Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5694682Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5696403Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5698150Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5700791Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5703280Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5705250Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5705925Z 
+2026-11-09T11:35:55.5706603Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5707229Z 
+2026-11-09T11:35:55.5707787Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5708810Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5710031Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5711517Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5713261Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5716213Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5718510Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5720007Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5720713Z 
+2026-11-09T11:35:55.5721234Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5721874Z 
+2026-11-09T11:35:55.5722470Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5723842Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5725261Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5726871Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5728680Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5731441Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5734165Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5735688Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5736442Z 
+2026-11-09T11:35:55.5736892Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5737558Z 
+2026-11-09T11:35:55.5738186Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5739264Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5740617Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5742199Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5744240Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5747047Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5749582Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5751298Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5752037Z 
+2026-11-09T11:35:55.5752488Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5753149Z 
+2026-11-09T11:35:55.5753920Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5755029Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5756347Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5757925Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5759936Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5762693Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5764835Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5765664Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5766043Z 
+2026-11-09T11:35:55.5766297Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5766772Z 
+2026-11-09T11:35:55.5767296Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5768407Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5769714Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5771253Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5773110Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5776092Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5778619Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5779620Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5780008Z 
+2026-11-09T11:35:55.5780272Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5780636Z 
+2026-11-09T11:35:55.5780956Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5781547Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5782262Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5783086Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5784997Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5787280Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5788788Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5789710Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5790367Z 
+2026-11-09T11:35:55.5790861Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5791487Z 
+2026-11-09T11:35:55.5791817Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5792401Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5793209Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5794356Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5796048Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5797688Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5809766Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5811375Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5812050Z 
+2026-11-09T11:35:55.5812599Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5813241Z 
+2026-11-09T11:35:55.5814035Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5815079Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5816308Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5817784Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5819511Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5822155Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5824701Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5826127Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5826808Z 
+2026-11-09T11:35:55.5827243Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5827871Z 
+2026-11-09T11:35:55.5828470Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5829550Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5830769Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5832249Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5834163Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5836951Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5839361Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5840796Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5841462Z 
+2026-11-09T11:35:55.5841899Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5842528Z 
+2026-11-09T11:35:55.5843186Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5844353Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5845576Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5847048Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5848769Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5851400Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5854066Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5855564Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5856233Z 
+2026-11-09T11:35:55.5856678Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5857310Z 
+2026-11-09T11:35:55.5858318Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5859439Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5860774Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5862497Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5864662Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5867401Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5869887Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5871396Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5872136Z 
+2026-11-09T11:35:55.5872723Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5873507Z 
+2026-11-09T11:35:55.5874146Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
+2026-11-09T11:35:55.5875273Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5876571Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5878130Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5880099Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5882827Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5885524Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5887032Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5887890Z 
+2026-11-09T11:35:55.5888453Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5889065Z 
+2026-11-09T11:35:55.5889569Z Error finding targetGameObject from AddedComponent.targetCorrespondingSourceObject (nullptr)
+2026-11-09T11:35:55.5890613Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T11:35:55.5891869Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T11:35:55.5893515Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.5895299Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T11:35:55.5898177Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T11:35:55.5900748Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T11:35:55.5902422Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T11:35:55.5903266Z 
+2026-11-09T11:35:55.5904006Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T11:35:55.5904641Z 
+2026-11-09T11:35:55.5904889Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+2026-11-09T11:35:55.6338975Z Obtained 49 stack frames.
+2026-11-09T11:35:55.6339870Z #0  0x005e7496c952ac in burst_signal_handler(int, siginfo_t*, void*)
+2026-11-09T11:35:55.6340676Z #1  0x0075bc312b2520 in (Unknown)
+2026-11-09T11:35:55.6341240Z #2  0x005e74983ff210 in (Unknown)
+2026-11-09T11:35:55.6341795Z #3  0x005e7498401818 in (Unknown)
+2026-11-09T11:35:55.6342332Z #4  0x005e74983ca565 in (Unknown)
+2026-11-09T11:35:55.6344143Z #5  0x005e74983c65e5 in MergeAllPrefabInstanceInfosDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, core::hash_map<int, PrefabInstanceInfo, core::hash<int>, std::equal_to<int> >&, AwakeFromLoadQueue&, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-09T11:35:55.6346276Z #6  0x005e74983c5cba in MergeAllPrefabInstancesDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, AwakeFromLoadQueue*, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-09T11:35:55.6347493Z #7  0x005e7496d4e7d9 in LoadSceneOperation::CompleteAwakeSequence()
+2026-11-09T11:35:55.6348374Z #8  0x005e7496d4e0d5 in LoadSceneOperation::CompletePreloadManagerLoadSceneEditor()
+2026-11-09T11:35:55.6349131Z #9  0x005e7496d4d8ec in LoadSceneOperation::IntegrateMainThread()
+2026-11-09T11:35:55.6350141Z #10 0x005e7496d507f7 in PreloadManager::UpdatePreloadingSingleStep(PreloadManager::UpdatePreloadingFlags, int)
+2026-11-09T11:35:55.6351096Z #11 0x005e7496d517a2 in PreloadManager::WaitForAllAsyncOperationsToComplete()
+2026-11-09T11:35:55.6352318Z #12 0x005e749843fe85 in EditorSceneManager::RestoreSceneBackups(core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, EditorSceneManager::PlayModeChange)
+2026-11-09T11:35:55.6354298Z #13 0x005e749843f045 in EditorSceneManager::OpenSceneForBuild(core::basic_string<char, core::StringStorageDefault<char> > const&, core::basic_string<char, core::StringStorageDefault<char> > const&)
+2026-11-09T11:35:55.6355309Z #14 0x005e74991897f4 in (Unknown)
+2026-11-09T11:35:55.6355848Z #15 0x005e749917f3f3 in (Unknown)
+2026-11-09T11:35:55.6358102Z #16 0x005e749917d834 in DoBuildPlayer(BuildPlayerSetup const&, core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, core::basic_string<char, core::StringStorageDefault<char> >, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, bool,
+2026-11-09T11:35:55.6360249Z #17 0x005e749806b237 in (Unknown)
+2026-11-09T11:35:55.6362290Z #18 0x005e749806f9e5 in BuildAssetBundles(core::basic_string<char, core::StringStorageDefault<char> > const&, core::vector<AssetBundleBuildInfo, core::allocator<AssetBundleBuildInfo, 0ul> > const&, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, BuildTa
+2026-11-09T11:35:55.6364683Z #19 0x005e74966f584d in BuildPipeline_CUSTOM_BuildAssetBundlesInternal(BuildAssetBundlesParameters__ const&)
+2026-11-09T11:35:55.6366052Z #20 0x0000004042605c in (wrapper managed-to-native) UnityEditor.BuildPipeline:BuildAssetBundlesInternal_Injected (UnityEditor.BuildAssetBundlesParameters&)
+2026-11-09T11:35:55.6367483Z #21 0x00000040425e8f in UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.6368622Z #22 0x00000040425dab in UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T11:35:55.6369948Z #23 0x00000040425c2f in UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget)
+2026-11-09T11:35:55.6371251Z #24 0x00000040420443 in Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder)
+2026-11-09T11:35:55.6372118Z #25 0x0000004040ccab in Korvalune.EditorTools.AndroidBuild:Build ()
+2026-11-09T11:35:55.6373064Z #26 0x0000004040937e in (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
+2026-11-09T11:35:55.6373937Z #27 0x0075bb20846406 in (Unknown)
+2026-11-09T11:35:55.6374478Z #28 0x0075bb209e3bf9 in (Unknown)
+2026-11-09T11:35:55.6375151Z #29 0x0075bb209e3b5d in mono_runtime_invoke
+2026-11-09T11:35:55.6376187Z #30 0x005e7497127473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+2026-11-09T11:35:55.6377235Z #31 0x005e74970fd663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+2026-11-09T11:35:55.6377955Z #32 0x005e7497f241f4 in Application::ParseARGVCommands()
+2026-11-09T11:35:55.6378630Z #33 0x005e7497f2324f in Application::FinishLoadingProject()
+2026-11-09T11:35:55.6379260Z #34 0x005e74986329a0 in InitializeUnity(void*)
+2026-11-09T11:35:55.6379823Z #35 0x0075bc31b172c8 in (Unknown)
+2026-11-09T11:35:55.6380401Z #36 0x0075bc31b16c44 in g_main_context_dispatch
+2026-11-09T11:35:55.6380977Z #37 0x0075bc31b6c488 in (Unknown)
+2026-11-09T11:35:55.6381532Z #38 0x0075bc31b162b3 in g_main_loop_run
+2026-11-09T11:35:55.6382095Z #39 0x0075bc3201fd2d in gtk_main
+2026-11-09T11:35:55.6382634Z #40 0x005e7498631f8c in main
+2026-11-09T11:35:55.6383179Z #41 0x0075bc31299d90 in (Unknown)
+2026-11-09T11:35:55.6384113Z #42 0x0075bc31299e40 in __libc_start_main
+2026-11-09T11:35:55.6384679Z #43 0x005e74964f0029 in (Unknown)
+2026-11-09T11:36:41.9344734Z Segmentation fault (core dumped)
+2026-11-09T11:36:41.9395581Z Build failed, with exit code 139
+2026-11-09T11:36:42.3683475Z 
+2026-11-09T11:36:42.3683954Z ###########################
+2026-11-09T11:36:42.3684457Z #       Build output      #
+2026-11-09T11:36:42.3684735Z ###########################
+2026-11-09T11:36:42.3684894Z 
+2026-11-09T11:36:42.3701137Z total 8.0K
+2026-11-09T11:36:42.3701553Z drwxr-xr-x 2 root root 4.0K Nov  9 11:22 .
+2026-11-09T11:36:42.3702115Z drwxr-xr-x 4 root root 4.0K Nov  9 11:31 ..
+2026-11-09T11:36:42.4839365Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-11-09T11:36:42.4840377Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-11-09T11:36:42.4841115Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-11-09T11:36:42.4841919Z [UnityConnectServicesConfig] Service configuration:
+2026-11-09T11:36:42.4842330Z     "servicesConfigBaseUrl": "",
+2026-11-09T11:36:42.4842665Z     "disableServicesWindow": false,
+2026-11-09T11:36:42.4843048Z     "disableUserLogin": false,
+2026-11-09T11:36:42.4843733Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-11-09T11:36:42.4844125Z     "clientConnectTimeoutSec": 5,
+2026-11-09T11:36:42.4844474Z     "clientHandshakeTimeoutSec": 10,
+2026-11-09T11:36:42.4844855Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-11-09T11:36:42.4845367Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-11-09T11:36:42.4845737Z     "licensingServiceBaseUrl": "",
+2026-11-09T11:36:42.4846079Z     "enableProxyAutoconfig": "false"
+2026-11-09T11:36:42.4846306Z 
+2026-11-09T11:36:42.4933870Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-11-09T11:36:42.4934420Z Branch:                  6000.0/staging
+2026-11-09T11:36:42.4934915Z Build type:              Release
+2026-11-09T11:36:42.4935304Z Batch mode:              YES
+2026-11-09T11:36:42.4935694Z System name:             Linux
+2026-11-09T11:36:42.4936138Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
+2026-11-09T11:36:42.4936887Z Kernel version:          7.0.0-1019-azure
+2026-11-09T11:36:42.4937523Z Architecture:            x86_64
+2026-11-09T11:36:42.4938068Z Available memory:        15983 MB
+2026-11-09T11:36:43.2955697Z User *** logged in successfully
+2026-11-09T11:36:43.2956140Z [UnityConnect::TryLogin] Request Succeeded.
+2026-11-09T11:36:43.2956711Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-11-09T11:36:43.2957778Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-11-09T11:36:43.2970306Z [Licensing::Module] Successfully launched the LicensingClient (PId: 7225)
+2026-11-09T11:36:43.8679004Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-09T11:36:43.864459Z"
+2026-11-09T11:36:43.8679877Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-11-09T11:36:43.9395465Z [Licensing::Client] Handshaking with LicensingClient:
+2026-11-09T11:36:43.9396159Z   Version:                 1.16.0+1c867a9
+2026-11-09T11:36:43.9396720Z   Session Id:              3e1513dad3284994b230fbd5789c57ed
+2026-11-09T11:36:43.9397362Z   Correlation Id:          4091c4c600f26d4c227bc164b59ecdbc
+2026-11-09T11:36:43.9397959Z   External correlation Id: 1953678790915828237
+2026-11-09T11:36:43.9398538Z   Machine Id:              BPtR9dVJiURdwFyb+i9eH+Uzj2E=
+2026-11-09T11:36:43.9399728Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.07s, handshake: 0.00s)
+2026-11-09T11:36:43.9436681Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-09T11:36:43.939265Z"
+2026-11-09T11:36:43.9438381Z [Licensing::Module] Connected to LicensingClient (PId: 7225, launch time: 0.00, total connection time: 0.64s)
+2026-11-09T11:36:43.9555548Z [Licensing::Client] Successfully updated the access token
+2026-11-09T11:36:43.9557207Z [Licensing::Module] Successfully updated the access token cCMp2JSEEI...
+2026-11-09T11:36:45.2987483Z [Licensing::Client] Successfully processed license management request
+2026-11-09T11:36:45.2988352Z [Licensing::Module] Successfully returned the entitlement license
+2026-11-09T11:36:45.3282424Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-11-09T11:36:46.3486269Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-09T11:36:46.3486939Z       Application is shutting down...
+2026-11-09T11:36:46.3579476Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-11-09T11:36:46.3580336Z       ALC ILPP context 2 is unloading
+2026-11-09T11:36:47.0184316Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-11-09T11:36:47.0335760Z 
+2026-11-09T11:36:47.0336505Z ###########################
+2026-11-09T11:36:47.0337025Z #         Failure         #
+2026-11-09T11:36:47.0337310Z ###########################
+2026-11-09T11:36:47.0337487Z 
+2026-11-09T11:36:47.0337653Z Please note that the exit code is not very descriptive.
+2026-11-09T11:36:47.0338023Z Most likely it will not help you solve the issue.
+2026-11-09T11:36:47.0338243Z 
+2026-11-09T11:36:47.0338600Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-11-09T11:36:47.0339158Z 
+2026-11-09T11:36:47.3125059Z ##[error]Build failed with exit code 139
