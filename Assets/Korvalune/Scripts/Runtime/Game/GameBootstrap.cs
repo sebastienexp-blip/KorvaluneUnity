@@ -175,7 +175,7 @@ namespace Korvalune.Game
                 RiftDirector.Begin(this);
                 WorldEvents.Begin(this);                                                        // événements du monde ouvert
                 bool valley = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Korvalune_Vallee";
-                if (valley) RiftKeeper.Place(this, Ground(playerSpawn + new Vector3(-7f, 0, -3f)), 90f);       // Oracle des Brèches, près de l'arrivée en ville
+                if (valley) RiftKeeper.Place(this, Ground(new Vector3(-7f, 0, -71f)), 90f);            // Oracle des Brèches : position fixe en ville (et non le point d'arrivée, qui dépend de la statue)
                 Waypoint.Place(this);                                                                    // pierre de voyage : toutes les régions
                 if (valley)
                 {
