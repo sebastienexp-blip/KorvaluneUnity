@@ -55,7 +55,7 @@ namespace Korvalune.Game
         public static void Place(GameBootstrap game)
         {
             if (Here == null || Rift.Active) return;
-            var spawn = game.playerSpawn; var taken = new System.Collections.Generic.List<Vector3> { spawn };
+            var spawn = GameBootstrap.Ground(new Vector3(0f, 0f, -68f)); /* ancre fixe de la ville : le point d'arrivée dépend de la statue */ var taken = new System.Collections.Generic.List<Vector3> { spawn };
             var pos = FreeSpot(spawn, 4f, 16f, 1.6f, taken, 3f) ?? GameBootstrap.Ground(spawn + new Vector3(5f, 0, 4f));
             Build(game, pos);
         }
@@ -65,7 +65,7 @@ namespace Korvalune.Game
         public static void PlaceTownPortals(GameBootstrap game)
         {
             if (Here == null || Rift.Active || Here.scene != "Korvalune_Vallee") return;
-            var spawn = game.playerSpawn; var taken = new System.Collections.Generic.List<Vector3> { spawn };
+            var spawn = GameBootstrap.Ground(new Vector3(0f, 0f, -68f)); /* ancre fixe de la ville : le point d'arrivée dépend de la statue */ var taken = new System.Collections.Generic.List<Vector3> { spawn };
             foreach (var w in FindObjectsByType<Waypoint>(FindObjectsSortMode.None)) taken.Add(w.transform.position);
             foreach (var r in Regions)
             {
