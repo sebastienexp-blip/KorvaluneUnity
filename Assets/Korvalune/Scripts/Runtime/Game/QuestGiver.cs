@@ -46,11 +46,22 @@ namespace Korvalune.Game
         void Build(Story.Def ch)
         {
             var root = transform;
-            var cloak = Mat(Color.HSVToRGB(Mathf.Repeat(0.08f * Story.ChapterNumber(ch), 1f), 0.5f, 0.45f), Color.black);
-            var skin = Mat(new Color(0.85f, 0.7f, 0.6f), Color.black);
-            Prim(root, PrimitiveType.Capsule, new Vector3(0, 0.9f, 0), new Vector3(0.7f, 0.9f, 0.7f), cloak);
-            Prim(root, PrimitiveType.Sphere, new Vector3(0, 1.95f, 0), Vector3.one * 0.42f, skin);
-            Prim(root, PrimitiveType.Cube, new Vector3(0, 2.25f, 0), new Vector3(0.46f, 0.1f, 0.46f), cloak);   // capuche
+            // un vrai personnage (modèle des PNJ de la ville) ; à défaut, la silhouette de secours
+            string[] kinds = { "Marchand", "Armurier", "Forgeron", "Alchimiste", "Mystique", "Joaillier", "Curiosites" };
+            var pf = Res.Load<GameObject>("Prefabs/Characters/PNJ_" + kinds[(Story.ChapterNumber(ch) - 1 + kinds.Length * 10) % kinds.Length]);
+            if (pf)
+            {
+                var npc = Instantiate(pf, root); npc.name = "PNJ"; npc.transform.localPosition = Vector3.zero; npc.transform.localRotation = Quaternion.identity;
+                foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) Destroy(c);
+            }
+            else
+            {
+                var cloak = Mat(Color.HSVToRGB(Mathf.Repeat(0.08f * Story.ChapterNumber(ch), 1f), 0.5f, 0.45f), Color.black);
+                var skin = Mat(new Color(0.85f, 0.7f, 0.6f), Color.black);
+                Prim(root, PrimitiveType.Capsule, new Vector3(0, 0.9f, 0), new Vector3(0.7f, 0.9f, 0.7f), cloak);
+                Prim(root, PrimitiveType.Sphere, new Vector3(0, 1.95f, 0), Vector3.one * 0.42f, skin);
+                Prim(root, PrimitiveType.Cube, new Vector3(0, 2.25f, 0), new Vector3(0.46f, 0.1f, 0.46f), cloak);   // capuche
+            }
             var name = new GameObject("Nom"); name.transform.SetParent(root, false); name.transform.localPosition = new Vector3(0, 2.7f, 0);
             var tm = name.AddComponent<TextMesh>();
             tm.text = QuestLog.RegionName(SceneManager.GetActiveScene().name) + "\nGardien";
