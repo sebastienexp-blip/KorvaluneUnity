@@ -141,6 +141,18 @@ jobs:
           mkdir -p ci-out
           tail -c 400000 unity-editor.log > ci-out/unity-editor-tail.log 2>/dev/null || true
 
+      - name: Journal de l'éditeur (téléchargeable)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: journal-unity-${{ github.run_id }}
+          path: |
+            unity-editor.log
+            ci-report.md
+            ci-out/
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Renvoyer les fichiers générés dans le dépôt
         if: always()
         run: |
