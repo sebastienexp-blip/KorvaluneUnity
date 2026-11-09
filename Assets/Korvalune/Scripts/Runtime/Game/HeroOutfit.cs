@@ -70,7 +70,7 @@ namespace Korvalune.Game
             foreach (var s in look.Slots)
             {
                 if (s == null || !s.equipped || NotArmor.IsMatch(s.name)) continue;
-                foreach (var r in s.GetComponentsInChildren<Renderer>(true)) Dye.Apply(r, ArmorDye);
+                if (s.renderer) Dye.Apply(s.renderer, ArmorDye);
             }
         }
     }
