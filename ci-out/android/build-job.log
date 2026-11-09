@@ -1,321 +1,321 @@
-# Journal de la construction Android (run 42662331261)
+# Journal de la construction Android (run 42695560351)
 ## Lignes importantes
-1695:2026-11-09T17:15:14.4301383Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
-1893:2026-11-09T17:16:33.2329490Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2016:2026-11-09T17:19:23.4744326Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-14324:2026-11-09T17:24:22.2518545Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
-14356:2026-11-09T17:24:22.2964622Z #30 0x005d94b2fec473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
-14357:2026-11-09T17:24:22.2965049Z #31 0x005d94b2fc2663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
-14371:2026-11-09T17:25:08.0371341Z Build failed, with exit code 139
-14431:2026-11-09T17:25:12.2378579Z Please note that the exit code is not very descriptive.
-14436:2026-11-09T17:25:12.4776096Z ##[error]Build failed with exit code 139
-14441:2026-11-09T17:25:12.5056608Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-14442:2026-11-09T17:25:12.5057021Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-14492:2026-11-09T17:25:12.7887027Z # Construction de l'APK Android
-14494:2026-11-09T17:25:12.7889079Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
-14511:2026-11-09T17:25:12.7895013Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
-14513:2026-11-09T17:25:12.7895585Z - APK : 129.3 Mo, version 0.1.131
-14814:2026-11-09T17:25:26.0538137Z ##[error]Process completed with exit code 1.
+1695:2026-11-09T20:45:06.9437850Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+1887:2026-11-09T20:46:13.3123794Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2015:2026-11-09T20:49:59.1016064Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+24424:2026-11-09T21:06:09.1215063Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+24456:2026-11-09T21:06:09.1798225Z #30 0x0061fe86afd473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+24457:2026-11-09T21:06:09.1799068Z #31 0x0061fe86ad3663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+24471:2026-11-09T21:06:53.4867446Z Build failed, with exit code 139
+24535:2026-11-09T21:06:58.5268202Z Please note that the exit code is not very descriptive.
+24540:2026-11-09T21:06:58.7940539Z ##[error]Build failed with exit code 139
+24545:2026-11-09T21:06:58.8228987Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+24546:2026-11-09T21:06:58.8229828Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+24596:2026-11-09T21:06:59.1898104Z # Construction de l'APK Android
+24598:2026-11-09T21:06:59.1901339Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
+24615:2026-11-09T21:06:59.1910456Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
+24617:2026-11-09T21:06:59.1911600Z - APK : 129.3 Mo, version 0.1.131
+24919:2026-11-09T21:07:15.9404622Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-11-09T17:24:20.0460116Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1159113484) doesn't exist!
-2026-11-09T17:24:20.0461136Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (388723768) doesn't exist!
-2026-11-09T17:24:20.0462050Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (409461588) doesn't exist!
-2026-11-09T17:24:20.0462923Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1767912773) doesn't exist!
-2026-11-09T17:24:20.0463827Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (356055804) doesn't exist!
-2026-11-09T17:24:20.0464794Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1853604020) doesn't exist!
-2026-11-09T17:24:20.0465699Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
-2026-11-09T17:24:20.0466580Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1948828944) doesn't exist!
-2026-11-09T17:24:20.0467476Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
-2026-11-09T17:24:20.0468313Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
-2026-11-09T17:24:20.0469349Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
-2026-11-09T17:24:20.0470237Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
-2026-11-09T17:24:20.0471101Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
-2026-11-09T17:24:20.0471961Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2066871891) doesn't exist!
-2026-11-09T17:24:20.0472879Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0473752Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0474647Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0475500Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0476325Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0477121Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0477982Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0478794Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0479610Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0480437Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2115300056) doesn't exist!
-2026-11-09T17:24:20.0481275Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0482109Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0482943Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0483747Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0484819Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0485644Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0486449Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.0487319Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2131724673) doesn't exist!
-2026-11-09T17:24:20.0488161Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
-2026-11-09T17:24:20.1094806Z Unloading 299 Unused Serialized files (Serialized files now loaded: 0)
-2026-11-09T17:24:22.2365379Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2366099Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2366772Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2369289Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2370553Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2371872Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2373118Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2373894Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2374414Z 
-2026-11-09T17:24:22.2381890Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2382380Z 
-2026-11-09T17:24:22.2382766Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2383295Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2383897Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2384749Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2385597Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2386894Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2388086Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2388802Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2389133Z 
-2026-11-09T17:24:22.2389365Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2389671Z 
-2026-11-09T17:24:22.2396786Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2397321Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2397949Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2398897Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2399731Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2400977Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2402135Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2402822Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2403151Z 
-2026-11-09T17:24:22.2403381Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2403692Z 
-2026-11-09T17:24:22.2413428Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2414140Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2414891Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2415897Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2416775Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2418055Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2419321Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2420071Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2420442Z 
-2026-11-09T17:24:22.2420749Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2421061Z 
-2026-11-09T17:24:22.2427843Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2428455Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2429111Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2429867Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2430778Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2432093Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2433322Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2434217Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2434594Z 
-2026-11-09T17:24:22.2434999Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2436100Z 
-2026-11-09T17:24:22.2437077Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2437641Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2438489Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2439250Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2440114Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2441401Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2442612Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2443359Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2443723Z 
-2026-11-09T17:24:22.2444153Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2444462Z 
-2026-11-09T17:24:22.2460066Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2460910Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2461561Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2462351Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2463194Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2464636Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2466001Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2466733Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2467062Z 
-2026-11-09T17:24:22.2467293Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2467603Z 
-2026-11-09T17:24:22.2467886Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2468414Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2469029Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2469770Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2470622Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2471888Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2473041Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2473754Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2474206Z 
-2026-11-09T17:24:22.2474436Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2474749Z 
-2026-11-09T17:24:22.2475245Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2475767Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2476394Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2477123Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2477968Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2479213Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2480365Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2481083Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2481416Z 
-2026-11-09T17:24:22.2481647Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2482202Z 
-2026-11-09T17:24:22.2482487Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2483003Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2483618Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2484479Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2485319Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2486610Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2487749Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2488466Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2488805Z 
-2026-11-09T17:24:22.2489035Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2489337Z 
-2026-11-09T17:24:22.2489623Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2490135Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2490724Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2491430Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2492255Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2493516Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2494885Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2495603Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2495956Z 
-2026-11-09T17:24:22.2496360Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2496668Z 
-2026-11-09T17:24:22.2496956Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2497481Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2498096Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2498817Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2499622Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2500821Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2501911Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2502582Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2503107Z 
-2026-11-09T17:24:22.2503323Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2503624Z 
-2026-11-09T17:24:22.2503892Z Assertion failed on expression: 'prefabInstance.GetPrefabModification().m_TransformParent.IsValid()'
-2026-11-09T17:24:22.2504550Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2505187Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2505909Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2506786Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2508064Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2509264Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2509936Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2510278Z 
-2026-11-09T17:24:22.2510506Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2510804Z 
-2026-11-09T17:24:22.2511088Z Error finding targetGameObject from AddedComponent.targetCorrespondingSourceObject (nullptr)
-2026-11-09T17:24:22.2511635Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-2026-11-09T17:24:22.2512298Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
-2026-11-09T17:24:22.2513074Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2513915Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
-2026-11-09T17:24:22.2515448Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
-2026-11-09T17:24:22.2516609Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
-2026-11-09T17:24:22.2517502Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
-2026-11-09T17:24:22.2517847Z 
-2026-11-09T17:24:22.2518096Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
-2026-11-09T17:24:22.2518403Z 
-2026-11-09T17:24:22.2518545Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
-2026-11-09T17:24:22.2942371Z Obtained 49 stack frames.
-2026-11-09T17:24:22.2942906Z #0  0x005d94b2b5a2ac in burst_signal_handler(int, siginfo_t*, void*)
-2026-11-09T17:24:22.2943292Z #1  0x0078e87d719520 in (Unknown)
-2026-11-09T17:24:22.2943536Z #2  0x005d94b42c4210 in (Unknown)
-2026-11-09T17:24:22.2943727Z #3  0x005d94b42c6818 in (Unknown)
-2026-11-09T17:24:22.2943890Z #4  0x005d94b428f565 in (Unknown)
-2026-11-09T17:24:22.2944781Z #5  0x005d94b428b5e5 in MergeAllPrefabInstanceInfosDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, core::hash_map<int, PrefabInstanceInfo, core::hash<int>, std::equal_to<int> >&, AwakeFromLoadQueue&, TransferInstructionFlags, ErrorsAndWarningsCapture*)
-2026-11-09T17:24:22.2947418Z #6  0x005d94b428acba in MergeAllPrefabInstancesDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, AwakeFromLoadQueue*, TransferInstructionFlags, ErrorsAndWarningsCapture*)
-2026-11-09T17:24:22.2948458Z #7  0x005d94b2c137d9 in LoadSceneOperation::CompleteAwakeSequence()
-2026-11-09T17:24:22.2948913Z #8  0x005d94b2c130d5 in LoadSceneOperation::CompletePreloadManagerLoadSceneEditor()
-2026-11-09T17:24:22.2949368Z #9  0x005d94b2c128ec in LoadSceneOperation::IntegrateMainThread()
-2026-11-09T17:24:22.2949960Z #10 0x005d94b2c157f7 in PreloadManager::UpdatePreloadingSingleStep(PreloadManager::UpdatePreloadingFlags, int)
-2026-11-09T17:24:22.2950556Z #11 0x005d94b2c167a2 in PreloadManager::WaitForAllAsyncOperationsToComplete()
-2026-11-09T17:24:22.2951315Z #12 0x005d94b4304e85 in EditorSceneManager::RestoreSceneBackups(core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, EditorSceneManager::PlayModeChange)
-2026-11-09T17:24:22.2952372Z #13 0x005d94b4304045 in EditorSceneManager::OpenSceneForBuild(core::basic_string<char, core::StringStorageDefault<char> > const&, core::basic_string<char, core::StringStorageDefault<char> > const&)
-2026-11-09T17:24:22.2953061Z #14 0x005d94b504e7f4 in (Unknown)
-2026-11-09T17:24:22.2953305Z #15 0x005d94b50443f3 in (Unknown)
-2026-11-09T17:24:22.2954975Z #16 0x005d94b5042834 in DoBuildPlayer(BuildPlayerSetup const&, core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, core::basic_string<char, core::StringStorageDefault<char> >, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, bool,
-2026-11-09T17:24:22.2956522Z #17 0x005d94b3f30237 in (Unknown)
-2026-11-09T17:24:22.2957887Z #18 0x005d94b3f349e5 in BuildAssetBundles(core::basic_string<char, core::StringStorageDefault<char> > const&, core::vector<AssetBundleBuildInfo, core::allocator<AssetBundleBuildInfo, 0ul> > const&, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, BuildTa
-2026-11-09T17:24:22.2959463Z #19 0x005d94b25ba84d in BuildPipeline_CUSTOM_BuildAssetBundlesInternal(BuildAssetBundlesParameters__ const&)
-2026-11-09T17:24:22.2960252Z #20 0x00000041fde5dc in (wrapper managed-to-native) UnityEditor.BuildPipeline:BuildAssetBundlesInternal_Injected (UnityEditor.BuildAssetBundlesParameters&)
-2026-11-09T17:24:22.2961030Z #21 0x00000041fde40f in UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2961696Z #22 0x00000041fde32b in UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters)
-2026-11-09T17:24:22.2962245Z #23 0x00000041fde1af in UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget)
-2026-11-09T17:24:22.2962799Z #24 0x00000041fd8793 in Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder)
-2026-11-09T17:24:22.2963151Z #25 0x00000041fc017b in Korvalune.EditorTools.AndroidBuild:Build ()
-2026-11-09T17:24:22.2963483Z #26 0x00000041fbe64e in (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
-2026-11-09T17:24:22.2963757Z #27 0x0078e780646406 in (Unknown)
-2026-11-09T17:24:22.2963922Z #28 0x0078e7807e3bf9 in (Unknown)
-2026-11-09T17:24:22.2964272Z #29 0x0078e7807e3b5d in mono_runtime_invoke
-2026-11-09T17:24:22.2964622Z #30 0x005d94b2fec473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
-2026-11-09T17:24:22.2965049Z #31 0x005d94b2fc2663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
-2026-11-09T17:24:22.2965321Z #32 0x005d94b3de91f4 in Application::ParseARGVCommands()
-2026-11-09T17:24:22.2965553Z #33 0x005d94b3de824f in Application::FinishLoadingProject()
-2026-11-09T17:24:22.2965774Z #34 0x005d94b44f79a0 in InitializeUnity(void*)
-2026-11-09T17:24:22.2966066Z #35 0x0078e87df172c8 in (Unknown)
-2026-11-09T17:24:22.2966237Z #36 0x0078e87df16c44 in g_main_context_dispatch
-2026-11-09T17:24:22.2966421Z #37 0x0078e87df6c488 in (Unknown)
-2026-11-09T17:24:22.2966580Z #38 0x0078e87df162b3 in g_main_loop_run
-2026-11-09T17:24:22.2966752Z #39 0x0078e87e41fd2d in gtk_main
-2026-11-09T17:24:22.2966908Z #40 0x005d94b44f6f8c in main
-2026-11-09T17:24:22.2967062Z #41 0x0078e87d700d90 in (Unknown)
-2026-11-09T17:24:22.2967226Z #42 0x0078e87d700e40 in __libc_start_main
-2026-11-09T17:24:22.2967399Z #43 0x005d94b23b5029 in (Unknown)
-2026-11-09T17:25:08.0323030Z Segmentation fault (core dumped)
-2026-11-09T17:25:08.0371341Z Build failed, with exit code 139
-2026-11-09T17:25:08.3977415Z 
-2026-11-09T17:25:08.3977854Z ###########################
-2026-11-09T17:25:08.3978109Z #       Build output      #
-2026-11-09T17:25:08.3978274Z ###########################
-2026-11-09T17:25:08.3978367Z 
-2026-11-09T17:25:08.3997163Z total 8.0K
-2026-11-09T17:25:08.3997409Z drwxr-xr-x 2 root root 4.0K Nov  9 17:22 .
-2026-11-09T17:25:08.3997630Z drwxr-xr-x 4 root root 4.0K Nov  9 17:22 ..
-2026-11-09T17:25:08.4824294Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
-2026-11-09T17:25:08.4824750Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
-2026-11-09T17:25:08.4825096Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
-2026-11-09T17:25:08.4825382Z [UnityConnectServicesConfig] Service configuration:
-2026-11-09T17:25:08.4825600Z     "servicesConfigBaseUrl": "",
-2026-11-09T17:25:08.4825781Z     "disableServicesWindow": false,
-2026-11-09T17:25:08.4825960Z     "disableUserLogin": false,
-2026-11-09T17:25:08.4826186Z     "entitlementCacheTimeoutInSeconds": 60,
-2026-11-09T17:25:08.4826377Z     "clientConnectTimeoutSec": 5,
-2026-11-09T17:25:08.4826575Z     "clientHandshakeTimeoutSec": 10,
-2026-11-09T17:25:08.4826769Z     "clientResolveEntitlementsTimeoutSec": 30,
-2026-11-09T17:25:08.4826978Z     "clientUpdateLicenseTimeoutSec": 30,
-2026-11-09T17:25:08.4827170Z     "licensingServiceBaseUrl": "",
-2026-11-09T17:25:08.4827339Z     "enableProxyAutoconfig": "false"
-2026-11-09T17:25:08.4827454Z 
-2026-11-09T17:25:08.5115393Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
-2026-11-09T17:25:08.5115863Z Branch:                  6000.0/staging
-2026-11-09T17:25:08.5116257Z Build type:              Release
-2026-11-09T17:25:08.5116726Z Batch mode:              YES
-2026-11-09T17:25:08.5116979Z System name:             Linux
-2026-11-09T17:25:08.5117401Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
-2026-11-09T17:25:08.5117761Z Kernel version:          7.0.0-1019-azure
-2026-11-09T17:25:08.5118645Z Architecture:            x86_64
-2026-11-09T17:25:08.5118848Z Available memory:        15983 MB
-2026-11-09T17:25:09.1140005Z User *** logged in successfully
-2026-11-09T17:25:09.1143126Z [UnityConnect::TryLogin] Request Succeeded.
-2026-11-09T17:25:09.1143615Z [Licensing::Module] Trying to connect to existing licensing client channel...
-2026-11-09T17:25:09.1148363Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
-2026-11-09T17:25:09.1148937Z [Licensing::Module] Successfully launched the LicensingClient (PId: 2017)
-2026-11-09T17:25:09.4911712Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-09T17:25:09.490216Z"
-2026-11-09T17:25:09.4912779Z [SignatureVerifier] Application signature verification not supported on this platform.
-2026-11-09T17:25:09.5318622Z [Licensing::Client] Handshaking with LicensingClient:
-2026-11-09T17:25:09.5319331Z   Version:                 1.16.0+1c867a9
-2026-11-09T17:25:09.5319642Z   Session Id:              17ae8b5a3dc6451ca313d709919988f9
-2026-11-09T17:25:09.5319986Z   Correlation Id:          c0b341ba15f5be6e659b6dd1ca554008
-2026-11-09T17:25:09.5320677Z   External correlation Id: 1754722191440304602
-2026-11-09T17:25:09.5321008Z   Machine Id:              wpQX8cwaKi6T7A9LcuEazHQ9YJ4=
-2026-11-09T17:25:09.5321566Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.38s, validation: 0.04s, handshake: 0.00s)
-2026-11-09T17:25:09.5322417Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-09T17:25:09.531086Z"
-2026-11-09T17:25:09.5323175Z [Licensing::Module] Connected to LicensingClient (PId: 2017, launch time: 0.00, total connection time: 0.42s)
-2026-11-09T17:25:09.5465257Z [Licensing::Client] Successfully updated the access token
-2026-11-09T17:25:09.5465624Z [Licensing::Module] Successfully updated the access token 7wgv7-5f22...
-2026-11-09T17:25:10.7554414Z [Licensing::Client] Successfully processed license management request
-2026-11-09T17:25:10.7554918Z [Licensing::Module] Successfully returned the entitlement license
-2026-11-09T17:25:10.7832238Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
-2026-11-09T17:25:12.2268994Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
-2026-11-09T17:25:12.2377100Z 
-2026-11-09T17:25:12.2377667Z ###########################
-2026-11-09T17:25:12.2377985Z #         Failure         #
-2026-11-09T17:25:12.2378285Z ###########################
-2026-11-09T17:25:12.2378424Z 
-2026-11-09T17:25:12.2378579Z Please note that the exit code is not very descriptive.
-2026-11-09T17:25:12.2378894Z Most likely it will not help you solve the issue.
-2026-11-09T17:25:12.2379120Z 
-2026-11-09T17:25:12.2379670Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
-2026-11-09T17:25:12.2380034Z 
-2026-11-09T17:25:12.4776096Z ##[error]Build failed with exit code 139
+2026-11-09T21:06:04.8826260Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (625143611) doesn't exist!
+2026-11-09T21:06:04.8827741Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1013105592) doesn't exist!
+2026-11-09T21:06:04.8829309Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (118190417) doesn't exist!
+2026-11-09T21:06:04.8830673Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1247197058) doesn't exist!
+2026-11-09T21:06:04.8832071Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (902938743) doesn't exist!
+2026-11-09T21:06:04.8833452Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (510291797) doesn't exist!
+2026-11-09T21:06:04.8835030Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1897781161) doesn't exist!
+2026-11-09T21:06:04.8836526Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (918211660) doesn't exist!
+2026-11-09T21:06:04.8838013Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (515286228) doesn't exist!
+2026-11-09T21:06:04.8839417Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (908797554) doesn't exist!
+2026-11-09T21:06:04.8840780Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (306881882) doesn't exist!
+2026-11-09T21:06:04.8842115Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1318901522) doesn't exist!
+2026-11-09T21:06:04.8843490Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1882915287) doesn't exist!
+2026-11-09T21:06:04.8845106Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (52755510) doesn't exist!
+2026-11-09T21:06:04.8846572Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (810666242) doesn't exist!
+2026-11-09T21:06:04.8847956Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1918906759) doesn't exist!
+2026-11-09T21:06:04.8849465Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2039868636) doesn't exist!
+2026-11-09T21:06:04.8850811Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (635968443) doesn't exist!
+2026-11-09T21:06:04.8852270Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (769517023) doesn't exist!
+2026-11-09T21:06:04.8853603Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1322824900) doesn't exist!
+2026-11-09T21:06:04.8854978Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1362207247) doesn't exist!
+2026-11-09T21:06:04.8856358Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1615662618) doesn't exist!
+2026-11-09T21:06:04.8857896Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1821507321) doesn't exist!
+2026-11-09T21:06:04.8859263Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (149090962) doesn't exist!
+2026-11-09T21:06:04.8860722Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (107410804) doesn't exist!
+2026-11-09T21:06:04.8862334Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2050936271) doesn't exist!
+2026-11-09T21:06:04.8863703Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1132786304) doesn't exist!
+2026-11-09T21:06:04.8865036Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (916915636) doesn't exist!
+2026-11-09T21:06:04.8866378Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (41933674) doesn't exist!
+2026-11-09T21:06:04.8867867Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (962600054) doesn't exist!
+2026-11-09T21:06:04.8869252Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (799760320) doesn't exist!
+2026-11-09T21:06:04.8870631Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2092501672) doesn't exist!
+2026-11-09T21:06:04.8871950Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (688014549) doesn't exist!
+2026-11-09T21:06:04.8873329Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (318815141) doesn't exist!
+2026-11-09T21:06:04.8874663Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (513387269) doesn't exist!
+2026-11-09T21:06:04.8876131Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2042991991) doesn't exist!
+2026-11-09T21:06:04.8877906Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (156659158) doesn't exist!
+2026-11-09T21:06:04.8879231Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (258808529) doesn't exist!
+2026-11-09T21:06:04.8880625Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1215763076) doesn't exist!
+2026-11-09T21:06:04.8881958Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1797701845) doesn't exist!
+2026-11-09T21:06:04.8883358Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1284698617) doesn't exist!
+2026-11-09T21:06:04.8884727Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (696108050) doesn't exist!
+2026-11-09T21:06:04.8886280Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1527743382) doesn't exist!
+2026-11-09T21:06:04.8888063Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (257772269) doesn't exist!
+2026-11-09T21:06:04.8889389Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (142511153) doesn't exist!
+2026-11-09T21:06:04.8902768Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2018429489) doesn't exist!
+2026-11-09T21:06:04.8904257Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1278833569) doesn't exist!
+2026-11-09T21:06:04.8905609Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (344754561) doesn't exist!
+2026-11-09T21:06:04.8907525Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1553899820) doesn't exist!
+2026-11-09T21:06:04.8908885Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (51632380) doesn't exist!
+2026-11-09T21:06:04.8910526Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2034509109) doesn't exist!
+2026-11-09T21:06:04.8912082Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1330700626) doesn't exist!
+2026-11-09T21:06:04.8913442Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (139129610) doesn't exist!
+2026-11-09T21:06:04.8914856Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1582599977) doesn't exist!
+2026-11-09T21:06:04.8916265Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2111405937) doesn't exist!
+2026-11-09T21:06:04.8917772Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (241776288) doesn't exist!
+2026-11-09T21:06:04.8919113Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1118998341) doesn't exist!
+2026-11-09T21:06:04.8920496Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (958615971) doesn't exist!
+2026-11-09T21:06:04.8921863Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (22959034) doesn't exist!
+2026-11-09T21:06:04.8923187Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2078735916) doesn't exist!
+2026-11-09T21:06:04.8924564Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1874522088) doesn't exist!
+2026-11-09T21:06:04.8926183Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1321631903) doesn't exist!
+2026-11-09T21:06:04.8927789Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (934496702) doesn't exist!
+2026-11-09T21:06:04.8929164Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1774854031) doesn't exist!
+2026-11-09T21:06:04.8930490Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (771877787) doesn't exist!
+2026-11-09T21:06:04.8931867Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2056283015) doesn't exist!
+2026-11-09T21:06:04.8933212Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2093243495) doesn't exist!
+2026-11-09T21:06:04.8934597Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1789244714) doesn't exist!
+2026-11-09T21:06:04.8935939Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2111119885) doesn't exist!
+2026-11-09T21:06:04.8937700Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (331526683) doesn't exist!
+2026-11-09T21:06:04.8939088Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1760543513) doesn't exist!
+2026-11-09T21:06:04.8940586Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1948020593) doesn't exist!
+2026-11-09T21:06:04.8942271Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1692484358) doesn't exist!
+2026-11-09T21:06:04.8943651Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1732481702) doesn't exist!
+2026-11-09T21:06:04.8944999Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (193129911) doesn't exist!
+2026-11-09T21:06:04.8946377Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (855932213) doesn't exist!
+2026-11-09T21:06:04.8947892Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (29379621) doesn't exist!
+2026-11-09T21:06:04.8949218Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1253364529) doesn't exist!
+2026-11-09T21:06:04.8950708Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2071492811) doesn't exist!
+2026-11-09T21:06:04.8952054Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2131345392) doesn't exist!
+2026-11-09T21:06:04.8953440Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1286664684) doesn't exist!
+2026-11-09T21:06:04.8954813Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (137832797) doesn't exist!
+2026-11-09T21:06:04.8956222Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (304358864) doesn't exist!
+2026-11-09T21:06:04.8957959Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1740083247) doesn't exist!
+2026-11-09T21:06:04.8959319Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2039940368) doesn't exist!
+2026-11-09T21:06:04.8960715Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (254407670) doesn't exist!
+2026-11-09T21:06:04.8961989Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (250050286) doesn't exist!
+2026-11-09T21:06:04.8963373Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1650433080) doesn't exist!
+2026-11-09T21:06:04.8964728Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1597321137) doesn't exist!
+2026-11-09T21:06:04.8966094Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (483632032) doesn't exist!
+2026-11-09T21:06:04.8967699Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1090890276) doesn't exist!
+2026-11-09T21:06:04.8969099Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1638637455) doesn't exist!
+2026-11-09T21:06:04.8970472Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1832239632) doesn't exist!
+2026-11-09T21:06:04.8971799Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (14395911) doesn't exist!
+2026-11-09T21:06:04.8973393Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (980635568) doesn't exist!
+2026-11-09T21:06:04.8974746Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (600173286) doesn't exist!
+2026-11-09T21:06:04.8976081Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (748172138) doesn't exist!
+2026-11-09T21:06:04.8977585Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (676481048) doesn't exist!
+2026-11-09T21:06:04.8979091Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1860103741) doesn't exist!
+2026-11-09T21:06:04.8980480Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1063650962) doesn't exist!
+2026-11-09T21:06:04.8981959Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1078497477) doesn't exist!
+2026-11-09T21:06:04.8983320Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1367537922) doesn't exist!
+2026-11-09T21:06:04.8984660Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (748666568) doesn't exist!
+2026-11-09T21:06:04.8986009Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (367875988) doesn't exist!
+2026-11-09T21:06:04.8987531Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2136850654) doesn't exist!
+2026-11-09T21:06:04.8989318Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1161239288) doesn't exist!
+2026-11-09T21:06:04.8990839Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1980360778) doesn't exist!
+2026-11-09T21:06:04.8992218Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (17660648) doesn't exist!
+2026-11-09T21:06:04.8993588Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1036055055) doesn't exist!
+2026-11-09T21:06:04.8994916Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1057063311) doesn't exist!
+2026-11-09T21:06:04.8996308Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (871928175) doesn't exist!
+2026-11-09T21:06:04.8997810Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1019217456) doesn't exist!
+2026-11-09T21:06:04.8999160Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1790775256) doesn't exist!
+2026-11-09T21:06:04.9000539Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1558844397) doesn't exist!
+2026-11-09T21:06:04.9001871Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1225316351) doesn't exist!
+2026-11-09T21:06:04.9003251Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1330855697) doesn't exist!
+2026-11-09T21:06:04.9004872Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (223831745) doesn't exist!
+2026-11-09T21:06:04.9006309Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (719839770) doesn't exist!
+2026-11-09T21:06:04.9007809Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1631386681) doesn't exist!
+2026-11-09T21:06:04.9009203Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1269903093) doesn't exist!
+2026-11-09T21:06:04.9010597Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (526847508) doesn't exist!
+2026-11-09T21:06:04.9011971Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1854186117) doesn't exist!
+2026-11-09T21:06:04.9013311Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (549539015) doesn't exist!
+2026-11-09T21:06:04.9014680Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (185327931) doesn't exist!
+2026-11-09T21:06:04.9016035Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (428676085) doesn't exist!
+2026-11-09T21:06:04.9017626Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2143697340) doesn't exist!
+2026-11-09T21:06:04.9019025Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1972100417) doesn't exist!
+2026-11-09T21:06:04.9020658Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (86798400) doesn't exist!
+2026-11-09T21:06:04.9022063Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1860994424) doesn't exist!
+2026-11-09T21:06:04.9023424Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1529849675) doesn't exist!
+2026-11-09T21:06:04.9024792Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (658390936) doesn't exist!
+2026-11-09T21:06:04.9026144Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1144386519) doesn't exist!
+2026-11-09T21:06:04.9027633Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1179543304) doesn't exist!
+2026-11-09T21:06:04.9029121Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1093122396) doesn't exist!
+2026-11-09T21:06:04.9030450Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (944465020) doesn't exist!
+2026-11-09T21:06:04.9031803Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (915840494) doesn't exist!
+2026-11-09T21:06:04.9033135Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1177037009) doesn't exist!
+2026-11-09T21:06:04.9034501Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (175013735) doesn't exist!
+2026-11-09T21:06:04.9036113Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (766803193) doesn't exist!
+2026-11-09T21:06:04.9037583Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1159113484) doesn't exist!
+2026-11-09T21:06:04.9039201Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (388723768) doesn't exist!
+2026-11-09T21:06:04.9040531Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (409461588) doesn't exist!
+2026-11-09T21:06:04.9041946Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1767912773) doesn't exist!
+2026-11-09T21:06:04.9043289Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (356055804) doesn't exist!
+2026-11-09T21:06:04.9044742Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1853604020) doesn't exist!
+2026-11-09T21:06:04.9046122Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-09T21:06:04.9047602Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1948828944) doesn't exist!
+2026-11-09T21:06:04.9048979Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-09T21:06:04.9050322Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-09T21:06:04.9051722Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-09T21:06:04.9053303Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-09T21:06:04.9054628Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-09T21:06:04.9056032Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2066871891) doesn't exist!
+2026-11-09T21:06:04.9057586Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9059005Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9060382Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9061751Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9063113Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9064497Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9065812Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9067608Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9068968Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9070355Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2115300056) doesn't exist!
+2026-11-09T21:06:04.9071722Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9073076Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9074447Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9075780Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9077334Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9078740Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9080130Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:04.9081505Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2131724673) doesn't exist!
+2026-11-09T21:06:04.9097114Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-09T21:06:05.0071814Z Unloading 299 Unused Serialized files (Serialized files now loaded: 0)
+2026-11-09T21:06:09.1199143Z Error finding targetGameObject from AddedComponent.targetCorrespondingSourceObject (nullptr)
+2026-11-09T21:06:09.1200347Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-09T21:06:09.1201638Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-09T21:06:09.1203190Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T21:06:09.1205081Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-09T21:06:09.1208045Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-09T21:06:09.1210651Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-09T21:06:09.1212467Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-09T21:06:09.1213179Z 
+2026-11-09T21:06:09.1213851Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-09T21:06:09.1214506Z 
+2026-11-09T21:06:09.1215063Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+2026-11-09T21:06:09.1768258Z Obtained 49 stack frames.
+2026-11-09T21:06:09.1768836Z #0  0x0061fe8666b2ac in burst_signal_handler(int, siginfo_t*, void*)
+2026-11-09T21:06:09.1769305Z #1  0x007e1eb2ab2520 in (Unknown)
+2026-11-09T21:06:09.1770094Z #2  0x0061fe87dd5210 in (Unknown)
+2026-11-09T21:06:09.1770491Z #3  0x0061fe87dd7818 in (Unknown)
+2026-11-09T21:06:09.1770817Z #4  0x0061fe87da0565 in (Unknown)
+2026-11-09T21:06:09.1772046Z #5  0x0061fe87d9c5e5 in MergeAllPrefabInstanceInfosDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, core::hash_map<int, PrefabInstanceInfo, core::hash<int>, std::equal_to<int> >&, AwakeFromLoadQueue&, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-09T21:06:09.1774075Z #6  0x0061fe87d9bcba in MergeAllPrefabInstancesDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, AwakeFromLoadQueue*, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-09T21:06:09.1775089Z #7  0x0061fe867247d9 in LoadSceneOperation::CompleteAwakeSequence()
+2026-11-09T21:06:09.1775696Z #8  0x0061fe867240d5 in LoadSceneOperation::CompletePreloadManagerLoadSceneEditor()
+2026-11-09T21:06:09.1776276Z #9  0x0061fe867238ec in LoadSceneOperation::IntegrateMainThread()
+2026-11-09T21:06:09.1777242Z #10 0x0061fe867267f7 in PreloadManager::UpdatePreloadingSingleStep(PreloadManager::UpdatePreloadingFlags, int)
+2026-11-09T21:06:09.1777989Z #11 0x0061fe867277a2 in PreloadManager::WaitForAllAsyncOperationsToComplete()
+2026-11-09T21:06:09.1778950Z #12 0x0061fe87e15e85 in EditorSceneManager::RestoreSceneBackups(core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, EditorSceneManager::PlayModeChange)
+2026-11-09T21:06:09.1780325Z #13 0x0061fe87e15045 in EditorSceneManager::OpenSceneForBuild(core::basic_string<char, core::StringStorageDefault<char> > const&, core::basic_string<char, core::StringStorageDefault<char> > const&)
+2026-11-09T21:06:09.1781189Z #14 0x0061fe88b5f7f4 in (Unknown)
+2026-11-09T21:06:09.1781516Z #15 0x0061fe88b553f3 in (Unknown)
+2026-11-09T21:06:09.1783484Z #16 0x0061fe88b53834 in DoBuildPlayer(BuildPlayerSetup const&, core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, core::basic_string<char, core::StringStorageDefault<char> >, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, bool,
+2026-11-09T21:06:09.1785406Z #17 0x0061fe87a41237 in (Unknown)
+2026-11-09T21:06:09.1787315Z #18 0x0061fe87a459e5 in BuildAssetBundles(core::basic_string<char, core::StringStorageDefault<char> > const&, core::vector<AssetBundleBuildInfo, core::allocator<AssetBundleBuildInfo, 0ul> > const&, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, BuildTa
+2026-11-09T21:06:09.1789277Z #19 0x0061fe860cb84d in BuildPipeline_CUSTOM_BuildAssetBundlesInternal(BuildAssetBundlesParameters__ const&)
+2026-11-09T21:06:09.1790314Z #20 0x000000403d3d7c in (wrapper managed-to-native) UnityEditor.BuildPipeline:BuildAssetBundlesInternal_Injected (UnityEditor.BuildAssetBundlesParameters&)
+2026-11-09T21:06:09.1791386Z #21 0x000000403d3baf in UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T21:06:09.1792396Z #22 0x000000403d3acb in UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters)
+2026-11-09T21:06:09.1793488Z #23 0x000000403d394f in UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget)
+2026-11-09T21:06:09.1794647Z #24 0x000000403ce163 in Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder)
+2026-11-09T21:06:09.1795343Z #25 0x000000403b9cab in Korvalune.EditorTools.AndroidBuild:Build ()
+2026-11-09T21:06:09.1796010Z #26 0x000000403b693e in (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
+2026-11-09T21:06:09.1796846Z #27 0x007e1db4446406 in (Unknown)
+2026-11-09T21:06:09.1797172Z #28 0x007e1db45e3bf9 in (Unknown)
+2026-11-09T21:06:09.1797523Z #29 0x007e1db45e3b5d in mono_runtime_invoke
+2026-11-09T21:06:09.1798225Z #30 0x0061fe86afd473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+2026-11-09T21:06:09.1799068Z #31 0x0061fe86ad3663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+2026-11-09T21:06:09.1799719Z #32 0x0061fe878fa1f4 in Application::ParseARGVCommands()
+2026-11-09T21:06:09.1800185Z #33 0x0061fe878f924f in Application::FinishLoadingProject()
+2026-11-09T21:06:09.1800612Z #34 0x0061fe880089a0 in InitializeUnity(void*)
+2026-11-09T21:06:09.1800974Z #35 0x007e1eb33172c8 in (Unknown)
+2026-11-09T21:06:09.1801327Z #36 0x007e1eb3316c44 in g_main_context_dispatch
+2026-11-09T21:06:09.1801724Z #37 0x007e1eb336c488 in (Unknown)
+2026-11-09T21:06:09.1802065Z #38 0x007e1eb33162b3 in g_main_loop_run
+2026-11-09T21:06:09.1802407Z #39 0x007e1eb381fd2d in gtk_main
+2026-11-09T21:06:09.1802719Z #40 0x0061fe88007f8c in main
+2026-11-09T21:06:09.1803019Z #41 0x007e1eb2a99d90 in (Unknown)
+2026-11-09T21:06:09.1803359Z #42 0x007e1eb2a99e40 in __libc_start_main
+2026-11-09T21:06:09.1803699Z #43 0x0061fe85ec6029 in (Unknown)
+2026-11-09T21:06:53.4794260Z Segmentation fault (core dumped)
+2026-11-09T21:06:53.4867446Z Build failed, with exit code 139
+2026-11-09T21:06:53.9459049Z 
+2026-11-09T21:06:53.9459442Z ###########################
+2026-11-09T21:06:53.9459765Z #       Build output      #
+2026-11-09T21:06:53.9460008Z ###########################
+2026-11-09T21:06:53.9460153Z 
+2026-11-09T21:06:53.9480232Z total 8.0K
+2026-11-09T21:06:53.9480515Z drwxr-xr-x 2 root root 4.0K Nov  9 20:52 .
+2026-11-09T21:06:53.9480854Z drwxr-xr-x 4 root root 4.0K Nov  9 21:01 ..
+2026-11-09T21:06:54.0525781Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-11-09T21:06:54.0527486Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-11-09T21:06:54.0528542Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-11-09T21:06:54.0529731Z [UnityConnectServicesConfig] Service configuration:
+2026-11-09T21:06:54.0530382Z     "servicesConfigBaseUrl": "",
+2026-11-09T21:06:54.0530743Z     "disableServicesWindow": false,
+2026-11-09T21:06:54.0531080Z     "disableUserLogin": false,
+2026-11-09T21:06:54.0531419Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-11-09T21:06:54.0531786Z     "clientConnectTimeoutSec": 5,
+2026-11-09T21:06:54.0532121Z     "clientHandshakeTimeoutSec": 10,
+2026-11-09T21:06:54.0532493Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-11-09T21:06:54.0532891Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-11-09T21:06:54.0533530Z     "licensingServiceBaseUrl": "",
+2026-11-09T21:06:54.0534051Z     "enableProxyAutoconfig": "false"
+2026-11-09T21:06:54.0534311Z 
+2026-11-09T21:06:54.0619955Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-11-09T21:06:54.0620491Z Branch:                  6000.0/staging
+2026-11-09T21:06:54.0620795Z Build type:              Release
+2026-11-09T21:06:54.0621068Z Batch mode:              YES
+2026-11-09T21:06:54.0621515Z System name:             Linux
+2026-11-09T21:06:54.0622121Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
+2026-11-09T21:06:54.0622999Z Kernel version:          7.0.0-1019-azure
+2026-11-09T21:06:54.0623496Z Architecture:            x86_64
+2026-11-09T21:06:54.0623972Z Available memory:        15983 MB
+2026-11-09T21:06:54.7637217Z User *** logged in successfully
+2026-11-09T21:06:54.7638302Z [UnityConnect::TryLogin] Request Succeeded.
+2026-11-09T21:06:54.7639197Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-11-09T21:06:54.7640566Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-11-09T21:06:54.7659392Z [Licensing::Module] Successfully launched the LicensingClient (PId: 7183)
+2026-11-09T21:06:55.3343653Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-09T21:06:55.333449Z"
+2026-11-09T21:06:55.3345354Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-11-09T21:06:55.3943245Z [Licensing::Client] Handshaking with LicensingClient:
+2026-11-09T21:06:55.3944299Z   Version:                 1.16.0+1c867a9
+2026-11-09T21:06:55.3944937Z   Session Id:              7389e82417324529bd51aad2a5705e98
+2026-11-09T21:06:55.3945661Z   Correlation Id:          e08fd7b7ef6056e65323b427ccb8281f
+2026-11-09T21:06:55.3946321Z   External correlation Id: 1759611331726196339
+2026-11-09T21:06:55.3947160Z   Machine Id:              WIg8KkafVte8crjDzdDelUJpB5Q=
+2026-11-09T21:06:55.3948424Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.06s, handshake: 0.00s)
+2026-11-09T21:06:55.3950286Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-09T21:06:55.39227Z"
+2026-11-09T21:06:55.3951914Z [Licensing::Module] Connected to LicensingClient (PId: 7183, launch time: 0.00, total connection time: 0.63s)
+2026-11-09T21:06:55.4083828Z [Licensing::Client] Successfully updated the access token
+2026-11-09T21:06:55.4084569Z [Licensing::Module] Successfully updated the access token 9xgbQobu0Q...
+2026-11-09T21:06:55.5034567Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-09T21:06:55.5035547Z       Application is shutting down...
+2026-11-09T21:06:55.5139316Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-11-09T21:06:55.5140609Z       ALC ILPP context 2 is unloading
+2026-11-09T21:06:56.8080849Z [Licensing::Client] Successfully processed license management request
+2026-11-09T21:06:56.8081723Z [Licensing::Module] Successfully returned the entitlement license
+2026-11-09T21:06:56.8438443Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-11-09T21:06:58.5172133Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-11-09T21:06:58.5266596Z 
+2026-11-09T21:06:58.5266866Z ###########################
+2026-11-09T21:06:58.5267334Z #         Failure         #
+2026-11-09T21:06:58.5267699Z ###########################
+2026-11-09T21:06:58.5267942Z 
+2026-11-09T21:06:58.5268202Z Please note that the exit code is not very descriptive.
+2026-11-09T21:06:58.5268805Z Most likely it will not help you solve the issue.
+2026-11-09T21:06:58.5269179Z 
+2026-11-09T21:06:58.5269776Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-11-09T21:06:58.5270529Z 
+2026-11-09T21:06:58.7940539Z ##[error]Build failed with exit code 139
