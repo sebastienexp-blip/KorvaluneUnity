@@ -52,7 +52,7 @@ namespace Korvalune.Game
             if (pf)
             {
                 var npc = Instantiate(pf, root); npc.name = "PNJ"; npc.transform.localPosition = Vector3.zero; npc.transform.localRotation = Quaternion.identity;
-                foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) Destroy(c);
+                foreach (var c in npc.GetComponentsInChildren<Collider>()) if (!c.isTrigger) { if (Application.isPlaying) Destroy(c); else DestroyImmediate(c); }
             }
             else
             {
