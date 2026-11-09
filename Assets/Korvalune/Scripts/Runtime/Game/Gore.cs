@@ -57,16 +57,21 @@ namespace Korvalune.Game
             if (f != Fluid.Bone && Random.value < (crit ? 0.9f : 0.35f)) Splat(h.transform.position + dir * Random.Range(0.4f, 1.4f) + Random.insideUnitSphere * 0.3f, c, Random.Range(0.5f, crit ? 1.3f : 0.9f));
         }
 
+        static int budgetFrame = -1, deathsThisFrame, seversThisFrame;
         static void OnDied(Health h)
         {
             if (!h || h.faction == Faction.Player || !h.GetComponent<EnemyAI>()) return;
             lastHit.TryGetValue(h, out var hit); lastHit.Remove(h);
+            // budget par frame : une attaque de zone qui tue beaucoup de monstres d'un coup ne doit pas créer
+            // tous les effets et découpes en même temps (saccade). Les morts au-delà gardent loot et XP.
+            if (Time.frameCount != budgetFrame) { budgetFrame = Time.frameCount; deathsThisFrame = 0; seversThisFrame = 0; }
+            if (++deathsThisFrame > 4) return;
             if (!Blood) return;
             var f = FluidOf(h); var c = ColorOf(f); var pos = h.transform.position; var dir = FromHero(pos);
             Spray(pos + Vector3.up * 1f, dir, c, 34, 5f, 0.1f);
             if (f != Fluid.Bone) { Splat(pos + dir * 0.6f, c, Random.Range(1.4f, 2.2f)); Splat(pos + dir * 1.6f + Random.insideUnitSphere * 0.4f, c, Random.Range(0.6f, 1.1f)); }
             else FX.Dust(pos, 0.8f);
-            if (!Dismember) return;
+            if (!Dismember || seversThisFrame >= 1) return;
             // un coup critique ou un gros coup final : la créature perd la tête ou un membre (parfois plusieurs)
             float overkill = hit.amount / Mathf.Max(1f, h.maxHp);
             float chance = 0.35f + (hit.crit ? 0.4f : 0f) + Mathf.Clamp01(overkill) * 0.4f;
@@ -75,6 +80,7 @@ namespace Korvalune.Game
             if (parts.Count == 0) return;
             int cuts = hit.crit && Random.value < 0.4f ? 2 : 1;
             if (overkill > 0.8f) cuts = 3;
+            seversThisFrame++;
             Sound.Play(f == Fluid.Bone ? "sfx_os" : "sfx_tranche", pos, 1f, 0.1f, 0.1f);
             for (int i = 0; i < cuts && parts.Count > 0; i++)
             {
