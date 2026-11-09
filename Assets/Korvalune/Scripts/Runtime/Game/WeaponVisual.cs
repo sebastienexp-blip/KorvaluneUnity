@@ -52,6 +52,7 @@ namespace Korvalune.Game
                 var pf = Res.Load<GameObject>("Prefabs/Weapons/" + m.model); if (!pf) continue;
                 var g = Instantiate(pf, s, false); g.name = m.model; g.transform.localPosition = Vector3.zero; g.transform.localRotation = Quaternion.identity;
                 foreach (var c in g.GetComponentsInChildren<Collider>()) Destroy(c);
+                foreach (var r in g.GetComponentsInChildren<Renderer>(true)) Dye.Apply(r, it.dye);   // arme et bouclier teintés comme dans l'inventaire
                 spawned.Add(g); used.Add(m.socket);
                 if (slot == Slot.Arme && m.socket == "Socket_Shield_L") hideRight = true;          // arc : tenu à gauche, main droite libre
             }

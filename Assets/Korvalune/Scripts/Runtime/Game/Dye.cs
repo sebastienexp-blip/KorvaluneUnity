@@ -36,20 +36,24 @@ namespace Korvalune.Game
         }
 
         /// <summary>Multiplie la couleur de base des matériaux du rendu par la teinture (les matériaux exclus gardent leur couleur).</summary>
+        static readonly Dictionary<int, Color> baseColor = new Dictionary<int, Color>();   // couleur d'origine de chaque instance
+
         public static void Apply(Renderer rd, string dye, System.Func<Material, bool> include = null)
         {
             if (!rd) return;
             var cols = Colors(dye);
-            if (cols.Length == 0) return;
             var mats = rd.materials;                              // instances : ne modifie pas les assets partagés
             for (int i = 0; i < mats.Length; i++)
             {
                 var m = mats[i]; if (!m || !m.HasProperty("_BaseColor")) continue;
                 if (include != null && !include(m)) continue;
+                int id = m.GetInstanceID();
+                if (!baseColor.TryGetValue(id, out var original)) { original = m.GetColor("_BaseColor"); baseColor[id] = original; }
+                if (cols.Length == 0) { m.SetColor("_BaseColor", original); continue; }   // teinture retirée : retour à la couleur d'origine
                 // mélange : première moitié des matériaux dans la couleur A, seconde dans la couleur B ; arc-en-ciel : une bande par matériau
                 Color c = dye == Rainbow || cols.Length == 1 ? cols[i % cols.Length]
                         : cols[Mathf.Min(cols.Length - 1, i * cols.Length / mats.Length)];
-                m.SetColor("_BaseColor", m.GetColor("_BaseColor") * Color.Lerp(Color.white, c, 0.85f));
+                m.SetColor("_BaseColor", original * Color.Lerp(Color.white, c, 0.85f));
             }
             rd.materials = mats;
         }

@@ -13,6 +13,9 @@ namespace Korvalune.Game
     {
         public const string RagsTop = "HaillonsHaut", RagsBottom = "HaillonsBas";
         CharacterEquipment look; Equipment eq;
+        /// <summary>Teinture de l'armure du héros (voir Dye) ; appliquée à chaque mise à jour de la tenue.</summary>
+        public string ArmorDye = "";
+        static readonly Regex NotArmor = new Regex(@"^(peau_|cheveux|anatomie|sousvetement|haillons|carquois)", RegexOptions.IgnoreCase);
         readonly Dictionary<string, Slot?> map = new Dictionary<string, Slot?>();
 
         static readonly (Regex re, Slot? slot)[] Rules =
@@ -57,6 +60,18 @@ namespace Korvalune.Game
             var top = look.Find(RagsTop); if (top != null) top.equipped = eq.In(Slot.Torse) == null;
             var bot = look.Find(RagsBottom); if (bot != null) bot.equipped = eq.In(Slot.Jambes) == null;
             look.Apply();
+            DyeArmor();
+        }
+
+        /// <summary>Teinte les pièces d'armure visibles ; la peau, les cheveux, les sous-vêtements et les haillons gardent leur couleur.</summary>
+        public void DyeArmor()
+        {
+            if (!look) return;
+            foreach (var s in look.Slots)
+            {
+                if (s == null || !s.equipped || NotArmor.IsMatch(s.name)) continue;
+                foreach (var r in s.GetComponentsInChildren<Renderer>(true)) Dye.Apply(r, ArmorDye);
+            }
         }
     }
 }
