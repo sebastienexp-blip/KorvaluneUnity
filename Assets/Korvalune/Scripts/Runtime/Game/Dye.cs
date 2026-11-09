@@ -40,7 +40,7 @@ namespace Korvalune.Game
 
         public static void Apply(Renderer rd, string dye, System.Func<Material, bool> include = null)
         {
-            if (!rd) return;
+            if (!rd || !Application.isPlaying) return;       // en édition (captures CI) : pas d'instances de matériau, la teinture se joue en jeu
             var cols = Colors(dye);
             var mats = rd.materials;                              // instances : ne modifie pas les assets partagés
             for (int i = 0; i < mats.Length; i++)
