@@ -10,19 +10,23 @@ namespace Korvalune.Game
         public Transform target;
         public float pitch = 56f, distance = 17f, fov = 38f, yaw = 0f;
         public float minZoom = 0.65f, maxZoom = 1.15f, zoom = 1f;
+        // ordinateur : plongée plus franche et plus proche du héros, comme la caméra de Diablo (angle fixe, héros bien lisible)
+        float Pitch => Platform.Desktop ? 62f : pitch;
+        float Fov => Platform.Desktop ? 32f : fov;
+        float Dist => Platform.Desktop ? 19f : distance;
         public float lookHeight = 1.0f, smooth = 7f;
         float shake;
         Camera cam;
 
         public void Shake(float amount) { if (Settings.Shake == 0) shake = Mathf.Max(shake, amount); }
 
-        Vector3 Offset => Quaternion.Euler(pitch, yaw, 0) * new Vector3(0, 0, -distance * zoom);
+        Vector3 Offset => Quaternion.Euler(Pitch, yaw, 0) * new Vector3(0, 0, -Dist * zoom);
 
         void LateUpdate()
         {
             if (!target || Cinematic.Active) return;                                  // la cinématique conduit la caméra
             if (!cam) cam = GetComponent<Camera>();
-            if (cam) cam.fieldOfView = fov;
+            if (cam) cam.fieldOfView = Fov;
             float wheel = Input.mouseScrollDelta.y;
             if (Input.touchCount == 2)
             {
@@ -34,7 +38,7 @@ namespace Korvalune.Game
             var focus = target.position + Vector3.up * lookHeight;
             var want = focus + Offset;
             transform.position = Vector3.Lerp(transform.position, want, 1 - Mathf.Exp(-smooth * Time.deltaTime));
-            transform.rotation = Quaternion.Euler(pitch, yaw, 0);
+            transform.rotation = Quaternion.Euler(Pitch, yaw, 0);
             if (shake > 0.001f) { transform.position += Random.insideUnitSphere * shake; shake = Mathf.Lerp(shake, 0, 10 * Time.deltaTime); }
         }
 
@@ -42,8 +46,8 @@ namespace Korvalune.Game
         {
             if (!target) return;
             if (!cam) cam = GetComponent<Camera>();
-            if (cam) cam.fieldOfView = fov;
-            transform.position = target.position + Vector3.up * lookHeight + Offset; transform.rotation = Quaternion.Euler(pitch, yaw, 0);
+            if (cam) cam.fieldOfView = Fov;
+            transform.position = target.position + Vector3.up * lookHeight + Offset; transform.rotation = Quaternion.Euler(Pitch, yaw, 0);
         }
     }
 }
