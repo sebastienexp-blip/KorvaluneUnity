@@ -154,7 +154,7 @@ namespace Korvalune.EditorTools
             water.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.Off;
 
             // ---- château, pont, rochers
-            EnsureCastleReadable();                          // le maillage doit être lisible pour percer la porte
+            // EnsureCastleReadable() : désactivé, la réimportation du FBX en plein build faisait échouer le CI (percement du passage suspendu)
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
             CarveCastleDoor(castle);                         // porte : retire le vantail de la collision et du rendu
             TownBuilder.Build();
