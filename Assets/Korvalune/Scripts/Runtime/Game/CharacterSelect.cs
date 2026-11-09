@@ -175,6 +175,8 @@ namespace Korvalune.Game
             RenderSettings.fog = false; RenderSettings.skybox = null;
             RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat; RenderSettings.ambientLight = new Color(0.24f, 0.21f, 0.22f);
             if (viewCamera) { viewCamera.clearFlags = CameraClearFlags.SolidColor; viewCamera.backgroundColor = new Color(0.03f, 0.025f, 0.035f); }
+            // le post-traitement de la scène est celui de la vallée (teinte chaude, halo, vignettage) : il rougissait toute la crypte
+            foreach (var pv in FindObjectsByType<UnityEngine.Rendering.Volume>(FindObjectsSortMode.None)) pv.enabled = false;
             if (!FindFirstObjectByType<EventSystem>()) new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
             var go = new GameObject("Sélection", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             var canvas = go.GetComponent<Canvas>();
