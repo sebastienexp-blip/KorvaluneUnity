@@ -1,408 +1,416 @@
-# Journal du job d'intégration (run 42698901680)
+# Journal du job d'intégration (run 42701852636)
 ## Lignes importantes
-887:2026-11-09T21:10:39.2794473Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
-889:2026-11-09T21:10:39.2795699Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
-1209:2026-11-09T21:11:22.3096003Z hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
-1320:2026-11-09T21:12:17.0147585Z ##[error]Process completed with exit code 1.
+1095:2026-11-09T21:32:56.7682987Z [  3/199    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_F10DA62680CBC480.mvfrm
+1615:2026-11-09T21:32:58.6366050Z Curl error 42: Callback aborted
+2794:2026-11-09T21:33:57.7873415Z Curl error 42: Callback aborted
+5446:2026-11-09T21:38:37.6842820Z Curl error 42: Callback aborted
+9916:2026-11-09T21:51:30.4617286Z Build failed, with exit code 1
+9976:2026-11-09T21:51:34.8113417Z Please note that the exit code is not very descriptive.
+9981:2026-11-09T21:51:34.9779612Z ##[error]Build failed with exit code 1
+9986:2026-11-09T21:51:35.0038518Z [36;1m    grep -E "error CS[0-9]+|Exception|Error|error" unity-editor.log 2>/dev/null | grep -v "^\s*$" | sort -u | head -60 || true;[0m
+9988:2026-11-09T21:51:35.0039575Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): (error|warning) CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | grep "error CS" | sort -u | head -80 || true;[0m
+10377:2026-11-09T21:51:50.4139137Z hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+10495:2026-11-09T21:52:38.0096672Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal Unity (400 dernières lignes avant l'arrêt)
-
-```
-```
-
-## Erreurs de compilation (Library/Bee, Logs)
-```
-```
-
-## Dernières étapes (ci-out/progress.log)
-```
-(aucune : la méthode CI n'a pas démarré)
-```
-2026-11-09T21:10:39.8480867Z ##[group]Run actions/upload-artifact@v4
-2026-11-09T21:10:39.8481291Z with:
-2026-11-09T21:10:39.8481571Z   name: journal-unity-42698901680
-2026-11-09T21:10:39.8481977Z   path: unity-editor.log
-ci-report.md
-ci-out/
-
-2026-11-09T21:10:39.8482385Z   if-no-files-found: ignore
-2026-11-09T21:10:39.8482729Z   retention-days: 14
-2026-11-09T21:10:39.8483048Z   compression-level: 6
-2026-11-09T21:10:39.8483374Z   overwrite: false
-2026-11-09T21:10:39.8483667Z   include-hidden-files: false
-2026-11-09T21:10:39.8484000Z env:
-2026-11-09T21:10:39.8492840Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0***"/>
-        <SerialMasked Value="***"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-11-09T21:10:39.8502853Z ##[endgroup]
-2026-11-09T21:10:40.0598280Z (node:2768) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-09T21:10:40.0599509Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-09T21:10:40.1340797Z Multiple search paths detected. Calculating the least common ancestor of all paths
-2026-11-09T21:10:40.1342112Z The least common ancestor is /home/runner/work/KorvaluneUnity/KorvaluneUnity. This will be the root directory of the artifact
-2026-11-09T21:10:40.1342855Z With the provided path, there will be 362 files uploaded
-2026-11-09T21:10:40.1348779Z Artifact name is valid!
-2026-11-09T21:10:40.1350224Z Root directory input is valid!
-2026-11-09T21:10:40.4815881Z Beginning upload of artifact content to blob storage
-2026-11-09T21:10:40.8829609Z (node:2768) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-2026-11-09T21:10:41.7103588Z Uploaded bytes 8388608
-2026-11-09T21:10:42.1655359Z Uploaded bytes 16777216
-2026-11-09T21:10:42.1944601Z Uploaded bytes 25165824
-2026-11-09T21:10:42.6971658Z Uploaded bytes 33554432
-2026-11-09T21:10:43.0018333Z Uploaded bytes 41943040
-2026-11-09T21:10:43.5373564Z Uploaded bytes 50331648
-2026-11-09T21:10:43.8997337Z Uploaded bytes 58720256
-2026-11-09T21:10:44.3620168Z Uploaded bytes 67108864
-2026-11-09T21:10:44.7226660Z Uploaded bytes 75497472
-2026-11-09T21:10:45.1977734Z Uploaded bytes 83886080
-2026-11-09T21:10:45.6911961Z Uploaded bytes 92274688
-2026-11-09T21:10:46.2682571Z Uploaded bytes 100663296
-2026-11-09T21:10:46.9588071Z Uploaded bytes 109051904
-2026-11-09T21:10:47.8969106Z Uploaded bytes 117440512
-2026-11-09T21:10:48.5370450Z Uploaded bytes 125829120
-2026-11-09T21:10:49.0092187Z Uploaded bytes 134217728
-2026-11-09T21:10:49.2428881Z Uploaded bytes 142606336
-2026-11-09T21:10:49.3701253Z Uploaded bytes 150994944
-2026-11-09T21:10:49.7035684Z Uploaded bytes 159383552
-2026-11-09T21:10:50.0564603Z Uploaded bytes 166277090
-2026-11-09T21:10:50.1247556Z Finished uploading artifact content to blob storage!
-2026-11-09T21:10:50.1249927Z SHA256 digest of uploaded artifact zip is 88d52e0e8b0967c6873dc6b0dda4e8e32be3ce25ce270edd39a495539dbf1a57
-2026-11-09T21:10:50.1251969Z Finalizing artifact upload
-2026-11-09T21:10:50.6819758Z Artifact journal-unity-42698901680.zip successfully finalized. Artifact ID 13710303905
-2026-11-09T21:10:50.6820758Z Artifact journal-unity-42698901680 has been successfully uploaded! Final size is 166277090 bytes. Artifact ID is 13710303905
-2026-11-09T21:10:50.6826254Z Artifact download URL: https://github.com/sebastienexp-blip/KorvaluneUnity/actions/runs/42698901680/artifacts/13710303905
-2026-11-09T21:10:50.7121775Z ##[group]Run git config user.name "korvalune-ci"
-2026-11-09T21:10:50.7122302Z [36;1mgit config user.name "korvalune-ci"[0m
-2026-11-09T21:10:50.7122776Z [36;1mgit config user.email "ci@korvalune.invalid"[0m
-2026-11-09T21:10:50.7123418Z [36;1mgit add -A Assets ProjectSettings Packages ci-report.md ci-out 2>/dev/null || true[0m
-2026-11-09T21:10:50.7123937Z [36;1mif git diff --cached --quiet; then echo "rien à renvoyer"; exit 0; fi[0m
-2026-11-09T21:10:50.7124374Z [36;1mgit commit -m "CI Unity : fichiers générés et rapport [skip ci]"[0m
-2026-11-09T21:10:50.7124874Z [36;1mfor i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done[0m
-2026-11-09T21:10:50.7179459Z shell: /usr/bin/bash -e {0}
-2026-11-09T21:10:50.7179733Z env:
-2026-11-09T21:10:50.7186012Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0***"/>
-        <SerialMasked Value="***"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-11-09T21:10:50.7192482Z ##[endgroup]
-2026-11-09T21:11:17.2615890Z [travail ce70c6a8] CI Unity : fichiers générés et rapport [skip ci]
-2026-11-09T21:11:17.2616308Z  2 files changed, 10 insertions(+), 6967 deletions(-)
-2026-11-09T21:11:17.2616612Z  delete mode 100644 ci-out/progress.log
-2026-11-09T21:11:17.7653726Z From https://github.com/sebastienexp-blip/KorvaluneUnity
-2026-11-09T21:11:17.7654323Z  * branch              main       -> FETCH_HEAD
-2026-11-09T21:11:17.7654966Z    b063672b..43e60892  main       -> origin/main
-2026-11-09T21:11:18.8282508Z warning: skipped previously applied commit 1e9196c9
-2026-11-09T21:11:18.8284026Z warning: skipped previously applied commit 088e73d8
-2026-11-09T21:11:18.8284854Z warning: skipped previously applied commit 209d0d1b
-2026-11-09T21:11:18.8285322Z warning: skipped previously applied commit 81d9d096
-2026-11-09T21:11:18.8286018Z warning: skipped previously applied commit 05ed1f31
-2026-11-09T21:11:18.8286519Z warning: skipped previously applied commit b4aef443
-2026-11-09T21:11:18.8287122Z warning: skipped previously applied commit b3295463
-2026-11-09T21:11:18.8287603Z warning: skipped previously applied commit 20b76900
-2026-11-09T21:11:18.8288080Z warning: skipped previously applied commit 8b2184a4
-2026-11-09T21:11:18.8288549Z warning: skipped previously applied commit 9e14ebf6
-2026-11-09T21:11:18.8289024Z warning: skipped previously applied commit 098adcda
-2026-11-09T21:11:18.8289479Z warning: skipped previously applied commit 1822d7e5
-2026-11-09T21:11:18.8289927Z warning: skipped previously applied commit c9e42512
-2026-11-09T21:11:18.8290377Z warning: skipped previously applied commit e4755aa8
-2026-11-09T21:11:18.8290826Z warning: skipped previously applied commit d1f68686
-2026-11-09T21:11:18.8291202Z warning: skipped previously applied commit 5b079ad6
-2026-11-09T21:11:18.8291508Z warning: skipped previously applied commit db7bf665
-2026-11-09T21:11:18.8291805Z warning: skipped previously applied commit ff7319fa
-2026-11-09T21:11:18.8292089Z warning: skipped previously applied commit 54c9ccf9
-2026-11-09T21:11:18.8292378Z warning: skipped previously applied commit de2c4369
-2026-11-09T21:11:18.8292663Z warning: skipped previously applied commit c2cad934
-2026-11-09T21:11:18.8292937Z warning: skipped previously applied commit d4dc8581
-2026-11-09T21:11:18.8293218Z warning: skipped previously applied commit 3d536c2c
-2026-11-09T21:11:18.8293494Z warning: skipped previously applied commit bb812507
-2026-11-09T21:11:18.8293771Z warning: skipped previously applied commit 48abe971
-2026-11-09T21:11:18.8294048Z warning: skipped previously applied commit 02ea1727
-2026-11-09T21:11:18.8294330Z warning: skipped previously applied commit 0552d52c
-2026-11-09T21:11:18.8294616Z warning: skipped previously applied commit 6916b92a
-2026-11-09T21:11:18.8294892Z warning: skipped previously applied commit 184bfc8d
-2026-11-09T21:11:18.8295172Z warning: skipped previously applied commit 7a504043
-2026-11-09T21:11:18.8295445Z warning: skipped previously applied commit b42700c3
-2026-11-09T21:11:18.8295926Z warning: skipped previously applied commit 90666dbc
-2026-11-09T21:11:18.8296207Z warning: skipped previously applied commit eadc3d37
-2026-11-09T21:11:18.8296482Z warning: skipped previously applied commit 41bb92e3
-2026-11-09T21:11:18.8296764Z warning: skipped previously applied commit d8886e52
-2026-11-09T21:11:18.8297221Z warning: skipped previously applied commit f44ec78f
-2026-11-09T21:11:18.8297498Z warning: skipped previously applied commit 42f7c9af
-2026-11-09T21:11:18.8297782Z warning: skipped previously applied commit 83058bda
-2026-11-09T21:11:18.8298061Z warning: skipped previously applied commit c5bd4e90
-2026-11-09T21:11:18.8298334Z warning: skipped previously applied commit ff078525
-2026-11-09T21:11:18.8298644Z warning: skipped previously applied commit 3d040ee5
-2026-11-09T21:11:18.8298925Z warning: skipped previously applied commit 09b06b70
-2026-11-09T21:11:18.8299201Z warning: skipped previously applied commit 680f0806
-2026-11-09T21:11:18.8299510Z warning: skipped previously applied commit 2a1527ec
-2026-11-09T21:11:18.8299805Z warning: skipped previously applied commit 4f71c208
-2026-11-09T21:11:18.8300098Z warning: skipped previously applied commit f27fd312
-2026-11-09T21:11:18.8300397Z warning: skipped previously applied commit bf4e61d2
-2026-11-09T21:11:18.8300680Z warning: skipped previously applied commit 2d66b2d2
-2026-11-09T21:11:18.8300955Z warning: skipped previously applied commit c04af551
-2026-11-09T21:11:18.8301288Z hint: use --reapply-cherry-picks to include skipped commits
-2026-11-09T21:11:18.8301690Z hint: Disable this message with "git config set advice.skippedCherryPicks false"
-2026-11-09T21:11:19.5188118Z Rebasing (1/44)
-2026-11-09T21:11:19.5188708Z dropping 982f03a330a97a0ce465c267e6f2f7dfbb3a5039 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:19.8221564Z Rebasing (2/44)
-2026-11-09T21:11:19.8222575Z dropping 157bf7d2580bea2893b535102b90278ba09fa743 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.2613710Z Rebasing (3/44)
-2026-11-09T21:11:20.3314959Z Rebasing (4/44)
-2026-11-09T21:11:20.3315762Z dropping eb71e8f3e0aa9ce0db5e656988d1ab46f78e8718 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.3409140Z Rebasing (5/44)
-2026-11-09T21:11:20.4838662Z dropping c9ac443f82bbfaab9eb0b2eb372c88e85afa4548 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.4839616Z Rebasing (6/44)
-2026-11-09T21:11:20.4921220Z Rebasing (7/44)
-2026-11-09T21:11:20.4921753Z dropping 9345e763b905a8ab9151816e310fb3021bcb8aa1 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.5012564Z Rebasing (8/44)
-2026-11-09T21:11:20.5013129Z dropping 7ee03d53148856200ab42d322a0080fedcc197d5 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.6426392Z Rebasing (9/44)
-2026-11-09T21:11:20.6511888Z Rebasing (10/44)
-2026-11-09T21:11:20.6512613Z dropping c25a8379642cde7ecba5ef41b52957b620fd9ea2 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.6604042Z Rebasing (11/44)
-2026-11-09T21:11:20.8041064Z dropping 9bb6acf39c6ff91dd753cc30a71db8d74476e07c Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.8041992Z Rebasing (12/44)
-2026-11-09T21:11:20.8123417Z Rebasing (13/44)
-2026-11-09T21:11:20.8124000Z dropping 5d837a4201d2a549736f5b21b93137303ce50eb3 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.8214688Z Rebasing (14/44)
-2026-11-09T21:11:20.8215279Z dropping defb226f3e528740bc45086123cf70a078978608 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.9640392Z Rebasing (15/44)
-2026-11-09T21:11:20.9641465Z dropping bd6f63f217d9430118eb01e11ca283da2f6cce86 Android : APK construit et testé dans l'émulateur [skip ci] -- patch contents already upstream
-2026-11-09T21:11:20.9735901Z Rebasing (16/44)
-2026-11-09T21:11:20.9736615Z dropping e4e446eb8fc7542b6f79759cf6f2ba245d450862 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.1168104Z Rebasing (17/44)
-2026-11-09T21:11:21.1169236Z dropping 9898b28826f5ea1bb20f6e0acbee457b29c390d5 Android : APK construit et testé dans l'émulateur [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.1260656Z Rebasing (18/44)
-2026-11-09T21:11:21.1261201Z dropping 90131e80f89a96dc2b317471fe71bec2a814106f Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.1347091Z Rebasing (19/44)
-2026-11-09T21:11:21.1347884Z dropping 332846999df47bbb03880cf376d90461f0e32e88 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.1438625Z Rebasing (20/44)
-2026-11-09T21:11:21.1439243Z dropping aef6877a4407c238173fecb778411a87c9236cfc Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.1524508Z Rebasing (21/44)
-2026-11-09T21:11:21.1525071Z dropping a41f991111d120fc4c43ab7a2380beb5cf710e4a Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.1614180Z Rebasing (22/44)
-2026-11-09T21:11:21.1614798Z dropping ca0dde17a19ec08390efc6985a9061719cf51acc Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.3013992Z Rebasing (23/44)
-2026-11-09T21:11:21.3256254Z Rebasing (24/44)
-2026-11-09T21:11:21.3256877Z dropping a0cb40a0f1a261f2ba7d5f0cbacc52c0e6a881d8 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.4598212Z Rebasing (25/44)
-2026-11-09T21:11:21.4681329Z Rebasing (26/44)
-2026-11-09T21:11:21.4684113Z dropping 2544c9ebad8dcb9611d2c05c2b159c13a43e9348 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.4773069Z Rebasing (27/44)
-2026-11-09T21:11:21.4773577Z dropping 76558d9d3f4640fe746c66eb57a80ec54e034f39 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.6111212Z Rebasing (28/44)
-2026-11-09T21:11:21.7315739Z Rebasing (29/44)
-2026-11-09T21:11:21.7316386Z dropping 3b76231a6b31845c1f39766e2eb5b050a4a6c913 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.7406334Z Rebasing (30/44)
-2026-11-09T21:11:21.7407123Z dropping a1647a10d85b4779edaeb9fd3ddeefe0e3991e39 Windows : rapport de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.7496406Z Rebasing (31/44)
-2026-11-09T21:11:21.7497104Z dropping b801a32b99e0b162513a7813a9647592951d3c6c Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:21.8864676Z Rebasing (32/44)
-2026-11-09T21:11:21.8952518Z Rebasing (33/44)
-2026-11-09T21:11:21.8953167Z dropping 67461db8e7b2620cb6e944ebf658575a74124243 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:22.0317970Z Rebasing (34/44)
-2026-11-09T21:11:22.0319320Z dropping aaf03cd701f0135789e1bb23ee4708f2d7304a27 Android : APK construit et testé dans l'émulateur [skip ci] -- patch contents already upstream
-2026-11-09T21:11:22.0412531Z Rebasing (35/44)
-2026-11-09T21:11:22.0429827Z dropping 335332d726aecf66a2c060be64aca3541c9ae2a4 Android : journal de construction [skip ci] -- patch contents already upstream
-2026-11-09T21:11:22.3000803Z Rebasing (36/44)
-2026-11-09T21:11:22.3002015Z dropping 23509086dc8b9558117ea9d2a75b4108f9248f0d Android : APK construit et testé dans l'émulateur [skip ci] -- patch contents already upstream
-2026-11-09T21:11:22.3042398Z CONFLICT (modify/delete): Assets/Korvalune/Scenes/Korvalune_Cote.unity deleted in c09d8d0a (Scène Côte : scène périmée supprimée (436 références cassées, plantage de Unity à la construction)) and modified in HEAD.  Version HEAD of Assets/Korvalune/Scenes/Korvalune_Cote.unity left in tree.
-2026-11-09T21:11:22.3092185Z Rebasing (37/44)
-2026-11-09T21:11:22.3093417Z error: could not apply c09d8d0a... Scène Côte : scène périmée supprimée (436 références cassées, plantage de Unity à la construction)
-2026-11-09T21:11:22.3094269Z hint: Resolve all conflicts manually, mark them as resolved with
-2026-11-09T21:11:22.3094823Z hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
-2026-11-09T21:11:22.3095376Z hint: You can instead skip this commit: run "git rebase --skip".
-2026-11-09T21:11:22.3096003Z hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
-2026-11-09T21:11:22.3096713Z hint: Disable this message with "git config set advice.mergeConflict false"
-2026-11-09T21:11:22.3097914Z Could not apply c09d8d0a... # Scène Côte : scène périmée supprimée (436 références cassées, plantage de Unity à la construction)
-2026-11-09T21:11:27.3318979Z error: Pulling is not possible because you have unmerged files.
-2026-11-09T21:11:27.3319577Z hint: Fix them up in the work tree, and then use 'git add/rm <file>'
-2026-11-09T21:11:27.3319974Z hint: as appropriate to mark resolution and make a commit.
-2026-11-09T21:11:27.3320337Z fatal: Exiting because of an unresolved conflict.
-2026-11-09T21:11:32.3380289Z error: Pulling is not possible because you have unmerged files.
-2026-11-09T21:11:32.3380945Z hint: Fix them up in the work tree, and then use 'git add/rm <file>'
-2026-11-09T21:11:32.3381502Z hint: as appropriate to mark resolution and make a commit.
-2026-11-09T21:11:32.3381997Z fatal: Exiting because of an unresolved conflict.
-2026-11-09T21:11:37.3948767Z ##[group]Run actions/cache/save@v4
-2026-11-09T21:11:37.3949024Z with:
-2026-11-09T21:11:37.3949215Z   path: Library
-2026-11-09T21:11:37.3949609Z   key: Library-Forge-0516e7a15d127f2421eca6e1a3979ab3f3905d8ba7478a5c9fdc20b20da83e9a-42698901680
-2026-11-09T21:11:37.3950049Z   enableCrossOsArchive: false
-2026-11-09T21:11:37.3950274Z env:
-2026-11-09T21:11:37.3956295Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0***"/>
-        <SerialMasked Value="***"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-11-09T21:11:37.3962803Z ##[endgroup]
-2026-11-09T21:11:37.5147561Z (node:2975) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-11-09T21:11:37.5148485Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-11-09T21:11:37.5886730Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/KorvaluneUnity/KorvaluneUnity --files-from manifest.txt --use-compress-program zstdmt
-2026-11-09T21:12:10.3151912Z (node:2975) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
-2026-11-09T21:12:11.3027131Z Sent 0 of 2092810067 (0.0%), 0.0 MBs/sec
-2026-11-09T21:12:12.3038038Z Sent 201326592 of 2092810067 (9.6%), 96.0 MBs/sec
-2026-11-09T21:12:13.3074604Z Sent 536870912 of 2092810067 (25.7%), 170.6 MBs/sec
-2026-11-09T21:12:14.3086816Z Sent 1073741824 of 2092810067 (51.3%), 255.8 MBs/sec
-2026-11-09T21:12:15.3041821Z Sent 1543503872 of 2092810067 (73.8%), 294.3 MBs/sec
-2026-11-09T21:12:16.3051245Z Sent 1891483475 of 2092810067 (90.4%), 300.5 MBs/sec
-2026-11-09T21:12:16.6040912Z Sent 2092810067 of 2092810067 (100.0%), 316.7 MBs/sec
-2026-11-09T21:12:16.9801574Z Cache saved with key: Library-Forge-0516e7a15d127f2421eca6e1a3979ab3f3905d8ba7478a5c9fdc20b20da83e9a-42698901680
-2026-11-09T21:12:16.9919384Z ##[group]Run if [ "skipped" = "success" ]; then exit 0; fi
-2026-11-09T21:12:16.9919774Z [36;1mif [ "skipped" = "success" ]; then exit 0; fi[0m
-2026-11-09T21:12:16.9920181Z [36;1mecho "::error::Échec de l'intégration Unity (voir ci-report.md)"; exit 1[0m
-2026-11-09T21:12:17.0063808Z shell: /usr/bin/bash -e {0}
-2026-11-09T21:12:17.0064096Z env:
-2026-11-09T21:12:17.0070698Z   UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><TimeStamp Value="ocFLB6z5zbeMew=="/>
-    <License id="Terms">
-        <MachineBindings>
-            <Binding Key="1" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-            <Binding Key="2" Value="a5bd2ff817057592a7357e8c6ad761cd"/>
-        </MachineBindings>
-        <MachineID Value="ua2/Z3qrorhRzbUt2nq59/GJaF0="/>
-        <SerialHash Value="818b0a09522a1dff60696f8c8c8406c6b80a4b5d"/>
-        <Features>
-            <Feature Value="33"/>
-            <Feature Value="1"/>
-            <Feature Value="12"/>
-            <Feature Value="2"/>
-            <Feature Value="24"/>
-            <Feature Value="3"/>
-            <Feature Value="36"/>
-            <Feature Value="17"/>
-            <Feature Value="19"/>
-            <Feature Value="62"/>
-        </Features>
-        <DeveloperData Value="AQAAAEY0***"/>
-        <SerialMasked Value="***"/>
-        <StartDate Value="2023-01-04T00:00:00"/>
-        <UpdateDate Value="2026-10-21T13:27:25"/>
-        <InitialActivationDate Value="2023-01-04T12:35:48"/>
-        <LicenseVersion Value="6.x"/>
-        <ClientProvidedVersion Value="2017.2.0"/>
-        <AlwaysOnline Value="false"/>
-        <Entitlements>
-            <Entitlement Ns="unity_editor" Tag="UnityPersonal" Type="EDITOR" ValidTo="9999-12-31T00:00:00"/>
-            <Entitlement Ns="unity_editor" Tag="DarkSkin" Type="EDITOR_FEATURE" ValidTo="9999-12-31T00:00:00"/>
-        </Entitlements>
-    </License><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#Terms"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorith
-/eqUe4B7XAxijyyWiEzxB9yKe/obj9SVuNG1N898IWq0o5fqIk3URnBaR2iZAtZlyZoRFsPlgU2Q
-JoYap+/WKXvUYKGZ4oACZJj88vZowy5WTh+Z91d1lR5bDJyZ1FXIiYBs8PHw51nf+lNBx/fqvzll
-UD3IfD+WcxpcyeQ9xfJk2PP9rgtIhT3Rcd9+UZU3BIJyXH1L9Bg3LYTvej1HDLQHbHmE3BkeqvlS
-VzskqBOS/0FRVff3gZpWW9GiBAoIuzW2Zss3Pw==</SignatureValue></Signature></root>
-2026-11-09T21:12:17.0076924Z ##[endgroup]
-2026-11-09T21:12:17.0145294Z ##[error]Échec de l'intégration Unity (voir ci-report.md)
-2026-11-09T21:12:17.0147585Z ##[error]Process completed with exit code 1.
-2026-11-09T21:12:17.0243155Z Post job cleanup.
-2026-11-09T21:12:17.0985631Z [command]/usr/bin/git version
-2026-11-09T21:12:17.1028823Z git version 2.56.0
-2026-11-09T21:12:17.1060565Z Temporarily overriding HOME='/home/runner/work/_temp/62f6570f-091a-4658-8fe8-46c3d18f4852' before making global git config changes
-2026-11-09T21:12:17.1061655Z Adding repository directory to the temporary git global config as a safe directory
-2026-11-09T21:12:17.1065926Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/KorvaluneUnity/KorvaluneUnity
-2026-11-09T21:12:17.1109150Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-11-09T21:12:17.1145563Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-11-09T21:12:17.1480735Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-11-09T21:12:17.1518092Z http.https://github.com/.extraheader
-2026-11-09T21:12:17.1531664Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-2026-11-09T21:12:17.1576445Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-11-09T21:12:17.1867446Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-11-09T21:12:17.1902324Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-11-09T21:12:17.2320860Z Cleaning up orphan processes
-2026-11-09T21:12:17.4018607Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache/restore@v4, actions/cache/save@v4, actions/checkout@v4, actions/upload-artifact@v4, game-ci/unity-builder@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-11-09T21:51:24.6490066Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6490609Z - ✅ **Collider** capsule
+2026-11-09T21:51:24.6490752Z 
+2026-11-09T21:51:24.6490848Z ## Pin2.fbx (prop, rig None)
+2026-11-09T21:51:24.6491200Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2/Pin2.fbx
+2026-11-09T21:51:24.6491589Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6491986Z - ✅ **Budget de triangles** 670 triangles, 726 sommets (max 60000)
+2026-11-09T21:51:24.6492463Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2.prefab
+2026-11-09T21:51:24.6493034Z - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.61×15.03×6.84, pieds à y=0.000
+2026-11-09T21:51:24.6493732Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6494539Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6495093Z - ✅ **Collider** capsule
+2026-11-09T21:51:24.6495241Z 
+2026-11-09T21:51:24.6495342Z ## Pin2_LOD1.fbx (prop, rig None)
+2026-11-09T21:51:24.6495823Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Pin2_LOD1/Pin2_LOD1.fbx
+2026-11-09T21:51:24.6496235Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6496634Z - ✅ **Budget de triangles** 422 triangles, 354 sommets (max 60000)
+2026-11-09T21:51:24.6497114Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Pin2_LOD1.prefab
+2026-11-09T21:51:24.6497705Z - ✅ **Échelle (hauteur)** 15.034 m (attendu 14.2823–15.7857), boîte 6.79×15.03×6.74, pieds à y=0.000
+2026-11-09T21:51:24.6498405Z - ✅ **Matériau W_Bark** shader Korvalune/PBR Monde, base W_Bark_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6499198Z - ✅ **Matériau W_Needles** shader Universal Render Pipeline/Lit, base W_Needles_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6499746Z - ✅ **Collider** capsule
+2026-11-09T21:51:24.6499891Z 
+2026-11-09T21:51:24.6499987Z ## Rocher0.fbx (prop, rig None)
+2026-11-09T21:51:24.6500355Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher0/Rocher0.fbx
+2026-11-09T21:51:24.6500749Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6501126Z - ✅ **Budget de triangles** 736 triangles, 588 sommets (max 60000)
+2026-11-09T21:51:24.6501598Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher0.prefab
+2026-11-09T21:51:24.6502195Z - ✅ **Échelle (hauteur)** 0.713 m (attendu 0.6775863–0.7489111), boîte 1.37×0.71×1.38, pieds à y=-0.339
+2026-11-09T21:51:24.6503018Z - ✅ **Matériau W_Rock** shader Korvalune/PBR Monde, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6503505Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6503742Z 
+2026-11-09T21:51:24.6503841Z ## Rocher1.fbx (prop, rig None)
+2026-11-09T21:51:24.6504218Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher1/Rocher1.fbx
+2026-11-09T21:51:24.6504616Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6505012Z - ✅ **Budget de triangles** 736 triangles, 583 sommets (max 60000)
+2026-11-09T21:51:24.6505596Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher1.prefab
+2026-11-09T21:51:24.6506210Z - ✅ **Échelle (hauteur)** 1.337 m (attendu 1.269715–1.403369), boîte 2.39×1.34×1.90, pieds à y=-0.620
+2026-11-09T21:51:24.6506905Z - ✅ **Matériau W_Rock** shader Korvalune/PBR Monde, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6507398Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6507542Z 
+2026-11-09T21:51:24.6507632Z ## Rocher2.fbx (prop, rig None)
+2026-11-09T21:51:24.6508012Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Rocher2/Rocher2.fbx
+2026-11-09T21:51:24.6508415Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6508811Z - ✅ **Budget de triangles** 800 triangles, 721 sommets (max 60000)
+2026-11-09T21:51:24.6509299Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Rocher2.prefab
+2026-11-09T21:51:24.6509901Z - ✅ **Échelle (hauteur)** 1.484 m (attendu 1.409374–1.557729), boîte 3.57×1.48×3.09, pieds à y=-0.779
+2026-11-09T21:51:24.6510602Z - ✅ **Matériau W_Rock** shader Korvalune/PBR Monde, base W_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6511093Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6511228Z 
+2026-11-09T21:51:24.6511331Z ## T_Troncon_0_0.fbx (prop, rig None)
+2026-11-09T21:51:24.6511795Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_0/T_Troncon_0_0.fbx
+2026-11-09T21:51:24.6512281Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6512687Z - ✅ **Budget de triangles** 40223 triangles, 27348 sommets (max 60000)
+2026-11-09T21:51:24.6513263Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_0.prefab
+2026-11-09T21:51:24.6513924Z - ✅ **Échelle (hauteur)** 9.882 m (attendu 8.893484–10.86981), boîte 51.60×9.88×51.58, pieds à y=-3.133
+2026-11-09T21:51:24.6514644Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6515494Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6516221Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6516964Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6517741Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6518526Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6519305Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6519827Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6519965Z 
+2026-11-09T21:51:24.6520060Z ## T_Troncon_0_1.fbx (prop, rig None)
+2026-11-09T21:51:24.6520532Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_1/T_Troncon_0_1.fbx
+2026-11-09T21:51:24.6521010Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6521411Z - ✅ **Budget de triangles** 28133 triangles, 19458 sommets (max 60000)
+2026-11-09T21:51:24.6521978Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_1.prefab
+2026-11-09T21:51:24.6522650Z - ✅ **Échelle (hauteur)** 11.108 m (attendu 9.997091–12.21867), boîte 44.14×11.11×51.66, pieds à y=-6.546
+2026-11-09T21:51:24.6523486Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6524335Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6525069Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6525892Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6526678Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6527470Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6528247Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6528785Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6528920Z 
+2026-11-09T21:51:24.6529017Z ## T_Troncon_0_2.fbx (prop, rig None)
+2026-11-09T21:51:24.6529492Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_2/T_Troncon_0_2.fbx
+2026-11-09T21:51:24.6529967Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6530386Z - ✅ **Budget de triangles** 47478 triangles, 32621 sommets (max 60000)
+2026-11-09T21:51:24.6530949Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_2.prefab
+2026-11-09T21:51:24.6531637Z - ✅ **Échelle (hauteur)** 12.344 m (attendu 11.10972–13.57855), boîte 51.25×12.34×51.54, pieds à y=-10.292
+2026-11-09T21:51:24.6532368Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6533121Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6533856Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6534601Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6535350Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6536249Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6537056Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6537862Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6538400Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6538543Z 
+2026-11-09T21:51:24.6538650Z ## T_Troncon_0_3.fbx (prop, rig None)
+2026-11-09T21:51:24.6539114Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_3/T_Troncon_0_3.fbx
+2026-11-09T21:51:24.6539708Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6540107Z - ✅ **Budget de triangles** 34716 triangles, 24405 sommets (max 60000)
+2026-11-09T21:51:24.6540765Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_3.prefab
+2026-11-09T21:51:24.6541421Z - ✅ **Échelle (hauteur)** 13.776 m (attendu 12.39875–15.15403), boîte 53.29×13.78×51.90, pieds à y=-15.585
+2026-11-09T21:51:24.6542125Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6542864Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6543599Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6544342Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6545130Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6546018Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6546788Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6547589Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6548109Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6548243Z 
+2026-11-09T21:51:24.6548346Z ## T_Troncon_0_4.fbx (prop, rig None)
+2026-11-09T21:51:24.6548814Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_4/T_Troncon_0_4.fbx
+2026-11-09T21:51:24.6549293Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6549702Z - ✅ **Budget de triangles** 13871 triangles, 9306 sommets (max 60000)
+2026-11-09T21:51:24.6550271Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_4.prefab
+2026-11-09T21:51:24.6550959Z - ✅ **Échelle (hauteur)** 7.752 m (attendu 6.976654–8.527021), boîte 38.04×7.75×25.31, pieds à y=-15.585
+2026-11-09T21:51:24.6551661Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6552427Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6553174Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6553920Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6554707Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6555570Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6556361Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6557167Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6557702Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6557840Z 
+2026-11-09T21:51:24.6557939Z ## T_Troncon_0_m1.fbx (prop, rig None)
+2026-11-09T21:51:24.6558431Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_0_m1/T_Troncon_0_m1.fbx
+2026-11-09T21:51:24.6558917Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6559315Z - ✅ **Budget de triangles** 492 triangles, 362 sommets (max 60000)
+2026-11-09T21:51:24.6559878Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_0_m1.prefab
+2026-11-09T21:51:24.6560563Z - ✅ **Échelle (hauteur)** 7.372 m (attendu 6.634953–8.109386), boîte 21.70×7.37×16.81, pieds à y=-0.518
+2026-11-09T21:51:24.6561406Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6562318Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6563071Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6563552Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6563701Z 
+2026-11-09T21:51:24.6563804Z ## T_Troncon_1_0.fbx (prop, rig None)
+2026-11-09T21:51:24.6564278Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_0/T_Troncon_1_0.fbx
+2026-11-09T21:51:24.6564752Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6565164Z - ✅ **Budget de triangles** 11445 triangles, 7652 sommets (max 60000)
+2026-11-09T21:51:24.6565802Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_0.prefab
+2026-11-09T21:51:24.6566483Z - ✅ **Échelle (hauteur)** 8.305 m (attendu 7.474657–9.135691), boîte 25.26×8.31×36.17, pieds à y=-2.999
+2026-11-09T21:51:24.6567173Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6567909Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6568623Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6569330Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6570044Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6570807Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6571628Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6572159Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6572295Z 
+2026-11-09T21:51:24.6572403Z ## T_Troncon_1_1.fbx (prop, rig None)
+2026-11-09T21:51:24.6572851Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_1/T_Troncon_1_1.fbx
+2026-11-09T21:51:24.6573315Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6573710Z - ✅ **Budget de triangles** 9665 triangles, 7156 sommets (max 60000)
+2026-11-09T21:51:24.6574264Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_1.prefab
+2026-11-09T21:51:24.6574936Z - ✅ **Échelle (hauteur)** 10.297 m (attendu 9.267158–11.32653), boîte 29.13×10.30×50.03, pieds à y=-5.632
+2026-11-09T21:51:24.6575749Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6576493Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6577219Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6577948Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6578676Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6579453Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6580254Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6580765Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6580903Z 
+2026-11-09T21:51:24.6581003Z ## T_Troncon_1_2.fbx (prop, rig None)
+2026-11-09T21:51:24.6581462Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_2/T_Troncon_1_2.fbx
+2026-11-09T21:51:24.6582072Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6582479Z - ✅ **Budget de triangles** 3002 triangles, 2080 sommets (max 60000)
+2026-11-09T21:51:24.6583148Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_2.prefab
+2026-11-09T21:51:24.6583798Z - ✅ **Échelle (hauteur)** 7.842 m (attendu 7.058225–8.626719), boîte 29.51×7.84×27.48, pieds à y=-5.884
+2026-11-09T21:51:24.6584516Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6585266Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6586093Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6586833Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6587604Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6588149Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6588288Z 
+2026-11-09T21:51:24.6588395Z ## T_Troncon_1_3.fbx (prop, rig None)
+2026-11-09T21:51:24.6588861Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_3/T_Troncon_1_3.fbx
+2026-11-09T21:51:24.6589321Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6589733Z - ✅ **Budget de triangles** 2386 triangles, 1870 sommets (max 60000)
+2026-11-09T21:51:24.6590290Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_3.prefab
+2026-11-09T21:51:24.6590954Z - ✅ **Échelle (hauteur)** 7.915 m (attendu 7.12352–8.706525), boîte 19.69×7.92×38.79, pieds à y=-15.271
+2026-11-09T21:51:24.6591664Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6592409Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6593155Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6593890Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6594642Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6595503Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6596324Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6596852Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6596988Z 
+2026-11-09T21:51:24.6597089Z ## T_Troncon_1_4.fbx (prop, rig None)
+2026-11-09T21:51:24.6597550Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_1_4/T_Troncon_1_4.fbx
+2026-11-09T21:51:24.6598036Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6598449Z - ✅ **Budget de triangles** 2359 triangles, 1663 sommets (max 60000)
+2026-11-09T21:51:24.6599009Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_1_4.prefab
+2026-11-09T21:51:24.6599685Z - ✅ **Échelle (hauteur)** 7.519 m (attendu 6.766927–8.270689), boîte 18.57×7.52×25.19, pieds à y=-15.588
+2026-11-09T21:51:24.6600402Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6601160Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6601885Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6602611Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6603522Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6604426Z - ✅ **Matériau C_Crystal** shader Korvalune/PBR Monde, base C_Crystal_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6604946Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6605083Z 
+2026-11-09T21:51:24.6605180Z ## T_Troncon_m1_0.fbx (prop, rig None)
+2026-11-09T21:51:24.6605752Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_0/T_Troncon_m1_0.fbx
+2026-11-09T21:51:24.6606235Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6606642Z - ✅ **Budget de triangles** 2564 triangles, 1891 sommets (max 60000)
+2026-11-09T21:51:24.6607203Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_0.prefab
+2026-11-09T21:51:24.6607874Z - ✅ **Échelle (hauteur)** 8.249 m (attendu 7.424075–9.073869), boîte 17.66×8.25×28.55, pieds à y=-0.857
+2026-11-09T21:51:24.6608588Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6609345Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6610098Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6610830Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6611621Z - ✅ **Matériau C_Mushroom** shader Korvalune/PBR Monde, base C_Mushroom_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6612384Z - ✅ **Matériau D_Bone** shader Korvalune/PBR Monde, base D_Bone_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6613176Z - ✅ **Matériau C_Web** shader Universal Render Pipeline/Lit, base C_Web_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6613698Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6613832Z 
+2026-11-09T21:51:24.6613947Z ## T_Troncon_m1_2.fbx (prop, rig None)
+2026-11-09T21:51:24.6614435Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_2/T_Troncon_m1_2.fbx
+2026-11-09T21:51:24.6614915Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6615321Z - ✅ **Budget de triangles** 573 triangles, 453 sommets (max 60000)
+2026-11-09T21:51:24.6615967Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_2.prefab
+2026-11-09T21:51:24.6616644Z - ✅ **Échelle (hauteur)** 8.029 m (attendu 7.225704–8.831416), boîte 15.16×8.03×34.64, pieds à y=-8.063
+2026-11-09T21:51:24.6617362Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6618131Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6618859Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6619589Z - ✅ **Matériau C_Root** shader Korvalune/PBR Monde, base C_Root_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6620090Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6620225Z 
+2026-11-09T21:51:24.6620336Z ## T_Troncon_m1_3.fbx (prop, rig None)
+2026-11-09T21:51:24.6620816Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_3/T_Troncon_m1_3.fbx
+2026-11-09T21:51:24.6621291Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6621692Z - ✅ **Budget de triangles** 12 triangles, 27 sommets (max 60000)
+2026-11-09T21:51:24.6622235Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_3.prefab
+2026-11-09T21:51:24.6622906Z - ✅ **Échelle (hauteur)** 1.981 m (attendu 1.783069–2.179307), boîte 8.95×1.98×6.48, pieds à y=-3.652
+2026-11-09T21:51:24.6623607Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6624092Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6624359Z 
+2026-11-09T21:51:24.6624467Z ## T_Troncon_m1_m1.fbx (prop, rig None)
+2026-11-09T21:51:24.6624948Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Terriers/T_Troncon_m1_m1/T_Troncon_m1_m1.fbx
+2026-11-09T21:51:24.6625641Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6626046Z - ✅ **Budget de triangles** 289 triangles, 197 sommets (max 60000)
+2026-11-09T21:51:24.6626604Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Terriers/T_Troncon_m1_m1.prefab
+2026-11-09T21:51:24.6627277Z - ✅ **Échelle (hauteur)** 7.828 m (attendu 7.045424–8.611073), boîte 16.62×7.83×17.46, pieds à y=-0.524
+2026-11-09T21:51:24.6627994Z - ✅ **Matériau C_Floor** shader Korvalune/PBR Monde, base C_Floor_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6628748Z - ✅ **Matériau C_Rock** shader Korvalune/PBR Monde, base C_Rock_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6629491Z - ✅ **Matériau C_Top** shader Korvalune/PBR Monde, base C_Top_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6629992Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6630123Z 
+2026-11-09T21:51:24.6630225Z ## M_Banc.fbx (prop, rig None)
+2026-11-09T21:51:24.6630617Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banc/M_Banc.fbx
+2026-11-09T21:51:24.6631033Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6631428Z - ✅ **Budget de triangles** 36 triangles, 72 sommets (max 40000)
+2026-11-09T21:51:24.6631930Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banc.prefab
+2026-11-09T21:51:24.6632519Z - ✅ **Échelle (hauteur)** 0.500 m (attendu 0.475–0.525), boîte 1.80×0.50×0.45, pieds à y=0.000
+2026-11-09T21:51:24.6633194Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6633688Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6633827Z 
+2026-11-09T21:51:24.6633928Z ## M_Banniere.fbx (prop, rig None)
+2026-11-09T21:51:24.6634350Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Banniere/M_Banniere.fbx
+2026-11-09T21:51:24.6634804Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6635194Z - ✅ **Budget de triangles** 60 triangles, 99 sommets (max 40000)
+2026-11-09T21:51:24.6635869Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Banniere.prefab
+2026-11-09T21:51:24.6636466Z - ✅ **Échelle (hauteur)** 6.000 m (attendu 5.7–6.3), boîte 1.21×6.00×0.12, pieds à y=0.000
+2026-11-09T21:51:24.6637139Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6637921Z - ✅ **Matériau T_ClothRed** shader Korvalune/PBR Monde, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6638761Z - ✅ **Matériau T_ClothCream** shader Korvalune/PBR Monde, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6639309Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6639444Z 
+2026-11-09T21:51:24.6639546Z ## M_Caisses.fbx (prop, rig None)
+2026-11-09T21:51:24.6639982Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Caisses/M_Caisses.fbx
+2026-11-09T21:51:24.6640416Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6640827Z - ✅ **Budget de triangles** 324 triangles, 648 sommets (max 40000)
+2026-11-09T21:51:24.6641347Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Caisses.prefab
+2026-11-09T21:51:24.6641970Z - ✅ **Échelle (hauteur)** 1.620 m (attendu 1.539–1.701), boîte 2.06×1.62×1.16, pieds à y=-0.010
+2026-11-09T21:51:24.6642699Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6643471Z - ✅ **Matériau T_Timber** shader Korvalune/PBR Monde, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6643983Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6644124Z 
+2026-11-09T21:51:24.6644232Z ## M_Charrette.fbx (prop, rig None)
+2026-11-09T21:51:24.6644673Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Charrette/M_Charrette.fbx
+2026-11-09T21:51:24.6645249Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6645744Z - ✅ **Budget de triangles** 396 triangles, 660 sommets (max 40000)
+2026-11-09T21:51:24.6646371Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Charrette.prefab
+2026-11-09T21:51:24.6647003Z - ✅ **Échelle (hauteur)** 1.475 m (attendu 1.40125–1.54875), boîte 2.04×1.48×4.39, pieds à y=0.000
+2026-11-09T21:51:24.6647683Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6648430Z - ✅ **Matériau T_Iron** shader Korvalune/PBR Monde, base T_Iron_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6649163Z - ✅ **Matériau T_Hay** shader Korvalune/PBR Monde, base T_Hay_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6649651Z - ✅ **Collider** mesh
+2026-11-09T21:51:24.6649788Z 
+2026-11-09T21:51:24.6649882Z ## M_Etal0.fbx (prop, rig None)
+2026-11-09T21:51:24.6650281Z - ✅ **Import du FBX** Assets/Korvalune/Art/World/Ville/M_Etal0/M_Etal0.fbx
+2026-11-09T21:51:24.6650704Z - ✅ **Import sans erreur ni avertissement** 
+2026-11-09T21:51:24.6651099Z - ✅ **Budget de triangles** 756 triangles, 1512 sommets (max 40000)
+2026-11-09T21:51:24.6651635Z - ✅ **Prefab créé** Assets/Korvalune/Resources/Prefabs/World/Ville/M_Etal0.prefab
+2026-11-09T21:51:24.6652262Z - ✅ **Échelle (hauteur)** 2.960 m (attendu 2.811601–3.107558), boîte 4.46×2.96×2.41, pieds à y=-0.010
+2026-11-09T21:51:24.6652956Z - ✅ **Matériau W_Wood** shader Korvalune/PBR Monde, base W_Wood_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6653721Z - ✅ **Matériau T_Timber** shader Korvalune/PBR Monde, base T_Timber_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6654520Z - ✅ **Matériau T_ClothRed** shader Korvalune/PBR Monde, base T_ClothRed_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6655354Z - ✅ **Matériau T_ClothCream** shader Korvalune/PBR Monde, base T_ClothCream_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6656261Z - ✅ **Matériau T_Plant** shader Korvalune/PBR Monde, base T_Plant_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.6657080Z - ✅ **Matériau T_ClothBlue** shader Korvalune/PBR Monde, base T_ClothBlue_BaseMap, normale oui, métal/lissé oui, AO oui
+2026-11-09T21:51:24.7277087Z - ✅ **Matériau T_ClothGreen** shStart importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '102a3e2bf620ffe21cc1f5adcf9e74fc') in 0.001492405 seconds
+2026-11-09T21:51:24.7300850Z Start importing Assets/Korvalune/Rendering/Korvalune_URP.asset using Guid(b12fccb66ff889562925de1523ea6335) (NativeFormatImporter) -> (artifact id: '8267674c5657de7ed964a34d50b2044e') in 0.001140141 seconds
+2026-11-09T21:51:24.7356724Z Refreshing native plugins compatible for Editor in 0.24 ms, found 0 plugins.
+2026-11-09T21:51:24.7364841Z Preloading 0 native plugins for Editor in 0.00 ms.
+2026-11-09T21:51:24.7365966Z Asset Pipeline Refresh (id=a29bedf970e372457bf24628baac0a88): Total: 0.027 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+2026-11-09T21:51:24.7847462Z Unloading 3242 unused Assets / (0.53 GB). Loaded Objects now: 7732.
+2026-11-09T21:51:24.7857744Z Memory consumption went from 2.23 GB to 1.69 GB.
+2026-11-09T21:51:24.7858420Z Total: 45.816124 ms (FindLiveObjects: 0.708396 ms CreateObjectMapping: 0.156273 ms MarkObjects: 35.473679 ms  DeleteObjects: 9.476424 ms)
+2026-11-09T21:51:24.7858944Z 
+2026-11-09T21:51:25.2333007Z [Physics::Module] Cleanup current backned.
+2026-11-09T21:51:25.2333562Z [Physics::Module] Id: 0xf2b8ea05
+2026-11-09T21:51:25.2334170Z [Licensing::IpcConnector] License Notification channel disconnected successfully.
+2026-11-09T21:51:25.2334685Z [Licensing::IpcConnector] License Client channel disconnected successfully.
+2026-11-09T21:51:25.2508136Z AcceleratorClientConnectionCallback - disconnected - :0
+2026-11-09T21:51:25.2593256Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-09T21:51:25.2593881Z       Application is shutting down...
+2026-11-09T21:51:25.2677102Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-11-09T21:51:25.2677956Z       ALC ILPP context 1 is unloading
+2026-11-09T21:51:29.8035573Z Cleanup mono
+2026-11-09T21:51:29.9674002Z debugger-agent: Unable to listen on 44
+2026-11-09T21:51:30.0221744Z [Package Manager] Server process was shutdown
+2026-11-09T21:51:30.0412292Z Checking for leaked weakptr:
+2026-11-09T21:51:30.0412592Z   Found no leaked weakptrs.
+2026-11-09T21:51:30.0715854Z ##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1794261090070,"processId":196,"allocatedMemory":17980811,"memoryLabels":[{"Default":21029},{"Permanent":16080},{"Thread":1084616},{"Manager":804698},{"VertexData":8},{"Geometry":408},{"Texture":160},{"Shader":1102523},{"Material":24},{"GfxDevice":36984},{"Animation":392},{"Audio":4032},{"FontEngine":320
+2026-11-09T21:51:30.4617286Z Build failed, with exit code 1
+2026-11-09T21:51:30.7479204Z 
+2026-11-09T21:51:30.7479760Z ###########################
+2026-11-09T21:51:30.7480148Z #       Build output      #
+2026-11-09T21:51:30.7480387Z ###########################
+2026-11-09T21:51:30.7480543Z 
+2026-11-09T21:51:30.7502429Z total 8.0K
+2026-11-09T21:51:30.7502640Z drwxr-xr-x 2 1001 1001 4.0K Nov  9 21:33 .
+2026-11-09T21:51:30.7502864Z drwxr-xr-x 3 1001 1001 4.0K Nov  9 21:33 ..
+2026-11-09T21:51:30.8674654Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-11-09T21:51:30.8675521Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-11-09T21:51:30.8676097Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-11-09T21:51:30.8676554Z [UnityConnectServicesConfig] Service configuration:
+2026-11-09T21:51:30.8676957Z     "servicesConfigBaseUrl": "",
+2026-11-09T21:51:30.8677223Z     "disableServicesWindow": false,
+2026-11-09T21:51:30.8677495Z     "disableUserLogin": false,
+2026-11-09T21:51:30.8677761Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-11-09T21:51:30.8678043Z     "clientConnectTimeoutSec": 5,
+2026-11-09T21:51:30.8678226Z     "clientHandshakeTimeoutSec": 10,
+2026-11-09T21:51:30.8678437Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-11-09T21:51:30.8678656Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-11-09T21:51:30.8678854Z     "licensingServiceBaseUrl": "",
+2026-11-09T21:51:30.8679040Z     "enableProxyAutoconfig": "false"
+2026-11-09T21:51:30.8679163Z 
+2026-11-09T21:51:30.9023479Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-11-09T21:51:30.9023854Z Branch:                  6000.0/staging
+2026-11-09T21:51:30.9024137Z Build type:              Release
+2026-11-09T21:51:30.9024389Z Batch mode:              YES
+2026-11-09T21:51:30.9024630Z System name:             Linux
+2026-11-09T21:51:30.9025232Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
+2026-11-09T21:51:30.9025729Z Kernel version:          7.0.0-1019-azure
+2026-11-09T21:51:30.9026014Z Architecture:            x86_64
+2026-11-09T21:51:30.9026440Z Available memory:        15983 MB
+2026-11-09T21:51:31.5036026Z User *** logged in successfully
+2026-11-09T21:51:31.5036449Z [UnityConnect::TryLogin] Request Succeeded.
+2026-11-09T21:51:31.5036863Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-11-09T21:51:31.5037854Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-11-09T21:51:31.5054692Z [Licensing::Module] Successfully launched the LicensingClient (PId: 439)
+2026-11-09T21:51:31.8817058Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-09T21:51:31.880785Z"
+2026-11-09T21:51:31.8818161Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-11-09T21:51:31.9217165Z [Licensing::Client] Handshaking with LicensingClient:
+2026-11-09T21:51:31.9217829Z   Version:                 1.16.0+1c867a9
+2026-11-09T21:51:31.9218344Z   Session Id:              b1a657876ec947c2adf56d682b2dce9e
+2026-11-09T21:51:31.9218818Z   Correlation Id:          e8abbaaaaad00d8b99be30f0b8dc1375
+2026-11-09T21:51:31.9219185Z   External correlation Id: 13432055695781399
+2026-11-09T21:51:31.9219539Z   Machine Id:              ytm0MJNSGX+hBns2zrhbxE6Mwzc=
+2026-11-09T21:51:31.9228006Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.38s, validation: 0.04s, handshake: 0.00s)
+2026-11-09T21:51:31.9229390Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-09T21:51:31.921453Z"
+2026-11-09T21:51:31.9230440Z [Licensing::Module] Connected to LicensingClient (PId: 439, launch time: 0.00, total connection time: 0.42s)
+2026-11-09T21:51:31.9361893Z [Licensing::Client] Successfully updated the access token
+2026-11-09T21:51:31.9362876Z [Licensing::Module] Successfully updated the access token C4RzdkTFCz...
+2026-11-09T21:51:33.2468605Z [Licensing::Client] Successfully processed license management request
+2026-11-09T21:51:33.2469019Z [Licensing::Module] Successfully returned the entitlement license
+2026-11-09T21:51:33.2711626Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-11-09T21:51:34.7991830Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-11-09T21:51:34.8109792Z 
+2026-11-09T21:51:34.8111326Z ###########################
+2026-11-09T21:51:34.8112739Z #         Failure         #
+2026-11-09T21:51:34.8113121Z ###########################
+2026-11-09T21:51:34.8113259Z 
+2026-11-09T21:51:34.8113417Z Please note that the exit code is not very descriptive.
+2026-11-09T21:51:34.8113804Z Most likely it will not help you solve the issue.
+2026-11-09T21:51:34.8114056Z 
+2026-11-09T21:51:34.8114398Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-11-09T21:51:34.8114905Z 
+2026-11-09T21:51:34.9779612Z ##[error]Build failed with exit code 1
