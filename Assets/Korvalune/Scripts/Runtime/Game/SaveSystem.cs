@@ -26,6 +26,7 @@ namespace Korvalune.Game
         public List<int> loadout = new List<int>();
         public List<ItemSave> inventory = new List<ItemSave>();
         public List<ItemSave> equipped = new List<ItemSave>();
+        public string armorDye = "";                          // teinture de toute l'armure du héros (vide = d'origine)
         public Wallet wallet = new Wallet();
         public AppearanceSave look = new AppearanceSave();
         public string created, lastPlayed;

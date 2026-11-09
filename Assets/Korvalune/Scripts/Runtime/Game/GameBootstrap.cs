@@ -127,7 +127,7 @@ namespace Korvalune.Game
             // équipement : caractéristiques de base (niveau) + objets portés
             var eq = hero.AddComponent<Equipment>(); eq.Init();
             if (save != null) eq.FromSave(save.equipped);
-            hero.AddComponent<HeroOutfit>().Init();
+            var outfit = hero.AddComponent<HeroOutfit>(); outfit.ArmorDye = save != null ? save.armorDye ?? "" : ""; outfit.Init();
             if (Application.isPlaying) hero.AddComponent<WeaponVisual>();               // arme et main gauche visibles selon l'objet porté
             StripChildColliders(hero);     // haillons au départ, la tenue apparaît à mesure qu'on s'équipe
             h.hp = h.maxHp;
@@ -274,6 +274,7 @@ namespace Korvalune.Game
             s.level = Player.level; s.xp = Player.xp; s.skillPoints = Player.skillPoints;
             if (Runner) { s.skillRanks = new List<int>(Runner.ranks); s.loadout = new List<int>(Runner.loadout); if (Runner.variants != null) s.skillVariants = new List<int>(Runner.variants); }
             var eqp = Player.GetComponent<Equipment>(); if (eqp) s.equipped = eqp.ToSave();
+            var outfit = Player.GetComponent<HeroOutfit>(); if (outfit) s.armorDye = outfit.ArmorDye ?? "";
             s.wallet = Player.wallet; s.gold = Player.wallet.gold;
             s.inventory = new List<ItemSave>(Player.inventory); s.playSeconds += 30f; s.lastPlayed = System.DateTime.UtcNow.ToString("o");
             SaveSystem.Save();

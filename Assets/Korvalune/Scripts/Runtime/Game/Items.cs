@@ -21,6 +21,7 @@ namespace Korvalune.Game
         public string cls = "";                              // classe à laquelle l'objet est réservé (vide = toutes)
         public string legendaryPower = "";                   // pouvoir légendaire (Powers)
         public string set = "";                              // ensemble auquel appartient la pièce
+        public string dye = "";                              // teinture (voir Dye) : couleur unie, mélange ou arc-en-ciel ; vide = d'origine
         public int upgrade;                                  // qualité +0 à +10 (amélioration chez le forgeron)
         public const int MaxUpgrade = 10;
         /// <summary>Multiplicateur de qualité : +6 % par niveau, et un palier de +10 % aux qualités +5 et +10.</summary>
