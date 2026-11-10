@@ -157,6 +157,7 @@ namespace Korvalune.EditorTools
             // EnsureCastleReadable() : désactivé, la réimportation du FBX en plein build faisait échouer le CI (percement du passage suspendu)
             var castle = Place("World/ChateauKorvalune", new Vector3(0, Base + 1.5f - 8f + 8f, 0), 0);
             CarveCastleDoor(castle);                         // porte : retire le vantail de la collision et du rendu
+            AlignCastleToGround(castle);                     // le sol du passage rejoint le terrain devant la porte
             TownBuilder.Build();
             Hamlets();
             Roadside();
@@ -568,6 +569,27 @@ namespace Korvalune.EditorTools
                 var mc = mf.GetComponent<MeshCollider>(); if (mc) mc.sharedMesh = mf.sharedMesh;
             }
             Debug.Log($"[Château] porte : {removed} triangles retirés, pieds y={feet:0.00}, façade z={frontZ:0.00}");
+        }
+
+        /// <summary>Le château était posé à hauteur fixe (Base + 1,5 m) : le sol du passage restait au-dessus du terrain
+        /// devant la porte, et le héros marchait dans le vide au pied de l'entrée. On mesure le sol du passage et on
+        /// décale le château pour qu'il rejoigne le terrain.</summary>
+        static void AlignCastleToGround(GameObject castle)
+        {
+            if (!castle) return;
+            var rens = castle.GetComponentsInChildren<Renderer>(true);
+            if (rens.Length == 0) return;
+            var wb = rens[0].bounds; foreach (var r in rens) wb.Encapsulate(r.bounds);
+            float frontZ = wb.min.z;
+            float terrainFront = Height(0f, frontZ - 2f);                       // terrain où arrive le héros, devant la porte
+            Physics.SyncTransforms();
+            var origin = new Vector3(0f, wb.min.y + 4f, frontZ + 6f);            // sous le linteau, dans le passage
+            if (!Physics.Raycast(origin, Vector3.down, out var hit, 8f, ~0, QueryTriggerInteraction.Ignore) || hit.collider.transform.root != castle.transform)
+            { Debug.Log("[Château] alignement : sol du passage introuvable, château non déplacé"); return; }
+            float delta = terrainFront - hit.point.y;
+            castle.transform.position += Vector3.up * delta;
+            Physics.SyncTransforms();
+            Debug.Log($"[Château] alignement : terrain devant la porte y={terrainFront:0.00}, sol du passage y={hit.point.y:0.00}, décalage {delta:+0.00;-0.00} m");
         }
 
         // vérifie que le passage de la porte d'entrée est libre à hauteur du héros ; liste les obstacles rencontrés
