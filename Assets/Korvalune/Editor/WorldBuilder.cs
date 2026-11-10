@@ -349,6 +349,7 @@ namespace Korvalune.EditorTools
                         if (c.magnitude < TownBuilder.WallR + 6 || NearHamlet(c, 18) || RiverDist(c) < 12) continue;
                         float sd = rng.Next(2) == 0 ? 1 : -1; var p = c + side * sd * (5.2f + (float)rng.NextDouble() * 1.5f);
                         if (RoadDist(p) < 4.2f) continue;
+                        if (TownBuilder.InMainStreet(p)) continue;   // couloir de la rue principale laissé libre
                         float yaw = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg + (float)rng.NextDouble() * 40 - 20;
                         GameObject g;
                         if (c.magnitude < 140 && rng.Next(3) == 0) g = Ville("M_Lanterne", Ground(p) - Vector3.up * 0.05f, yaw);

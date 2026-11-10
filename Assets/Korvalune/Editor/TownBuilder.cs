@@ -207,8 +207,12 @@ namespace Korvalune.EditorTools
 
         static IEnumerable<Vector2> RingSpots(float r, int n) { for (int k = 0; k < n; k++) { float a = (k * 137.5f) % 360 * Mathf.Deg2Rad; yield return new Vector2(Mathf.Sin(a), Mathf.Cos(a)) * r; } }
 
+        /// <summary>Couloir de la rue principale (porte sud -> château), dégagé de tout objet : même tracé que le contrôle « rue principale praticable ».</summary>
+        public static bool InMainStreet(Vector2 q) => Mathf.Abs(q.x) < 3.5f && q.y > -80f && q.y < -36f;
+
         static void Lamp(Vector2 q)
         {
+            if (InMainStreet(q)) return;
             var go = Put("M_Lanterne", G(q), (Mathf.Atan2(q.x, q.y) * Mathf.Rad2Deg) + 90);
             if (go) taken.Add(new Spot { p = q, r = 0.6f });
         }
