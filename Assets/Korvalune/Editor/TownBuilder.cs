@@ -62,6 +62,7 @@ namespace Korvalune.EditorTools
 
         static bool Free(Vector2 p, float r, float street = 0)
         {
+            if (InMainStreet(p)) return false;                    // couloir de la rue principale : jamais d'objet
             if (p.magnitude < 40f + r || p.magnitude > WallR - 3.5f - r) return false;
             if (WorldBuilder.RiverDist(p) < 14 + r) return false;
             if (street > 0 && StreetDist(p) < street) return false;
