@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-11-05 08:35 UTC
+# Rapport d'intégration Unity — 2026-11-10 06:25 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 287 modèle(s) ModelForge trouvé(s)
 - 0 modèle(s) intégré(s), 287 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-11-05 08:36 UTC
+# Rapport d'intégration Unity — 2026-11-10 06:26 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 287 modèle(s) ModelForge trouvé(s)
@@ -3170,11 +3170,11 @@
 - ✅ **Pièces importées (modèle + prefab + peau)** 140/140, jusqu'à 0 blendshapes
 - ✅ **Scène vitrine** Assets/Korvalune/Scenes/Showcase.unity
 
-_169 captures écrites dans ci-out/ (OpenGLCore) en 6.8 min._
+_169 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-11-05 08:44 UTC
+# Rapport d'intégration Unity — 2026-11-10 06:33 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 287 modèle(s) ModelForge trouvé(s)
@@ -3186,12 +3186,13 @@ _169 captures écrites dans ci-out/ (OpenGLCore) en 6.8 min._
 - ✅ **Château** 
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon, abbe, wendigo, basilic, tisseuse, salamandre, voyant
-- ✅ **Ville : échoppes des marchands** Marchand, Marchande de curiosités, Mystique, Forgeron, Armurier, Joaillier, Reliquaire Céleste, Coffre, Alchimiste
+- ✅ **Château : porte franchissable** passage libre sur 24 m
+- ✅ **Ville : échoppes des marchands** Marchand, Joaillier, Reliquaire Céleste, Forgeron, Mystique, Coffre, Alchimiste, Marchande de curiosités, Armurier
 - ✅ **Ville : maisons** 41 maisons
-- ✅ **Ville : rue principale praticable jusqu'au château** dégagée
+- ❌ **Ville : rue principale praticable jusqu'au château** M_Lanterne en z=-48
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
 - ✅ **Montures** ci-out/Jeu_17_monture_*.png — Animator sur la racine, posture Sk_Monte
-- ✅ **Butin et inventaire** 1 objets portés, 25 dans le sac — Dégâts 152   Vie 481   Armure 2 Critique 12 %   Attaque 1.67/s   Recharge −6 % Mana 100 (+3/s)   Régén. vie 1.5/s   Vitesse 6.6 m/s Dégâts par seconde ≈ 283   Force 118
+- ✅ **Butin et inventaire** 4 objets portés, 22 dans le sac — Dégâts 781   Vie 220   Armure 118 Critique 27.3 %   Attaque 1.77/s   Recharge −12 % Mana 100 (+13.1/s)   Régén. vie 1.5/s   Vitesse 6.6 m/s Dégâts par seconde ≈ 1755   Force 570   <color=#ff9a3c>1 pouvoir(s) légendaire(s)</color>
 - ✅ **Captures de la vallée** ci-out/Jeu_*.png
 - ✅ **Départ du héros au sec (au-dessus de l'eau)** y = 13.0, eau à 10.4
 - ✅ **Camp « squelette » au sec** y = 12.0
@@ -3246,6 +3247,8 @@ _169 captures écrites dans ci-out/ (OpenGLCore) en 6.8 min._
 - ✅ **Région : Canyon Écarlate** ci-out/Region_Canyon_*.png, 11 camps, niveaux 150 à 175
 - ✅ **Scène : Abîme du Néant** Assets/Korvalune/Scenes/Korvalune_Abime.unity, 11 camps, portail de retour : 1
 - ✅ **Région : Abîme du Néant** ci-out/Region_Abime_*.png, 11 camps, niveaux 175 à 200
+- ✅ **Scène : Catacombes de Verre** Assets/Korvalune/Scenes/Korvalune_Catacombes.unity, 11 camps, portail de retour : 1
+- ✅ **Région : Catacombes de Verre** ci-out/Region_Catacombes_*.png, 11 camps, niveaux 185 à 200
 
 ## Brèches (niveaux générés)
 - ✅ **Scène des brèches** Assets/Korvalune/Scenes/Korvalune_Breche.unity
@@ -3263,6 +3266,6 @@ _169 captures écrites dans ci-out/ (OpenGLCore) en 6.8 min._
 - ✅ **Captures du créateur** ci-out/Createur_*.png
 
 ## Journal Unity (erreurs et avertissements)
-- ❌ Error: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Aucun.
 
-**RÉSULTAT : tout est valide.**
+**RÉSULTAT : 1 vérification(s) en échec.**
