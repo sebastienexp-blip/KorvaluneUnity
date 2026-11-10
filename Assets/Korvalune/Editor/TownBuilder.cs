@@ -119,6 +119,7 @@ namespace Korvalune.EditorTools
                 ("S_Alchimiste", MerchantKind.Alchimiste, 4.4f, new Vector3(0, 0.12f, 0.4f), "S_Alchimiste_Toit"),
                 ("S_Mystique", MerchantKind.Mystique, 4.6f, new Vector3(0, 0.12f, 1.3f), "S_Mystique_Toit"),
                 ("S_Curiosites", MerchantKind.Curiosites, 4.4f, new Vector3(-2.4f, 0f, -1.6f), null),
+                ("S_Curiosites", MerchantKind.Teinturier, 4.4f, new Vector3(2.4f, 0f, -1.6f), null),
             };
             foreach (var s in shops)
             {

@@ -67,6 +67,7 @@ namespace Korvalune.Game
 
         public void OpenShop(Merchant m)
         {
+            if (m.kind == MerchantKind.Teinturier) { if (player) DyeWindow.Open(player); return; }   // le teinturier a sa propre fenêtre
             if (!shopPanel || !player) return;
             if (bagPanel) bagPanel.SetActive(false); if (treePanel) treePanel.SetActive(false);
             shopOwner = m; tabIdx = 0; sel = null; multiSel.Clear(); rerollOffer = null;
