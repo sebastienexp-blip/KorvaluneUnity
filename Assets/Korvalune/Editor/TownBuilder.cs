@@ -187,7 +187,8 @@ namespace Korvalune.EditorTools
             void Lamps(Vector2 a, Vector2 b, float step)
             {
                 var d = b - a; float L = d.magnitude; var t = d / L; var n = new Vector2(-t.y, t.x); int k = 0;
-                for (float s = 4; s < L; s += step, k++) { var q = a + t * s + n * (k % 2 == 0 ? 3.9f : -3.9f); if (q.magnitude < WallR - 2 && q.magnitude > 39 && Free(q, 0.5f)) Lamp(q); }
+                for (float s = 4; s < L; s += step, k++) { var q = a + t * s + n * (k % 2 == 0 ? 3.9f : -3.9f); if (q.magnitude < WallR - 2 && q.magnitude > 39 && Free(q, 0.5f, 2.5f)) Lamp(q); }   // lanterne hors de la chaussée pavée
+
             }
             Lamps(Main[0], Main[1], 14);
             for (int k = 0; k < 18; k++) { float a = k / 18f * Mathf.PI * 2; var q = new Vector2(Mathf.Sin(a), Mathf.Cos(a)) * (RingR + 3.9f); if (Free(q, 0.5f)) Lamp(q); }

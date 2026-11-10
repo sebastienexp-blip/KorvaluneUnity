@@ -161,7 +161,7 @@ jobs:
           git add -A Assets ProjectSettings Packages ci-report.md ci-out 2>/dev/null || true
           if git diff --cached --quiet; then echo "rien à renvoyer"; exit 0; fi
           git commit -m "CI Unity : fichiers générés et rapport [skip ci]"
-          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase -X ours origin travail && git push origin HEAD:travail && break; sleep 5; done
 
       - name: Sauver le cache Library
         if: always()
@@ -210,4 +210,4 @@ jobs:
           git config user.name "korvalune-ci"; git config user.email "ci@korvalune.invalid"
           git add ci-out/unity-job.log
           git commit -m "CI Unity : journal du job [skip ci]" || exit 0
-          for i in 1 2 3; do git pull --rebase -X ours origin main && git push origin HEAD:main && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase -X ours origin travail && git push origin HEAD:travail && break; sleep 5; done
