@@ -1,7 +1,321 @@
-# Journal de la construction Android (run 42783761129)
+# Journal de la construction Android (run 42791739170)
 ## Lignes importantes
+1695:2026-11-10T09:50:14.6889660Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+1884:2026-11-10T09:51:06.5019466Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2012:2026-11-10T09:54:56.0306739Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+24427:2026-11-10T10:10:49.9259266Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+24459:2026-11-10T10:10:50.1447472Z #30 0x006095f2774473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+24460:2026-11-10T10:10:50.1448153Z #31 0x006095f274a663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+24474:2026-11-10T10:12:00.0770882Z Build failed, with exit code 139
+24538:2026-11-10T10:12:05.1917709Z Please note that the exit code is not very descriptive.
+24543:2026-11-10T10:12:05.5037162Z ##[error]Build failed with exit code 139
+24548:2026-11-10T10:12:05.5290232Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+24549:2026-11-10T10:12:05.5290825Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+24599:2026-11-10T10:12:05.8495097Z # Construction de l'APK Android
+24601:2026-11-10T10:12:05.8497632Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
+24618:2026-11-10T10:12:05.8505204Z - Code mis à jour depuis le jeu : Korvalune.Runtime 677 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
+24620:2026-11-10T10:12:05.8506010Z - APK : 129.3 Mo, version 0.1.131
+24923:2026-11-10T10:12:29.1811312Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-﻿<?xml version="1.0" encoding="utf-8"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.
-RequestId:95181050-d01e-00b1-78ef-7089e4000000
-Time:2026-11-10T08:39:35.3472108Z</Message></Error>
+2026-11-10T10:10:46.4776578Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (625143611) doesn't exist!
+2026-11-10T10:10:46.4777179Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1013105592) doesn't exist!
+2026-11-10T10:10:46.4777765Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (118190417) doesn't exist!
+2026-11-10T10:10:46.4778530Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1247197058) doesn't exist!
+2026-11-10T10:10:46.4779304Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (902938743) doesn't exist!
+2026-11-10T10:10:46.4779907Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (510291797) doesn't exist!
+2026-11-10T10:10:46.4780584Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1897781161) doesn't exist!
+2026-11-10T10:10:46.4781215Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (918211660) doesn't exist!
+2026-11-10T10:10:46.4781821Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (515286228) doesn't exist!
+2026-11-10T10:10:46.4782427Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (908797554) doesn't exist!
+2026-11-10T10:10:46.4783044Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (306881882) doesn't exist!
+2026-11-10T10:10:46.4783659Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1318901522) doesn't exist!
+2026-11-10T10:10:46.4784276Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1882915287) doesn't exist!
+2026-11-10T10:10:46.4784877Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (52755510) doesn't exist!
+2026-11-10T10:10:46.4785560Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (810666242) doesn't exist!
+2026-11-10T10:10:46.4786161Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1918906759) doesn't exist!
+2026-11-10T10:10:46.4786831Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2039868636) doesn't exist!
+2026-11-10T10:10:46.4787480Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (635968443) doesn't exist!
+2026-11-10T10:10:46.4788072Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (769517023) doesn't exist!
+2026-11-10T10:10:46.4798181Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1322824900) doesn't exist!
+2026-11-10T10:10:46.4799107Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1362207247) doesn't exist!
+2026-11-10T10:10:46.4800045Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1615662618) doesn't exist!
+2026-11-10T10:10:46.4800997Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1821507321) doesn't exist!
+2026-11-10T10:10:46.4802138Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (149090962) doesn't exist!
+2026-11-10T10:10:46.4803055Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (107410804) doesn't exist!
+2026-11-10T10:10:46.4803984Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2050936271) doesn't exist!
+2026-11-10T10:10:46.4804882Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1132786304) doesn't exist!
+2026-11-10T10:10:46.4805805Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (916915636) doesn't exist!
+2026-11-10T10:10:46.4806699Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (41933674) doesn't exist!
+2026-11-10T10:10:46.4807629Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (962600054) doesn't exist!
+2026-11-10T10:10:46.4808541Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (799760320) doesn't exist!
+2026-11-10T10:10:46.4809603Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2092501672) doesn't exist!
+2026-11-10T10:10:46.4810492Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (688014549) doesn't exist!
+2026-11-10T10:10:46.4811293Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (318815141) doesn't exist!
+2026-11-10T10:10:46.4811924Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (513387269) doesn't exist!
+2026-11-10T10:10:46.4812555Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2042991991) doesn't exist!
+2026-11-10T10:10:46.4813165Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (156659158) doesn't exist!
+2026-11-10T10:10:46.4813763Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (258808529) doesn't exist!
+2026-11-10T10:10:46.4814377Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1215763076) doesn't exist!
+2026-11-10T10:10:46.4815026Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1797701845) doesn't exist!
+2026-11-10T10:10:46.4815649Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1284698617) doesn't exist!
+2026-11-10T10:10:46.4816332Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (696108050) doesn't exist!
+2026-11-10T10:10:46.4816959Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1527743382) doesn't exist!
+2026-11-10T10:10:46.4817660Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (257772269) doesn't exist!
+2026-11-10T10:10:46.4818286Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (142511153) doesn't exist!
+2026-11-10T10:10:46.4819110Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2018429489) doesn't exist!
+2026-11-10T10:10:46.4819737Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1278833569) doesn't exist!
+2026-11-10T10:10:46.4820343Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (344754561) doesn't exist!
+2026-11-10T10:10:46.4821107Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1553899820) doesn't exist!
+2026-11-10T10:10:46.4821750Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (51632380) doesn't exist!
+2026-11-10T10:10:46.4822465Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2034509109) doesn't exist!
+2026-11-10T10:10:46.4823082Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1330700626) doesn't exist!
+2026-11-10T10:10:46.4823669Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (139129610) doesn't exist!
+2026-11-10T10:10:46.4824320Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1582599977) doesn't exist!
+2026-11-10T10:10:46.4824934Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2111405937) doesn't exist!
+2026-11-10T10:10:46.4825542Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (241776288) doesn't exist!
+2026-11-10T10:10:46.4826147Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1118998341) doesn't exist!
+2026-11-10T10:10:46.4826756Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (958615971) doesn't exist!
+2026-11-10T10:10:46.4827364Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (22959034) doesn't exist!
+2026-11-10T10:10:46.4827982Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2078735916) doesn't exist!
+2026-11-10T10:10:46.4828603Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1874522088) doesn't exist!
+2026-11-10T10:10:46.4829479Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1321631903) doesn't exist!
+2026-11-10T10:10:46.4830088Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (934496702) doesn't exist!
+2026-11-10T10:10:46.4830699Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1774854031) doesn't exist!
+2026-11-10T10:10:46.4831323Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (771877787) doesn't exist!
+2026-11-10T10:10:46.4832057Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2056283015) doesn't exist!
+2026-11-10T10:10:46.4832653Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2093243495) doesn't exist!
+2026-11-10T10:10:46.4833308Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1789244714) doesn't exist!
+2026-11-10T10:10:46.4833994Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2111119885) doesn't exist!
+2026-11-10T10:10:46.4834597Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (331526683) doesn't exist!
+2026-11-10T10:10:46.4835278Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1760543513) doesn't exist!
+2026-11-10T10:10:46.4835899Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1948020593) doesn't exist!
+2026-11-10T10:10:46.4836504Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1692484358) doesn't exist!
+2026-11-10T10:10:46.4837119Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1732481702) doesn't exist!
+2026-11-10T10:10:46.4837735Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (193129911) doesn't exist!
+2026-11-10T10:10:46.4838356Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (855932213) doesn't exist!
+2026-11-10T10:10:46.4839194Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (29379621) doesn't exist!
+2026-11-10T10:10:46.4839849Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1253364529) doesn't exist!
+2026-11-10T10:10:46.4840505Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2071492811) doesn't exist!
+2026-11-10T10:10:46.4841109Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2131345392) doesn't exist!
+2026-11-10T10:10:46.4841692Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1286664684) doesn't exist!
+2026-11-10T10:10:46.4842437Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (137832797) doesn't exist!
+2026-11-10T10:10:46.4843056Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (304358864) doesn't exist!
+2026-11-10T10:10:46.4843654Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1740083247) doesn't exist!
+2026-11-10T10:10:46.4844274Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2039940368) doesn't exist!
+2026-11-10T10:10:46.4844880Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (254407670) doesn't exist!
+2026-11-10T10:10:46.4845549Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (250050286) doesn't exist!
+2026-11-10T10:10:46.4846151Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1650433080) doesn't exist!
+2026-11-10T10:10:46.4846819Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1597321137) doesn't exist!
+2026-11-10T10:10:46.4847459Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (483632032) doesn't exist!
+2026-11-10T10:10:46.4848067Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1090890276) doesn't exist!
+2026-11-10T10:10:46.4848669Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1638637455) doesn't exist!
+2026-11-10T10:10:46.4849465Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1832239632) doesn't exist!
+2026-11-10T10:10:46.4850064Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (14395911) doesn't exist!
+2026-11-10T10:10:46.4850666Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (980635568) doesn't exist!
+2026-11-10T10:10:46.4851372Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (600173286) doesn't exist!
+2026-11-10T10:10:46.4851964Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (748172138) doesn't exist!
+2026-11-10T10:10:46.4852562Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (676481048) doesn't exist!
+2026-11-10T10:10:46.4853373Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1860103741) doesn't exist!
+2026-11-10T10:10:46.4853992Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1063650962) doesn't exist!
+2026-11-10T10:10:46.4854586Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1078497477) doesn't exist!
+2026-11-10T10:10:46.4855221Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1367537922) doesn't exist!
+2026-11-10T10:10:46.4855835Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (748666568) doesn't exist!
+2026-11-10T10:10:46.4856459Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (367875988) doesn't exist!
+2026-11-10T10:10:46.4857055Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2136850654) doesn't exist!
+2026-11-10T10:10:46.4857732Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1161239288) doesn't exist!
+2026-11-10T10:10:46.4858357Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1980360778) doesn't exist!
+2026-11-10T10:10:46.4859145Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (17660648) doesn't exist!
+2026-11-10T10:10:46.4859750Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1036055055) doesn't exist!
+2026-11-10T10:10:46.4860371Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1057063311) doesn't exist!
+2026-11-10T10:10:46.4860994Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (871928175) doesn't exist!
+2026-11-10T10:10:46.4861593Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1019217456) doesn't exist!
+2026-11-10T10:10:46.4862230Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1790775256) doesn't exist!
+2026-11-10T10:10:46.4862831Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1558844397) doesn't exist!
+2026-11-10T10:10:46.4863433Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1225316351) doesn't exist!
+2026-11-10T10:10:46.4864254Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1330855697) doesn't exist!
+2026-11-10T10:10:46.4864889Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (223831745) doesn't exist!
+2026-11-10T10:10:46.4865518Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (719839770) doesn't exist!
+2026-11-10T10:10:46.4866112Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1631386681) doesn't exist!
+2026-11-10T10:10:46.4866715Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1269903093) doesn't exist!
+2026-11-10T10:10:46.4867367Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (526847508) doesn't exist!
+2026-11-10T10:10:46.4867975Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1854186117) doesn't exist!
+2026-11-10T10:10:46.4868565Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (549539015) doesn't exist!
+2026-11-10T10:10:46.4869414Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (185327931) doesn't exist!
+2026-11-10T10:10:46.4870017Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (428676085) doesn't exist!
+2026-11-10T10:10:46.4870728Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2143697340) doesn't exist!
+2026-11-10T10:10:46.4871366Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1972100417) doesn't exist!
+2026-11-10T10:10:46.4871966Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (86798400) doesn't exist!
+2026-11-10T10:10:46.4872591Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1860994424) doesn't exist!
+2026-11-10T10:10:46.4873186Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1529849675) doesn't exist!
+2026-11-10T10:10:46.4873792Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (658390936) doesn't exist!
+2026-11-10T10:10:46.4874527Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1144386519) doesn't exist!
+2026-11-10T10:10:46.4875204Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1179543304) doesn't exist!
+2026-11-10T10:10:46.4875795Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1093122396) doesn't exist!
+2026-11-10T10:10:46.4876407Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (944465020) doesn't exist!
+2026-11-10T10:10:46.4877017Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (915840494) doesn't exist!
+2026-11-10T10:10:46.4877600Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1177037009) doesn't exist!
+2026-11-10T10:10:46.4878229Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (175013735) doesn't exist!
+2026-11-10T10:10:46.4878972Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (766803193) doesn't exist!
+2026-11-10T10:10:46.4879585Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1159113484) doesn't exist!
+2026-11-10T10:10:46.4880204Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (388723768) doesn't exist!
+2026-11-10T10:10:46.4880811Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (409461588) doesn't exist!
+2026-11-10T10:10:46.4881528Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1767912773) doesn't exist!
+2026-11-10T10:10:46.4882142Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (356055804) doesn't exist!
+2026-11-10T10:10:46.4882774Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1853604020) doesn't exist!
+2026-11-10T10:10:46.4883390Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-10T10:10:46.4883991Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1948828944) doesn't exist!
+2026-11-10T10:10:46.4884600Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-10T10:10:46.4885378Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-10T10:10:46.4885991Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-10T10:10:46.4886652Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-10T10:10:46.4887287Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (1649636491) doesn't exist!
+2026-11-10T10:10:46.4887948Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2066871891) doesn't exist!
+2026-11-10T10:10:46.4888574Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4889325Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4889940Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4890578Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4891189Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4891785Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4892487Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4893098Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4893684Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4894308Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2115300056) doesn't exist!
+2026-11-10T10:10:46.4894921Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4895536Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4896285Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4896881Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4897516Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4898116Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4899009Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.4899674Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (2131724673) doesn't exist!
+2026-11-10T10:10:46.4900284Z Broken text PPtr in file(Assets/Korvalune/Scenes/Korvalune_Cote.unity). Local file identifier (968204321) doesn't exist!
+2026-11-10T10:10:46.9758183Z Unloading 299 Unused Serialized files (Serialized files now loaded: 0)
+2026-11-10T10:10:49.9251305Z Error finding targetGameObject from AddedComponent.targetCorrespondingSourceObject (nullptr)
+2026-11-10T10:10:49.9251911Z UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+2026-11-10T10:10:49.9252748Z UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:37)
+2026-11-10T10:10:49.9253615Z UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-10T10:10:49.9254385Z UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:658)
+2026-11-10T10:10:49.9256230Z UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget) (at /home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs:631)
+2026-11-10T10:10:49.9257465Z Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder) (at Assets/Korvalune/Editor/AndroidBuild.cs:162)
+2026-11-10T10:10:49.9258092Z Korvalune.EditorTools.AndroidBuild:Build () (at Assets/Korvalune/Editor/AndroidBuild.cs:85)
+2026-11-10T10:10:49.9258373Z 
+2026-11-10T10:10:49.9258582Z [/home/bokken/build/output/unity/unity/Editor/Mono/BuildPipeline.bindings.cs line 658]
+2026-11-10T10:10:49.9259076Z 
+2026-11-10T10:10:49.9259266Z Caught fatal signal - signo:11 code:1 errno:0 addr:0x70
+2026-11-10T10:10:50.1425670Z Obtained 49 stack frames.
+2026-11-10T10:10:50.1426406Z #0  0x006095f22e22ac in burst_signal_handler(int, siginfo_t*, void*)
+2026-11-10T10:10:50.1427009Z #1  0x007e05d92b2520 in (Unknown)
+2026-11-10T10:10:50.1427373Z #2  0x006095f3a4c210 in (Unknown)
+2026-11-10T10:10:50.1427695Z #3  0x006095f3a4e818 in (Unknown)
+2026-11-10T10:10:50.1427992Z #4  0x006095f3a17565 in (Unknown)
+2026-11-10T10:10:50.1429143Z #5  0x006095f3a135e5 in MergeAllPrefabInstanceInfosDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, core::hash_map<int, PrefabInstanceInfo, core::hash<int>, std::equal_to<int> >&, AwakeFromLoadQueue&, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-10T10:10:50.1430669Z #6  0x006095f3a12cba in MergeAllPrefabInstancesDuringLoad(core::basic_string<char, core::StringStorageDefault<char> > const&, AwakeFromLoadQueue*, TransferInstructionFlags, ErrorsAndWarningsCapture*)
+2026-11-10T10:10:50.1431405Z #7  0x006095f239b7d9 in LoadSceneOperation::CompleteAwakeSequence()
+2026-11-10T10:10:50.1431811Z #8  0x006095f239b0d5 in LoadSceneOperation::CompletePreloadManagerLoadSceneEditor()
+2026-11-10T10:10:50.1432217Z #9  0x006095f239a8ec in LoadSceneOperation::IntegrateMainThread()
+2026-11-10T10:10:50.1432694Z #10 0x006095f239d7f7 in PreloadManager::UpdatePreloadingSingleStep(PreloadManager::UpdatePreloadingFlags, int)
+2026-11-10T10:10:50.1433207Z #11 0x006095f239e7a2 in PreloadManager::WaitForAllAsyncOperationsToComplete()
+2026-11-10T10:10:50.1433897Z #12 0x006095f3a8ce85 in EditorSceneManager::RestoreSceneBackups(core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, EditorSceneManager::PlayModeChange)
+2026-11-10T10:10:50.1434842Z #13 0x006095f3a8c045 in EditorSceneManager::OpenSceneForBuild(core::basic_string<char, core::StringStorageDefault<char> > const&, core::basic_string<char, core::StringStorageDefault<char> > const&)
+2026-11-10T10:10:50.1435452Z #14 0x006095f47d67f4 in (Unknown)
+2026-11-10T10:10:50.1435665Z #15 0x006095f47cc3f3 in (Unknown)
+2026-11-10T10:10:50.1437130Z #16 0x006095f47ca834 in DoBuildPlayer(BuildPlayerSetup const&, core::vector<EditorSceneBackup, core::allocator<EditorSceneBackup, 0ul> >&, core::basic_string<char, core::StringStorageDefault<char> >, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, bool,
+2026-11-10T10:10:50.1438559Z #17 0x006095f36b8237 in (Unknown)
+2026-11-10T10:10:50.1439953Z #18 0x006095f36bc9e5 in BuildAssetBundles(core::basic_string<char, core::StringStorageDefault<char> > const&, core::vector<AssetBundleBuildInfo, core::allocator<AssetBundleBuildInfo, 0ul> > const&, core::vector<core::basic_string<char, core::StringStorageDefault<char> >, core::allocator<core::basic_string<char, core::StringStorageDefault<char> >, 0ul> > const&, BuildTa
+2026-11-10T10:10:50.1441375Z #19 0x006095f1d4284d in BuildPipeline_CUSTOM_BuildAssetBundlesInternal(BuildAssetBundlesParameters__ const&)
+2026-11-10T10:10:50.1442197Z #20 0x00000042265d7c in (wrapper managed-to-native) UnityEditor.BuildPipeline:BuildAssetBundlesInternal_Injected (UnityEditor.BuildAssetBundlesParameters&)
+2026-11-10T10:10:50.1442951Z #21 0x00000042265baf in UnityEditor.BuildPipeline:BuildAssetBundlesInternal (UnityEditor.BuildAssetBundlesParameters)
+2026-11-10T10:10:50.1443646Z #22 0x00000042265acb in UnityEditor.BuildPipeline:BuildAssetBundles (UnityEditor.BuildAssetBundlesParameters)
+2026-11-10T10:10:50.1444418Z #23 0x0000004226594f in UnityEditor.BuildPipeline:BuildAssetBundles (string,UnityEditor.AssetBundleBuild[],UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget)
+2026-11-10T10:10:50.1445206Z #24 0x00000042260163 in Korvalune.EditorTools.AndroidBuild:BuildContent (string[],int,System.Text.StringBuilder)
+2026-11-10T10:10:50.1445683Z #25 0x0000004224bcab in Korvalune.EditorTools.AndroidBuild:Build ()
+2026-11-10T10:10:50.1446147Z #26 0x0000004224893e in (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
+2026-11-10T10:10:50.1446545Z #27 0x007e04dc846406 in (Unknown)
+2026-11-10T10:10:50.1446770Z #28 0x007e04dc9e3bf9 in (Unknown)
+2026-11-10T10:10:50.1446989Z #29 0x007e04dc9e3b5d in mono_runtime_invoke
+2026-11-10T10:10:50.1447472Z #30 0x006095f2774473 in scripting_method_invoke(ScriptingMethodPtr, ScriptingObjectPtr, ScriptingArguments&, ScriptingExceptionPtr*, bool)
+2026-11-10T10:10:50.1448153Z #31 0x006095f274a663 in ScriptingInvocation::Invoke(ScriptingExceptionPtr*, bool)
+2026-11-10T10:10:50.1448530Z #32 0x006095f35711f4 in Application::ParseARGVCommands()
+2026-11-10T10:10:50.1448976Z #33 0x006095f357024f in Application::FinishLoadingProject()
+2026-11-10T10:10:50.1449267Z #34 0x006095f3c7f9a0 in InitializeUnity(void*)
+2026-11-10T10:10:50.1449509Z #35 0x007e05d9b172c8 in (Unknown)
+2026-11-10T10:10:50.1449747Z #36 0x007e05d9b16c44 in g_main_context_dispatch
+2026-11-10T10:10:50.1449988Z #37 0x007e05d9b6c488 in (Unknown)
+2026-11-10T10:10:50.1450223Z #38 0x007e05d9b162b3 in g_main_loop_run
+2026-11-10T10:10:50.1450452Z #39 0x007e05da01fd2d in gtk_main
+2026-11-10T10:10:50.1450659Z #40 0x006095f3c7ef8c in main
+2026-11-10T10:10:50.1450870Z #41 0x007e05d9299d90 in (Unknown)
+2026-11-10T10:10:50.1451084Z #42 0x007e05d9299e40 in __libc_start_main
+2026-11-10T10:10:50.1451306Z #43 0x006095f1b3d029 in (Unknown)
+2026-11-10T10:12:00.0716534Z Segmentation fault (core dumped)
+2026-11-10T10:12:00.0770882Z Build failed, with exit code 139
+2026-11-10T10:12:00.4317374Z 
+2026-11-10T10:12:00.4317795Z ###########################
+2026-11-10T10:12:00.4318108Z #       Build output      #
+2026-11-10T10:12:00.4318333Z ###########################
+2026-11-10T10:12:00.4318451Z 
+2026-11-10T10:12:00.4341018Z total 8.0K
+2026-11-10T10:12:00.4342109Z drwxr-xr-x 2 root root 4.0K Nov 10 09:58 .
+2026-11-10T10:12:00.4342405Z drwxr-xr-x 4 root root 4.0K Nov 10 10:07 ..
+2026-11-10T10:12:00.5296618Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-11-10T10:12:00.5297270Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-11-10T10:12:00.5297731Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-11-10T10:12:00.5298265Z [UnityConnectServicesConfig] Service configuration:
+2026-11-10T10:12:00.5298831Z     "servicesConfigBaseUrl": "",
+2026-11-10T10:12:00.5299106Z     "disableServicesWindow": false,
+2026-11-10T10:12:00.5299360Z     "disableUserLogin": false,
+2026-11-10T10:12:00.5299624Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-11-10T10:12:00.5299994Z     "clientConnectTimeoutSec": 5,
+2026-11-10T10:12:00.5300341Z     "clientHandshakeTimeoutSec": 10,
+2026-11-10T10:12:00.5300655Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-11-10T10:12:00.5300922Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-11-10T10:12:00.5301174Z     "licensingServiceBaseUrl": "",
+2026-11-10T10:12:00.5301396Z     "enableProxyAutoconfig": "false"
+2026-11-10T10:12:00.5301675Z 
+2026-11-10T10:12:00.5642392Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-11-10T10:12:00.5642882Z Branch:                  6000.0/staging
+2026-11-10T10:12:00.5643261Z Build type:              Release
+2026-11-10T10:12:00.5643568Z Batch mode:              YES
+2026-11-10T10:12:00.5643898Z System name:             Linux
+2026-11-10T10:12:00.5644360Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
+2026-11-10T10:12:00.5645046Z Kernel version:          7.0.0-1019-azure
+2026-11-10T10:12:00.5645416Z Architecture:            x86_64
+2026-11-10T10:12:00.5645740Z Available memory:        15983 MB
+2026-11-10T10:12:01.4660174Z User *** logged in successfully
+2026-11-10T10:12:01.4660565Z [UnityConnect::TryLogin] Request Succeeded.
+2026-11-10T10:12:01.4660967Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-11-10T10:12:01.4662269Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-11-10T10:12:01.4678837Z [Licensing::Module] Successfully launched the LicensingClient (PId: 7243)
+2026-11-10T10:12:02.0373032Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-10T10:12:02.035577Z"
+2026-11-10T10:12:02.0374249Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-11-10T10:12:02.0375766Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-10T10:12:02.0376386Z       Application is shutting down...
+2026-11-10T10:12:02.0450118Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-11-10T10:12:02.0450754Z       ALC ILPP context 2 is unloading
+2026-11-10T10:12:02.1012178Z [Licensing::Client] Handshaking with LicensingClient:
+2026-11-10T10:12:02.1012532Z   Version:                 1.16.0+1c867a9
+2026-11-10T10:12:02.1012820Z   Session Id:              a3aaa34b4db547e9ad1eb39bd0270832
+2026-11-10T10:12:02.1013346Z   Correlation Id:          797f019c8f3d4f643f176893967a1c16
+2026-11-10T10:12:02.1013790Z   External correlation Id: 1476840534853414646
+2026-11-10T10:12:02.1014173Z   Machine Id:              hUHP0OIv64CqIFprkoLAvxCEOEM=
+2026-11-10T10:12:02.1015023Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.06s, handshake: 0.00s)
+2026-11-10T10:12:02.1016343Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-10T10:12:02.100699Z"
+2026-11-10T10:12:02.1017460Z [Licensing::Module] Connected to LicensingClient (PId: 7243, launch time: 0.00, total connection time: 0.63s)
+2026-11-10T10:12:02.1172820Z [Licensing::Client] Successfully updated the access token
+2026-11-10T10:12:02.1173336Z [Licensing::Module] Successfully updated the access token ppO-ZzMnBr...
+2026-11-10T10:12:03.4575138Z [Licensing::Client] Successfully processed license management request
+2026-11-10T10:12:03.4575743Z [Licensing::Module] Successfully returned the entitlement license
+2026-11-10T10:12:03.4940958Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-11-10T10:12:05.1785220Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-11-10T10:12:05.1915460Z 
+2026-11-10T10:12:05.1916732Z ###########################
+2026-11-10T10:12:05.1917180Z #         Failure         #
+2026-11-10T10:12:05.1917442Z ###########################
+2026-11-10T10:12:05.1917566Z 
+2026-11-10T10:12:05.1917709Z Please note that the exit code is not very descriptive.
+2026-11-10T10:12:05.1918067Z Most likely it will not help you solve the issue.
+2026-11-10T10:12:05.1918252Z 
+2026-11-10T10:12:05.1918535Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-11-10T10:12:05.1939497Z 
+2026-11-10T10:12:05.5037162Z ##[error]Build failed with exit code 139
