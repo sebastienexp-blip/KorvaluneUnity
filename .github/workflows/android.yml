@@ -103,7 +103,7 @@ jobs:
         with:
           name: apk
           path: |
-            build/Android/Korvalune.apk
+            build/Android/Android.apk
             ci-out/android/build.md
           if-no-files-found: warn
 
@@ -115,7 +115,7 @@ jobs:
           key: Library-Android-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.run_id }}
 
       - name: Résultat
-        run: test -f build/Android/Korvalune.apk
+        run: test -f build/Android/Android.apk
 
       - name: Publier le contenu téléchargeable
         env:
@@ -191,7 +191,7 @@ jobs:
           disk-size: 6G
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           disable-animations: true
-          script: bash .github/scripts/test-apk.sh dl/build/Android/Korvalune.apk
+          script: bash .github/scripts/test-apk.sh dl/build/Android/Android.apk
       - name: Publier les résultats
         if: always()
         env:
@@ -208,6 +208,6 @@ jobs:
             V=$(grep -oE "version [0-9.]+" ci-out/android/build.md | head -1 | cut -d' ' -f2)
             gh release delete apk-derniere -y --cleanup-tag 2>/dev/null || true
             echo "${GITHUB_RUN_NUMBER}" > version.txt
-            gh release create apk-derniere dl/build/Android/Korvalune.apk version.txt $(ls ci-out/android/*.png 2>/dev/null) \
+            gh release create apk-derniere dl/build/Android/Android.apk version.txt $(ls ci-out/android/*.png 2>/dev/null) \
               --title "Korvalune ${V} — APK testé" --notes-file ci-out/android/test.md --latest
           fi
