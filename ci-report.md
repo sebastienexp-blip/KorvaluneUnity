@@ -1,10 +1,10 @@
-# Rapport d'intégration Unity — 2026-11-10 06:25 UTC
+# Rapport d'intégration Unity — 2026-11-10 07:07 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 287 modèle(s) ModelForge trouvé(s)
 - 0 modèle(s) intégré(s), 287 déjà à jour (inchangés)
 
-# Rapport d'intégration Unity — 2026-11-10 06:26 UTC
+# Rapport d'intégration Unity — 2026-11-10 07:08 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 287 modèle(s) ModelForge trouvé(s)
@@ -3174,7 +3174,7 @@ _169 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
 
 
 # Scènes (éditeur 3)
-# Rapport d'intégration Unity — 2026-11-10 06:33 UTC
+# Rapport d'intégration Unity — 2026-11-10 07:15 UTC
 - Unity 6000.0.32f1, plateforme active StandaloneLinux64, rendu OpenGLCore
 - ✅ **Render Pipeline** URP actif (Korvalune_URP)
 - 287 modèle(s) ModelForge trouvé(s)
@@ -3187,9 +3187,9 @@ _169 captures écrites dans ci-out/ (OpenGLCore) en 5.7 min._
 - ✅ **Héros jouable** KaelDraven_M (10 héros, chargés à la demande)
 - ✅ **Ennemis configurés** squelette, loup, sorcier, araignee, chevalier, demon, abbe, wendigo, basilic, tisseuse, salamandre, voyant
 - ✅ **Château : porte franchissable** passage libre sur 24 m
-- ✅ **Ville : échoppes des marchands** Marchand, Joaillier, Reliquaire Céleste, Forgeron, Mystique, Coffre, Alchimiste, Marchande de curiosités, Armurier
+- ✅ **Ville : échoppes des marchands** Alchimiste, Armurier, Coffre, Reliquaire Céleste, Marchande de curiosités, Joaillier, Mystique, Marchand, Forgeron
 - ✅ **Ville : maisons** 41 maisons
-- ❌ **Ville : rue principale praticable jusqu'au château** M_Lanterne en z=-48
+- ❌ **Ville : rue principale praticable jusqu'au château** S_Coffre en z=-46
 - ✅ **Illustration du lanceur et icône** ci-out/Lanceur_Fond.png, ci-out/Icone.png
 - ✅ **Montures** ci-out/Jeu_17_monture_*.png — Animator sur la racine, posture Sk_Monte
 - ✅ **Butin et inventaire** 4 objets portés, 22 dans le sac — Dégâts 781   Vie 220   Armure 118 Critique 27.3 %   Attaque 1.77/s   Recharge −12 % Mana 100 (+13.1/s)   Régén. vie 1.5/s   Vitesse 6.6 m/s Dégâts par seconde ≈ 1755   Force 570   <color=#ff9a3c>1 pouvoir(s) légendaire(s)</color>
