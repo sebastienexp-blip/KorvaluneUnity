@@ -108,7 +108,7 @@ namespace Korvalune.Game
                 skillButtons.Add((cd, t, i));
             }
             // esquive (roulade invulnérable) : à côté des compétences ; touche Espace sur ordinateur
-            var dg = RoundButton(root, "Esquive", "leap", new Vector2(1, 0), pc ? new Vector2(-40, 200) : new Vector2(-470, 240), pc ? 96 : 104, () => player?.Dodge(), out dodgeCd, out _);
+            var dg = RoundButton(root, "Esquive", "leap", new Vector2(1, 0), pc ? new Vector2(-1044, 66) : new Vector2(-470, 240), pc ? 96 : 104, () => player?.Dodge(), out dodgeCd, out _);
             if (pc)
             {
                 var dk = Label(dg.rectTransform, "Touche", "Espace", 20, TextAnchor.MiddleCenter, new Vector2(0.5f, 0f), new Vector2(0, -26), new Vector2(110, 28));
@@ -127,28 +127,28 @@ namespace Korvalune.Game
             RoundButton(root, "Inventaire", "bag", new Vector2(0.5f, 1), new Vector2(-60, -24), 96, ToggleBag, out _, out _);
             if (player && player.GetComponent<Equipment>()) BuildBag(root);
             RoundButton(root, "Arbre", "book", new Vector2(0.5f, 1), new Vector2(60, -24), 96, ToggleTree, out _, out _);
-            RoundButton(root, "Carte", "map", new Vector2(0.5f, 1), new Vector2(300, -24), 96, () => WorldMap.Toggle(font), out _, out _);
+            RoundButton(root, "Carte", "map", new Vector2(0.5f, 1), new Vector2(pc ? 180 : 300, -24), 96, () => WorldMap.Toggle(font), out _, out _);
             RoundButton(root, "Journal", "quete", new Vector2(0.5f, 1), new Vector2(-180, -24), 96, ToggleJournal, out _, out _);   // journal de quêtes
             if (runner) BuildTree(root);
             // bourse (sous le portrait) et potions de soin (au-dessus du joystick, à droite)
             var purse = Img(root, "Or", UIStyle.Icon("coin", new Color(1f, 0.82f, 0.3f)), new Vector2(0, 1), new Vector2(40, -212), new Vector2(40, 40));
             goldText = Label(root, "Montant", "", 28, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(88, -212), new Vector2(300, 40)); goldText.color = new Color(1f, 0.86f, 0.45f);
             goldText.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.8f);
-            var pb = RoundButton(root, "Potion", "potion", new Vector2(0, 0), new Vector2(390, 40), 112, () => { if (player && !player.DrinkPotion()) Notify(player.wallet.potions <= 0 ? "Plus de potions" : "Potion en recharge"); }, out potionCd, out _);
+            var pb = RoundButton(root, "Potion", "potion", new Vector2(0, 0), new Vector2(pc ? 40 : 390, 40), 112, () => { if (player && !player.DrinkPotion()) Notify(player.wallet.potions <= 0 ? "Plus de potions" : "Potion en recharge"); }, out potionCd, out _);
             if (!UIStyle.IsPainted("potion")) pb.transform.Find("Masque/Icône").GetComponent<Image>().color = new Color(1f, 0.35f, 0.3f);
             potionCount = Label(pb.rectTransform, "Nombre", "", 28, TextAnchor.LowerRight, new Vector2(0.5f, 0.5f), new Vector2(-6, 4), new Vector2(100, 100));
             potionCount.gameObject.AddComponent<Outline>().effectColor = Color.black;
             // potion de mana, à droite de la potion de soin
-            var mb = RoundButton(root, "PotionMana", "mana", new Vector2(0, 0), new Vector2(520, 40), 112, () => { if (player && !player.DrinkManaPotion()) Notify(player.wallet.manaPotions <= 0 ? "Plus de potions de mana" : "Potion de mana en recharge"); }, out manaCd, out _);
+            var mb = RoundButton(root, "PotionMana", "mana", new Vector2(0, 0), new Vector2(pc ? 170 : 520, 40), 112, () => { if (player && !player.DrinkManaPotion()) Notify(player.wallet.manaPotions <= 0 ? "Plus de potions de mana" : "Potion de mana en recharge"); }, out manaCd, out _);
             manaCount = Label(mb.rectTransform, "Nombre", "", 28, TextAnchor.LowerRight, new Vector2(0.5f, 0.5f), new Vector2(-6, 4), new Vector2(100, 100));
             manaCount.gameObject.AddComponent<Outline>().effectColor = Color.black;
             // monture : appeler / renvoyer
-            RoundButton(root, "Monture", "monture", new Vector2(0, 0), new Vector2(650, 40), 112, () =>
+            RoundButton(root, "Monture", "monture", new Vector2(0, 0), new Vector2(pc ? 300 : 650, 40), 112, () =>
             {
                 if (!player) return; var r = player.GetComponent<Rider>(); if (!r) r = player.gameObject.AddComponent<Rider>(); r.Toggle();
             }, out _, out _);
             // portail de ville (violet)
-            RoundButton(root, "PortailVille", "portail", new Vector2(0, 0), new Vector2(780, 40), 112, TownPortal.Cast, out _, out _);
+            RoundButton(root, "PortailVille", "portail", new Vector2(0, 0), new Vector2(pc ? 430 : 780, 40), 112, TownPortal.Cast, out _, out _);
             if (player) BuildShop(root);
             BuildJournal(root);
             BuildMenu(root);
