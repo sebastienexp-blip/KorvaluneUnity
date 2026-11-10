@@ -1,321 +1,321 @@
-# Journal de la construction Android (run 42781062598)
+# Journal de la construction Android (run 42782884483)
 ## Lignes importantes
-1695:2026-11-10T08:16:40.2699509Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
-1900:2026-11-10T08:17:41.7915497Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
-2023:2026-11-10T08:20:19.8037553Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
-4952:2026-11-10T08:23:29.5273263Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
-4959:2026-11-10T08:23:29.5278252Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
-4963:2026-11-10T08:23:29.5281070Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
-4976:2026-11-10T08:23:29.7118428Z Build failed, with exit code 1
-5040:2026-11-10T08:23:34.4482604Z Please note that the exit code is not very descriptive.
-5045:2026-11-10T08:23:34.7040133Z ##[error]Build failed with exit code 1
-5050:2026-11-10T08:23:34.7324124Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
-5051:2026-11-10T08:23:34.7324899Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
-5101:2026-11-10T08:23:35.0618703Z # Construction de l'APK Android
-5103:2026-11-10T08:23:35.0622204Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
-5121:2026-11-10T08:23:35.0630629Z - Code mis à jour depuis le jeu : Korvalune.Runtime 679 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
-5123:2026-11-10T08:23:35.0631755Z - APK : 129.3 Mo, version 0.1.141
-5426:2026-11-10T08:24:00.0221376Z ##[error]Process completed with exit code 1.
+1695:2026-11-10T08:30:24.3484448Z [36;1m# relevé mémoire toutes les 5 s pendant la construction (diagnostic des arrêts « Killed »)[0m
+1902:2026-11-10T08:31:28.0010242Z [36;1melse echo "::error::Secret UNITY_LICENSE absent : ajoute le contenu de ton fichier Unity_lic.ulf dans Settings → Secrets and variables → Actions"; exit 1; fi[0m
+2025:2026-11-10T08:34:39.6057159Z [command]/usr/bin/docker run --workdir /github/workspace --rm --env UNITY_EMAIL=*** --env UNITY_PASSWORD=*** --env UNITY_SERIAL=*** --env SKIP_ACTIVATION=false --env UNITY_VERSION=6000.0.32f1 --env PROJECT_PATH=. --env BUILD_TARGET=Android --env BUILD_NAME=Android --env BUILD_PATH=build/Android --env BUILD_FILE=Android.apk --env BUILD_METHOD=Korvalune.EditorTools.
+3270:2026-11-10T08:37:21.6013380Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
+3755:2026-11-10T08:37:21.6459322Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
+3759:2026-11-10T08:37:21.6471366Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
+3772:2026-11-10T08:37:21.8080126Z Build failed, with exit code 1
+3836:2026-11-10T08:37:25.9064257Z Please note that the exit code is not very descriptive.
+3841:2026-11-10T08:37:26.1040460Z ##[error]Build failed with exit code 1
+3846:2026-11-10T08:37:26.1340780Z [36;1m  { echo "# Construction de l'APK : Unity s'est arrêté avant la fin"; echo '```';[0m
+3847:2026-11-10T08:37:26.1341803Z [36;1m    grep -rhoaE "[A-Za-z0-9_/.-]+\.cs\([0-9]+,[0-9]+\): error CS[0-9]+: [^\"\\]{0,300}" Library/Bee Logs Temp 2>/dev/null | sort -u | head -60 || true;[0m
+3897:2026-11-10T08:37:26.4872811Z # Construction de l'APK Android
+3899:2026-11-10T08:37:26.4876047Z - Scènes : Korvalune_Lanceur, Korvalune_Selection, CharacterCreator, Korvalune_Vallee, Korvalune_Crypte, Korvalune_Terriers, Korvalune_Eclipse, Korvalune_Breche, Korvalune_Foret, Korvalune_Desert, Korvalune_Pics, Korvalune_Cote, Korvalune_Marais, Korvalune_Toundra, Korvalune_Volcan, Korvalune_Canyon, Korvalune_Abime, Korvalune_Catacombes
+3917:2026-11-10T08:37:26.4885278Z - Code mis à jour depuis le jeu : Korvalune.Runtime 679 Ko + 7 métadonnées (9.0 Mo), APK minimal 0
+3919:2026-11-10T08:37:26.4886317Z - APK : 129.3 Mo, version 0.1.141
+4222:2026-11-10T08:37:50.5845729Z ##[error]Process completed with exit code 1.
 
 ## Fin du journal (300 dernières lignes avant l'arrêt)
-2026-11-10T08:23:29.5114232Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.TraceSource.dll"
-2026-11-10T08:23:29.5115429Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Tracing.dll"
-2026-11-10T08:23:29.5116591Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Drawing.Primitives.dll"
-2026-11-10T08:23:29.5117726Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Dynamic.Runtime.dll"
-2026-11-10T08:23:29.5118927Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Calendars.dll"
-2026-11-10T08:23:29.5120206Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Extensions.dll"
-2026-11-10T08:23:29.5121397Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.dll"
-2026-11-10T08:23:29.5122567Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.ZipFile.dll"
-2026-11-10T08:23:29.5123873Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.dll"
-2026-11-10T08:23:29.5125056Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.DriveInfo.dll"
-2026-11-10T08:23:29.5126289Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Primitives.dll"
-2026-11-10T08:23:29.5127512Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Watcher.dll"
-2026-11-10T08:23:29.5128679Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.dll"
-2026-11-10T08:23:29.5129812Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.IsolatedStorage.dll"
-2026-11-10T08:23:29.5130997Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.MemoryMappedFiles.dll"
-2026-11-10T08:23:29.5132106Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Pipes.dll"
-2026-11-10T08:23:29.5133391Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.UnmanagedMemoryStream.dll"
-2026-11-10T08:23:29.5134495Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.dll"
-2026-11-10T08:23:29.5135550Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Expressions.dll"
-2026-11-10T08:23:29.5136665Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Parallel.dll"
-2026-11-10T08:23:29.5137955Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Queryable.dll"
-2026-11-10T08:23:29.5139020Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.dll"
-2026-11-10T08:23:29.5140011Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Memory.dll"
-2026-11-10T08:23:29.5141036Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Http.dll"
-2026-11-10T08:23:29.5142134Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NameResolution.dll"
-2026-11-10T08:23:29.5143480Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NetworkInformation.dll"
-2026-11-10T08:23:29.5144611Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Ping.dll"
-2026-11-10T08:23:29.5145688Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Primitives.dll"
-2026-11-10T08:23:29.5146968Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Requests.dll"
-2026-11-10T08:23:29.5148062Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Security.dll"
-2026-11-10T08:23:29.5149142Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Sockets.dll"
-2026-11-10T08:23:29.5150538Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebHeaderCollection.dll"
-2026-11-10T08:23:29.5151771Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.Client.dll"
-2026-11-10T08:23:29.5153084Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.dll"
-2026-11-10T08:23:29.5154225Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Numerics.Vectors.dll"
-2026-11-10T08:23:29.5155333Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ObjectModel.dll"
-2026-11-10T08:23:29.5156514Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.DispatchProxy.dll"
-2026-11-10T08:23:29.5157793Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.ILGeneration.dll"
-2026-11-10T08:23:29.5159091Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.Lightweight.dll"
-2026-11-10T08:23:29.5160301Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.dll"
-2026-11-10T08:23:29.5161451Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Extensions.dll"
-2026-11-10T08:23:29.5162657Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Primitives.dll"
-2026-11-10T08:23:29.5163925Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.dll"
-2026-11-10T08:23:29.5165021Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Reader.dll"
-2026-11-10T08:23:29.5166223Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.ResourceManager.dll"
-2026-11-10T08:23:29.5167424Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Writer.dll"
-2026-11-10T08:23:29.5168673Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.CompilerServices.VisualC.dll"
-2026-11-10T08:23:29.5169935Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Extensions.dll"
-2026-11-10T08:23:29.5171279Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Handles.dll"
-2026-11-10T08:23:29.5172614Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.RuntimeInformation.dll"
-2026-11-10T08:23:29.5174139Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.dll"
-2026-11-10T08:23:29.5175322Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Numerics.dll"
-2026-11-10T08:23:29.5176757Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Formatters.dll"
-2026-11-10T08:23:29.5178094Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Json.dll"
-2026-11-10T08:23:29.5179419Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Primitives.dll"
-2026-11-10T08:23:29.5180738Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Xml.dll"
-2026-11-10T08:23:29.5181865Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.dll"
-2026-11-10T08:23:29.5183088Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Claims.dll"
-2026-11-10T08:23:29.5184437Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Algorithms.dll"
-2026-11-10T08:23:29.5185941Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Csp.dll"
-2026-11-10T08:23:29.5187237Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Encoding.dll"
-2026-11-10T08:23:29.5188594Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Primitives.dll"
-2026-11-10T08:23:29.5190011Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.X509Certificates.dll"
-2026-11-10T08:23:29.5191324Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Principal.dll"
-2026-11-10T08:23:29.5192513Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.SecureString.dll"
-2026-11-10T08:23:29.5193898Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.Extensions.dll"
-2026-11-10T08:23:29.5195090Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.dll"
-2026-11-10T08:23:29.5196264Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.RegularExpressions.dll"
-2026-11-10T08:23:29.5197475Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Overlapped.dll"
-2026-11-10T08:23:29.5198709Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Extensions.dll"
-2026-11-10T08:23:29.5199967Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Parallel.dll"
-2026-11-10T08:23:29.5201356Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.dll"
-2026-11-10T08:23:29.5202488Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Thread.dll"
-2026-11-10T08:23:29.5203790Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.ThreadPool.dll"
-2026-11-10T08:23:29.5204941Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Timer.dll"
-2026-11-10T08:23:29.5206031Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.dll"
-2026-11-10T08:23:29.5207081Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ValueTuple.dll"
-2026-11-10T08:23:29.5208183Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.ReaderWriter.dll"
-2026-11-10T08:23:29.5209297Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XDocument.dll"
-2026-11-10T08:23:29.5210427Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.XDocument.dll"
-2026-11-10T08:23:29.5211532Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.dll"
-2026-11-10T08:23:29.5212609Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlDocument.dll"
-2026-11-10T08:23:29.5213893Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlSerializer.dll"
-2026-11-10T08:23:29.5215002Z -r:"/opt/unity/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll"
-2026-11-10T08:23:29.5215860Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll"
-2026-11-10T08:23:29.5216819Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
-2026-11-10T08:23:29.5217861Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
-2026-11-10T08:23:29.5219124Z -r:"/opt/unity/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll"
-2026-11-10T08:23:29.5220264Z -r:"Library/PackageCache/com.code-philosophy.hybridclr/Plugins/dnlib.dll"
-2026-11-10T08:23:29.5221511Z -r:"Library/PackageCache/com.unity.collections/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll"
-2026-11-10T08:23:29.5222938Z -r:"Library/PackageCache/com.unity.ext.nunit/net40/unity-custom/nunit.framework.dll"
-2026-11-10T08:23:29.5224035Z -r:"Library/PackageCache/com.unity.nuget.mono-cecil/Mono.Cecil.dll"
-2026-11-10T08:23:29.5224778Z -r:"Library/Bee/artifacts/1300b0aE.dag/Korvalune.Boot.ref.dll"
-2026-11-10T08:23:29.5225625Z -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.RenderPipelines.Core.Runtime.ref.dll"
-2026-11-10T08:23:29.5226647Z -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.RenderPipelines.Universal.Runtime.ref.dll"
-2026-11-10T08:23:29.5227537Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"
-2026-11-10T08:23:29.5228231Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
-2026-11-10T08:23:29.5229195Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
-2026-11-10T08:23:29.5230362Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-2026-11-10T08:23:29.5231492Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
-2026-11-10T08:23:29.5232461Z "Assets/Korvalune/Scripts/Runtime/CharacterAppearance.cs"
-2026-11-10T08:23:29.5233270Z "Assets/Korvalune/Scripts/Runtime/CharacterCatalog.cs"
-2026-11-10T08:23:29.5233909Z "Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs"
-2026-11-10T08:23:29.5234548Z "Assets/Korvalune/Scripts/Runtime/CharacterEquipment.cs"
-2026-11-10T08:23:29.5235173Z "Assets/Korvalune/Scripts/Runtime/CharacterRig.cs"
-2026-11-10T08:23:29.5235744Z "Assets/Korvalune/Scripts/Runtime/Content.cs"
-2026-11-10T08:23:29.5236299Z "Assets/Korvalune/Scripts/Runtime/CreatorNames.cs"
-2026-11-10T08:23:29.5236876Z "Assets/Korvalune/Scripts/Runtime/Game/AutoTest.cs"
-2026-11-10T08:23:29.5237479Z "Assets/Korvalune/Scripts/Runtime/Game/BossCatalog.cs"
-2026-11-10T08:23:29.5238089Z "Assets/Korvalune/Scripts/Runtime/Game/Breakable.cs"
-2026-11-10T08:23:29.5238677Z "Assets/Korvalune/Scripts/Runtime/Game/CameraRig.cs"
-2026-11-10T08:23:29.5239300Z "Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs"
-2026-11-10T08:23:29.5239941Z "Assets/Korvalune/Scripts/Runtime/Game/Cinematic.cs"
-2026-11-10T08:23:29.5240535Z "Assets/Korvalune/Scripts/Runtime/Game/CombatFeel.cs"
-2026-11-10T08:23:29.5241147Z "Assets/Korvalune/Scripts/Runtime/Game/Difficulty.cs"
-2026-11-10T08:23:29.5241718Z "Assets/Korvalune/Scripts/Runtime/Game/Dye.cs"
-2026-11-10T08:23:29.5242280Z "Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs"
-2026-11-10T08:23:29.5242996Z "Assets/Korvalune/Scripts/Runtime/Game/Economy.cs"
-2026-11-10T08:23:29.5243570Z "Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs"
-2026-11-10T08:23:29.5244145Z "Assets/Korvalune/Scripts/Runtime/Game/Equipment.cs"
-2026-11-10T08:23:29.5244711Z "Assets/Korvalune/Scripts/Runtime/Game/FX.cs"
-2026-11-10T08:23:29.5245258Z "Assets/Korvalune/Scripts/Runtime/Game/Flicker.cs"
-2026-11-10T08:23:29.5245829Z "Assets/Korvalune/Scripts/Runtime/Game/Floater.cs"
-2026-11-10T08:23:29.5246433Z "Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs"
-2026-11-10T08:23:29.5247063Z "Assets/Korvalune/Scripts/Runtime/Game/GameConfig.cs"
-2026-11-10T08:23:29.5247646Z "Assets/Korvalune/Scripts/Runtime/Game/Gore.cs"
-2026-11-10T08:23:29.5248419Z "Assets/Korvalune/Scripts/Runtime/Game/GraphicsQuality.cs"
-2026-11-10T08:23:29.5249067Z "Assets/Korvalune/Scripts/Runtime/Game/GroundGps.cs"
-2026-11-10T08:23:29.5249742Z "Assets/Korvalune/Scripts/Runtime/Game/GroundGuard.cs"
-2026-11-10T08:23:29.5250390Z "Assets/Korvalune/Scripts/Runtime/Game/GroundPickup.cs"
-2026-11-10T08:23:29.5251243Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Inventory.cs"
-2026-11-10T08:23:29.5251862Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs"
-2026-11-10T08:23:29.5252448Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Quests.cs"
-2026-11-10T08:23:29.5253203Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs"
-2026-11-10T08:23:29.5253763Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.cs"
-2026-11-10T08:23:29.5254324Z "Assets/Korvalune/Scripts/Runtime/Game/Health.cs"
-2026-11-10T08:23:29.5254905Z "Assets/Korvalune/Scripts/Runtime/Game/HeroOutfit.cs"
-2026-11-10T08:23:29.5255742Z "Assets/Korvalune/Scripts/Runtime/Game/IntroPlayer.cs"
-2026-11-10T08:23:29.5256338Z "Assets/Korvalune/Scripts/Runtime/Game/ItemIcons.cs"
-2026-11-10T08:23:29.5256923Z "Assets/Korvalune/Scripts/Runtime/Game/Items.cs"
-2026-11-10T08:23:29.5257484Z "Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs"
-2026-11-10T08:23:29.5257749Z "Assets/Korvalune/Scripts/Runtime/Game/LegendaryPowers.cs"
-2026-11-10T08:23:29.5257963Z "Assets/Korvalune/Scripts/Runtime/Game/LootBeam.cs"
-2026-11-10T08:23:29.5258176Z "Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs"
-2026-11-10T08:23:29.5258391Z "Assets/Korvalune/Scripts/Runtime/Game/Merchant.cs"
-2026-11-10T08:23:29.5258644Z "Assets/Korvalune/Scripts/Runtime/Game/MonsterVariants.cs"
-2026-11-10T08:23:29.5258851Z "Assets/Korvalune/Scripts/Runtime/Game/Mounts.cs"
-2026-11-10T08:23:29.5259068Z "Assets/Korvalune/Scripts/Runtime/Game/Occluders.cs"
-2026-11-10T08:23:29.5259301Z "Assets/Korvalune/Scripts/Runtime/Game/OptionsMenu.cs"
-2026-11-10T08:23:29.5259507Z "Assets/Korvalune/Scripts/Runtime/Game/Platform.cs"
-2026-11-10T08:23:29.5259790Z "Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs"
-2026-11-10T08:23:29.5260003Z "Assets/Korvalune/Scripts/Runtime/Game/Portal.cs"
-2026-11-10T08:23:29.5260209Z "Assets/Korvalune/Scripts/Runtime/Game/Quest.cs"
-2026-11-10T08:23:29.5260440Z "Assets/Korvalune/Scripts/Runtime/Game/QuestGiver.cs"
-2026-11-10T08:23:29.5260646Z "Assets/Korvalune/Scripts/Runtime/Game/QuestLog.cs"
-2026-11-10T08:23:29.5260847Z "Assets/Korvalune/Scripts/Runtime/Game/Rift.cs"
-2026-11-10T08:23:29.5261066Z "Assets/Korvalune/Scripts/Runtime/Game/RiftLevel.cs"
-2026-11-10T08:23:29.5261279Z "Assets/Korvalune/Scripts/Runtime/Game/RoofFade.cs"
-2026-11-10T08:23:29.5261497Z "Assets/Korvalune/Scripts/Runtime/Game/SaveSystem.cs"
-2026-11-10T08:23:29.5261702Z "Assets/Korvalune/Scripts/Runtime/Game/Sight.cs"
-2026-11-10T08:23:29.5261903Z "Assets/Korvalune/Scripts/Runtime/Game/Skill.cs"
-2026-11-10T08:23:29.5262126Z "Assets/Korvalune/Scripts/Runtime/Game/SkillAnims.cs"
-2026-11-10T08:23:29.5262350Z "Assets/Korvalune/Scripts/Runtime/Game/SkillBook.cs"
-2026-11-10T08:23:29.5262577Z "Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs"
-2026-11-10T08:23:29.5262975Z "Assets/Korvalune/Scripts/Runtime/Game/SkillVariants.cs"
-2026-11-10T08:23:29.5263180Z "Assets/Korvalune/Scripts/Runtime/Game/Sound.cs"
-2026-11-10T08:23:29.5263381Z "Assets/Korvalune/Scripts/Runtime/Game/Story.cs"
-2026-11-10T08:23:29.5263594Z "Assets/Korvalune/Scripts/Runtime/Game/TownLife.cs"
-2026-11-10T08:23:29.5263815Z "Assets/Korvalune/Scripts/Runtime/Game/TownPortal.cs"
-2026-11-10T08:23:29.5264062Z "Assets/Korvalune/Scripts/Runtime/Game/TreasureChest.cs"
-2026-11-10T08:23:29.5264309Z "Assets/Korvalune/Scripts/Runtime/Game/TreasureThief.cs"
-2026-11-10T08:23:29.5264520Z "Assets/Korvalune/Scripts/Runtime/Game/UIStyle.cs"
-2026-11-10T08:23:29.5264722Z "Assets/Korvalune/Scripts/Runtime/Game/Updater.cs"
-2026-11-10T08:23:29.5264929Z "Assets/Korvalune/Scripts/Runtime/Game/Usable.cs"
-2026-11-10T08:23:29.5265126Z "Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs"
-2026-11-10T08:23:29.5265358Z "Assets/Korvalune/Scripts/Runtime/Game/VfxLibrary.cs"
-2026-11-10T08:23:29.5265774Z "Assets/Korvalune/Scripts/Runtime/Game/VirtualJoystick.cs"
-2026-11-10T08:23:29.5265990Z "Assets/Korvalune/Scripts/Runtime/Game/Waypoint.cs"
-2026-11-10T08:23:29.5266234Z "Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs"
-2026-11-10T08:23:29.5266496Z "Assets/Korvalune/Scripts/Runtime/Game/WorldBossEvents.cs"
-2026-11-10T08:23:29.5266734Z "Assets/Korvalune/Scripts/Runtime/Game/WorldEvents.cs"
-2026-11-10T08:23:29.5266943Z "Assets/Korvalune/Scripts/Runtime/Game/WorldMap.cs"
-2026-11-10T08:23:29.5267200Z "Assets/Korvalune/Scripts/Runtime/Game/WorldPopulation.cs"
-2026-11-10T08:23:29.5267409Z "Assets/Korvalune/Scripts/Runtime/Game/ZoneLook.cs"
-2026-11-10T08:23:29.5267610Z "Assets/Korvalune/Scripts/Runtime/MorphMap.cs"
-2026-11-10T08:23:29.5267808Z "Assets/Korvalune/Scripts/Runtime/MorphRig.cs"
-2026-11-10T08:23:29.5268023Z "Assets/Korvalune/Scripts/Runtime/ShowcaseCycler.cs"
-2026-11-10T08:23:29.5268328Z -langversion:9.0
-2026-11-10T08:23:29.5268473Z /deterministic
-2026-11-10T08:23:29.5268605Z /optimize+
-2026-11-10T08:23:29.5268742Z /debug:portable
-2026-11-10T08:23:29.5268875Z /nologo
-2026-11-10T08:23:29.5269053Z /RuntimeMetadataVersion:v4.0.30319
-2026-11-10T08:23:29.5269192Z /nowarn:0169
-2026-11-10T08:23:29.5269317Z /nowarn:0649
-2026-11-10T08:23:29.5269450Z /nowarn:0282
-2026-11-10T08:23:29.5269588Z /nowarn:1701
-2026-11-10T08:23:29.5269716Z /nowarn:1702
-2026-11-10T08:23:29.5269852Z /utf8output
-2026-11-10T08:23:29.5269999Z /preferreduilang:en-US
-2026-11-10T08:23:29.5270508Z /additionalfile:"Library/Bee/artifacts/1300b0aE.dag/Korvalune.Runtime.UnityAdditionalFile.txt"
-2026-11-10T08:23:29.5270673Z ##### Custom Environment Variables
-2026-11-10T08:23:29.5270836Z DOTNET_MULTILEVEL_LOOKUP=0
-2026-11-10T08:23:29.5270965Z ##### ExitCode
-2026-11-10T08:23:29.5271097Z 1
-2026-11-10T08:23:29.5271228Z ##### Output
-2026-11-10T08:23:29.5272195Z Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs(46,17): warning CS0219: The variable 'hideRight' is assigned but its value is never used
-2026-11-10T08:23:29.5273263Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
-2026-11-10T08:23:29.5274111Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
-2026-11-10T08:23:29.5274423Z *** Tundra build failed (31.72 seconds), 407 items updated, 542 evaluated
-2026-11-10T08:23:29.5274988Z ## Script Compilation Error for: Csc Library/Bee/artifacts/1300b0aE.dag/Korvalune.Runtime.dll (+2 others)
-2026-11-10T08:23:29.5276465Z ## CmdLine: "/opt/unity/Editor/Data/NetCoreRuntime/dotnet" exec "/opt/unity/Editor/Data/DotNetSdkRoslyn/csc.dll" /nostdlib /noconfig /shared "@Library/Bee/artifacts/1300b0aE.dag/Korvalune.Runtime.rsp" "@Library/Bee/artifacts/1300b0aE.dag/Korvalune.Runtime.rsp2"
-2026-11-10T08:23:29.5276604Z ## Output:
-2026-11-10T08:23:29.5277348Z Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs(46,17): warning CS0219: The variable 'hideRight' is assigned but its value is never used
-2026-11-10T08:23:29.5278252Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
-2026-11-10T08:23:29.5279095Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
-2026-11-10T08:23:29.5279440Z ��
-2026-11-10T08:23:29.5280175Z Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs(46,17): warning CS0219: The variable 'hideRight' is assigned but its value is never used
-2026-11-10T08:23:29.5281070Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
-2026-11-10T08:23:29.5281901Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
-2026-11-10T08:23:29.5283055Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
-2026-11-10T08:23:29.5283280Z Total cache size 18760936
-2026-11-10T08:23:29.5283509Z AssetDatabase: script compilation time: 33.261573s
-2026-11-10T08:23:29.5283761Z Total cache size after purge 18760936, took 00:00:00.0376312
-2026-11-10T08:23:29.6600373Z Scripts have compiler errors.
-2026-11-10T08:23:29.6600413Z 
-2026-11-10T08:23:29.6601005Z Aborting batchmode due to failure:
-2026-11-10T08:23:29.6601311Z Scripts have compiler errors.
-2026-11-10T08:23:29.6601319Z 
-2026-11-10T08:23:29.6607143Z 
-2026-11-10T08:23:29.6607826Z SDL leaked 2 allocations
-2026-11-10T08:23:29.7118428Z Build failed, with exit code 1
-2026-11-10T08:23:30.1342006Z 
-2026-11-10T08:23:30.1343001Z ###########################
-2026-11-10T08:23:30.1343932Z #       Build output      #
-2026-11-10T08:23:30.1344574Z ###########################
-2026-11-10T08:23:30.1345024Z 
-2026-11-10T08:23:30.1362194Z total 8.0K
-2026-11-10T08:23:30.1362849Z drwxr-xr-x 2 root root 4.0K Nov 10 08:22 .
-2026-11-10T08:23:30.1363486Z drwxr-xr-x 3 root root 4.0K Nov 10 08:22 ..
-2026-11-10T08:23:30.2375048Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
-2026-11-10T08:23:30.2376640Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
-2026-11-10T08:23:30.2377991Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
-2026-11-10T08:23:30.2379147Z [UnityConnectServicesConfig] Service configuration:
-2026-11-10T08:23:30.2379957Z     "servicesConfigBaseUrl": "",
-2026-11-10T08:23:30.2380528Z     "disableServicesWindow": false,
-2026-11-10T08:23:30.2381095Z     "disableUserLogin": false,
-2026-11-10T08:23:30.2381654Z     "entitlementCacheTimeoutInSeconds": 60,
-2026-11-10T08:23:30.2382327Z     "clientConnectTimeoutSec": 5,
-2026-11-10T08:23:30.2383128Z     "clientHandshakeTimeoutSec": 10,
-2026-11-10T08:23:30.2383786Z     "clientResolveEntitlementsTimeoutSec": 30,
-2026-11-10T08:23:30.2384459Z     "clientUpdateLicenseTimeoutSec": 30,
-2026-11-10T08:23:30.2385056Z     "licensingServiceBaseUrl": "",
-2026-11-10T08:23:30.2385637Z     "enableProxyAutoconfig": "false"
-2026-11-10T08:23:30.2386014Z 
-2026-11-10T08:23:30.2477990Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
-2026-11-10T08:23:30.2478878Z Branch:                  6000.0/staging
-2026-11-10T08:23:30.2479727Z Build type:              Release
-2026-11-10T08:23:30.2480319Z Batch mode:              YES
-2026-11-10T08:23:30.2480852Z System name:             Linux
-2026-11-10T08:23:30.2481553Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
-2026-11-10T08:23:30.2482316Z Kernel version:          7.0.0-1019-azure
-2026-11-10T08:23:30.2483139Z Architecture:            x86_64
-2026-11-10T08:23:30.2483661Z Available memory:        15983 MB
-2026-11-10T08:23:30.8492308Z User *** logged in successfully
-2026-11-10T08:23:30.8493704Z [UnityConnect::TryLogin] Request Succeeded.
-2026-11-10T08:23:30.8494567Z [Licensing::Module] Trying to connect to existing licensing client channel...
-2026-11-10T08:23:30.8496164Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
-2026-11-10T08:23:30.8511942Z [Licensing::Module] Successfully launched the LicensingClient (PId: 3867)
-2026-11-10T08:23:31.3219210Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
-2026-11-10T08:23:31.3220427Z       Application is shutting down...
-2026-11-10T08:23:31.3318920Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
-2026-11-10T08:23:31.3319839Z       ALC ILPP context 1 is unloading
-2026-11-10T08:23:31.4194486Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-10T08:23:31.418703Z"
-2026-11-10T08:23:31.4198183Z [SignatureVerifier] Application signature verification not supported on this platform.
-2026-11-10T08:23:31.5114055Z [Licensing::Client] Handshaking with LicensingClient:
-2026-11-10T08:23:31.5115928Z   Version:                 1.16.0+1c867a9
-2026-11-10T08:23:31.5116834Z   Session Id:              283303f0980549a586fd3938521baf83
-2026-11-10T08:23:31.5117578Z   Correlation Id:          b6c3ee99d219f68b3f88106c6177ff5f
-2026-11-10T08:23:31.5118239Z   External correlation Id: 4520353356303640077
-2026-11-10T08:23:31.5118868Z   Machine Id:              K7go+s7Dxlb3BzffIfIqCDwlmGU=
-2026-11-10T08:23:31.5120158Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.09s, handshake: 0.00s)
-2026-11-10T08:23:31.5122112Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-10T08:23:31.510827Z"
-2026-11-10T08:23:31.5124300Z [Licensing::Module] Connected to LicensingClient (PId: 3867, launch time: 0.00, total connection time: 0.66s)
-2026-11-10T08:23:31.5305116Z [Licensing::Client] Successfully updated the access token
-2026-11-10T08:23:31.5306725Z [Licensing::Module] Successfully updated the access token _e7hWR2udc...
-2026-11-10T08:23:33.0428775Z [Licensing::Client] Successfully processed license management request
-2026-11-10T08:23:33.0444221Z [Licensing::Module] Successfully returned the entitlement license
-2026-11-10T08:23:33.0786185Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
-2026-11-10T08:23:34.4357811Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
-2026-11-10T08:23:34.4481026Z 
-2026-11-10T08:23:34.4481544Z ###########################
-2026-11-10T08:23:34.4482001Z #         Failure         #
-2026-11-10T08:23:34.4482282Z ###########################
-2026-11-10T08:23:34.4482434Z 
-2026-11-10T08:23:34.4482604Z Please note that the exit code is not very descriptive.
-2026-11-10T08:23:34.4483725Z Most likely it will not help you solve the issue.
-2026-11-10T08:23:34.4483969Z 
-2026-11-10T08:23:34.4484346Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
-2026-11-10T08:23:34.4484798Z 
-2026-11-10T08:23:34.7040133Z ##[error]Build failed with exit code 1
+2026-11-10T08:37:21.6248705Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Data.Common.dll"
+2026-11-10T08:37:21.6249364Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Contracts.dll"
+2026-11-10T08:37:21.6250127Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Debug.dll"
+2026-11-10T08:37:21.6251446Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.FileVersionInfo.dll"
+2026-11-10T08:37:21.6252734Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Process.dll"
+2026-11-10T08:37:21.6253956Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.StackTrace.dll"
+2026-11-10T08:37:21.6255275Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.TextWriterTraceListener.dll"
+2026-11-10T08:37:21.6256580Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Tools.dll"
+2026-11-10T08:37:21.6257778Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.TraceSource.dll"
+2026-11-10T08:37:21.6258995Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Tracing.dll"
+2026-11-10T08:37:21.6260181Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Drawing.Primitives.dll"
+2026-11-10T08:37:21.6261525Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Dynamic.Runtime.dll"
+2026-11-10T08:37:21.6262710Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Calendars.dll"
+2026-11-10T08:37:21.6263963Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Extensions.dll"
+2026-11-10T08:37:21.6265148Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.dll"
+2026-11-10T08:37:21.6266323Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.ZipFile.dll"
+2026-11-10T08:37:21.6267470Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.dll"
+2026-11-10T08:37:21.6268622Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.DriveInfo.dll"
+2026-11-10T08:37:21.6269883Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Primitives.dll"
+2026-11-10T08:37:21.6271093Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Watcher.dll"
+2026-11-10T08:37:21.6272778Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.dll"
+2026-11-10T08:37:21.6273886Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.IsolatedStorage.dll"
+2026-11-10T08:37:21.6275076Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.MemoryMappedFiles.dll"
+2026-11-10T08:37:21.6276327Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Pipes.dll"
+2026-11-10T08:37:21.6277477Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.UnmanagedMemoryStream.dll"
+2026-11-10T08:37:21.6278602Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.dll"
+2026-11-10T08:37:21.6279928Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Expressions.dll"
+2026-11-10T08:37:21.6281098Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Parallel.dll"
+2026-11-10T08:37:21.6282389Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Queryable.dll"
+2026-11-10T08:37:21.6283406Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.dll"
+2026-11-10T08:37:21.6284332Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Memory.dll"
+2026-11-10T08:37:21.6285343Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Http.dll"
+2026-11-10T08:37:21.6286452Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NameResolution.dll"
+2026-11-10T08:37:21.6287643Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NetworkInformation.dll"
+2026-11-10T08:37:21.6288794Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Ping.dll"
+2026-11-10T08:37:21.6289935Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Primitives.dll"
+2026-11-10T08:37:21.6313943Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Requests.dll"
+2026-11-10T08:37:21.6315107Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Security.dll"
+2026-11-10T08:37:21.6316380Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Sockets.dll"
+2026-11-10T08:37:21.6317525Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebHeaderCollection.dll"
+2026-11-10T08:37:21.6318725Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.Client.dll"
+2026-11-10T08:37:21.6319896Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.dll"
+2026-11-10T08:37:21.6320976Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Numerics.Vectors.dll"
+2026-11-10T08:37:21.6322270Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ObjectModel.dll"
+2026-11-10T08:37:21.6323365Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.DispatchProxy.dll"
+2026-11-10T08:37:21.6324601Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.ILGeneration.dll"
+2026-11-10T08:37:21.6325888Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.Lightweight.dll"
+2026-11-10T08:37:21.6327095Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.dll"
+2026-11-10T08:37:21.6328285Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Extensions.dll"
+2026-11-10T08:37:21.6329503Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Primitives.dll"
+2026-11-10T08:37:21.6330664Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.dll"
+2026-11-10T08:37:21.6332257Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Reader.dll"
+2026-11-10T08:37:21.6333766Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.ResourceManager.dll"
+2026-11-10T08:37:21.6335014Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Writer.dll"
+2026-11-10T08:37:21.6336229Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.CompilerServices.VisualC.dll"
+2026-11-10T08:37:21.6337451Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Extensions.dll"
+2026-11-10T08:37:21.6338653Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Handles.dll"
+2026-11-10T08:37:21.6339909Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.RuntimeInformation.dll"
+2026-11-10T08:37:21.6342182Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.dll"
+2026-11-10T08:37:21.6343359Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Numerics.dll"
+2026-11-10T08:37:21.6344298Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Formatters.dll"
+2026-11-10T08:37:21.6345062Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Json.dll"
+2026-11-10T08:37:21.6345812Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Primitives.dll"
+2026-11-10T08:37:21.6346603Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Xml.dll"
+2026-11-10T08:37:21.6347310Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.dll"
+2026-11-10T08:37:21.6347952Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Claims.dll"
+2026-11-10T08:37:21.6348672Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Algorithms.dll"
+2026-11-10T08:37:21.6349409Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Csp.dll"
+2026-11-10T08:37:21.6350155Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Encoding.dll"
+2026-11-10T08:37:21.6350909Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Primitives.dll"
+2026-11-10T08:37:21.6352215Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.X509Certificates.dll"
+2026-11-10T08:37:21.6353527Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Principal.dll"
+2026-11-10T08:37:21.6354680Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.SecureString.dll"
+2026-11-10T08:37:21.6355862Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.Extensions.dll"
+2026-11-10T08:37:21.6356979Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.dll"
+2026-11-10T08:37:21.6358161Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.RegularExpressions.dll"
+2026-11-10T08:37:21.6359341Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Overlapped.dll"
+2026-11-10T08:37:21.6360548Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Extensions.dll"
+2026-11-10T08:37:21.6361986Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Parallel.dll"
+2026-11-10T08:37:21.6363116Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.dll"
+2026-11-10T08:37:21.6364258Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Thread.dll"
+2026-11-10T08:37:21.6365437Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.ThreadPool.dll"
+2026-11-10T08:37:21.6366886Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Timer.dll"
+2026-11-10T08:37:21.6367977Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.dll"
+2026-11-10T08:37:21.6369032Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ValueTuple.dll"
+2026-11-10T08:37:21.6370167Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.ReaderWriter.dll"
+2026-11-10T08:37:21.6371487Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XDocument.dll"
+2026-11-10T08:37:21.6372680Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.XDocument.dll"
+2026-11-10T08:37:21.6373983Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.dll"
+2026-11-10T08:37:21.6375091Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlDocument.dll"
+2026-11-10T08:37:21.6376286Z -r:"/opt/unity/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlSerializer.dll"
+2026-11-10T08:37:21.6377222Z -r:"/opt/unity/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll"
+2026-11-10T08:37:21.6378085Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll"
+2026-11-10T08:37:21.6379070Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
+2026-11-10T08:37:21.6380063Z -r:"/opt/unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
+2026-11-10T08:37:21.6381460Z -r:"/opt/unity/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll"
+2026-11-10T08:37:21.6382586Z -r:"Library/PackageCache/com.code-philosophy.hybridclr/Plugins/dnlib.dll"
+2026-11-10T08:37:21.6383828Z -r:"Library/PackageCache/com.unity.collections/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll"
+2026-11-10T08:37:21.6385135Z -r:"Library/PackageCache/com.unity.ext.nunit/net40/unity-custom/nunit.framework.dll"
+2026-11-10T08:37:21.6386014Z -r:"Library/PackageCache/com.unity.nuget.mono-cecil/Mono.Cecil.dll"
+2026-11-10T08:37:21.6386775Z -r:"Library/Bee/artifacts/1300b0aE.dag/Korvalune.Boot.ref.dll"
+2026-11-10T08:37:21.6387647Z -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.RenderPipelines.Core.Runtime.ref.dll"
+2026-11-10T08:37:21.6388655Z -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.RenderPipelines.Universal.Runtime.ref.dll"
+2026-11-10T08:37:21.6389551Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"
+2026-11-10T08:37:21.6390220Z -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
+2026-11-10T08:37:21.6391171Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
+2026-11-10T08:37:21.6392540Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+2026-11-10T08:37:21.6393614Z -analyzer:"/opt/unity/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+2026-11-10T08:37:21.6394576Z "Assets/Korvalune/Scripts/Runtime/CharacterAppearance.cs"
+2026-11-10T08:37:21.6395264Z "Assets/Korvalune/Scripts/Runtime/CharacterCatalog.cs"
+2026-11-10T08:37:21.6395875Z "Assets/Korvalune/Scripts/Runtime/CharacterCreator.cs"
+2026-11-10T08:37:21.6396517Z "Assets/Korvalune/Scripts/Runtime/CharacterEquipment.cs"
+2026-11-10T08:37:21.6397143Z "Assets/Korvalune/Scripts/Runtime/CharacterRig.cs"
+2026-11-10T08:37:21.6397674Z "Assets/Korvalune/Scripts/Runtime/Content.cs"
+2026-11-10T08:37:21.6398205Z "Assets/Korvalune/Scripts/Runtime/CreatorNames.cs"
+2026-11-10T08:37:21.6398755Z "Assets/Korvalune/Scripts/Runtime/Game/AutoTest.cs"
+2026-11-10T08:37:21.6399320Z "Assets/Korvalune/Scripts/Runtime/Game/BossCatalog.cs"
+2026-11-10T08:37:21.6399892Z "Assets/Korvalune/Scripts/Runtime/Game/Breakable.cs"
+2026-11-10T08:37:21.6400853Z "Assets/Korvalune/Scripts/Runtime/Game/CameraRig.cs"
+2026-11-10T08:37:21.6401624Z "Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs"
+2026-11-10T08:37:21.6402381Z "Assets/Korvalune/Scripts/Runtime/Game/Cinematic.cs"
+2026-11-10T08:37:21.6403194Z "Assets/Korvalune/Scripts/Runtime/Game/CombatFeel.cs"
+2026-11-10T08:37:21.6403803Z "Assets/Korvalune/Scripts/Runtime/Game/Difficulty.cs"
+2026-11-10T08:37:21.6404369Z "Assets/Korvalune/Scripts/Runtime/Game/Dye.cs"
+2026-11-10T08:37:21.6404937Z "Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs"
+2026-11-10T08:37:21.6405473Z "Assets/Korvalune/Scripts/Runtime/Game/Economy.cs"
+2026-11-10T08:37:21.6406002Z "Assets/Korvalune/Scripts/Runtime/Game/EnemyAI.cs"
+2026-11-10T08:37:21.6406578Z "Assets/Korvalune/Scripts/Runtime/Game/Equipment.cs"
+2026-11-10T08:37:21.6407151Z "Assets/Korvalune/Scripts/Runtime/Game/FX.cs"
+2026-11-10T08:37:21.6407695Z "Assets/Korvalune/Scripts/Runtime/Game/Flicker.cs"
+2026-11-10T08:37:21.6408503Z "Assets/Korvalune/Scripts/Runtime/Game/Floater.cs"
+2026-11-10T08:37:21.6409112Z "Assets/Korvalune/Scripts/Runtime/Game/GameBootstrap.cs"
+2026-11-10T08:37:21.6409752Z "Assets/Korvalune/Scripts/Runtime/Game/GameConfig.cs"
+2026-11-10T08:37:21.6410342Z "Assets/Korvalune/Scripts/Runtime/Game/Gore.cs"
+2026-11-10T08:37:21.6410977Z "Assets/Korvalune/Scripts/Runtime/Game/GraphicsQuality.cs"
+2026-11-10T08:37:21.6411923Z "Assets/Korvalune/Scripts/Runtime/Game/GroundGps.cs"
+2026-11-10T08:37:21.6412509Z "Assets/Korvalune/Scripts/Runtime/Game/GroundGuard.cs"
+2026-11-10T08:37:21.6413131Z "Assets/Korvalune/Scripts/Runtime/Game/GroundPickup.cs"
+2026-11-10T08:37:21.6413754Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Inventory.cs"
+2026-11-10T08:37:21.6414352Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Menus.cs"
+2026-11-10T08:37:21.6414945Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Quests.cs"
+2026-11-10T08:37:21.6415532Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.Shop.cs"
+2026-11-10T08:37:21.6416113Z "Assets/Korvalune/Scripts/Runtime/Game/HUD.cs"
+2026-11-10T08:37:21.6416670Z "Assets/Korvalune/Scripts/Runtime/Game/Health.cs"
+2026-11-10T08:37:21.6417237Z "Assets/Korvalune/Scripts/Runtime/Game/HeroOutfit.cs"
+2026-11-10T08:37:21.6417832Z "Assets/Korvalune/Scripts/Runtime/Game/IntroPlayer.cs"
+2026-11-10T08:37:21.6418470Z "Assets/Korvalune/Scripts/Runtime/Game/ItemIcons.cs"
+2026-11-10T08:37:21.6419061Z "Assets/Korvalune/Scripts/Runtime/Game/Items.cs"
+2026-11-10T08:37:21.6419638Z "Assets/Korvalune/Scripts/Runtime/Game/Launcher.cs"
+2026-11-10T08:37:21.6420280Z "Assets/Korvalune/Scripts/Runtime/Game/LegendaryPowers.cs"
+2026-11-10T08:37:21.6420906Z "Assets/Korvalune/Scripts/Runtime/Game/LootBeam.cs"
+2026-11-10T08:37:21.6421674Z "Assets/Korvalune/Scripts/Runtime/Game/LootDrop.cs"
+2026-11-10T08:37:21.6422233Z "Assets/Korvalune/Scripts/Runtime/Game/Merchant.cs"
+2026-11-10T08:37:21.6422844Z "Assets/Korvalune/Scripts/Runtime/Game/MonsterVariants.cs"
+2026-11-10T08:37:21.6423459Z "Assets/Korvalune/Scripts/Runtime/Game/Mounts.cs"
+2026-11-10T08:37:21.6424039Z "Assets/Korvalune/Scripts/Runtime/Game/Occluders.cs"
+2026-11-10T08:37:21.6424641Z "Assets/Korvalune/Scripts/Runtime/Game/OptionsMenu.cs"
+2026-11-10T08:37:21.6425247Z "Assets/Korvalune/Scripts/Runtime/Game/Platform.cs"
+2026-11-10T08:37:21.6425873Z "Assets/Korvalune/Scripts/Runtime/Game/PlayerController.cs"
+2026-11-10T08:37:21.6426461Z "Assets/Korvalune/Scripts/Runtime/Game/Portal.cs"
+2026-11-10T08:37:21.6427017Z "Assets/Korvalune/Scripts/Runtime/Game/Quest.cs"
+2026-11-10T08:37:21.6427595Z "Assets/Korvalune/Scripts/Runtime/Game/QuestGiver.cs"
+2026-11-10T08:37:21.6428167Z "Assets/Korvalune/Scripts/Runtime/Game/QuestLog.cs"
+2026-11-10T08:37:21.6428731Z "Assets/Korvalune/Scripts/Runtime/Game/Rift.cs"
+2026-11-10T08:37:21.6429286Z "Assets/Korvalune/Scripts/Runtime/Game/RiftLevel.cs"
+2026-11-10T08:37:21.6429838Z "Assets/Korvalune/Scripts/Runtime/Game/RoofFade.cs"
+2026-11-10T08:37:21.6430408Z "Assets/Korvalune/Scripts/Runtime/Game/SaveSystem.cs"
+2026-11-10T08:37:21.6430965Z "Assets/Korvalune/Scripts/Runtime/Game/Sight.cs"
+2026-11-10T08:37:21.6431642Z "Assets/Korvalune/Scripts/Runtime/Game/Skill.cs"
+2026-11-10T08:37:21.6432186Z "Assets/Korvalune/Scripts/Runtime/Game/SkillAnims.cs"
+2026-11-10T08:37:21.6432764Z "Assets/Korvalune/Scripts/Runtime/Game/SkillBook.cs"
+2026-11-10T08:37:21.6433542Z "Assets/Korvalune/Scripts/Runtime/Game/SkillRunner.cs"
+2026-11-10T08:37:21.6434169Z "Assets/Korvalune/Scripts/Runtime/Game/SkillVariants.cs"
+2026-11-10T08:37:21.6434731Z "Assets/Korvalune/Scripts/Runtime/Game/Sound.cs"
+2026-11-10T08:37:21.6435229Z "Assets/Korvalune/Scripts/Runtime/Game/Story.cs"
+2026-11-10T08:37:21.6435737Z "Assets/Korvalune/Scripts/Runtime/Game/TownLife.cs"
+2026-11-10T08:37:21.6436265Z "Assets/Korvalune/Scripts/Runtime/Game/TownPortal.cs"
+2026-11-10T08:37:21.6436880Z "Assets/Korvalune/Scripts/Runtime/Game/TreasureChest.cs"
+2026-11-10T08:37:21.6437518Z "Assets/Korvalune/Scripts/Runtime/Game/TreasureThief.cs"
+2026-11-10T08:37:21.6438062Z "Assets/Korvalune/Scripts/Runtime/Game/UIStyle.cs"
+2026-11-10T08:37:21.6438840Z "Assets/Korvalune/Scripts/Runtime/Game/Updater.cs"
+2026-11-10T08:37:21.6439437Z "Assets/Korvalune/Scripts/Runtime/Game/Usable.cs"
+2026-11-10T08:37:21.6439973Z "Assets/Korvalune/Scripts/Runtime/Game/Vfx.cs"
+2026-11-10T08:37:21.6440533Z "Assets/Korvalune/Scripts/Runtime/Game/VfxLibrary.cs"
+2026-11-10T08:37:21.6441145Z "Assets/Korvalune/Scripts/Runtime/Game/VirtualJoystick.cs"
+2026-11-10T08:37:21.6441924Z "Assets/Korvalune/Scripts/Runtime/Game/Waypoint.cs"
+2026-11-10T08:37:21.6442520Z "Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs"
+2026-11-10T08:37:21.6443139Z "Assets/Korvalune/Scripts/Runtime/Game/WorldBossEvents.cs"
+2026-11-10T08:37:21.6443740Z "Assets/Korvalune/Scripts/Runtime/Game/WorldEvents.cs"
+2026-11-10T08:37:21.6444316Z "Assets/Korvalune/Scripts/Runtime/Game/WorldMap.cs"
+2026-11-10T08:37:21.6444901Z "Assets/Korvalune/Scripts/Runtime/Game/WorldPopulation.cs"
+2026-11-10T08:37:21.6445514Z "Assets/Korvalune/Scripts/Runtime/Game/ZoneLook.cs"
+2026-11-10T08:37:21.6446076Z "Assets/Korvalune/Scripts/Runtime/MorphMap.cs"
+2026-11-10T08:37:21.6446643Z "Assets/Korvalune/Scripts/Runtime/MorphRig.cs"
+2026-11-10T08:37:21.6447209Z "Assets/Korvalune/Scripts/Runtime/ShowcaseCycler.cs"
+2026-11-10T08:37:21.6447722Z -langversion:9.0
+2026-11-10T08:37:21.6448065Z /deterministic
+2026-11-10T08:37:21.6448403Z /optimize+
+2026-11-10T08:37:21.6448737Z /debug:portable
+2026-11-10T08:37:21.6449063Z /nologo
+2026-11-10T08:37:21.6449409Z /RuntimeMetadataVersion:v4.0.30319
+2026-11-10T08:37:21.6449833Z /nowarn:0169
+2026-11-10T08:37:21.6450163Z /nowarn:0649
+2026-11-10T08:37:21.6450464Z /nowarn:0282
+2026-11-10T08:37:21.6450774Z /nowarn:1701
+2026-11-10T08:37:21.6451069Z /nowarn:1702
+2026-11-10T08:37:21.6454861Z /utf8output
+2026-11-10T08:37:21.6455206Z /preferreduilang:en-US
+2026-11-10T08:37:21.6455940Z /additionalfile:"Library/Bee/artifacts/1300b0aE.dag/Korvalune.Runtime.UnityAdditionalFile.txt"
+2026-11-10T08:37:21.6456744Z ##### Custom Environment Variables
+2026-11-10T08:37:21.6457196Z DOTNET_MULTILEVEL_LOOKUP=0
+2026-11-10T08:37:21.6457579Z ##### ExitCode
+2026-11-10T08:37:21.6457930Z 1
+2026-11-10T08:37:21.6458227Z ##### Output
+2026-11-10T08:37:21.6459322Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
+2026-11-10T08:37:21.6461013Z Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs(46,17): warning CS0219: The variable 'hideRight' is assigned but its value is never used
+2026-11-10T08:37:21.6468455Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-11-10T08:37:21.6469782Z *** Tundra build failed (3.38 seconds), 3 items updated, 542 evaluated
+2026-11-10T08:37:21.6471366Z Assets/Korvalune/Scripts/Runtime/Game/DyeWindow.cs(36,37): error CS0120: An object reference is required for the non-static field, method, or property 'DyeWindow.Refresh()'
+2026-11-10T08:37:21.6473094Z Assets/Korvalune/Scripts/Runtime/Game/WeaponVisual.cs(46,17): warning CS0219: The variable 'hideRight' is assigned but its value is never used
+2026-11-10T08:37:21.6474725Z Assets/Korvalune/Scripts/Runtime/Game/CharacterSelect.cs(28,46): warning CS0414: The field 'CharacterSelect.creating' is assigned but its value is never used
+2026-11-10T08:37:21.6476112Z Total cache size 514180
+2026-11-10T08:37:21.6476605Z Total cache size after purge 514180, took 00:00:00.0201077
+2026-11-10T08:37:21.6477194Z AssetDatabase: script compilation time: 4.018107s
+2026-11-10T08:37:21.7598118Z Scripts have compiler errors.
+2026-11-10T08:37:21.7600321Z 
+2026-11-10T08:37:21.7601005Z Aborting batchmode due to failure:
+2026-11-10T08:37:21.7601652Z Scripts have compiler errors.
+2026-11-10T08:37:21.7601938Z 
+2026-11-10T08:37:21.7604004Z 
+2026-11-10T08:37:21.7604687Z SDL leaked 2 allocations
+2026-11-10T08:37:21.8080126Z Build failed, with exit code 1
+2026-11-10T08:37:22.2395931Z 
+2026-11-10T08:37:22.2396363Z ###########################
+2026-11-10T08:37:22.2397079Z #       Build output      #
+2026-11-10T08:37:22.2397355Z ###########################
+2026-11-10T08:37:22.2397516Z 
+2026-11-10T08:37:22.2413459Z total 8.0K
+2026-11-10T08:37:22.2413804Z drwxr-xr-x 2 root root 4.0K Nov 10 08:37 .
+2026-11-10T08:37:22.2414151Z drwxr-xr-x 3 root root 4.0K Nov 10 08:37 ..
+2026-11-10T08:37:22.3411715Z [UnityConnectServicesConfig] Local config successfully read: "/usr/share/unity3d/config/services-config.json"
+2026-11-10T08:37:22.3412765Z [UnityConnectServicesConfig] "clientConnectTimeoutSec" was overridden with "5"
+2026-11-10T08:37:22.3413671Z [UnityConnectServicesConfig] "clientHandshakeTimeoutSec" was overridden with "10"
+2026-11-10T08:37:22.3414477Z [UnityConnectServicesConfig] Service configuration:
+2026-11-10T08:37:22.3415030Z     "servicesConfigBaseUrl": "",
+2026-11-10T08:37:22.3415494Z     "disableServicesWindow": false,
+2026-11-10T08:37:22.3415929Z     "disableUserLogin": false,
+2026-11-10T08:37:22.3416375Z     "entitlementCacheTimeoutInSeconds": 60,
+2026-11-10T08:37:22.3416859Z     "clientConnectTimeoutSec": 5,
+2026-11-10T08:37:22.3417321Z     "clientHandshakeTimeoutSec": 10,
+2026-11-10T08:37:22.3417834Z     "clientResolveEntitlementsTimeoutSec": 30,
+2026-11-10T08:37:22.3418354Z     "clientUpdateLicenseTimeoutSec": 30,
+2026-11-10T08:37:22.3418747Z     "licensingServiceBaseUrl": "",
+2026-11-10T08:37:22.3419152Z     "enableProxyAutoconfig": "false"
+2026-11-10T08:37:22.3419367Z 
+2026-11-10T08:37:22.3512259Z Unity Editor version:    6000.0.32f1 (b2e806cf271c)
+2026-11-10T08:37:22.3512857Z Branch:                  6000.0/staging
+2026-11-10T08:37:22.3513324Z Build type:              Release
+2026-11-10T08:37:22.3513761Z Batch mode:              YES
+2026-11-10T08:37:22.3514190Z System name:             Linux
+2026-11-10T08:37:22.3514768Z Distro version:          #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
+2026-11-10T08:37:22.3515414Z Kernel version:          7.0.0-1019-azure
+2026-11-10T08:37:22.3515888Z Architecture:            x86_64
+2026-11-10T08:37:22.3516335Z Available memory:        15983 MB
+2026-11-10T08:37:22.7463973Z [40m[32minfo[39m[22m[49m: Microsoft.Hosting.Lifetime[0]
+2026-11-10T08:37:22.7464628Z       Application is shutting down...
+2026-11-10T08:37:22.7574239Z [40m[32minfo[39m[22m[49m: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+2026-11-10T08:37:22.7574963Z       ALC ILPP context 1 is unloading
+2026-11-10T08:37:22.9521613Z User *** logged in successfully
+2026-11-10T08:37:22.9522041Z [UnityConnect::TryLogin] Request Succeeded.
+2026-11-10T08:37:22.9522492Z [Licensing::Module] Trying to connect to existing licensing client channel...
+2026-11-10T08:37:22.9523299Z [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-root" failed because channel doesn't exist; code: "0x80000002"
+2026-11-10T08:37:22.9539505Z [Licensing::Module] Successfully launched the LicensingClient (PId: 1801)
+2026-11-10T08:37:23.5224702Z [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-root" at "2026-11-10T08:37:23.521636Z"
+2026-11-10T08:37:23.5226082Z [SignatureVerifier] Application signature verification not supported on this platform.
+2026-11-10T08:37:23.5881631Z [Licensing::Client] Handshaking with LicensingClient:
+2026-11-10T08:37:23.5882989Z   Version:                 1.16.0+1c867a9
+2026-11-10T08:37:23.5887135Z   Session Id:              366ff54844684f19ad075925802d97a5
+2026-11-10T08:37:23.5888031Z   Correlation Id:          b4ad0a43900e2b6651823e011e29f5ce
+2026-11-10T08:37:23.5888846Z   External correlation Id: 3623157927733301544
+2026-11-10T08:37:23.5889610Z   Machine Id:              X9MgzftXvg8xWyCuyQoH7mej110=
+2026-11-10T08:37:23.5891067Z [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-root" (connect: 0.57s, validation: 0.07s, handshake: 0.00s)
+2026-11-10T08:37:23.5894244Z [Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-root-notifications" at "2026-11-10T08:37:23.58818Z"
+2026-11-10T08:37:23.5906709Z [Licensing::Module] Connected to LicensingClient (PId: 1801, launch time: 0.00, total connection time: 0.63s)
+2026-11-10T08:37:23.6073307Z [Licensing::Client] Successfully updated the access token
+2026-11-10T08:37:23.6074201Z [Licensing::Module] Successfully updated the access token M5bay0pnqI...
+2026-11-10T08:37:24.6374126Z [Licensing::Client] Successfully processed license management request
+2026-11-10T08:37:24.6374849Z [Licensing::Module] Successfully returned the entitlement license
+2026-11-10T08:37:24.6716082Z [Licensing::Client] Successfully queried for the EntitlementGroupsDetails
+2026-11-10T08:37:25.8944741Z [Licensing::Client] Successfully returned ULF license with serial number : "***"
+2026-11-10T08:37:25.9059702Z 
+2026-11-10T08:37:25.9060548Z ###########################
+2026-11-10T08:37:25.9062050Z #         Failure         #
+2026-11-10T08:37:25.9063277Z ###########################
+2026-11-10T08:37:25.9063932Z 
+2026-11-10T08:37:25.9064257Z Please note that the exit code is not very descriptive.
+2026-11-10T08:37:25.9064844Z Most likely it will not help you solve the issue.
+2026-11-10T08:37:25.9065231Z 
+2026-11-10T08:37:25.9065767Z To find the reason for failure: please search for errors in the log above and check for annotations in the summary view.
+2026-11-10T08:37:25.9066371Z 
+2026-11-10T08:37:26.1040460Z ##[error]Build failed with exit code 1
