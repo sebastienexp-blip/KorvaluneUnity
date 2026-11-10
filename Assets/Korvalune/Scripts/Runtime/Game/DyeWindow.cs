@@ -33,7 +33,7 @@ namespace Korvalune.Game
             var sc = go.GetComponent<CanvasScaler>(); sc.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; sc.referenceResolution = new Vector2(1920, 1080); sc.matchWidthOrHeight = 0.6f;
             if (!FindFirstObjectByType<EventSystem>()) new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
             var w = go.AddComponent<DyeWindow>(); w.player = p; w.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            w.Build(); Current = w; Refresh();
+            w.Build(); Current = w; w.Refresh();
             Sound.UI("sfx_ui_ouvrir", 0.7f);
             return w;
         }
